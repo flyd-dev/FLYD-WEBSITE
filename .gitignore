@@ -39,3 +39,6 @@ next-env.d.ts
 
 # Local dev artifacts
 temporary screenshots/
+
+# Raw source photos (not referenced by the site — keep originals elsewhere)
+team_pictures/
