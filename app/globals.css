@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #1F1F1F;
+  --teal: #8BC0BE;
+  --teal-dark: #4C8E93;
+  --paper: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-poppins), Helvetica, Arial, sans-serif;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+::selection {
+  background: var(--teal);
+  color: var(--ink);
+}
+
+/* Inputs */
+input, textarea, select, button {
+  font-family: inherit;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  [data-reveal] {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Reveal on scroll (progressive — if JS hasn't run yet content is visible) */
+[data-reveal] {
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-reveal="hidden"] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+[data-reveal="shown"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Marquee pause on hover */
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Custom focus ring (teal) */
+*:focus-visible {
+  outline: 2px solid var(--teal-dark);
+  outline-offset: 2px;
+}
+
+/* Word "flyd." wordmark */
+.wordmark {
+  font-family: var(--font-poppins), Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: lowercase;
+}
