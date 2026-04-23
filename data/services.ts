@@ -123,7 +123,7 @@ export const erpSystems: ErpSystem[] = [
     id: 'tripletex',
     name: 'Tripletex',
     tagline: 'Brukervennlig og skybasert',
-    description: 'For små og mellomstore bedrifter som vil komme raskt i gang med et moderne, skybasert regnskaps- og ERP-system.',
+    description: 'Moderne, skybasert regnskaps- og ERP-system som er raskt å komme i gang med — skalerer fint fra små til relativt store virksomheter.',
   },
   {
     id: 'visma',

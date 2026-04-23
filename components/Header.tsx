@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Menu, X } from 'lucide-react';
-import Wordmark from './Wordmark';
 import { ButtonLink } from './Button';
 
 const nav = [
@@ -45,7 +45,17 @@ export default function Header() {
       >
         <div className="mx-auto flex w-full max-w-shell items-center justify-between px-6 md:px-10">
           <Link href="/" aria-label="Flyd forside" className="flex items-center">
-            <Wordmark variant="teal" size={scrolled ? 'sm' : 'md'} />
+            <Image
+              src="/brand/flyd-logo-transparent.png"
+              alt="Flyd"
+              width={935}
+              height={445}
+              priority
+              className={clsx(
+                'w-auto transition-[height] duration-300',
+                scrolled ? 'h-7' : 'h-9',
+              )}
+            />
           </Link>
 
           <nav className="hidden items-center gap-9 md:flex" aria-label="Hovednavigasjon">

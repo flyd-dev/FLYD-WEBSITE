@@ -38,7 +38,7 @@ export default function KontaktPage() {
                     <dd className="mt-1">
                       <a
                         href="mailto:post@flyd.no"
-                        className="font-display text-xl font-semibold hover:text-flyd-teal-dark"
+                        className="font-display text-xl font-semibold transition-colors hover:text-flyd-accent"
                       >
                         post@flyd.no
                       </a>
@@ -54,7 +54,7 @@ export default function KontaktPage() {
                     <dd className="mt-1">
                       <a
                         href="tel:+4748019958"
-                        className="font-display text-xl font-semibold hover:text-flyd-teal-dark"
+                        className="font-display text-xl font-semibold transition-colors hover:text-flyd-accent"
                       >
                         +47 480 19 958
                       </a>
@@ -116,7 +116,7 @@ export default function KontaktPage() {
                     strokeWidth={1.75}
                   />
                   <ArrowUpRight
-                    className="h-5 w-5 text-flyd-ink/30 transition-colors group-hover:text-flyd-ink"
+                    className="h-5 w-5 text-flyd-ink/30 transition-colors group-hover:text-flyd-accent"
                     strokeWidth={1.75}
                   />
                 </div>
@@ -129,7 +129,7 @@ export default function KontaktPage() {
                   <br />
                   {o.postal}
                 </p>
-                <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/50 group-hover:text-flyd-ink">
+                <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/50 transition-colors group-hover:text-flyd-accent">
                   Åpne i Google Maps →
                 </div>
               </a>

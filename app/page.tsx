@@ -149,7 +149,7 @@ export default function HomePage() {
             <Eyebrow>Et utvalg kunder</Eyebrow>
             <Link
               href="/kontakt"
-              className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/60 hover:text-flyd-ink"
+              className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/60 transition-colors hover:text-flyd-accent"
             >
               Bli kunde →
             </Link>
@@ -333,14 +333,10 @@ export default function HomePage() {
               hjelpe.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <ButtonLink href="/kontakt" variant="teal" withArrow>
+              <ButtonLink href="/kontakt" variant="teal" withArrow accent>
                 Send melding
               </ButtonLink>
-              <ButtonLink
-                href="tel:+4748019958"
-                variant="outline"
-                className="border-flyd-paper text-flyd-paper hover:bg-flyd-paper hover:text-flyd-ink"
-              >
+              <ButtonLink href="tel:+4748019958" variant="outline-paper">
                 Ring oss
               </ButtonLink>
             </div>

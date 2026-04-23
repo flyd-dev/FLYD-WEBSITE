@@ -29,7 +29,7 @@ export const offices: Office[] = [
   },
   {
     city: 'Sokndal',
-    name: 'Sokndal',
+    name: 'Banken',
     street: 'Gamleveien 13',
     postal: '4380 Hauge i Dalane',
     mapsUrl: 'https://maps.google.com/?q=Gamleveien+13,+4380+Hauge+i+Dalane',

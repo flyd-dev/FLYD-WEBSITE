@@ -201,7 +201,7 @@ export default function OmFlydPage() {
                     strokeWidth={1.75}
                   />
                   <ArrowUpRight
-                    className="h-5 w-5 text-flyd-ink/30 transition-colors group-hover:text-flyd-ink"
+                    className="h-5 w-5 text-flyd-ink/30 transition-colors group-hover:text-flyd-accent"
                     strokeWidth={1.75}
                   />
                 </div>
@@ -232,14 +232,10 @@ export default function OmFlydPage() {
               kontor, i en videosamtale eller over en kaffe.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <ButtonLink href="/kontakt" variant="teal" withArrow>
+              <ButtonLink href="/kontakt" variant="teal" withArrow accent>
                 Ta kontakt
               </ButtonLink>
-              <ButtonLink
-                href="/karriere"
-                variant="outline"
-                className="border-flyd-paper text-flyd-paper hover:bg-flyd-paper hover:text-flyd-ink"
-              >
+              <ButtonLink href="/karriere" variant="outline-paper">
                 Jobb hos oss
               </ButtonLink>
             </div>

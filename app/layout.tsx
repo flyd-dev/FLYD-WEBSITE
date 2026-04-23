@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Poppins, Nunito } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -9,6 +9,13 @@ const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-poppins',
+  display: 'swap',
+});
+
+const nunito = Nunito({
+  subsets: ['latin'],
+  weight: ['700', '800', '900'],
+  variable: '--font-nunito',
   display: 'swap',
 });
 
@@ -61,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="nb" className={poppins.variable}>
+    <html lang="nb" className={`${poppins.variable} ${nunito.variable}`}>
       <body>
         <a
           href="#main"

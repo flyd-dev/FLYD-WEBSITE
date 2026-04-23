@@ -55,7 +55,7 @@ export default function TjenesterPage() {
               <Link
                 key={s.id}
                 href={`#${s.id}`}
-                className="bg-flyd-paper px-4 py-5 text-center text-[13px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors hover:bg-[#F2F7F7] hover:text-flyd-ink"
+                className="bg-flyd-paper px-4 py-5 text-center text-[13px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors hover:bg-[#F2F7F7] hover:text-flyd-accent"
               >
                 {s.title}
               </Link>
@@ -148,6 +148,7 @@ export default function TjenesterPage() {
                       href="/kontakt"
                       variant={dark ? 'teal' : 'primary'}
                       withArrow
+                      accent
                     >
                       Snakk med oss om {s.title.toLowerCase()}
                     </ButtonLink>
@@ -200,14 +201,10 @@ export default function TjenesterPage() {
               anbefale hva som bør være første steg.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <ButtonLink href="/kontakt" variant="teal" withArrow>
+              <ButtonLink href="/kontakt" variant="teal" withArrow accent>
                 Book en samtale
               </ButtonLink>
-              <ButtonLink
-                href="tel:+4748019958"
-                variant="outline"
-                className="border-flyd-paper text-flyd-paper hover:bg-flyd-paper hover:text-flyd-ink"
-              >
+              <ButtonLink href="tel:+4748019958" variant="outline-paper">
                 Ring oss
               </ButtonLink>
             </div>

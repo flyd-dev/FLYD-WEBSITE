@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Wordmark from './Wordmark';
+import Image from 'next/image';
 import Container from './Container';
 import { offices } from '@/data/offices';
 
@@ -9,7 +9,16 @@ export default function Footer() {
       <Container className="py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Wordmark variant="paper" size="lg" />
+            <Link href="/" aria-label="Flyd — til forsiden" className="inline-block">
+              <Image
+                src="/brand/flyd-logo-white.png"
+                alt="Flyd"
+                width={935}
+                height={445}
+                className="h-20 w-auto -my-4 md:h-24 md:-my-5"
+                priority={false}
+              />
+            </Link>
             <p className="mt-6 max-w-sm text-[15px] text-flyd-paper/70 leading-relaxed">
               Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning,
               programvare og integrasjoner under samme tak.

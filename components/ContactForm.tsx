@@ -79,7 +79,7 @@ export default function ContactForm() {
           åpnet automatisk, kan du sende direkte til{' '}
           <a
             href="mailto:post@flyd.no"
-            className="text-flyd-ink underline underline-offset-4 hover:text-flyd-teal-dark"
+            className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 transition-colors hover:text-flyd-accent hover:decoration-flyd-accent"
           >
             post@flyd.no
           </a>
@@ -211,8 +211,8 @@ export default function ContactForm() {
           </a>
           .
         </p>
-        <Button type="submit" variant="primary">
-          <Send className="h-4 w-4" strokeWidth={1.75} />
+        <Button type="submit" variant="primary" accent>
+          <Send className="h-4 w-4 transition-colors" strokeWidth={1.75} />
           {status === 'sending' ? 'Sender …' : 'Send melding'}
         </Button>
       </div>
