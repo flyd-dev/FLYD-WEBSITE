@@ -22,7 +22,7 @@ const perks: Gallery4Item[] = [
     title: 'Moderne fagmiljø',
     description:
       'Skjæringspunktet mellom økonomi, teknologi og rådgivning — der fag og systemer jobber sammen.',
-    background: '/team-bg/DSC_4940.jpg',
+    background: '/team-bg/DSC_4940.webp',
   },
   {
     id: 'utvikling',
@@ -30,7 +30,7 @@ const perks: Gallery4Item[] = [
     title: 'Personlig utvikling',
     description:
       'Vi investerer i deg, både faglig og personlig. Din vekst er en del av vår vekst.',
-    background: '/team-bg/DSC_4610.jpg',
+    background: '/team-bg/perk-utvikling.webp',
   },
   {
     id: 'kunder',
@@ -38,7 +38,7 @@ const perks: Gallery4Item[] = [
     title: 'Spennende kunder',
     description:
       'Fra gründere til industrikonsern — ingen dag er lik, og hver kunde gir nye faglige løft.',
-    background: '/team-bg/DSC_5263.jpg',
+    background: '/team-bg/DSC_5306.webp',
   },
   {
     id: 'laering',
@@ -46,7 +46,7 @@ const perks: Gallery4Item[] = [
     title: 'Læring og vekst',
     description:
       'Kurs, sertifiseringer og interne fagsamlinger — vi holder kompetansen skarp.',
-    background: '/team-bg/DSC_4634.jpg',
+    background: '/team-bg/perk-miljo.webp',
   },
   {
     id: 'miljo',
@@ -54,7 +54,7 @@ const perks: Gallery4Item[] = [
     title: 'Godt arbeidsmiljø',
     description:
       'Trivsel, samarbeid og arbeidsglede er ikke bare ord — det er hvordan vi gjør ting.',
-    background: '/team-bg/DSC_4457.jpg',
+    background: '/team-bg/DSC_4634.webp',
   },
   {
     id: 'pavirke',
@@ -62,7 +62,7 @@ const perks: Gallery4Item[] = [
     title: 'Påvirke',
     description:
       'Du får være med å forme din egen rolle og selskapet videre. Vi lytter.',
-    background: '/team-bg/DSC_5306.jpg',
+    background: '/team-bg/perk-pavirke.webp',
   },
 ];
 
@@ -154,14 +154,14 @@ export default function KarrierePage() {
                     </div>
                   </div>
 
-                  <div className="md:col-span-6">
+                  <div className="md:col-span-5">
                     <p className="text-[15px] leading-[1.7] text-flyd-ink/75">
                       {job.ingress}
                     </p>
                   </div>
 
-                  <div className="md:col-span-1 md:flex md:justify-end">
-                    <span className="inline-flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.18em] text-flyd-ink transition-colors group-hover:text-flyd-teal-dark">
+                  <div className="md:col-span-2 md:flex md:justify-end">
+                    <span className="inline-flex items-center gap-2 whitespace-nowrap text-[13px] font-medium uppercase tracking-[0.18em] text-flyd-ink transition-colors group-hover:text-flyd-teal-dark">
                       Se stilling
                       <ArrowUpRight
                         className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

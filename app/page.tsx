@@ -48,28 +48,28 @@ const process = [
     title: 'Dialog',
     body:
       'Vi starter med en uforpliktende samtale. Blir kjent med bedriften, systemene og hvor dere vil – og hvor skoen trykker i dag.',
-    imgSrc: '/process-bg/dialog.jpg',
+    imgSrc: '/process-bg/dialog.webp',
   },
   {
     n: '02',
     title: 'Plan',
     body:
       'Vi designer en løsning tilpasset virksomheten: riktig ERP, integrasjoner, arbeidsflyt og hvem som gjør hva.',
-    imgSrc: '/process-bg/plan.jpg',
+    imgSrc: '/process-bg/plan.webp',
   },
   {
     n: '03',
     title: 'I drift',
     body:
       'Vi tar hånd om regnskap, lønn og rapportering. Dere får oppdaterte tall og en fast rådgiver å støtte dere på.',
-    imgSrc: '/process-bg/drift.jpg',
+    imgSrc: '/process-bg/drift.webp',
   },
   {
     n: '04',
     title: 'Videreutvikling',
     body:
       'Vi følger med, justerer og foreslår forbedringer. Systemet skal vokse med bedriften – ikke bremse den.',
-    imgSrc: '/process-bg/videreutvikling.jpg',
+    imgSrc: '/process-bg/videreutvikling.webp',
   },
 ];
 
@@ -94,10 +94,10 @@ export default function HomePage() {
                   <span className="text-flyd-ink">– </span>
                   <Typewriter
                     text={[
-                      'full oversikt.',
+                      'full flyd.',
                       'god kontroll.',
+                      'full oversikt.',
                       'trygg vekst.',
-                      'ett kompetansehus.',
                     ]}
                     speed={70}
                     waitTime={1800}
@@ -107,10 +107,10 @@ export default function HomePage() {
                   />
                 </span>
               </h1>
-              <p className="mt-8 max-w-2xl text-[18px] leading-[1.7] text-flyd-ink/75">
+              <p className="mt-8 max-w-2xl text-[18px] font-normal leading-[1.7] text-flyd-ink/75">
                 Flyd er et kompetansehus som hjelper bedrifter med hele bildet.
                 Fra daglig regnskap til ERP og integrasjoner – én partner, ett
-                nummer, full oversikt.
+                nummer, full flyd.
               </p>
 
               <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-6">
@@ -122,13 +122,6 @@ export default function HomePage() {
                 <ButtonLink href="/tjenester" variant="outline">
                   Se våre tjenester
                 </ButtonLink>
-              </div>
-
-              <div className="mt-16 flex items-center gap-5 text-[13px] text-flyd-ink/60">
-                <div className="h-[1px] w-12 bg-flyd-ink/40" />
-                <span className="uppercase tracking-[0.22em]">
-                  Tillit siden dag én — 670+ kunder, 6 kontorer
-                </span>
               </div>
             </div>
 
@@ -143,7 +136,7 @@ export default function HomePage() {
       </Section>
 
       {/* STATS */}
-      <Section tone="teal" size="sm" className="!py-8 md:!py-10">
+      <Section tone="teal" size="sm" className="!py-12 md:!py-16">
         <Container>
           <StatsSection stats={stats} />
         </Container>

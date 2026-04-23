@@ -34,56 +34,59 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header
-      className={clsx(
-        'sticky top-0 z-40 w-full border-b transition-[padding,background-color,border-color] duration-300',
-        scrolled
-          ? 'bg-flyd-paper/90 backdrop-blur-md border-flyd-ink/10 py-3'
-          : 'bg-flyd-paper border-flyd-ink/0 py-5',
-      )}
-    >
-      <div className="mx-auto flex w-full max-w-shell items-center justify-between px-6 md:px-10">
-        <Link href="/" aria-label="Flyd forside" className="flex items-center">
-          <Wordmark variant="teal" size={scrolled ? 'sm' : 'md'} />
-        </Link>
+    <>
+      <header
+        className={clsx(
+          'sticky top-0 z-40 w-full border-b transition-[padding,background-color,border-color] duration-300',
+          scrolled
+            ? 'bg-flyd-paper/90 backdrop-blur-md border-flyd-ink/10 py-3'
+            : 'bg-flyd-paper border-flyd-ink/0 py-5',
+        )}
+      >
+        <div className="mx-auto flex w-full max-w-shell items-center justify-between px-6 md:px-10">
+          <Link href="/" aria-label="Flyd forside" className="flex items-center">
+            <Wordmark variant="teal" size={scrolled ? 'sm' : 'md'} />
+          </Link>
 
-        <nav className="hidden items-center gap-9 md:flex" aria-label="Hovednavigasjon">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-[14px] text-flyd-ink/80 tracking-wide hover:text-flyd-ink transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-9 md:flex" aria-label="Hovednavigasjon">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-[14px] text-flyd-ink/80 tracking-wide hover:text-flyd-ink transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="hidden md:block">
-          <ButtonLink href="/kontakt" variant="primary" className="px-5 py-3 text-[13px]">
-            Snakk med oss
-          </ButtonLink>
+          <div className="hidden md:block">
+            <ButtonLink href="/kontakt" variant="primary" className="px-5 py-3 text-[13px]">
+              Snakk med oss
+            </ButtonLink>
+          </div>
+
+          <button
+            type="button"
+            aria-label={open ? 'Lukk meny' : 'Åpne meny'}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden relative z-[60] p-2 -mr-2 text-flyd-ink"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+      </header>
 
-        <button
-          type="button"
-          aria-label={open ? 'Lukk meny' : 'Åpne meny'}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="md:hidden p-2 -mr-2 text-flyd-ink"
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </div>
-
-      {/* Mobile drawer */}
+      {/* Mobile drawer — rendered as a sibling of <header> so it is not
+          confined to the sticky header's stacking context on iOS Safari */}
       <div
         className={clsx(
-          'md:hidden fixed inset-x-0 top-[64px] bottom-0 bg-flyd-paper z-40 transition-opacity duration-200',
+          'md:hidden fixed inset-0 z-50 bg-flyd-paper transition-opacity duration-200',
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
         )}
       >
-        <div className="flex flex-col gap-2 px-6 pt-8 pb-12 h-full">
+        <div className="flex h-full flex-col gap-2 px-6 pt-24 pb-12 overflow-y-auto">
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -101,6 +104,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }

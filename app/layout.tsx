@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     title: 'Flyd – Regnskap, rådgivning og teknologi i samme hus',
     description:
       'Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak.',
-    images: [{ url: '/og/og-default.png', width: 1200, height: 630, alt: 'flyd.' }],
   },
   twitter: {
     card: 'summary_large_image',

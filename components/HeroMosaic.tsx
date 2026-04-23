@@ -10,19 +10,19 @@ type Card = {
 };
 
 const columnA: Card[] = [
-  { src: '/header/ig-1.jpg', alt: 'Fra Flyd-hverdagen', ratio: 'aspect-[3/4]' },
-  { src: '/header/office-1.jpg', alt: 'Flyd-kontoret', ratio: 'aspect-[4/3]' },
-  { src: '/header/ig-4.jpg', alt: 'Flyd-teamet i arbeid', ratio: 'aspect-[4/5]' },
-  { src: '/header/office-2.jpg', alt: 'Møte hos Flyd', ratio: 'aspect-[3/4]' },
-  { src: '/header/office-3.jpg', alt: 'Flyd-kontoret', ratio: 'aspect-[4/3]' },
+  { src: '/header/ig-1.webp', alt: 'Fra Flyd-hverdagen', ratio: 'aspect-[3/4]' },
+  { src: '/header/office-1.webp', alt: 'Flyd-kontoret', ratio: 'aspect-[4/3]' },
+  { src: '/header/ig-4.webp', alt: 'Flyd-teamet i arbeid', ratio: 'aspect-[4/5]' },
+  { src: '/header/office-2.webp', alt: 'Møte hos Flyd', ratio: 'aspect-[3/4]' },
+  { src: '/header/office-3.webp', alt: 'Flyd-kontoret', ratio: 'aspect-[4/3]' },
 ];
 
 const columnB: Card[] = [
-  { src: '/header/office-4.jpg', alt: 'Flyd-teamet i arbeid', ratio: 'aspect-[3/4]' },
-  { src: '/header/ig-2.jpg', alt: 'Fra Flyd-hverdagen', ratio: 'aspect-[4/3]' },
-  { src: '/header/office-5.jpg', alt: 'Flyd-kontoret', ratio: 'aspect-[4/5]' },
-  { src: '/header/ig-3.jpg', alt: 'Fra Flyd-hverdagen', ratio: 'aspect-[4/3]' },
-  { src: '/header/office-6.jpg', alt: 'Flyd-teamet i arbeid', ratio: 'aspect-[3/4]' },
+  { src: '/header/office-4.webp', alt: 'Flyd-teamet i arbeid', ratio: 'aspect-[3/4]' },
+  { src: '/header/ig-2.webp', alt: 'Fra Flyd-hverdagen', ratio: 'aspect-[4/3]' },
+  { src: '/header/DSC_4439.webp', alt: 'Flyd-kontoret', ratio: 'aspect-[4/5]' },
+  { src: '/header/ig-3.webp', alt: 'Fra Flyd-hverdagen', ratio: 'aspect-[4/3]' },
+  { src: '/header/DSC_5138.webp', alt: 'Flyd-teamet i arbeid', ratio: 'aspect-[3/4]' },
 ];
 
 function MosaicCard({ card, priority }: { card: Card; priority?: boolean }) {
