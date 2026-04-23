@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, ArrowUpRight } from 'lucide-react';
 import Container from '@/components/Container';
@@ -135,8 +136,15 @@ export default function OmFlydPage() {
           <div className="flex items-end justify-between gap-6" data-reveal>
             <div>
               <Eyebrow>Ledelse og partnere</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Menneskene bak Flyd.
+              <h2 className="mt-5 font-display text-display-lg font-semibold leading-[1.05] text-[#3b3c36]">
+                Menneskene bak{' '}
+                <Image
+                  src="/brand/flyd-logo-dark.png"
+                  alt="Flyd"
+                  width={935}
+                  height={445}
+                  className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline"
+                />
               </h2>
             </div>
             <div className="hidden text-right text-[13px] text-flyd-ink/60 md:block">
@@ -151,7 +159,7 @@ export default function OmFlydPage() {
             ))}
           </div>
 
-          <h3 className="mt-24 font-display text-2xl font-semibold" data-reveal>
+          <h3 className="mt-24 font-display text-2xl font-semibold text-[#3b3c36]" data-reveal>
             Kontorledere
           </h3>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -160,7 +168,7 @@ export default function OmFlydPage() {
             ))}
           </div>
 
-          <h3 className="mt-24 font-display text-2xl font-semibold" data-reveal>
+          <h3 className="mt-24 font-display text-2xl font-semibold text-[#3b3c36]" data-reveal>
             Resten av teamet
           </h3>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

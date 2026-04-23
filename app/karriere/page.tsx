@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Briefcase, ArrowUpRight } from 'lucide-react';
 import Container from '@/components/Container';
@@ -80,8 +81,16 @@ export default function KarrierePage() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <Eyebrow tone="teal">Karriere</Eyebrow>
-              <h1 className="mt-6 font-display text-display-xl font-semibold">
-                Bli en del av <span className="text-flyd-teal-dark">Flyd.</span>
+              <h1 className="mt-6 font-display text-display-xl font-semibold leading-[1.02]">
+                Bli en del av{' '}
+                <Image
+                  src="/brand/flyd-logo-transparent.png"
+                  alt="Flyd"
+                  width={935}
+                  height={445}
+                  priority
+                  className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline"
+                />
               </h1>
             </div>
             <div className="lg:col-span-5">
