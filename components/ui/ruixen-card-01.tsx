@@ -62,13 +62,13 @@ export default function RuixenCard({
   const useIconMode = !image && Icon;
 
   return (
-    <div className={cn('group flex w-full flex-col', className)}>
+    <div className={cn('group flex h-full w-full flex-col', className)}>
       <Link
         href={href}
-        className="relative block overflow-hidden rounded-[20px] border border-flyd-ink/10 bg-flyd-paper shadow-subtle transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-flyd-teal-dark/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flyd-teal-dark/40 focus-visible:ring-offset-2 focus-visible:ring-offset-flyd-paper"
+        className="relative flex h-full flex-col overflow-hidden rounded-[20px] border border-flyd-ink/10 bg-flyd-paper shadow-subtle transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-flyd-teal-dark/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flyd-teal-dark/40 focus-visible:ring-offset-2 focus-visible:ring-offset-flyd-paper"
       >
         {useIconMode ? (
-          <div className={cn('relative h-[240px] w-full overflow-hidden', toneGradients[tone])}>
+          <div className={cn('relative h-[200px] w-full shrink-0 overflow-hidden', toneGradients[tone])}>
             <div
               className={cn('pointer-events-none absolute inset-0', toneAccent[tone])}
               aria-hidden="true"
@@ -78,7 +78,7 @@ export default function RuixenCard({
               style={{ backgroundImage: grainSvg, backgroundSize: '160px 160px' }}
               aria-hidden="true"
             />
-            <div className="absolute inset-0 flex items-start justify-start p-6">
+            <div className="absolute inset-0 flex items-center justify-center p-6">
               <Icon
                 className={cn(
                   'h-16 w-16 transition-transform duration-500 ease-out group-hover:scale-105 group-hover:rotate-[-2deg]',
@@ -89,7 +89,7 @@ export default function RuixenCard({
             </div>
           </div>
         ) : (
-          <div className="relative h-[240px] w-full">
+          <div className="relative h-[200px] w-full shrink-0">
             <Image
               src={image ?? 'https://placehold.co/600x750'}
               alt={imageAlt ?? title}
@@ -121,22 +121,20 @@ export default function RuixenCard({
           </div>
         ) : null}
 
-        <div className="absolute bottom-3 left-3 right-3 transform rounded-[12px] border border-flyd-paper/40 bg-flyd-paper/90 p-4 shadow-subtle backdrop-blur-md transition-transform duration-300 ease-out group-hover:-translate-y-1">
-          <div className="flex flex-col gap-1">
-            <h3 className="font-display text-[15px] font-semibold leading-tight text-flyd-ink">
-              {title}
-            </h3>
-            <p className="line-clamp-2 text-[12.5px] leading-snug text-flyd-ink/70">
-              {subtitle}
-            </p>
-            <div className="mt-1.5 flex justify-end">
-              <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-flyd-teal/15 text-flyd-teal-dark transition-[background-color,transform] duration-300 group-hover:scale-110 group-hover:bg-flyd-teal/30">
-                <ArrowUpRight
-                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-45"
-                  strokeWidth={1.75}
-                />
-              </span>
-            </div>
+        <div className="flex flex-1 flex-col gap-1 p-5">
+          <h3 className="font-display text-[16px] font-semibold leading-tight text-flyd-ink">
+            {title}
+          </h3>
+          <p className="text-[14px] leading-snug text-flyd-ink/70">
+            {subtitle}
+          </p>
+          <div className="mt-auto flex justify-end pt-3">
+            <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-flyd-teal/15 text-flyd-teal-dark transition-[background-color,transform] duration-300 group-hover:scale-110 group-hover:bg-flyd-teal/30">
+              <ArrowUpRight
+                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-45"
+                strokeWidth={1.75}
+              />
+            </span>
           </div>
         </div>
       </Link>

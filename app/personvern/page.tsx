@@ -2,15 +2,28 @@ import type { Metadata } from 'next';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
+import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Personvern',
   description: 'Slik behandler Flyd personopplysninger.',
+  alternates: { canonical: '/personvern/' },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Hjem', item: 'https://www.flyd.no/' },
+    { '@type': 'ListItem', position: 2, name: 'Personvern', item: 'https://www.flyd.no/personvern/' },
+  ],
 };
 
 export default function PersonvernPage() {
   return (
-    <Section tone="paper" size="lg" className="pt-20 md:pt-28">
+    <>
+      <JsonLd data={breadcrumbJsonLd} />
+      <Section tone="paper" size="lg" className="pt-20 md:pt-28">
       <Container>
         <div className="max-w-3xl">
           <Eyebrow tone="teal">Personvern</Eyebrow>
@@ -24,7 +37,7 @@ export default function PersonvernPage() {
                 Behandlingsansvarlig
               </h2>
               <p className="mt-3">
-                Flyd AS, org.nr. 923 456 789, er behandlingsansvarlig for
+                Flyd AS, org.nr. 933 662 934, er behandlingsansvarlig for
                 personopplysningene som samles inn gjennom dette nettstedet.
               </p>
             </section>
@@ -85,5 +98,6 @@ export default function PersonvernPage() {
         </div>
       </Container>
     </Section>
+    </>
   );
 }

@@ -4,17 +4,31 @@ import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import ContactForm from '@/components/ContactForm';
+import JsonLd from '@/components/JsonLd';
 import { offices } from '@/data/offices';
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Hjem', item: 'https://www.flyd.no/' },
+    { '@type': 'ListItem', position: 2, name: 'Kontakt', item: 'https://www.flyd.no/kontakt/' },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: 'Kontakt',
+  title: {
+    absolute: 'Kontakt Flyd – 6 kontorer i Sør-Vest-Norge',
+  },
   description:
     'Ta kontakt med Flyd. Fortell oss hva du trenger hjelp med, så finner vi riktig person hos oss.',
+  alternates: { canonical: '/kontakt/' },
 };
 
 export default function KontaktPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       <Section tone="paper" size="lg" className="pt-20 md:pt-28">
         <Container>
           <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
@@ -66,7 +80,7 @@ export default function KontaktPage() {
                     Org.nr
                   </div>
                   <div className="font-display text-lg font-semibold">
-                    923 456 789 · Flyd AS
+                    933 662 934 · Flyd AS
                   </div>
                 </div>
               </dl>

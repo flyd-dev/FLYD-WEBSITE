@@ -4,6 +4,8 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Reveal from '@/components/Reveal';
+import ScrollToTop from '@/components/ScrollToTop';
+import { offices } from '@/data/offices';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -27,6 +29,9 @@ export const metadata: Metadata = {
   },
   description:
     'Flyd er et kompetansehus for økonomi og teknologi. Fra daglig regnskap til ERP og integrasjoner – én partner, ett nummer, full oversikt.',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     type: 'website',
     locale: 'nb_NO',
@@ -57,14 +62,75 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const orgJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
+  const siteUrl = 'https://www.flyd.no';
+  const orgId = `${siteUrl}/#organization`;
+  const hq = offices[0];
+
+  const organization = {
+    '@type': ['Organization', 'AccountingService'],
+    '@id': orgId,
     name: 'Flyd',
-    url: 'https://www.flyd.no',
-    logo: 'https://www.flyd.no/brand/flyd-teal.png',
+    legalName: 'Flyd AS',
+    url: siteUrl,
+    logo: `${siteUrl}/brand/flyd-teal.png`,
+    image: `${siteUrl}/brand/flyd-teal.png`,
     email: 'post@flyd.no',
-    sameAs: [],
+    telephone: '+4748019958',
+    vatID: 'NO933662934MVA',
+    taxID: '933662934',
+    description:
+      'Flyd er et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak – med kontorer i Sør-Vest-Norge.',
+    sameAs: [
+      'https://www.linkedin.com/company/flyd-as/',
+      'https://www.facebook.com/flyd.no',
+    ],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: hq.street,
+      postalCode: hq.postal.split(' ')[0],
+      addressLocality: hq.postal.split(' ').slice(1).join(' '),
+      addressCountry: 'NO',
+    },
+    areaServed: offices.map((o) => ({ '@type': 'City', name: o.city })),
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        telephone: '+4748019958',
+        email: 'post@flyd.no',
+        areaServed: 'NO',
+        availableLanguage: ['Norwegian', 'English'],
+      },
+    ],
+  };
+
+  const localBusinesses = offices.map((o) => ({
+    '@type': ['LocalBusiness', 'AccountingService'],
+    '@id': `${siteUrl}/#office-${o.city.toLowerCase()}`,
+    name: `Flyd ${o.city}`,
+    parentOrganization: { '@id': orgId },
+    url: siteUrl,
+    image: `${siteUrl}/brand/flyd-teal.png`,
+    telephone: '+4748019958',
+    email: 'post@flyd.no',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: o.street,
+      postalCode: o.postal.split(' ')[0],
+      addressLocality: o.postal.split(' ').slice(1).join(' '),
+      addressCountry: 'NO',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: o.lat,
+      longitude: o.lng,
+    },
+    hasMap: o.mapsUrl,
+  }));
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [organization, ...localBusinesses],
   };
 
   return (
@@ -79,10 +145,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <ScrollToTop />
         <Reveal />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </body>
     </html>

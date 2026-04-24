@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import fs from 'node:fs';
+import path from 'node:path';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
@@ -15,7 +17,45 @@ import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import { ButtonLink } from '@/components/Button';
-import { jobs, getJobBySlug } from '@/data/jobs';
+import JsonLd from '@/components/JsonLd';
+import { jobs, getJobBySlug, type Job } from '@/data/jobs';
+
+const SITE_URL = 'https://www.flyd.no';
+
+function jobsFileMtime(): string {
+  try {
+    return fs
+      .statSync(path.join(process.cwd(), 'data/jobs.ts'))
+      .mtime.toISOString();
+  } catch {
+    return new Date().toISOString();
+  }
+}
+
+function employmentType(type: string): string {
+  const t = type.toLowerCase();
+  if (t.includes('heltid')) return 'FULL_TIME';
+  if (t.includes('deltid')) return 'PART_TIME';
+  if (t.includes('vikar')) return 'TEMPORARY';
+  if (t.includes('kontrakt')) return 'CONTRACTOR';
+  return 'OTHER';
+}
+
+function jobDescriptionHtml(job: Job): string {
+  const intro = `<p>${job.ingress}</p>`;
+  const body = job.sections
+    .map((s) => {
+      const heading = `<h3>${s.heading}</h3>`;
+      const para = s.body ? `<p>${s.body}</p>` : '';
+      const list =
+        s.bullets && s.bullets.length
+          ? `<ul>${s.bullets.map((b) => `<li>${b}</li>`).join('')}</ul>`
+          : '';
+      return heading + para + list;
+    })
+    .join('');
+  return intro + body;
+}
 
 export function generateStaticParams() {
   return jobs.map((job) => ({ slug: job.slug }));
@@ -31,6 +71,7 @@ export function generateMetadata({
   return {
     title: `${job.title} – ${job.location}`,
     description: job.ingress,
+    alternates: { canonical: `/karriere/${job.slug}/` },
   };
 }
 
@@ -46,6 +87,50 @@ export default function JobDetailPage({
     `Søknad: ${job.title} – ${job.location}`,
   );
   const applyHref = `mailto:${job.applyEmail}?subject=${mailtoSubject}`;
+
+  const datePosted = job.datePosted ?? jobsFileMtime();
+  const jobPostingJsonLd: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    title: job.title,
+    description: jobDescriptionHtml(job),
+    datePosted,
+    employmentType: employmentType(job.type),
+    hiringOrganization: { '@id': `${SITE_URL}/#organization` },
+    jobLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: job.location,
+        addressCountry: 'NO',
+      },
+    },
+    directApply: false,
+    applicantLocationRequirements: { '@type': 'Country', name: 'Norway' },
+  };
+  if (job.validThrough) {
+    jobPostingJsonLd.validThrough = job.validThrough;
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Hjem', item: `${SITE_URL}/` },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Karriere',
+        item: `${SITE_URL}/karriere/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: job.title,
+        item: `${SITE_URL}/karriere/${job.slug}/`,
+      },
+    ],
+  };
 
   const metaItems: { icon: typeof MapPin; label: string; value: string }[] = [
     {
@@ -79,6 +164,8 @@ export default function JobDetailPage({
 
   return (
     <>
+      <JsonLd data={jobPostingJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
       <Section tone="paper" className="pt-16 md:pt-20">
         <Container>
           <Link

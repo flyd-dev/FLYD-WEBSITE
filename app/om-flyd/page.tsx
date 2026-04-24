@@ -9,13 +9,26 @@ import FullflydMark from '@/components/FullflydMark';
 import TeamCard from '@/components/TeamCard';
 import { ButtonLink } from '@/components/Button';
 import { GlowCard } from '@/components/ui/glow-card';
+import JsonLd from '@/components/JsonLd';
 import { leadership, officeLeads, otherTeam } from '@/data/team';
 import { offices } from '@/data/offices';
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Hjem', item: 'https://www.flyd.no/' },
+    { '@type': 'ListItem', position: 2, name: 'Om Flyd', item: 'https://www.flyd.no/om-flyd/' },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: 'Om Flyd',
+  title: {
+    absolute: 'Om Flyd – Kompetansehus for økonomi og teknologi',
+  },
   description:
     'Flyd er et kompetansehus for økonomi og teknologi. Møt teamet og besøk et av våre seks kontorer i Sør-Vest-Norge.',
+  alternates: { canonical: '/om-flyd/' },
 };
 
 const values = [
@@ -40,6 +53,7 @@ const values = [
 export default function OmFlydPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       {/* HERO */}
       <Section tone="paper" size="lg" className="pt-20 md:pt-28 overflow-hidden">
         <div

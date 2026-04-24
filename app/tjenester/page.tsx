@@ -7,12 +7,23 @@ import Eyebrow from '@/components/Eyebrow';
 import FullflydMark from '@/components/FullflydMark';
 import { ButtonLink } from '@/components/Button';
 import { ScrollProgressLineWrapper } from '@/components/ScrollProgressLine';
+import JsonLd from '@/components/JsonLd';
 import { services, erpSystems } from '@/data/services';
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Hjem', item: 'https://www.flyd.no/' },
+    { '@type': 'ListItem', position: 2, name: 'Tjenester', item: 'https://www.flyd.no/tjenester/' },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: 'Tjenester',
+  title: 'Regnskap, rådgivning og ERP – Tjenester',
   description:
     'Regnskap og rådgivning, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR – samlet hos Flyd.',
+  alternates: { canonical: '/tjenester/' },
 };
 
 const tones: Array<'paper' | 'ink' | 'teal' | 'teal-soft'> = [
@@ -27,6 +38,7 @@ const tones: Array<'paper' | 'ink' | 'teal' | 'teal-soft'> = [
 export default function TjenesterPage() {
   return (
     <ScrollProgressLineWrapper>
+      <JsonLd data={breadcrumbJsonLd} />
       <Section tone="paper" size="lg" className="pt-20 md:pt-28 overflow-hidden">
         <div
           className="pointer-events-none absolute -right-[4%] top-[30%] hidden lg:block opacity-[0.12]"

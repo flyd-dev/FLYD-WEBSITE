@@ -10,6 +10,8 @@ export type Job = {
   applyEmail: string;
   deadline?: string;
   startDate?: string;
+  datePosted?: string;
+  validThrough?: string;
   contact?: {
     name: string;
     role?: string;

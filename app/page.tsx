@@ -189,7 +189,7 @@ export default function HomePage() {
             <div className="lg:col-span-7">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
                 {services.map((s, i) => (
-                  <div key={s.id} data-reveal>
+                  <div key={s.id} data-reveal className="h-full">
                     <RuixenCard
                       title={s.title}
                       subtitle={s.short}

@@ -8,12 +8,23 @@ import Eyebrow from '@/components/Eyebrow';
 import FullflydMark from '@/components/FullflydMark';
 import { ButtonLink } from '@/components/Button';
 import { Gallery4, type Gallery4Item } from '@/components/ui/gallery4';
+import JsonLd from '@/components/JsonLd';
 import { jobs } from '@/data/jobs';
 
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Hjem', item: 'https://www.flyd.no/' },
+    { '@type': 'ListItem', position: 2, name: 'Karriere', item: 'https://www.flyd.no/karriere/' },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: 'Karriere',
+  title: 'Ledige stillinger – Karriere',
   description:
     'Bli en del av Flyd. Vi er alltid på utkikk etter dyktige folk innen økonomi, teknologi og rådgivning.',
+  alternates: { canonical: '/karriere/' },
 };
 
 const perks: Gallery4Item[] = [
@@ -70,6 +81,7 @@ const perks: Gallery4Item[] = [
 export default function KarrierePage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       <Section tone="paper" size="lg" className="pt-20 md:pt-28 overflow-hidden">
         <div
           className="pointer-events-none absolute -right-[6%] top-[20%] hidden lg:block opacity-[0.12]"
