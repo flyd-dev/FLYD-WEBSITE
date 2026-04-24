@@ -136,8 +136,15 @@ export default function HomePage() {
       </Section>
 
       {/* STATS */}
-      <Section tone="teal" size="sm" className="!py-12 md:!py-16">
+      <Section tone="teal" size="sm" className="!py-10 md:!py-14">
         <Container>
+          <div className="mb-7 md:mb-9 max-w-3xl" data-reveal>
+            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.15] tracking-[-0.02em]">
+              Kontroll i dag.
+              <br />
+              <span className="text-flyd-teal-dark">Innsikt for i morgen.</span>
+            </h2>
+          </div>
           <StatsSection stats={stats} />
         </Container>
       </Section>
@@ -268,6 +275,21 @@ export default function HomePage() {
                 </SpotlightCard>
               );
             })}
+          </div>
+
+          <div className="mt-10 flex justify-end" data-reveal>
+            <Link
+              href="/tjenester#nettsider"
+              className="group inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.2em] text-flyd-ink/60 transition-colors hover:text-flyd-accent"
+            >
+              Trenger du en nettside eller digital flate som snakker med systemet?
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-200 group-hover:translate-x-0.5"
+              >
+                →
+              </span>
+            </Link>
           </div>
         </Container>
       </Section>

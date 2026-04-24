@@ -12,7 +12,7 @@ import { services, erpSystems } from '@/data/services';
 export const metadata: Metadata = {
   title: 'Tjenester',
   description:
-    'Regnskap, rådgivning, ERP/programvare, integrasjoner, analyse, lønn og HR – samlet hos Flyd.',
+    'Regnskap og rådgivning, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR – samlet hos Flyd.',
 };
 
 const tones: Array<'paper' | 'ink' | 'teal' | 'teal-soft'> = [

@@ -136,7 +136,7 @@ export default function StatsSection({ stats }: { stats: Stat[] }) {
                 willChange: 'opacity, transform, filter',
               }}
             >
-              <div className="font-display text-3xl md:text-4xl font-semibold tracking-tighter text-flyd-ink tabular-nums">
+              <div className="font-display text-2xl md:text-3xl font-semibold tracking-tighter text-flyd-ink tabular-nums">
                 {canCount && !reduced ? (
                   <CountUp
                     target={num!}
@@ -148,7 +148,7 @@ export default function StatsSection({ stats }: { stats: Stat[] }) {
                   s.value
                 )}
               </div>
-              <div className="mt-1.5 text-[11px] md:text-[12px] text-flyd-ink/75 leading-snug">
+              <div className="mt-1 text-[10px] md:text-[11px] text-flyd-ink/75 leading-snug">
                 {s.label}
               </div>
             </div>

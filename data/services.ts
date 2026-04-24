@@ -1,11 +1,11 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   Calculator,
-  Compass,
   LayoutGrid,
   Workflow,
   BarChart3,
   Users,
+  MonitorSmartphone,
 } from 'lucide-react';
 
 export type Service = {
@@ -20,34 +20,20 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    id: 'regnskap',
-    title: 'Regnskap',
-    short: 'Vi tar hånd om regnskapet ditt – så du kan fokusere på det du gjør best.',
-    long: 'Regnskap skal ikke være noe du tenker på hver dag. Vi tar ansvar for bokføring, fakturering, mva-oppgjør og årsoppgjør – med moderne verktøy og en fast kontaktperson som kjenner bedriften din. Du får færre avbrudd, mer forutsigbarhet og et regnskap som faktisk er til å stole på.',
+    id: 'regnskap-radgivning',
+    title: 'Regnskap og rådgivning',
+    short: 'Fra daglig bokføring til strategisk sparring – én partner for både tallene og beslutningene.',
+    long: 'Regnskapet skal være i orden, men det skal også fortelle deg noe. Vi tar ansvar for bokføring, fakturering, mva-oppgjør og årsoppgjør – og er samtidig sparringspartneren som hjelper deg å tolke tallene, se muligheter og ta bedre beslutninger. Enten du står foran oppkjøp, vekst, generasjonsskifte eller en vanskelig periode, får du en fast kontaktperson som kjenner virksomheten – og en rådgiver å støtte deg på når det virkelig gjelder.',
     bullets: [
-      'Løpende bokføring og avstemming',
-      'Fakturering, purring og inkasso',
+      'Løpende bokføring, fakturering og årsoppgjør',
       'Merverdiavgift og terminoppgaver',
-      'Årsoppgjør, ligning og regnskapsavslutning',
-      'Fast kontaktperson som kjenner virksomheten',
-    ],
-    fitFor: 'Bedrifter som vil ha et profesjonelt regnskap uten selv å måtte bygge regnskapskompetanse internt.',
-    icon: Calculator,
-  },
-  {
-    id: 'radgivning',
-    title: 'Rådgivning',
-    short: 'Fra økonomisk analyse til strategisk sparring. Vi er rådgiveren din i alle faser.',
-    long: 'Vi er mer enn bare tallknusere. Vi er sparringspartneren som hjelper deg å tolke tallene, se muligheter og ta bedre beslutninger – enten du står foran oppkjøp, vekst, generasjonsskifte eller en vanskelig periode.',
-    bullets: [
       'Budsjettering, likviditet og prognoser',
       'Strategisk økonomisk sparring',
-      'Skatt, selskapsstruktur og omorganisering',
-      'Oppkjøp, fusjon og generasjonsskifte',
-      'Due diligence og verdivurdering',
+      'Skatt, selskapsstruktur og generasjonsskifte',
+      'Fast kontaktperson som kjenner bedriften',
     ],
-    fitFor: 'Ledere og eiere som trenger en rådgiver som ser hele bildet – ikke bare fjorårets tall.',
-    icon: Compass,
+    fitFor: 'Bedrifter som vil ha et trygt regnskap – og en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
+    icon: Calculator,
   },
   {
     id: 'programvare',
@@ -93,6 +79,21 @@ export const services: Service[] = [
     ],
     fitFor: 'Ledere som vil bytte ut magefølelsen med fakta, uten å bli oversvømt av tabeller.',
     icon: BarChart3,
+  },
+  {
+    id: 'nettsider',
+    title: 'Nettsider og digitale flater',
+    short: 'Nettsider, kundeportaler og interne arbeidsflater — bygget tett på tallene og systemene dine.',
+    long: 'En nettside skal gjøre en jobb — ikke bare se bra ut. Vi lager nettsider og digitale flater som henger sammen med ERP, regnskap og dataene dine, slik at teamet får mindre manuelt arbeid og kundene en ryddigere opplevelse. Denne siden, flyd.no, bygde vi selv.',
+    bullets: [
+      'Nettsider som er raske, tilgjengelige og enkle å vedlikeholde',
+      'Kundeportaler knyttet til ERP og regnskap',
+      'Interne arbeidsflater for team som gjør for mye manuelt',
+      'Tett integrasjon mot systemene dere allerede bruker',
+      'Bygget av folk som kjenner driften og tallene deres fra før',
+    ],
+    fitFor: 'Virksomheter som vil ha en nettside eller digital løsning som henger sammen med resten av driften – ikke bare en frittstående markedsside.',
+    icon: MonitorSmartphone,
   },
   {
     id: 'lonn',
