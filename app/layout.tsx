@@ -40,12 +40,22 @@ export const metadata: Metadata = {
     title: 'Flyd – Regnskap, rådgivning og teknologi i samme hus',
     description:
       'Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak.',
+    images: [
+      {
+        url: 'https://www.flyd.no/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        type: 'image/png',
+        alt: 'Flyd – Regnskap, rådgivning og teknologi i samme hus',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Flyd – Regnskap, rådgivning og teknologi i samme hus',
     description:
       'Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak.',
+    images: ['https://www.flyd.no/opengraph-image.png'],
   },
   icons: {
     icon: [
