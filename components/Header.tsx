@@ -108,7 +108,12 @@ export default function Header() {
             </Link>
           ))}
           <div className="mt-8">
-            <ButtonLink href="/kontakt" variant="primary" className="w-full">
+            <ButtonLink
+              href="/kontakt"
+              variant="primary"
+              className="w-full"
+              onClick={() => setOpen(false)}
+            >
               Snakk med oss
             </ButtonLink>
           </div>

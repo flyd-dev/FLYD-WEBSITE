@@ -62,11 +62,13 @@ export function ButtonLink({
   withArrow,
   accent,
   external,
+  onClick,
 }: BaseProps & { href: string; external?: boolean }) {
   if (external) {
     return (
       <a
         href={href}
+        onClick={onClick}
         className={clsx(base, variants[variant], accent && accentArrow, className)}
         target="_blank"
         rel="noopener noreferrer"
@@ -79,6 +81,7 @@ export function ButtonLink({
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={clsx(base, variants[variant], accent && accentArrow, className)}
     >
       {children}

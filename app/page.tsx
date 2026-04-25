@@ -30,7 +30,7 @@ const stats = [
   { value: '670+', label: 'Kunder' },
   { value: '6', label: 'Kontorer' },
   { value: '19', label: 'Medarbeidere' },
-  { value: '8', label: 'Statsautoriserte regnskapsførere' },
+  { value: '10', label: 'Statsautoriserte regnskapsførere' },
 ];
 
 const whyFlyd = [
