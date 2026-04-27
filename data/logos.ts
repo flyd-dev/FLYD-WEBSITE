@@ -14,6 +14,6 @@ export const customerLogos: CustomerLogo[] = [
   { name: 'Sinneshyttå', src: '/customer-logo/sinneshytta.webp', alt: 'Sinneshyttå' },
   { name: 'Steis', src: '/customer-logo/Steis.webp', alt: 'Steis' },
   { name: 'NADG', src: '/customer-logo/NADGWebRetinav2.webp', alt: 'NADG' },
-  { name: 'Stang Borli', src: '/customer-logo/logo-1.png.webp', alt: 'Stang Borli' },
+  { name: 'Stangborli', src: '/customer-logo/logo-1.png.webp', alt: 'Stangborli' },
   { name: 'Sirdal Fjellpark', src: '/customer-logo/sirdal_fjellpark.webp', alt: 'Sirdal Fjellpark' },
 ];
