@@ -103,7 +103,8 @@ export const otherTeam: TeamMember[] = [
   }),
   mk({
     name: 'Henriette Tengs Gjertsen',
-    role: 'Regnskapskonsulent',
+    role: 'Statsautorisert regnskapsfører',
+    certified: true,
     phone: '+47 952 67 974',
     email: 'henriette.gjertsen@flyd.no',
     image: '/team/flyd-henriette.webp',
