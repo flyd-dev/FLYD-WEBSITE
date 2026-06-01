@@ -56,10 +56,10 @@ export const offices: Office[] = [
   },
   {
     city: 'Flekkefjord',
-    name: 'S32',
-    street: 'Strandgaten 32',
+    name: 'Flekkefjord',
+    street: 'Elvegaten 22',
     postal: '4400 Flekkefjord',
-    mapsUrl: 'https://maps.google.com/?q=Strandgaten+32,+4400+Flekkefjord',
+    mapsUrl: 'https://maps.google.com/?q=Elvegaten+22,+4400+Flekkefjord',
     lat: 58.2967,
     lng: 6.6628,
   },
