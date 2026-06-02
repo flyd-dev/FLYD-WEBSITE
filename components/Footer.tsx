@@ -25,8 +25,8 @@ export default function Footer() {
             </p>
             <div className="mt-8 space-y-1.5 text-[14px] text-flyd-paper/70">
               <div>
-                <a href="mailto:post@flyd.no" className="hover:text-flyd-teal">
-                  post@flyd.no
+                <a href="mailto:support@flyd.no" className="hover:text-flyd-teal">
+                  support@flyd.no
                 </a>
               </div>
               <div>Org.nr. 933 662 934</div>

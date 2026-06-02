@@ -51,10 +51,10 @@ export default function KontaktPage() {
                     </dt>
                     <dd className="mt-1">
                       <a
-                        href="mailto:post@flyd.no"
+                        href="mailto:support@flyd.no"
                         className="font-display text-xl font-semibold transition-colors hover:text-flyd-accent"
                       >
-                        post@flyd.no
+                        support@flyd.no
                       </a>
                     </dd>
                   </div>

@@ -75,10 +75,10 @@ export default function PersonvernPage() {
                 opplysninger. Du kan også kreve at behandlingen begrenses eller
                 protestere mot den. Henvendelser sendes til{' '}
                 <a
-                  href="mailto:post@flyd.no"
+                  href="mailto:support@flyd.no"
                   className="text-flyd-ink underline underline-offset-4 hover:text-flyd-teal-dark"
                 >
-                  post@flyd.no
+                  support@flyd.no
                 </a>
                 .
               </p>
