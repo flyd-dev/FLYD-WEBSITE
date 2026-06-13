@@ -5,6 +5,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Reveal from '@/components/Reveal';
 import ScrollToTop from '@/components/ScrollToTop';
+import Analytics from '@/components/Analytics';
+import CookieConsent from '@/components/CookieConsent';
 import { offices } from '@/data/offices';
 
 const poppins = Poppins({
@@ -157,6 +159,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <ScrollToTop />
         <Reveal />
+        <CookieConsent />
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

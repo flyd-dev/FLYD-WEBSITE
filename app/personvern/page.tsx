@@ -89,9 +89,29 @@ export default function PersonvernPage() {
                 Informasjonskapsler
               </h2>
               <p className="mt-3">
-                Dette nettstedet bruker kun tekniske informasjonskapsler som er
-                nødvendige for at sidene skal fungere. Vi bruker ikke
-                tredjepartssporing eller markedsføringscookies.
+                Vi bruker tekniske informasjonskapsler som er nødvendige for at
+                sidene skal fungere. Disse kan vi benytte uten samtykke.
+              </p>
+              <p className="mt-3">
+                I tillegg bruker vi Google Analytics for å lage anonymisert
+                statistikk om hvordan nettstedet brukes, slik at vi kan forbedre
+                innholdet. Disse informasjonskapslene settes kun dersom du
+                aktivt godtar dem i samtykkebanneren. Frem til du har gitt
+                samtykke, samler vi ikke inn data via Google Analytics. Det
+                rettslige grunnlaget er ditt samtykke, jf. ekomloven og
+                personvernforordningen (GDPR).
+              </p>
+              <p className="mt-3">
+                Når statistikk er aktivert, behandles opplysningene av Google som
+                databehandler på våre vegne. IP-adressen din anonymiseres, og vi
+                bruker ikke dataene til markedsføring eller deling med
+                tredjeparter for annonseformål.
+              </p>
+              <p className="mt-3">
+                Du kan når som helst trekke tilbake eller endre samtykket ditt.
+                Valget lagres lokalt i nettleseren din – tøm nettleserdataene for
+                nettstedet, så vil samtykkebanneren vises på nytt ved neste
+                besøk.
               </p>
             </section>
           </div>
