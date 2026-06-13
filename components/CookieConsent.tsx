@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { CONSENT_KEY } from './Analytics';
+import { CONSENT_KEY, loadClarity } from './Analytics';
 
 declare global {
   interface Window {
@@ -48,6 +48,11 @@ export default function CookieConsent() {
       /* localStorage utilgjengelig – valget gjelder kun denne økten */
     }
     window.gtag?.('consent', 'update', { analytics_storage: value });
+    if (value === 'granted') {
+      loadClarity();
+    } else {
+      window.clarity?.('consent', false);
+    }
     setShown(false);
     document.body.style.overflow = '';
     // La modalen animere ut før den fjernes fra DOM.

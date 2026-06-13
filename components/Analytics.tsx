@@ -1,18 +1,62 @@
 'use client';
 
 import Script from 'next/script';
+import { useEffect } from 'react';
 
 export const GA_ID = 'G-WQT5M2TYEM';
+export const CLARITY_ID = 'x6je6h9lsq';
 export const CONSENT_KEY = 'flyd-consent';
 
+declare global {
+  interface Window {
+    clarity?: ((...args: unknown[]) => void) & { q?: unknown[] };
+  }
+}
+
 /**
- * Google Analytics 4 med Google Consent Mode v2.
+ * Laster Microsoft Clarity (heatmaps / sesjonsopptak). Kalles kun når brukeren
+ * har gitt samtykke. Idempotent – scriptet injiseres maks én gang.
+ */
+export function loadClarity() {
+  if (typeof window === 'undefined') return;
+
+  if (!window.clarity) {
+    const clarity: Window['clarity'] = (...args: unknown[]) => {
+      (clarity!.q = clarity!.q || []).push(args);
+    };
+    window.clarity = clarity;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.clarity.ms/tag/${CLARITY_ID}`;
+    const first = document.getElementsByTagName('script')[0];
+    first?.parentNode?.insertBefore(script, first);
+  }
+
+  // Signaliser samtykke til Clarity (gjelder også om "Cookie consent" er på i Clarity).
+  window.clarity('consent');
+}
+
+/**
+ * Google Analytics 4 med Google Consent Mode v2, samt Microsoft Clarity.
  *
  * Samtykke settes til "denied" som standard (påkrevd i EØS). gtag.js lastes,
  * men samler ingen personopplysninger / cookies før brukeren aktivt godtar i
- * cookie-banneren (se CookieConsent.tsx). Tidligere valg huskes via localStorage.
+ * cookie-modalen (se CookieConsent.tsx). Clarity lastes først ved samtykke.
+ * Tidligere valg huskes via localStorage.
  */
 export default function Analytics() {
+  // Gjengangere som allerede har godtatt: last Clarity ved sidelast.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(CONSENT_KEY) === 'granted') {
+        loadClarity();
+      }
+    } catch {
+      /* localStorage utilgjengelig */
+    }
+  }, []);
+
   return (
     <>
       {/* Må kjøre før gtag.js prosesserer køen, derfor først i dataLayer. */}

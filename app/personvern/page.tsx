@@ -93,19 +93,20 @@ export default function PersonvernPage() {
                 sidene skal fungere. Disse kan vi benytte uten samtykke.
               </p>
               <p className="mt-3">
-                I tillegg bruker vi Google Analytics for å lage anonymisert
-                statistikk om hvordan nettstedet brukes, slik at vi kan forbedre
-                innholdet. Disse informasjonskapslene settes kun dersom du
-                aktivt godtar dem i samtykkebanneren. Frem til du har gitt
-                samtykke, samler vi ikke inn data via Google Analytics. Det
+                I tillegg bruker vi Google Analytics og Microsoft Clarity for å
+                lage anonymisert statistikk om hvordan nettstedet brukes – blant
+                annet hvilke sider som besøkes og hvordan man navigerer – slik at
+                vi kan forbedre innholdet. Disse informasjonskapslene settes kun
+                dersom du aktivt godtar dem i samtykkebanneren. Frem til du har
+                gitt samtykke, samler vi ikke inn data via disse verktøyene. Det
                 rettslige grunnlaget er ditt samtykke, jf. ekomloven og
                 personvernforordningen (GDPR).
               </p>
               <p className="mt-3">
-                Når statistikk er aktivert, behandles opplysningene av Google som
-                databehandler på våre vegne. IP-adressen din anonymiseres, og vi
-                bruker ikke dataene til markedsføring eller deling med
-                tredjeparter for annonseformål.
+                Når statistikk er aktivert, behandles opplysningene av Google og
+                Microsoft som databehandlere på våre vegne. IP-adressen din
+                anonymiseres, og vi bruker ikke dataene til markedsføring eller
+                deling med tredjeparter for annonseformål.
               </p>
               <p className="mt-3">
                 Du kan når som helst trekke tilbake eller endre samtykket ditt.
