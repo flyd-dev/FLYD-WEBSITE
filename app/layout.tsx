@@ -19,6 +19,9 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.flyd.no'),
+  verification: {
+    google: 'etU_ZA2jeyyDin4pgdzxqQzG6LLkLYft9oiBM0HhzPA',
+  },
   title: {
     default: 'Flyd – Regnskap, rådgivning og teknologi i samme hus',
     template: '%s · Flyd',
