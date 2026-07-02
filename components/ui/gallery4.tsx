@@ -80,7 +80,7 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
               {title}
             </h2>
           </div>
-          <div className="hidden shrink-0 items-center gap-2 md:flex">
+          <div className="flex shrink-0 items-center gap-2">
             <Button
               size="icon"
               variant="outline"
@@ -122,7 +122,7 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
                   key={item.id}
                   className="max-w-[320px] pl-5 lg:max-w-[380px]"
                 >
-                  <article className="group relative h-[460px] w-full overflow-hidden rounded-lg shadow-[0_24px_48px_-24px_rgba(31,31,31,0.35),0_8px_16px_-12px_rgba(76,142,147,0.35)] lg:h-[500px]">
+                  <article className="group relative h-[460px] w-full overflow-hidden rounded-2xl shadow-[0_24px_48px_-24px_rgba(31,31,31,0.35),0_8px_16px_-12px_rgba(76,142,147,0.35)] lg:h-[500px]">
                     {/* Lightly blurred background – people should still be recognisable */}
                     <div
                       className="absolute inset-0 scale-110 bg-cover bg-center blur-[2px] transition-transform duration-[900ms] ease-out group-hover:scale-[1.15]"
@@ -175,7 +175,7 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
 
                     {/* Subtle inner border */}
                     <div
-                      className="pointer-events-none absolute inset-0 rounded-lg ring-1 ring-inset ring-flyd-paper/10"
+                      className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-flyd-paper/10"
                       aria-hidden="true"
                     />
                   </article>
@@ -185,19 +185,24 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
           </CarouselContent>
         </Carousel>
 
-        {/* Dots */}
-        <div className="mt-10 flex justify-center gap-2">
+        {/* Dots – visuelt små, men med ≥24px klikkflate via padding */}
+        <div className="mt-8 flex justify-center">
           {items.map((_, index) => (
             <button
               key={index}
-              className={`h-[6px] rounded-full transition-all duration-300 ${
-                currentSlide === index
-                  ? 'w-8 bg-flyd-teal-dark'
-                  : 'w-[6px] bg-flyd-ink/20 hover:bg-flyd-ink/40'
-              }`}
+              className="group/dot p-2.5"
               onClick={() => carouselApi?.scrollTo(index)}
-              aria-label={`Gå til slide ${index + 1}`}
-            />
+              aria-label={`Gå til kort ${index + 1}`}
+              aria-current={currentSlide === index ? 'true' : undefined}
+            >
+              <span
+                className={`block h-[6px] rounded-full transition-[width,background-color] duration-300 ${
+                  currentSlide === index
+                    ? 'w-8 bg-flyd-teal-dark'
+                    : 'w-[6px] bg-flyd-ink/20 group-hover/dot:bg-flyd-ink/40'
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>

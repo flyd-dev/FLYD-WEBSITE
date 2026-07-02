@@ -1,8 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Reveal() {
+  // Re-kjør ved klientnavigasjon – layouten (og dermed denne komponenten)
+  // beholdes på tvers av sider, så uten pathname-avhengigheten ville nye
+  // siders [data-reveal]-elementer aldri bli observert.
+  const pathname = usePathname();
+
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
     if (!('IntersectionObserver' in window)) {
@@ -47,7 +53,7 @@ export default function Reveal() {
       io.disconnect();
       window.clearTimeout(fallback);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

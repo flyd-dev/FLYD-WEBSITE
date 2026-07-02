@@ -7,7 +7,7 @@ const tones: Record<Tone, string> = {
   ink: 'bg-flyd-ink text-flyd-paper',
   teal: 'bg-flyd-teal text-flyd-ink',
   'teal-dark': 'bg-flyd-teal-dark text-flyd-paper',
-  'teal-soft': 'bg-[#F2F7F7] text-flyd-ink',
+  'teal-soft': 'bg-flyd-teal-soft text-flyd-ink',
 };
 
 export default function Section({

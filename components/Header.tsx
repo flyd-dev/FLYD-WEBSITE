@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { Menu, X } from 'lucide-react';
 import { ButtonLink } from './Button';
@@ -18,6 +19,9 @@ const nav = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (href: string) =>
+    (pathname ?? '').replace(/\/+$/, '') === href.replace(/\/+$/, '');
   const openBtnRef = useRef<HTMLButtonElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -102,7 +106,13 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[14px] text-flyd-ink/80 tracking-wide hover:text-flyd-ink transition-colors"
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                className={clsx(
+                  'text-[14px] tracking-wide transition-colors hover:text-flyd-ink',
+                  isActive(item.href)
+                    ? 'font-medium text-flyd-ink underline decoration-flyd-teal-dark decoration-2 underline-offset-8'
+                    : 'text-flyd-ink/80',
+                )}
               >
                 {item.label}
               </Link>
@@ -164,7 +174,11 @@ export default function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="text-3xl font-display tracking-tighter py-3 border-b border-flyd-ink/10"
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              className={clsx(
+                'text-3xl font-display tracking-tighter py-3 border-b border-flyd-ink/10',
+                isActive(item.href) && 'text-flyd-teal-dark',
+              )}
             >
               {item.label}
             </Link>

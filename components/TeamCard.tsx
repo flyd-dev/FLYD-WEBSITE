@@ -10,7 +10,7 @@ export default function TeamCard({ m }: { m: TeamMember }) {
       data-reveal
       className="group flex flex-col overflow-hidden rounded-2xl border border-flyd-ink/15 bg-flyd-paper pb-6 transition-colors duration-200 hover:border-flyd-teal-dark/40"
     >
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#F2F7F7]">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-flyd-teal-soft">
         {m.image ? (
           <Image
             src={m.image}

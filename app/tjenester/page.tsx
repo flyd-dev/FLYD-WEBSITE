@@ -67,7 +67,7 @@ export default function TjenesterPage() {
               <Link
                 key={s.id}
                 href={`#${s.id}`}
-                className="bg-flyd-paper px-4 py-5 text-center text-[13px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors hover:bg-[#F2F7F7] hover:text-flyd-teal-dark"
+                className="bg-flyd-paper px-4 py-5 text-center text-[13px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors hover:bg-flyd-teal-soft hover:text-flyd-teal-dark"
               >
                 {s.title}
               </Link>

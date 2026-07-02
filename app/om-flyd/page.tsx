@@ -150,7 +150,7 @@ export default function OmFlydPage() {
           <div className="flex items-end justify-between gap-6" data-reveal>
             <div>
               <Eyebrow>Ledelse og partnere</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold leading-[1.05] text-[#3b3c36]">
+              <h2 className="mt-5 font-display text-display-lg font-semibold leading-[1.05]">
                 Menneskene bak{' '}
                 <Image
                   src="/brand/flyd-logo-dark.png"
@@ -162,8 +162,10 @@ export default function OmFlydPage() {
               </h2>
             </div>
             <div className="hidden text-right text-[13px] text-flyd-ink/60 md:block">
-              19 medarbeidere
-              <br />6 kontorer
+              {leadership.length + officeLeads.length + otherTeam.length}{' '}
+              medarbeidere
+              <br />
+              {offices.length} kontorer
             </div>
           </div>
 
@@ -173,7 +175,7 @@ export default function OmFlydPage() {
             ))}
           </div>
 
-          <h3 className="mt-24 font-display text-2xl font-semibold text-[#3b3c36]" data-reveal>
+          <h3 className="mt-24 font-display text-2xl font-semibold" data-reveal>
             Kontorledere
           </h3>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -182,7 +184,7 @@ export default function OmFlydPage() {
             ))}
           </div>
 
-          <h3 className="mt-24 font-display text-2xl font-semibold text-[#3b3c36]" data-reveal>
+          <h3 className="mt-24 font-display text-2xl font-semibold" data-reveal>
             Resten av teamet
           </h3>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -215,7 +217,7 @@ export default function OmFlydPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-reveal
-                className="group relative bg-flyd-paper p-7 md:p-8 transition-colors duration-200 hover:bg-[#F2F7F7]"
+                className="group relative bg-flyd-paper p-7 md:p-8 transition-colors duration-200 hover:bg-flyd-teal-soft"
               >
                 <div className="flex items-start justify-between">
                   <MapPin

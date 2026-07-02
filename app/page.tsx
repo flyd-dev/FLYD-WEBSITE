@@ -16,6 +16,7 @@ import { SpotlightCard } from '@/components/ui/spotlight-card';
 import RuixenCard, { type RuixenCardTone } from '@/components/ui/ruixen-card-01';
 import WhyFlydList from '@/components/WhyFlydList';
 import { services, erpSystems } from '@/data/services';
+import { stats } from '@/data/stats';
 
 const serviceTones: RuixenCardTone[] = ['teal', 'dark', 'ink', 'teal', 'dark', 'ink'];
 
@@ -25,13 +26,6 @@ const erpIcons: Record<string, typeof Cloud> = {
   unimicro: Plug,
   poweroffice: Sparkles,
 };
-
-const stats = [
-  { value: '670+', label: 'Kunder' },
-  { value: '6', label: 'Kontorer' },
-  { value: '19', label: 'Medarbeidere' },
-  { value: '11', label: 'Statsautoriserte regnskapsførere' },
-];
 
 const whyFlyd = [
   'Regnskap, rådgivning og teknologi under samme tak',

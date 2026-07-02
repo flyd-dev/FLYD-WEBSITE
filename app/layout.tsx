@@ -8,6 +8,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import Analytics from '@/components/Analytics';
 import CookieConsent from '@/components/CookieConsent';
 import { offices } from '@/data/offices';
+import { leadership, officeLeads, otherTeam } from '@/data/team';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -89,6 +90,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       'https://www.linkedin.com/company/flyd-as/',
       'https://www.facebook.com/flyd.no',
     ],
+    numberOfEmployees: {
+      '@type': 'QuantitativeValue',
+      value: leadership.length + officeLeads.length + otherTeam.length,
+    },
+    memberOf: {
+      '@type': 'Organization',
+      name: 'Regnskap Norge',
+      url: 'https://www.regnskapnorge.no/',
+    },
     address: {
       '@type': 'PostalAddress',
       streetAddress: hq.street,

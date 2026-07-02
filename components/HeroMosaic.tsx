@@ -28,7 +28,7 @@ const columnB: Card[] = [
 function MosaicCard({ card }: { card: Card }) {
   return (
     <div
-      className={`relative mb-4 w-full ${card.ratio} overflow-hidden rounded-[14px] bg-flyd-ink/5 shadow-[0_18px_40px_-24px_rgba(31,31,31,0.35),0_2px_6px_-2px_rgba(76,142,147,0.15)] ring-1 ring-flyd-ink/5`}
+      className={`relative mb-4 w-full ${card.ratio} overflow-hidden rounded-2xl bg-flyd-ink/5 shadow-[0_18px_40px_-24px_rgba(31,31,31,0.35),0_2px_6px_-2px_rgba(76,142,147,0.15)] ring-1 ring-flyd-ink/5`}
     >
       {/* Ingen priority: mosaikken er skjult under lg, og preload lastet
           bildene unødig på mobil. Lazy henter dem kun når de faktisk vises. */}

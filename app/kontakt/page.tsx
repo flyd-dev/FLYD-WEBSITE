@@ -122,7 +122,7 @@ export default function KontaktPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-reveal
-                className="group relative bg-flyd-paper p-7 md:p-8 transition-colors duration-200 hover:bg-[#F2F7F7]"
+                className="group relative bg-flyd-paper p-7 md:p-8 transition-colors duration-200 hover:bg-flyd-teal-soft"
               >
                 <div className="flex items-start justify-between">
                   <MapPin

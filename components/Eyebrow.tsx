@@ -9,12 +9,14 @@ export default function Eyebrow({
   className?: string;
   tone?: 'ink' | 'paper' | 'teal';
 }) {
+  // Teksten holdes i sort/hvit (AA-kontrast på 12px) – teal-aksenten
+  // ligger i streken foran, ikke i selve teksten.
   const color =
     tone === 'paper'
-      ? 'text-flyd-paper/70 before:bg-flyd-paper/70'
+      ? 'text-flyd-paper/80 before:bg-flyd-teal'
       : tone === 'teal'
-      ? 'text-flyd-teal-dark before:bg-flyd-teal-dark'
-      : 'text-flyd-ink/70 before:bg-flyd-ink/70';
+      ? 'text-flyd-ink/80 before:bg-flyd-teal-dark'
+      : 'text-flyd-ink/80 before:bg-flyd-teal-dark';
 
   return (
     <span

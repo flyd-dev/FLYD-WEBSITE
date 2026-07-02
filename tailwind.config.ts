@@ -12,6 +12,8 @@ const config: Config = {
         flyd: {
           teal: '#8BC0BE',
           'teal-dark': '#4C8E93',
+          // avledet flate: teal på ~5 % mot hvit — ikke en egen profilfarge
+          'teal-soft': '#F2F7F7',
           ink: '#1F1F1F',
           paper: '#FFFFFF',
         },

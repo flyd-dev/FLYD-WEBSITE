@@ -1,5 +1,22 @@
 # Endringslogg — analyse-forbedringer
 
+## Runde 3: Lav prioritet / polish (L-tiltak)
+
+- **L3 Repo-opprydding:** `CLAUDE.md` skrevet om fra et fremmed malprosjekt til å beskrive det faktiske oppsettet (stack, struktur, merkevare- og kvalitetsregler). 41 ubrukte `.jpg`-duplikater slettet fra `public/` (11 MB → 3,8 MB — alle referanser bruker WebP). Rå-mappene var allerede gitignorert.
+- **L4 Design-tokens:** `flyd-teal-soft` (#F2F7F7) inn i Tailwind-config; alle `bg-[#F2F7F7]` erstattet. Avviksfargen `#3b3c36` fjernet fra om-flyd-overskrifter (nå ren ink). Stats-tallene flyttet til `data/stats.ts` — kontor- og medarbeidertall utledes nå fra datafilene (også på om-flyd).
+- **L5 Reveal ved navigasjon:** `Reveal.tsx` re-observerer `[data-reveal]` ved ruteendring (`usePathname`) — animasjonene virker nå også ved klikk-navigasjon, ikke bare første sidelast.
+- **L6 Navigasjon/karusell:** Aktiv side markeres i menyen (`aria-current="page"` + teal understrek på desktop, teal tekst i mobilmenyen). Karusellpilene på karrieresiden vises nå også på mobil. Dots har ≥24 px klikkflate (padding rundt visuell prikk).
+- **L7 Metadata:** `opengraph-image.png` komprimert 458 KB → 114 KB (samme format/filnavn). Organization-schema beriket med `numberOfEmployees` (utledet fra teamdata) og `memberOf` Regnskap Norge.
+- **L8 Etiketter:** Eyebrow-tekst er nå alltid sort/hvit med AA-kontrast — teal-aksenten ligger i streken foran, ikke i teksten. Stats-etiketter opp fra 10–11 px til 12–13 px.
+- **L9 Prosessbilder:** Blur redusert fra 5 px til 2 px og lysstyrke hevet (0,62 → 0,72) — motivene er gjenkjennelige, tekstkontrasten ivaretas av bunngradienten.
+- **L1 Radius:** «Flytende» kort samlet på `rounded-2xl` (16 px): tjenestekort (før 20 px), hero-mosaikk (14 px), karrierekort (4 px). Flush hairline-grids (ERP, kontorer) og knapper er bevisst fortsatt skarpe.
+
+**Bevisst ikke gjort:** L2 SVG-logo (rører selve merkevaren — bør besluttes av dere), M3 kundesitater, M5 kontorsider, L10/L11 innholdsblokker (pris, kontorhistorier, Stavanger/Forus-avklaring).
+
+Verifisert: `tsc` OK, `npm run build` OK, skjermbilder av karusell (mobil), prosess-kort, eyebrows og aktiv nav.
+
+---
+
 ## Runde 2: Middels prioritet (M-tiltak)
 
 - **M1 Kontaktpunkter:** Telefonnummer (+47 480 19 958) i footerens kontaktblokk (`components/Footer.tsx`) og «Ring …»-knapp i mobilmenyen (`components/Header.tsx`).

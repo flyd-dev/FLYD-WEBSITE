@@ -1,54 +1,44 @@
-# CLAUDE.md — Frontend Website Rules
+# CLAUDE.md — flyd.no
 
-## Always Do First
-- **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
+Nettsted for Flyd AS (regnskap, rådgivning og teknologi, Sør-Vest-Norge).
 
-## Reference Images
-- If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
-- If no reference image: design from scratch with high craft (see guardrails below).
-- Screenshot your output, compare against reference, fix mismatches, re-screenshot. Do at least 2 comparison rounds. Stop only when no visible differences remain or user says so.
+## Stack og oppsett
 
-## Local Server
-- **Always serve on localhost** — never screenshot a `file:///` URL.
-- Start the dev server: `node serve.mjs` (serves the project root at `http://localhost:3000`)
-- `serve.mjs` lives in the project root. Start it in the background before taking any screenshots.
-- If the server is already running, do not start a second instance.
+- **Next.js 14 App Router** med statisk eksport (`output: 'export'`, `trailingSlash: true`, `images.unoptimized`) — ingen server-runtime.
+- **Tailwind CSS** (se `tailwind.config.ts` for tokens), **framer-motion** for mikroanimasjoner, **lucide-react** for ikoner.
+- Deploy: push til `main` → Vercel bygger og publiserer automatisk til www.flyd.no. **Ikke push uten eksplisitt beskjed.**
+- Dev-server: `npm run dev` (port 3000). Hvis 3000 er opptatt av et annet prosjekt: `npx next dev -p 3001`.
+- Bygg/sjekk før commit: `npx tsc --noEmit` og `npm run build`.
 
-## Screenshot Workflow
-- Puppeteer is installed at `C:/Users/nateh/AppData/Local/Temp/puppeteer-test/`. Chrome cache is at `C:/Users/nateh/.cache/puppeteer/`.
-- **Always screenshot from localhost:** `node screenshot.mjs http://localhost:3000`
-- Screenshots are saved automatically to `./temporary screenshots/screenshot-N.png` (auto-incremented, never overwritten).
-- Optional label suffix: `node screenshot.mjs http://localhost:3000 label` → saves as `screenshot-N-label.png`
-- `screenshot.mjs` lives in the project root. Use it as-is.
-- After screenshotting, read the PNG from `temporary screenshots/` with the Read tool — Claude can see and analyze the image directly.
-- When comparing, be specific: "heading is 32px but reference shows ~24px", "card gap is 16px but should be 24px"
-- Check: spacing/padding, font size/weight/line-height, colors (exact hex), alignment, border-radius, shadows, image sizing
+## Struktur
 
-## Output Defaults
-- Single `index.html` file, all styles inline, unless user says otherwise
-- Tailwind CSS via CDN: `<script src="https://cdn.tailwindcss.com"></script>`
-- Placeholder images: `https://placehold.co/WIDTHxHEIGHT`
-- Mobile-first responsive
+- `app/` — sider: `/`, `/tjenester`, `/om-flyd`, `/karriere`, `/karriere/[slug]`, `/kontakt`, `/personvern`, `not-found`, `sitemap.ts`, `robots.ts`.
+- `components/` — delte komponenter; `components/ui/` — tilpassede tredjeparts-UI (typewriter, kort, karusell).
+- `data/` — alt innhold som endres ofte: `services.ts`, `team.ts`, `jobs.ts`, `offices.ts`, `partners.ts`, `logos.ts`. **Rediger innhold her, ikke i sidene.**
+- `public/` — kun filer som faktisk serveres. Bilder skal være **WebP** (unntak: favicon/OG-bilde og logo-PNG-ene i `public/brand/`).
+- `brand_assets/` — kildefiler for profil (Profilmanual.jpg m.m.). Rå foto-mapper (`header_pictures/` osv.) er gitignorert.
 
-## Brand Assets
-- Always check the `brand_assets/` folder before designing. It may contain logos, color guides, style guides, or images.
-- If assets exist there, use them. Do not use placeholders where real assets are available.
-- If a logo is present, use it. If a color palette is defined, use those exact values — do not invent brand colors.
+## Merkevare (følg profilmanualen)
 
-## Anti-Generic Guardrails
-- **Colors:** Never use default Tailwind palette (indigo-500, blue-600, etc.). Pick a custom brand color and derive from it.
-- **Shadows:** Never use flat `shadow-md`. Use layered, color-tinted shadows with low opacity.
-- **Typography:** Never use the same font for headings and body. Pair a display/serif with a clean sans. Apply tight tracking (`-0.03em`) on large headings, generous line-height (`1.7`) on body.
-- **Gradients:** Layer multiple radial gradients. Add grain/texture via SVG noise filter for depth.
-- **Animations:** Only animate `transform` and `opacity`. Never `transition-all`. Use spring-style easing.
-- **Interactive states:** Every clickable element needs hover, focus-visible, and active states. No exceptions.
-- **Images:** Add a gradient overlay (`bg-gradient-to-t from-black/60`) and a color treatment layer with `mix-blend-multiply`.
-- **Spacing:** Use intentional, consistent spacing tokens — not random Tailwind steps.
-- **Depth:** Surfaces should have a layering system (base → elevated → floating), not all sit at the same z-plane.
+- **Farger (de eneste):** sort `#1F1F1F` (flyd-ink), lys blå `#8BC0BE` (flyd-teal, hovedfarge), mørk blågrønn `#4C8E93` (flyd-teal-dark), hvit `#FFFFFF` (flyd-paper). Opacity-varianter er lov. **Ingen andre farger** (oransje aksent ble fjernet bevisst i 2026 — ikke gjeninnfør).
+- **Tekst er alltid sort eller hvit** (evt. med opacity). Aksentfargene brukes på flater, linjer og ikoner.
+- **Typografi:** Poppins (via next/font) til overskrifter, Helvetica/Arial-stack til brødtekst (`globals.css`).
+- **Slagordet er «full flyd»** — ordspill på navnet. Aldri «full flyt».
+- Tone: moderne, teknisk dyktig, lokal, profesjonell, menneskelig. Ikke generisk IT-byrå.
 
-## Hard Rules
-- Do not add sections, features, or content not in the reference
-- Do not "improve" a reference design — match it
-- Do not stop after one screenshot pass
-- Do not use `transition-all`
-- Do not use default Tailwind blue/indigo as primary color
+## Kvalitetskrav (fra nettstedsanalysen 2026 — se ANALYSE-RAPPORT.md)
+
+- **Kontrast:** minst 4,5:1 for normal tekst, 3:1 for stor tekst. Kjente feller: teal på hvit (2,0:1 — aldri til tekst), teal-dark på teal (1,9:1 — aldri). Teal-dark på hvit (3,75:1) er kun for stor tekst.
+- **Tilgjengelighet:** alle bilder har alt-tekst; modaler/drawere har fokusfelle + Escape; animasjoner skal respektere `prefers-reduced-motion`; skjemafelt har label + `aria-invalid`/`aria-describedby` ved feil.
+- **SEO:** hver side har unik `metadata` (title/description/canonical). Ikke legg synlig tekst utelukkende i klient-animasjoner (typewriteren SSR-er første frase — behold det mønsteret).
+- Interaktive elementer trenger hover-, focus-visible- og active-tilstander. Ikke bruk `transition-all`.
+
+## Skjermbilder ved visuelt arbeid
+
+- `node screenshot.mjs http://localhost:3000 [label] [mobile|desktop]` — lagrer til `temporary screenshots/` (gitignorert). Les PNG-en med Read-verktøyet og sammenlign mot faktisk resultat i minst to runder ved designendringer.
+
+## Diverse
+
+- Kontaktskjemaet poster til en Make-webhook (`components/ContactForm.tsx`) — honeypot-feltet heter `company`; det ekte bedriftsfeltet heter `bedrift`. Ikke fjern noen av delene.
+- Samtykke: GA4 + Clarity er gated bak `CookieConsent` (Consent Mode v2, localStorage-nøkkel `flyd-consent`). «Endre samtykke» i footer sender `flyd:open-consent`-event.
+- Git: commits på norsk, ingen Co-Authored-By-linjer.

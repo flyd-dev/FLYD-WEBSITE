@@ -148,7 +148,7 @@ export default function StatsSection({ stats }: { stats: Stat[] }) {
                   s.value
                 )}
               </div>
-              <div className="mt-1 text-[10px] md:text-[11px] text-flyd-ink/75 leading-snug">
+              <div className="mt-1 text-[12px] md:text-[13px] text-flyd-ink/80 leading-snug">
                 {s.label}
               </div>
             </div>

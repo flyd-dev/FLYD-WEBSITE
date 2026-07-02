@@ -218,7 +218,7 @@ export default function JobDetailPage({
               </div>
 
               <div
-                className="mt-16 border border-flyd-ink/15 bg-[#F2F7F7] p-8 md:p-10"
+                className="mt-16 border border-flyd-ink/15 bg-flyd-teal-soft p-8 md:p-10"
                 data-reveal
               >
                 <h2 className="font-display text-2xl font-semibold">
@@ -272,7 +272,7 @@ export default function JobDetailPage({
 
             <aside className="lg:col-span-4">
               <div className="lg:sticky lg:top-24">
-                <div className="border border-flyd-ink/15 bg-[#F2F7F7] p-7">
+                <div className="border border-flyd-ink/15 bg-flyd-teal-soft p-7">
                   <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-teal-dark">
                     Om stillingen
                   </div>

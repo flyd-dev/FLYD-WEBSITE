@@ -42,7 +42,7 @@ const Card = ({ step }: CardProps) => {
       className="group relative h-72 w-full cursor-pointer overflow-hidden bg-flyd-teal-dark md:h-80"
     >
       <div
-        className="absolute inset-0 scale-[1.08] blur-[5px] brightness-[0.62] transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.14] group-hover:blur-[2px] group-hover:brightness-[0.7]"
+        className="absolute inset-0 scale-[1.08] blur-[2px] brightness-[0.72] transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.14] group-hover:blur-[1px] group-hover:brightness-[0.78]"
         style={{
           backgroundImage: `url(${step.imgSrc})`,
           backgroundSize: 'cover',

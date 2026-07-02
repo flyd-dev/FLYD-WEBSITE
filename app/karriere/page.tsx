@@ -161,7 +161,7 @@ export default function KarrierePage() {
               <li key={job.slug}>
                 <Link
                   href={`/karriere/${job.slug}/`}
-                  className="group grid grid-cols-1 gap-6 py-8 transition-colors duration-200 hover:bg-[#F2F7F7] md:grid-cols-12 md:items-center md:gap-8 md:px-6"
+                  className="group grid grid-cols-1 gap-6 py-8 transition-colors duration-200 hover:bg-flyd-teal-soft md:grid-cols-12 md:items-center md:gap-8 md:px-6"
                 >
                   <div className="md:col-span-5">
                     <h3 className="font-display text-2xl font-semibold leading-tight md:text-[28px]">
@@ -206,7 +206,7 @@ export default function KarrierePage() {
           </ul>
 
           <div
-            className="mt-14 flex flex-wrap items-center gap-4 border border-flyd-ink/15 bg-[#F2F7F7] p-8 md:p-10"
+            className="mt-14 flex flex-wrap items-center gap-4 border border-flyd-ink/15 bg-flyd-teal-soft p-8 md:p-10"
             data-reveal
           >
             <div className="max-w-xl">

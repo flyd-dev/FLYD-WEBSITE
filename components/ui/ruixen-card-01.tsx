@@ -65,7 +65,7 @@ export default function RuixenCard({
     <div className={cn('group flex h-full w-full flex-col', className)}>
       <Link
         href={href}
-        className="relative flex h-full flex-col overflow-hidden rounded-[20px] border border-flyd-ink/10 bg-flyd-paper shadow-subtle transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-flyd-teal-dark/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flyd-teal-dark/40 focus-visible:ring-offset-2 focus-visible:ring-offset-flyd-paper"
+        className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-flyd-ink/10 bg-flyd-paper shadow-subtle transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-flyd-teal-dark/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flyd-teal-dark/40 focus-visible:ring-offset-2 focus-visible:ring-offset-flyd-paper"
       >
         {useIconMode ? (
           <div className={cn('relative h-[200px] w-full shrink-0 overflow-hidden', toneGradients[tone])}>
