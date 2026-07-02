@@ -123,7 +123,7 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
                   className="max-w-[320px] pl-5 lg:max-w-[380px]"
                 >
                   <article className="group relative h-[460px] w-full overflow-hidden rounded-lg shadow-[0_24px_48px_-24px_rgba(31,31,31,0.35),0_8px_16px_-12px_rgba(76,142,147,0.35)] lg:h-[500px]">
-                    {/* Lightly blurred background — people should still be recognisable */}
+                    {/* Lightly blurred background – people should still be recognisable */}
                     <div
                       className="absolute inset-0 scale-110 bg-cover bg-center blur-[2px] transition-transform duration-[900ms] ease-out group-hover:scale-[1.15]"
                       style={{ backgroundImage: `url(${item.background})` }}

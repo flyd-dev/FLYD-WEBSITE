@@ -25,18 +25,19 @@ const columnB: Card[] = [
   { src: '/header/DSC_5138.webp', alt: 'Flyd-teamet i arbeid', ratio: 'aspect-[3/4]' },
 ];
 
-function MosaicCard({ card, priority }: { card: Card; priority?: boolean }) {
+function MosaicCard({ card }: { card: Card }) {
   return (
     <div
       className={`relative mb-4 w-full ${card.ratio} overflow-hidden rounded-[14px] bg-flyd-ink/5 shadow-[0_18px_40px_-24px_rgba(31,31,31,0.35),0_2px_6px_-2px_rgba(76,142,147,0.15)] ring-1 ring-flyd-ink/5`}
     >
+      {/* Ingen priority: mosaikken er skjult under lg, og preload lastet
+          bildene unødig på mobil. Lazy henter dem kun når de faktisk vises. */}
       <Image
         src={card.src}
         alt={card.alt}
         fill
         sizes="(min-width:1024px) 18vw, 40vw"
         className="object-cover"
-        priority={priority}
       />
       {/* subtle warm treatment so the mosaic sits cleanly against paper background */}
       <div
@@ -51,12 +52,10 @@ function MosaicColumn({
   cards,
   duration,
   delay = 0,
-  priority,
 }: {
   cards: Card[];
   duration: number;
   delay?: number;
-  priority?: boolean;
 }) {
   // duplicate once for a seamless 50% translate loop
   const loop = [...cards, ...cards];
@@ -71,11 +70,7 @@ function MosaicColumn({
         }}
       >
         {loop.map((card, i) => (
-          <MosaicCard
-            key={`${card.src}-${i}`}
-            card={card}
-            priority={priority && i < 2}
-          />
+          <MosaicCard key={`${card.src}-${i}`} card={card} />
         ))}
       </div>
     </div>
@@ -99,13 +94,13 @@ export default function HeroMosaic() {
       {/*
         Absolute + inset-0 means this component contributes NOTHING to the
         parent's intrinsic size. The parent (hero media column) must have
-        position: relative and overflow-hidden — the parent decides the height,
+        position: relative and overflow-hidden – the parent decides the height,
         and everything here is clipped to it. The track inside can be taller
         than the container; it just scrolls and gets clipped.
       */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="relative mx-auto grid h-full max-w-[520px] grid-cols-2 gap-x-4">
-          <MosaicColumn cards={columnA} duration={46} priority />
+          <MosaicColumn cards={columnA} duration={46} />
           <div className="pt-10 overflow-hidden">
             <MosaicColumn cards={columnB} duration={58} delay={-14} />
           </div>

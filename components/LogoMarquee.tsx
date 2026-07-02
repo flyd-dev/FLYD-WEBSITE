@@ -4,7 +4,8 @@ import { customerLogos } from '@/data/logos';
 export default function LogoMarquee() {
   const doubled = [...customerLogos, ...customerLogos];
   return (
-    <div className="relative w-full overflow-hidden py-4">
+    // marquee-track: hover pauser animasjonen (se globals.css)
+    <div className="marquee-track relative w-full overflow-hidden py-4">
       {/* Fade edges */}
       <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-flyd-paper to-transparent z-10" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-flyd-paper to-transparent z-10" />

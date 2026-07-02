@@ -1,4 +1,25 @@
-# Endringslogg — analyse-forbedringer (H1–H8)
+# Endringslogg — analyse-forbedringer
+
+## Runde 2: Middels prioritet (M-tiltak)
+
+- **M1 Kontaktpunkter:** Telefonnummer (+47 480 19 958) i footerens kontaktblokk (`components/Footer.tsx`) og «Ring …»-knapp i mobilmenyen (`components/Header.tsx`).
+- **M2 Statsautorisert-badge:** Teamkort viser «Statsautorisert»-merke med hake nederst på bildet (`components/TeamCard.tsx`). Utledes av `certified`-feltet eller rolletekst. **NB:** 9 av teamet har det i rollen i dag — stats-seksjonen sier 11, så de to siste bør markeres med `certified: true` i `data/team.ts`.
+- **M4 Hero-høyde:** 100vh gjelder nå kun desktop (`lg:`) — på mobil vises stats-tallene i folden (`app/page.tsx`).
+- **M6 Stillingsdata:** `datePosted: '2026-04-22'` (lanseringsdato) på alle tre stillinger, `deadline` endret fra «Snarest» til «Fortløpende» (`data/jobs.ts`). Verifisert i JobPosting-JSON-LD.
+- **M7 Nunito fjernet:** Fonten ble lastet i tre vekter men aldri brukt (`app/layout.tsx`). Brødtekst-strategien (Helvetica vs. webfont) står som åpen beslutning.
+- **M8 Marquee-pause:** `marquee-track`-klassen er nå faktisk på logostripen — hover pauser animasjonen som tiltenkt (`components/LogoMarquee.tsx`).
+- **M9 Mosaikk-preload:** `priority` fjernet fra hero-mosaikken — 0 bilder lastes på mobil (før: 2 preloads à ~30–45 KB). Verifisert med nettverkslogg.
+- **M10 CTA-vokabular:** Primær-CTA er «Snakk med oss» også i avslutningsseksjonene (før: «Send melding» / «Book en samtale» / «Ta kontakt»). Kontekstuelle CTA-er («Snakk med oss om lønn og HR», «Send søknad») er beholdt.
+- **M11 Tekstfikser:** Dynamisk stillingsteller på karrieresiden (går ikke lenger ut av sync med antall stillinger), «Har du det haster …» → «Haster det, …» + løfte om svar innen én arbeidsdag i skjemaets kvittering, konsekvent tankestrek («–», 29 forekomster av «—» normalisert).
+- **M12 Oransje fjernet helt:** ScrollToTop er nå teal-dark med ink-hover; `accent`/`accent-dark` er fjernet fra `tailwind.config.ts` og `globals.css`. Paletten består igjen kun av de fire offisielle fargene.
+
+Verifisert: `tsc --noEmit` OK, `npm run build` OK, alle endringer bekreftet i rendret HTML/JSON-LD og med skjermbilder (mobil-hero, teamkort, scroll-knapp).
+
+**Ikke gjort (krever innhold/beslutning fra dere):** M3 kundesitater, M5 lokasjonssider, brødtekst-webfont (T2).
+
+---
+
+# Runde 1: Høy prioritet (H1–H8)
 
 Branch: `analyse-forbedringer` (kun lokal — ikke pushet).
 Grunnlag: ANALYSE-RAPPORT.md, tiltakene med høy prioritet.

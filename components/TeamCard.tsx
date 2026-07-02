@@ -3,6 +3,8 @@ import { Mail, Phone } from 'lucide-react';
 import type { TeamMember } from '@/data/team';
 
 export default function TeamCard({ m }: { m: TeamMember }) {
+  const certified =
+    m.certified || m.role.toLowerCase().includes('statsautorisert');
   return (
     <article
       data-reveal
@@ -33,6 +35,23 @@ export default function TeamCard({ m }: { m: TeamMember }) {
         {m.lead && !m.partner && (
           <span className="absolute left-4 top-4 bg-flyd-ink px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-flyd-paper">
             Kontorleder
+          </span>
+        )}
+        {certified && (
+          <span className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 bg-flyd-paper/90 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-flyd-ink backdrop-blur-sm">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-3 w-3 text-flyd-teal-dark"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+            Statsautorisert
           </span>
         )}
       </div>

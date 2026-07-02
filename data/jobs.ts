@@ -29,7 +29,8 @@ export const jobs: Job[] = [
     type: 'Heltid',
     percentage: '100 %',
     startDate: 'Etter avtale',
-    deadline: 'Snarest',
+    deadline: 'Fortløpende',
+    datePosted: '2026-04-22',
     applyEmail: 'marit.christensen@flyd.no',
     contact: {
       name: 'Marit Haga Christensen',
@@ -94,7 +95,8 @@ export const jobs: Job[] = [
     type: 'Heltid',
     percentage: '100 %',
     startDate: 'Etter avtale',
-    deadline: 'Snarest',
+    deadline: 'Fortløpende',
+    datePosted: '2026-04-22',
     applyEmail: 'kai.mydland@flyd.no',
     contact: {
       name: 'Kai Mydland',
@@ -156,7 +158,8 @@ export const jobs: Job[] = [
     type: 'Heltid',
     percentage: '100 %',
     startDate: 'Etter avtale',
-    deadline: 'Snarest',
+    deadline: 'Fortløpende',
+    datePosted: '2026-04-22',
     applyEmail: 'kai.mydland@flyd.no',
     contact: {
       name: 'Kai Mydland',

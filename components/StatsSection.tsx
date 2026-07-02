@@ -34,7 +34,7 @@ function CountUp({
       const tick = (now: number) => {
         if (startTime === null) startTime = now;
         const progress = Math.min((now - startTime) / duration, 1);
-        // ease-out quart — calm landing, no overshoot
+        // ease-out quart – calm landing, no overshoot
         const eased = 1 - Math.pow(1 - progress, 4);
         setDisplay(Math.round(target * eased));
         if (progress < 1) {

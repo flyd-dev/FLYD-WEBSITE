@@ -14,8 +14,6 @@ const config: Config = {
           'teal-dark': '#4C8E93',
           ink: '#1F1F1F',
           paper: '#FFFFFF',
-          accent: '#E8884C',
-          'accent-dark': '#D1723A',
         },
       },
       fontFamily: {

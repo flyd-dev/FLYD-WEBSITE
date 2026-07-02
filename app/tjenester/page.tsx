@@ -222,7 +222,7 @@ export default function TjenesterPage() {
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <ButtonLink href="/kontakt" variant="teal" withArrow accent>
-                Book en samtale
+                Snakk med oss
               </ButtonLink>
               <ButtonLink href="tel:+4748019958" variant="outline-paper">
                 Ring oss

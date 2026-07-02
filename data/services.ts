@@ -83,8 +83,8 @@ export const services: Service[] = [
   {
     id: 'nettsider',
     title: 'Nettsider og digitale flater',
-    short: 'Nettsider, kundeportaler og interne arbeidsflater — bygget tett på tallene og systemene dine.',
-    long: 'En nettside skal gjøre en jobb — ikke bare se bra ut. Vi lager nettsider og digitale flater som henger sammen med ERP, regnskap og dataene dine, slik at teamet får mindre manuelt arbeid og kundene en ryddigere opplevelse. Denne siden, flyd.no, bygde vi selv.',
+    short: 'Nettsider, kundeportaler og interne arbeidsflater – bygget tett på tallene og systemene dine.',
+    long: 'En nettside skal gjøre en jobb – ikke bare se bra ut. Vi lager nettsider og digitale flater som henger sammen med ERP, regnskap og dataene dine, slik at teamet får mindre manuelt arbeid og kundene en ryddigere opplevelse. Denne siden, flyd.no, bygde vi selv.',
     bullets: [
       'Nettsider som er raske, tilgjengelige og enkle å vedlikeholde',
       'Kundeportaler knyttet til ERP og regnskap',
@@ -124,7 +124,7 @@ export const erpSystems: ErpSystem[] = [
     id: 'tripletex',
     name: 'Tripletex',
     tagline: 'Brukervennlig og skybasert',
-    description: 'Moderne, skybasert regnskaps- og ERP-system som er raskt å komme i gang med — skalerer fint fra små til relativt store virksomheter.',
+    description: 'Moderne, skybasert regnskaps- og ERP-system som er raskt å komme i gang med – skalerer fint fra små til relativt store virksomheter.',
   },
   {
     id: 'visma',

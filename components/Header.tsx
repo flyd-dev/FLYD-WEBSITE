@@ -129,7 +129,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile drawer — rendered as a sibling of <header> so it is not
+      {/* Mobile drawer – rendered as a sibling of <header> so it is not
           confined to the sticky header's stacking context on iOS Safari.
           Draweren dekker headeren (og burger-knappen), derfor har den sin
           egen lukkeknapp. `invisible` tar den ut av tab-rekkefølgen når lukket. */}
@@ -169,7 +169,7 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
-          <div className="mt-8">
+          <div className="mt-8 space-y-3">
             <ButtonLink
               href="/kontakt"
               variant="primary"
@@ -177,6 +177,15 @@ export default function Header() {
               onClick={() => setOpen(false)}
             >
               Snakk med oss
+            </ButtonLink>
+            <ButtonLink
+              href="tel:+4748019958"
+              variant="outline"
+              external
+              className="w-full"
+              onClick={() => setOpen(false)}
+            >
+              Ring +47 480 19 958
             </ButtonLink>
           </div>
         </div>

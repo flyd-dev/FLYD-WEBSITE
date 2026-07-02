@@ -77,9 +77,11 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
+      {/* 100vh kun på desktop – på mobil ville det gitt en nesten tom fold
+          under CTA-ene og skjøvet stats-seksjonen ut av syne. */}
       <Section
         tone="paper"
-        className="overflow-hidden relative min-h-[100vh] lg:h-[100vh]"
+        className="overflow-hidden relative lg:min-h-[100vh] lg:h-[100vh]"
       >
         <Container className="relative w-full h-full">
           <div className="grid h-full w-full grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-12 lg:auto-rows-fr">
@@ -142,7 +144,7 @@ export default function HomePage() {
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.15] tracking-[-0.02em]">
               Kontroll i dag.
               <br />
-              {/* ink/70 på teal-flaten = 4,25:1 — teal-dark her målte 1,85:1 */}
+              {/* ink/70 på teal-flaten = 4,25:1 – teal-dark her målte 1,85:1 */}
               <span className="text-flyd-ink/70">Innsikt for i morgen.</span>
             </h2>
           </div>
@@ -173,7 +175,7 @@ export default function HomePage() {
             <div className="lg:col-span-5" data-reveal>
               <Eyebrow>Tjenester</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Alt du trenger — <br />
+                Alt du trenger – <br />
                 i ett hus.
               </h2>
               <p className="mt-6 max-w-md text-[16px] text-flyd-ink/75 leading-[1.75]">
@@ -219,7 +221,7 @@ export default function HomePage() {
               </h2>
               <p className="mt-8 max-w-md text-[17px] leading-[1.75] text-flyd-paper/75">
                 Flyd kombinerer fagkompetanse med moderne teknologiforståelse. Vi
-                er ikke et tradisjonelt regnskapsbyrå — vi er et kompetansehus som
+                er ikke et tradisjonelt regnskapsbyrå – vi er et kompetansehus som
                 hjelper bedrifter med å se hele bildet.
               </p>
             </div>
@@ -352,12 +354,12 @@ export default function HomePage() {
               La oss ta en prat.
             </h2>
             <p className="mt-8 max-w-xl text-[18px] leading-[1.75] text-flyd-paper/80">
-              Fortell oss om virksomheten din — så finner vi ut hvordan vi kan
+              Fortell oss om virksomheten din – så finner vi ut hvordan vi kan
               hjelpe.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <ButtonLink href="/kontakt" variant="teal" withArrow accent>
-                Send melding
+                Snakk med oss
               </ButtonLink>
               <ButtonLink href="tel:+4748019958" variant="outline-paper">
                 Ring oss

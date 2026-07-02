@@ -108,11 +108,11 @@ export default function ContactForm() {
       <div className="border border-flyd-teal-dark/40 bg-flyd-teal/10 p-10 md:p-14">
         <CheckCircle2 className="h-8 w-8 text-flyd-teal-dark" strokeWidth={1.5} />
         <h3 className="mt-6 font-display text-2xl font-semibold">
-          Takk — meldingen er mottatt.
+          Takk – meldingen er mottatt.
         </h3>
         <p className="mt-4 max-w-lg text-[15px] text-flyd-ink/75 leading-relaxed">
-          Vi kommer tilbake til deg innen kort tid. Har du det haster kan du
-          også nå oss direkte på{' '}
+          Vi svarer deg normalt innen én arbeidsdag. Haster det, kan du også
+          nå oss direkte på{' '}
           <a
             href="mailto:support@flyd.no"
             className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 transition-colors hover:text-flyd-teal-dark hover:decoration-flyd-teal-dark"

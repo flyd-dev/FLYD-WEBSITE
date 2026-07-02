@@ -10,7 +10,7 @@ export default function Footer() {
       <Container className="py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Link href="/" aria-label="Flyd — til forsiden" className="inline-block">
+            <Link href="/" aria-label="Flyd – til forsiden" className="inline-block">
               <Image
                 src="/brand/flyd-logo-white.png"
                 alt="Flyd"
@@ -25,6 +25,11 @@ export default function Footer() {
               programvare og integrasjoner under samme tak.
             </p>
             <div className="mt-8 space-y-1.5 text-[14px] text-flyd-paper/70">
+              <div>
+                <a href="tel:+4748019958" className="hover:text-flyd-teal">
+                  +47 480 19 958
+                </a>
+              </div>
               <div>
                 <a href="mailto:support@flyd.no" className="hover:text-flyd-teal">
                   support@flyd.no

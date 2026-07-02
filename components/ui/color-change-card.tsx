@@ -62,7 +62,7 @@ const Card = ({ step }: CardProps) => {
           />
         </div>
         <div>
-          {/* Bokstavanimasjonen dobler hver bokstav i DOM ("DDiiaalloogg") —
+          {/* Bokstavanimasjonen dobler hver bokstav i DOM ("DDiiaalloogg") –
               skjules for skjermlesere/søkemotorer, ren tittel ligger i sr-only. */}
           <h3 className="font-display text-2xl font-semibold leading-tight">
             <span className="sr-only">{step.title}</span>

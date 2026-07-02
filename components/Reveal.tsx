@@ -36,7 +36,7 @@ export default function Reveal() {
     els.forEach((el) => io.observe(el));
 
     // Safety net: any element still hidden after 1.2s (e.g. bot/headless that
-    // doesn't fire IntersectionObserver consistently) — reveal it.
+    // doesn't fire IntersectionObserver consistently) – reveal it.
     const fallback = window.setTimeout(() => {
       document
         .querySelectorAll('[data-reveal="hidden"]')

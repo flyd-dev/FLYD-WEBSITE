@@ -33,7 +33,7 @@ const perks: Gallery4Item[] = [
     icon: 'sparkles',
     title: 'Moderne fagmiljø',
     description:
-      'Skjæringspunktet mellom økonomi, teknologi og rådgivning — der fag og systemer jobber sammen.',
+      'Skjæringspunktet mellom økonomi, teknologi og rådgivning – der fag og systemer jobber sammen.',
     background: '/team-bg/DSC_4940.webp',
   },
   {
@@ -49,7 +49,7 @@ const perks: Gallery4Item[] = [
     icon: 'building-2',
     title: 'Spennende kunder',
     description:
-      'Fra gründere til industrikonsern — ingen dag er lik, og hver kunde gir nye faglige løft.',
+      'Fra gründere til industrikonsern – ingen dag er lik, og hver kunde gir nye faglige løft.',
     background: '/team-bg/DSC_5306.webp',
   },
   {
@@ -57,7 +57,7 @@ const perks: Gallery4Item[] = [
     icon: 'compass',
     title: 'Læring og vekst',
     description:
-      'Kurs, sertifiseringer og interne fagsamlinger — vi holder kompetansen skarp.',
+      'Kurs, sertifiseringer og interne fagsamlinger – vi holder kompetansen skarp.',
     background: '/team-bg/perk-miljo.webp',
   },
   {
@@ -65,7 +65,7 @@ const perks: Gallery4Item[] = [
     icon: 'heart-handshake',
     title: 'Godt arbeidsmiljø',
     description:
-      'Trivsel, samarbeid og arbeidsglede er ikke bare ord — det er hvordan vi gjør ting.',
+      'Trivsel, samarbeid og arbeidsglede er ikke bare ord – det er hvordan vi gjør ting.',
     background: '/team-bg/DSC_4634.webp',
   },
   {
@@ -77,6 +77,16 @@ const perks: Gallery4Item[] = [
     background: '/team-bg/perk-pavirke.webp',
   },
 ];
+
+const tallord = ['Én', 'To', 'Tre', 'Fire', 'Fem', 'Seks', 'Sju', 'Åtte', 'Ni', 'Ti'];
+
+function stillingsOverskrift(antall: number): string {
+  if (antall === 0) return 'Ingen ledige stillinger akkurat nå.';
+  const tall = tallord[antall - 1] ?? String(antall);
+  return antall === 1
+    ? `${tall} åpen stilling akkurat nå.`
+    : `${tall} åpne stillinger akkurat nå.`;
+}
 
 export default function KarrierePage() {
   return (
@@ -109,7 +119,7 @@ export default function KarrierePage() {
               <p className="text-[17px] leading-[1.8] text-flyd-ink/80">
                 Vi er alltid på utkikk etter dyktige folk som brenner for økonomi,
                 teknologi og rådgivning. Hos Flyd får du jobbe i skjæringspunktet
-                mellom fag og teknologi — med alt fra løpende regnskap til
+                mellom fag og teknologi – med alt fra løpende regnskap til
                 ERP-implementeringer og komplekse integrasjoner.
               </p>
             </div>
@@ -135,7 +145,7 @@ export default function KarrierePage() {
             <div className="max-w-2xl">
               <Eyebrow>Ledige stillinger</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Tre åpne stillinger akkurat nå.
+                {stillingsOverskrift(jobs.length)}
               </h2>
             </div>
             <div className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/55">
@@ -204,7 +214,7 @@ export default function KarrierePage() {
                 Åpen søknad
               </div>
               <p className="mt-3 text-[15px] leading-[1.7] text-flyd-ink/80">
-                Finner du ikke en stilling som passer? Send oss en åpen søknad —
+                Finner du ikke en stilling som passer? Send oss en åpen søknad –
                 vi leser alt som kommer inn og tar kontakt når noe passer.
               </p>
             </div>
@@ -230,7 +240,7 @@ export default function KarrierePage() {
               Lurer du på noe før du søker?
             </h2>
             <p className="mt-8 text-[17px] text-flyd-paper/80 leading-[1.75]">
-              Ta en uformell prat med oss — vi svarer på alt fra arbeidshverdag
+              Ta en uformell prat med oss – vi svarer på alt fra arbeidshverdag
               til karriereveier, uten forpliktelse.
             </p>
             <div className="mt-10">

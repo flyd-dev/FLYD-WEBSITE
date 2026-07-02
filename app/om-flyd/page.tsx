@@ -38,7 +38,7 @@ const values = [
   },
   {
     title: 'Nær',
-    body: 'Seks kontorer gjør at vi alltid er i nærheten — også når det haster.',
+    body: 'Seks kontorer gjør at vi alltid er i nærheten – også når det haster.',
   },
   {
     title: 'Visjonær',
@@ -46,7 +46,7 @@ const values = [
   },
   {
     title: 'Kompetent',
-    body: 'Dyp fagkunnskap innen økonomi, systemer og rådgivning — i samme team.',
+    body: 'Dyp fagkunnskap innen økonomi, systemer og rådgivning – i samme team.',
   },
 ];
 
@@ -144,7 +144,7 @@ export default function OmFlydPage() {
         </Container>
       </Section>
 
-      {/* TEAM — leadership */}
+      {/* TEAM – leadership */}
       <Section tone="paper" id="team">
         <Container>
           <div className="flex items-end justify-between gap-6" data-reveal>
@@ -250,12 +250,12 @@ export default function OmFlydPage() {
               Vil du vite mer om hvem vi er?
             </h2>
             <p className="mt-8 max-w-xl text-[17px] text-flyd-paper/80 leading-[1.75]">
-              Ta kontakt — så finner vi en anledning til å møtes, enten på et
+              Ta kontakt – så finner vi en anledning til å møtes, enten på et
               kontor, i en videosamtale eller over en kaffe.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <ButtonLink href="/kontakt" variant="teal" withArrow accent>
-                Ta kontakt
+                Snakk med oss
               </ButtonLink>
               <ButtonLink href="/karriere" variant="outline-paper">
                 Jobb hos oss

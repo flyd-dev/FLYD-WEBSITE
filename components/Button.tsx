@@ -18,8 +18,8 @@ type BaseProps = {
 const base =
   'inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[15px] tracking-wide uppercase font-medium transition-[background-color,color,border-color,transform] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:translate-y-[1px]';
 
-// Subtle teal accent on the trailing arrow only — used on secondary CTAs.
-// (Tidligere oransje #E8884C — utenfor offisiell palett, målt 2,61:1 på hvit.)
+// Subtle teal accent on the trailing arrow only – used on secondary CTAs.
+// (Tidligere oransje #E8884C – utenfor offisiell palett, målt 2,61:1 på hvit.)
 const accentArrow =
   'hover:[&>svg]:!text-flyd-teal focus-visible:[&>svg]:!text-flyd-teal [&>svg]:transition-colors';
 
