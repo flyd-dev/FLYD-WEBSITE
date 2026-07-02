@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import fs from 'node:fs';
 import path from 'node:path';
 import { jobs } from '@/data/jobs';
+import { offices } from '@/data/offices';
 
 const base = 'https://www.flyd.no';
 
@@ -29,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const jobsMtime = mtimeOf('data/jobs.ts');
+  const officesMtime = mtimeOf('data/offices.ts');
 
   return [
     ...staticRoutes.map((r) => ({
@@ -36,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: mtimeOf(r.source),
       changeFrequency: r.changeFrequency,
       priority: r.priority,
+    })),
+    ...offices.map((office) => ({
+      url: `${base}/kontor/${office.slug}/`,
+      lastModified: officesMtime,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     })),
     ...jobs.map((job) => ({
       url: `${base}/karriere/${job.slug}/`,

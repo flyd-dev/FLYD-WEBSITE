@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, ArrowUpRight } from 'lucide-react';
 import Container from '@/components/Container';
@@ -8,6 +7,7 @@ import Eyebrow from '@/components/Eyebrow';
 import FullflydMark from '@/components/FullflydMark';
 import TeamCard from '@/components/TeamCard';
 import { ButtonLink } from '@/components/Button';
+import FlydLogo from '@/components/FlydLogo';
 import { GlowCard } from '@/components/ui/glow-card';
 import JsonLd from '@/components/JsonLd';
 import { leadership, officeLeads, otherTeam } from '@/data/team';
@@ -152,12 +152,9 @@ export default function OmFlydPage() {
               <Eyebrow>Ledelse og partnere</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold leading-[1.05]">
                 Menneskene bak{' '}
-                <Image
-                  src="/brand/flyd-logo-dark.png"
-                  alt="Flyd"
-                  width={935}
-                  height={445}
-                  className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline"
+                <FlydLogo
+                  title="Flyd"
+                  className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline text-flyd-ink"
                 />
               </h2>
             </div>
@@ -211,11 +208,9 @@ export default function OmFlydPage() {
 
           <div className="mt-12 grid grid-cols-1 gap-[1px] bg-flyd-ink/10 sm:grid-cols-2 lg:grid-cols-3">
             {offices.map((o) => (
-              <a
+              <Link
                 key={o.city}
-                href={o.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/kontor/${o.slug}/`}
                 data-reveal
                 className="group relative bg-flyd-paper p-7 md:p-8 transition-colors duration-200 hover:bg-flyd-teal-soft"
               >
@@ -238,7 +233,10 @@ export default function OmFlydPage() {
                   <br />
                   {o.postal}
                 </p>
-              </a>
+                <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/50 transition-colors group-hover:text-flyd-teal-dark">
+                  Se kontoret →
+                </div>
+              </Link>
             ))}
           </div>
         </Container>

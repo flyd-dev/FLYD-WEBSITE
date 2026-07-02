@@ -1,12 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { Menu, X } from 'lucide-react';
 import { ButtonLink } from './Button';
+import FlydLogo from './FlydLogo';
 
 const nav = [
   { href: '/', label: 'Forside' },
@@ -88,14 +88,9 @@ export default function Header() {
       >
         <div className="mx-auto flex w-full max-w-shell items-center justify-between px-6 md:px-10">
           <Link href="/" aria-label="Flyd forside" className="flex items-center">
-            <Image
-              src="/brand/flyd-logo-transparent.png"
-              alt="Flyd"
-              width={935}
-              height={445}
-              priority
+            <FlydLogo
               className={clsx(
-                'w-auto transition-[height] duration-300',
+                'w-auto text-flyd-teal transition-[height] duration-300',
                 scrolled ? 'h-7' : 'h-9',
               )}
             />

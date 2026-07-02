@@ -124,7 +124,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     '@id': `${siteUrl}/#office-${o.city.toLowerCase()}`,
     name: `Flyd ${o.city}`,
     parentOrganization: { '@id': orgId },
-    url: siteUrl,
+    url: `${siteUrl}/kontor/${o.slug}/`,
     image: `${siteUrl}/brand/flyd-teal.png`,
     telephone: '+4748019958',
     email: 'support@flyd.no',

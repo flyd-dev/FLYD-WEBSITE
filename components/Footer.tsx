@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import Container from './Container';
 import ConsentLink from './ConsentLink';
+import FlydLogo from './FlydLogo';
 import { offices } from '@/data/offices';
 
 export default function Footer() {
@@ -11,14 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-4">
             <Link href="/" aria-label="Flyd – til forsiden" className="inline-block">
-              <Image
-                src="/brand/flyd-logo-white.png"
-                alt="Flyd"
-                width={935}
-                height={445}
-                className="h-20 w-auto -my-4 md:h-24 md:-my-5"
-                priority={false}
-              />
+              <FlydLogo className="h-20 w-auto -my-4 text-flyd-paper md:h-24 md:-my-5" />
             </Link>
             <p className="mt-6 max-w-sm text-[15px] text-flyd-paper/70 leading-relaxed">
               Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning,
@@ -85,7 +78,12 @@ export default function Footer() {
             <ul className="mt-5 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2 text-[14px] text-flyd-paper/80">
               {offices.map((o) => (
                 <li key={o.city} className="leading-relaxed">
-                  <span className="font-medium text-flyd-paper">{o.city}</span>
+                  <Link
+                    href={`/kontor/${o.slug}/`}
+                    className="font-medium text-flyd-paper hover:text-flyd-teal"
+                  >
+                    {o.city}
+                  </Link>
                   <br />
                   <span className="text-flyd-paper/60">
                     {o.street}, {o.postal}

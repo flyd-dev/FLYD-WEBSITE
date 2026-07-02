@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
@@ -116,11 +117,9 @@ export default function KontaktPage() {
 
           <div className="mt-14 grid grid-cols-1 gap-[1px] bg-flyd-ink/10 sm:grid-cols-2 lg:grid-cols-3">
             {offices.map((o) => (
-              <a
+              <Link
                 key={o.city}
-                href={o.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/kontor/${o.slug}/`}
                 data-reveal
                 className="group relative bg-flyd-paper p-7 md:p-8 transition-colors duration-200 hover:bg-flyd-teal-soft"
               >
@@ -144,9 +143,9 @@ export default function KontaktPage() {
                   {o.postal}
                 </p>
                 <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/50 transition-colors group-hover:text-flyd-teal-dark">
-                  Åpne i Google Maps →
+                  Se kontoret →
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </Container>

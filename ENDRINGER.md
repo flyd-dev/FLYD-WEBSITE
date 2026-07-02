@@ -1,5 +1,17 @@
 # Endringslogg — analyse-forbedringer
 
+## Runde 4: Kontorsider, statsautorisert-merking og SVG-logo
+
+- **Kontorsider (M5):** Ny rute `app/kontor/[slug]/page.tsx` — seks statiske sider (`/kontor/stavanger/` … `/kontor/flekkefjord/`) målrettet lokale søk («regnskapsfører Egersund» osv.). Hver side har H1 «Regnskapsfører i {by}», lokal ingress, besøkskort (adresse/telefon/e-post/Google Maps), tjenesteliste, lenker til de andre kontorene og CTA. `data/offices.ts` utvidet med `slug` og `blurb`. Sitemap inkluderer sidene; LocalBusiness-schemaet (både globalt og per side, samme `@id`) peker nå på riktig kontorside. Kontorkortene på /kontakt og /om-flyd + bynavnene i footeren lenker til sidene (Google Maps-lenken ligger på kontorsiden). Stavanger-siden forklarer Forus/Sandnes-adressen (løser også I3).
+- **Statsautorisert (M2 fullført):** Svein Zwygart og Thomas Haaland markert med `certified: true` (avklart med Flyd). Teamsiden viser nå 11 badges, og tallet i stats-seksjonen utledes automatisk fra teamdataene i `data/stats.ts` — det kan ikke lenger komme i utakt.
+- **SVG-logo (L2):** Logoen vektorisert fra `flyd-logo-transparent.png` med potrace (letterformene er identiske — verifisert med overlagt sammenligning). Ny komponent `components/FlydLogo.tsx` med `currentColor`-fylling brukes i header (teal), footer (hvit), karriere-H1 (teal, med tilgjengelig navn «Flyd») og om-flyd-H2 (ink). Skarp på alle skjermer, én kilde, CSS-fargestyrt. PNG-ene ligger igjen i `public/brand/` (brukes av schema/OG).
+
+Verifisert: `tsc` OK, `npm run build` OK (12 + 6 ruter), 11 badges, kontorsider rendrer (desktop + mobil skjermbilder), sitemap i statisk bygg inneholder alle kontor-URL-er.
+
+**Gjenstår (venter på dere):** kundesitater (trenger samtykke — M3).
+
+---
+
 ## Runde 3: Lav prioritet / polish (L-tiltak)
 
 - **L3 Repo-opprydding:** `CLAUDE.md` skrevet om fra et fremmed malprosjekt til å beskrive det faktiske oppsettet (stack, struktur, merkevare- og kvalitetsregler). 41 ubrukte `.jpg`-duplikater slettet fra `public/` (11 MB → 3,8 MB — alle referanser bruker WebP). Rå-mappene var allerede gitignorert.

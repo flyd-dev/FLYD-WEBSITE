@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Briefcase, ArrowUpRight } from 'lucide-react';
 import Container from '@/components/Container';
@@ -7,6 +6,7 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import FullflydMark from '@/components/FullflydMark';
 import { ButtonLink } from '@/components/Button';
+import FlydLogo from '@/components/FlydLogo';
 import { Gallery4, type Gallery4Item } from '@/components/ui/gallery4';
 import JsonLd from '@/components/JsonLd';
 import { jobs } from '@/data/jobs';
@@ -105,13 +105,9 @@ export default function KarrierePage() {
               <Eyebrow tone="teal">Karriere</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold leading-[1.02]">
                 Bli en del av{' '}
-                <Image
-                  src="/brand/flyd-logo-transparent.png"
-                  alt="Flyd"
-                  width={935}
-                  height={445}
-                  priority
-                  className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline"
+                <FlydLogo
+                  title="Flyd"
+                  className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline text-flyd-teal"
                 />
               </h1>
             </div>
