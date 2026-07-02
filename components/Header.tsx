@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Menu, X } from 'lucide-react';
 import { ButtonLink } from './Button';
@@ -18,6 +18,9 @@ const nav = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const openBtnRef = useRef<HTMLButtonElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -30,6 +33,42 @@ export default function Header() {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
+    };
+  }, [open]);
+
+  // Åpen meny: fokus på lukkeknappen, Escape lukker, Tab holdes inne i draweren.
+  useEffect(() => {
+    if (!open) return;
+    // Vent til visibility-transisjonen (200 ms) er ferdig før fokus flyttes.
+    const focusTimer = window.setTimeout(
+      () => closeBtnRef.current?.focus(),
+      210,
+    );
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        openBtnRef.current?.focus();
+        return;
+      }
+      if (e.key !== 'Tab' || !drawerRef.current) return;
+      const focusables = drawerRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.removeEventListener('keydown', onKeyDown);
     };
   }, [open]);
 
@@ -78,24 +117,47 @@ export default function Header() {
 
           <button
             type="button"
-            aria-label={open ? 'Lukk meny' : 'Åpne meny'}
+            ref={openBtnRef}
+            aria-label="Åpne meny"
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="md:hidden relative z-[60] p-2 -mr-2 text-flyd-ink"
+            aria-controls="mobilmeny"
+            onClick={() => setOpen(true)}
+            className="md:hidden p-2 -mr-2 text-flyd-ink"
           >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <Menu className="h-6 w-6" />
           </button>
         </div>
       </header>
 
       {/* Mobile drawer — rendered as a sibling of <header> so it is not
-          confined to the sticky header's stacking context on iOS Safari */}
+          confined to the sticky header's stacking context on iOS Safari.
+          Draweren dekker headeren (og burger-knappen), derfor har den sin
+          egen lukkeknapp. `invisible` tar den ut av tab-rekkefølgen når lukket. */}
       <div
+        id="mobilmeny"
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Meny"
         className={clsx(
-          'md:hidden fixed inset-0 z-50 bg-flyd-paper transition-opacity duration-200',
-          open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
+          'md:hidden fixed inset-0 z-50 bg-flyd-paper transition-[opacity,visibility] duration-200',
+          open
+            ? 'opacity-100 visible pointer-events-auto'
+            : 'opacity-0 invisible pointer-events-none',
         )}
       >
+        <button
+          type="button"
+          ref={closeBtnRef}
+          aria-label="Lukk meny"
+          onClick={() => {
+            setOpen(false);
+            openBtnRef.current?.focus();
+          }}
+          className="absolute right-4 top-4 p-2 text-flyd-ink"
+        >
+          <X className="h-6 w-6" />
+        </button>
         <div className="flex h-full flex-col gap-2 px-6 pt-24 pb-12 overflow-y-auto">
           {nav.map((item) => (
             <Link

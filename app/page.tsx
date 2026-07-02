@@ -102,8 +102,8 @@ export default function HomePage() {
                     speed={70}
                     waitTime={1800}
                     deleteSpeed={40}
-                    className="text-flyd-teal"
-                    cursorClassName="ml-1 text-flyd-teal font-light"
+                    className="text-flyd-teal-dark"
+                    cursorClassName="ml-1 text-flyd-teal-dark font-light"
                   />
                 </span>
               </h1>
@@ -142,7 +142,8 @@ export default function HomePage() {
             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.15] tracking-[-0.02em]">
               Kontroll i dag.
               <br />
-              <span className="text-flyd-teal-dark">Innsikt for i morgen.</span>
+              {/* ink/70 på teal-flaten = 4,25:1 — teal-dark her målte 1,85:1 */}
+              <span className="text-flyd-ink/70">Innsikt for i morgen.</span>
             </h2>
           </div>
           <StatsSection stats={stats} />
@@ -156,7 +157,7 @@ export default function HomePage() {
             <Eyebrow>Et utvalg kunder</Eyebrow>
             <Link
               href="/kontakt"
-              className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/60 transition-colors hover:text-flyd-accent"
+              className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/60 transition-colors hover:text-flyd-teal-dark"
             >
               Bli kunde →
             </Link>
@@ -280,7 +281,7 @@ export default function HomePage() {
           <div className="mt-10 flex justify-end" data-reveal>
             <Link
               href="/tjenester#nettsider"
-              className="group inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.2em] text-flyd-ink/60 transition-colors hover:text-flyd-accent"
+              className="group inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.2em] text-flyd-ink/60 transition-colors hover:text-flyd-teal-dark"
             >
               Trenger du en nettside eller digital flate som snakker med systemet?
               <span

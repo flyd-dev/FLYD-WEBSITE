@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Container from './Container';
+import ConsentLink from './ConsentLink';
 import { offices } from '@/data/offices';
 
 export default function Footer() {
@@ -68,6 +69,7 @@ export default function Footer() {
               <li><Link href="/karriere" className="hover:text-flyd-teal">Karriere</Link></li>
               <li><Link href="/kontakt" className="hover:text-flyd-teal">Kontakt</Link></li>
               <li><Link href="/personvern" className="hover:text-flyd-teal">Personvern</Link></li>
+              <li><ConsentLink className="hover:text-flyd-teal" /></li>
             </ul>
           </div>
 

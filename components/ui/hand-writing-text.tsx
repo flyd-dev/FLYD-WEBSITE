@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface HandWrittenCircleProps {
     children: React.ReactNode;
@@ -13,6 +13,8 @@ function HandWrittenCircle({
     className,
     strokeClassName = "text-flyd-ink opacity-90",
 }: HandWrittenCircleProps) {
+    // Ved prefers-reduced-motion vises sirkelen ferdig tegnet uten animasjon.
+    const reducedMotion = useReducedMotion();
     const draw = {
         hidden: { pathLength: 0, opacity: 0 },
         visible: {
@@ -30,7 +32,7 @@ function HandWrittenCircle({
             <motion.svg
                 viewBox="0 0 1200 600"
                 preserveAspectRatio="none"
-                initial="hidden"
+                initial={reducedMotion ? "visible" : "hidden"}
                 animate="visible"
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-x-10 -inset-y-8 z-20 h-[calc(100%+4rem)] w-[calc(100%+5rem)]"

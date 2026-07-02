@@ -223,7 +223,7 @@ export default function OmFlydPage() {
                     strokeWidth={1.75}
                   />
                   <ArrowUpRight
-                    className="h-5 w-5 text-flyd-ink/30 transition-colors group-hover:text-flyd-accent"
+                    className="h-5 w-5 text-flyd-ink/30 transition-colors group-hover:text-flyd-teal-dark"
                     strokeWidth={1.75}
                   />
                 </div>

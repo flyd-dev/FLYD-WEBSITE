@@ -50,14 +50,27 @@ const Typewriter = ({
     },
   },
 }: TypewriterProps) => {
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // Første frase rendres ferdig skrevet på serveren, slik at H1 er komplett i
+  // statisk HTML (SEO/skjermlesere/JS av). Animasjonen tar over etter mount.
+  const firstText = Array.isArray(text) ? text[0] : text;
+  const [displayText, setDisplayText] = useState(firstText);
+  const [currentIndex, setCurrentIndex] = useState(firstText.length);
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   const texts = Array.isArray(text) ? text : [text];
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setReducedMotion(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Ved redusert bevegelse: stå stille på første frase.
+    if (reducedMotion) return;
+
     let timeout: ReturnType<typeof setTimeout>;
 
     const currentText = texts[currentTextIndex];
@@ -109,6 +122,7 @@ const Typewriter = ({
     currentTextIndex,
     loop,
     initialDelay,
+    reducedMotion,
   ]);
 
   const activeClass =
@@ -119,7 +133,7 @@ const Typewriter = ({
   return (
     <span className={cn('inline tracking-tight', activeClass)}>
       <span>{displayText}</span>
-      {showCursor && (
+      {showCursor && !reducedMotion && (
         <motion.span
           variants={cursorAnimationVariants}
           className={cn(

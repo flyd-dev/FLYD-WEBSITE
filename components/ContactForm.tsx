@@ -62,6 +62,13 @@ export default function ContactForm() {
     const errors = validate(formData);
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
+      // Flytt fokus til første felt med feil.
+      const firstError = (['name', 'email', 'message'] as const).find(
+        (k) => errors[k],
+      );
+      if (firstError) {
+        (form.querySelector(`#${firstError}`) as HTMLElement | null)?.focus();
+      }
       return;
     }
     setFieldErrors({});
@@ -108,7 +115,7 @@ export default function ContactForm() {
           også nå oss direkte på{' '}
           <a
             href="mailto:support@flyd.no"
-            className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 transition-colors hover:text-flyd-accent hover:decoration-flyd-accent"
+            className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 transition-colors hover:text-flyd-teal-dark hover:decoration-flyd-teal-dark"
           >
             support@flyd.no
           </a>
@@ -144,11 +151,15 @@ export default function ContactForm() {
             id="name"
             name="name"
             autoComplete="name"
+            aria-invalid={fieldErrors.name ? true : undefined}
+            aria-describedby={fieldErrors.name ? 'name-error' : undefined}
             className={fieldErrors.name ? inputErrCls : inputCls}
             placeholder="Kari Nordmann"
           />
           {fieldErrors.name && (
-            <p className="mt-1 text-[12px] text-red-600">{fieldErrors.name}</p>
+            <p id="name-error" className="mt-1 text-[12px] text-red-600">
+              {fieldErrors.name}
+            </p>
           )}
         </div>
         <div>
@@ -175,11 +186,15 @@ export default function ContactForm() {
             name="email"
             type="email"
             autoComplete="email"
+            aria-invalid={fieldErrors.email ? true : undefined}
+            aria-describedby={fieldErrors.email ? 'email-error' : undefined}
             className={fieldErrors.email ? inputErrCls : inputCls}
             placeholder="kari@nordmann.no"
           />
           {fieldErrors.email && (
-            <p className="mt-1 text-[12px] text-red-600">{fieldErrors.email}</p>
+            <p id="email-error" className="mt-1 text-[12px] text-red-600">
+              {fieldErrors.email}
+            </p>
           )}
         </div>
         <div>
@@ -226,6 +241,8 @@ export default function ContactForm() {
           id="message"
           name="message"
           rows={6}
+          aria-invalid={fieldErrors.message ? true : undefined}
+          aria-describedby={fieldErrors.message ? 'message-error' : undefined}
           className={clsx(
             fieldErrors.message ? inputErrCls : inputCls,
             'resize-none leading-relaxed',
@@ -233,7 +250,9 @@ export default function ContactForm() {
           placeholder="Fortell oss kort hva du trenger hjelp med …"
         />
         {fieldErrors.message && (
-          <p className="mt-1 text-[12px] text-red-600">{fieldErrors.message}</p>
+          <p id="message-error" className="mt-1 text-[12px] text-red-600">
+            {fieldErrors.message}
+          </p>
         )}
       </div>
 
@@ -249,14 +268,21 @@ export default function ContactForm() {
           </a>
           .
         </p>
-        <Button type="submit" variant="primary" accent>
+        <Button
+          type="submit"
+          variant="primary"
+          accent
+          disabled={status === 'sending'}
+        >
           <Send className="h-4 w-4 transition-colors" strokeWidth={1.75} />
           {status === 'sending' ? 'Sender …' : 'Send melding'}
         </Button>
       </div>
 
       {status === 'error' && errorMsg && (
-        <p className="text-[14px] text-red-700">{errorMsg}</p>
+        <p role="alert" className="text-[14px] text-red-700">
+          {errorMsg}
+        </p>
       )}
     </form>
   );

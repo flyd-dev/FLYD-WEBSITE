@@ -170,7 +170,7 @@ export default function JobDetailPage({
         <Container>
           <Link
             href="/karriere/#ledige-stillinger"
-            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-flyd-ink/60 transition-colors hover:text-flyd-accent"
+            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-flyd-ink/60 transition-colors hover:text-flyd-teal-dark"
           >
             <ArrowLeft className="h-4 w-4" strokeWidth={2} />
             Alle stillinger
@@ -228,7 +228,7 @@ export default function JobDetailPage({
                   Send søknad og CV til{' '}
                   <a
                     href={`mailto:${job.applyEmail}`}
-                    className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 hover:text-flyd-accent hover:decoration-flyd-accent"
+                    className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 hover:text-flyd-teal-dark hover:decoration-flyd-teal-dark"
                   >
                     {job.applyEmail}
                   </a>
@@ -239,7 +239,7 @@ export default function JobDetailPage({
                       på{' '}
                       <a
                         href={`tel:${job.contact.phone.replace(/\s+/g, '')}`}
-                        className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 hover:text-flyd-accent hover:decoration-flyd-accent"
+                        className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 hover:text-flyd-teal-dark hover:decoration-flyd-teal-dark"
                       >
                         {job.contact.phone}
                       </a>
@@ -320,7 +320,7 @@ export default function JobDetailPage({
                         />
                         <a
                           href={`tel:${job.contact.phone.replace(/\s+/g, '')}`}
-                          className="text-flyd-ink hover:text-flyd-accent"
+                          className="text-flyd-ink hover:text-flyd-teal-dark"
                         >
                           {job.contact.phone}
                         </a>
@@ -332,7 +332,7 @@ export default function JobDetailPage({
                         />
                         <a
                           href={`mailto:${job.contact.email}`}
-                          className="break-all text-flyd-ink hover:text-flyd-accent"
+                          className="break-all text-flyd-ink hover:text-flyd-teal-dark"
                         >
                           {job.contact.email}
                         </a>
@@ -396,7 +396,7 @@ export default function JobDetailPage({
                       <p className="text-[14px] leading-[1.7] text-flyd-ink/70 md:flex-1">
                         {j.ingress}
                       </p>
-                      <span className="inline-flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.18em] text-flyd-ink transition-colors group-hover:text-flyd-accent md:flex-shrink-0">
+                      <span className="inline-flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.18em] text-flyd-ink transition-colors group-hover:text-flyd-teal-dark md:flex-shrink-0">
                         Se stilling →
                       </span>
                     </Link>

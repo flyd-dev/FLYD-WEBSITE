@@ -62,10 +62,15 @@ const Card = ({ step }: CardProps) => {
           />
         </div>
         <div>
+          {/* Bokstavanimasjonen dobler hver bokstav i DOM ("DDiiaalloogg") —
+              skjules for skjermlesere/søkemotorer, ren tittel ligger i sr-only. */}
           <h3 className="font-display text-2xl font-semibold leading-tight">
-            {step.title.split('').map((letter, index) => (
-              <AnimatedLetter letter={letter} key={index} />
-            ))}
+            <span className="sr-only">{step.title}</span>
+            <span aria-hidden="true">
+              {step.title.split('').map((letter, index) => (
+                <AnimatedLetter letter={letter} key={index} />
+              ))}
+            </span>
           </h3>
           <p className="mt-3 max-w-[34ch] text-[14.5px] leading-relaxed text-flyd-paper/90">
             {step.body}

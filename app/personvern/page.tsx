@@ -52,6 +52,11 @@ export default function PersonvernPage() {
                 din. Opplysningene brukes utelukkende for å besvare henvendelsen
                 og opprette videre dialog.
               </p>
+              <p className="mt-3">
+                Henvendelser fra kontaktskjemaet formidles til oss gjennom
+                automatiseringstjenesten Make (make.com), som behandler
+                opplysningene på våre vegne som databehandler, på servere i EU.
+              </p>
             </section>
 
             <section>
@@ -80,7 +85,16 @@ export default function PersonvernPage() {
                 >
                   support@flyd.no
                 </a>
-                .
+                . Du har også rett til å klage til{' '}
+                <a
+                  href="https://www.datatilsynet.no/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-flyd-ink underline underline-offset-4 hover:text-flyd-teal-dark"
+                >
+                  Datatilsynet
+                </a>{' '}
+                dersom du mener behandlingen er i strid med regelverket.
               </p>
             </section>
 
@@ -109,10 +123,9 @@ export default function PersonvernPage() {
                 deling med tredjeparter for annonseformål.
               </p>
               <p className="mt-3">
-                Du kan når som helst trekke tilbake eller endre samtykket ditt.
-                Valget lagres lokalt i nettleseren din – tøm nettleserdataene for
-                nettstedet, så vil samtykkebanneren vises på nytt ved neste
-                besøk.
+                Du kan når som helst trekke tilbake eller endre samtykket ditt
+                via «Endre samtykke»-lenken nederst på siden. Valget lagres
+                lokalt i nettleseren din.
               </p>
             </section>
           </div>

@@ -41,6 +41,45 @@ export default function CookieConsent() {
     };
   }, []);
 
+  // «Endre samtykke» (footer/personvern) gjenåpner modalen.
+  useEffect(() => {
+    const openModal = () => {
+      setVisible(true);
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => {
+        setShown(true);
+        acceptRef.current?.focus();
+      });
+    };
+    window.addEventListener('flyd:open-consent', openModal);
+    return () => window.removeEventListener('flyd:open-consent', openModal);
+  }, []);
+
+  // Hold Tab-fokus inne i modalen så lenge den er åpen.
+  useEffect(() => {
+    if (!visible) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      const dialog = document.getElementById('cookie-dialog');
+      if (!dialog) return;
+      const focusables = dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [visible]);
+
   function decide(value: 'granted' | 'denied') {
     try {
       localStorage.setItem(CONSENT_KEY, value);
@@ -63,6 +102,7 @@ export default function CookieConsent() {
 
   return (
     <div
+      id="cookie-dialog"
       role="dialog"
       aria-modal="true"
       aria-labelledby="cookie-title"
