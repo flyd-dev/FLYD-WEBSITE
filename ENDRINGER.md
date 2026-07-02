@@ -1,5 +1,21 @@
 # Endringslogg — analyse-forbedringer
 
+## Runde 5: Lighthouse-optimalisering (målt mot produksjon, mobil)
+
+| Kategori | Før | Etter |
+|---|---|---|
+| Ytelse | 73 | **90** (LCP 5,1 s → 3,3 s, FCP 2,9 s → 1,1 s) |
+| Tilgjengelighet | 96 | **100** |
+| Beste praksis | 100 | **100** |
+| SEO | 100 | **100** |
+
+- **LCP-fiksen (størst):** `Reveal.tsx` skjuler aldri lenger innhold som er synlig i viewporten ved lasting — hero-teksten ble malt, skjult av JS og tonet inn igjen, og Google regnet *siste* maling som LCP. Kun innhold under folden får nå reveal-animasjon.
+- GA/gtag lastes med `lazyOnload` — 161 KB analytics ute av det kritiske lastevinduet (Consent Mode-oppsettet er uendret).
+- `browserslist` satt til moderne nettlesere — mindre polyfill-JS.
+- Kontrast (96 → 100): all småtekst i `ink/50–60` hevet til `ink/70`; ERP-taglines og små etiketter fra teal-dark til `ink/70`; personvernlenken i cookie-modalen er sort med teal understrek; «fullflyd.»-vannmerket bruker pseudoelement-tekst (dekorativt — skal ikke måles som tekstinnhold, og kan ikke lenger markeres/leses opp).
+
+---
+
 ## Runde 4: Kontorsider, statsautorisert-merking og SVG-logo
 
 - **Kontorsider (M5):** Ny rute `app/kontor/[slug]/page.tsx` — seks statiske sider (`/kontor/stavanger/` … `/kontor/flekkefjord/`) målrettet lokale søk («regnskapsfører Egersund» osv.). Hver side har H1 «Regnskapsfører i {by}», lokal ingress, besøkskort (adresse/telefon/e-post/Google Maps), tjenesteliste, lenker til de andre kontorene og CTA. `data/offices.ts` utvidet med `slug` og `blurb`. Sitemap inkluderer sidene; LocalBusiness-schemaet (både globalt og per side, samme `@id`) peker nå på riktig kontorside. Kontorkortene på /kontakt og /om-flyd + bynavnene i footeren lenker til sidene (Google Maps-lenken ligger på kontorsiden). Stavanger-siden forklarer Forus/Sandnes-adressen (løser også I3).
