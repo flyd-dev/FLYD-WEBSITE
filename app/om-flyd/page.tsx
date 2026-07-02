@@ -102,7 +102,7 @@ export default function OmFlydPage() {
                   customSize
                   className="h-full p-8 md:p-9"
                 >
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-teal-dark">
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
                     0{i + 1}
                   </div>
                   <h3 className="mt-4 font-display text-2xl font-semibold">
@@ -158,7 +158,7 @@ export default function OmFlydPage() {
                 />
               </h2>
             </div>
-            <div className="hidden text-right text-[13px] text-flyd-ink/60 md:block">
+            <div className="hidden text-right text-[13px] text-flyd-ink/70 md:block">
               {leadership.length + officeLeads.length + otherTeam.length}{' '}
               medarbeidere
               <br />
@@ -233,7 +233,7 @@ export default function OmFlydPage() {
                   <br />
                   {o.postal}
                 </p>
-                <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/50 transition-colors group-hover:text-flyd-teal-dark">
+                <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/70 transition-colors group-hover:text-flyd-teal-dark">
                   Se kontoret →
                 </div>
               </Link>

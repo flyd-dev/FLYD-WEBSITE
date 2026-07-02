@@ -59,8 +59,9 @@ export default function Analytics() {
 
   return (
     <>
-      {/* Må kjøre før gtag.js prosesserer køen, derfor først i dataLayer. */}
-      <Script id="ga-consent-default" strategy="afterInteractive">
+      {/* Må kjøre før gtag.js prosesserer køen, derfor først i dataLayer.
+          lazyOnload: analytics trenger ikke konkurrere med LCP på mobil. */}
+      <Script id="ga-consent-default" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -89,7 +90,7 @@ export default function Analytics() {
 
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
     </>
   );

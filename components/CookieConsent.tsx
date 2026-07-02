@@ -129,7 +129,7 @@ export default function CookieConsent() {
           bedre. Du velger selv om du vil tillate dette. Les mer i{' '}
           <Link
             href="/personvern"
-            className="font-medium text-flyd-teal-dark underline underline-offset-2 transition-colors hover:text-flyd-ink"
+            className="font-medium text-flyd-ink underline decoration-flyd-teal-dark decoration-2 underline-offset-2 transition-colors hover:text-flyd-teal-dark"
           >
             personvernerklæringen
           </Link>
@@ -150,7 +150,7 @@ export default function CookieConsent() {
           <button
             type="button"
             onClick={() => decide('denied')}
-            className="inline-flex w-full items-center justify-center px-6 py-2.5 text-[13px] font-medium tracking-wide text-flyd-ink/60 transition-colors duration-200 hover:text-flyd-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-flyd-ink/30"
+            className="inline-flex w-full items-center justify-center px-6 py-2.5 text-[13px] font-medium tracking-wide text-flyd-ink/70 transition-colors duration-200 hover:text-flyd-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-flyd-ink/30"
           >
             Kun nødvendige
           </button>

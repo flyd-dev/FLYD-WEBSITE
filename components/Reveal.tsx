@@ -21,8 +21,16 @@ export default function Reveal() {
       return;
     }
 
-    // Mark everything hidden first, then reveal as they intersect.
-    els.forEach((el) => el.setAttribute('data-reveal', 'hidden'));
+    // Innhold som allerede er synlig i viewporten (typisk hero) skal ALDRI
+    // skjules og tones inn igjen – det utsetter LCP med flere sekunder fordi
+    // siste maling teller. Kun elementer under folden får reveal-animasjon.
+    const initiallyVisible = (el: HTMLElement) => {
+      const r = el.getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0;
+    };
+    els.forEach((el) => {
+      el.setAttribute('data-reveal', initiallyVisible(el) ? 'shown' : 'hidden');
+    });
 
     const reveal = (el: Element) => {
       (el as HTMLElement).setAttribute('data-reveal', 'shown');

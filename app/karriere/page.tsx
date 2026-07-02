@@ -144,7 +144,7 @@ export default function KarrierePage() {
                 {stillingsOverskrift(jobs.length)}
               </h2>
             </div>
-            <div className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/55">
+            <div className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/70">
               {jobs.length} stilling{jobs.length === 1 ? '' : 'er'}
             </div>
           </div>
@@ -206,7 +206,7 @@ export default function KarrierePage() {
             data-reveal
           >
             <div className="max-w-xl">
-              <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-teal-dark">
+              <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
                 Åpen søknad
               </div>
               <p className="mt-3 text-[15px] leading-[1.7] text-flyd-ink/80">

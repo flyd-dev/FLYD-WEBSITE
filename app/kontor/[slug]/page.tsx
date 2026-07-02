@@ -99,7 +99,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
         <Container>
           <Link
             href="/kontakt/#kontorer"
-            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-flyd-ink/60 transition-colors hover:text-flyd-teal-dark"
+            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors hover:text-flyd-teal-dark"
           >
             <ArrowLeft className="h-4 w-4" strokeWidth={2} />
             Alle kontorer
@@ -270,7 +270,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 <div className="mt-1 text-[13px] text-flyd-ink/65">
                   {o.street}
                 </div>
-                <div className="mt-4 text-[12px] uppercase tracking-[0.18em] text-flyd-ink/60 transition-colors group-hover:text-flyd-teal-dark">
+                <div className="mt-4 text-[12px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors group-hover:text-flyd-teal-dark">
                   Se kontoret →
                 </div>
               </Link>

@@ -170,7 +170,7 @@ export default function JobDetailPage({
         <Container>
           <Link
             href="/karriere/#ledige-stillinger"
-            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-flyd-ink/60 transition-colors hover:text-flyd-teal-dark"
+            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors hover:text-flyd-teal-dark"
           >
             <ArrowLeft className="h-4 w-4" strokeWidth={2} />
             Alle stillinger
@@ -273,7 +273,7 @@ export default function JobDetailPage({
             <aside className="lg:col-span-4">
               <div className="lg:sticky lg:top-24">
                 <div className="border border-flyd-ink/15 bg-flyd-teal-soft p-7">
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-teal-dark">
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
                     Om stillingen
                   </div>
                   <dl className="mt-5 space-y-4 text-[14px]">
@@ -284,7 +284,7 @@ export default function JobDetailPage({
                           strokeWidth={1.75}
                         />
                         <div>
-                          <dt className="text-flyd-ink/55">{label}</dt>
+                          <dt className="text-flyd-ink/70">{label}</dt>
                           <dd className="mt-0.5 text-flyd-ink">{value}</dd>
                         </div>
                       </div>
@@ -306,7 +306,7 @@ export default function JobDetailPage({
 
                 {job.contact && (
                   <div className="mt-5 border border-flyd-ink/15 bg-flyd-paper p-7">
-                    <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-teal-dark">
+                    <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
                       {job.contact.role ?? 'Kontaktperson'}
                     </div>
                     <div className="mt-4 font-display text-lg font-semibold">

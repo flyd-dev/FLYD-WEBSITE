@@ -10,7 +10,7 @@ export default function NotFound() {
       <Container>
         <div className="flex max-w-2xl flex-col items-start">
           <Wordmark variant="teal" size="lg" />
-          <div className="mt-12 text-[14px] uppercase tracking-[0.22em] text-flyd-ink/55">
+          <div className="mt-12 text-[14px] uppercase tracking-[0.22em] text-flyd-ink/70">
             404 · Siden finnes ikke
           </div>
           <h1 className="mt-4 font-display text-display-lg font-semibold">

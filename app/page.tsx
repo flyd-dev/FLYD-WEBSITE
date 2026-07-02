@@ -153,7 +153,7 @@ export default function HomePage() {
             <Eyebrow>Et utvalg kunder</Eyebrow>
             <Link
               href="/kontakt"
-              className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/60 transition-colors hover:text-flyd-teal-dark"
+              className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/70 transition-colors hover:text-flyd-teal-dark"
             >
               Bli kunde →
             </Link>
@@ -258,11 +258,11 @@ export default function HomePage() {
                           {e.name}
                         </h3>
                       </div>
-                      <span className="hidden text-[11px] uppercase tracking-[0.22em] text-flyd-teal-dark md:inline whitespace-nowrap pt-3">
+                      <span className="hidden text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70 md:inline whitespace-nowrap pt-3">
                         {e.tagline}
                       </span>
                     </div>
-                    <span className="mt-4 inline-block text-[11px] uppercase tracking-[0.22em] text-flyd-teal-dark md:hidden">
+                    <span className="mt-4 inline-block text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70 md:hidden">
                       {e.tagline}
                     </span>
                     <p className="mt-6 text-[15px] text-flyd-ink/75 leading-relaxed">
@@ -277,7 +277,7 @@ export default function HomePage() {
           <div className="mt-10 flex justify-end" data-reveal>
             <Link
               href="/tjenester#nettsider"
-              className="group inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.2em] text-flyd-ink/60 transition-colors hover:text-flyd-teal-dark"
+              className="group inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.2em] text-flyd-ink/70 transition-colors hover:text-flyd-teal-dark"
             >
               Trenger du en nettside eller digital flate som snakker med systemet?
               <span

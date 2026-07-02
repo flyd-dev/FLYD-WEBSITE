@@ -21,7 +21,7 @@ type FieldErrors = { name?: string; email?: string; message?: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const labelCls = 'text-[12px] uppercase tracking-[0.22em] text-flyd-ink/60';
+const labelCls = 'text-[12px] uppercase tracking-[0.22em] text-flyd-ink/70';
 const inputCls =
   'mt-2 w-full border border-flyd-ink/25 bg-flyd-paper px-4 py-3.5 text-[15px] text-flyd-ink placeholder:text-flyd-ink/30 focus:border-flyd-teal-dark focus:outline-none';
 const inputErrCls =
@@ -124,7 +124,7 @@ export default function ContactForm() {
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="mt-8 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/60 hover:text-flyd-ink"
+          className="mt-8 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/70 hover:text-flyd-ink"
         >
           ← Send en ny
         </button>
@@ -257,7 +257,7 @@ export default function ContactForm() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-        <p className="text-[12px] text-flyd-ink/50 max-w-md leading-relaxed">
+        <p className="text-[12px] text-flyd-ink/70 max-w-md leading-relaxed">
           Ved å sende skjemaet samtykker du i at vi lagrer opplysningene for å
           svare deg. Se{' '}
           <a

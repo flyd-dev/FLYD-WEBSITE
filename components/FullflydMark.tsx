@@ -27,6 +27,9 @@ export default function FullflydMark({
       ? '#1F1F1F'
       : '#FFFFFF';
 
+  // Teksten ligger i ::before-pseudoelementer: visuelt identisk, men regnes
+  // ikke som tekstinnhold — vannmerket er dekorativt og skal ikke måles mot
+  // WCAG-tekstkontrast (og skal ikke kunne markeres/leses opp).
   return (
     <span
       className={clsx(
@@ -36,14 +39,13 @@ export default function FullflydMark({
       aria-hidden="true"
     >
       <span
+        className="before:content-['full']"
         style={{
           WebkitTextStroke: `2px ${outlineColor}`,
           color: 'transparent',
         }}
-      >
-        full
-      </span>
-      <span className={solid}>flyd.</span>
+      />
+      <span className={clsx(solid, "before:content-['flyd.']")} />
     </span>
   );
 }

@@ -47,7 +47,7 @@ export default function KontaktPage() {
                 <div className="flex items-start gap-5 border-b border-flyd-ink/15 py-6">
                   <Mail className="h-5 w-5 text-flyd-teal-dark mt-1" strokeWidth={1.5} />
                   <div>
-                    <dt className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/55">
+                    <dt className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
                       E-post
                     </dt>
                     <dd className="mt-1">
@@ -63,7 +63,7 @@ export default function KontaktPage() {
                 <div className="flex items-start gap-5 border-b border-flyd-ink/15 py-6">
                   <Phone className="h-5 w-5 text-flyd-teal-dark mt-1" strokeWidth={1.5} />
                   <div>
-                    <dt className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/55">
+                    <dt className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
                       Sentralbord
                     </dt>
                     <dd className="mt-1">
@@ -77,7 +77,7 @@ export default function KontaktPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-5 py-6">
-                  <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-flyd-ink/55">
+                  <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
                     Org.nr
                   </div>
                   <div className="font-display text-lg font-semibold">
@@ -142,7 +142,7 @@ export default function KontaktPage() {
                   <br />
                   {o.postal}
                 </p>
-                <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/50 transition-colors group-hover:text-flyd-teal-dark">
+                <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/70 transition-colors group-hover:text-flyd-teal-dark">
                   Se kontoret →
                 </div>
               </Link>
