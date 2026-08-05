@@ -1,3 +1,6 @@
+// Deaktivert rute: `output: export` krever minst én stilling i `data/jobs.ts`
+// for å bygge denne siden. Gi mappen navnet `[slug]` igjen når stillinger
+// flyttes tilbake fra `arkiverteJobs` til `jobs`.
 import type { Metadata } from 'next';
 import fs from 'node:fs';
 import path from 'node:path';

@@ -20,7 +20,11 @@ export type Job = {
   };
 };
 
-export const jobs: Job[] = [
+export const jobs: Job[] = [];
+
+// Besatte stillinger (august 2026). Flytt en stilling tilbake til `jobs` over
+// hvis den skal lyses ut igjen.
+export const arkiverteJobs: Job[] = [
   {
     slug: 'regnskapsforer-stavanger',
     title: 'Regnskapsfører',

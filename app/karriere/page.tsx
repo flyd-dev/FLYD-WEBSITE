@@ -144,11 +144,14 @@ export default function KarrierePage() {
                 {stillingsOverskrift(jobs.length)}
               </h2>
             </div>
-            <div className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/70">
-              {jobs.length} stilling{jobs.length === 1 ? '' : 'er'}
-            </div>
+            {jobs.length > 0 && (
+              <div className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/70">
+                {jobs.length} stilling{jobs.length === 1 ? '' : 'er'}
+              </div>
+            )}
           </div>
 
+          {jobs.length > 0 && (
           <ul
             className="mt-12 divide-y divide-flyd-ink/15 border-y border-flyd-ink/15"
             data-reveal
@@ -200,6 +203,7 @@ export default function KarrierePage() {
               </li>
             ))}
           </ul>
+          )}
 
           <div
             className="mt-14 flex flex-wrap items-center gap-4 border border-flyd-ink/15 bg-flyd-teal-soft p-8 md:p-10"
@@ -210,8 +214,9 @@ export default function KarrierePage() {
                 Åpen søknad
               </div>
               <p className="mt-3 text-[15px] leading-[1.7] text-flyd-ink/80">
-                Finner du ikke en stilling som passer? Send oss en åpen søknad –
-                vi leser alt som kommer inn og tar kontakt når noe passer.
+                {jobs.length > 0
+                  ? 'Finner du ikke en stilling som passer? Send oss en åpen søknad – vi leser alt som kommer inn og tar kontakt når noe passer.'
+                  : 'Vi er alltid på utkikk etter dyktige folk. Send oss en åpen søknad – vi leser alt som kommer inn og tar kontakt når noe passer.'}
               </p>
             </div>
             <div className="md:ml-auto">
