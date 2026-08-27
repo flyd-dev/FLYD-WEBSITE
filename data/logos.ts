@@ -16,4 +16,6 @@ export const customerLogos: CustomerLogo[] = [
   { name: 'NADG', src: '/customer-logo/NADGWebRetinav2.webp', alt: 'NADG' },
   { name: 'Stangborli', src: '/customer-logo/logo-1.png.webp', alt: 'Stangborli' },
   { name: 'Sirdal Fjellpark', src: '/customer-logo/sirdal_fjellpark.webp', alt: 'Sirdal Fjellpark' },
+  { name: 'Lervig', src: '/customer-logo/lervig.webp', alt: 'Lervig' },
+  { name: 'Driftig', src: '/customer-logo/driftig.webp', alt: 'Driftig' },
 ];
