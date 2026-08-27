@@ -17,5 +17,5 @@ export const customerLogos: CustomerLogo[] = [
   { name: 'Stangborli', src: '/customer-logo/logo-1.png.webp', alt: 'Stangborli' },
   { name: 'Sirdal Fjellpark', src: '/customer-logo/sirdal_fjellpark.webp', alt: 'Sirdal Fjellpark' },
   { name: 'Lervig', src: '/customer-logo/lervig.webp', alt: 'Lervig' },
-  { name: 'Driftig', src: '/customer-logo/driftig.webp', alt: 'Driftig' },
+  { name: 'Driftig', src: '/customer-logo/driftig.webp', alt: 'Driftig – Eiendomsservice fra OBOS' },
 ];
