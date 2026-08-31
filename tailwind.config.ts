@@ -43,15 +43,6 @@ const config: Config = {
       boxShadow: {
         subtle: '0 1px 0 rgba(31,31,31,0.06), 0 12px 32px -20px rgba(76,142,147,0.25)',
       },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
-      },
-      animation: {
-        marquee: 'marquee 40s linear infinite',
-      },
     },
   },
   plugins: [],

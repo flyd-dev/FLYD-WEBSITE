@@ -40,9 +40,8 @@ input, textarea, select, button {
   font-family: inherit;
 }
 
-/* Reduced motion */
+/* Reduced motion (logokarusellen styrer dette selv — se LogoMarquee.tsx) */
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
   [data-reveal] {
     animation: none !important;
     transition: none !important;
@@ -63,11 +62,6 @@ input, textarea, select, button {
 [data-reveal="shown"] {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Marquee pause on hover */
-.marquee-track:hover .animate-marquee {
-  animation-play-state: paused;
 }
 
 /* Custom focus ring (teal) */
