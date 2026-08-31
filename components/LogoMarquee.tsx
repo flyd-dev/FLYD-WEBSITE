@@ -17,6 +17,7 @@ const MAX_FLING = 2400;
 const KEY_STEP = 80;
 
 export default function LogoMarquee() {
+  const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const firstSetRef = useRef<HTMLDivElement>(null);
 
@@ -32,9 +33,10 @@ export default function LogoMarquee() {
   const reducedMotion = useRef(false);
 
   useEffect(() => {
+    const viewport = viewportRef.current;
     const track = trackRef.current;
     const firstSet = firstSetRef.current;
-    if (!track || !firstSet) return;
+    if (!viewport || !track || !firstSet) return;
 
     // Bredden på ett sett er løkkelengden. Den måles på nytt når bildene har lastet.
     const measure = () => {
@@ -53,6 +55,17 @@ export default function LogoMarquee() {
 
     let frame = 0;
     let previous = performance.now();
+
+    const start = () => {
+      if (frame) return;
+      previous = performance.now(); // ikke ta igjen tapt tid — start der vi slapp
+      frame = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      if (!frame) return;
+      cancelAnimationFrame(frame);
+      frame = 0;
+    };
 
     const tick = (now: number) => {
       // Kutt lange sprang (bytte av fane) så karusellen ikke hopper når man kommer tilbake.
@@ -78,10 +91,22 @@ export default function LogoMarquee() {
 
       frame = requestAnimationFrame(tick);
     };
-    frame = requestAnimationFrame(tick);
+
+    // Karusellen står stille til den er på skjermen. Ellers ville den ha rullet
+    // ferdig halve runden mens folk fortsatt leser toppen av siden, og de
+    // viktigste kundene var passert før noen så dem. Sparer også CPU.
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) start();
+        else stop();
+      },
+      { threshold: 0.5 },
+    );
+    visibility.observe(viewport);
 
     return () => {
-      cancelAnimationFrame(frame);
+      stop();
+      visibility.disconnect();
       resizeObserver.disconnect();
       motionQuery.removeEventListener('change', syncMotion);
     };
@@ -136,6 +161,7 @@ export default function LogoMarquee() {
 
   return (
     <div
+      ref={viewportRef}
       // touch-pan-y: loddrett sidescroll på mobil er fortsatt nettleserens jobb,
       // vannrett drag er vår.
       className="relative w-full cursor-grab select-none overflow-hidden py-4 touch-pan-y active:cursor-grabbing"
