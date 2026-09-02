@@ -64,6 +64,17 @@ input, textarea, select, button {
   transform: translateY(0);
 }
 
+/* Hero-mosaikken (app/page.tsx) ligger i grid-kolonne 8–12 i Container, men
+   skal gå helt ut til høyre viewportkant. Negativ høyremarg = containerens
+   ytre marg (sentrert, maks-bredde shell) + horisontal padding (px-10). */
+@media (min-width: 1024px) {
+  .hero-bleed-right {
+    margin-right: calc(
+      -1 * (max(0px, (100vw - theme('maxWidth.shell')) / 2) + theme('spacing.10'))
+    );
+  }
+}
+
 /* Custom focus ring (teal) */
 *:focus-visible {
   outline: 2px solid var(--teal-dark);

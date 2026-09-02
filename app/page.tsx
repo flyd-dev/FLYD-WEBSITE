@@ -6,7 +6,7 @@ import Eyebrow from '@/components/Eyebrow';
 import FullflydMark from '@/components/FullflydMark';
 import LogoMarquee from '@/components/LogoMarquee';
 import PartnerStrip from '@/components/PartnerStrip';
-import HeroMosaic from '@/components/HeroMosaic';
+import HeroMosaic, { HeroMosaicStrip } from '@/components/HeroMosaic';
 import StatsSection from '@/components/StatsSection';
 import { ButtonLink } from '@/components/Button';
 import { Typewriter } from '@/components/ui/typewriter';
@@ -71,16 +71,24 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
+      {/* De to øverste mosaikk-kortene preloades kun på desktop (mosaikken er
+          skjult under lg). Uten dette blir det største synlige elementet et
+          lazy-oppdaget bilde, og LCP flytter seg fra overskriften til
+          bildenedlastingen. */}
+      <link rel="preload" as="image" href="/header/ig-1.webp" media="(min-width: 1024px)" />
+      <link rel="preload" as="image" href="/header/office-4.webp" media="(min-width: 1024px)" />
       {/* 100vh kun på desktop – på mobil ville det gitt en nesten tom fold
-          under CTA-ene og skjøvet stats-seksjonen ut av syne. */}
+          under CTA-ene og skjøvet stats-seksjonen ut av syne.
+          På desktop flyttes den vertikale paddingen fra seksjonen til
+          tekstkolonnen, slik at mosaikk-kolonnen kan fylle hele høyden. */}
       <Section
         tone="paper"
-        className="overflow-hidden relative lg:min-h-[100vh] lg:h-[100vh]"
+        className="overflow-hidden relative lg:min-h-[100vh] lg:h-[100vh] lg:py-0"
       >
         <Container className="relative w-full h-full">
           <div className="grid h-full w-full grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-12 lg:auto-rows-fr">
             <div
-              className="lg:col-span-8 lg:flex lg:flex-col lg:justify-center"
+              className="lg:col-span-7 lg:flex lg:flex-col lg:justify-center lg:py-28"
               data-reveal
             >
               <Eyebrow tone="teal">Kompetansehus for økonomi og teknologi</Eyebrow>
@@ -121,14 +129,22 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Kolonnen ligger i grid-en (garantert 48 px luft til teksten),
+                men strekkes ut til høyre viewportkant via .hero-bleed-right. */}
             <div
-              className="relative lg:col-span-4 hidden lg:block overflow-hidden min-h-0"
+              className="hero-bleed-right relative lg:col-span-5 hidden lg:block overflow-hidden min-h-0"
               data-reveal
             >
               <HeroMosaic />
             </div>
           </div>
         </Container>
+
+        {/* Mobil/tablett: kolonnene over er skjult under lg – her får de
+            samme bildene plass som en lav stripe under teksten, kant til kant. */}
+        <div className="mt-14 lg:hidden" data-reveal>
+          <HeroMosaicStrip />
+        </div>
       </Section>
 
       {/* STATS */}
