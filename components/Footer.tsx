@@ -99,7 +99,11 @@ export default function Footer() {
             © {new Date().getFullYear()} Flyd AS. Alle rettigheter reservert.
           </p>
           <p className="text-[13px] text-flyd-paper/50">
-            Laget med omhu i Sør-Vest-Norge av Flyd.
+            Laget med omhu i Sør-Vest-Norge av{' '}
+            <FlydLogo
+              title="Flyd"
+              className="inline-block h-[1.35em] w-auto align-[-0.33em]"
+            />
           </p>
         </div>
       </Container>
