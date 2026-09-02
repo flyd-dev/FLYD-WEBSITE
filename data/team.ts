@@ -179,4 +179,11 @@ export const otherTeam: TeamMember[] = [
     email: 'oyvind.nedland@flyd.no',
     image: '/team/flyd-oyvind.webp',
   }),
+  mk({
+    name: 'Tatjana Derksen',
+    role: 'Regnskapskonsulent',
+    phone: '+47 994 68 653',
+    email: 'tatjana.derksen@flyd.no',
+    image: '/team/flyd-tatjana.webp',
+  }),
 ];
