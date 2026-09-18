@@ -38,12 +38,24 @@ export function loadClarity() {
 }
 
 /**
+ * Sender GA4-hendelsen «generate_lead» (importeres som konvertering i
+ * Google Ads). No-op hvis gtag ikke er tilgjengelig.
+ */
+export function trackLead(params: Record<string, string> = {}) {
+  window.gtag?.('event', 'generate_lead', { form: 'kontakt', ...params });
+}
+
+/**
  * Google Analytics 4 med Google Consent Mode v2, samt Microsoft Clarity.
  *
  * Samtykke settes til "denied" som standard (påkrevd i EØS). gtag.js lastes,
  * men samler ingen personopplysninger / cookies før brukeren aktivt godtar i
  * cookie-modalen (se CookieConsent.tsx). Clarity lastes først ved samtykke.
  * Tidligere valg huskes via localStorage.
+ *
+ * «Godta alle» dekker både statistikk og annonsesignalene (ad_storage,
+ * ad_user_data, ad_personalization) – GA4 er koblet til Google Ads for
+ * konverteringsmåling og remarketing. Personvernsiden beskriver dette.
  */
 export default function Analytics() {
   // Gjengangere som allerede har godtatt: last Clarity ved sidelast.
@@ -79,7 +91,12 @@ export default function Analytics() {
 
           try {
             if (localStorage.getItem('${CONSENT_KEY}') === 'granted') {
-              gtag('consent', 'update', { analytics_storage: 'granted' });
+              gtag('consent', 'update', {
+                analytics_storage: 'granted',
+                ad_storage: 'granted',
+                ad_user_data: 'granted',
+                ad_personalization: 'granted'
+              });
             }
           } catch (e) {}
 

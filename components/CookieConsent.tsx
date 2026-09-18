@@ -13,7 +13,7 @@ declare global {
 /**
  * Cookie-samtykke som blokkerende modal for Google Consent Mode v2. Vises ved
  * første besøk når det ikke finnes et lagret valg, og kan ikke lukkes uten at
- * brukeren tar et valg. Oppdaterer analytics_storage hos gtag deretter.
+ * brukeren tar et valg. Oppdaterer samtykkesignalene hos gtag deretter.
  */
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -86,7 +86,13 @@ export default function CookieConsent() {
     } catch {
       /* localStorage utilgjengelig – valget gjelder kun denne økten */
     }
-    window.gtag?.('consent', 'update', { analytics_storage: value });
+    // «Godta alle» / «Kun nødvendige» styrer både statistikk og annonsesignaler.
+    window.gtag?.('consent', 'update', {
+      analytics_storage: value,
+      ad_storage: value,
+      ad_user_data: value,
+      ad_personalization: value,
+    });
     if (value === 'granted') {
       loadClarity();
     } else {
@@ -125,8 +131,9 @@ export default function CookieConsent() {
           Vi bruker informasjonskapsler
         </h2>
         <p className="mt-3 text-[15px] leading-relaxed text-flyd-ink/80">
-          Vi bruker informasjonskapsler til statistikk for å gjøre nettstedet
-          bedre. Du velger selv om du vil tillate dette. Les mer i{' '}
+          Vi bruker informasjonskapsler til statistikk og for å måle om
+          annonsene våre fører til henvendelser. Du velger selv om du vil
+          tillate dette. Les mer i{' '}
           <Link
             href="/personvern"
             className="font-medium text-flyd-ink underline decoration-flyd-teal-dark decoration-2 underline-offset-2 transition-colors hover:text-flyd-teal-dark"

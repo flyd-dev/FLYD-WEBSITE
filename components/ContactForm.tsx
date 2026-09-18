@@ -4,6 +4,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { Send, CheckCircle2 } from 'lucide-react';
 import { Button } from './Button';
+import { trackLead } from './Analytics';
 
 const WEBHOOK_URL = 'https://hook.eu2.make.com/g8aore8oidc681el311c4f1p55hmgxmx';
 
@@ -97,6 +98,8 @@ export default function ContactForm() {
 
       setStatus('success');
       form.reset();
+      // Konvertering til GA4/Google Ads – kun ekte innsendinger, ikke honeypot.
+      trackLead(payload.subject ? { topic: payload.subject } : {});
     } catch {
       setStatus('error');
       setErrorMsg('Noe gikk galt. Prøv igjen, eller send direkte til support@flyd.no.');

@@ -117,10 +117,17 @@ export default function PersonvernPage() {
                 personvernforordningen (GDPR).
               </p>
               <p className="mt-3">
-                Når statistikk er aktivert, behandles opplysningene av Google og
-                Microsoft som databehandlere på våre vegne. IP-adressen din
-                anonymiseres, og vi bruker ikke dataene til markedsføring eller
-                deling med tredjeparter for annonseformål.
+                Når du godtar alle, bruker vi også Google Ads til å måle om
+                annonsene våre fører til henvendelser (konverteringsmåling), og
+                til å vise annonser til deg som tidligere har besøkt flyd.no
+                (remarketing). Vi deler ikke navn, e-post eller innholdet i
+                henvendelsen din med Google – kun at et skjema ble sendt.
+              </p>
+              <p className="mt-3">
+                Når statistikk og annonsemåling er aktivert, behandles
+                opplysningene av Google og Microsoft som databehandlere på våre
+                vegne. IP-adressen din anonymiseres. Velger du «Kun nødvendige»,
+                samles ingen data inn via disse verktøyene.
               </p>
               <p className="mt-3">
                 Du kan når som helst trekke tilbake eller endre samtykket ditt
