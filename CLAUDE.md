@@ -40,5 +40,6 @@ Nettsted for Flyd AS (regnskap, rådgivning og teknologi, Sør-Vest-Norge).
 ## Diverse
 
 - Kontaktskjemaet poster til en Make-webhook (`components/ContactForm.tsx`) — honeypot-feltet heter `company`; det ekte bedriftsfeltet heter `bedrift`. Ikke fjern noen av delene.
-- Samtykke: GA4 + Clarity er gated bak `CookieConsent` (Consent Mode v2, localStorage-nøkkel `flyd-consent`). «Endre samtykke» i footer sender `flyd:open-consent`-event.
+- Samtykke: GA4 + Clarity er gated bak `CookieConsent` (Consent Mode v2, localStorage-nøkkel `flyd-consent`). gtag.js lastes cookieløst med alt `denied`; «Godta alle» setter analytics_storage **og** annonsesignalene (`ad_storage`, `ad_user_data`, `ad_personalization`) til `granted` — GA4 er koblet til Google Ads (sept. 2026). «Endre samtykke» i footer sender `flyd:open-consent`-event.
+- Konverteringer til Google Ads (via GA4-import, ikke egen Ads-tag): `trackLead()` i `Analytics.tsx` sender `generate_lead` ved vellykket kontaktskjema; en global klikk-lytter sender `phone_click`/`email_click` på `tel:`/`mailto:`-lenker. Ikke fjern. Google forwarding-numre finnes ikke i Norge, så telefon måles kun som klikk.
 - Git: commits på norsk, ingen Co-Authored-By-linjer.

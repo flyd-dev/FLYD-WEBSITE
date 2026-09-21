@@ -86,6 +86,20 @@ export const offices: Office[] = [
   },
 ];
 
+/**
+ * Åpningstider – like på alle seks kontorer og identiske med Google
+ * Bedriftsprofil (sjekket 21.9.2026). Endres de ett sted, må de endres begge.
+ */
+export const openingHours = {
+  label: 'Man–fre 07–16',
+  schema: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '07:00',
+    closes: '16:00',
+  },
+};
+
 export function getOfficeBySlug(slug: string): Office | undefined {
   return offices.find((o) => o.slug === slug);
 }

@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   ArrowUpRight,
   Check,
+  Clock,
   Mail,
   MapPin,
   Phone,
@@ -14,7 +15,7 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import { ButtonLink } from '@/components/Button';
 import JsonLd from '@/components/JsonLd';
-import { offices, getOfficeBySlug } from '@/data/offices';
+import { offices, getOfficeBySlug, openingHours } from '@/data/offices';
 import { services } from '@/data/services';
 
 const SITE_URL = 'https://www.flyd.no';
@@ -67,6 +68,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
       longitude: office.lng,
     },
     hasMap: office.mapsUrl,
+    openingHoursSpecification: openingHours.schema,
   };
 
   const breadcrumbJsonLd = {
@@ -173,6 +175,13 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                     >
                       support@flyd.no
                     </a>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Clock
+                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
+                      strokeWidth={1.75}
+                    />
+                    <span>{openingHours.label}</span>
                   </div>
                 </div>
                 <div className="mt-7">

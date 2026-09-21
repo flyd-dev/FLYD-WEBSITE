@@ -7,7 +7,7 @@ import Reveal from '@/components/Reveal';
 import ScrollToTop from '@/components/ScrollToTop';
 import Analytics from '@/components/Analytics';
 import CookieConsent from '@/components/CookieConsent';
-import { offices } from '@/data/offices';
+import { offices, openingHours } from '@/data/offices';
 import { leadership, officeLeads, otherTeam } from '@/data/team';
 
 const poppins = Poppins({
@@ -144,6 +144,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       longitude: o.lng,
     },
     hasMap: o.mapsUrl,
+    openingHoursSpecification: openingHours.schema,
   }));
 
   const jsonLd = {
