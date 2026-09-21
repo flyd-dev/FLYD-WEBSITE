@@ -46,6 +46,22 @@ export function trackLead(params: Record<string, string> = {}) {
 }
 
 /**
+ * Klikk på tel:/mailto:-lenker → «phone_click» / «email_click» i GA4.
+ * Google forwarding-numre finnes ikke i Norge, så «anrop fra nettstedet» kan
+ * ikke måles – klikk på nummeret er nærmeste vi kommer. Importeres i Ads.
+ */
+function trackContactClick(e: MouseEvent) {
+  const target = e.target instanceof Element ? e.target : null;
+  const link = target?.closest('a[href^="tel:"], a[href^="mailto:"]');
+  if (!(link instanceof HTMLAnchorElement)) return;
+  const href = link.getAttribute('href') ?? '';
+  window.gtag?.('event', href.startsWith('tel:') ? 'phone_click' : 'email_click', {
+    link_url: href,
+    link_text: (link.textContent ?? '').trim().slice(0, 100),
+  });
+}
+
+/**
  * Google Analytics 4 med Google Consent Mode v2, samt Microsoft Clarity.
  *
  * Samtykke settes til "denied" som standard (påkrevd i EØS). gtag.js lastes,
@@ -67,6 +83,12 @@ export default function Analytics() {
     } catch {
       /* localStorage utilgjengelig */
     }
+  }, []);
+
+  // Capture-fase så vi rekker å sende før nettleseren åpner tel:/mailto:.
+  useEffect(() => {
+    document.addEventListener('click', trackContactClick, true);
+    return () => document.removeEventListener('click', trackContactClick, true);
   }, []);
 
   return (
