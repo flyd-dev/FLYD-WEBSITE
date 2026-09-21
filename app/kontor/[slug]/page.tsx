@@ -1,6 +1,7 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -9,16 +10,16 @@ import {
   Mail,
   MapPin,
   Phone,
-} from 'lucide-react';
-import Container from '@/components/Container';
-import Section from '@/components/Section';
-import Eyebrow from '@/components/Eyebrow';
-import { ButtonLink } from '@/components/Button';
-import JsonLd from '@/components/JsonLd';
-import { offices, getOfficeBySlug, openingHours } from '@/data/offices';
-import { services } from '@/data/services';
+} from "lucide-react";
+import Container from "@/components/Container";
+import Section from "@/components/Section";
+import Eyebrow from "@/components/Eyebrow";
+import { ButtonLink } from "@/components/Button";
+import JsonLd from "@/components/JsonLd";
+import { offices, getOfficeBySlug, openingHours } from "@/data/offices";
+import { services } from "@/data/services";
 
-const SITE_URL = 'https://www.flyd.no';
+const SITE_URL = "https://www.flyd.no";
 
 export function generateStaticParams() {
   return offices.map((o) => ({ slug: o.slug }));
@@ -30,7 +31,7 @@ export function generateMetadata({
   params: { slug: string };
 }): Metadata {
   const office = getOfficeBySlug(params.slug);
-  if (!office) return { title: 'Kontor ikke funnet' };
+  if (!office) return { title: "Kontor ikke funnet" };
   return {
     title: `Regnskapsfører ${office.city} – Flyd ${office.city}`,
     description: `${office.blurb} Regnskap, rådgivning og teknologi – lokalt i ${office.city}.`,
@@ -45,25 +46,25 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
   const otherOffices = offices.filter((o) => o.slug !== office.slug);
 
   const localBusinessJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': ['LocalBusiness', 'AccountingService'],
-    '@id': `${SITE_URL}/#office-${office.city.toLowerCase()}`,
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "AccountingService"],
+    "@id": `${SITE_URL}/#office-${office.city.toLowerCase()}`,
     name: `Flyd ${office.city}`,
-    parentOrganization: { '@id': `${SITE_URL}/#organization` },
+    parentOrganization: { "@id": `${SITE_URL}/#organization` },
     url: `${SITE_URL}/kontor/${office.slug}/`,
     image: `${SITE_URL}/brand/flyd-teal.png`,
-    telephone: '+4748019958',
-    email: 'support@flyd.no',
+    telephone: "+4748019958",
+    email: "support@flyd.no",
     description: office.blurb,
     address: {
-      '@type': 'PostalAddress',
+      "@type": "PostalAddress",
       streetAddress: office.street,
-      postalCode: office.postal.split(' ')[0],
-      addressLocality: office.postal.split(' ').slice(1).join(' '),
-      addressCountry: 'NO',
+      postalCode: office.postal.split(" ")[0],
+      addressLocality: office.postal.split(" ").slice(1).join(" "),
+      addressCountry: "NO",
     },
     geo: {
-      '@type': 'GeoCoordinates',
+      "@type": "GeoCoordinates",
       latitude: office.lat,
       longitude: office.lng,
     },
@@ -72,18 +73,18 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
   };
 
   const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Hjem', item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 1, name: "Hjem", item: `${SITE_URL}/` },
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 2,
-        name: 'Kontakt',
+        name: "Kontakt",
         item: `${SITE_URL}/kontakt/`,
       },
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 3,
         name: office.city,
         item: `${SITE_URL}/kontor/${office.slug}/`,
@@ -111,7 +112,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             <div className="lg:col-span-7">
               <Eyebrow tone="teal">Kontor · {office.name}</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">
-                Regnskapsfører i{' '}
+                Regnskapsfører i{" "}
                 <span className="text-flyd-teal-dark">{office.city}.</span>
               </h1>
               <p className="mt-8 max-w-2xl text-[18px] leading-[1.75] text-flyd-ink/80">
@@ -134,66 +135,83 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             </div>
 
             <aside className="lg:col-span-5">
-              <div className="border border-flyd-ink/15 bg-flyd-teal-soft p-7 md:p-8 lg:sticky lg:top-24">
-                <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
-                  Besøk oss
-                </div>
-                <div className="mt-5 space-y-4 text-[15px]">
-                  <div className="flex items-start gap-3">
-                    <MapPin
-                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
-                      strokeWidth={1.75}
+              <div className="lg:sticky lg:top-24">
+                {office.image && (
+                  <div className="relative mb-5 aspect-[3/2] overflow-hidden rounded-2xl bg-flyd-ink/5 ring-1 ring-flyd-ink/5">
+                    <Image
+                      src={office.image.src}
+                      alt={office.image.alt}
+                      fill
+                      sizes="(min-width:1024px) 40vw, 100vw"
+                      className="object-cover"
+                      priority
                     />
-                    <div>
-                      <div className="font-display font-semibold">
-                        {office.city} · {office.name}
-                      </div>
-                      <div className="mt-0.5 text-flyd-ink/75">
-                        {office.street}
-                        <br />
-                        {office.postal}
+                  </div>
+                )}
+                <div className="border border-flyd-ink/15 bg-flyd-teal-soft p-7 md:p-8">
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
+                    Besøk oss
+                  </div>
+                  <div className="mt-5 space-y-4 text-[15px]">
+                    <div className="flex items-start gap-3">
+                      <MapPin
+                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
+                        strokeWidth={1.75}
+                      />
+                      <div>
+                        <div className="font-display font-semibold">
+                          {office.city} · {office.name}
+                        </div>
+                        <div className="mt-0.5 text-flyd-ink/75">
+                          {office.street}
+                          <br />
+                          {office.postal}
+                        </div>
                       </div>
                     </div>
+                    <div className="flex items-start gap-3">
+                      <Phone
+                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
+                        strokeWidth={1.75}
+                      />
+                      <a
+                        href="tel:+4748019958"
+                        className="hover:text-flyd-teal-dark"
+                      >
+                        +47 480 19 958
+                      </a>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Mail
+                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
+                        strokeWidth={1.75}
+                      />
+                      <a
+                        href="mailto:support@flyd.no"
+                        className="hover:text-flyd-teal-dark"
+                      >
+                        support@flyd.no
+                      </a>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Clock
+                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
+                        strokeWidth={1.75}
+                      />
+                      <span>{openingHours.label}</span>
+                    </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Phone
-                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
-                      strokeWidth={1.75}
-                    />
-                    <a href="tel:+4748019958" className="hover:text-flyd-teal-dark">
-                      +47 480 19 958
-                    </a>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Mail
-                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
-                      strokeWidth={1.75}
-                    />
-                    <a
-                      href="mailto:support@flyd.no"
-                      className="hover:text-flyd-teal-dark"
+                  <div className="mt-7">
+                    <ButtonLink
+                      href={office.mapsUrl}
+                      variant="outline"
+                      withArrow
+                      external
+                      className="w-full"
                     >
-                      support@flyd.no
-                    </a>
+                      Åpne i Google Maps
+                    </ButtonLink>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Clock
-                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
-                      strokeWidth={1.75}
-                    />
-                    <span>{openingHours.label}</span>
-                  </div>
-                </div>
-                <div className="mt-7">
-                  <ButtonLink
-                    href={office.mapsUrl}
-                    variant="outline"
-                    withArrow
-                    external
-                    className="w-full"
-                  >
-                    Åpne i Google Maps
-                  </ButtonLink>
                 </div>
               </div>
             </aside>

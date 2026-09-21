@@ -9,6 +9,12 @@ export type Office = {
   lng: number;
   /** 2–3 setninger til kontorsiden (/kontor/[slug]) og meta description. */
   blurb: string;
+  /**
+   * Fasadefoto av kontoret (3:2, 1200×800, WebP i public/kontor/). Valgfritt –
+   * uten bilde vises besøkskortet alene. Samme motiv som forsidebildet i
+   * Google Bedriftsprofil.
+   */
+  image?: { src: string; alt: string };
 };
 
 export const offices: Office[] = [
@@ -23,6 +29,10 @@ export const offices: Office[] = [
     lng: 5.7354,
     blurb:
       'Regionkontoret vårt ligger i FOMO-miljøet på Forus, midt i Stavanger-regionen. Herfra betjener vi kunder på hele Nord-Jæren – fra gründere til etablerte industri- og eiendomsselskaper.',
+    image: {
+      src: '/kontor/stavanger.webp',
+      alt: 'FOMO-bygget i Grenseveien 21 på Forus, der Flyd har Stavanger-kontoret',
+    },
   },
   {
     city: 'Egersund',
@@ -35,6 +45,10 @@ export const offices: Office[] = [
     lng: 5.9989,
     blurb:
       'Kontoret ligger i Torvgården, midt på torget i Egersund. Her sitter vi tett på næringslivet i Eigersund og resten av Dalane – kom gjerne innom for en regnskapsprat.',
+    image: {
+      src: '/kontor/egersund.webp',
+      alt: 'Torvgården på torget i Egersund, der Flyd-kontoret ligger',
+    },
   },
   {
     city: 'Sokndal',
@@ -47,6 +61,10 @@ export const offices: Office[] = [
     lng: 6.2714,
     blurb:
       'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i Sokndal og omegn – med hele Flyds fagmiljø i ryggen.',
+    image: {
+      src: '/kontor/sokndal.webp',
+      alt: 'Flyd-kontoret i «Banken», Gamleveien 13 i Hauge i Dalane – hvit fasade med flyd-skilt',
+    },
   },
   {
     city: 'Moi',
@@ -59,6 +77,10 @@ export const offices: Office[] = [
     lng: 6.5334,
     blurb:
       'Moi-kontoret betjener Lund og områdene langs E39 mellom Egersund og Flekkefjord. En lokal regnskapspartner – med kompetansen til hele kompetansehuset bak seg.',
+    image: {
+      src: '/kontor/moi.webp',
+      alt: 'Fasaden på Flyd-kontoret i Øyevollveien 10 på Moi, med flyd-skilt over inngangen',
+    },
   },
   {
     city: 'Sirdal',
@@ -71,6 +93,10 @@ export const offices: Office[] = [
     lng: 6.8094,
     blurb:
       'På Tjørhom i Sirdal finner du oss i Handleriet. Vi jobber tett med hytte-, bygg- og reiselivsnæringen i fjellbygda – og er til stede der verdiene skapes.',
+    image: {
+      src: '/kontor/sirdal.webp',
+      alt: 'Handleriet på Tjørhom i Sirdal, der Flyd-kontoret ligger',
+    },
   },
   {
     city: 'Flekkefjord',
@@ -83,6 +109,10 @@ export const offices: Office[] = [
     lng: 6.6628,
     blurb:
       'I Flekkefjord sitter vi sentralt i Elvegaten 22. Kontoret betjener næringslivet i Lister-regionen – med kort vei til både kunder og kollegaer.',
+    image: {
+      src: '/kontor/flekkefjord.webp',
+      alt: 'Inngangen til Flyd-kontoret i Elvegaten 22 i Flekkefjord, med teal flyd-skilt',
+    },
   },
 ];
 
