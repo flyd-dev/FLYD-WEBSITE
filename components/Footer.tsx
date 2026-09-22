@@ -4,6 +4,10 @@ import ConsentLink from './ConsentLink';
 import FlydLogo from './FlydLogo';
 import { offices } from '@/data/offices';
 
+// Floyd (intern assistent for ansatte) bor på egen adresse som settes ved
+// deploy. Er variabelen ikke satt, rendres ingen lenke.
+const floydUrl = process.env.NEXT_PUBLIC_FLOYD_URL?.trim();
+
 export default function Footer() {
   return (
     <footer className="bg-flyd-ink text-flyd-paper">
@@ -68,6 +72,19 @@ export default function Footer() {
               <li><Link href="/kontakt" className="hover:text-flyd-teal">Kontakt</Link></li>
               <li><Link href="/personvern" className="hover:text-flyd-teal">Personvern</Link></li>
               <li><ConsentLink className="hover:text-flyd-teal" /></li>
+              {floydUrl && (
+                <li>
+                  <a
+                    href={floydUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Floyd – for ansatte i Flyd (åpnes i nytt vindu)"
+                    className="hover:text-flyd-teal"
+                  >
+                    For ansatte
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 

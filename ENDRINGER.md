@@ -1,5 +1,19 @@
 # Endringslogg — analyse-forbedringer
 
+## «For ansatte»-lenke til Floyd i bunnteksten (21.9.2026)
+
+- **Lenken:** `components/Footer.tsx` har fått «For ansatte» som siste punkt i navigasjonslisten (etter «Endre samtykke»). Den peker til Floyd, Flyds interne assistent, som er et eksternt system på egen adresse. Vanlig `<a>` (ikke `next/link`) med `target="_blank"`, `rel="noopener noreferrer"` og `aria-label="Floyd – for ansatte i Flyd (åpnes i nytt vindu)"`; samme klasse som de andre lenkene (`hover:text-flyd-teal`). Ingen ikon — nettstedet har ikke et eget «ekstern lenke»-ikon i bruk (`ArrowUpRight` brukes som generell CTA-pil også på interne lenker).
+- **Adressen er ikke hardkodet:** den leses fra miljøvariabelen `NEXT_PUBLIC_FLOYD_URL` ved bygg. Er variabelen ikke satt (eller tom), rendres ingen lenke — ingen død lenke, ingen plassholder, og ordet «Floyd» finnes da ikke noe sted i eksporten. Adressen kan byttes (f.eks. til `floyd.flyd.no`) uten kodeendring.
+- **Miljøfiler:** ny `.env.example` (sjekkes inn) dokumenterer variabelen. `.env.local` (gitignorert) setter den for lokal kjøring.
+- **Innlogging:** skjer hos Floyd/Microsoft. Nettstedet har ingen innloggingsskjema, brukerhåndtering eller cookies for dette.
+- **Ikke rørt:** hovedmeny, forside, øvrige komponenter. Ingen nye avhengigheter.
+
+**Ved deploy må `NEXT_PUBLIC_FLOYD_URL` settes som miljøvariabel i Vercel-prosjektet (Production), ellers bygges nettstedet uten lenken.** Verdien er Floyds adresse (i dag `https://floyd-blond.vercel.app`, senere `https://floyd.flyd.no`). Nytt bygg kreves etter endring av verdien — den bakes inn i den statiske eksporten.
+
+Verifisert: `tsc` OK; `npm run build` OK både uten variabel (0 sider med lenken, 0 forekomster av «floyd») og med (14/14 HTML-sider har lenken, rendret markup kontrollert); DOM-sjekk i headless Chrome (siste `<li>`, `href`/`target`/`rel`/`aria-label` riktig); skjermbilder av bunnteksten i desktop (1440), mobil (390) og hover. `npm run lint` er ikke kjørt — ESLint er ikke satt opp i prosjektet, og `next lint` ville installert en ny avhengighet.
+
+---
+
 ## Runde 5: Lighthouse-optimalisering (målt mot produksjon, mobil)
 
 | Kategori | Før | Etter |
