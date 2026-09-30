@@ -16,6 +16,8 @@ export type Service = {
   bullets: string[];
   fitFor: string;
   icon: LucideIcon;
+  /** 3D-objekt (transparent WebP) som vises på tjenestekortene på forsiden. */
+  image: { src: string; alt: string };
 };
 
 export const services: Service[] = [
@@ -34,6 +36,10 @@ export const services: Service[] = [
     ],
     fitFor: 'Bedrifter som vil ha et trygt regnskap – og en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
     icon: Calculator,
+    image: {
+      src: '/tjenesteobjekter/regnskap-radgivning.webp',
+      alt: '3D-illustrasjon: skjerm med Flyd-logo, stolpediagram, MVA og kronemynter',
+    },
   },
   {
     id: 'programvare',
@@ -49,6 +55,10 @@ export const services: Service[] = [
     ],
     fitFor: 'Virksomheter som skal bytte system, har vokst ut av det gamle, eller skal rydde opp etter en halvferdig implementering.',
     icon: LayoutGrid,
+    image: {
+      src: '/tjenesteobjekter/programvare.webp',
+      alt: '3D-illustrasjon: tavle med moduler, én av dem merket Flyd',
+    },
   },
   {
     id: 'integrasjoner',
@@ -64,6 +74,10 @@ export const services: Service[] = [
     ],
     fitFor: 'Bedrifter som opplever at data ikke stemmer mellom systemer, eller som gjør mye manuelt arbeid som burde vært automatisk.',
     icon: Workflow,
+    image: {
+      src: '/tjenesteobjekter/integrasjoner.webp',
+      alt: '3D-illustrasjon: to enheter koblet sammen med en kabel',
+    },
   },
   {
     id: 'analyse',
@@ -79,6 +93,10 @@ export const services: Service[] = [
     ],
     fitFor: 'Ledere som vil bytte ut magefølelsen med fakta, uten å bli oversvømt av tabeller.',
     icon: BarChart3,
+    image: {
+      src: '/tjenesteobjekter/analyse.webp',
+      alt: '3D-illustrasjon: dashbord med stolpediagram, kurve og NOK-diagram',
+    },
   },
   {
     id: 'nettsider',
@@ -94,6 +112,10 @@ export const services: Service[] = [
     ],
     fitFor: 'Virksomheter som vil ha en nettside eller digital løsning som henger sammen med resten av driften – ikke bare en frittstående markedsside.',
     icon: MonitorSmartphone,
+    image: {
+      src: '/tjenesteobjekter/nettsider.webp',
+      alt: '3D-illustrasjon: nettleservinduer med en Flyd-nettside',
+    },
   },
   {
     id: 'lonn',
@@ -109,6 +131,10 @@ export const services: Service[] = [
     ],
     fitFor: 'Bedrifter som vil ha trygghet på at lønn og rapportering er riktig – og at de ansatte blir ivaretatt.',
     icon: Users,
+    image: {
+      src: '/tjenesteobjekter/lonn.webp',
+      alt: '3D-illustrasjon: to personer og en avkrysset sjekkliste med Flyd-logo',
+    },
   },
 ];
 

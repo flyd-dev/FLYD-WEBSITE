@@ -1,5 +1,15 @@
 # Endringslogg — analyse-forbedringer
 
+## Nye 3D-objekter på tjenestekortene (30.9.2026)
+
+- **Objektene:** De seks tjenestekortene i «Tjenester»-seksjonen på forsiden viser nå hvert sitt 3D-objekt (Flyd-logo, MVA, kr/NOK) i stedet for lucide-ikonet. Gradientflatene er de samme som før.
+- **Filer:** `public/tjenesteobjekter/*.webp` (652×561, 15–20 KB hver). De er beskåret fra 1200×600-PNG-ene med ett felles utsnitt, slik at objektene får lik skala og samme grunnlinje. Mappen heter ikke `tjenester/`, for å ikke kollidere med ruten `/tjenester/`. Original-PNG-ene ligger i `brand_assets/tjenesteobjekter/`. `.blend` og `.glb` er ikke sjekket inn (ca. 16 MB, brukes ikke av nettstedet).
+- **Kode:** `data/services.ts` har nytt `image`-felt (`src` + `alt`) per tjeneste. `RuixenCard` har fått propen `illustration`, som legger et frilagt bilde på tone-gradienten. Ved hover løftes objektet litt; med `prefers-reduced-motion` står det stille. `icon` brukes fortsatt på /tjenester-siden, og ikonmodusen i kortet er beholdt.
+
+Verifisert: `tsc` OK; `npm run build` OK; skjermbilder av seksjonen i desktop (1440), nettbrett (768) og mobil (390), og av et kort i hover-tilstand.
+
+---
+
 ## «For ansatte»-lenke til Floyd i bunnteksten (21.9.2026)
 
 - **Lenken:** `components/Footer.tsx` har fått «For ansatte» som siste punkt i navigasjonslisten (etter «Endre samtykke»). Den peker til Floyd, Flyds interne assistent, som er et eksternt system på egen adresse. Vanlig `<a>` (ikke `next/link`) med `target="_blank"`, `rel="noopener noreferrer"` og `aria-label="Floyd – for ansatte i Flyd (åpnes i nytt vindu)"`; samme klasse som de andre lenkene (`hover:text-flyd-teal`). Ingen ikon — nettstedet har ikke et eget «ekstern lenke»-ikon i bruk (`ArrowUpRight` brukes som generell CTA-pil også på interne lenker).

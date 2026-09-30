@@ -206,7 +206,7 @@ export default function HomePage() {
                     <RuixenCard
                       title={s.title}
                       subtitle={s.short}
-                      icon={s.icon}
+                      illustration={s.image}
                       tone={serviceTones[i % serviceTones.length]}
                       href={`/tjenester#${s.id}`}
                     />
