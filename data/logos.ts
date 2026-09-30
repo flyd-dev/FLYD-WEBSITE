@@ -19,7 +19,6 @@ export const customerLogos: CustomerLogo[] = [
   { name: 'Årring', src: '/customer-logo/arring.webp', alt: 'Årring' },
   { name: 'Sirdal Fjellpark', src: '/customer-logo/sirdal_fjellpark.webp', alt: 'Sirdal Fjellpark' },
   { name: 'Sinneshyttå', src: '/customer-logo/sinneshytta.webp', alt: 'Sinneshyttå' },
-  { name: 'NADG', src: '/customer-logo/NADGWebRetinav2.webp', alt: 'NADG' },
   { name: 'Arkit Interiør', src: '/customer-logo/arkit.webp', alt: 'Arkit Interiør' },
   { name: 'Arkit Arealplan', src: '/customer-logo/arkit_arealplan.webp', alt: 'Arkit Arealplan' },
   { name: 'Sirdal Bygg', src: '/customer-logo/sirdalbygg.webp', alt: 'Sirdal Bygg' },
