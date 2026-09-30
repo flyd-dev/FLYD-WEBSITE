@@ -8,6 +8,7 @@ import FullflydMark from '@/components/FullflydMark';
 import { ButtonLink } from '@/components/Button';
 import { ScrollProgressLineWrapper } from '@/components/ScrollProgressLine';
 import JsonLd from '@/components/JsonLd';
+import ServiceIcon from '@/components/ServiceIcon';
 import { services, erpSystems } from '@/data/services';
 
 const breadcrumbJsonLd = {
@@ -78,7 +79,6 @@ export default function TjenesterPage() {
 
       {services.map((s, i) => {
         const tone = tones[i % tones.length];
-        const Icon = s.icon;
         const dark = tone === 'ink';
         const teal = tone === 'teal';
         const textMuted = dark
@@ -94,9 +94,10 @@ export default function TjenesterPage() {
               <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
                 <div className="lg:col-span-5" data-reveal>
                   <div className="flex items-center gap-4">
-                    <Icon
+                    <ServiceIcon
+                      name={s.icon}
                       className={dark ? 'h-7 w-7 text-flyd-teal' : 'h-7 w-7 text-flyd-teal-dark'}
-                      strokeWidth={1.5}
+                      strokeWidth={1.75}
                     />
                     <Eyebrow tone={dark ? 'paper' : 'ink'}>
                       0{i + 1} · Tjeneste

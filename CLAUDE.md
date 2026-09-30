@@ -21,6 +21,7 @@ Nettsted for Flyd AS (regnskap, rådgivning og teknologi, Sør-Vest-Norge).
 ## Merkevare (følg profilmanualen)
 
 - **Farger (de eneste):** sort `#1F1F1F` (flyd-ink), lys blå `#8BC0BE` (flyd-teal, hovedfarge), mørk blågrønn `#4C8E93` (flyd-teal-dark), hvit `#FFFFFF` (flyd-paper). Opacity-varianter er lov. **Ingen andre farger** (oransje aksent ble fjernet bevisst i 2026 — ikke gjeninnfør).
+  - **Eneste unntak (bestemt sept. 2026):** tjenesteikonene på glassflis (`ServiceTile` i `components/ServiceIcon.tsx`, kilde `brand_assets/tjenesteikoner/kort/`) har oransje punktum `#F2905A` og strek i `#F8F6F1`. Ikke bruk oransje andre steder, og ikke fjern det her.
 - **Tekst er alltid sort eller hvit** (evt. med opacity). Aksentfargene brukes på flater, linjer og ikoner.
 - **Typografi:** Poppins (via next/font) til overskrifter, Helvetica/Arial-stack til brødtekst (`globals.css`).
 - **Slagordet er «full flyd»** — ordspill på navnet. Aldri «full flyt».

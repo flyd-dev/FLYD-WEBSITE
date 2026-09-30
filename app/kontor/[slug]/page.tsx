@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowUpRight,
-  Check,
   Clock,
   Mail,
   MapPin,
@@ -16,6 +15,7 @@ import Section from "@/components/Section";
 import Eyebrow from "@/components/Eyebrow";
 import { ButtonLink } from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
+import ServiceIcon from "@/components/ServiceIcon";
 import { offices, getOfficeBySlug, openingHours } from "@/data/offices";
 import { services } from "@/data/services";
 
@@ -248,10 +248,11 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                       href={`/tjenester#${s.id}`}
                       className="group flex items-center justify-between gap-4 border-b border-flyd-paper/10 py-4 transition-colors hover:bg-flyd-paper/5"
                     >
-                      <span className="flex items-start gap-3">
-                        <Check
-                          className="mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal"
-                          strokeWidth={2}
+                      <span className="flex items-center gap-3.5">
+                        <ServiceIcon
+                          name={s.icon}
+                          className="h-5 w-5 flex-shrink-0 text-flyd-teal"
+                          strokeWidth={1.75}
                         />
                         <span className="text-[16px] text-flyd-paper/90">
                           {s.title}

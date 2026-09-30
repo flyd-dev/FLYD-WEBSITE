@@ -1,5 +1,14 @@
 # Endringslogg — analyse-forbedringer
 
+## Tjenesteikoner i 2D (30.9.2026)
+
+- **Byttet:** 3D-objektene på tjenestekortene er erstattet med Flyds 2D-ikonsett (kilde: `brand_assets/tjenesteikoner/`). Ikonene er lagt inn som komponent i `components/ServiceIcon.tsx`, med strek i `currentColor` og «punktumet» fra logoen tegnet for seg.
+- **Tjenestekortene på forsiden:** `ServiceTile` legger ikonet på en glassflis over den samme tone-gradienten som før. Strek i `#F8F6F1` og oransje punktum `#F2905A`, som i `kort/`-filene. Oransje er et avtalt unntak fra fargeregelen, gjeldende kun her (se CLAUDE.md).
+- **Samme ikoner andre steder:** ved seksjonsoverskriftene på /tjenester (i stedet for lucide-ikonene) og i tjenestelisten på kontorsidene (i stedet for hakemerker).
+- **Opprydding:** `data/services.ts` har `icon` som navn i ikonsettet, og 3D-feltet `image` er fjernet. `public/tjenesteobjekter/` er slettet (ubrukt). PNG-kildene ligger fortsatt i `brand_assets/tjenesteobjekter/`.
+
+---
+
 ## Nye 3D-objekter på tjenestekortene (30.9.2026)
 
 - **Objektene:** De seks tjenestekortene i «Tjenester»-seksjonen på forsiden viser nå hvert sitt 3D-objekt (Flyd-logo, MVA, kr/NOK) i stedet for lucide-ikonet. Gradientflatene er de samme som før.

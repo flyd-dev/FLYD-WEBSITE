@@ -1,12 +1,4 @@
-import type { LucideIcon } from 'lucide-react';
-import {
-  Calculator,
-  LayoutGrid,
-  Workflow,
-  BarChart3,
-  Users,
-  MonitorSmartphone,
-} from 'lucide-react';
+import type { ServiceIconName } from '@/components/ServiceIcon';
 
 export type Service = {
   id: string;
@@ -15,9 +7,8 @@ export type Service = {
   long: string;
   bullets: string[];
   fitFor: string;
-  icon: LucideIcon;
-  /** 3D-objekt (transparent WebP) som vises på tjenestekortene på forsiden. */
-  image: { src: string; alt: string };
+  /** 2D-ikon fra Flyds ikonsett (components/ServiceIcon.tsx). */
+  icon: ServiceIconName;
 };
 
 export const services: Service[] = [
@@ -35,11 +26,7 @@ export const services: Service[] = [
       'Fast kontaktperson som kjenner bedriften',
     ],
     fitFor: 'Bedrifter som vil ha et trygt regnskap – og en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
-    icon: Calculator,
-    image: {
-      src: '/tjenesteobjekter/regnskap-radgivning.webp',
-      alt: '3D-illustrasjon: skjerm med Flyd-logo, stolpediagram, MVA og kronemynter',
-    },
+    icon: 'regnskap',
   },
   {
     id: 'programvare',
@@ -54,11 +41,7 @@ export const services: Service[] = [
       'Videre forvaltning og optimalisering',
     ],
     fitFor: 'Virksomheter som skal bytte system, har vokst ut av det gamle, eller skal rydde opp etter en halvferdig implementering.',
-    icon: LayoutGrid,
-    image: {
-      src: '/tjenesteobjekter/programvare.webp',
-      alt: '3D-illustrasjon: tavle med moduler, én av dem merket Flyd',
-    },
+    icon: 'erp',
   },
   {
     id: 'integrasjoner',
@@ -73,11 +56,7 @@ export const services: Service[] = [
       'Dokumentasjon som holder når folk bytter rolle',
     ],
     fitFor: 'Bedrifter som opplever at data ikke stemmer mellom systemer, eller som gjør mye manuelt arbeid som burde vært automatisk.',
-    icon: Workflow,
-    image: {
-      src: '/tjenesteobjekter/integrasjoner.webp',
-      alt: '3D-illustrasjon: to enheter koblet sammen med en kabel',
-    },
+    icon: 'integrasjoner',
   },
   {
     id: 'analyse',
@@ -92,11 +71,7 @@ export const services: Service[] = [
       'Prognoser og scenarioanalyse',
     ],
     fitFor: 'Ledere som vil bytte ut magefølelsen med fakta, uten å bli oversvømt av tabeller.',
-    icon: BarChart3,
-    image: {
-      src: '/tjenesteobjekter/analyse.webp',
-      alt: '3D-illustrasjon: dashbord med stolpediagram, kurve og NOK-diagram',
-    },
+    icon: 'analyse',
   },
   {
     id: 'nettsider',
@@ -111,11 +86,7 @@ export const services: Service[] = [
       'Bygget av folk som kjenner driften og tallene deres fra før',
     ],
     fitFor: 'Virksomheter som vil ha en nettside eller digital løsning som henger sammen med resten av driften – ikke bare en frittstående markedsside.',
-    icon: MonitorSmartphone,
-    image: {
-      src: '/tjenesteobjekter/nettsider.webp',
-      alt: '3D-illustrasjon: nettleservinduer med en Flyd-nettside',
-    },
+    icon: 'nettsider',
   },
   {
     id: 'lonn',
@@ -130,11 +101,7 @@ export const services: Service[] = [
       'Personalhåndbok, rutiner og avtaler',
     ],
     fitFor: 'Bedrifter som vil ha trygghet på at lønn og rapportering er riktig – og at de ansatte blir ivaretatt.',
-    icon: Users,
-    image: {
-      src: '/tjenesteobjekter/lonn.webp',
-      alt: '3D-illustrasjon: to personer og en avkrysset sjekkliste med Flyd-logo',
-    },
+    icon: 'lonn',
   },
 ];
 

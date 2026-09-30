@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import { ArrowUpRight, type LucideIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ServiceTile, type ServiceIconName } from '@/components/ServiceIcon';
 
 export type RuixenCardBadgeVariant = 'teal' | 'ink' | 'teal-dark';
 export type RuixenCardTone = 'teal' | 'dark' | 'ink';
@@ -12,8 +13,8 @@ export interface RuixenCardProps {
   image?: string;
   imageAlt?: string;
   icon?: LucideIcon;
-  /** Frilagt objekt (transparent bakgrunn) som legges på tone-gradienten i stedet for ikonet. */
-  illustration?: { src: string; alt: string };
+  /** Tjenesteikon (2D) på glassflis over tone-gradienten – se ServiceTile. */
+  serviceIcon?: ServiceIconName;
   tone?: RuixenCardTone;
   badge?: {
     text: string;
@@ -56,13 +57,13 @@ export default function RuixenCard({
   image,
   imageAlt,
   icon: Icon,
-  illustration,
+  serviceIcon,
   tone = 'teal',
   badge,
   href = '#',
   className,
 }: RuixenCardProps) {
-  const useToneMode = !image && (illustration || Icon);
+  const useToneMode = !image && Icon;
 
   return (
     <div className={cn('group flex h-full w-full flex-col', className)}>
@@ -70,7 +71,9 @@ export default function RuixenCard({
         href={href}
         className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-flyd-ink/10 bg-flyd-paper shadow-subtle transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-flyd-teal-dark/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flyd-teal-dark/40 focus-visible:ring-offset-2 focus-visible:ring-offset-flyd-paper"
       >
-        {useToneMode ? (
+        {serviceIcon ? (
+          <ServiceTile name={serviceIcon} tone={tone} className="h-[200px] w-full shrink-0" />
+        ) : useToneMode ? (
           <div className={cn('relative h-[200px] w-full shrink-0 overflow-hidden', toneGradients[tone])}>
             <div
               className={cn('pointer-events-none absolute inset-0', toneAccent[tone])}
@@ -81,17 +84,7 @@ export default function RuixenCard({
               style={{ backgroundImage: grainSvg, backgroundSize: '160px 160px' }}
               aria-hidden="true"
             />
-            {illustration ? (
-              <div className="absolute inset-x-4 inset-y-3">
-                <Image
-                  src={illustration.src}
-                  alt={illustration.alt}
-                  fill
-                  className="object-contain drop-shadow-[0_14px_18px_rgba(18,28,30,0.28)] transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:transform-none"
-                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 50vw, 100vw"
-                />
-              </div>
-            ) : Icon ? (
+            {Icon ? (
               <div className="absolute inset-0 flex items-center justify-center p-6">
                 <Icon
                   className={cn(
