@@ -11,7 +11,7 @@ import OfficeCards from "@/components/OfficeCards";
 import { ButtonLink } from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
-import { offices, getOfficeBySlug, openingHours } from "@/data/offices";
+import { offices, getOfficeBySlug, openingHours, atOffice } from "@/data/offices";
 import { services } from "@/data/services";
 
 const SITE_URL = "https://www.flyd.no";
@@ -29,7 +29,7 @@ export function generateMetadata({
   if (!office) return { title: "Kontor ikke funnet" };
   return {
     title: `Regnskapsfører ${office.city} – Flyd ${office.city}`,
-    description: `${office.blurb} Regnskap, rådgivning og teknologi – lokalt i ${office.city}.`,
+    description: `${office.blurb} Regnskap, rådgivning og teknologi – lokalt ${atOffice(office)}.`,
     alternates: { canonical: `/kontor/${office.slug}/` },
   };
 }
@@ -116,7 +116,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             <div className="lg:col-span-7">
               <Eyebrow>Kontor · {office.name}</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">
-                Regnskapsfører i {office.city}.
+                Regnskapsfører {atOffice(office)}.
               </h1>
               <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
                 {office.blurb}
@@ -209,7 +209,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             <div className="lg:col-span-5" data-reveal>
               <Eyebrow tone="petrol">Det hjelper vi deg med</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-                Alt du trenger – også i {office.city}.
+                Alt du trenger – også {atOffice(office)}.
               </h2>
               <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
                 Samme tjenester, samme fagmiljø og samme systemer på alle
@@ -268,7 +268,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
 
       <ClosingCta
         kicker="Kontakt"
-        title={`Skal vi ta en prat i ${office.city}?`}
+        title={`Skal vi ta en prat ${atOffice(office)}?`}
         text="Fortell oss om virksomheten din, så finner vi ut hvordan vi kan hjelpe – på kontoret, hos deg eller i en videosamtale."
       />
     </>

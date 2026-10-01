@@ -15,6 +15,8 @@ export type Office = {
    * Google Bedriftsprofil.
    */
   image?: { src: string; alt: string };
+  /** Preposisjon foran stedsnavnet («på Moi», «i Egersund»). Standard er «i». */
+  preposition?: 'i' | 'på';
 };
 
 export const offices: Office[] = [
@@ -70,6 +72,7 @@ export const offices: Office[] = [
     city: 'Moi',
     slug: 'moi',
     name: 'Moi',
+    preposition: 'på',
     street: 'Øyevollveien 10',
     postal: '4460 Moi',
     mapsUrl: 'https://maps.google.com/?q=Øyevollveien+10,+4460+Moi',
@@ -129,6 +132,11 @@ export const openingHours = {
     closes: '16:00',
   },
 };
+
+/** Stedsnavnet med riktig preposisjon, f.eks. «på Moi» eller «i Egersund». */
+export function atOffice(office: Office): string {
+  return `${office.preposition ?? 'i'} ${office.city}`;
+}
 
 export function getOfficeBySlug(slug: string): Office | undefined {
   return offices.find((o) => o.slug === slug);
