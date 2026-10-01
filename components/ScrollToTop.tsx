@@ -27,7 +27,7 @@ export default function ScrollToTop() {
       type="button"
       onClick={handleClick}
       aria-label="Til toppen"
-      className={`fixed bottom-5 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-flyd-teal-dark text-flyd-paper shadow-[0_8px_24px_-8px_rgba(76,142,147,0.55)] transition duration-200 ease-out hover:bg-flyd-ink active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flyd-teal-dark focus-visible:ring-offset-2 focus-visible:ring-offset-flyd-paper md:bottom-8 md:right-8 md:h-14 md:w-14 ${
+      className={`fixed bottom-5 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-pille bg-flyd-petrol text-flyd-sand transition-[opacity,transform,background-color] duration-200 ease-out hover:bg-flyd-skog active:scale-95 md:bottom-8 md:right-8 md:h-14 md:w-14 ${
         visible
           ? 'pointer-events-auto opacity-100 translate-y-0'
           : 'pointer-events-none opacity-0 translate-y-2'

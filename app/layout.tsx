@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { DM_Sans, Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -10,10 +10,20 @@ import CookieConsent from '@/components/CookieConsent';
 import { offices, openingHours } from '@/data/offices';
 import { leadership, officeLeads, otherTeam } from '@/data/team';
 
+// Designmanualen: Poppins (500 ingress, 600 overskrifter og tall) og
+// DM Sans (400 brødtekst, 400 kursiv sitater, 500 knapper, 700 kickers).
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['500', '600'],
   variable: '--font-poppins',
+  display: 'swap',
+});
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-dm-sans',
   display: 'swap',
 });
 
@@ -153,11 +163,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="nb" className={poppins.variable}>
+    <html lang="nb" className={`${poppins.variable} ${dmSans.variable}`}>
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-flyd-ink focus:text-flyd-paper focus:px-3 focus:py-2"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-pille focus:bg-flyd-skog focus:text-flyd-sand focus:px-4 focus:py-2"
         >
           Hopp til hovedinnhold
         </a>

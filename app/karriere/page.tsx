@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { MapPin, Briefcase, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
+import { MapPin, Briefcase, ArrowRight } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
-import FullflydMark from '@/components/FullflydMark';
+import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink } from '@/components/Button';
 import FlydLogo from '@/components/FlydLogo';
 import { Gallery4, type Gallery4Item } from '@/components/ui/gallery4';
@@ -92,38 +93,62 @@ export default function KarrierePage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
-      <Section tone="paper" size="lg" className="pt-20 md:pt-28 overflow-hidden">
-        <div
-          className="pointer-events-none absolute -right-[6%] top-[20%] hidden lg:block opacity-[0.12]"
-          aria-hidden="true"
-        >
-          <FullflydMark variant="teal" className="text-[18rem]" />
-        </div>
-        <Container className="relative">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+      {/* HERO – portrettbilde ved siden av teksten (designmanualen kap. 07). */}
+      <Section tone="sand" size="lg" className="pt-12 md:pt-16">
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
-              <Eyebrow tone="teal">Karriere</Eyebrow>
-              <h1 className="mt-6 font-display text-display-xl font-semibold leading-[1.02]">
+              <Eyebrow>Karriere</Eyebrow>
+              <h1 className="mt-6 font-display text-display-xl font-semibold">
                 Bli en del av{' '}
                 <FlydLogo
                   title="Flyd"
                   className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline text-flyd-teal"
                 />
               </h1>
+              <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
+                Vi er alltid på utkikk etter dyktige folk som brenner for økonomi,
+                teknologi og rådgivning.
+              </p>
+              <p className="mt-5 max-w-2xl text-[17px] leading-[1.7] text-flyd-skifer">
+                Hos Flyd får du jobbe i skjæringspunktet mellom fag og teknologi –
+                med alt fra løpende regnskap til ERP-implementeringer og komplekse
+                integrasjoner.
+              </p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                {jobs.length > 0 ? (
+                  <>
+                    <ButtonLink href="#ledige-stillinger" variant="primary" withArrow>
+                      Se ledige stillinger
+                    </ButtonLink>
+                    <ButtonLink href="mailto:jobb@flyd.no" variant="secondary" external>
+                      Send åpen søknad
+                    </ButtonLink>
+                  </>
+                ) : (
+                  <ButtonLink href="mailto:jobb@flyd.no" variant="primary" withArrow external>
+                    Send åpen søknad
+                  </ButtonLink>
+                )}
+              </div>
             </div>
             <div className="lg:col-span-5">
-              <p className="text-[17px] leading-[1.8] text-flyd-ink/80">
-                Vi er alltid på utkikk etter dyktige folk som brenner for økonomi,
-                teknologi og rådgivning. Hos Flyd får du jobbe i skjæringspunktet
-                mellom fag og teknologi – med alt fra løpende regnskap til
-                ERP-implementeringer og komplekse integrasjoner.
-              </p>
+              <div className="relative aspect-[4/5] overflow-hidden rounded-bilde bg-flyd-lysmint lg:aspect-square">
+                <Image
+                  src="/header/office-3.webp"
+                  alt="Kolleger hos Flyd samlet på kontoret"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover object-[40%_center]"
+                />
+              </div>
             </div>
           </div>
         </Container>
       </Section>
 
-      <Section tone="teal-soft" className="overflow-hidden">
+      <Section tone="lysmint" className="overflow-hidden">
         <Gallery4
           eyebrow="Hvorfor jobbe i Flyd"
           title="Seks grunner til å vurdere oss."
@@ -132,7 +157,7 @@ export default function KarrierePage() {
       </Section>
 
       {/* OPEN POSITIONS */}
-      <Section tone="paper" id="ledige-stillinger">
+      <Section tone="sand" id="ledige-stillinger">
         <Container>
           <div
             className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
@@ -145,57 +170,49 @@ export default function KarrierePage() {
               </h2>
             </div>
             {jobs.length > 0 && (
-              <div className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/70">
+              <span className="inline-flex rounded-pille bg-flyd-korall px-4 py-2 text-[12px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-skog">
                 {jobs.length} stilling{jobs.length === 1 ? '' : 'er'}
-              </div>
+              </span>
             )}
           </div>
 
           {jobs.length > 0 && (
-          <ul
-            className="mt-12 divide-y divide-flyd-ink/15 border-y border-flyd-ink/15"
-            data-reveal
-          >
+          <ul className="mt-12 grid grid-cols-1 gap-4" data-reveal>
             {jobs.map((job) => (
               <li key={job.slug}>
                 <Link
                   href={`/karriere/${job.slug}/`}
-                  className="group grid grid-cols-1 gap-6 py-8 transition-colors duration-200 hover:bg-flyd-teal-soft md:grid-cols-12 md:items-center md:gap-8 md:px-6"
+                  className="group grid grid-cols-1 gap-6 rounded-kort bg-flyd-lysmint p-7 transition-transform duration-300 ease-out hover:-translate-y-1 active:translate-y-0 motion-reduce:transition-none md:grid-cols-12 md:items-center md:gap-8 md:p-8"
                 >
                   <div className="md:col-span-5">
-                    <h3 className="font-display text-2xl font-semibold leading-tight md:text-[28px]">
+                    <h3 className="font-display text-[24px] font-semibold leading-tight md:text-[28px]">
                       {job.title}
                     </h3>
-                    <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-flyd-ink/65">
+                    <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px] text-flyd-skifer">
                       <span className="inline-flex items-center gap-1.5">
-                        <MapPin
-                          className="h-4 w-4 text-flyd-teal-dark"
-                          strokeWidth={1.75}
-                        />
+                        <MapPin className="h-4 w-4 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                         {job.location}
                       </span>
                       <span className="inline-flex items-center gap-1.5">
-                        <Briefcase
-                          className="h-4 w-4 text-flyd-teal-dark"
-                          strokeWidth={1.75}
-                        />
+                        <Briefcase className="h-4 w-4 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                         {job.type}
                       </span>
                     </div>
                   </div>
 
                   <div className="md:col-span-5">
-                    <p className="text-[15px] leading-[1.7] text-flyd-ink/75">
+                    <p className="text-[16px] leading-[1.65] text-flyd-skifer">
                       {job.ingress}
                     </p>
                   </div>
 
                   <div className="md:col-span-2 md:flex md:justify-end">
-                    <span className="inline-flex items-center gap-2 whitespace-nowrap text-[13px] font-medium uppercase tracking-[0.18em] text-flyd-ink transition-colors group-hover:text-flyd-teal-dark">
+                    <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-[15px] font-medium text-flyd-petrol decoration-flyd-teal decoration-2 underline-offset-[6px] group-hover:underline">
                       Se stilling
-                      <ArrowUpRight
-                        className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      <ArrowRight
+                        className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
                         strokeWidth={2}
+                        aria-hidden="true"
                       />
                     </span>
                   </div>
@@ -206,27 +223,19 @@ export default function KarrierePage() {
           )}
 
           <div
-            className="mt-14 flex flex-wrap items-center gap-4 border border-flyd-ink/15 bg-flyd-teal-soft p-8 md:p-10"
+            className="mt-10 flex flex-wrap items-center gap-6 rounded-kort bg-flyd-lysmint p-8 md:p-10"
             data-reveal
           >
             <div className="max-w-xl">
-              <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
-                Åpen søknad
-              </div>
-              <p className="mt-3 text-[15px] leading-[1.7] text-flyd-ink/80">
+              <Eyebrow>Åpen søknad</Eyebrow>
+              <p className="mt-3 text-[16px] leading-[1.65] text-flyd-skog">
                 {jobs.length > 0
                   ? 'Finner du ikke en stilling som passer? Send oss en åpen søknad – vi leser alt som kommer inn og tar kontakt når noe passer.'
                   : 'Vi er alltid på utkikk etter dyktige folk. Send oss en åpen søknad – vi leser alt som kommer inn og tar kontakt når noe passer.'}
               </p>
             </div>
             <div className="md:ml-auto">
-              <ButtonLink
-                href="mailto:jobb@flyd.no"
-                variant="outline"
-                withArrow
-                accent
-                external
-              >
+              <ButtonLink href="mailto:jobb@flyd.no" variant="secondary" withArrow external>
                 Send åpen søknad
               </ButtonLink>
             </div>
@@ -234,24 +243,12 @@ export default function KarrierePage() {
         </Container>
       </Section>
 
-      <Section tone="ink" size="lg">
-        <Container>
-          <div className="max-w-3xl" data-reveal>
-            <h2 className="font-display text-display-lg font-semibold">
-              Lurer du på noe før du søker?
-            </h2>
-            <p className="mt-8 text-[17px] text-flyd-paper/80 leading-[1.75]">
-              Ta en uformell prat med oss – vi svarer på alt fra arbeidshverdag
-              til karriereveier, uten forpliktelse.
-            </p>
-            <div className="mt-10">
-              <ButtonLink href="/kontakt" variant="teal" withArrow accent>
-                Ta kontakt
-              </ButtonLink>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <ClosingCta
+        title="Lurer du på noe før du søker?"
+        text="Ta en uformell prat med oss – vi svarer på alt fra arbeidshverdag til karriereveier, uten forpliktelse."
+        primary={{ href: '/kontakt', label: 'Ta kontakt' }}
+        secondary={{ href: 'mailto:jobb@flyd.no', label: 'jobb@flyd.no', external: true }}
+      />
     </>
   );
 }

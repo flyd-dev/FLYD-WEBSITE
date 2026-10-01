@@ -66,7 +66,17 @@ function CountUp({
   );
 }
 
-export default function StatsSection({ stats }: { stats: Stat[] }) {
+// Nøkkeltall: stort tall i Petrol med farget topplinje – teal, mint, korall.
+const topLines = ['bg-flyd-teal', 'bg-flyd-mint', 'bg-flyd-korall', 'bg-flyd-petrol'];
+
+export default function StatsSection({
+  stats,
+  columns = 4,
+}: {
+  stats: Stat[];
+  /** 4 på forsiden; 3 der tallene står i en smalere kolonne. */
+  columns?: 3 | 4;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [reduced, setReduced] = useState(false);
@@ -97,64 +107,60 @@ export default function StatsSection({ stats }: { stats: Stat[] }) {
     return () => io.disconnect();
   }, []);
 
-  const lineDuration = 800;
-  const blockDelayBase = 550;
-  const stagger = 160;
-  const blockDuration = 900;
+  const blockDelayBase = 150;
+  const stagger = 140;
+  const blockDuration = 800;
   const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
   return (
-    <div ref={ref}>
-      <div
-        aria-hidden="true"
-        className="h-px w-full bg-flyd-ink/25 mb-6 md:mb-8"
-        style={{
-          transformOrigin: 'left center',
-          transform: inView ? 'scaleX(1)' : 'scaleX(0)',
-          transition: reduced
-            ? 'none'
-            : `transform ${lineDuration}ms ${ease}`,
-        }}
-      />
+    <div
+      ref={ref}
+      className={`grid gap-x-6 gap-y-10 md:gap-8 ${
+        columns === 3 ? 'grid-cols-3' : 'grid-cols-2 md:grid-cols-4'
+      }`}
+    >
+      {stats.map((s, i) => {
+        const { num, suffix } = parseStat(s.value);
+        const delay = blockDelayBase + i * stagger;
+        const canCount = num !== null && num > 0;
 
-      <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-6">
-        {stats.map((s, i) => {
-          const { num, suffix } = parseStat(s.value);
-          const delay = blockDelayBase + i * stagger;
-          const canCount = num !== null && num > 0;
-
-          return (
+        return (
+          <div key={s.label}>
+            {/* Farget topplinje (designmanualen «Nøkkeltall»). */}
             <div
-              key={s.label}
+              aria-hidden="true"
+              className={`h-1 w-full rounded-pille ${topLines[i % topLines.length]}`}
+              style={{
+                transformOrigin: 'left center',
+                transform: inView ? 'scaleX(1)' : 'scaleX(0)',
+                transition: reduced ? 'none' : `transform ${blockDuration}ms ${ease} ${delay}ms`,
+              }}
+            />
+            <div
               style={{
                 opacity: inView ? 1 : 0,
-                transform: inView ? 'translateY(0)' : 'translateY(10px)',
-                filter: inView ? 'blur(0px)' : 'blur(4px)',
+                transform: inView ? 'translateY(0)' : 'translateY(8px)',
                 transition: reduced
                   ? 'none'
-                  : `opacity ${blockDuration}ms ${ease} ${delay}ms, transform ${blockDuration}ms ${ease} ${delay}ms, filter ${blockDuration}ms ${ease} ${delay}ms`,
-                willChange: 'opacity, transform, filter',
+                  : `opacity ${blockDuration}ms ${ease} ${delay + 200}ms, transform ${blockDuration}ms ${ease} ${delay + 200}ms`,
               }}
             >
-              <div className="font-display text-2xl md:text-3xl font-semibold tracking-tighter text-flyd-ink tabular-nums">
+              <div
+                className={`mt-5 font-display font-semibold leading-none tracking-[-0.01em] text-flyd-petrol tabular-nums ${
+                  columns === 3 ? 'text-[34px] md:text-[44px]' : 'text-[44px] md:text-[56px]'
+                }`}
+              >
                 {canCount && !reduced ? (
-                  <CountUp
-                    target={num!}
-                    suffix={suffix}
-                    start={inView}
-                    delay={delay}
-                  />
+                  <CountUp target={num!} suffix={suffix} start={inView} delay={delay + 200} />
                 ) : (
                   s.value
                 )}
               </div>
-              <div className="mt-1 text-[12px] md:text-[13px] text-flyd-ink/80 leading-snug">
-                {s.label}
-              </div>
+              <div className="mt-2 text-[15px] leading-snug text-flyd-skifer">{s.label}</div>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

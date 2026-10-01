@@ -1,18 +1,25 @@
 import clsx from 'clsx';
 
-type Tone = 'paper' | 'ink' | 'teal' | 'teal-dark' | 'teal-soft';
+/**
+ * Bakgrunnsrytme etter designmanualen: Sand og Lys mint veksler på innhold,
+ * Petrol for seksjonsskiller, Skog for forsider og mørke flater, Flyd-teal
+ * kun på avslutningsflater (signaturen).
+ */
+export type Tone = 'sand' | 'lysmint' | 'skog' | 'petrol' | 'teal';
 
 const tones: Record<Tone, string> = {
-  paper: 'bg-flyd-paper text-flyd-ink',
-  ink: 'bg-flyd-ink text-flyd-paper',
-  teal: 'bg-flyd-teal text-flyd-ink',
-  'teal-dark': 'bg-flyd-teal-dark text-flyd-paper',
-  'teal-soft': 'bg-flyd-teal-soft text-flyd-ink',
+  sand: 'bg-flyd-sand text-flyd-skog',
+  lysmint: 'bg-flyd-lysmint text-flyd-skog',
+  skog: 'on-dark bg-flyd-skog text-flyd-sand',
+  petrol: 'on-dark bg-flyd-petrol text-flyd-sand',
+  teal: 'on-dark bg-flyd-teal text-flyd-sand',
 };
+
+export const isDark = (tone: Tone) => tone === 'skog' || tone === 'petrol' || tone === 'teal';
 
 export default function Section({
   id,
-  tone = 'paper',
+  tone = 'sand',
   children,
   className,
   size = 'default',
@@ -24,7 +31,7 @@ export default function Section({
   size?: 'sm' | 'default' | 'lg';
 }) {
   const padding =
-    size === 'sm' ? 'py-16 md:py-20' : size === 'lg' ? 'py-28 md:py-40' : 'py-20 md:py-28';
+    size === 'sm' ? 'py-16 md:py-20' : size === 'lg' ? 'py-24 md:py-32' : 'py-20 md:py-28';
   return (
     <section
       id={id}

@@ -117,26 +117,26 @@ export default function CookieConsent() {
       }`}
     >
       {/* Bakgrunn – blokkerer interaksjon med siden, men kan ikke klikkes bort. */}
-      <div className="absolute inset-0 bg-flyd-ink/60 backdrop-blur-[2px]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-flyd-skog/60 backdrop-blur-[2px]" aria-hidden="true" />
 
       <div
-        className={`relative w-full max-w-md border border-flyd-ink/10 bg-flyd-paper p-6 shadow-subtle sm:p-8 motion-safe:transition motion-safe:duration-200 motion-safe:ease-out ${
+        className={`relative w-full max-w-md rounded-kort bg-flyd-sand p-6 sm:p-8 motion-safe:transition motion-safe:duration-200 motion-safe:ease-out ${
           shown ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-3 scale-[0.98] opacity-0'
         }`}
       >
         <h2
           id="cookie-title"
-          className="font-display text-xl font-semibold tracking-tighter text-flyd-ink"
+          className="font-display text-[22px] font-semibold text-flyd-skog"
         >
           Vi bruker informasjonskapsler
         </h2>
-        <p className="mt-3 text-[15px] leading-relaxed text-flyd-ink/80">
+        <p className="mt-3 text-[15px] leading-relaxed text-flyd-skifer">
           Vi bruker informasjonskapsler til statistikk og for å måle om
           annonsene våre fører til henvendelser. Du velger selv om du vil
           tillate dette. Les mer i{' '}
           <Link
             href="/personvern"
-            className="font-medium text-flyd-ink underline decoration-flyd-teal-dark decoration-2 underline-offset-2 transition-colors hover:text-flyd-teal-dark"
+            className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-skog hover:decoration-flyd-skog"
           >
             personvernerklæringen
           </Link>
@@ -149,7 +149,7 @@ export default function CookieConsent() {
             ref={acceptRef}
             type="button"
             onClick={() => decide('granted')}
-            className="inline-flex w-full items-center justify-center px-6 py-4 text-[15px] font-semibold uppercase tracking-wide text-flyd-ink bg-flyd-teal border border-flyd-teal shadow-subtle transition-[background-color,color,border-color,transform] duration-200 hover:bg-flyd-teal-dark hover:text-flyd-paper hover:border-flyd-teal-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-flyd-teal-dark active:translate-y-[1px]"
+            className="inline-flex w-full items-center justify-center rounded-pille border border-flyd-skog bg-flyd-skog px-6 py-3.5 text-[16px] font-medium text-flyd-sand transition-[background-color,border-color,transform] duration-200 hover:border-flyd-petrol hover:bg-flyd-petrol active:translate-y-[1px]"
           >
             Godta alle
           </button>
@@ -157,7 +157,7 @@ export default function CookieConsent() {
           <button
             type="button"
             onClick={() => decide('denied')}
-            className="inline-flex w-full items-center justify-center px-6 py-2.5 text-[13px] font-medium tracking-wide text-flyd-ink/70 transition-colors duration-200 hover:text-flyd-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-flyd-ink/30"
+            className="inline-flex w-full items-center justify-center rounded-pille px-6 py-2.5 text-[15px] font-medium text-flyd-skifer transition-colors duration-200 hover:bg-flyd-lysmint hover:text-flyd-skog active:bg-flyd-linje-mint"
           >
             Kun nødvendige
           </button>

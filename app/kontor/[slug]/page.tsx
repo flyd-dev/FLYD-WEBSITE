@@ -2,17 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Clock,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Eyebrow from "@/components/Eyebrow";
+import ClosingCta from "@/components/ClosingCta";
+import OfficeCards from "@/components/OfficeCards";
 import { ButtonLink } from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
@@ -92,43 +87,51 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
     ],
   };
 
+  const visitRow = "flex items-start gap-3";
+  const visitIcon = "mt-0.5 h-5 w-5 flex-shrink-0 text-flyd-teal";
+  const visitLink =
+    "text-flyd-skog decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-petrol hover:underline";
+
   return (
     <>
       <JsonLd data={localBusinessJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
 
       {/* HERO */}
-      <Section tone="paper" className="pt-16 md:pt-20">
+      <Section tone="sand" className="pt-10 md:pt-14">
         <Container>
           <Link
             href="/kontakt/#kontorer"
-            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors hover:text-flyd-teal-dark"
+            className="group inline-flex items-center gap-2 rounded-pille text-[15px] font-medium text-flyd-petrol decoration-flyd-teal decoration-2 underline-offset-[6px] transition-colors hover:text-flyd-skog hover:underline"
           >
-            <ArrowLeft className="h-4 w-4" strokeWidth={2} />
+            <ArrowLeft
+              className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5"
+              strokeWidth={2}
+              aria-hidden="true"
+            />
             Alle kontorer
           </Link>
 
-          <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
-              <Eyebrow tone="teal">Kontor · {office.name}</Eyebrow>
+              <Eyebrow>Kontor · {office.name}</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">
-                Regnskapsfører i{" "}
-                <span className="text-flyd-teal-dark">{office.city}.</span>
+                Regnskapsfører i {office.city}.
               </h1>
-              <p className="mt-8 max-w-2xl text-[18px] leading-[1.75] text-flyd-ink/80">
+              <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
                 {office.blurb}
               </p>
-              <p className="mt-5 max-w-2xl text-[16px] leading-[1.75] text-flyd-ink/75">
+              <p className="mt-5 max-w-2xl text-[17px] leading-[1.7] text-flyd-skifer">
                 Som del av Flyd får du mer enn løpende regnskap: rådgivning,
                 riktig forretningssystem og integrasjoner som fjerner manuelt
                 arbeid – fra ett kompetansehus, med en fast kontaktperson som
                 kjenner virksomheten din.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-4">
-                <ButtonLink href="/kontakt" variant="primary" withArrow accent>
+                <ButtonLink href="/kontakt" variant="primary" withArrow>
                   Snakk med oss
                 </ButtonLink>
-                <ButtonLink href="tel:+4748019958" variant="outline">
+                <ButtonLink href="tel:+4748019958" variant="secondary" external>
                   Ring oss
                 </ButtonLink>
               </div>
@@ -137,7 +140,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             <aside className="lg:col-span-5">
               <div className="lg:sticky lg:top-24">
                 {office.image && (
-                  <div className="relative mb-5 aspect-[3/2] overflow-hidden rounded-2xl bg-flyd-ink/5 ring-1 ring-flyd-ink/5">
+                  <div className="relative mb-4 aspect-[3/2] overflow-hidden rounded-bilde bg-flyd-lysmint">
                     <Image
                       src={office.image.src}
                       alt={office.image.alt}
@@ -148,63 +151,43 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                     />
                   </div>
                 )}
-                <div className="border border-flyd-ink/15 bg-flyd-teal-soft p-7 md:p-8">
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
-                    Besøk oss
-                  </div>
-                  <div className="mt-5 space-y-4 text-[15px]">
-                    <div className="flex items-start gap-3">
-                      <MapPin
-                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
-                        strokeWidth={1.75}
-                      />
+                <div className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
+                  <Eyebrow>Besøk oss</Eyebrow>
+                  <div className="mt-5 space-y-4 text-[16px]">
+                    <div className={visitRow}>
+                      <MapPin className={visitIcon} strokeWidth={2} aria-hidden="true" />
                       <div>
                         <div className="font-display font-semibold">
                           {office.city} · {office.name}
                         </div>
-                        <div className="mt-0.5 text-flyd-ink/75">
+                        <div className="mt-0.5 text-flyd-skifer">
                           {office.street}
                           <br />
                           {office.postal}
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <Phone
-                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
-                        strokeWidth={1.75}
-                      />
-                      <a
-                        href="tel:+4748019958"
-                        className="hover:text-flyd-teal-dark"
-                      >
+                    <div className={visitRow}>
+                      <Phone className={visitIcon} strokeWidth={2} aria-hidden="true" />
+                      <a href="tel:+4748019958" className={visitLink}>
                         +47 480 19 958
                       </a>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <Mail
-                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
-                        strokeWidth={1.75}
-                      />
-                      <a
-                        href="mailto:support@flyd.no"
-                        className="hover:text-flyd-teal-dark"
-                      >
+                    <div className={visitRow}>
+                      <Mail className={visitIcon} strokeWidth={2} aria-hidden="true" />
+                      <a href="mailto:support@flyd.no" className={visitLink}>
                         support@flyd.no
                       </a>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <Clock
-                        className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
-                        strokeWidth={1.75}
-                      />
+                    <div className={visitRow}>
+                      <Clock className={visitIcon} strokeWidth={2} aria-hidden="true" />
                       <span>{openingHours.label}</span>
                     </div>
                   </div>
                   <div className="mt-7">
                     <ButtonLink
                       href={office.mapsUrl}
-                      variant="outline"
+                      variant="secondary"
                       withArrow
                       external
                       className="w-full"
@@ -219,48 +202,47 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
         </Container>
       </Section>
 
-      {/* TJENESTER LOKALT */}
-      <Section tone="ink">
+      {/* TJENESTER LOKALT – Petrol som seksjonsskille */}
+      <Section tone="petrol">
         <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>
-              <Eyebrow tone="paper">Det hjelper vi deg med</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Alt du trenger –
-                <br />
-                <span className="text-flyd-teal">også i {office.city}.</span>
+              <Eyebrow tone="petrol">Det hjelper vi deg med</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
+                Alt du trenger – også i {office.city}.
               </h2>
-              <p className="mt-8 max-w-md text-[17px] leading-[1.75] text-flyd-paper/75">
+              <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
                 Samme tjenester, samme fagmiljø og samme systemer på alle
                 kontorene våre – forskjellen er at vi møter deg der du er.
               </p>
               <div className="mt-8">
-                <ButtonLink href="/tjenester" variant="teal" withArrow accent>
+                <ButtonLink href="/tjenester" variant="secondary-dark" withArrow>
                   Utforsk alle tjenester
                 </ButtonLink>
               </div>
             </div>
             <div className="lg:col-span-7" data-reveal>
-              <ul className="border-t border-flyd-paper/10">
+              <ul className="border-t border-flyd-sand/15">
                 {services.map((s) => (
                   <li key={s.id}>
                     <Link
                       href={`/tjenester#${s.id}`}
-                      className="group flex items-center justify-between gap-4 border-b border-flyd-paper/10 py-4 transition-colors hover:bg-flyd-paper/5"
+                      className="group flex items-center justify-between gap-4 border-b border-flyd-sand/15 py-5 transition-colors hover:text-flyd-mint"
                     >
-                      <span className="flex items-center gap-3.5">
+                      <span className="flex items-center gap-4">
                         <ServiceIcon
                           name={s.icon}
-                          className="h-5 w-5 flex-shrink-0 text-flyd-teal"
-                          strokeWidth={1.75}
+                          className="h-6 w-6 flex-shrink-0 text-flyd-mint"
+                          dotClassName="fill-flyd-korall"
                         />
-                        <span className="text-[16px] text-flyd-paper/90">
+                        <span className="text-[17px] text-flyd-sand group-hover:text-flyd-mint">
                           {s.title}
                         </span>
                       </span>
-                      <ArrowUpRight
-                        className="h-4 w-4 flex-shrink-0 text-flyd-paper/40 transition-colors group-hover:text-flyd-teal"
-                        strokeWidth={1.75}
+                      <ArrowRight
+                        className="h-5 w-5 flex-shrink-0 text-flyd-mint transition-transform duration-200 group-hover:translate-x-1"
+                        strokeWidth={2}
+                        aria-hidden="true"
                       />
                     </Link>
                   </li>
@@ -272,7 +254,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
       </Section>
 
       {/* ANDRE KONTORER */}
-      <Section tone="teal-soft">
+      <Section tone="lysmint">
         <Container>
           <div className="max-w-2xl" data-reveal>
             <Eyebrow>Ett kompetansehus</Eyebrow>
@@ -280,56 +262,15 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
               Vi er også nær deg andre steder.
             </h2>
           </div>
-          <div className="mt-10 grid grid-cols-1 gap-[1px] bg-flyd-ink/10 sm:grid-cols-2 lg:grid-cols-5">
-            {otherOffices.map((o) => (
-              <Link
-                key={o.slug}
-                href={`/kontor/${o.slug}/`}
-                data-reveal
-                className="group bg-flyd-paper p-6 transition-colors duration-200 hover:bg-flyd-teal-soft"
-              >
-                <MapPin
-                  className="h-4 w-4 text-flyd-teal-dark"
-                  strokeWidth={1.75}
-                />
-                <div className="mt-3 font-display text-lg font-semibold">
-                  {o.city}
-                </div>
-                <div className="mt-1 text-[13px] text-flyd-ink/65">
-                  {o.street}
-                </div>
-                <div className="mt-4 text-[12px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors group-hover:text-flyd-teal-dark">
-                  Se kontoret →
-                </div>
-              </Link>
-            ))}
-          </div>
+          <OfficeCards offices={otherOffices} compact className="mt-10" />
         </Container>
       </Section>
 
-      {/* CTA */}
-      <Section tone="ink" size="lg">
-        <Container>
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow tone="paper">Kontakt</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">
-              Skal vi ta en prat i {office.city}?
-            </h2>
-            <p className="mt-8 max-w-xl text-[17px] leading-[1.75] text-flyd-paper/80">
-              Fortell oss om virksomheten din, så finner vi ut hvordan vi kan
-              hjelpe – på kontoret, hos deg eller i en videosamtale.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <ButtonLink href="/kontakt" variant="teal" withArrow accent>
-                Snakk med oss
-              </ButtonLink>
-              <ButtonLink href="tel:+4748019958" variant="outline-paper">
-                Ring oss
-              </ButtonLink>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <ClosingCta
+        kicker="Kontakt"
+        title={`Skal vi ta en prat i ${office.city}?`}
+        text="Fortell oss om virksomheten din, så finner vi ut hvordan vi kan hjelpe – på kontoret, hos deg eller i en videosamtale."
+      />
     </>
   );
 }

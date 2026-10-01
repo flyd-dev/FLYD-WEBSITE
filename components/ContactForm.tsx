@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import clsx from 'clsx';
-import { Send, CheckCircle2 } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
 import { trackLead } from './Analytics';
 
@@ -22,11 +22,23 @@ type FieldErrors = { name?: string; email?: string; message?: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const labelCls = 'text-[12px] uppercase tracking-[0.22em] text-flyd-ink/70';
-const inputCls =
-  'mt-2 w-full border border-flyd-ink/25 bg-flyd-paper px-4 py-3.5 text-[15px] text-flyd-ink placeholder:text-flyd-ink/30 focus:border-flyd-teal-dark focus:outline-none';
-const inputErrCls =
-  'mt-2 w-full border border-red-400 bg-flyd-paper px-4 py-3.5 text-[15px] text-flyd-ink placeholder:text-flyd-ink/30 focus:border-red-500 focus:outline-none';
+// Feltene er Sand-fliser (radius 12 px) på Lys mint-kortet. Feil markeres med
+// Rust-kant og et ikon; selve feilteksten står i Skog for å holde kontrasten.
+const labelCls = 'text-[15px] font-medium text-flyd-skog';
+const fieldBase =
+  'mt-2 w-full rounded-flis border bg-flyd-sand px-4 py-3.5 text-[16px] text-flyd-skog placeholder:text-flyd-skifer/60 transition-[border-color,box-shadow] duration-200 hover:border-flyd-teal focus:outline-none focus-visible:outline-none focus:border-flyd-teal focus:ring-2 focus:ring-flyd-teal/30';
+const inputCls = `${fieldBase} border-flyd-linje-mint`;
+const inputErrCls = `${fieldBase} border-flyd-rust ring-1 ring-flyd-rust`;
+const errCls = 'mt-2 flex items-center gap-1.5 text-[14px] text-flyd-skog';
+
+function FieldError({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <p id={id} className={errCls}>
+      <AlertCircle className="h-4 w-4 flex-shrink-0 text-flyd-rust" strokeWidth={2} aria-hidden="true" />
+      {children}
+    </p>
+  );
+}
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
@@ -108,17 +120,17 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="border border-flyd-teal-dark/40 bg-flyd-teal/10 p-10 md:p-14">
-        <CheckCircle2 className="h-8 w-8 text-flyd-teal-dark" strokeWidth={1.5} />
+      <div className="rounded-kort bg-flyd-sand p-8 md:p-12">
+        <CheckCircle2 className="h-8 w-8 text-flyd-teal" strokeWidth={2} />
         <h3 className="mt-6 font-display text-2xl font-semibold">
           Takk – meldingen er mottatt.
         </h3>
-        <p className="mt-4 max-w-lg text-[15px] text-flyd-ink/75 leading-relaxed">
+        <p className="mt-4 max-w-lg text-[16px] text-flyd-skifer leading-relaxed">
           Vi svarer deg normalt innen én arbeidsdag. Haster det, kan du også
           nå oss direkte på{' '}
           <a
             href="mailto:support@flyd.no"
-            className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 transition-colors hover:text-flyd-teal-dark hover:decoration-flyd-teal-dark"
+            className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-skog hover:decoration-flyd-skog"
           >
             support@flyd.no
           </a>
@@ -127,7 +139,7 @@ export default function ContactForm() {
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="mt-8 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/70 hover:text-flyd-ink"
+          className="mt-8 rounded-pille border border-flyd-skog px-5 py-2.5 text-[15px] font-medium text-flyd-skog transition-colors hover:bg-flyd-skog hover:text-flyd-sand active:translate-y-[1px]"
         >
           ← Send en ny
         </button>
@@ -148,22 +160,19 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelCls}>
-            Navn <span className="text-flyd-teal-dark">*</span>
+            Navn <span className="text-flyd-petrol" aria-hidden="true">*</span>
           </label>
           <input
             id="name"
             name="name"
+            aria-required="true"
             autoComplete="name"
             aria-invalid={fieldErrors.name ? true : undefined}
             aria-describedby={fieldErrors.name ? 'name-error' : undefined}
             className={fieldErrors.name ? inputErrCls : inputCls}
             placeholder="Kari Nordmann"
           />
-          {fieldErrors.name && (
-            <p id="name-error" className="mt-1 text-[12px] text-red-600">
-              {fieldErrors.name}
-            </p>
-          )}
+          {fieldErrors.name && <FieldError id="name-error">{fieldErrors.name}</FieldError>}
         </div>
         <div>
           <label htmlFor="bedrift" className={labelCls}>
@@ -182,11 +191,12 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
           <label htmlFor="email" className={labelCls}>
-            E-post <span className="text-flyd-teal-dark">*</span>
+            E-post <span className="text-flyd-petrol" aria-hidden="true">*</span>
           </label>
           <input
             id="email"
             name="email"
+            aria-required="true"
             type="email"
             autoComplete="email"
             aria-invalid={fieldErrors.email ? true : undefined}
@@ -194,11 +204,7 @@ export default function ContactForm() {
             className={fieldErrors.email ? inputErrCls : inputCls}
             placeholder="kari@nordmann.no"
           />
-          {fieldErrors.email && (
-            <p id="email-error" className="mt-1 text-[12px] text-red-600">
-              {fieldErrors.email}
-            </p>
-          )}
+          {fieldErrors.email && <FieldError id="email-error">{fieldErrors.email}</FieldError>}
         </div>
         <div>
           <label htmlFor="phone" className={labelCls}>
@@ -238,11 +244,12 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="message" className={labelCls}>
-          Melding <span className="text-flyd-teal-dark">*</span>
+          Melding <span className="text-flyd-petrol" aria-hidden="true">*</span>
         </label>
         <textarea
           id="message"
           name="message"
+          aria-required="true"
           rows={6}
           aria-invalid={fieldErrors.message ? true : undefined}
           aria-describedby={fieldErrors.message ? 'message-error' : undefined}
@@ -252,38 +259,30 @@ export default function ContactForm() {
           )}
           placeholder="Fortell oss kort hva du trenger hjelp med …"
         />
-        {fieldErrors.message && (
-          <p id="message-error" className="mt-1 text-[12px] text-red-600">
-            {fieldErrors.message}
-          </p>
-        )}
+        {fieldErrors.message && <FieldError id="message-error">{fieldErrors.message}</FieldError>}
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-        <p className="text-[12px] text-flyd-ink/70 max-w-md leading-relaxed">
+        <p className="max-w-md text-[14px] leading-relaxed text-flyd-skifer">
           Ved å sende skjemaet samtykker du i at vi lagrer opplysningene for å
           svare deg. Se{' '}
           <a
             href="/personvern"
-            className="text-flyd-ink underline underline-offset-4"
+            className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-skog hover:decoration-flyd-skog"
           >
             personvernerklæring
           </a>
           .
         </p>
-        <Button
-          type="submit"
-          variant="primary"
-          accent
-          disabled={status === 'sending'}
-        >
-          <Send className="h-4 w-4 transition-colors" strokeWidth={1.75} />
+        <Button type="submit" variant="primary" disabled={status === 'sending'}>
+          <Send className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
           {status === 'sending' ? 'Sender …' : 'Send melding'}
         </Button>
       </div>
 
       {status === 'error' && errorMsg && (
-        <p role="alert" className="text-[14px] text-red-700">
+        <p role="alert" className="flex items-start gap-2 rounded-flis bg-flyd-sand px-4 py-3 text-[15px] text-flyd-skog">
+          <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-rust" strokeWidth={2} aria-hidden="true" />
           {errorMsg}
         </p>
       )}

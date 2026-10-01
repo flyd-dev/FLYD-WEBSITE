@@ -1,5 +1,23 @@
 # Endringslogg — analyse-forbedringer
 
+## Redesign etter designmanualen v1.0 (1.10.2026)
+
+Hele nettstedet er tegnet om etter Flyd Designmanual v1.0 (sept. 2026). Innhold og URL-er er uendret; endringen er visuell.
+
+- **Palett og tokens:** ny palett (Skog, Petrol, Flyd-teal, Mint, Korall, Rust, Sand, Lys mint, Skifer) i `tailwind.config.ts` som `flyd-*` og som CSS-variabler i `globals.css`. De gamle tokenene (`ink`, `paper`, `teal-dark`, `teal-soft`) er fjernet. Sand er ny sidebakgrunn; rent hvitt og svart er borte.
+- **Typografi:** DM Sans til brødtekst (via `next/font`), Poppins 500/600 til overskrifter, ingress og tall. Overskrifter med manualens sperring (−2 %/−1 %).
+- **Byggeklosser:** pilleknapper i setningsstil (`Button.tsx`, nye varianter `primary`/`secondary`/`primary-dark`/`secondary-dark` + `TextLink`), kickers (`Eyebrow`), nøkkeltall med farget topplinje, nummerert liste (`NumberedList`, erstatter avkrysningslisten), kort uten skygger/kantlinjer, radier 24/16/12 px.
+- **Forsiden:** heltebilde med Skog-overlay i et kort med 24 px radius (erstatter bildemosaikken), tjenestekort med ikonflis, «Hvorfor Flyd» på Petrol, prosesskort med ekte bilder uten blur.
+- **Undersider:** /tjenester åpner med Petrol-seksjonsskille og emnetagger; /om-flyd med bilde og nøkkeltall; /karriere med gruppebilde; kontakt- og kontorsider med Lys mint-kort. Felles kontorkort (`OfficeCards`).
+- **Avslutning:** `ClosingCta` (Skog med Korall-knapp) og signaturen «full flyd.» på Flyd-teal (`Signatur.tsx`, maske av originalfilen). Bunnteksten er Skog.
+- **Kontrast:** Rust gir 4,4:1 på Sand og 4,2:1 på Lys mint (manualen: «kun stor tekst»). Kickers på lys bunn er derfor Skog med et Korall-punktum; Rust brukes på tall i 24 px. Korall på Petrol (4,2:1) er byttet med Mint. Skjemafeil vises med Rust-kant og -ikon og tekst i Skog (rødt er fjernet, det er ikke i paletten).
+- **Logo, favikon og delingsbilde:** logoen i toppmenyen er forstørret til minst 64 px bredde. Favikonene er laget på nytt fra logoens egne konturer (`scripts/make-favicons.mjs`), i Sand på Flyd-teal. Nytt `opengraph-image.png` i forsidens stil. `public/brand/flyd-teal.*` (brukt i strukturerte data) har fått ny teal.
+- **Opprydding:** fjernet mosaikkbildene som ikke lenger brukes (`public/header/` utenom `DSC_5138`, `office-3` og `office-4`, samt `public/header/sm/`), `HeroMosaic`, `WhyFlydList`, `FullflydMark`, `Wordmark` og ubrukte UI-komponenter (`ruixen-card-01`, `color-change-card`, `spotlight-card`, `glow-card`, `hand-writing-text`, `checkbox`) samt avhengigheten `@radix-ui/react-checkbox`.
+
+Verifisert: `tsc` OK; `npm run build` OK; automatisk kontrastsjekk av all synlig tekst på alle sidetyper (ingen tekst under 4,5:1/3:1); skjermbilder av alle 13 sider i desktop (1440) og mobil (390), pluss cookie-dialog og mobilmeny.
+
+---
+
 ## Tjenesteikoner i 2D (30.9.2026)
 
 - **Byttet:** 3D-objektene på tjenestekortene er erstattet med Flyds 2D-ikonsett (kilde: `brand_assets/tjenesteikoner/`). Ikonene er lagt inn som komponent i `components/ServiceIcon.tsx`, med strek i `currentColor` og «punktumet» fra logoen tegnet for seg.

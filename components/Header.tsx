@@ -82,31 +82,33 @@ export default function Header() {
         className={clsx(
           'sticky top-0 z-40 w-full border-b transition-[padding,background-color,border-color] duration-300',
           scrolled
-            ? 'bg-flyd-paper/90 backdrop-blur-md border-flyd-ink/10 py-3'
-            : 'bg-flyd-paper border-flyd-ink/0 py-5',
+            ? 'bg-flyd-sand/90 backdrop-blur-md border-flyd-linje-sand py-3'
+            : 'bg-flyd-sand border-transparent py-5',
         )}
       >
         <div className="mx-auto flex w-full max-w-shell items-center justify-between px-6 md:px-10">
-          <Link href="/" aria-label="Flyd forside" className="flex items-center">
+          {/* Logoen er minst 64 px bred (designmanualen kap. 02). SVG-en har
+              luft rundt ordmerket, så negativ marg retter den inn mot kanten. */}
+          <Link href="/" aria-label="Flyd forside" className="-ml-1.5 flex items-center rounded-flis">
             <FlydLogo
               className={clsx(
                 'w-auto text-flyd-teal transition-[height] duration-300',
-                scrolled ? 'h-7' : 'h-9',
+                scrolled ? 'h-10' : 'h-11',
               )}
             />
           </Link>
 
-          <nav className="hidden items-center gap-9 md:flex" aria-label="Hovednavigasjon">
+          <nav className="hidden items-center gap-8 md:flex" aria-label="Hovednavigasjon">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 className={clsx(
-                  'text-[14px] tracking-wide transition-colors hover:text-flyd-ink',
+                  'rounded-sm text-[15px] font-medium underline-offset-[10px] decoration-2 transition-colors duration-200 hover:text-flyd-skog hover:underline hover:decoration-flyd-mint active:text-flyd-petrol',
                   isActive(item.href)
-                    ? 'font-medium text-flyd-ink underline decoration-flyd-teal-dark decoration-2 underline-offset-8'
-                    : 'text-flyd-ink/80',
+                    ? 'text-flyd-skog underline !decoration-flyd-teal'
+                    : 'text-flyd-skifer',
                 )}
               >
                 {item.label}
@@ -115,7 +117,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:block">
-            <ButtonLink href="/kontakt" variant="primary" className="px-5 py-3 text-[13px]">
+            <ButtonLink href="/kontakt" variant="primary" className="!px-5 !py-2.5 !text-[15px]">
               Snakk med oss
             </ButtonLink>
           </div>
@@ -127,9 +129,9 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobilmeny"
             onClick={() => setOpen(true)}
-            className="md:hidden p-2 -mr-2 text-flyd-ink"
+            className="md:hidden -mr-2 rounded-pille p-2 text-flyd-skog transition-colors hover:bg-flyd-lysmint active:bg-flyd-linje-mint"
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-6 w-6" strokeWidth={2} />
           </button>
         </div>
       </header>
@@ -145,7 +147,7 @@ export default function Header() {
         aria-modal="true"
         aria-label="Meny"
         className={clsx(
-          'md:hidden fixed inset-0 z-50 bg-flyd-paper transition-[opacity,visibility] duration-200',
+          'md:hidden fixed inset-0 z-50 bg-flyd-sand transition-[opacity,visibility] duration-200',
           open
             ? 'opacity-100 visible pointer-events-auto'
             : 'opacity-0 invisible pointer-events-none',
@@ -159,11 +161,12 @@ export default function Header() {
             setOpen(false);
             openBtnRef.current?.focus();
           }}
-          className="absolute right-4 top-4 p-2 text-flyd-ink"
+          className="absolute right-4 top-4 rounded-pille p-2 text-flyd-skog transition-colors hover:bg-flyd-lysmint active:bg-flyd-linje-mint"
         >
-          <X className="h-6 w-6" />
+          <X className="h-6 w-6" strokeWidth={2} />
         </button>
-        <div className="flex h-full flex-col gap-2 px-6 pt-24 pb-12 overflow-y-auto">
+        <div className="flex h-full flex-col px-6 pt-24 pb-12 overflow-y-auto">
+          <FlydLogo className="absolute left-5 top-5 h-11 w-auto text-flyd-teal" />
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -171,14 +174,17 @@ export default function Header() {
               onClick={() => setOpen(false)}
               aria-current={isActive(item.href) ? 'page' : undefined}
               className={clsx(
-                'text-3xl font-display tracking-tighter py-3 border-b border-flyd-ink/10',
-                isActive(item.href) && 'text-flyd-teal-dark',
+                'flex items-center justify-between border-b border-flyd-linje-sand py-4 font-display text-[28px] font-semibold tracking-[-0.01em] transition-colors active:text-flyd-petrol',
+                isActive(item.href) ? 'text-flyd-skog' : 'text-flyd-skifer',
               )}
             >
               {item.label}
+              {isActive(item.href) && (
+                <span className="h-2.5 w-2.5 rounded-sm bg-flyd-korall" aria-hidden="true" />
+              )}
             </Link>
           ))}
-          <div className="mt-8 space-y-3">
+          <div className="mt-10 flex flex-col gap-3">
             <ButtonLink
               href="/kontakt"
               variant="primary"
@@ -189,7 +195,7 @@ export default function Header() {
             </ButtonLink>
             <ButtonLink
               href="tel:+4748019958"
-              variant="outline"
+              variant="secondary"
               external
               className="w-full"
               onClick={() => setOpen(false)}

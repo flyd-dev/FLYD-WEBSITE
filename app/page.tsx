@@ -1,24 +1,22 @@
-import Link from 'next/link';
+import Image from 'next/image';
 import { Cloud, Layers, Plug, Sparkles } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
-import FullflydMark from '@/components/FullflydMark';
 import LogoMarquee from '@/components/LogoMarquee';
 import PartnerStrip from '@/components/PartnerStrip';
-import HeroMosaic, { HeroMosaicStrip } from '@/components/HeroMosaic';
 import StatsSection from '@/components/StatsSection';
-import { ButtonLink } from '@/components/Button';
+import ServiceCard from '@/components/ServiceCard';
+import NumberedList from '@/components/NumberedList';
+import ProcessCards, { type ProcessStep } from '@/components/ProcessCards';
+import ClosingCta from '@/components/ClosingCta';
+import { ButtonLink, TextLink } from '@/components/Button';
 import { Typewriter } from '@/components/ui/typewriter';
-import { HandWrittenCircle } from '@/components/ui/hand-writing-text';
-import ColorChangeCards from '@/components/ui/color-change-card';
-import { SpotlightCard } from '@/components/ui/spotlight-card';
-import RuixenCard, { type RuixenCardTone } from '@/components/ui/ruixen-card-01';
-import WhyFlydList from '@/components/WhyFlydList';
+import type { ServiceTone } from '@/components/ServiceIcon';
 import { services, erpSystems } from '@/data/services';
 import { stats } from '@/data/stats';
 
-const serviceTones: RuixenCardTone[] = ['teal', 'dark', 'ink', 'teal', 'dark', 'ink'];
+const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
 
 const erpIcons: Record<string, typeof Cloud> = {
   tripletex: Cloud,
@@ -36,7 +34,7 @@ const whyFlyd = [
   'Innsikt og analyse som gir bedre beslutninger',
 ];
 
-const process = [
+const process: ProcessStep[] = [
   {
     n: '01',
     title: 'Dialog',
@@ -63,321 +61,235 @@ const process = [
     title: 'Videreutvikling',
     body:
       'Vi følger med, justerer og foreslår forbedringer. Systemet skal vokse med bedriften – ikke bremse den.',
-    imgSrc: '/process-bg/videreutvikling.webp',
+    imgSrc: '/header/office-4.webp',
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* HERO */}
-      {/* De to øverste mosaikk-kortene preloades kun på desktop (mosaikken er
-          skjult under lg). Uten dette blir det største synlige elementet et
-          lazy-oppdaget bilde, og LCP flytter seg fra overskriften til
-          bildenedlastingen. */}
-      <link rel="preload" as="image" href="/header/ig-1.webp" media="(min-width: 1024px)" />
-      <link rel="preload" as="image" href="/header/office-4.webp" media="(min-width: 1024px)" />
-      {/* 100vh kun på desktop – på mobil ville det gitt en nesten tom fold
-          under CTA-ene og skjøvet stats-seksjonen ut av syne.
-          På desktop flyttes den vertikale paddingen fra seksjonen til
-          tekstkolonnen, slik at mosaikk-kolonnen kan fylle hele høyden. */}
-      <Section
-        tone="paper"
-        className="overflow-hidden relative lg:min-h-[100vh] lg:h-[100vh] lg:py-0"
-      >
-        <Container className="relative w-full h-full">
-          <div className="grid h-full w-full grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-12 lg:auto-rows-fr">
-            <div
-              className="lg:col-span-7 lg:flex lg:flex-col lg:justify-center lg:py-28"
-              data-reveal
-            >
-              <Eyebrow tone="teal">Kompetansehus for økonomi og teknologi</Eyebrow>
-              <h1 className="mt-6 font-display text-display-xl font-semibold">
-                Økonomi og teknologi
-                <span className="mt-3 block whitespace-nowrap text-2xl leading-[1.15] sm:text-3xl md:text-4xl lg:text-5xl xl:text-display-lg">
-                  <span className="text-flyd-ink">– </span>
-                  <Typewriter
-                    text={[
-                      'full flyd.',
-                      'god kontroll.',
-                      'full oversikt.',
-                      'trygg vekst.',
-                    ]}
-                    speed={70}
-                    waitTime={1800}
-                    deleteSpeed={40}
-                    className="text-flyd-teal-dark"
-                    cursorClassName="ml-1 text-flyd-teal-dark font-light"
-                  />
-                </span>
-              </h1>
-              <p className="mt-8 max-w-2xl text-[18px] font-normal leading-[1.7] text-flyd-ink/75">
-                Flyd er et kompetansehus som hjelper bedrifter med hele bildet.
-                Fra daglig regnskap til ERP og integrasjoner – én partner, ett
-                nummer, full flyd.
-              </p>
+      {/* HERO – forsiden er Skog + foto med overlay (designmanualen kap. 07/08).
+          Bildet står i et kort med radius 24 px, siden det ikke er utfallende. */}
+      <Section tone="sand" className="!pb-0 !pt-0 md:!pt-1">
+        <div className="px-3 md:px-5">
+          <div className="on-dark relative flex min-h-[640px] overflow-hidden rounded-bilde bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
+            <Image
+              src="/process-bg/videreutvikling.webp"
+              alt="Flyd-teamet i en uformell prat på kontoret"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[70%_center]"
+            />
+            <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
+            <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />
 
-              <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-6">
-                <HandWrittenCircle strokeClassName="text-flyd-teal-dark opacity-90">
-                  <ButtonLink href="/kontakt" variant="primary" withArrow>
+            <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
+              <div className="max-w-2xl" data-reveal>
+                <Eyebrow tone="dark">Kompetansehus for økonomi og teknologi</Eyebrow>
+                <h1 className="mt-6 font-display text-display-xl font-semibold text-flyd-sand">
+                  Økonomi og teknologi
+                  <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
+                    <span>– </span>
+                    <Typewriter
+                      text={['full flyd.', 'god kontroll.', 'full oversikt.', 'trygg vekst.']}
+                      speed={70}
+                      waitTime={1800}
+                      deleteSpeed={40}
+                      className="text-flyd-mint"
+                      cursorClassName="ml-1 text-flyd-mint"
+                    />
+                  </span>
+                </h1>
+                <p className="mt-8 max-w-xl font-display text-ingress font-medium text-flyd-dempet">
+                  Flyd er et kompetansehus som hjelper bedrifter med hele bildet.
+                  Fra daglig regnskap til ERP og integrasjoner – én partner, ett
+                  nummer, full flyd.
+                </p>
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
                     Snakk med oss
                   </ButtonLink>
-                </HandWrittenCircle>
-                <ButtonLink href="/tjenester" variant="outline">
-                  Se våre tjenester
-                </ButtonLink>
+                  <ButtonLink href="/tjenester" variant="secondary-dark">
+                    Se våre tjenester
+                  </ButtonLink>
+                </div>
               </div>
-            </div>
-
-            {/* Kolonnen ligger i grid-en (garantert 48 px luft til teksten),
-                men strekkes ut til høyre viewportkant via .hero-bleed-right. */}
-            <div
-              className="hero-bleed-right relative lg:col-span-5 hidden lg:block overflow-hidden min-h-0"
-              data-reveal
-            >
-              <HeroMosaic />
-            </div>
+            </Container>
           </div>
-        </Container>
-
-        {/* Mobil/tablett: kolonnene over er skjult under lg – her får de
-            samme bildene plass som en lav stripe under teksten, kant til kant. */}
-        <div className="mt-14 lg:hidden" data-reveal>
-          <HeroMosaicStrip />
         </div>
       </Section>
 
-      {/* STATS */}
-      <Section tone="teal" size="sm" className="!py-10 md:!py-14">
+      {/* NØKKELTALL + KUNDER */}
+      <Section tone="sand">
         <Container>
-          <div className="mb-7 md:mb-9 max-w-3xl" data-reveal>
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.15] tracking-[-0.02em]">
+          <div className="max-w-3xl" data-reveal>
+            <Eyebrow>Flyd i tall</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold">
               Kontroll i dag.
               <br />
-              {/* ink/70 på teal-flaten = 4,25:1 – teal-dark her målte 1,85:1 */}
-              <span className="text-flyd-ink/70">Innsikt for i morgen.</span>
+              Innsikt for i morgen.
             </h2>
           </div>
-          <StatsSection stats={stats} />
-        </Container>
-      </Section>
+          <div className="mt-12 md:mt-14">
+            <StatsSection stats={stats} />
+          </div>
 
-      {/* CUSTOMER LOGOS */}
-      <Section tone="paper" size="sm">
-        <Container>
-          <div className="mb-10 flex items-center justify-between gap-6">
+          <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
             <Eyebrow>Et utvalg kunder</Eyebrow>
-            <Link
-              href="/kontakt"
-              className="text-[13px] uppercase tracking-[0.2em] text-flyd-ink/70 transition-colors hover:text-flyd-teal-dark"
-            >
-              Bli kunde →
-            </Link>
+            <TextLink href="/kontakt">Bli kunde</TextLink>
           </div>
         </Container>
-        <LogoMarquee />
+        <div className="mt-8">
+          <LogoMarquee />
+        </div>
       </Section>
 
-      {/* SERVICES */}
-      <Section tone="teal-soft" id="tjenester">
+      {/* TJENESTER */}
+      <Section tone="lysmint" id="tjenester">
         <Container>
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between" data-reveal>
+            <div className="max-w-2xl">
               <Eyebrow>Tjenester</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Alt du trenger – <br />
-                i ett hus.
+                Alt du trenger – i ett hus.
               </h2>
-              <p className="mt-6 max-w-md text-[16px] text-flyd-ink/75 leading-[1.75]">
+              <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-skifer">
                 Vi kombinerer regnskap, rådgivning og teknologi for å gi deg bedre
                 kontroll, mer effektive prosesser og et sterkere beslutningsgrunnlag.
               </p>
-              <div className="mt-8">
-                <ButtonLink href="/tjenester" variant="outline" withArrow>
-                  Utforsk alle tjenester
-                </ButtonLink>
-              </div>
             </div>
+            <TextLink href="/tjenester" className="lg:mb-2">
+              Utforsk alle tjenester
+            </TextLink>
+          </div>
 
-            <div className="lg:col-span-7">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
-                {services.map((s, i) => (
-                  <div key={s.id} data-reveal className="h-full">
-                    <RuixenCard
-                      title={s.title}
-                      subtitle={s.short}
-                      serviceIcon={s.icon}
-                      tone={serviceTones[i % serviceTones.length]}
-                      href={`/tjenester#${s.id}`}
-                    />
-                  </div>
-                ))}
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+            {services.map((s, i) => (
+              <div key={s.id} data-reveal className="h-full">
+                <ServiceCard
+                  title={s.title}
+                  text={s.short}
+                  icon={s.icon}
+                  tone={serviceTones[i % serviceTones.length]}
+                  href={`/tjenester#${s.id}`}
+                />
               </div>
-            </div>
+            ))}
           </div>
         </Container>
       </Section>
 
-      {/* WHY FLYD (dark) */}
-      <Section tone="ink">
+      {/* HVORFOR FLYD – Petrol som seksjonsskille */}
+      <Section tone="petrol">
         <Container>
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>
-              <Eyebrow tone="paper">Hvorfor Flyd</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Din strategiske
-                <br />
-                <span className="text-flyd-teal">sparringspartner.</span>
+              <Eyebrow tone="petrol">Hvorfor Flyd</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
+                Din strategiske sparringspartner.
               </h2>
-              <p className="mt-8 max-w-md text-[17px] leading-[1.75] text-flyd-paper/75">
+              <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
                 Flyd kombinerer fagkompetanse med moderne teknologiforståelse. Vi
                 er ikke et tradisjonelt regnskapsbyrå – vi er et kompetansehus som
                 hjelper bedrifter med å se hele bildet.
               </p>
             </div>
-
-            <WhyFlydList items={whyFlyd} />
+            <div className="lg:col-span-7">
+              <NumberedList items={whyFlyd} tone="dark" />
+            </div>
           </div>
         </Container>
       </Section>
 
-      {/* ERP SYSTEMS */}
-      <Section tone="paper">
+      {/* PROGRAMVARE */}
+      <Section tone="sand">
         <Container>
           <div className="max-w-3xl" data-reveal>
             <Eyebrow>Programvare</Eyebrow>
             <h2 className="mt-5 font-display text-display-lg font-semibold">
               Riktig system for din virksomhet.
             </h2>
-            <p className="mt-6 text-[16px] text-flyd-ink/75 leading-[1.75]">
+            <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
               Vi hjelper deg å velge, implementere og utnytte forretningssystemet
               som passer bedriften – ikke det vi tilfeldigvis selger.
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-5 md:gap-6 sm:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5">
             {erpSystems.map((e) => {
               const Icon = erpIcons[e.id] ?? Cloud;
               return (
-                <SpotlightCard
-                  key={e.id}
-                  spotlightColor="rgba(76, 142, 147, 0.55)"
-                  className="group border border-flyd-ink/10 bg-flyd-paper p-8 md:p-10 transition-[border-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:border-flyd-teal-dark/30 hover:shadow-subtle"
-                >
-                  <div data-reveal>
-                    <div className="flex items-start justify-between gap-6">
-                      <div className="flex items-center gap-4">
-                        <span className="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center border border-flyd-teal-dark/25 bg-flyd-teal/10 text-flyd-teal-dark transition-colors duration-300 group-hover:bg-flyd-teal/20 group-hover:text-flyd-teal-dark">
-                          <Icon className="h-5 w-5" strokeWidth={1.75} />
-                        </span>
-                        <h3 className="font-display text-2xl font-semibold leading-none">
-                          {e.name}
-                        </h3>
-                      </div>
-                      <span className="hidden text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70 md:inline whitespace-nowrap pt-3">
-                        {e.tagline}
-                      </span>
-                    </div>
-                    <span className="mt-4 inline-block text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70 md:hidden">
-                      {e.tagline}
+                <div key={e.id} data-reveal className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
+                  <div className="flex flex-wrap items-center gap-4">
+                    <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-flis bg-flyd-sand text-flyd-teal">
+                      <Icon className="h-6 w-6" strokeWidth={2} aria-hidden="true" />
                     </span>
-                    <p className="mt-6 text-[15px] text-flyd-ink/75 leading-relaxed">
-                      {e.description}
-                    </p>
+                    <h3 className="font-display text-[24px] font-semibold leading-tight">
+                      {e.name}
+                    </h3>
                   </div>
-                </SpotlightCard>
+                  <span className="mt-5 inline-flex rounded-pille border border-flyd-teal px-3 py-1.5 text-[11px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-petrol">
+                    {e.tagline}
+                  </span>
+                  <p className="mt-4 text-[16px] leading-[1.6] text-flyd-skifer">
+                    {e.description}
+                  </p>
+                </div>
               );
             })}
           </div>
 
-          <div className="mt-10 flex justify-end" data-reveal>
-            <Link
-              href="/tjenester#nettsider"
-              className="group inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.2em] text-flyd-ink/70 transition-colors hover:text-flyd-teal-dark"
-            >
+          <div className="mt-10" data-reveal>
+            <TextLink href="/tjenester#nettsider">
               Trenger du en nettside eller digital flate som snakker med systemet?
-              <span
-                aria-hidden="true"
-                className="transition-transform duration-200 group-hover:translate-x-0.5"
-              >
-                →
-              </span>
-            </Link>
+            </TextLink>
           </div>
         </Container>
       </Section>
 
       {/* SLIK JOBBER VI */}
-      <Section tone="teal-soft">
+      <Section tone="lysmint">
         <Container>
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4" data-reveal>
               <Eyebrow>Slik jobber vi</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Fra første samtale
-                <br />
-                <span className="text-flyd-teal-dark">til full flyd.</span>
+                Fra første samtale til full flyd.
               </h2>
-              <p className="mt-6 max-w-md text-[16px] text-flyd-ink/75 leading-[1.75]">
+              <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-skifer">
                 Vi tror på tydelige forventninger og kort vei fra plan til
                 handling. Her er hvordan et samarbeid med Flyd vanligvis ser ut.
               </p>
               <div className="mt-8">
-                <ButtonLink href="/kontakt" variant="outline" withArrow>
+                <ButtonLink href="/kontakt" variant="secondary" withArrow>
                   Ta første steg
                 </ButtonLink>
               </div>
             </div>
 
-            <div className="lg:col-span-7" data-reveal>
-              <ColorChangeCards steps={process} />
+            <div className="lg:col-span-8" data-reveal>
+              <ProcessCards steps={process} />
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* PARTNERS */}
-      <Section tone="paper" size="sm" className="!py-14 md:!py-16">
+      {/* PARTNERE */}
+      <Section tone="sand" size="sm">
         <Container>
-          <div className="mb-8 flex items-center justify-center md:mb-10" data-reveal>
+          <div className="mb-8 md:mb-10" data-reveal>
             <Eyebrow>Våre partnere</Eyebrow>
           </div>
           <PartnerStrip />
         </Container>
       </Section>
 
-      {/* CLOSING CTA */}
-      <Section tone="ink" size="lg" className="overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-[-8%] flex justify-center opacity-10"
-          aria-hidden="true"
-        >
-          <FullflydMark
-            variant="paper"
-            className="text-[22rem] md:text-[32rem] leading-none"
-          />
-        </div>
-        <Container className="relative">
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow tone="paper">Kontakt</Eyebrow>
-            <h2 className="mt-5 font-display text-display-xl font-semibold">
-              La oss ta en prat.
-            </h2>
-            <p className="mt-8 max-w-xl text-[18px] leading-[1.75] text-flyd-paper/80">
-              Fortell oss om virksomheten din – så finner vi ut hvordan vi kan
-              hjelpe.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <ButtonLink href="/kontakt" variant="teal" withArrow accent>
-                Snakk med oss
-              </ButtonLink>
-              <ButtonLink href="tel:+4748019958" variant="outline-paper">
-                Ring oss
-              </ButtonLink>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <ClosingCta
+        kicker="Kontakt"
+        title="La oss ta en prat."
+        text="Fortell oss om virksomheten din – så finner vi ut hvordan vi kan hjelpe."
+      />
     </>
   );
 }

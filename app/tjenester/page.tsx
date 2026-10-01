@@ -4,11 +4,11 @@ import { Check } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
-import FullflydMark from '@/components/FullflydMark';
+import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink } from '@/components/Button';
 import { ScrollProgressLineWrapper } from '@/components/ScrollProgressLine';
 import JsonLd from '@/components/JsonLd';
-import ServiceIcon from '@/components/ServiceIcon';
+import { ServiceTile, type ServiceTone } from '@/components/ServiceIcon';
 import { services, erpSystems } from '@/data/services';
 
 const breadcrumbJsonLd = {
@@ -27,176 +27,116 @@ export const metadata: Metadata = {
   alternates: { canonical: '/tjenester/' },
 };
 
-const tones: Array<'paper' | 'ink' | 'teal' | 'teal-soft'> = [
-  'paper',
-  'ink',
-  'paper',
-  'teal',
-  'paper',
-  'ink',
-];
+// Sand og Lys mint veksler på innhold (designmanualen, bakgrunnsrytme).
+const tones = ['sand', 'lysmint'] as const;
+const tileTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
 
 export default function TjenesterPage() {
   return (
     <ScrollProgressLineWrapper>
       <JsonLd data={breadcrumbJsonLd} />
-      <Section tone="paper" size="lg" className="pt-20 md:pt-28 overflow-hidden">
-        <div
-          className="pointer-events-none absolute -right-[4%] top-[30%] hidden lg:block opacity-[0.12]"
-          aria-hidden="true"
-        >
-          <FullflydMark variant="teal" className="text-[18rem]" />
-        </div>
-        <Container className="relative">
-          <Eyebrow tone="teal">Tjenester</Eyebrow>
-          <h1 className="mt-6 max-w-4xl font-display text-display-xl font-semibold">
-            Seks tjenester.
-            <br />
-            <span className="text-flyd-teal-dark">Ett kompetansehus.</span>
+      {/* Seksjonsskille: Petrol, stor tittel og emnetagger. */}
+      <Section tone="petrol" size="lg">
+        <Container>
+          <Eyebrow tone="petrol">Tjenester</Eyebrow>
+          <h1 className="mt-6 max-w-4xl font-display text-display-xl font-semibold text-flyd-sand">
+            Seks tjenester. Ett kompetansehus.
           </h1>
-          <p className="mt-8 max-w-2xl text-[18px] leading-[1.75] text-flyd-ink/75">
+          <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
             Vi leverer alt du trenger innen økonomi og teknologi – fra daglig
             bokføring til komplekse integrasjoner mellom forretningssystemer.
             Velg det du trenger, eller sett oss til å ta hele bildet.
           </p>
 
-          <nav
-            aria-label="Tjenester"
-            className="mt-14 grid grid-cols-2 gap-[1px] bg-flyd-ink/10 sm:grid-cols-3 lg:grid-cols-6"
-          >
-            {services.map((s) => (
-              <Link
-                key={s.id}
-                href={`#${s.id}`}
-                className="bg-flyd-paper px-4 py-5 text-center text-[13px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors hover:bg-flyd-teal-soft hover:text-flyd-teal-dark"
-              >
-                {s.title}
-              </Link>
-            ))}
+          <nav aria-label="Tjenester" className="mt-12">
+            <ul className="flex flex-wrap gap-3">
+              {services.map((s) => (
+                <li key={s.id}>
+                  <Link
+                    href={`#${s.id}`}
+                    className="inline-flex items-center rounded-pille border border-flyd-mint px-4 py-2 text-[15px] font-medium text-flyd-sand transition-colors duration-200 hover:bg-flyd-mint hover:text-flyd-skog active:translate-y-[1px]"
+                  >
+                    {s.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
         </Container>
       </Section>
 
       {services.map((s, i) => {
         const tone = tones[i % tones.length];
-        const dark = tone === 'ink';
-        const teal = tone === 'teal';
-        const textMuted = dark
-          ? 'text-flyd-paper/80'
-          : teal
-          ? 'text-flyd-ink/80'
-          : 'text-flyd-ink/75';
-        const border = dark ? 'border-flyd-paper/20' : 'border-flyd-ink/15';
+        const cardBg = tone === 'sand' ? 'bg-flyd-lysmint' : 'bg-flyd-sand';
+        const line = tone === 'sand' ? 'border-flyd-linje-sand' : 'border-flyd-linje-mint';
 
         return (
           <Section key={s.id} tone={tone} id={s.id}>
             <Container>
-              <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
+              <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
                 <div className="lg:col-span-5" data-reveal>
-                  <div className="flex items-center gap-4">
-                    <ServiceIcon
-                      name={s.icon}
-                      className={dark ? 'h-7 w-7 text-flyd-teal' : 'h-7 w-7 text-flyd-teal-dark'}
-                      strokeWidth={1.75}
-                    />
-                    <Eyebrow tone={dark ? 'paper' : 'ink'}>
-                      0{i + 1} · Tjeneste
-                    </Eyebrow>
-                  </div>
-                  <h2 className="mt-6 font-display text-display-lg font-semibold">
+                  <ServiceTile
+                    name={s.icon}
+                    tone={tileTones[i % tileTones.length]}
+                    className="h-20 w-20 rounded-flis"
+                  />
+                  <Eyebrow className="mt-8">
+                    {String(i + 1).padStart(2, '0')} — Tjeneste
+                  </Eyebrow>
+                  <h2 className="mt-4 font-display text-display-lg font-semibold">
                     {s.title}
                   </h2>
-                  <p className={`mt-6 text-[17px] leading-[1.75] ${textMuted}`}>
+                  <p className="mt-6 font-display text-ingress font-medium text-flyd-petrol">
                     {s.short}
                   </p>
                 </div>
 
                 <div className="lg:col-span-7" data-reveal>
-                  <p className={`text-[17px] leading-[1.8] ${textMuted}`}>
-                    {s.long}
-                  </p>
+                  <p className="text-[17px] leading-[1.7] text-flyd-skifer">{s.long}</p>
 
-                  <ul className={`mt-10 grid grid-cols-1 gap-0 sm:grid-cols-2 border-t ${border}`}>
+                  <ul className={`mt-10 grid grid-cols-1 border-t sm:grid-cols-2 sm:gap-x-8 ${line}`}>
                     {s.bullets.map((b) => (
                       <li
                         key={b}
-                        className={`flex items-start gap-3 border-b ${border} py-4 pr-4 text-[15px] leading-relaxed`}
+                        className={`flex items-start gap-3 border-b py-4 text-[16px] leading-relaxed text-flyd-skog ${line}`}
                       >
                         <Check
-                          className={
-                            dark
-                              ? 'mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal'
-                              : 'mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal-dark'
-                          }
-                          strokeWidth={2}
+                          className="mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal"
+                          strokeWidth={2.5}
+                          aria-hidden="true"
                         />
-                        <span className={dark ? 'text-flyd-paper/90' : 'text-flyd-ink/90'}>
-                          {b}
-                        </span>
+                        {b}
                       </li>
                     ))}
                   </ul>
 
-                  <div
-                    className={`mt-10 border p-6 md:p-7 ${
-                      dark
-                        ? 'border-flyd-teal/50 bg-flyd-teal/10'
-                        : 'border-flyd-teal-dark bg-flyd-teal/10'
-                    }`}
-                  >
-                    <div
-                      className={`text-[11px] uppercase tracking-[0.22em] ${
-                        dark
-                          ? 'text-flyd-teal'
-                          : teal
-                          ? 'text-flyd-ink/80'
-                          : 'text-flyd-ink/70'
-                      }`}
-                    >
-                      Passer for
-                    </div>
-                    <p
-                      className={`mt-3 text-[15px] leading-relaxed ${
-                        dark ? 'text-flyd-paper/90' : 'text-flyd-ink/90'
-                      }`}
-                    >
-                      {s.fitFor}
-                    </p>
+                  <div className={`mt-10 rounded-kort p-6 md:p-7 ${cardBg}`}>
+                    <Eyebrow>Passer for</Eyebrow>
+                    <p className="mt-3 text-[16px] leading-relaxed text-flyd-skog">{s.fitFor}</p>
                   </div>
 
                   <div className="mt-10">
-                    <ButtonLink
-                      href="/kontakt"
-                      variant={dark ? 'teal' : 'primary'}
-                      withArrow
-                      accent
-                    >
+                    <ButtonLink href="/kontakt" variant="primary" withArrow>
                       Snakk med oss om {s.title.toLowerCase()}
                     </ButtonLink>
                   </div>
                 </div>
               </div>
 
-              {/* ERP sub-grid only under the programvare section */}
+              {/* ERP-systemene kun under programvare */}
               {s.id === 'programvare' && (
-                <div className="mt-20 border-t border-flyd-ink/15 pt-14">
-                  <h3 className="font-display text-2xl font-semibold">
+                <div className={`mt-20 border-t pt-14 ${line}`}>
+                  <h3 className="font-display text-display-md font-semibold">
                     Systemer vi jobber med
                   </h3>
-                  <div className="mt-8 grid grid-cols-1 gap-[1px] bg-flyd-ink/10 sm:grid-cols-2 lg:grid-cols-4">
+                  <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {erpSystems.map((e) => (
-                      <div
-                        key={e.id}
-                        id={e.id}
-                        className="bg-flyd-paper p-7"
-                      >
-                        <h4 className="font-display text-lg font-semibold">
-                          {e.name}
-                        </h4>
-                        <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-flyd-teal-dark">
+                      <div key={e.id} id={e.id} className={`rounded-kort p-7 ${cardBg}`}>
+                        <h4 className="font-display text-[20px] font-semibold">{e.name}</h4>
+                        <p className="mt-2 text-[12px] font-bold uppercase leading-[1.35] tracking-[0.12em] text-flyd-petrol">
                           {e.tagline}
-                        </div>
-                        <p className="mt-4 text-[14px] text-flyd-ink/75 leading-relaxed">
+                        </p>
+                        <p className="mt-4 text-[15px] leading-relaxed text-flyd-skifer">
                           {e.description}
                         </p>
                       </div>
@@ -209,29 +149,11 @@ export default function TjenesterPage() {
         );
       })}
 
-      {/* CLOSING CTA */}
-      <Section tone="teal-dark" size="lg">
-        <Container className="relative">
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow tone="paper">Neste steg</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-paper">
-              Usikker på hvor du skal begynne?
-            </h2>
-            <p className="mt-6 text-[17px] text-flyd-paper/85 leading-[1.75]">
-              Vi tar gjerne en uforpliktende prat for å forstå situasjonen din og
-              anbefale hva som bør være første steg.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <ButtonLink href="/kontakt" variant="teal" withArrow accent>
-                Snakk med oss
-              </ButtonLink>
-              <ButtonLink href="tel:+4748019958" variant="outline-paper">
-                Ring oss
-              </ButtonLink>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <ClosingCta
+        kicker="Neste steg"
+        title="Usikker på hvor du skal begynne?"
+        text="Vi tar gjerne en uforpliktende prat for å forstå situasjonen din og anbefale hva som bør være første steg."
+      />
     </ScrollProgressLineWrapper>
   );
 }

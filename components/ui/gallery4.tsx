@@ -74,22 +74,23 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
     <div className="w-full">
       <Container>
         <div className="flex items-end justify-between gap-8" data-reveal>
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
             {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
             <h2 className="mt-5 font-display text-display-lg font-semibold">
               {title}
             </h2>
           </div>
-          <div className="flex shrink-0 items-center gap-2">
+          {/* Pilene vises fra sm og opp; på mobil sveiper man (prikkene viser posisjon). */}
+          <div className="hidden shrink-0 items-center gap-2 sm:flex">
             <Button
               size="icon"
               variant="outline"
               onClick={() => carouselApi?.scrollPrev()}
               disabled={!canScrollPrev}
               aria-label="Forrige"
-              className="h-11 w-11 rounded-full"
+              className="h-11 w-11"
             >
-              <ArrowLeft className="h-5 w-5" strokeWidth={1.75} />
+              <ArrowLeft className="h-5 w-5" strokeWidth={2} />
             </Button>
             <Button
               size="icon"
@@ -97,9 +98,9 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
               onClick={() => carouselApi?.scrollNext()}
               disabled={!canScrollNext}
               aria-label="Neste"
-              className="h-11 w-11 rounded-full"
+              className="h-11 w-11"
             >
-              <ArrowRight className="h-5 w-5" strokeWidth={1.75} />
+              <ArrowRight className="h-5 w-5" strokeWidth={2} />
             </Button>
           </div>
         </div>
@@ -122,62 +123,38 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
                   key={item.id}
                   className="max-w-[320px] pl-5 lg:max-w-[380px]"
                 >
-                  <article className="group relative h-[460px] w-full overflow-hidden rounded-2xl shadow-[0_24px_48px_-24px_rgba(31,31,31,0.35),0_8px_16px_-12px_rgba(76,142,147,0.35)] lg:h-[500px]">
-                    {/* Lightly blurred background – people should still be recognisable */}
+                  <article className="group relative h-[460px] w-full overflow-hidden rounded-bilde bg-flyd-skog lg:h-[500px]">
                     <div
-                      className="absolute inset-0 scale-110 bg-cover bg-center blur-[2px] transition-transform duration-[900ms] ease-out group-hover:scale-[1.15]"
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-[900ms] ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                       style={{ backgroundImage: `url(${item.background})` }}
                       aria-hidden="true"
                     />
-                    {/* Very light wash so the photo still reads */}
-                    <div
-                      className="absolute inset-0 bg-flyd-ink/10"
-                      aria-hidden="true"
-                    />
-                    {/* Strong bottom gradient, concentrated under the text block */}
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-flyd-ink from-0% via-flyd-ink/80 via-35% to-transparent to-65%"
-                      aria-hidden="true"
-                    />
-                    {/* Teal accent wash at bottom */}
-                    <div
-                      className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#4C8E93]/35 via-[#4C8E93]/8 to-transparent mix-blend-overlay"
-                      aria-hidden="true"
-                    />
+                    {/* Overlay for tekst på bilde (designmanualen kap. 07). */}
+                    <div className="overlay-skog-bunn absolute inset-0" aria-hidden="true" />
 
-                    {/* Content */}
-                    <div className="relative flex h-full flex-col justify-between p-7 text-flyd-paper md:p-8">
+                    <div className="relative flex h-full flex-col justify-between p-7 text-flyd-sand md:p-8">
                       <div className="flex items-center justify-between">
                         {Icon ? (
-                          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-flyd-paper/15 ring-1 ring-inset ring-flyd-paper/30 backdrop-blur-md">
-                            <Icon
-                              className="h-[22px] w-[22px] text-flyd-paper"
-                              strokeWidth={1.5}
-                            />
+                          <div className="flex h-12 w-12 items-center justify-center rounded-flis bg-flyd-skog/70">
+                            <Icon className="h-6 w-6 text-flyd-mint" strokeWidth={2} aria-hidden="true" />
                           </div>
                         ) : (
                           <span />
                         )}
-                        <span className="text-[11px] uppercase tracking-[0.22em] text-flyd-paper/85">
+                        <span className="rounded-pille bg-flyd-skog px-3 py-1.5 font-display text-[15px] font-semibold tabular-nums text-flyd-korall">
                           0{items.indexOf(item) + 1}
                         </span>
                       </div>
 
                       <div>
-                        <h3 className="font-display text-[26px] font-semibold leading-[1.15] tracking-tight md:text-[28px]">
+                        <h3 className="font-display text-[26px] font-semibold leading-[1.15] md:text-[28px]">
                           {item.title}
                         </h3>
-                        <p className="mt-4 text-[14.5px] leading-[1.7] text-flyd-paper/90">
+                        <p className="mt-4 text-[15px] leading-[1.6] text-flyd-sand/90">
                           {item.description}
                         </p>
                       </div>
                     </div>
-
-                    {/* Subtle inner border */}
-                    <div
-                      className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-flyd-paper/10"
-                      aria-hidden="true"
-                    />
                   </article>
                 </CarouselItem>
               );
@@ -196,10 +173,10 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
               aria-current={currentSlide === index ? 'true' : undefined}
             >
               <span
-                className={`block h-[6px] rounded-full transition-[width,background-color] duration-300 ${
+                className={`block h-[6px] rounded-pille transition-[width,background-color] duration-300 ${
                   currentSlide === index
-                    ? 'w-8 bg-flyd-teal-dark'
-                    : 'w-[6px] bg-flyd-ink/20 group-hover/dot:bg-flyd-ink/40'
+                    ? 'w-8 bg-flyd-teal'
+                    : 'w-[6px] bg-flyd-skog/25 group-hover/dot:bg-flyd-skog/50'
                 }`}
               />
             </button>

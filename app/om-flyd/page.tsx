@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { MapPin, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
-import FullflydMark from '@/components/FullflydMark';
 import TeamCard from '@/components/TeamCard';
-import { ButtonLink } from '@/components/Button';
 import FlydLogo from '@/components/FlydLogo';
-import { GlowCard } from '@/components/ui/glow-card';
+import OfficeCards from '@/components/OfficeCards';
+import StatsSection from '@/components/StatsSection';
+import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
 import { leadership, officeLeads, otherTeam } from '@/data/team';
 import { offices } from '@/data/offices';
+import { stats } from '@/data/stats';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -51,91 +51,97 @@ const values = [
 ];
 
 export default function OmFlydPage() {
+  const teamSize = leadership.length + officeLeads.length + otherTeam.length;
+  const figures = [
+    { value: String(teamSize), label: 'Medarbeidere' },
+    { value: String(offices.length), label: 'Kontorer' },
+    stats.find((s) => s.label === 'Kunder') ?? stats[0],
+  ];
+
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
-      {/* HERO */}
-      <Section tone="paper" size="lg" className="pt-20 md:pt-28 overflow-hidden">
-        <div
-          className="pointer-events-none absolute -left-[8%] bottom-[-10%] hidden lg:block opacity-[0.1]"
-          aria-hidden="true"
-        >
-          <FullflydMark variant="teal" className="text-[18rem]" />
-        </div>
-        <Container className="relative">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <Eyebrow tone="teal">Om Flyd</Eyebrow>
-              <h1 className="mt-6 font-display text-display-xl font-semibold">
-                Mer enn et
-                <br />
-                <span className="text-flyd-teal-dark">regnskapskontor.</span>
-              </h1>
+      {/* HERO – «Innhold med tall»: Sand, bilde til venstre, tall med topplinje. */}
+      <Section tone="sand" size="lg" className="pt-12 md:pt-16">
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="order-2 lg:order-1 lg:col-span-5">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-bilde bg-flyd-lysmint">
+                <Image
+                  src="/header/DSC_5138.webp"
+                  alt="Flyd-teamet i samtale på kontoret"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
-            <div className="lg:col-span-5">
-              <p className="text-[17px] leading-[1.8] text-flyd-ink/80">
+            <div className="order-1 lg:order-2 lg:col-span-7">
+              <Eyebrow>Om Flyd</Eyebrow>
+              <h1 className="mt-6 font-display text-display-xl font-semibold">
+                Mer enn et regnskapskontor.
+              </h1>
+              <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
                 Flyd er et kompetansehus for økonomi og teknologi. Vi leverer
                 regnskap, rådgivning, programvare og integrasjoner fra samme
                 sted – slik at du slipper å koordinere fem leverandører og kan
                 konsentrere deg om å drive bedriften videre.
               </p>
+              <div className="mt-12 max-w-xl">
+                <StatsSection stats={figures} columns={3} />
+              </div>
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* VALUES */}
-      <Section tone="teal">
+      {/* VERDIER */}
+      <Section tone="lysmint">
         <Container>
-          <div className="max-w-2xl" data-reveal>
-            <Eyebrow tone="ink">Våre verdier</Eyebrow>
+          <div className="max-w-3xl" data-reveal>
+            <Eyebrow>Våre verdier</Eyebrow>
             <h2 className="mt-5 font-display text-display-lg font-semibold">
               Fire ord som styrer dagen vår.
             </h2>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
             {values.map((v, i) => (
-              <div key={v.title} data-reveal className="h-full">
-                <GlowCard
-                  glowColor="teal"
-                  customSize
-                  className="h-full p-8 md:p-9"
+              <div key={v.title} data-reveal className="rounded-kort bg-flyd-sand p-7 md:p-8">
+                <span
+                  className="font-display text-[24px] font-semibold leading-none tabular-nums text-flyd-rust"
+                  aria-hidden="true"
                 >
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
-                    0{i + 1}
-                  </div>
-                  <h3 className="mt-4 font-display text-2xl font-semibold">
-                    {v.title}
-                  </h3>
-                  <p className="mt-4 text-[14px] text-flyd-ink/75 leading-relaxed">
-                    {v.body}
-                  </p>
-                </GlowCard>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mt-6 font-display text-[24px] font-semibold">{v.title}</h3>
+                <p className="mt-3 text-[16px] leading-relaxed text-flyd-skifer">{v.body}</p>
               </div>
             ))}
           </div>
         </Container>
       </Section>
 
-      {/* HOW WE WORK (dark) */}
-      <Section tone="ink">
+      {/* SLIK JOBBER VI */}
+      <Section tone="skog">
         <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-4" data-reveal>
-              <Eyebrow tone="paper">Slik jobber vi</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Langsiktige
-                <br />
-                relasjoner.
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5" data-reveal>
+              <Eyebrow tone="dark">Slik jobber vi</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
+                Langsiktige relasjoner.
               </h2>
+              <blockquote className="mt-10 border-l-4 border-flyd-korall pl-6 font-display text-[24px] font-semibold leading-[1.3] text-flyd-mint">
+                Én partner. Ett nummer. Full flyd.
+              </blockquote>
             </div>
-            <div className="lg:col-span-8 space-y-6" data-reveal>
-              <p className="text-[18px] leading-[1.8] text-flyd-paper/85">
+            <div className="space-y-6 lg:col-span-7" data-reveal>
+              <p className="font-display text-ingress font-medium text-flyd-sand">
                 Vi tror på langsiktige relasjoner. Hver kunde får en dedikert
                 kontaktperson som kjenner virksomheten, utfordringene og målene.
               </p>
-              <p className="text-[18px] leading-[1.8] text-flyd-paper/85">
+              <p className="text-[17px] leading-[1.7] text-flyd-dempet">
                 Ved å kombinere fagkompetanse med teknologiforståelse skaper vi
                 bedre flyt – i prosesser, systemer og beslutninger.
               </p>
@@ -144,47 +150,46 @@ export default function OmFlydPage() {
         </Container>
       </Section>
 
-      {/* TEAM – leadership */}
-      <Section tone="paper" id="team">
+      {/* TEAM */}
+      <Section tone="sand" id="team">
         <Container>
           <div className="flex items-end justify-between gap-6" data-reveal>
             <div>
               <Eyebrow>Ledelse og partnere</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold leading-[1.05]">
+              <h2 className="mt-5 font-display text-display-lg font-semibold">
                 Menneskene bak{' '}
                 <FlydLogo
                   title="Flyd"
-                  className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline text-flyd-ink"
+                  className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline text-flyd-teal"
                 />
               </h2>
             </div>
-            <div className="hidden text-right text-[13px] text-flyd-ink/70 md:block">
-              {leadership.length + officeLeads.length + otherTeam.length}{' '}
-              medarbeidere
+            <div className="hidden text-right text-[15px] text-flyd-skifer md:block">
+              {teamSize} medarbeidere
               <br />
               {offices.length} kontorer
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {leadership.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>
 
-          <h3 className="mt-24 font-display text-2xl font-semibold" data-reveal>
-            Kontorledere
-          </h3>
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
+            <Eyebrow>Kontorledere</Eyebrow>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {officeLeads.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>
 
-          <h3 className="mt-24 font-display text-2xl font-semibold" data-reveal>
-            Resten av teamet
-          </h3>
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
+            <Eyebrow>Resten av teamet</Eyebrow>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {otherTeam.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
@@ -192,78 +197,28 @@ export default function OmFlydPage() {
         </Container>
       </Section>
 
-      {/* OFFICES */}
-      <Section tone="teal-soft" id="kontorer">
+      {/* KONTORER */}
+      <Section tone="lysmint" id="kontorer">
         <Container>
           <div className="max-w-2xl" data-reveal>
             <Eyebrow>Kontorer</Eyebrow>
             <h2 className="mt-5 font-display text-display-lg font-semibold">
               Seks steder. Én partner.
             </h2>
-            <p className="mt-6 text-[16px] leading-[1.75] text-flyd-ink/75">
+            <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
               Vi er lokalt tilstede der kundene våre er – fra Stavanger i nord
               til Flekkefjord i sør.
             </p>
           </div>
-
-          <div className="mt-12 grid grid-cols-1 gap-[1px] bg-flyd-ink/10 sm:grid-cols-2 lg:grid-cols-3">
-            {offices.map((o) => (
-              <Link
-                key={o.city}
-                href={`/kontor/${o.slug}/`}
-                data-reveal
-                className="group relative bg-flyd-paper p-7 md:p-8 transition-colors duration-200 hover:bg-flyd-teal-soft"
-              >
-                <div className="flex items-start justify-between">
-                  <MapPin
-                    className="h-5 w-5 text-flyd-teal-dark"
-                    strokeWidth={1.75}
-                  />
-                  <ArrowUpRight
-                    className="h-5 w-5 text-flyd-ink/30 transition-colors group-hover:text-flyd-teal-dark"
-                    strokeWidth={1.75}
-                  />
-                </div>
-                <h3 className="mt-5 font-display text-xl font-semibold">
-                  {o.city} <span className="text-flyd-ink/40">·</span>{' '}
-                  <span className="text-flyd-teal-dark">{o.name}</span>
-                </h3>
-                <p className="mt-3 text-[14px] text-flyd-ink/70 leading-relaxed">
-                  {o.street}
-                  <br />
-                  {o.postal}
-                </p>
-                <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/70 transition-colors group-hover:text-flyd-teal-dark">
-                  Se kontoret →
-                </div>
-              </Link>
-            ))}
-          </div>
+          <OfficeCards offices={offices} className="mt-12" />
         </Container>
       </Section>
 
-      {/* CLOSING */}
-      <Section tone="ink" size="lg">
-        <Container>
-          <div className="max-w-3xl" data-reveal>
-            <h2 className="font-display text-display-lg font-semibold">
-              Vil du vite mer om hvem vi er?
-            </h2>
-            <p className="mt-8 max-w-xl text-[17px] text-flyd-paper/80 leading-[1.75]">
-              Ta kontakt – så finner vi en anledning til å møtes, enten på et
-              kontor, i en videosamtale eller over en kaffe.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <ButtonLink href="/kontakt" variant="teal" withArrow accent>
-                Snakk med oss
-              </ButtonLink>
-              <ButtonLink href="/karriere" variant="outline-paper">
-                Jobb hos oss
-              </ButtonLink>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <ClosingCta
+        title="Vil du vite mer om hvem vi er?"
+        text="Ta kontakt – så finner vi en anledning til å møtes, enten på et kontor, i en videosamtale eller over en kaffe."
+        secondary={{ href: '/karriere', label: 'Jobb hos oss' }}
+      />
     </>
   );
 }

@@ -6,9 +6,8 @@ import type { ReactNode } from 'react';
  * 24×24-rutenett, strek i currentColor. «Punktumet» – den lille firkanten
  * fra logoen – tegnes separat så det kan få egen farge (`dotClassName`).
  *
- * Kortversjonen (ServiceTile) følger `kort/`-filene: strek i #F8F6F1 og
- * oransje punktum (#F2905A) – et bevisst unntak fra fargeregelen, kun her
- * (se CLAUDE.md).
+ * Kortversjonen (ServiceTile) følger `kort/`-filene: strek i Sand (#F8F6F1)
+ * og punktum i Korall (#F2905A).
  */
 const icons = {
   regnskap: {
@@ -138,28 +137,22 @@ export default function ServiceIcon({
   );
 }
 
-export type ServiceTone = 'teal' | 'dark' | 'ink';
+export type ServiceTone = 'petrol' | 'teal' | 'skog';
 
-// Gradientflatene fra tjenestekortene.
-const toneGradients: Record<ServiceTone, string> = {
-  teal: 'bg-[radial-gradient(120%_90%_at_15%_0%,#B9DAD8_0%,#8BC0BE_38%,#4C8E93_100%)]',
-  dark: 'bg-[radial-gradient(120%_90%_at_85%_10%,#8BC0BE_0%,#4C8E93_45%,#1F3639_100%)]',
-  ink: 'bg-[radial-gradient(120%_100%_at_20%_0%,#3A6268_0%,#274347_45%,#121C1E_100%)]',
+// Flate profilfarger bak glassflisen (designmanualen kap. 04).
+const toneBg: Record<ServiceTone, string> = {
+  petrol: 'bg-flyd-petrol',
+  teal: 'bg-flyd-teal',
+  skog: 'bg-flyd-skog',
 };
 
-const toneAccent: Record<ServiceTone, string> = {
-  teal: 'bg-[radial-gradient(60%_60%_at_85%_90%,rgba(255,255,255,0.35)_0%,rgba(255,255,255,0)_60%)]',
-  dark: 'bg-[radial-gradient(60%_60%_at_15%_85%,rgba(139,192,190,0.45)_0%,rgba(139,192,190,0)_60%)]',
-  ink: 'bg-[radial-gradient(55%_55%_at_80%_10%,rgba(139,192,190,0.4)_0%,rgba(139,192,190,0)_65%)]',
-};
-
-// Farger fra kort/-filene. Oransje punktum er et avtalt unntak (sept. 2026).
+// Farger fra kort/-filene: strek i Sand, punktum i Korall.
 const TILE_LINE = '#F8F6F1';
 const TILE_DOT = '#F2905A';
 
 /**
- * Kortbildet: tone-gradient med en glassflis, ikonet i lys strek og oransje
- * punktum (etter `kort/`-filene). Kvadratisk viewBox + «meet» gjør at flisen alltid
+ * Kortbildet: profilfarget flate med en glassflis, ikonet i Sand-strek og
+ * Korall-punktum (etter `kort/`-filene). Kvadratisk viewBox + «meet» gjør at flisen alltid
  * fyller ~75 % av korteste side, uansett om flaten er bred eller smal.
  */
 export function ServiceTile({
@@ -172,8 +165,7 @@ export function ServiceTile({
   className?: string;
 }) {
   return (
-    <div className={clsx('relative overflow-hidden', toneGradients[tone], className)}>
-      <div className={clsx('pointer-events-none absolute inset-0', toneAccent[tone])} aria-hidden="true" />
+    <div className={clsx('relative overflow-hidden', toneBg[tone], className)}>
       <svg
         viewBox="-12 -12 48 48"
         preserveAspectRatio="xMidYMid meet"

@@ -169,11 +169,11 @@ export default function JobDetailPage({
     <>
       <JsonLd data={jobPostingJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
-      <Section tone="paper" className="pt-16 md:pt-20">
+      <Section tone="sand" className="pt-16 md:pt-20">
         <Container>
           <Link
             href="/karriere/#ledige-stillinger"
-            className="inline-flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-flyd-ink/70 transition-colors hover:text-flyd-teal-dark"
+            className="inline-flex items-center gap-2 text-[15px] font-medium text-flyd-petrol decoration-flyd-teal decoration-2 underline-offset-[6px] transition-colors hover:text-flyd-skog hover:underline"
           >
             <ArrowLeft className="h-4 w-4" strokeWidth={2} />
             Alle stillinger
@@ -181,11 +181,11 @@ export default function JobDetailPage({
 
           <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-12">
             <div className="lg:col-span-8">
-              <Eyebrow tone="teal">Ledig stilling</Eyebrow>
+              <Eyebrow>Ledig stilling</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">
                 {job.title}
               </h1>
-              <p className="mt-8 text-[18px] leading-[1.75] text-flyd-ink/80">
+              <p className="mt-8 text-[18px] leading-[1.75] text-flyd-skifer">
                 {job.ingress}
               </p>
 
@@ -196,20 +196,20 @@ export default function JobDetailPage({
                       {s.heading}
                     </h2>
                     {s.body && (
-                      <p className="mt-6 text-[17px] leading-[1.8] text-flyd-ink/80">
+                      <p className="mt-6 text-[17px] leading-[1.8] text-flyd-skifer">
                         {s.body}
                       </p>
                     )}
                     {s.bullets && s.bullets.length > 0 && (
-                      <ul className="mt-6 border-t border-flyd-ink/15">
+                      <ul className="mt-6 border-t border-flyd-linje-sand">
                         {s.bullets.map((b) => (
                           <li
                             key={b}
-                            className="flex items-start gap-4 border-b border-flyd-ink/15 py-4 text-[16px] leading-relaxed text-flyd-ink/85"
+                            className="flex items-start gap-4 border-b border-flyd-linje-sand py-4 text-[16px] leading-relaxed text-flyd-skifer"
                           >
                             <span
                               aria-hidden="true"
-                              className="mt-2.5 inline-block h-[6px] w-[6px] flex-shrink-0 bg-flyd-teal-dark"
+                              className="mt-2.5 inline-block h-[6px] w-[6px] flex-shrink-0 bg-flyd-rust"
                             />
                             <span>{b}</span>
                           </li>
@@ -221,28 +221,28 @@ export default function JobDetailPage({
               </div>
 
               <div
-                className="mt-16 border border-flyd-ink/15 bg-flyd-teal-soft p-8 md:p-10"
+                className="mt-16 rounded-kort bg-flyd-lysmint p-8 md:p-10"
                 data-reveal
               >
                 <h2 className="font-display text-2xl font-semibold">
                   Høres dette ut som deg?
                 </h2>
-                <p className="mt-5 text-[16px] leading-[1.75] text-flyd-ink/80">
+                <p className="mt-5 text-[16px] leading-[1.75] text-flyd-skifer">
                   Send søknad og CV til{' '}
                   <a
                     href={`mailto:${job.applyEmail}`}
-                    className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 hover:text-flyd-teal-dark hover:decoration-flyd-teal-dark"
+                    className="text-flyd-skog underline underline-offset-4 decoration-flyd-teal hover:text-flyd-petrol hover:decoration-flyd-skog"
                   >
                     {job.applyEmail}
                   </a>
                   {job.contact && (
                     <>
                       . Har du spørsmål, ta kontakt med{' '}
-                      <span className="text-flyd-ink">{job.contact.name}</span>{' '}
+                      <span className="text-flyd-skog">{job.contact.name}</span>{' '}
                       på{' '}
                       <a
                         href={`tel:${job.contact.phone.replace(/\s+/g, '')}`}
-                        className="text-flyd-ink underline underline-offset-4 decoration-flyd-ink/40 hover:text-flyd-teal-dark hover:decoration-flyd-teal-dark"
+                        className="text-flyd-skog underline underline-offset-4 decoration-flyd-teal hover:text-flyd-petrol hover:decoration-flyd-skog"
                       >
                         {job.contact.phone}
                       </a>
@@ -255,7 +255,6 @@ export default function JobDetailPage({
                     href={applyHref}
                     variant="primary"
                     withArrow
-                    accent
                     external
                   >
                     Send søknad
@@ -263,7 +262,7 @@ export default function JobDetailPage({
                   {job.contact && (
                     <ButtonLink
                       href={`tel:${job.contact.phone.replace(/\s+/g, '')}`}
-                      variant="outline"
+                      variant="secondary"
                       external
                     >
                       Ring {job.contact.name.split(' ')[0]}
@@ -275,20 +274,20 @@ export default function JobDetailPage({
 
             <aside className="lg:col-span-4">
               <div className="lg:sticky lg:top-24">
-                <div className="border border-flyd-ink/15 bg-flyd-teal-soft p-7">
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
+                <div className="rounded-kort bg-flyd-lysmint p-7">
+                  <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.12em] text-flyd-skog before:h-2 before:w-2 before:rounded-[2px] before:bg-flyd-korall before:content-['']">
                     Om stillingen
                   </div>
                   <dl className="mt-5 space-y-4 text-[14px]">
                     {metaItems.map(({ icon: Icon, label, value }) => (
                       <div key={label} className="flex items-start gap-3">
                         <Icon
-                          className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
+                          className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal"
                           strokeWidth={1.75}
                         />
                         <div>
-                          <dt className="text-flyd-ink/70">{label}</dt>
-                          <dd className="mt-0.5 text-flyd-ink">{value}</dd>
+                          <dt className="text-flyd-skifer">{label}</dt>
+                          <dd className="mt-0.5 text-flyd-skog">{value}</dd>
                         </div>
                       </div>
                     ))}
@@ -298,7 +297,6 @@ export default function JobDetailPage({
                       href={applyHref}
                       variant="primary"
                       withArrow
-                      accent
                       external
                       className="w-full"
                     >
@@ -308,8 +306,8 @@ export default function JobDetailPage({
                 </div>
 
                 {job.contact && (
-                  <div className="mt-5 border border-flyd-ink/15 bg-flyd-paper p-7">
-                    <div className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
+                  <div className="mt-5 rounded-kort bg-flyd-sand p-7">
+                    <div className="flex items-center gap-2.5 font-body text-[13px] font-bold uppercase tracking-[0.12em] text-flyd-skog before:h-2 before:w-2 before:rounded-[2px] before:bg-flyd-korall before:content-['']">
                       {job.contact.role ?? 'Kontaktperson'}
                     </div>
                     <div className="mt-4 font-display text-lg font-semibold">
@@ -318,24 +316,24 @@ export default function JobDetailPage({
                     <dl className="mt-4 space-y-3 text-[14px]">
                       <div className="flex items-start gap-3">
                         <Phone
-                          className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
+                          className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal"
                           strokeWidth={1.75}
                         />
                         <a
                           href={`tel:${job.contact.phone.replace(/\s+/g, '')}`}
-                          className="text-flyd-ink hover:text-flyd-teal-dark"
+                          className="text-flyd-skog hover:text-flyd-petrol"
                         >
                           {job.contact.phone}
                         </a>
                       </div>
                       <div className="flex items-start gap-3">
                         <Mail
-                          className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal-dark"
+                          className="mt-0.5 h-4 w-4 flex-shrink-0 text-flyd-teal"
                           strokeWidth={1.75}
                         />
                         <a
                           href={`mailto:${job.contact.email}`}
-                          className="break-all text-flyd-ink hover:text-flyd-teal-dark"
+                          className="break-all text-flyd-skog hover:text-flyd-petrol"
                         >
                           {job.contact.email}
                         </a>
@@ -350,7 +348,7 @@ export default function JobDetailPage({
       </Section>
 
       {jobs.filter((j) => j.slug !== job.slug).length > 0 && (
-        <Section tone="teal-soft">
+        <Section tone="lysmint">
           <Container>
             <div
               className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
@@ -364,7 +362,7 @@ export default function JobDetailPage({
               </div>
             </div>
             <ul
-              className="mt-10 divide-y divide-flyd-ink/15 border-y border-flyd-ink/15"
+              className="mt-10 divide-y divide-flyd-linje-sand border-y border-flyd-linje-sand"
               data-reveal
             >
               {jobs
@@ -373,33 +371,33 @@ export default function JobDetailPage({
                   <li key={j.slug}>
                     <Link
                       href={`/karriere/${j.slug}/`}
-                      className="group flex flex-col gap-2 py-6 transition-colors duration-200 hover:bg-flyd-paper md:flex-row md:items-center md:gap-8 md:px-6"
+                      className="group flex flex-col gap-2 py-6 transition-colors duration-200 hover:bg-flyd-sand md:flex-row md:items-center md:gap-8 md:px-6"
                     >
                       <div className="md:w-1/3">
                         <h3 className="font-display text-xl font-semibold">
                           {j.title}
                         </h3>
-                        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-flyd-ink/65">
+                        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-flyd-skifer">
                           <span className="inline-flex items-center gap-1.5">
                             <MapPin
-                              className="h-3.5 w-3.5 text-flyd-teal-dark"
+                              className="h-3.5 w-3.5 text-flyd-teal"
                               strokeWidth={1.75}
                             />
                             {j.location}
                           </span>
                           <span className="inline-flex items-center gap-1.5">
                             <Briefcase
-                              className="h-3.5 w-3.5 text-flyd-teal-dark"
+                              className="h-3.5 w-3.5 text-flyd-teal"
                               strokeWidth={1.75}
                             />
                             {j.type}
                           </span>
                         </div>
                       </div>
-                      <p className="text-[14px] leading-[1.7] text-flyd-ink/70 md:flex-1">
+                      <p className="text-[14px] leading-[1.7] text-flyd-skifer md:flex-1">
                         {j.ingress}
                       </p>
-                      <span className="inline-flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.18em] text-flyd-ink transition-colors group-hover:text-flyd-teal-dark md:flex-shrink-0">
+                      <span className="inline-flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.18em] text-flyd-skog transition-colors group-hover:text-flyd-petrol md:flex-shrink-0">
                         Se stilling →
                       </span>
                     </Link>

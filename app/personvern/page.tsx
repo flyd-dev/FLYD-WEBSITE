@@ -23,17 +23,17 @@ export default function PersonvernPage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
-      <Section tone="paper" size="lg" className="pt-20 md:pt-28">
+      <Section tone="sand" size="lg" className="pt-12 md:pt-16">
       <Container>
         <div className="max-w-3xl">
-          <Eyebrow tone="teal">Personvern</Eyebrow>
-          <h1 className="mt-6 font-display text-display-lg font-semibold">
+          <Eyebrow>Personvern</Eyebrow>
+          <h1 className="mt-6 font-display text-display-xl font-semibold">
             Slik behandler vi dine opplysninger.
           </h1>
 
-          <div className="mt-12 space-y-8 text-[16px] leading-[1.85] text-flyd-ink/80">
+          <div className="mt-12 space-y-10 text-[17px] leading-[1.7] text-flyd-skifer">
             <section>
-              <h2 className="font-display text-xl font-semibold text-flyd-ink">
+              <h2 className="border-t border-flyd-linje-sand pt-8 font-display text-[24px] font-semibold text-flyd-skog">
                 Behandlingsansvarlig
               </h2>
               <p className="mt-3">
@@ -43,7 +43,7 @@ export default function PersonvernPage() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl font-semibold text-flyd-ink">
+              <h2 className="border-t border-flyd-linje-sand pt-8 font-display text-[24px] font-semibold text-flyd-skog">
                 Hvilke opplysninger vi samler inn
               </h2>
               <p className="mt-3">
@@ -60,7 +60,7 @@ export default function PersonvernPage() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl font-semibold text-flyd-ink">
+              <h2 className="border-t border-flyd-linje-sand pt-8 font-display text-[24px] font-semibold text-flyd-skog">
                 Lagring
               </h2>
               <p className="mt-3">
@@ -72,7 +72,7 @@ export default function PersonvernPage() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl font-semibold text-flyd-ink">
+              <h2 className="border-t border-flyd-linje-sand pt-8 font-display text-[24px] font-semibold text-flyd-skog">
                 Dine rettigheter
               </h2>
               <p className="mt-3">
@@ -81,7 +81,7 @@ export default function PersonvernPage() {
                 protestere mot den. Henvendelser sendes til{' '}
                 <a
                   href="mailto:support@flyd.no"
-                  className="text-flyd-ink underline underline-offset-4 hover:text-flyd-teal-dark"
+                  className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-skog hover:decoration-flyd-skog"
                 >
                   support@flyd.no
                 </a>
@@ -90,7 +90,7 @@ export default function PersonvernPage() {
                   href="https://www.datatilsynet.no/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-flyd-ink underline underline-offset-4 hover:text-flyd-teal-dark"
+                  className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-skog hover:decoration-flyd-skog"
                 >
                   Datatilsynet
                 </a>{' '}
@@ -99,7 +99,7 @@ export default function PersonvernPage() {
             </section>
 
             <section>
-              <h2 className="font-display text-xl font-semibold text-flyd-ink">
+              <h2 className="border-t border-flyd-linje-sand pt-8 font-display text-[24px] font-semibold text-flyd-skog">
                 Informasjonskapsler
               </h2>
               <p className="mt-3">

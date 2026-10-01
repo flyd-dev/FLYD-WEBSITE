@@ -2,11 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Designtokens fra Flyd designmanual v1.0, kap. 09 Digitale flater. */
 :root {
-  --ink: #1F1F1F;
-  --teal: #8BC0BE;
-  --teal-dark: #4C8E93;
-  --paper: #FFFFFF;
+  --flyd-skog: #17292A;
+  --flyd-petrol: #24494B;
+  --flyd-teal: #4C8687;
+  --flyd-mint: #8BC2BB;
+  --flyd-korall: #F2905A;
+  --flyd-rust: #B9551F;
+  --flyd-sand: #F8F6F1;
+  --flyd-lysmint: #EAF2EF;
+  --flyd-skifer: #4A5A5B;
+  --font-display: var(--font-poppins), Arial, sans-serif;
+  --font-body: var(--font-dm-sans), Arial, sans-serif;
+  --radius-bilde: 24px;
+  --radius-kort: 16px;
+  --radius-flis: 12px;
+  --radius-pille: 999px;
 }
 
 html {
@@ -16,23 +28,23 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
-  color: var(--ink);
-  background: var(--paper);
-  line-height: 1.7;
+  color: var(--flyd-skog);
+  background: var(--flyd-sand);
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-poppins), Helvetica, Arial, sans-serif;
+  font-family: var(--font-display);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   font-weight: 600;
 }
 
 ::selection {
-  background: var(--teal);
-  color: var(--ink);
+  background: var(--flyd-mint);
+  color: var(--flyd-skog);
 }
 
 /* Inputs */
@@ -64,28 +76,45 @@ input, textarea, select, button {
   transform: translateY(0);
 }
 
-/* Hero-mosaikken (app/page.tsx) ligger i grid-kolonne 8–12 i Container, men
-   skal gå helt ut til høyre viewportkant. Negativ høyremarg = containerens
-   ytre marg (sentrert, maks-bredde shell) + horisontal padding (px-10). */
-@media (min-width: 1024px) {
-  .hero-bleed-right {
-    margin-right: calc(
-      -1 * (max(0px, (100vw - theme('maxWidth.shell')) / 2) + theme('spacing.10'))
-    );
-  }
-}
-
-/* Custom focus ring (teal) */
+/* Fokusring i Flyd-teal (3,8:1 mot Sand – godkjent for UI-elementer).
+   På mørke flater brukes Mint – se .on-dark under. */
 *:focus-visible {
-  outline: 2px solid var(--teal-dark);
-  outline-offset: 2px;
+  outline: 2px solid var(--flyd-teal);
+  outline-offset: 3px;
+}
+.on-dark *:focus-visible,
+.on-dark:focus-visible {
+  outline-color: var(--flyd-mint);
 }
 
-/* Word "flyd." wordmark */
-.wordmark {
-  font-family: var(--font-poppins), Helvetica, Arial, sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  text-transform: lowercase;
+/* Overlay for tekst på bilde (manualen kap. 07): gradient fra venstre i Skog,
+   95 % → 82 % ved 45 % → 20 %. Teksten står på den mørke siden. */
+.overlay-skog {
+  background: linear-gradient(
+    90deg,
+    rgb(23 41 42 / 0.95) 0%,
+    rgb(23 41 42 / 0.82) 45%,
+    rgb(23 41 42 / 0.2) 100%
+  );
+}
+/* Smale flater (mobil, små kort): teksten ligger nederst, så gradienten
+   går nedenfra med samme stopp. */
+.overlay-skog-bunn {
+  background: linear-gradient(
+    0deg,
+    rgb(23 41 42 / 0.95) 0%,
+    rgb(23 41 42 / 0.82) 45%,
+    rgb(23 41 42 / 0.2) 100%
+  );
+}
+
+/* Signaturen «full flyd.»: originalfilen (public/brand/fullflyd-outline.png)
+   brukes som maske, slik at den alltid tegnes i Sand på Flyd-teal uten at
+   ordmerket skrives på nytt med en skrift. */
+.signatur {
+  display: block;
+  aspect-ratio: 3000 / 801;
+  background-color: var(--flyd-sand);
+  -webkit-mask: url('/brand/fullflyd-outline.png') center / contain no-repeat;
+  mask: url('/brand/fullflyd-outline.png') center / contain no-repeat;
 }

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, Building2 } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import ContactForm from '@/components/ContactForm';
+import OfficeCards from '@/components/OfficeCards';
 import JsonLd from '@/components/JsonLd';
 import { offices } from '@/data/offices';
 
@@ -27,74 +27,64 @@ export const metadata: Metadata = {
 };
 
 export default function KontaktPage() {
+  const contactLink =
+    'font-display text-[22px] font-semibold text-flyd-skog decoration-flyd-teal decoration-2 underline-offset-[6px] transition-colors hover:text-flyd-petrol hover:underline';
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
-      <Section tone="paper" size="lg" className="pt-20 md:pt-28">
+      <Section tone="sand" size="lg" className="pt-12 md:pt-16">
         <Container>
-          <div className="grid grid-cols-1 gap-14 lg:grid-cols-12">
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
-              <Eyebrow tone="teal">Kontakt</Eyebrow>
+              <Eyebrow>Kontakt</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">
                 La oss ta en prat.
               </h1>
-              <p className="mt-8 text-[17px] leading-[1.8] text-flyd-ink/80">
+              <p className="mt-8 font-display text-ingress font-medium text-flyd-petrol">
                 Fortell oss hva du trenger hjelp med, så finner vi riktig person
                 hos oss. Vi svarer normalt innen én arbeidsdag.
               </p>
 
-              <dl className="mt-12 space-y-6 border-t border-flyd-ink/15">
-                <div className="flex items-start gap-5 border-b border-flyd-ink/15 py-6">
-                  <Mail className="h-5 w-5 text-flyd-teal-dark mt-1" strokeWidth={1.5} />
+              <dl className="mt-12 border-t border-flyd-linje-sand">
+                <div className="flex items-start gap-5 border-b border-flyd-linje-sand py-6">
+                  <Mail className="mt-1 h-6 w-6 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                   <div>
-                    <dt className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
-                      E-post
-                    </dt>
+                    <dt className="text-[15px] text-flyd-skifer">E-post</dt>
                     <dd className="mt-1">
-                      <a
-                        href="mailto:support@flyd.no"
-                        className="font-display text-xl font-semibold transition-colors hover:text-flyd-teal-dark"
-                      >
+                      <a href="mailto:support@flyd.no" className={contactLink}>
                         support@flyd.no
                       </a>
                     </dd>
                   </div>
                 </div>
-                <div className="flex items-start gap-5 border-b border-flyd-ink/15 py-6">
-                  <Phone className="h-5 w-5 text-flyd-teal-dark mt-1" strokeWidth={1.5} />
+                <div className="flex items-start gap-5 border-b border-flyd-linje-sand py-6">
+                  <Phone className="mt-1 h-6 w-6 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                   <div>
-                    <dt className="text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
-                      Sentralbord
-                    </dt>
+                    <dt className="text-[15px] text-flyd-skifer">Telefon</dt>
                     <dd className="mt-1">
-                      <a
-                        href="tel:+4748019958"
-                        className="font-display text-xl font-semibold transition-colors hover:text-flyd-teal-dark"
-                      >
+                      <a href="tel:+4748019958" className={contactLink}>
                         +47 480 19 958
                       </a>
                     </dd>
                   </div>
                 </div>
-                <div className="flex items-start gap-5 py-6">
-                  <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-flyd-ink/70">
-                    Org.nr
-                  </div>
-                  <div className="font-display text-lg font-semibold">
-                    933 662 934 · Flyd AS
+                <div className="flex items-start gap-5 border-b border-flyd-linje-sand py-6">
+                  <Building2 className="mt-1 h-6 w-6 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
+                  <div>
+                    <dt className="text-[15px] text-flyd-skifer">Org.nr.</dt>
+                    <dd className="mt-1 font-display text-[22px] font-semibold">
+                      933 662 934 · Flyd AS
+                    </dd>
                   </div>
                 </div>
               </dl>
             </div>
 
             <div className="lg:col-span-7">
-              <div className="border border-flyd-ink/15 bg-flyd-paper p-8 md:p-10">
-                <h2 className="font-display text-2xl font-semibold">
-                  Send oss en melding
-                </h2>
-                <p className="mt-2 text-[14px] text-flyd-ink/65">
-                  Felt merket med <span className="text-flyd-teal-dark">*</span>{' '}
-                  er obligatoriske.
+              <div className="rounded-kort bg-flyd-lysmint p-7 md:p-10">
+                <h2 className="font-display text-[28px] font-semibold">Send oss en melding</h2>
+                <p className="mt-2 text-[15px] text-flyd-skifer">
+                  Felt merket med <span className="text-flyd-petrol">*</span> er obligatoriske.
                 </p>
                 <div className="mt-8">
                   <ContactForm />
@@ -105,8 +95,8 @@ export default function KontaktPage() {
         </Container>
       </Section>
 
-      {/* OFFICES */}
-      <Section tone="teal-soft" id="kontorer">
+      {/* KONTORER */}
+      <Section tone="lysmint" id="kontorer">
         <Container>
           <div className="max-w-2xl" data-reveal>
             <Eyebrow>Kontorer</Eyebrow>
@@ -114,40 +104,7 @@ export default function KontaktPage() {
               Møt oss der du er.
             </h2>
           </div>
-
-          <div className="mt-14 grid grid-cols-1 gap-[1px] bg-flyd-ink/10 sm:grid-cols-2 lg:grid-cols-3">
-            {offices.map((o) => (
-              <Link
-                key={o.city}
-                href={`/kontor/${o.slug}/`}
-                data-reveal
-                className="group relative bg-flyd-paper p-7 md:p-8 transition-colors duration-200 hover:bg-flyd-teal-soft"
-              >
-                <div className="flex items-start justify-between">
-                  <MapPin
-                    className="h-5 w-5 text-flyd-teal-dark"
-                    strokeWidth={1.75}
-                  />
-                  <ArrowUpRight
-                    className="h-5 w-5 text-flyd-ink/30 transition-colors group-hover:text-flyd-teal-dark"
-                    strokeWidth={1.75}
-                  />
-                </div>
-                <h3 className="mt-5 font-display text-xl font-semibold">
-                  {o.city} <span className="text-flyd-ink/40">·</span>{' '}
-                  <span className="text-flyd-teal-dark">{o.name}</span>
-                </h3>
-                <p className="mt-3 text-[14px] text-flyd-ink/70 leading-relaxed">
-                  {o.street}
-                  <br />
-                  {o.postal}
-                </p>
-                <div className="mt-5 text-[12px] uppercase tracking-[0.22em] text-flyd-ink/70 transition-colors group-hover:text-flyd-teal-dark">
-                  Se kontoret →
-                </div>
-              </Link>
-            ))}
-          </div>
+          <OfficeCards offices={offices} className="mt-12" />
         </Container>
       </Section>
     </>

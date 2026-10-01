@@ -1,33 +1,43 @@
 import clsx from 'clsx';
 
+/**
+ * Kicker – versal etikett over hver overskrift (designmanualen kap. 05/06):
+ * DM Sans 700, versaler, +12 % sperring.
+ *
+ * - dark (Skog):   Korall-tekst, som i manualen (6,4:1).
+ * - petrol:        Mint-tekst – Korall gir bare 4,2:1 på Petrol.
+ * - light (Sand/Lys mint): Skog-tekst med et Korall-punktum foran. Manualen
+ *   bruker Rust her, men Rust er 4,4:1 på Sand og 4,2:1 på Lys mint – under
+ *   kravet på 4,5:1 for liten tekst (manualens egen tabell: «kun stor tekst»).
+ *   Punktumet er logoens punktum og bærer aksenten i stedet.
+ */
 export default function Eyebrow({
   children,
   className,
-  tone = 'ink',
+  tone = 'light',
+  as: Tag = 'p',
 }: {
   children: React.ReactNode;
   className?: string;
-  tone?: 'ink' | 'paper' | 'teal';
+  tone?: 'light' | 'dark' | 'petrol';
+  as?: 'p' | 'span' | 'div' | 'h2' | 'h3';
 }) {
-  // Teksten holdes i sort/hvit (AA-kontrast på 12px) – teal-aksenten
-  // ligger i streken foran, ikke i selve teksten.
   const color =
-    tone === 'paper'
-      ? 'text-flyd-paper/80 before:bg-flyd-teal'
-      : tone === 'teal'
-      ? 'text-flyd-ink/80 before:bg-flyd-teal-dark'
-      : 'text-flyd-ink/80 before:bg-flyd-teal-dark';
+    tone === 'dark'
+      ? 'text-flyd-korall'
+      : tone === 'petrol'
+      ? 'text-flyd-mint'
+      : 'flex items-center gap-2.5 text-flyd-skog before:h-2 before:w-2 before:flex-shrink-0 before:rounded-[2px] before:bg-flyd-korall before:content-[""]';
 
   return (
-    <span
+    <Tag
       className={clsx(
-        'inline-flex items-center gap-3 text-[12px] font-medium tracking-[0.22em] uppercase',
-        'before:inline-block before:h-[1px] before:w-8 before:content-[""]',
+        'font-body text-[13px] font-bold uppercase leading-[1.2] tracking-[0.12em]',
         color,
         className,
       )}
     >
       {children}
-    </span>
+    </Tag>
   );
 }

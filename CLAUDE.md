@@ -15,24 +15,31 @@ Nettsted for Flyd AS (regnskap, rådgivning og teknologi, Sør-Vest-Norge).
 - `app/` — sider: `/`, `/tjenester`, `/om-flyd`, `/karriere`, `/karriere/[slug]`, `/kontakt`, `/personvern`, `not-found`, `sitemap.ts`, `robots.ts`.
 - `components/` — delte komponenter; `components/ui/` — tilpassede tredjeparts-UI (typewriter, kort, karusell).
 - `data/` — alt innhold som endres ofte: `services.ts`, `team.ts`, `jobs.ts`, `offices.ts`, `partners.ts`, `logos.ts`. **Rediger innhold her, ikke i sidene.**
-- `public/` — kun filer som faktisk serveres. Bilder skal være **WebP** (unntak: favicon/OG-bilde og logo-PNG-ene i `public/brand/`).
-- `brand_assets/` — kildefiler for profil (Profilmanual.jpg m.m.). Rå foto-mapper (`header_pictures/` osv.) er gitignorert.
+- `public/` — kun filer som faktisk serveres. Bilder skal være **WebP** (unntak: favicon/OG-bilde og logo-PNG-ene i `public/brand/`). Favikonene lages med `node scripts/make-favicons.mjs` (fra logoens egne konturer).
+- `brand_assets/` — kildefiler for profil (Profilmanual.jpg m.m.; designmanualen v1.0 er gjeldende). Rå foto-mapper (`header_pictures/` osv.) er gitignorert.
 
-## Merkevare (følg profilmanualen)
+## Merkevare (følg designmanualen v1.0, sept. 2026)
 
-- **Farger (de eneste):** sort `#1F1F1F` (flyd-ink), lys blå `#8BC0BE` (flyd-teal, hovedfarge), mørk blågrønn `#4C8E93` (flyd-teal-dark), hvit `#FFFFFF` (flyd-paper). Opacity-varianter er lov. **Ingen andre farger** (oransje aksent ble fjernet bevisst i 2026 — ikke gjeninnfør).
-  - **Eneste unntak (bestemt sept. 2026):** tjenesteikonene på glassflis (`ServiceTile` i `components/ServiceIcon.tsx`, kilde `brand_assets/tjenesteikoner/kort/`) har oransje punktum `#F2905A` og strek i `#F8F6F1`. Ikke bruk oransje andre steder, og ikke fjern det her.
-- **Tekst er alltid sort eller hvit** (evt. med opacity). Aksentfargene brukes på flater, linjer og ikoner.
-- **Typografi:** Poppins (via next/font) til overskrifter, Helvetica/Arial-stack til brødtekst (`globals.css`).
-- **Slagordet er «full flyd»** — ordspill på navnet. Aldri «full flyt».
-- Tone: moderne, teknisk dyktig, lokal, profesjonell, menneskelig. Ikke generisk IT-byrå.
+Kilde: Flyd Designmanual v1.0. Tokens ligger i `tailwind.config.ts` (`flyd-*`) og som CSS-variabler i `app/globals.css`.
+
+- **Palett (de eneste fargene):** Skog `#17292A` (primær mørk, hovedtekst), Petrol `#24494B` (seksjonsskiller, store tall, mørke kort), Flyd-teal `#4C8687` (logo, ikoner, linjer, avslutningsflater), Mint `#8BC2BB` (tagger, dekor, ikoner på mørk), Korall `#F2905A` (aksent), Rust `#B9551F` (aksent i tekst), Sand `#F8F6F1` (primær lys bakgrunn), Lys mint `#EAF2EF` (sekundær lys bakgrunn), Skifer `#4A5A5B` (brødtekst). Linjefarger: `#C9DCD7` på Lys mint, `#E2DDD3` på Sand. Dempet tekst på Skog: `#BFD8D5`. **Ikke rent hvitt eller rent svart.**
+- **Bakgrunnsrytme:** Sand og Lys mint veksler på innhold, Petrol som seksjonsskille, Skog på forsiden og mørke flater, Flyd-teal kun bak signaturen. Ca. 55 % lyst, 25 % mørkt.
+- **Korall** er krydderet: primærknapp kun på mørk bunn (Skog-tekst), Partner-pille, punktum i kickers/ikoner. Aldri tekst på lys bunn.
+- **Typografi:** Poppins 600 (titler, overskrifter, tall) og 500 (ingress). DM Sans 400 (brødtekst), 500 (knapper), 700 versal +12 % (kickers). Begge via `next/font`. Titler i setningsstil, venstrejustert; sentrering kun i signaturen.
+- **Byggeklosser:** kicker over hver overskrift (`Eyebrow`), pilleknapper (`Button.tsx`), tekstlenke med pil (`TextLink`), nøkkeltall med farget topplinje (`StatsSection`), nummerert liste (`NumberedList`), kort uten skygge og kantlinje. Radier: bilder 24 px (`rounded-bilde`), kort 16 px (`rounded-kort`), fliser 12 px (`rounded-flis`), piller `rounded-pille`.
+- **Ikoner:** Lucide-stil, 2 px strek. Flyd-teal på lys, Mint på mørk. Tjenesteikonene (`components/ServiceIcon.tsx`, kilde `brand_assets/tjenesteikoner/`) har Sand-strek og Korall-punktum på glassflis.
+- **Bilder:** ekte Flyd-folk, radius 24 px når de ikke er utfallende. Tekst på bilde krever Skog-overlay (`.overlay-skog` fra venstre, `.overlay-skog-bunn` nedenfra: 95 % → 82 % → 20 %). Ingen blur/filtre.
+- **Logo:** alltid originalen (`FlydLogo`-SVG), aldri satt med skrift. Flyd-teal på lys, Sand på mørk. Minst 64 px bred på skjerm.
+- **Signaturen «full flyd.»** (`Signatur.tsx`, maske av `public/brand/fullflyd-outline.png`): kun i Sand på Flyd-teal, aldri på bilde eller lys bunn. Brukes som avslutning i `ClosingCta`.
+- **Språk:** «full flyd.» med små bokstaver og punktum – aldri «full flyt». Primærhandling «Snakk med oss». Telefon +47 480 19 958, e-post support@flyd.no, domenet skrives flyd.no. Tankestrek med mellomrom, mellomrom som tusenskille.
+- Tone: nær, tydelig, trygg, framoverlent. Ikke generisk IT-byrå.
 
 ## Kvalitetskrav (fra nettstedsanalysen 2026 — se ANALYSE-RAPPORT.md)
 
-- **Kontrast:** minst 4,5:1 for normal tekst, 3:1 for stor tekst. Kjente feller: teal på hvit (2,0:1 — aldri til tekst), teal-dark på teal (1,9:1 — aldri). Teal-dark på hvit (3,75:1) er kun for stor tekst.
+- **Kontrast:** minst 4,5:1 for normal tekst, 3:1 for stor tekst (≥ 24 px). Kjente feller fra manualens tabell: Flyd-teal på Sand (3,8:1) og Sand på Flyd-teal (3,8:1) – kun stor tekst; Rust på Sand (4,4:1) og på Lys mint (4,2:1) – kun stor tekst, derfor er kickers på lys bunn Skog med Korall-punktum; Korall på Petrol (4,2:1) – bruk Mint; Korall/Mint på Sand – aldri tekst. Tekstlenker er Petrol med teal understrek.
 - **Tilgjengelighet:** alle bilder har alt-tekst; modaler/drawere har fokusfelle + Escape; animasjoner skal respektere `prefers-reduced-motion`; skjemafelt har label + `aria-invalid`/`aria-describedby` ved feil.
 - **SEO:** hver side har unik `metadata` (title/description/canonical). Ikke legg synlig tekst utelukkende i klient-animasjoner (typewriteren SSR-er første frase — behold det mønsteret).
-- Interaktive elementer trenger hover-, focus-visible- og active-tilstander. Ikke bruk `transition-all`.
+- Interaktive elementer trenger hover-, focus-visible- og active-tilstander (fokusring: Flyd-teal på lys, Mint på mørk via `.on-dark`). Ikke bruk `transition-all`.
 
 ## Skjermbilder ved visuelt arbeid
 
