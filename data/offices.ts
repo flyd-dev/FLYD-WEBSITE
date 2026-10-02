@@ -16,8 +16,10 @@ export type Office = {
    */
   image?: { src: string; alt: string };
   /**
-   * Bilder fra kontoret og folkene der (4:3, WebP i public/kontor/). Valgfritt –
-   * vises som en egen bildeseksjon på kontorsiden når det finnes.
+   * Bilder fra kontoret og folkene der (4:3, 900×675, WebP i public/kontor/).
+   * Vises som en egen bildeseksjon på kontorsiden (to eller tre bilder).
+   * Filnavnet viser hvor bildet er tatt. Kontorer uten egne bilder låner fra
+   * andre kontorer inntil videre – alt-teksten sier da ikke hvor det er tatt.
    */
   gallery?: { src: string; alt: string }[];
   /** Preposisjon foran stedsnavnet («på Moi», «i Egersund»). Standard er «i». */
@@ -40,6 +42,21 @@ export const offices: Office[] = [
       src: '/kontor/stavanger.webp',
       alt: 'FOMO-bygget i Grenseveien 21 på Forus, der Flyd har Stavanger-kontoret',
     },
+    // Lånte bilder fra Egersund (de to siste) til vi har flere fra Stavanger.
+    gallery: [
+      {
+        src: '/kontor/stavanger-fomo.webp',
+        alt: 'To Flyd-kolleger smiler foran inngangen til FOMO-bygget på Forus',
+      },
+      {
+        src: '/kontor/egersund-latter.webp',
+        alt: 'Fire kolleger ler sammen i en uformell prat på kontoret',
+      },
+      {
+        src: '/kontor/egersund-notatbok.webp',
+        alt: 'Smilende regnskapsfører med notatbok ved skrivebordet',
+      },
+    ],
   },
   {
     city: 'Egersund',
@@ -86,6 +103,20 @@ export const offices: Office[] = [
       src: '/kontor/sokndal.webp',
       alt: 'Flyd-kontoret i «Banken», Gamleveien 13 i Hauge i Dalane – hvit fasade med flyd-skilt',
     },
+    gallery: [
+      {
+        src: '/kontor/sokndal-moterom.webp',
+        alt: 'Latter rundt møtebordet på kontoret i Sokndal',
+      },
+      {
+        src: '/kontor/sokndal-latter.webp',
+        alt: 'Tre kolleger ler sammen ved et ståbord',
+      },
+      {
+        src: '/kontor/sokndal-resepsjon.webp',
+        alt: 'Resepsjonen i «Banken», med sofaer og den gamle hvelvdøren åpen i bakgrunnen',
+      },
+    ],
   },
   {
     city: 'Moi',
@@ -103,6 +134,20 @@ export const offices: Office[] = [
       src: '/kontor/moi.webp',
       alt: 'Fasaden på Flyd-kontoret i Øyevollveien 10 på Moi, med flyd-skilt over inngangen',
     },
+    gallery: [
+      {
+        src: '/kontor/moi-teamet.webp',
+        alt: 'Flyd-kolleger samlet utendørs på Moi, med skogkledde åser i bakgrunnen',
+      },
+      {
+        src: '/kontor/moi-kolleger.webp',
+        alt: 'To kolleger ler sammen ved en arbeidsplass på Moi-kontoret',
+      },
+      {
+        src: '/kontor/moi-prat.webp',
+        alt: 'Uformell prat i en døråpning mellom to kolleger',
+      },
+    ],
   },
   {
     city: 'Sirdal',
@@ -119,6 +164,21 @@ export const offices: Office[] = [
       src: '/kontor/sirdal.webp',
       alt: 'Handleriet på Tjørhom i Sirdal, der Flyd-kontoret ligger',
     },
+    // Lånte bilder fra Moi og Egersund til vi har egne fra Sirdal.
+    gallery: [
+      {
+        src: '/kontor/moi-korridor.webp',
+        alt: 'To kolleger ler sammen i gangen på kontoret',
+      },
+      {
+        src: '/kontor/moi-motebord.webp',
+        alt: 'Kolleger samlet rundt møtebordet med kaffe og frukt',
+      },
+      {
+        src: '/kontor/egersund-pult.webp',
+        alt: 'Smilende rådgiver tar notater ved skrivebordet',
+      },
+    ],
   },
   {
     city: 'Flekkefjord',
@@ -135,6 +195,21 @@ export const offices: Office[] = [
       src: '/kontor/flekkefjord.webp',
       alt: 'Inngangen til Flyd-kontoret i Elvegaten 22 i Flekkefjord, med teal flyd-skilt',
     },
+    // Lånte bilder fra Moi og Egersund til vi har egne fra Flekkefjord.
+    gallery: [
+      {
+        src: '/kontor/moi-skjerm.webp',
+        alt: 'Kollega ved skrivebordet smiler til en kollega som stikker innom',
+      },
+      {
+        src: '/kontor/moi-samtale.webp',
+        alt: 'To kolleger ser smilende på noe sammen',
+      },
+      {
+        src: '/kontor/egersund-glassdor.webp',
+        alt: 'To Flyd-ansatte i døråpningen ved glassveggen med flyd-logoen',
+      },
+    ],
   },
 ];
 

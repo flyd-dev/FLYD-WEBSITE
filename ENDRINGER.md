@@ -1,5 +1,21 @@
 # Endringslogg — analyse-forbedringer
 
+## Bilder på alle kontorsidene (2.10.2026)
+
+Alle seks kontorsidene har nå seksjonen «Fra kontoret» med bilder. Kildene ligger i SharePoint: FLYD AS › Delte dokumenter › General › Bilder (`Ny nettside/Moi`, `Ny nettside/Sokndal`, `Ny nettside/Overtakelse Sokndal` og `Ny nettside/FOMO`).
+
+- **Egne bilder:** Moi (teamet utendørs foran åsene, to kolleger ved en arbeidsplass og en prat i en døråpning) og Sokndal (møterommet, latter ved et ståbord og resepsjonen i «Banken» med den gamle hvelvdøren). Stavanger har ett eget bilde (to kolleger foran FOMO-bygget).
+- **Lånte bilder:** Stavanger (to), Sirdal og Flekkefjord (tre hver) låner bilder fra Moi og Egersund til de får egne. Filnavnet viser hvor bildet er tatt (`moi-*`, `egersund-*`), og en kommentar i `data/offices.ts` merker de lånte. Alt-tekstene sier ikke hvor de lånte bildene er tatt.
+- **Variasjon:** ingen bilder går igjen på flere sider, og de lånte bildene er spredt på ulike personer. Mannen i den brune genseren er ikke med i noen av de nye bildene.
+- **Galleriet** bruker to kolonner når et kontor bare har to bilder, ellers tre. Bildene er 900 × 675 WebP. Skjeve Moi-bilder er rettet opp.
+- **Valgt bort:** «Bilder revisjon (Viadesign)» er en fotografering for revisjonsselskapet liit. med deres logo på flasker, skjermer og roll-ups. Bildene er ikke brukt. Utendørsportrettene fra Sokndal er ikke brukt fordi de er headshots, ikke kontorbilder.
+
+Verifisert: `tsc` OK; `npm run build` OK; skjermbilder av alle seks kontorsidene i desktop og mobil (to runder).
+
+---
+
+## Flere bilder av de ansatte (2.10.2026)
+
 ## Flere bilder av de ansatte (2.10.2026)
 
 Bilder fra fotograferingen på Egersund-kontoret (194 originaler, 8256 × 5504) er brukt der nettstedet manglet mennesker. Originalene ligger i SharePoint: FLYD AS › Grafisk profil › Profileringsbilder › Egersund.
