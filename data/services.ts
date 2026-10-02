@@ -29,7 +29,7 @@ export const services: Service[] = [
     ],
     fitFor: 'Bedrifter som vil ha et trygt regnskap – og en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
     icon: 'regnskap',
-    image: { src: '/tjenestebilder/regnskap-radgivning.webp', alt: 'To Flyd-rådgivere i samtale over en kopp kaffe' },
+    image: { src: '/tjenestebilder/regnskap-radgivning.webp', alt: 'Rådgivningsmøte: kollega lytter engasjert mens en annen forklarer' },
   },
   {
     id: 'programvare',
@@ -45,7 +45,7 @@ export const services: Service[] = [
     ],
     fitFor: 'Virksomheter som skal bytte system, har vokst ut av det gamle, eller skal rydde opp etter en halvferdig implementering.',
     icon: 'erp',
-    image: { src: '/tjenestebilder/programvare.webp', alt: 'To kolleger går gjennom et forretningssystem sammen ved skjermen' },
+    image: { src: '/tjenestebilder/programvare.webp', alt: 'Flyd-ansatt jobber i forretningssystemet ved skjermen' },
   },
   {
     id: 'integrasjoner',

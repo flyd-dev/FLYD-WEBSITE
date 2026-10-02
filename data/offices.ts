@@ -58,12 +58,12 @@ export const offices: Office[] = [
     },
     gallery: [
       {
-        src: '/kontor/egersund-velkommen.webp',
-        alt: 'Kolleger i en uformell prat på kontoret i Egersund, med velkomstskiltet på pulten',
+        src: '/kontor/egersund-arbeidsplass.webp',
+        alt: 'To kolleger i prat over skilleveggen, med utsikt mot trehusene i Egersund',
       },
       {
-        src: '/kontor/egersund-torget.webp',
-        alt: 'Tre kolleger ved skjermen, med utsikt over torget i Egersund',
+        src: '/kontor/egersund-motebord.webp',
+        alt: 'Latter rundt møtebordet på kontoret i Egersund',
       },
       {
         src: '/kontor/egersund-mote.webp',
