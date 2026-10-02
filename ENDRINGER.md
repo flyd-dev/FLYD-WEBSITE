@@ -1,5 +1,18 @@
 # Endringslogg — analyse-forbedringer
 
+## Ingen like bilder på flere sider (2.10.2026)
+
+- **/om-flyd** brukte samme bilde som forsiden (DSC_5138). Siden har fått et eget stående teambilde fra Moi (`public/header/om-flyd-teamet.webp`). `public/header/DSC_5138.webp` er slettet.
+- **Kontorsidene:** gruppebildet på Moi er byttet til helfigur-bildet av teamet på rad, så det ikke ligner bildet på /om-flyd. Stavanger hadde samme bilde som toppen av /karriere, og Flekkefjord nesten samme bilde som et kort på /karriere. Begge har nå to store bilder i stedet for tre.
+- **/karriere:** kortene «Spennende kunder» og «Godt arbeidsmiljø» hadde nesten samme bilde som forsiden (presentasjonen) og /tjenester (Lønn og HR). De har fått nye bilder fra Moi (`team-bg/kunder.webp`, `team-bg/arbeidsmiljo.webp`).
+- Sjekket med kontaktark av alle bildene på nettstedet. Ingen bilder er nå brukt to steder, og ingen nesten-like varianter av samme øyeblikk ligger på forskjellige sider. Unntaket er toppbildet på forsiden og toppbildet på /karriere, som er fra samme samtale tatt fra to vinkler.
+
+Verifisert: `tsc` OK; `npm run build` OK; skjermbilder av /om-flyd, forsiden, /karriere og kontorsidene for Moi, Stavanger og Flekkefjord.
+
+---
+
+## Bilder på alle kontorsidene (2.10.2026)
+
 ## Bilder på alle kontorsidene (2.10.2026)
 
 Alle seks kontorsidene har nå seksjonen «Fra kontoret» med bilder. Kildene ligger i SharePoint: FLYD AS › Delte dokumenter › General › Bilder (`Ny nettside/Moi`, `Ny nettside/Sokndal`, `Ny nettside/Overtakelse Sokndal` og `Ny nettside/FOMO`).

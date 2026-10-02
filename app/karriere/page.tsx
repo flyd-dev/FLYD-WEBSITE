@@ -51,7 +51,7 @@ const perks: Gallery4Item[] = [
     title: 'Spennende kunder',
     description:
       'Fra gründere til industrikonsern – ingen dag er lik, og hver kunde gir nye faglige løft.',
-    background: '/team-bg/DSC_5306.webp',
+    background: '/team-bg/kunder.webp',
   },
   {
     id: 'laering',
@@ -67,7 +67,7 @@ const perks: Gallery4Item[] = [
     title: 'Godt arbeidsmiljø',
     description:
       'Trivsel, samarbeid og arbeidsglede er ikke bare ord – det er hvordan vi gjør ting.',
-    background: '/team-bg/DSC_4634.webp',
+    background: '/team-bg/arbeidsmiljo.webp',
   },
   {
     id: 'pavirke',

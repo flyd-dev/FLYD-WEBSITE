@@ -68,8 +68,8 @@ export default function OmFlydPage() {
             <div className="order-2 lg:order-1 lg:col-span-5">
               <div className="relative aspect-[4/5] overflow-hidden rounded-bilde bg-flyd-lysmint">
                 <Image
-                  src="/header/DSC_5138.webp"
-                  alt="Flyd-teamet i samtale på kontoret"
+                  src="/header/om-flyd-teamet.webp"
+                  alt="Smilende Flyd-kolleger samlet utendørs, med skogkledde åser i bakgrunnen"
                   fill
                   priority
                   sizes="(min-width: 1024px) 40vw, 100vw"

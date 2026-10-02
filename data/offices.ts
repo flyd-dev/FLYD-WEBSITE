@@ -42,15 +42,11 @@ export const offices: Office[] = [
       src: '/kontor/stavanger.webp',
       alt: 'FOMO-bygget i Grenseveien 21 på Forus, der Flyd har Stavanger-kontoret',
     },
-    // Lånte bilder fra Egersund (de to siste) til vi har flere fra Stavanger.
+    // Det siste bildet er lånt fra Egersund til vi har flere fra Stavanger.
     gallery: [
       {
         src: '/kontor/stavanger-fomo.webp',
         alt: 'To Flyd-kolleger smiler foran inngangen til FOMO-bygget på Forus',
-      },
-      {
-        src: '/kontor/egersund-latter.webp',
-        alt: 'Fire kolleger ler sammen i en uformell prat på kontoret',
       },
       {
         src: '/kontor/egersund-notatbok.webp',
@@ -137,7 +133,7 @@ export const offices: Office[] = [
     gallery: [
       {
         src: '/kontor/moi-teamet.webp',
-        alt: 'Flyd-kolleger samlet utendørs på Moi, med skogkledde åser i bakgrunnen',
+        alt: 'Flyd-kolleger på rad utendørs på Moi, med skogkledde åser og gule bygninger i bakgrunnen',
       },
       {
         src: '/kontor/moi-kolleger.webp',
@@ -195,15 +191,11 @@ export const offices: Office[] = [
       src: '/kontor/flekkefjord.webp',
       alt: 'Inngangen til Flyd-kontoret i Elvegaten 22 i Flekkefjord, med teal flyd-skilt',
     },
-    // Lånte bilder fra Moi og Egersund til vi har egne fra Flekkefjord.
+    // Lånte bilder fra Moi og Egersund til vi har egne fra Flekkefjord (to bilder gir to kolonner).
     gallery: [
       {
         src: '/kontor/moi-skjerm.webp',
         alt: 'Kollega ved skrivebordet smiler til en kollega som stikker innom',
-      },
-      {
-        src: '/kontor/moi-samtale.webp',
-        alt: 'To kolleger ser smilende på noe sammen',
       },
       {
         src: '/kontor/egersund-glassdor.webp',
