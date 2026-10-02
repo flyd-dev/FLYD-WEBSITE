@@ -212,7 +212,11 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 Hos oss {atOffice(office)}.
               </h2>
             </div>
-            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-5">
+            <div
+              className={`mt-10 grid grid-cols-1 gap-4 md:gap-5 ${
+                office.gallery.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"
+              }`}
+            >
               {office.gallery.map((img) => (
                 <div
                   key={img.src}
@@ -223,7 +227,11 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                     src={img.src}
                     alt={img.alt}
                     fill
-                    sizes="(min-width: 640px) 33vw, 100vw"
+                    sizes={
+                      office.gallery!.length === 2
+                        ? "(min-width: 640px) 50vw, 100vw"
+                        : "(min-width: 640px) 33vw, 100vw"
+                    }
                     className="object-cover"
                   />
                 </div>
