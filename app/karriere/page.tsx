@@ -121,12 +121,12 @@ export default function KarrierePage() {
                     <ButtonLink href="#ledige-stillinger" variant="primary" withArrow>
                       Se ledige stillinger
                     </ButtonLink>
-                    <ButtonLink href="mailto:jobb@flyd.no" variant="secondary" external>
+                    <ButtonLink href="mailto:support@flyd.no" variant="secondary" external>
                       Send åpen søknad
                     </ButtonLink>
                   </>
                 ) : (
-                  <ButtonLink href="mailto:jobb@flyd.no" variant="primary" withArrow external>
+                  <ButtonLink href="mailto:support@flyd.no" variant="primary" withArrow external>
                     Send åpen søknad
                   </ButtonLink>
                 )}
@@ -235,7 +235,7 @@ export default function KarrierePage() {
               </p>
             </div>
             <div className="md:ml-auto">
-              <ButtonLink href="mailto:jobb@flyd.no" variant="secondary" withArrow external>
+              <ButtonLink href="mailto:support@flyd.no" variant="secondary" withArrow external>
                 Send åpen søknad
               </ButtonLink>
             </div>
@@ -247,7 +247,7 @@ export default function KarrierePage() {
         title="Lurer du på noe før du søker?"
         text="Ta en uformell prat med oss – vi svarer på alt fra arbeidshverdag til karriereveier, uten forpliktelse."
         primary={{ href: '/kontakt', label: 'Ta kontakt' }}
-        secondary={{ href: 'mailto:jobb@flyd.no', label: 'jobb@flyd.no', external: true }}
+        secondary={{ href: 'mailto:support@flyd.no', label: 'support@flyd.no', external: true }}
       />
     </>
   );
