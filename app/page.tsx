@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { preload } from 'react-dom';
 import { Cloud, Layers, Plug, Sparkles } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
@@ -65,7 +65,14 @@ const process: ProcessStep[] = [
   },
 ];
 
+const HERO = {
+  src: '/header/hero-1200.webp',
+  srcSet: '/header/hero-1200.webp 1200w, /header/hero-2400.webp 2400w',
+};
+
 export default function HomePage() {
+  // Heltebildet er det største elementet i første skjermbilde (LCP).
+  preload(HERO.src, { as: 'image', imageSrcSet: HERO.srcSet, imageSizes: '100vw', fetchPriority: 'high' });
   return (
     <>
       {/* HERO – forsiden er Skog + foto med overlay (designmanualen kap. 07/08).
@@ -73,13 +80,18 @@ export default function HomePage() {
       <Section tone="sand" className="!pb-0 !pt-0 md:!pt-1">
         <div className="px-3 md:px-5">
           <div className="on-dark relative flex min-h-[640px] overflow-hidden rounded-bilde bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
-            <Image
-              src="/process-bg/videreutvikling.webp"
-              alt="Flyd-teamet i en uformell prat på kontoret"
-              fill
-              priority
+            {/* Originalfotoet i to størrelser: mobil henter 1200 px, store
+                skjermer 2400 px. next/image lager ikke srcset med statisk
+                eksport (unoptimized), derfor vanlig <img> + preload over. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={HERO.src}
+              srcSet={HERO.srcSet}
               sizes="100vw"
-              className="object-cover object-[70%_center]"
+              alt="Flyd-teamet i en uformell prat på kontoret"
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
             />
             <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
             <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />

@@ -9,6 +9,8 @@ export type Service = {
   fitFor: string;
   /** 2D-ikon fra Flyds ikonsett (components/ServiceIcon.tsx). */
   icon: ServiceIconName;
+  /** Ekte arbeidsbilde fra Flyd (4:3, WebP i public/tjenestebilder/). Vises på /tjenester. */
+  image?: { src: string; alt: string };
 };
 
 export const services: Service[] = [
@@ -27,6 +29,7 @@ export const services: Service[] = [
     ],
     fitFor: 'Bedrifter som vil ha et trygt regnskap – og en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
     icon: 'regnskap',
+    image: { src: '/tjenestebilder/regnskap-radgivning.webp', alt: 'To Flyd-rådgivere i samtale over en kopp kaffe' },
   },
   {
     id: 'programvare',
@@ -42,6 +45,7 @@ export const services: Service[] = [
     ],
     fitFor: 'Virksomheter som skal bytte system, har vokst ut av det gamle, eller skal rydde opp etter en halvferdig implementering.',
     icon: 'erp',
+    image: { src: '/tjenestebilder/programvare.webp', alt: 'To kolleger går gjennom et forretningssystem sammen ved skjermen' },
   },
   {
     id: 'integrasjoner',
@@ -57,6 +61,7 @@ export const services: Service[] = [
     ],
     fitFor: 'Bedrifter som opplever at data ikke stemmer mellom systemer, eller som gjør mye manuelt arbeid som burde vært automatisk.',
     icon: 'integrasjoner',
+    image: { src: '/tjenestebilder/integrasjoner.webp', alt: 'Flyd-ansatt arbeider ved bred skjerm og laptop, med utsikt over Egersund' },
   },
   {
     id: 'analyse',
@@ -72,6 +77,7 @@ export const services: Service[] = [
     ],
     fitFor: 'Ledere som vil bytte ut magefølelsen med fakta, uten å bli oversvømt av tabeller.',
     icon: 'analyse',
+    image: { src: '/tjenestebilder/analyse.webp', alt: 'Kollega presenterer for teamet på møterommet' },
   },
   {
     id: 'nettsider',
@@ -87,6 +93,7 @@ export const services: Service[] = [
     ],
     fitFor: 'Virksomheter som vil ha en nettside eller digital løsning som henger sammen med resten av driften – ikke bare en frittstående markedsside.',
     icon: 'nettsider',
+    image: { src: '/tjenestebilder/nettsider.webp', alt: 'Flyd-ansatt jobber med en nettside på bred skjerm' },
   },
   {
     id: 'lonn',
@@ -102,6 +109,7 @@ export const services: Service[] = [
     ],
     fitFor: 'Bedrifter som vil ha trygghet på at lønn og rapportering er riktig – og at de ansatte blir ivaretatt.',
     icon: 'lonn',
+    image: { src: '/tjenestebilder/lonn-hr.webp', alt: 'Kollega ved pulten smiler opp til en kollega som stikker innom' },
   },
 ];
 

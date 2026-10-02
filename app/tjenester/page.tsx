@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Check } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
@@ -89,6 +90,17 @@ export default function TjenesterPage() {
                   <p className="mt-6 font-display text-ingress font-medium text-flyd-petrol">
                     {s.short}
                   </p>
+                  {s.image && (
+                    <div className="relative mt-10 aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint">
+                      <Image
+                        src={s.image.src}
+                        alt={s.image.alt}
+                        fill
+                        sizes="(min-width: 1024px) 40vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div className="lg:col-span-7" data-reveal>

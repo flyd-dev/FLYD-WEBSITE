@@ -15,6 +15,11 @@ export type Office = {
    * Google Bedriftsprofil.
    */
   image?: { src: string; alt: string };
+  /**
+   * Bilder fra kontoret og folkene der (4:3, WebP i public/kontor/). Valgfritt –
+   * vises som en egen bildeseksjon på kontorsiden når det finnes.
+   */
+  gallery?: { src: string; alt: string }[];
   /** Preposisjon foran stedsnavnet («på Moi», «i Egersund»). Standard er «i». */
   preposition?: 'i' | 'på';
 };
@@ -51,6 +56,20 @@ export const offices: Office[] = [
       src: '/kontor/egersund.webp',
       alt: 'Torvgården på torget i Egersund, der Flyd-kontoret ligger',
     },
+    gallery: [
+      {
+        src: '/kontor/egersund-velkommen.webp',
+        alt: 'Kolleger i en uformell prat på kontoret i Egersund, med velkomstskiltet på pulten',
+      },
+      {
+        src: '/kontor/egersund-torget.webp',
+        alt: 'Tre kolleger ved skjermen, med utsikt over torget i Egersund',
+      },
+      {
+        src: '/kontor/egersund-mote.webp',
+        alt: 'Teamet i Egersund samlet rundt møtebordet ved vinduene mot sentrum',
+      },
+    ],
   },
   {
     city: 'Sokndal',

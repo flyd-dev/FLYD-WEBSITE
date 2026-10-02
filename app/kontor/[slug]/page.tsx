@@ -202,6 +202,37 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
         </Container>
       </Section>
 
+      {/* BILDER FRA KONTORET – kun når kontoret har egne bilder */}
+      {office.gallery && office.gallery.length > 0 && (
+        <Section tone="sand" className="!pt-0">
+          <Container>
+            <div className="border-t border-flyd-linje-sand pt-12 md:pt-16" data-reveal>
+              <Eyebrow>Fra kontoret</Eyebrow>
+              <h2 className="mt-5 font-display text-display-md font-semibold">
+                Hos oss {atOffice(office)}.
+              </h2>
+            </div>
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-5">
+              {office.gallery.map((img) => (
+                <div
+                  key={img.src}
+                  data-reveal
+                  className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint"
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(min-width: 640px) 33vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
       {/* TJENESTER LOKALT – Petrol som seksjonsskille */}
       <Section tone="petrol">
         <Container>

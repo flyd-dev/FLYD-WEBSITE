@@ -1,5 +1,18 @@
 # Endringslogg — analyse-forbedringer
 
+## Flere bilder av de ansatte (2.10.2026)
+
+Bilder fra fotograferingen på Egersund-kontoret (194 originaler, 8256 × 5504) er brukt der nettstedet manglet mennesker. Originalene ligger i SharePoint: FLYD AS › Grafisk profil › Profileringsbilder › Egersund.
+
+- **/tjenester:** hver tjeneste har fått et ekte arbeidsbilde (4:3, radius 24 px) under ingressen i venstre spalte. Bildene ligger i `public/tjenestebilder/` og styres av det nye feltet `image` i `data/services.ts`. Mappen heter ikke `tjenester/` for å ikke kollidere med ruten.
+- **Kontorsidene:** nytt valgfritt felt `gallery` i `data/offices.ts`. Når det finnes, vises seksjonen «Fra kontoret – Hos oss i/på …» med tre bilder. Egersund har fått tre bilder (velkomstskiltet, utsikten mot torget og møterommet).
+- **Forsiden:** heltebildet (DSC_5138) er byttet til originalen i 1200 og 2400 px med `srcset` og preload, så store skjermer får et skarpere bilde og mobil fortsatt henter den lille filen. `public/process-bg/videreutvikling.webp` (1400 px) er fjernet.
+- **Valgt bort:** bilder der skjermen viser kundelister eller lønnstall (bl.a. DSC_4860, DSC_4875, DSC_4877). Sju originaler over 5 MB kunne ikke hentes gjennom Microsoft 365-tilkoblingen; de er nesten-duplikater av nabobildene.
+
+Verifisert: `tsc` OK; `npm run build` OK; skjermbilder av /tjenester, /kontor/egersund og forsiden i desktop og mobil (to runder).
+
+---
+
 ## Redesign etter designmanualen v1.0 (1.10.2026)
 
 Hele nettstedet er tegnet om etter Flyd Designmanual v1.0 (sept. 2026). Innhold og URL-er er uendret; endringen er visuell.
