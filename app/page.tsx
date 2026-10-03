@@ -1,5 +1,4 @@
 import { preload } from 'react-dom';
-import { Cloud, Layers, Plug, Sparkles } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
@@ -13,18 +12,11 @@ import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { Typewriter } from '@/components/ui/typewriter';
 import type { ServiceTone } from '@/components/ServiceIcon';
-import type { FlydIconName } from '@/components/FlydIcon';
+import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
 import { services, erpSystems } from '@/data/services';
 import { stats } from '@/data/stats';
 
 const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
-
-const erpIcons: Record<string, typeof Cloud> = {
-  tripletex: Cloud,
-  visma: Layers,
-  unimicro: Plug,
-  poweroffice: Sparkles,
-};
 
 const whyFlyd: { icon: FlydIconName; text: string }[] = [
   { icon: 'samme-tak', text: 'Regnskap, rådgivning og teknologi under samme tak' },
@@ -238,27 +230,24 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5">
-            {erpSystems.map((e) => {
-              const Icon = erpIcons[e.id] ?? Cloud;
-              return (
-                <div key={e.id} data-reveal className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
-                  <div className="flex flex-wrap items-center gap-4">
-                    <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-flis bg-flyd-sand text-flyd-teal">
-                      <Icon className="h-6 w-6" strokeWidth={2} aria-hidden="true" />
-                    </span>
-                    <h3 className="font-display text-[24px] font-semibold leading-tight">
-                      {e.name}
-                    </h3>
-                  </div>
-                  <span className="mt-5 inline-flex rounded-pille border border-flyd-teal px-3 py-1.5 text-[11px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-petrol">
-                    {e.tagline}
+            {erpSystems.map((e) => (
+              <div key={e.id} data-reveal className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
+                <div className="flex flex-wrap items-center gap-4">
+                  <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-flis bg-flyd-sand text-flyd-teal">
+                    <FlydIcon name={e.icon} className="h-6 w-6" />
                   </span>
-                  <p className="mt-4 text-[16px] leading-[1.6] text-flyd-skifer">
-                    {e.description}
-                  </p>
+                  <h3 className="font-display text-[24px] font-semibold leading-tight">
+                    {e.name}
+                  </h3>
                 </div>
-              );
-            })}
+                <span className="mt-5 inline-flex rounded-pille border border-flyd-teal px-3 py-1.5 text-[11px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-petrol">
+                  {e.tagline}
+                </span>
+                <p className="mt-4 text-[16px] leading-[1.6] text-flyd-skifer">
+                  {e.description}
+                </p>
+              </div>
+            ))}
           </div>
 
           <div className="mt-10" data-reveal>

@@ -1,5 +1,17 @@
 # Endringslogg — analyse-forbedringer
 
+## Tre nye ikoner i Flyd-stil (3.10.2026)
+
+Settet manglet ikoner to steder der det trengtes. De nye er tegnet etter samme mal som de 22 i `brand_assets/ikoner/`: Lucide-geometri på 24×24, 2 px strek og Korall-punktum. SVG-ene ligger sammen med resten av settet.
+
+- **Klokke** (`klokke.svg`): åpningstidene på kontorsidene. Punktumet er dreiepunktet for viserne, som i «i drift». Nå har alle fire radene i «Besøk oss» samme stil.
+- **Sky** (`sky.svg`) og **plugg** (`plugg.svg`): systemkortene under «Programvare» på forsiden. Ikonene speiler taglinen til hvert system: Tripletex («skybasert») har sky, Visma («komplett ERP») har ERP, UniMicro («integrerbart») har plugg og PowerOffice Go («automatisert») har automatisering. Før var dette Lucide-ikoner uten punktum, og stjerne-ikonet til PowerOffice sa ingenting. Ikonet ligger nå i `icon` i `erpSystems` (`data/services.ts`), ikke i et oppslag i siden.
+- **Fortsatt Lucide:** piler, meny, skjemastatus, hakene i tjenestelistene og 16 px-ikonene på teamkortene og i stillingslisten.
+
+Verifisert: `tsc` OK; `npm run build` OK; skjermbilder før og etter av «Programvare» på forsiden og «Besøk oss» på /kontor/egersund i desktop og mobil.
+
+---
+
 ## Flyds ikonsett tatt i bruk (3.10.2026)
 
 Det nye ikonsettet (22 ikoner i Lucide-stil med Korall-punktum) ligger i `brand_assets/ikoner/`. Ikonene nettstedet bruker er lagt inn i `components/FlydIcon.tsx`. Ikonene er bare brukt der de forklarer innholdet:

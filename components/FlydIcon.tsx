@@ -7,7 +7,8 @@ import type { ReactNode } from 'react';
  *
  * Strek i Flyd-teal på lys bunn og Mint på mørk; punktumet er alltid Korall.
  * Bare ikonene nettstedet bruker er lagt inn her – resten av settet ligger i
- * brand_assets/ikoner/.
+ * brand_assets/ikoner/. Klokke, sky og plugg er tegnet etter samme mal
+ * (Lucide-geometri, punktumet som dreiepunkt eller midt i formen).
  */
 const icons = {
   'samme-tak': {
@@ -133,6 +134,28 @@ const icons = {
       </>
     ),
     dot: [10.5, 7.5],
+  },
+  klokke: {
+    body: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3.5 2" />
+      </>
+    ),
+    dot: [10.5, 10.5],
+  },
+  sky: {
+    body: <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />,
+    dot: [10.5, 11.5],
+  },
+  plugg: {
+    body: (
+      <>
+        <path d="M12 22v-5M9 8V2M15 8V2" />
+        <path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z" />
+      </>
+    ),
+    dot: [10.5, 11],
   },
 } satisfies Record<string, { body: ReactNode; dot: [number, number] }>;
 

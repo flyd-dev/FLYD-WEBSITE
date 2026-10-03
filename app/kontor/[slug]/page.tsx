@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Eyebrow from "@/components/Eyebrow";
@@ -181,7 +181,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                       </a>
                     </div>
                     <div className={visitRow}>
-                      <Clock className={visitIcon} strokeWidth={2} aria-hidden="true" />
+                      <FlydIcon name="klokke" className={visitIcon} />
                       <span>{openingHours.label}</span>
                     </div>
                   </div>

@@ -1,4 +1,5 @@
 import type { ServiceIconName } from '@/components/ServiceIcon';
+import type { FlydIconName } from '@/components/FlydIcon';
 
 export type Service = {
   id: string;
@@ -118,6 +119,8 @@ export type ErpSystem = {
   name: string;
   tagline: string;
   description: string;
+  /** Ikon fra Flyds ikonsett (components/FlydIcon.tsx) som speiler taglinen. Vises på forsiden. */
+  icon: FlydIconName;
 };
 
 export const erpSystems: ErpSystem[] = [
@@ -125,24 +128,28 @@ export const erpSystems: ErpSystem[] = [
     id: 'tripletex',
     name: 'Tripletex',
     tagline: 'Brukervennlig og skybasert',
+    icon: 'sky',
     description: 'Moderne, skybasert regnskaps- og ERP-system som er raskt å komme i gang med – skalerer fint fra små til relativt store virksomheter.',
   },
   {
     id: 'visma',
     name: 'Visma Business NXT',
     tagline: 'Komplett ERP',
+    icon: 'erp',
     description: 'Komplett forretningssystem for mellomstore og større bedrifter med behov for dybde i økonomi, logistikk og prosjekt.',
   },
   {
     id: 'unimicro',
     name: 'UniMicro',
     tagline: 'Fleksibelt og integrerbart',
+    icon: 'plugg',
     description: 'Fleksibelt system med gode integrasjonsmuligheter. Egner seg godt når du trenger skreddersøm og datakobling til andre løsninger.',
   },
   {
     id: 'poweroffice',
     name: 'PowerOffice Go',
     tagline: 'Moderne og automatisert',
+    icon: 'automatisering',
     description: 'Moderne, automatisert regnskap. Favoritt hos regnskapsbyråer og bedrifter som prioriterer enkelhet og automatisering.',
   },
 ];
