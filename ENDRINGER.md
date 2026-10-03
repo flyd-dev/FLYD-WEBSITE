@@ -1,5 +1,24 @@
 # Endringslogg — analyse-forbedringer
 
+## Flyds ikonsett tatt i bruk (3.10.2026)
+
+Det nye ikonsettet (22 ikoner i Lucide-stil med Korall-punktum) ligger i `brand_assets/ikoner/`. Ikonene nettstedet bruker er lagt inn i `components/FlydIcon.tsx`. Ikonene er bare brukt der de forklarer innholdet:
+
+- **Forsiden, «Hvorfor Flyd»:** de seks punktene har fått hvert sitt ikon i stedet for 01–06. Punktene er grunner, ikke en rekkefølge, så tall ga ingen mening. Ikonene er samme tak, sparring, ERP, automatisering, lokal og innsikt, i Mint med Korall-punktum på Petrol. `NumberedList` har fått en valgfri `icons`-prop, og listen blir da en `<ul>`.
+- **Forsiden, «Slik jobber vi»:** ikonene dialog, plan, i drift og videreutvikling står foran «Steg 01–04». De ligger i det mørke feltet av overlayet, ikke oppe på fotoet.
+- **/kontakt:** e-post, telefon og org.nr. har fått Flyd-ikoner (org.nr. bruker bygget fra `kunder`).
+- **Kontorsidene og kontorkortene:** adresse (lokal), telefon og e-post. Klokken for åpningstider er fortsatt Lucide, fordi settet ikke har noe klokkeikon.
+- **/karriere, «Seks grunner»:** alle seks kortene har Flyd-ikoner i stedet for tilfeldige Lucide-ikoner. Moderne fagmiljø har samme tak, personlig utvikling har videreutvikling, spennende kunder har kunder, læring og vekst har rosetten, godt arbeidsmiljø har medarbeidere og påvirke har sparring.
+- **Valgt bort:**
+  - Nøkkeltallene. Ikoner mellom topplinjen og tallet konkurrerte med tallene.
+  - Teamkortene og stillingslisten. På 16 px ble 60+ Korall-punktum bare støy.
+  - Tjenesteikonene. De eksisterende ikonene fra `brand_assets/tjenesteikoner/` er beholdt, og settets egne tjenesteikoner (regnskap, programvare, integrasjoner, analyse, nettsider, lønn/HR) er ikke brukt.
+  - `neste-steg`.
+
+Verifisert: `tsc` OK; `npm run build` OK; skjermbilder før og etter av forsiden, /kontakt, /kontor/egersund og /karriere i desktop og mobil.
+
+---
+
 ## Ingen like bilder på flere sider (2.10.2026)
 
 - **/om-flyd** brukte samme bilde som forsiden (DSC_5138). Siden har fått et eget stående teambilde fra Moi (`public/header/om-flyd-teamet.webp`). `public/header/DSC_5138.webp` er slettet.

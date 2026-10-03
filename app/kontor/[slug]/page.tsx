@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Clock, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Eyebrow from "@/components/Eyebrow";
@@ -11,6 +11,7 @@ import OfficeCards from "@/components/OfficeCards";
 import { ButtonLink } from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
+import FlydIcon from "@/components/FlydIcon";
 import { offices, getOfficeBySlug, openingHours, atOffice } from "@/data/offices";
 import { services } from "@/data/services";
 
@@ -155,7 +156,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                   <Eyebrow>Besøk oss</Eyebrow>
                   <div className="mt-5 space-y-4 text-[16px]">
                     <div className={visitRow}>
-                      <MapPin className={visitIcon} strokeWidth={2} aria-hidden="true" />
+                      <FlydIcon name="lokal" className={visitIcon} />
                       <div>
                         <div className="font-display font-semibold">
                           {office.city} · {office.name}
@@ -168,13 +169,13 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                       </div>
                     </div>
                     <div className={visitRow}>
-                      <Phone className={visitIcon} strokeWidth={2} aria-hidden="true" />
+                      <FlydIcon name="telefon" className={visitIcon} />
                       <a href="tel:+4748019958" className={visitLink}>
                         +47 480 19 958
                       </a>
                     </div>
                     <div className={visitRow}>
-                      <Mail className={visitIcon} strokeWidth={2} aria-hidden="true" />
+                      <FlydIcon name="epost" className={visitIcon} />
                       <a href="mailto:support@flyd.no" className={visitLink}>
                         support@flyd.no
                       </a>

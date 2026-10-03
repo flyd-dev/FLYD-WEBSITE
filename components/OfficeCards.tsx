@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import clsx from 'clsx';
-import { ArrowRight, MapPin } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import FlydIcon from './FlydIcon';
 import type { Office } from '@/data/offices';
 
 /**
@@ -33,7 +34,7 @@ export default function OfficeCards({
             compact ? 'p-6' : 'p-7 md:p-8',
           )}
         >
-          <MapPin className="h-6 w-6 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
+          <FlydIcon name="lokal" className="h-6 w-6 text-flyd-teal" />
           <h3
             className={clsx(
               'mt-5 font-display font-semibold leading-tight text-flyd-skog',

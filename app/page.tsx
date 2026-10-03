@@ -13,6 +13,7 @@ import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { Typewriter } from '@/components/ui/typewriter';
 import type { ServiceTone } from '@/components/ServiceIcon';
+import type { FlydIconName } from '@/components/FlydIcon';
 import { services, erpSystems } from '@/data/services';
 import { stats } from '@/data/stats';
 
@@ -25,19 +26,20 @@ const erpIcons: Record<string, typeof Cloud> = {
   poweroffice: Sparkles,
 };
 
-const whyFlyd = [
-  'Regnskap, rådgivning og teknologi under samme tak',
-  'Strategisk sparringspartner – ikke bare leverandør',
-  'Moderne ERP- og programvarekompetanse',
-  'Integrasjoner som reduserer manuelt arbeid',
-  'Lokal tilstedeværelse med personlig oppfølging',
-  'Innsikt og analyse som gir bedre beslutninger',
+const whyFlyd: { icon: FlydIconName; text: string }[] = [
+  { icon: 'samme-tak', text: 'Regnskap, rådgivning og teknologi under samme tak' },
+  { icon: 'sparring', text: 'Strategisk sparringspartner – ikke bare leverandør' },
+  { icon: 'erp', text: 'Moderne ERP- og programvarekompetanse' },
+  { icon: 'automatisering', text: 'Integrasjoner som reduserer manuelt arbeid' },
+  { icon: 'lokal', text: 'Lokal tilstedeværelse med personlig oppfølging' },
+  { icon: 'innsikt', text: 'Innsikt og analyse som gir bedre beslutninger' },
 ];
 
 const process: ProcessStep[] = [
   {
     n: '01',
     title: 'Dialog',
+    icon: 'dialog',
     body:
       'Vi starter med en uforpliktende samtale. Blir kjent med bedriften, systemene og hvor dere vil – og hvor skoen trykker i dag.',
     imgSrc: '/process-bg/dialog.webp',
@@ -45,6 +47,7 @@ const process: ProcessStep[] = [
   {
     n: '02',
     title: 'Plan',
+    icon: 'plan',
     body:
       'Vi designer en løsning tilpasset virksomheten: riktig ERP, integrasjoner, arbeidsflyt og hvem som gjør hva.',
     imgSrc: '/process-bg/plan.webp',
@@ -52,6 +55,7 @@ const process: ProcessStep[] = [
   {
     n: '03',
     title: 'I drift',
+    icon: 'i-drift',
     body:
       'Vi tar hånd om regnskap, lønn og rapportering. Dere får oppdaterte tall og en fast rådgiver å støtte dere på.',
     imgSrc: '/process-bg/drift.webp',
@@ -59,6 +63,7 @@ const process: ProcessStep[] = [
   {
     n: '04',
     title: 'Videreutvikling',
+    icon: 'videreutvikling',
     body:
       'Vi følger med, justerer og foreslår forbedringer. Systemet skal vokse med bedriften – ikke bremse den.',
     imgSrc: '/header/office-4.webp',
@@ -208,7 +213,11 @@ export default function HomePage() {
               </p>
             </div>
             <div className="lg:col-span-7">
-              <NumberedList items={whyFlyd} tone="dark" />
+              <NumberedList
+                items={whyFlyd.map((w) => w.text)}
+                icons={whyFlyd.map((w) => w.icon)}
+                tone="dark"
+              />
             </div>
           </div>
         </Container>

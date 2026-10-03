@@ -1,16 +1,6 @@
 'use client';
 
-import {
-  ArrowLeft,
-  ArrowRight,
-  Sparkles,
-  GraduationCap,
-  Users,
-  Building2,
-  HeartHandshake,
-  Compass,
-  type LucideIcon,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -22,24 +12,15 @@ import {
 } from '@/components/ui/carousel';
 import Container from '@/components/Container';
 import Eyebrow from '@/components/Eyebrow';
-
-const iconMap: Record<string, LucideIcon> = {
-  sparkles: Sparkles,
-  'graduation-cap': GraduationCap,
-  users: Users,
-  'building-2': Building2,
-  'heart-handshake': HeartHandshake,
-  compass: Compass,
-};
-
-export type Gallery4IconName = keyof typeof iconMap;
+import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
 
 export interface Gallery4Item {
   id: string;
   title: string;
   description: string;
   background: string;
-  icon?: Gallery4IconName;
+  /** Ikon fra Flyds ikonsett (components/FlydIcon.tsx). */
+  icon?: FlydIconName;
 }
 
 export interface Gallery4Props {
@@ -117,7 +98,6 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
         >
           <CarouselContent className="ml-0 px-6 md:px-10 lg:px-[max(2.5rem,calc(50vw-620px))]">
             {items.map((item) => {
-              const Icon = item.icon ? iconMap[item.icon] : undefined;
               return (
                 <CarouselItem
                   key={item.id}
@@ -134,9 +114,9 @@ const Gallery4 = ({ eyebrow, title, items }: Gallery4Props) => {
 
                     <div className="relative flex h-full flex-col justify-between p-7 text-flyd-sand md:p-8">
                       <div className="flex items-center justify-between">
-                        {Icon ? (
+                        {item.icon ? (
                           <div className="flex h-12 w-12 items-center justify-center rounded-flis bg-flyd-skog/70">
-                            <Icon className="h-6 w-6 text-flyd-mint" strokeWidth={2} aria-hidden="true" />
+                            <FlydIcon name={item.icon} className="h-6 w-6 text-flyd-mint" />
                           </div>
                         ) : (
                           <span />

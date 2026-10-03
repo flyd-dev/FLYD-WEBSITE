@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 const perks: Gallery4Item[] = [
   {
     id: 'fagmiljo',
-    icon: 'sparkles',
+    icon: 'samme-tak',
     title: 'Moderne fagmiljø',
     description:
       'Skjæringspunktet mellom økonomi, teknologi og rådgivning – der fag og systemer jobber sammen.',
@@ -39,7 +39,7 @@ const perks: Gallery4Item[] = [
   },
   {
     id: 'utvikling',
-    icon: 'graduation-cap',
+    icon: 'videreutvikling',
     title: 'Personlig utvikling',
     description:
       'Vi investerer i deg, både faglig og personlig. Din vekst er en del av vår vekst.',
@@ -47,7 +47,7 @@ const perks: Gallery4Item[] = [
   },
   {
     id: 'kunder',
-    icon: 'building-2',
+    icon: 'kunder',
     title: 'Spennende kunder',
     description:
       'Fra gründere til industrikonsern – ingen dag er lik, og hver kunde gir nye faglige løft.',
@@ -55,7 +55,7 @@ const perks: Gallery4Item[] = [
   },
   {
     id: 'laering',
-    icon: 'compass',
+    icon: 'statsautorisert',
     title: 'Læring og vekst',
     description:
       'Kurs, sertifiseringer og interne fagsamlinger – vi holder kompetansen skarp.',
@@ -63,7 +63,7 @@ const perks: Gallery4Item[] = [
   },
   {
     id: 'miljo',
-    icon: 'heart-handshake',
+    icon: 'medarbeidere',
     title: 'Godt arbeidsmiljø',
     description:
       'Trivsel, samarbeid og arbeidsglede er ikke bare ord – det er hvordan vi gjør ting.',
@@ -71,7 +71,7 @@ const perks: Gallery4Item[] = [
   },
   {
     id: 'pavirke',
-    icon: 'users',
+    icon: 'sparring',
     title: 'Påvirke',
     description:
       'Du får være med å forme din egen rolle og selskapet videre. Vi lytter.',

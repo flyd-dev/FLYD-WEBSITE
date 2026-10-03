@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { Mail, Phone, Building2 } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
+import FlydIcon from '@/components/FlydIcon';
 import ContactForm from '@/components/ContactForm';
 import OfficeCards from '@/components/OfficeCards';
 import JsonLd from '@/components/JsonLd';
@@ -47,7 +47,7 @@ export default function KontaktPage() {
 
               <dl className="mt-12 border-t border-flyd-linje-sand">
                 <div className="flex items-start gap-5 border-b border-flyd-linje-sand py-6">
-                  <Mail className="mt-1 h-6 w-6 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
+                  <FlydIcon name="epost" className="mt-1 h-6 w-6 flex-shrink-0 text-flyd-teal" />
                   <div>
                     <dt className="text-[15px] text-flyd-skifer">E-post</dt>
                     <dd className="mt-1">
@@ -58,7 +58,7 @@ export default function KontaktPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-5 border-b border-flyd-linje-sand py-6">
-                  <Phone className="mt-1 h-6 w-6 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
+                  <FlydIcon name="telefon" className="mt-1 h-6 w-6 flex-shrink-0 text-flyd-teal" />
                   <div>
                     <dt className="text-[15px] text-flyd-skifer">Telefon</dt>
                     <dd className="mt-1">
@@ -69,7 +69,7 @@ export default function KontaktPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-5 border-b border-flyd-linje-sand py-6">
-                  <Building2 className="mt-1 h-6 w-6 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
+                  <FlydIcon name="kunder" className="mt-1 h-6 w-6 flex-shrink-0 text-flyd-teal" />
                   <div>
                     <dt className="text-[15px] text-flyd-skifer">Org.nr.</dt>
                     <dd className="mt-1 font-display text-[22px] font-semibold">
