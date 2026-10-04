@@ -30,6 +30,7 @@ export default function PersonvernPage() {
           <h1 className="mt-6 font-display text-display-xl font-semibold">
             Slik behandler vi dine opplysninger.
           </h1>
+          <p className="mt-6 text-[15px] text-flyd-skifer">Sist oppdatert 4. oktober 2026.</p>
 
           <div className="mt-12 space-y-10 text-[17px] leading-[1.7] text-flyd-skifer">
             <section>
@@ -108,7 +109,7 @@ export default function PersonvernPage() {
               </p>
               <p className="mt-3">
                 I tillegg bruker vi Google Analytics og Microsoft Clarity for å
-                lage anonymisert statistikk om hvordan nettstedet brukes – blant
+                lage statistikk om hvordan nettstedet brukes – blant
                 annet hvilke sider som besøkes og hvordan man navigerer – slik at
                 vi kan forbedre innholdet. Disse informasjonskapslene settes kun
                 dersom du aktivt godtar dem i samtykkebanneren. Frem til du har
@@ -126,8 +127,8 @@ export default function PersonvernPage() {
               <p className="mt-3">
                 Når statistikk og annonsemåling er aktivert, behandles
                 opplysningene av Google og Microsoft som databehandlere på våre
-                vegne. IP-adressen din anonymiseres. Velger du «Kun nødvendige»,
-                samles ingen data inn via disse verktøyene.
+                vegne. Velger du «Kun nødvendige», samles ingen data inn via
+                disse verktøyene.
               </p>
               <p className="mt-3">
                 Du kan når som helst trekke tilbake eller endre samtykket ditt

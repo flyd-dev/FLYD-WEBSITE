@@ -1,5 +1,39 @@
 # Endringslogg — analyse-forbedringer
 
+## Tekstgjennomgang av hele nettstedet (4.10.2026)
+
+All synlig tekst på de 13 sidene er lest gjennom (inkludert sidetitler, skjema og cookie-banner).
+
+- **Feil rettet:**
+  - Knappene på /tjenester skrev «programvare / erp» og «lønn og hr». Nå blir bare første bokstav liten.
+  - «Full flyd.» med stor F på /om-flyd er byttet til «Én partner, ett nummer – full flyd.».
+  - «tilstede» er rettet til «til stede».
+  - «UniMicro» er rettet til «Uni Micro».
+  - Prosessteg 01 manglet subjekt.
+  - «data flyter dit den skal» er rettet til «dataene flyter dit de skal».
+- **Kontaktskjemaet:** temaene følger nå de seks tjenestene, pluss Karriere og Annet. Før manglet analyse, nettsider og lønn/HR. Make-scenariet bruker temaet bare som «Emne» i e-posten, så det sorterer ikke på verdiene.
+- **Moi og Flekkefjord:** bynavnet står ikke lenger to ganger («Moi · Moi»). `officeLabel()` og `hasOwnName()` i `data/offices.ts` viser navnet på bygget bare når det finnes.
+- **Gjentakelser fjernet:**
+  - «Kompetansehus»: kickeren på forsiden, «Hvorfor Flyd», kontorsidene og Moi-teksten.
+  - Punkt 2 i «Hvorfor Flyd» gjentok overskriften.
+  - Systembeskrivelsene gjentok taglinen. Nå sier de hvem systemet passer for.
+  - «Langsiktige relasjoner» stod to ganger på /om-flyd.
+  - Karriere: «alltid på utkikk» og «skjæringspunktet» stod to ganger hver, og «Læring og vekst» er nå «Faglig påfyll».
+  - Kontorsidene: «Som del av Flyd» er nå «Som kunde hos Flyd».
+- **Tone:** «du» overalt. Prosesstegene og nettsider-tjenesten sa «dere». Andre endringer:
+  - «dedikert» er nå «fast kontaktperson».
+  - «Ingen nummerskranker» er nå «Ingen nummerlapp og kø».
+  - «Påvirke» er nå «Rom for å påvirke».
+  - «Pensjon (OTP) og forsikring».
+- **Sidetitler:**
+  - Kontorsidene har nå «Regnskapsfører i Stavanger · Flyd». Før stod Flyd to ganger.
+  - 404-siden har egen tittel og `noindex`.
+- **Personvern:** løftene om «anonymisert statistikk» og «IP-adressen din anonymiseres» er fjernet, fordi de ikke stemmer med remarketing. Siden har fått datoen «Sist oppdatert». Om Google er databehandler eller selvstendig behandlingsansvarlig for remarketing, og om overføring til USA skal nevnes, er ikke avklart. Det må den som har ansvaret for personvern ta stilling til.
+
+Verifisert: `tsc` OK; `npm run build` OK; teksten er hentet fra alle sidene før og etter, og diffen inneholder bare de tilsiktede endringene. Skjermbilder av de berørte seksjonene i desktop og mobil.
+
+---
+
 ## Tre nye ikoner i Flyd-stil (3.10.2026)
 
 Settet manglet ikoner to steder der det trengtes. De nye er tegnet etter samme mal som de 22 i `brand_assets/ikoner/`: Lucide-geometri på 24×24, 2 px strek og Korall-punktum. SVG-ene ligger sammen med resten av settet.

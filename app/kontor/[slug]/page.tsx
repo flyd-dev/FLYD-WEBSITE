@@ -12,7 +12,7 @@ import { ButtonLink } from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
 import FlydIcon from "@/components/FlydIcon";
-import { offices, getOfficeBySlug, openingHours, atOffice } from "@/data/offices";
+import { offices, getOfficeBySlug, openingHours, atOffice, officeLabel } from "@/data/offices";
 import { services } from "@/data/services";
 
 const SITE_URL = "https://www.flyd.no";
@@ -29,7 +29,7 @@ export function generateMetadata({
   const office = getOfficeBySlug(params.slug);
   if (!office) return { title: "Kontor ikke funnet" };
   return {
-    title: `Regnskapsfører ${office.city} – Flyd ${office.city}`,
+    title: `Regnskapsfører ${atOffice(office)}`,
     description: `${office.blurb} Regnskap, rådgivning og teknologi – lokalt ${atOffice(office)}.`,
     alternates: { canonical: `/kontor/${office.slug}/` },
   };
@@ -123,10 +123,9 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 {office.blurb}
               </p>
               <p className="mt-5 max-w-2xl text-[17px] leading-[1.7] text-flyd-skifer">
-                Som del av Flyd får du mer enn løpende regnskap: rådgivning,
+                Som kunde hos Flyd får du mer enn løpende regnskap: rådgivning,
                 riktig forretningssystem og integrasjoner som fjerner manuelt
-                arbeid – fra ett kompetansehus, med en fast kontaktperson som
-                kjenner virksomheten din.
+                arbeid – og en fast kontaktperson som kjenner virksomheten din.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <ButtonLink href="/kontakt" variant="primary" withArrow>
@@ -159,7 +158,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                       <FlydIcon name="lokal" className={visitIcon} />
                       <div>
                         <div className="font-display font-semibold">
-                          {office.city} · {office.name}
+                          {officeLabel(office)}
                         </div>
                         <div className="mt-0.5 text-flyd-skifer">
                           {office.street}
@@ -297,7 +296,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
       <Section tone="lysmint">
         <Container>
           <div className="max-w-2xl" data-reveal>
-            <Eyebrow>Ett kompetansehus</Eyebrow>
+            <Eyebrow>Andre kontorer</Eyebrow>
             <h2 className="mt-5 font-display text-display-md font-semibold">
               Vi er også nær deg andre steder.
             </h2>

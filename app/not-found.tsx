@@ -1,8 +1,14 @@
+import type { Metadata } from 'next';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import FlydLogo from '@/components/FlydLogo';
 import { ButtonLink } from '@/components/Button';
+
+export const metadata: Metadata = {
+  title: 'Siden finnes ikke',
+  robots: { index: false },
+};
 
 export default function NotFound() {
   return (

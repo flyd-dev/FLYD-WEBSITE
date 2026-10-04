@@ -34,7 +34,7 @@ const perks: Gallery4Item[] = [
     icon: 'samme-tak',
     title: 'Moderne fagmiljø',
     description:
-      'Skjæringspunktet mellom økonomi, teknologi og rådgivning – der fag og systemer jobber sammen.',
+      'Regnskapsførere, rådgivere og ERP-konsulenter i samme team – der fag og systemer jobber sammen.',
     background: '/team-bg/DSC_4940.webp',
   },
   {
@@ -56,7 +56,7 @@ const perks: Gallery4Item[] = [
   {
     id: 'laering',
     icon: 'statsautorisert',
-    title: 'Læring og vekst',
+    title: 'Faglig påfyll',
     description:
       'Kurs, sertifiseringer og interne fagsamlinger – vi holder kompetansen skarp.',
     background: '/team-bg/perk-miljo.webp',
@@ -72,7 +72,7 @@ const perks: Gallery4Item[] = [
   {
     id: 'pavirke',
     icon: 'sparring',
-    title: 'Påvirke',
+    title: 'Rom for å påvirke',
     description:
       'Du får være med å forme din egen rolle og selskapet videre. Vi lytter.',
     background: '/team-bg/perk-pavirke.webp',
@@ -231,7 +231,7 @@ export default function KarrierePage() {
               <p className="mt-3 text-[16px] leading-[1.65] text-flyd-skog">
                 {jobs.length > 0
                   ? 'Finner du ikke en stilling som passer? Send oss en åpen søknad – vi leser alt som kommer inn og tar kontakt når noe passer.'
-                  : 'Vi er alltid på utkikk etter dyktige folk. Send oss en åpen søknad – vi leser alt som kommer inn og tar kontakt når noe passer.'}
+                  : 'Send oss gjerne en åpen søknad likevel – vi leser alt som kommer inn og tar kontakt når noe passer.'}
               </p>
             </div>
             <div className="md:ml-auto">

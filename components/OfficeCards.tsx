@@ -2,7 +2,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { ArrowRight } from 'lucide-react';
 import FlydIcon from './FlydIcon';
-import type { Office } from '@/data/offices';
+import { hasOwnName, type Office } from '@/data/offices';
 
 /**
  * Kontorkort: Sand-kort på Lys mint, radius 16 px, uten skygge og kantlinje.
@@ -43,7 +43,7 @@ export default function OfficeCards({
           >
             {o.city}
           </h3>
-          {!compact && <p className="mt-1 text-[15px] text-flyd-skifer">{o.name}</p>}
+          {!compact && hasOwnName(o) && <p className="mt-1 text-[15px] text-flyd-skifer">{o.name}</p>}
           <p className="mt-3 text-[15px] leading-relaxed text-flyd-skifer">
             {o.street}
             {!compact && (

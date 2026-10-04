@@ -125,7 +125,7 @@ export const offices: Office[] = [
     lat: 58.4621,
     lng: 6.5334,
     blurb:
-      'Moi-kontoret betjener Lund og områdene langs E39 mellom Egersund og Flekkefjord. En lokal regnskapspartner – med kompetansen til hele kompetansehuset bak seg.',
+      'Moi-kontoret betjener Lund og områdene langs E39 mellom Egersund og Flekkefjord. En lokal regnskapspartner, med kolleger på fem andre kontorer å spille på.',
     image: {
       src: '/kontor/moi.webp',
       alt: 'Fasaden på Flyd-kontoret i Øyevollveien 10 på Moi, med flyd-skilt over inngangen',
@@ -222,6 +222,16 @@ export const openingHours = {
 /** Stedsnavnet med riktig preposisjon, f.eks. «på Moi» eller «i Egersund». */
 export function atOffice(office: Office): string {
   return `${office.preposition ?? 'i'} ${office.city}`;
+}
+
+/** Har kontoret ikke eget navn på bygget (navnet = bynavnet), vises bare byen – ikke «Moi · Moi». */
+export function hasOwnName(office: Office): boolean {
+  return office.name !== office.city;
+}
+
+/** «Egersund · Torvgården», eller bare «Moi» når kontoret ikke har eget navn. */
+export function officeLabel(office: Office): string {
+  return hasOwnName(office) ? `${office.city} · ${office.name}` : office.city;
 }
 
 export function getOfficeBySlug(slug: string): Office | undefined {

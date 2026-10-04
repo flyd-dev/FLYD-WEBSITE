@@ -129,7 +129,7 @@ export default function TjenesterPage() {
 
                   <div className="mt-10">
                     <ButtonLink href="/kontakt" variant="primary" withArrow>
-                      Snakk med oss om {s.title.toLowerCase()}
+                      Snakk med oss om {s.title.charAt(0).toLowerCase() + s.title.slice(1)}
                     </ButtonLink>
                   </div>
                 </div>

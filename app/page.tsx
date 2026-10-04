@@ -20,7 +20,7 @@ const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
 
 const whyFlyd: { icon: FlydIconName; text: string }[] = [
   { icon: 'samme-tak', text: 'Regnskap, rådgivning og teknologi under samme tak' },
-  { icon: 'sparring', text: 'Strategisk sparringspartner – ikke bare leverandør' },
+  { icon: 'sparring', text: 'Rådgivere som stiller spørsmål – ikke bare leverer tall' },
   { icon: 'erp', text: 'Moderne ERP- og programvarekompetanse' },
   { icon: 'automatisering', text: 'Integrasjoner som reduserer manuelt arbeid' },
   { icon: 'lokal', text: 'Lokal tilstedeværelse med personlig oppfølging' },
@@ -33,7 +33,7 @@ const process: ProcessStep[] = [
     title: 'Dialog',
     icon: 'dialog',
     body:
-      'Vi starter med en uforpliktende samtale. Blir kjent med bedriften, systemene og hvor dere vil – og hvor skoen trykker i dag.',
+      'Vi starter med en uforpliktende samtale og blir kjent med bedriften, systemene og hvor du vil – og hvor skoen trykker i dag.',
     imgSrc: '/process-bg/dialog.webp',
   },
   {
@@ -49,7 +49,7 @@ const process: ProcessStep[] = [
     title: 'I drift',
     icon: 'i-drift',
     body:
-      'Vi tar hånd om regnskap, lønn og rapportering. Dere får oppdaterte tall og en fast rådgiver å støtte dere på.',
+      'Vi tar hånd om regnskap, lønn og rapportering. Du får oppdaterte tall og en fast rådgiver å støtte deg på.',
     imgSrc: '/process-bg/drift.webp',
   },
   {
@@ -95,7 +95,7 @@ export default function HomePage() {
 
             <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
               <div className="max-w-2xl" data-reveal>
-                <Eyebrow tone="dark">Kompetansehus for økonomi og teknologi</Eyebrow>
+                <Eyebrow tone="dark">Regnskap, rådgivning og teknologi</Eyebrow>
                 <h1 className="mt-6 font-display text-display-xl font-semibold text-flyd-sand">
                   Økonomi og teknologi
                   <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
@@ -200,8 +200,8 @@ export default function HomePage() {
               </h2>
               <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
                 Flyd kombinerer fagkompetanse med moderne teknologiforståelse. Vi
-                er ikke et tradisjonelt regnskapsbyrå – vi er et kompetansehus som
-                hjelper bedrifter med å se hele bildet.
+                er ikke et tradisjonelt regnskapsbyrå – vi ser tallene, systemene
+                og arbeidsflyten under ett.
               </p>
             </div>
             <div className="lg:col-span-7">

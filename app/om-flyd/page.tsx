@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 const values = [
   {
     title: 'Personlig',
-    body: 'Vi kjenner kundene våre og følger dem opp individuelt. Ingen nummerskranker.',
+    body: 'Vi kjenner kundene våre og følger dem opp individuelt. Ingen nummerlapp og kø.',
   },
   {
     title: 'Nær',
@@ -133,13 +133,13 @@ export default function OmFlydPage() {
                 Langsiktige relasjoner.
               </h2>
               <blockquote className="mt-10 border-l-4 border-flyd-korall pl-6 font-display text-[24px] font-semibold leading-[1.3] text-flyd-mint">
-                Én partner. Ett nummer. Full flyd.
+                Én partner, ett nummer – full flyd.
               </blockquote>
             </div>
             <div className="space-y-6 lg:col-span-7" data-reveal>
               <p className="font-display text-ingress font-medium text-flyd-sand">
-                Vi tror på langsiktige relasjoner. Hver kunde får en dedikert
-                kontaktperson som kjenner virksomheten, utfordringene og målene.
+                Hver kunde får en fast kontaktperson som kjenner virksomheten,
+                utfordringene og målene – og som er der år etter år.
               </p>
               <p className="text-[17px] leading-[1.7] text-flyd-dempet">
                 Ved å kombinere fagkompetanse med teknologiforståelse skaper vi
@@ -206,7 +206,7 @@ export default function OmFlydPage() {
               Seks steder. Én partner.
             </h2>
             <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
-              Vi er lokalt tilstede der kundene våre er – fra Stavanger i nord
+              Vi er lokalt til stede der kundene våre er – fra Stavanger i nord
               til Flekkefjord i sør.
             </p>
           </div>

@@ -8,11 +8,15 @@ import { trackLead } from './Analytics';
 
 const WEBHOOK_URL = 'https://hook.eu2.make.com/g8aore8oidc681el311c4f1p55hmgxmx';
 
+// Samme navn som tjenestene i data/services.ts. Make-scenariet bruker temaet
+// bare som «Emne» i e-posten, så verdiene kan endres fritt.
 const topics = [
-  'Regnskap',
-  'Rådgivning',
-  'ERP og programvare',
+  'Regnskap og rådgivning',
+  'Programvare / ERP',
   'Integrasjoner',
+  'Analyse og rapportering',
+  'Nettsider og digitale flater',
+  'Lønn og HR',
   'Karriere',
   'Annet',
 ];
