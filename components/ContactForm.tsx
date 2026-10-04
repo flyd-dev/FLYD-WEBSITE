@@ -95,6 +95,8 @@ export default function ContactForm() {
     try {
       const payload = {
         name: String(formData.get('name') ?? '').trim(),
+        // Det ekte bedriftsfeltet. `company` under er honeypoten – Make sorterer bort boter på den.
+        bedrift: String(formData.get('bedrift') ?? '').trim(),
         email: String(formData.get('email') ?? '').trim(),
         phone: String(formData.get('phone') ?? '').trim(),
         subject: String(formData.get('topic') ?? '').trim(),

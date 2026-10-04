@@ -12,6 +12,7 @@ All synlig tekst på de 13 sidene er lest gjennom (inkludert sidetitler, skjema 
   - Prosessteg 01 manglet subjekt.
   - «data flyter dit den skal» er rettet til «dataene flyter dit de skal».
 - **Kontaktskjemaet:** temaene følger nå de seks tjenestene, pluss Karriere og Annet. Før manglet analyse, nettsider og lønn/HR. Make-scenariet bruker temaet bare som «Emne» i e-posten, så det sorterer ikke på verdiene.
+- **Bedriftsfeltet:** skjemaet sendte ikke det som ble skrevet i Bedrift. Payloaden har nå `bedrift`. E-posten i Make-scenariet må få `{{1.bedrift}}` for at det skal synes, og det gjøres i Make.
 - **Moi og Flekkefjord:** bynavnet står ikke lenger to ganger («Moi · Moi»). `officeLabel()` og `hasOwnName()` i `data/offices.ts` viser navnet på bygget bare når det finnes.
 - **Gjentakelser fjernet:**
   - «Kompetansehus»: kickeren på forsiden, «Hvorfor Flyd», kontorsidene og Moi-teksten.
