@@ -3,7 +3,11 @@
 ## Google Ads: riktige konverteringer og klikk-ID i skjemaet (6.10.2026)
 
 - **Jobbsøkere teller ikke som kunder.** Tema «Karriere» sendte `generate_lead`, så Google Ads lærte seg å finne jobbsøkere. Nå sender det `career_inquiry`, som ikke skal importeres i Ads. «Ta kontakt» på /karriere åpner skjemaet med Karriere valgt (`/kontakt?tema=karriere`).
-- **Klikk-ID følger henvendelsen.** `gclid` (eller `gbraid`/`wbraid` fra iOS) leses fra landingssiden og sendes til Make sammen med skjemaet. Den lagres i 90 dager, og bare når brukeren har godtatt alle. Velger brukeren «Kun nødvendige», slettes den. Med klikk-ID-en kan Make senere melde til Google Ads hvilke henvendelser som ble kunder. Make-scenariet må mappe `{{1.gclid}}` (og `gbraid`/`wbraid`) for å ta vare på den.
+- **Klikk-ID følger henvendelsen.** `gclid` (eller `gbraid`/`wbraid` fra iOS) leses fra landingssiden og sendes til Make sammen med skjemaet. Den lagres i 90 dager, og bare når brukeren har godtatt alle. Velger brukeren «Kun nødvendige», slettes den. Med klikk-ID-en kan Make senere melde til Google Ads hvilke henvendelser som ble kunder.
+- **Make:**
+  - Henvendelser fra annonser lagres i data store «Annonsehenvendelser flyd.no» med navn, bedrift, emne og klikk-ID. E-post, telefon og melding lagres ikke.
+  - Den interne e-posten viser «Fra Google-annonse: Ja/Nei». Ved «Ja» har den en lenke som registrerer at henvendelsen ble kunde. Lenken åpner en bekreftelsesside, så Outlooks lenkesjekk ikke kan registrere noe av seg selv.
+  - Et nattlig scenario sletter oppføringer eldre enn 90 dager.
 - **Personvern:** forklarer klikk-ID-en og at Google kan få vite om en henvendelse ble et kundeforhold, men ikke navn, e-post eller innhold.
 
 ## Tekstgjennomgang av hele nettstedet (4.10.2026)
