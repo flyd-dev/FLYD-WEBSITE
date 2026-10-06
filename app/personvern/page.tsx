@@ -30,7 +30,7 @@ export default function PersonvernPage() {
           <h1 className="mt-6 font-display text-display-xl font-semibold">
             Slik behandler vi dine opplysninger.
           </h1>
-          <p className="mt-6 text-[15px] text-flyd-skifer">Sist oppdatert 4. oktober 2026.</p>
+          <p className="mt-6 text-[15px] text-flyd-skifer">Sist oppdatert 6. oktober 2026.</p>
 
           <div className="mt-12 space-y-10 text-[17px] leading-[1.7] text-flyd-skifer">
             <section>
@@ -121,8 +121,11 @@ export default function PersonvernPage() {
                 Når du godtar alle, bruker vi også Google Ads til å måle om
                 annonsene våre fører til henvendelser (konverteringsmåling), og
                 til å vise annonser til deg som tidligere har besøkt flyd.no
-                (remarketing). Vi deler ikke navn, e-post eller innholdet i
-                henvendelsen din med Google – kun at et skjema ble sendt.
+                (remarketing). Kommer du fra en av annonsene våre, følger
+                annonsens klikk-ID med henvendelsen, slik at vi senere kan melde
+                til Google Ads om den førte til et kundeforhold. Vi deler ikke
+                navn, e-post eller innholdet i henvendelsen din med Google –
+                bare at et skjema ble sendt, og eventuelt at du ble kunde.
               </p>
               <p className="mt-3">
                 Når statistikk og annonsemåling er aktivert, behandles
@@ -133,7 +136,9 @@ export default function PersonvernPage() {
               <p className="mt-3">
                 Du kan når som helst trekke tilbake eller endre samtykket ditt
                 via «Endre samtykke»-lenken nederst på siden. Valget lagres
-                lokalt i nettleseren din.
+                lokalt i nettleseren din. Det gjør også en eventuell klikk-ID fra
+                en annonse, som slettes etter 90 dager eller når du trekker
+                tilbake samtykket.
               </p>
             </section>
           </div>

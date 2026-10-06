@@ -246,7 +246,7 @@ export default function KarrierePage() {
       <ClosingCta
         title="Lurer du på noe før du søker?"
         text="Ta en uformell prat med oss – vi svarer på alt fra arbeidshverdag til karriereveier, uten forpliktelse."
-        primary={{ href: '/kontakt', label: 'Ta kontakt' }}
+        primary={{ href: '/kontakt?tema=karriere', label: 'Ta kontakt' }}
         secondary={{ href: 'mailto:support@flyd.no', label: 'support@flyd.no', external: true }}
       />
     </>

@@ -1,5 +1,11 @@
 # Endringslogg — analyse-forbedringer
 
+## Google Ads: riktige konverteringer og klikk-ID i skjemaet (6.10.2026)
+
+- **Jobbsøkere teller ikke som kunder.** Tema «Karriere» sendte `generate_lead`, så Google Ads lærte seg å finne jobbsøkere. Nå sender det `career_inquiry`, som ikke skal importeres i Ads. «Ta kontakt» på /karriere åpner skjemaet med Karriere valgt (`/kontakt?tema=karriere`).
+- **Klikk-ID følger henvendelsen.** `gclid` (eller `gbraid`/`wbraid` fra iOS) leses fra landingssiden og sendes til Make sammen med skjemaet. Den lagres i 90 dager, og bare når brukeren har godtatt alle. Velger brukeren «Kun nødvendige», slettes den. Med klikk-ID-en kan Make senere melde til Google Ads hvilke henvendelser som ble kunder. Make-scenariet må mappe `{{1.gclid}}` (og `gbraid`/`wbraid`) for å ta vare på den.
+- **Personvern:** forklarer klikk-ID-en og at Google kan få vite om en henvendelse ble et kundeforhold, men ikke navn, e-post eller innhold.
+
 ## Tekstgjennomgang av hele nettstedet (4.10.2026)
 
 All synlig tekst på de 13 sidene er lest gjennom (inkludert sidetitler, skjema og cookie-banner).

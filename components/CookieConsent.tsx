@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { CONSENT_KEY, loadClarity } from './Analytics';
+import { CONSENT_KEY, forgetAdClick, loadClarity, rememberAdClick } from './Analytics';
 
 declare global {
   interface Window {
@@ -95,8 +95,10 @@ export default function CookieConsent() {
     });
     if (value === 'granted') {
       loadClarity();
+      rememberAdClick();
     } else {
       window.clarity?.('consent', false);
+      forgetAdClick();
     }
     setShown(false);
     document.body.style.overflow = '';

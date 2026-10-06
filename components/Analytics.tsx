@@ -46,6 +46,93 @@ export function trackLead(params: Record<string, string> = {}) {
 }
 
 /**
+ * Henvendelser om jobb får en egen hendelse, så Google Ads ikke lærer seg å
+ * finne jobbsøkere. Ikke importer denne som konvertering.
+ */
+export function trackCareerInquiry() {
+  window.gtag?.('event', 'career_inquiry', { form: 'kontakt' });
+}
+
+function hasConsent(): boolean {
+  try {
+    return localStorage.getItem(CONSENT_KEY) === 'granted';
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Klikk-ID fra Google Ads: gclid, eller gbraid/wbraid fra iOS-apper. Følger
+ * med kontaktskjemaet til Make, slik at vi kan melde tilbake til Ads hvilke
+ * henvendelser som ble kunder (offline-konverteringer). Lagres og sendes kun
+ * med samtykke – uten samtykke ligger den bare i minnet til siden lastes på nytt.
+ */
+const AD_CLICK_KEY = 'flyd-ad-click';
+const AD_CLICK_PARAMS = ['gclid', 'gbraid', 'wbraid'] as const;
+// Google Ads tar imot konverteringer opptil 90 dager etter klikket.
+const AD_CLICK_MAX_AGE_MS = 90 * 24 * 60 * 60 * 1000;
+
+export type AdClick = Record<(typeof AD_CLICK_PARAMS)[number], string>;
+type StoredAdClick = AdClick & { ts: number };
+
+let landedAdClick: StoredAdClick | null = null;
+
+function readAdClickFromUrl(): StoredAdClick | null {
+  const params = new URLSearchParams(window.location.search);
+  const click = { gclid: '', gbraid: '', wbraid: '', ts: Date.now() };
+  let found = false;
+  for (const key of AD_CLICK_PARAMS) {
+    const value = params.get(key) ?? '';
+    // Ekte ID-er er base64url. Alt annet skal ikke videre til Make.
+    if (/^[\w-]{1,200}$/.test(value)) {
+      click[key] = value;
+      found = true;
+    }
+  }
+  return found ? click : null;
+}
+
+/** Lagret klikk-ID som ikke er utløpt. Utløpte slettes. */
+function readStoredAdClick(): StoredAdClick | null {
+  try {
+    const stored = JSON.parse(localStorage.getItem(AD_CLICK_KEY) ?? 'null') as StoredAdClick | null;
+    if (!stored) return null;
+    if (Date.now() - stored.ts < AD_CLICK_MAX_AGE_MS) return stored;
+    localStorage.removeItem(AD_CLICK_KEY);
+  } catch {
+    /* ugyldig eller utilgjengelig */
+  }
+  return null;
+}
+
+/** Lagrer klikk-ID-en fra landingssiden. Kalles når samtykke er gitt. */
+export function rememberAdClick() {
+  if (!landedAdClick) return;
+  try {
+    localStorage.setItem(AD_CLICK_KEY, JSON.stringify(landedAdClick));
+  } catch {
+    /* localStorage utilgjengelig */
+  }
+}
+
+/** Sletter lagret klikk-ID. Kalles når samtykket trekkes tilbake. */
+export function forgetAdClick() {
+  try {
+    localStorage.removeItem(AD_CLICK_KEY);
+  } catch {
+    /* localStorage utilgjengelig */
+  }
+}
+
+/** Klikk-ID-en som skal følge henvendelsen, eller null uten samtykke. */
+export function getAdClick(): AdClick | null {
+  if (!hasConsent()) return null;
+  const click = landedAdClick ?? readStoredAdClick();
+  if (!click) return null;
+  return { gclid: click.gclid, gbraid: click.gbraid, wbraid: click.wbraid };
+}
+
+/**
  * Klikk på tel:/mailto:-lenker → «phone_click» / «email_click» i GA4.
  * Google forwarding-numre finnes ikke i Norge, så «anrop fra nettstedet» kan
  * ikke måles – klikk på nummeret er nærmeste vi kommer. Importeres i Ads.
@@ -76,13 +163,15 @@ function trackContactClick(e: MouseEvent) {
 export default function Analytics() {
   // Gjengangere som allerede har godtatt: last Clarity ved sidelast.
   useEffect(() => {
-    try {
-      if (localStorage.getItem(CONSENT_KEY) === 'granted') {
-        loadClarity();
-      }
-    } catch {
-      /* localStorage utilgjengelig */
-    }
+    if (hasConsent()) loadClarity();
+  }, []);
+
+  // Klikk-ID fra annonsen leses bare fra landingssiden. Analytics ligger i
+  // layouten, så den overlever klientnavigasjonen videre til /kontakt.
+  useEffect(() => {
+    landedAdClick = readAdClickFromUrl();
+    if (hasConsent()) rememberAdClick();
+    readStoredAdClick();
   }, []);
 
   // Capture-fase så vi rekker å sende før nettleseren åpner tel:/mailto:.

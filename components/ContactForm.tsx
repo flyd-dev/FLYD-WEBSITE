@@ -1,15 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
-import { trackLead } from './Analytics';
+import { getAdClick, trackCareerInquiry, trackLead } from './Analytics';
 
 const WEBHOOK_URL = 'https://hook.eu2.make.com/g8aore8oidc681el311c4f1p55hmgxmx';
 
 // Samme navn som tjenestene i data/services.ts. Make-scenariet bruker temaet
-// bare som «Emne» i e-posten, så verdiene kan endres fritt.
+// bare som «Emne» i e-posten, så verdiene kan endres fritt. Lenker kan velge
+// tema på forhånd med ?tema= (f.eks. /kontakt?tema=karriere).
+const CAREER_TOPIC = 'Karriere';
 const topics = [
   'Regnskap og rådgivning',
   'Programvare / ERP',
@@ -17,7 +19,7 @@ const topics = [
   'Analyse og rapportering',
   'Nettsider og digitale flater',
   'Lønn og HR',
-  'Karriere',
+  CAREER_TOPIC,
   'Annet',
 ];
 
@@ -48,6 +50,13 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const topicRef = useRef<HTMLSelectElement>(null);
+
+  useEffect(() => {
+    const tema = new URLSearchParams(window.location.search).get('tema')?.toLowerCase();
+    const match = topics.find((t) => t.toLowerCase() === tema);
+    if (match && topicRef.current) topicRef.current.value = match;
+  }, []);
 
   function validate(formData: FormData): FieldErrors {
     const errors: FieldErrors = {};
@@ -102,6 +111,8 @@ export default function ContactForm() {
         subject: String(formData.get('topic') ?? '').trim(),
         message: String(formData.get('message') ?? '').trim(),
         company: String(formData.get('company') ?? '').trim(),
+        // Klikk-ID fra Google Ads (tom uten annonseklikk eller samtykke).
+        ...(getAdClick() ?? { gclid: '', gbraid: '', wbraid: '' }),
       };
 
       const res = await fetch(WEBHOOK_URL, {
@@ -116,8 +127,13 @@ export default function ContactForm() {
 
       setStatus('success');
       form.reset();
-      // Konvertering til GA4/Google Ads – kun ekte innsendinger, ikke honeypot.
-      trackLead(payload.subject ? { topic: payload.subject } : {});
+      // Konvertering til GA4/Google Ads – kun ekte innsendinger, ikke honeypot,
+      // og ikke jobbsøkere.
+      if (payload.subject === CAREER_TOPIC) {
+        trackCareerInquiry();
+      } else {
+        trackLead(payload.subject ? { topic: payload.subject } : {});
+      }
     } catch {
       setStatus('error');
       setErrorMsg('Noe gikk galt. Prøv igjen, eller send direkte til support@flyd.no.');
@@ -232,6 +248,7 @@ export default function ContactForm() {
           Hva gjelder henvendelsen?
         </label>
         <select
+          ref={topicRef}
           id="topic"
           name="topic"
           defaultValue=""
