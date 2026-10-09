@@ -11,7 +11,7 @@ import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
 import { leadership, officeLeads, otherTeam } from '@/data/team';
 import { offices } from '@/data/offices';
-import { stats } from '@/data/stats';
+import { stat } from '@/data/stats';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -51,12 +51,7 @@ const values = [
 ];
 
 export default function OmFlydPage() {
-  const teamSize = leadership.length + officeLeads.length + otherTeam.length;
-  const figures = [
-    { value: String(teamSize), label: 'Medarbeidere' },
-    { value: String(offices.length), label: 'Kontorer' },
-    stats.find((s) => s.label === 'Kunder') ?? stats[0],
-  ];
+  const figures = [stat('medarbeidere'), stat('kontorer'), stat('kunder')];
 
   return (
     <>
@@ -165,7 +160,7 @@ export default function OmFlydPage() {
               </h2>
             </div>
             <div className="hidden text-right text-[15px] text-flyd-skifer md:block">
-              {teamSize} medarbeidere
+              {stat('medarbeidere').value} medarbeidere
               <br />
               {offices.length} kontorer
             </div>

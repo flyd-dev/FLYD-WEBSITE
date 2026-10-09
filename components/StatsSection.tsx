@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import type { Stat } from '@/data/stats';
 
-type Stat = { value: string; label: string };
+// [BEKREFT]-merknader vises lokalt og på forhåndsvisninger, aldri i produksjon.
+const visBekreft = process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production';
 
 function parseStat(value: string): { num: number | null; suffix: string } {
   const match = value.match(/^(\d+)(.*)$/);
@@ -23,11 +25,14 @@ function CountUp({
   delay: number;
   duration?: number;
 }) {
-  const [display, setDisplay] = useState(0);
-  const [done, setDone] = useState(false);
+  // Starter på måltallet, så HTML-en og første render har det ekte tallet.
+  const [display, setDisplay] = useState(target);
+  const [done, setDone] = useState(true);
 
   useEffect(() => {
     if (!start) return;
+    setDisplay(0);
+    setDone(false);
     let raf = 0;
     let startTime: number | null = null;
     const timeout = window.setTimeout(() => {
@@ -78,20 +83,21 @@ export default function StatsSection({
   columns?: 3 | 4;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  const [reduced, setReduced] = useState(false);
+  // Server-HTML og første render viser tallene ferdig. Animasjonen tar over
+  // bare når seksjonen ligger under bretten ved innlasting.
+  const [animate, setAnimate] = useState(false);
+  const [inView, setInView] = useState(true);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
     const prefersReduced = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches;
-    if (prefersReduced) {
-      setReduced(true);
-      setInView(true);
-      return;
-    }
-    const el = ref.current;
-    if (!el) return;
+    const alreadyVisible = el.getBoundingClientRect().top < window.innerHeight;
+    if (prefersReduced || alreadyVisible) return;
+    setAnimate(true);
+    setInView(false);
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -122,7 +128,7 @@ export default function StatsSection({
       {stats.map((s, i) => {
         const { num, suffix } = parseStat(s.value);
         const delay = blockDelayBase + i * stagger;
-        const canCount = num !== null && num > 0;
+        const canCount = animate && num !== null && num > 0;
 
         return (
           <div key={s.label}>
@@ -133,14 +139,14 @@ export default function StatsSection({
               style={{
                 transformOrigin: 'left center',
                 transform: inView ? 'scaleX(1)' : 'scaleX(0)',
-                transition: reduced ? 'none' : `transform ${blockDuration}ms ${ease} ${delay}ms`,
+                transition: !animate ? 'none' : `transform ${blockDuration}ms ${ease} ${delay}ms`,
               }}
             />
             <div
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? 'translateY(0)' : 'translateY(8px)',
-                transition: reduced
+                transition: !animate
                   ? 'none'
                   : `opacity ${blockDuration}ms ${ease} ${delay + 200}ms, transform ${blockDuration}ms ${ease} ${delay + 200}ms`,
               }}
@@ -150,13 +156,18 @@ export default function StatsSection({
                   columns === 3 ? 'text-[34px] md:text-[44px]' : 'text-[44px] md:text-[56px]'
                 }`}
               >
-                {canCount && !reduced ? (
+                {canCount ? (
                   <CountUp target={num!} suffix={suffix} start={inView} delay={delay + 200} />
                 ) : (
                   s.value
                 )}
               </div>
               <div className="mt-2 text-[15px] leading-snug text-flyd-skifer">{s.label}</div>
+              {visBekreft && !s.bekreftet && (
+                <div className="mt-1 text-[13px] font-medium text-flyd-skog">
+                  [BEKREFT: tallet]
+                </div>
+              )}
             </div>
           </div>
         );
