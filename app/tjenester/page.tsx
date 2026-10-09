@@ -12,6 +12,29 @@ import JsonLd from '@/components/JsonLd';
 import { ServiceTile, type ServiceTone } from '@/components/ServiceIcon';
 import { services, erpSystems } from '@/data/services';
 
+// Én Service per tjeneste. Ankeret (#id) er seksjonen på siden; får
+// tjenestene egne sider, peker url dit i stedet.
+const servicesJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: services.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      '@id': `https://www.flyd.no/tjenester/#${s.id}`,
+      name: s.title,
+      description: s.short,
+      url: `https://www.flyd.no/tjenester/#${s.id}`,
+      provider: { '@id': 'https://www.flyd.no/#organization' },
+      areaServed: [
+        { '@type': 'AdministrativeArea', name: 'Rogaland' },
+        { '@type': 'AdministrativeArea', name: 'Agder' },
+      ],
+    },
+  })),
+};
+
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -36,6 +59,7 @@ export default function TjenesterPage() {
   return (
     <ScrollProgressLineWrapper>
       <JsonLd data={breadcrumbJsonLd} />
+      <JsonLd data={servicesJsonLd} />
       {/* Seksjonsskille: Petrol, stor tittel og emnetagger. */}
       <Section tone="petrol" size="lg">
         <Container>
