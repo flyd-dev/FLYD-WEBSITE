@@ -10,7 +10,7 @@ import NumberedList from '@/components/NumberedList';
 import ProcessCards, { type ProcessStep } from '@/components/ProcessCards';
 import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink, TextLink } from '@/components/Button';
-import { Typewriter } from '@/components/ui/typewriter';
+import { HeroTypewriter, HeroTypewriterPause } from '@/components/HeroTypewriter';
 import type { ServiceTone } from '@/components/ServiceIcon';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
 import { services, erpSystems } from '@/data/services';
@@ -100,13 +100,8 @@ export default function HomePage() {
                   Økonomi og teknologi
                   <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
                     <span>– </span>
-                    <Typewriter
+                    <HeroTypewriter
                       text={['full flyd.', 'god kontroll.', 'full oversikt.', 'trygg vekst.']}
-                      speed={70}
-                      waitTime={1800}
-                      deleteSpeed={40}
-                      className="text-flyd-mint"
-                      cursorClassName="ml-1 text-flyd-mint"
                     />
                   </span>
                 </h1>
@@ -124,6 +119,7 @@ export default function HomePage() {
                   </ButtonLink>
                 </div>
               </div>
+              <HeroTypewriterPause className="absolute bottom-4 right-4 md:bottom-6 md:right-6" />
             </Container>
           </div>
         </div>

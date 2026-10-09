@@ -7,7 +7,14 @@ export default function PartnerStrip() {
   // bredde; med fast bredde stakk lista utenfor containeren på 768–1247 px
   // og ga hele siden horisontal scroll.
   return (
-    <div className="-mx-4 overflow-x-auto md:mx-0 md:overflow-visible">
+    // Rullbar stripe på mobil: må kunne nås og rulles med tastatur (axe
+    // scrollable-region-focusable). Fra md er det et vanlig grid.
+    <div
+      className="-mx-4 overflow-x-auto md:mx-0 md:overflow-visible"
+      role="region"
+      aria-label="Systemer og partnere vi jobber med"
+      tabIndex={0}
+    >
       <ul className="flex min-w-max items-center gap-10 px-4 md:grid md:min-w-0 md:grid-cols-4 md:gap-x-6 md:gap-y-8 md:px-0 lg:grid-cols-8">
         {partnerLogos.map((logo) => (
           <li

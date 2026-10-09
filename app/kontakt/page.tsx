@@ -46,36 +46,37 @@ export default function KontaktPage() {
               </p>
 
               <dl className="mt-12 border-t border-flyd-linje-sand">
-                <div className="flex items-start gap-5 border-b border-flyd-linje-sand py-6">
-                  <FlydIcon name="epost" className="mt-1 h-6 w-6 flex-shrink-0 text-flyd-teal" />
-                  <div>
-                    <dt className="text-[15px] text-flyd-skifer">E-post</dt>
-                    <dd className="mt-1">
-                      <a href="mailto:support@flyd.no" className={contactLink}>
-                        support@flyd.no
-                      </a>
-                    </dd>
-                  </div>
+                {/* Ikonet ligger i <dt>: en <div> i <dl> kan bare ha <dt>/<dd> som barn. */}
+                <div className="relative border-b border-flyd-linje-sand py-6 pl-11">
+                  <dt className="text-[15px] text-flyd-skifer">
+                    <FlydIcon name="epost" className="absolute left-0 top-7 h-6 w-6 text-flyd-teal" />
+                    E-post
+                  </dt>
+                  <dd className="mt-1">
+                    <a href="mailto:support@flyd.no" className={contactLink}>
+                      support@flyd.no
+                    </a>
+                  </dd>
                 </div>
-                <div className="flex items-start gap-5 border-b border-flyd-linje-sand py-6">
-                  <FlydIcon name="telefon" className="mt-1 h-6 w-6 flex-shrink-0 text-flyd-teal" />
-                  <div>
-                    <dt className="text-[15px] text-flyd-skifer">Telefon</dt>
-                    <dd className="mt-1">
-                      <a href="tel:+4748019958" className={contactLink}>
-                        +47 480 19 958
-                      </a>
-                    </dd>
-                  </div>
+                <div className="relative border-b border-flyd-linje-sand py-6 pl-11">
+                  <dt className="text-[15px] text-flyd-skifer">
+                    <FlydIcon name="telefon" className="absolute left-0 top-7 h-6 w-6 text-flyd-teal" />
+                    Telefon
+                  </dt>
+                  <dd className="mt-1">
+                    <a href="tel:+4748019958" className={contactLink}>
+                      +47 480 19 958
+                    </a>
+                  </dd>
                 </div>
-                <div className="flex items-start gap-5 border-b border-flyd-linje-sand py-6">
-                  <FlydIcon name="kunder" className="mt-1 h-6 w-6 flex-shrink-0 text-flyd-teal" />
-                  <div>
-                    <dt className="text-[15px] text-flyd-skifer">Org.nr.</dt>
-                    <dd className="mt-1 font-display text-[22px] font-semibold">
-                      933 662 934 · Flyd AS
-                    </dd>
-                  </div>
+                <div className="relative border-b border-flyd-linje-sand py-6 pl-11">
+                  <dt className="text-[15px] text-flyd-skifer">
+                    <FlydIcon name="kunder" className="absolute left-0 top-7 h-6 w-6 text-flyd-teal" />
+                    Org.nr.
+                  </dt>
+                  <dd className="mt-1 font-display text-[22px] font-semibold">
+                    933 662 934 · Flyd AS
+                  </dd>
                 </div>
               </dl>
             </div>

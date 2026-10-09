@@ -22,6 +22,8 @@ interface TypewriterProps {
     animate: Variants['animate'];
   };
   cursorClassName?: string;
+  /** Stopper skrivingen der den er (WCAG 2.2.2). */
+  paused?: boolean;
 }
 
 const Typewriter = ({
@@ -37,6 +39,7 @@ const Typewriter = ({
   hideCursorOnType = false,
   cursorChar = '|',
   cursorClassName = 'ml-1',
+  paused = false,
   cursorAnimationVariants = {
     initial: { opacity: 0 },
     animate: {
@@ -69,7 +72,7 @@ const Typewriter = ({
 
   useEffect(() => {
     // Ved redusert bevegelse: stå stille på første frase.
-    if (reducedMotion) return;
+    if (reducedMotion || paused) return;
 
     let timeout: ReturnType<typeof setTimeout>;
 
@@ -123,6 +126,7 @@ const Typewriter = ({
     loop,
     initialDelay,
     reducedMotion,
+    paused,
   ]);
 
   const activeClass =
@@ -132,8 +136,10 @@ const Typewriter = ({
 
   return (
     <span className={cn('inline tracking-tight', activeClass)}>
-      <span>{displayText}</span>
-      {showCursor && !reducedMotion && (
+      {/* Skjermlesere får første frase én gang, ikke hver bokstav som skrives. */}
+      <span className="sr-only">{firstText}</span>
+      <span aria-hidden="true">{displayText}</span>
+      {showCursor && !reducedMotion && !paused && (
         <motion.span
           variants={cursorAnimationVariants}
           className={cn(
@@ -145,6 +151,7 @@ const Typewriter = ({
           )}
           initial="initial"
           animate="animate"
+          aria-hidden="true"
         >
           {cursorChar}
         </motion.span>
