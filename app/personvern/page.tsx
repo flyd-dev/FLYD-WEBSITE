@@ -113,7 +113,8 @@ export default function PersonvernPage() {
                 annet hvilke sider som besøkes og hvordan man navigerer – slik at
                 vi kan forbedre innholdet. Disse informasjonskapslene settes kun
                 dersom du aktivt godtar dem i samtykkebanneren. Frem til du har
-                gitt samtykke, samler vi ikke inn data via disse verktøyene. Det
+                gitt samtykke, lastes ikke skriptene fra Google og Microsoft i
+                det hele tatt, og det samles ikke inn data via dem. Det
                 rettslige grunnlaget er ditt samtykke, jf. ekomloven og
                 personvernforordningen (GDPR).
               </p>

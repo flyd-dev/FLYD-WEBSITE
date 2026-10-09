@@ -1,6 +1,5 @@
 'use client';
 
-import Script from 'next/script';
 import { useEffect } from 'react';
 
 export const GA_ID = 'G-WQT5M2TYEM';
@@ -149,11 +148,52 @@ function trackContactClick(e: MouseEvent) {
 }
 
 /**
- * Google Analytics 4 med Google Consent Mode v2, samt Microsoft Clarity.
+ * Laster Google-taggen (GA4, som også sender konverteringer til Google Ads).
+ * Kalles kun når brukeren har gitt samtykke. Idempotent – gtag.js injiseres
+ * maks én gang.
  *
- * Samtykke settes til "denied" som standard (påkrevd i EØS). gtag.js lastes,
- * men samler ingen personopplysninger / cookies før brukeren aktivt godtar i
- * cookie-modalen (se CookieConsent.tsx). Clarity lastes først ved samtykke.
+ * Consent Mode v2 brukes fortsatt: standard er «denied», og samtykket som er
+ * gitt sendes som «update» før config, så Google får riktige signaler.
+ */
+let googleLoaded = false;
+export function loadGoogle() {
+  if (typeof window === 'undefined' || googleLoaded) return;
+  googleLoaded = true;
+
+  const w = window as unknown as { dataLayer: unknown[] };
+  w.dataLayer = w.dataLayer || [];
+  // gtag må pushe selve arguments-objektet, ikke en kopi.
+  window.gtag = function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    w.dataLayer.push(arguments);
+  };
+  window.gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+  });
+  window.gtag('consent', 'update', {
+    analytics_storage: 'granted',
+    ad_storage: 'granted',
+    ad_user_data: 'granted',
+    ad_personalization: 'granted',
+  });
+  window.gtag('js', new Date());
+  window.gtag('config', GA_ID);
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+  document.head.appendChild(script);
+}
+
+/**
+ * GA4 (med Google Ads-konverteringer) og Microsoft Clarity – begge lastes
+ * først etter samtykke. Uten samtykke hentes ingen skript fra Google eller
+ * Microsoft, og ingen informasjonskapsler settes (se CookieConsent.tsx).
  * Tidligere valg huskes via localStorage.
  *
  * «Godta alle» dekker både statistikk og annonsesignalene (ad_storage,
@@ -161,9 +201,19 @@ function trackContactClick(e: MouseEvent) {
  * konverteringsmåling og remarketing. Personvernsiden beskriver dette.
  */
 export default function Analytics() {
-  // Gjengangere som allerede har godtatt: last Clarity ved sidelast.
+  // Gjengangere som allerede har godtatt: last verktøyene når siden er
+  // ferdig lastet, så de ikke konkurrerer med LCP på mobil.
   useEffect(() => {
-    if (hasConsent()) loadClarity();
+    if (!hasConsent()) return;
+    const load = () => {
+      loadGoogle();
+      loadClarity();
+    };
+    if (document.readyState === 'complete') load();
+    else {
+      window.addEventListener('load', load, { once: true });
+      return () => window.removeEventListener('load', load);
+    }
   }, []);
 
   // Klikk-ID fra annonsen leses bare fra landingssiden. Analytics ligger i
@@ -180,46 +230,5 @@ export default function Analytics() {
     return () => document.removeEventListener('click', trackContactClick, true);
   }, []);
 
-  return (
-    <>
-      {/* Må kjøre før gtag.js prosesserer køen, derfor først i dataLayer.
-          lazyOnload: analytics trenger ikke konkurrere med LCP på mobil. */}
-      <Script id="ga-consent-default" strategy="lazyOnload">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          window.gtag = gtag;
-
-          gtag('consent', 'default', {
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-            analytics_storage: 'denied',
-            functionality_storage: 'granted',
-            security_storage: 'granted',
-            wait_for_update: 500
-          });
-
-          try {
-            if (localStorage.getItem('${CONSENT_KEY}') === 'granted') {
-              gtag('consent', 'update', {
-                analytics_storage: 'granted',
-                ad_storage: 'granted',
-                ad_user_data: 'granted',
-                ad_personalization: 'granted'
-              });
-            }
-          } catch (e) {}
-
-          gtag('js', new Date());
-          gtag('config', '${GA_ID}');
-        `}
-      </Script>
-
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-        strategy="lazyOnload"
-      />
-    </>
-  );
+  return null;
 }

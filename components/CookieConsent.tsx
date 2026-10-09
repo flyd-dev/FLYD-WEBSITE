@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { CONSENT_KEY, forgetAdClick, loadClarity, rememberAdClick } from './Analytics';
+import { CONSENT_KEY, forgetAdClick, loadClarity, loadGoogle, rememberAdClick } from './Analytics';
 
 declare global {
   interface Window {
@@ -11,14 +11,18 @@ declare global {
 }
 
 /**
- * Cookie-samtykke som blokkerende modal for Google Consent Mode v2. Vises ved
- * første besøk når det ikke finnes et lagret valg, og kan ikke lukkes uten at
- * brukeren tar et valg. Oppdaterer samtykkesignalene hos gtag deretter.
+ * Cookie-samtykke som blokkerende modal. Vises ved første besøk når det ikke
+ * finnes et lagret valg, og kan ikke lukkes uten at brukeren tar et valg.
+ * Google-taggen og Clarity lastes først når brukeren godtar. «Kun nødvendige»
+ * og «Godta alle» er like store, like synlige og ett klikk unna.
  */
+const choiceClass =
+  'inline-flex w-full items-center justify-center rounded-pille border border-flyd-skog bg-flyd-skog px-6 py-3.5 text-[16px] font-medium text-flyd-sand transition-[background-color,border-color,transform] duration-200 hover:border-flyd-petrol hover:bg-flyd-petrol active:translate-y-[1px]';
+
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
   const [shown, setShown] = useState(false); // styrer inn-animasjonen
-  const acceptRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let hasChoice = false;
@@ -33,7 +37,7 @@ export default function CookieConsent() {
       document.body.style.overflow = 'hidden';
       requestAnimationFrame(() => {
         setShown(true);
-        acceptRef.current?.focus();
+        dialogRef.current?.focus();
       });
     }
     return () => {
@@ -48,7 +52,7 @@ export default function CookieConsent() {
       document.body.style.overflow = 'hidden';
       requestAnimationFrame(() => {
         setShown(true);
-        acceptRef.current?.focus();
+        dialogRef.current?.focus();
       });
     };
     window.addEventListener('flyd:open-consent', openModal);
@@ -87,6 +91,8 @@ export default function CookieConsent() {
       /* localStorage utilgjengelig – valget gjelder kun denne økten */
     }
     // «Godta alle» / «Kun nødvendige» styrer både statistikk og annonsesignaler.
+    // Taggen finnes bare hvis samtykke er gitt tidligere i økten; da sendes
+    // det nye valget videre. Ved «Godta alle» lastes den nå.
     window.gtag?.('consent', 'update', {
       analytics_storage: value,
       ad_storage: value,
@@ -94,6 +100,7 @@ export default function CookieConsent() {
       ad_personalization: value,
     });
     if (value === 'granted') {
+      loadGoogle();
       loadClarity();
       rememberAdClick();
     } else {
@@ -122,7 +129,9 @@ export default function CookieConsent() {
       <div className="absolute inset-0 bg-flyd-skog/60 backdrop-blur-[2px]" aria-hidden="true" />
 
       <div
-        className={`relative w-full max-w-md rounded-kort bg-flyd-sand p-6 sm:p-8 motion-safe:transition motion-safe:duration-200 motion-safe:ease-out ${
+        ref={dialogRef}
+        tabIndex={-1}
+        className={`relative w-full max-w-md rounded-kort outline-none bg-flyd-sand p-6 sm:p-8 motion-safe:transition motion-safe:duration-200 motion-safe:ease-out ${
           shown ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-3 scale-[0.98] opacity-0'
         }`}
       >
@@ -145,23 +154,14 @@ export default function CookieConsent() {
           .
         </p>
 
-        <div className="mt-6 flex flex-col gap-3">
-          {/* Primær, fremhevet handling */}
-          <button
-            ref={acceptRef}
-            type="button"
-            onClick={() => decide('granted')}
-            className="inline-flex w-full items-center justify-center rounded-pille border border-flyd-skog bg-flyd-skog px-6 py-3.5 text-[16px] font-medium text-flyd-sand transition-[background-color,border-color,transform] duration-200 hover:border-flyd-petrol hover:bg-flyd-petrol active:translate-y-[1px]"
-          >
-            Godta alle
-          </button>
-          {/* Sekundær, nedtonet handling */}
-          <button
-            type="button"
-            onClick={() => decide('denied')}
-            className="inline-flex w-full items-center justify-center rounded-pille px-6 py-2.5 text-[15px] font-medium text-flyd-skifer transition-colors duration-200 hover:bg-flyd-lysmint hover:text-flyd-skog active:bg-flyd-linje-mint"
-          >
+        {/* Like store og like synlige valg (Datatilsynet: å si nei skal være
+            like lett som å si ja). */}
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <button type="button" onClick={() => decide('denied')} className={choiceClass}>
             Kun nødvendige
+          </button>
+          <button type="button" onClick={() => decide('granted')} className={choiceClass}>
+            Godta alle
           </button>
         </div>
       </div>
