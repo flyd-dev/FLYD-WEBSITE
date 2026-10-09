@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import JsonLd from '@/components/JsonLd';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Personvern',
-  description: 'Slik behandler Flyd personopplysninger.',
-  alternates: { canonical: '/personvern/' },
-};
+  description: 'Slik behandler Flyd personopplysninger, informasjonskapsler og samtykke på flyd.no.',
+  path: '/personvern/',
+});
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',

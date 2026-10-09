@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Check } from 'lucide-react';
@@ -21,12 +22,12 @@ const breadcrumbJsonLd = {
   ],
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Regnskap, rådgivning og ERP – Tjenester',
   description:
     'Regnskap og rådgivning, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR – samlet hos Flyd.',
-  alternates: { canonical: '/tjenester/' },
-};
+  path: '/tjenester/',
+});
 
 // Sand og Lys mint veksler på innhold (designmanualen, bakgrunnsrytme).
 const tones = ['sand', 'lysmint'] as const;

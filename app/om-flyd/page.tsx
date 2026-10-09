@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Image from 'next/image';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
@@ -22,14 +23,12 @@ const breadcrumbJsonLd = {
   ],
 };
 
-export const metadata: Metadata = {
-  title: {
-    absolute: 'Om Flyd – Kompetansehus for økonomi og teknologi',
-  },
+export const metadata: Metadata = pageMetadata({
+  absoluteTitle: 'Om Flyd – Kompetansehus for økonomi og teknologi',
   description:
     'Flyd er et kompetansehus for økonomi og teknologi. Møt teamet og besøk et av våre seks kontorer i Sør-Vest-Norge.',
-  alternates: { canonical: '/om-flyd/' },
-};
+  path: '/om-flyd/',
+});
 
 const values = [
   {

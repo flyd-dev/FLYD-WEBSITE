@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -28,11 +29,11 @@ export function generateMetadata({
 }): Metadata {
   const office = getOfficeBySlug(params.slug);
   if (!office) return { title: "Kontor ikke funnet" };
-  return {
+  return pageMetadata({
     title: `Regnskapsfører ${atOffice(office)}`,
     description: `${office.blurb} Regnskap, rådgivning og teknologi – lokalt ${atOffice(office)}.`,
-    alternates: { canonical: `/kontor/${office.slug}/` },
-  };
+    path: `/kontor/${office.slug}/`,
+  });
 }
 
 export default function KontorPage({ params }: { params: { slug: string } }) {
