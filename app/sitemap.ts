@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { jobs } from '@/data/jobs';
@@ -6,13 +7,32 @@ import { offices } from '@/data/offices';
 
 const base = 'https://www.flyd.no';
 
-function mtimeOf(relPath: string): Date {
+// Filenes mtime er byggetidspunktet på Vercel (fersk klone), så lastmod ble
+// «nå» for alle sider ved hver deploy. Google ignorerer lastmod som ikke
+// stemmer. Bruk siste commit som endret filen; i en grunn klone (shallow)
+// kan ikke det avgjøres, og da utelates lastmod heller enn å gjette.
+const shallow = (() => {
   try {
-    return fs.statSync(path.join(process.cwd(), relPath)).mtime;
+    return execFileSync('git', ['rev-parse', '--is-shallow-repository']).toString().trim() !== 'false';
   } catch {
-    return new Date();
+    return true;
+  }
+})();
+
+function lastCommitOf(...relPaths: string[]): Date | undefined {
+  if (shallow) return undefined;
+  try {
+    const iso = execFileSync('git', ['log', '-1', '--format=%cI', '--', ...relPaths]).toString().trim();
+    return iso ? new Date(iso) : undefined;
+  } catch {
+    return undefined;
   }
 }
+
+// Stillingssidene er slått av (mappen heter `_slug`, som Next.js ignorerer).
+// Sitemapen listet likevel URL-ene, og de ga 404. Tas med igjen automatisk
+// når mappen får navnet `[slug]`.
+const jobPagesEnabled = fs.existsSync(path.join(process.cwd(), 'app/karriere/[slug]'));
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: {
@@ -29,13 +49,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/personvern', source: 'app/personvern/page.tsx', priority: 0.3, changeFrequency: 'yearly' },
   ];
 
-  const jobsMtime = mtimeOf('data/jobs.ts');
-  const officesMtime = mtimeOf('data/offices.ts');
+  const jobsMtime = lastCommitOf('data/jobs.ts', 'app/karriere/[slug]');
+  const officesMtime = lastCommitOf('data/offices.ts', 'app/kontor/[slug]');
 
   return [
     ...staticRoutes.map((r) => ({
       url: `${base}${r.path}/`,
-      lastModified: mtimeOf(r.source),
+      lastModified: lastCommitOf(r.source),
       changeFrequency: r.changeFrequency,
       priority: r.priority,
     })),
@@ -45,7 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
-    ...jobs.map((job) => ({
+    ...(jobPagesEnabled ? jobs : []).map((job) => ({
       url: `${base}/karriere/${job.slug}/`,
       lastModified: jobsMtime,
       changeFrequency: 'weekly' as const,
