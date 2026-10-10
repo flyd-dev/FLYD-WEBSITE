@@ -43,7 +43,7 @@ export default function ErpMal({ system: e }: { system: ErpSystem }) {
       {utkast && <UtkastBanner />}
       <JsonLd data={jsonLd} />
 
-      <Section tone="sand" className="pt-10 md:pt-14">
+      <Section tone="sand" className="pt-10 md:pt-14" flyt>
         <Container>
           <Breadcrumbs
             items={[
@@ -124,7 +124,7 @@ export default function ErpMal({ system: e }: { system: ErpSystem }) {
         </Container>
       </Section>
 
-      <Section tone="petrol">
+      <Section tone="petrol" flyt>
         <Container>
           <div className="stagger grid grid-cols-1 gap-10 md:grid-cols-3">
             <div data-reveal>
@@ -181,7 +181,7 @@ export default function ErpMal({ system: e }: { system: ErpSystem }) {
                 <li key={o.slug} data-reveal style={{ '--i': i } as React.CSSProperties}>
                   <Link
                     href={erpUrl(o)}
-                    className="lenkekort flex h-full items-center gap-4 rounded-kort bg-flyd-lysmint p-5 hover:bg-flyd-linje-mint"
+                    className="lys lenkekort flex h-full items-center gap-4 rounded-kort bg-flyd-lysmint p-5 hover:bg-flyd-linje-mint"
                   >
                     <FlydIcon name={o.icon} className="h-6 w-6 flex-shrink-0 text-flyd-teal" />
                     <span className="flex-1 font-display text-[18px] font-semibold">{o.name}</span>

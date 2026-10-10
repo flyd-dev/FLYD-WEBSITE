@@ -25,7 +25,7 @@ export default function SammenligningMal() {
   return (
     <>
       {utkast && <UtkastBanner />}
-      <Section tone="sand" className="pt-10 md:pt-14">
+      <Section tone="sand" className="pt-10 md:pt-14" flyt>
         <Container>
           <Breadcrumbs
             items={[

@@ -7,6 +7,7 @@ import PartnerStrip from '@/components/PartnerStrip';
 import StatsSection from '@/components/StatsSection';
 import ServiceCard from '@/components/ServiceCard';
 import NumberedList from '@/components/NumberedList';
+import FlytLinjer from '@/components/FlytLinjer';
 import ProcessCards from '@/components/ProcessCards';
 import { process } from '@/data/process';
 import ClosingCta from '@/components/ClosingCta';
@@ -43,7 +44,7 @@ export default function HomePage() {
           Bildet står i et kort med radius 24 px, siden det ikke er utfallende. */}
       <Section tone="sand" className="!pb-0 !pt-0 md:!pt-1">
         <div className="px-3 md:px-5">
-          <div className="on-dark relative flex min-h-[640px] overflow-hidden rounded-bilde bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
+          <div className="on-dark relative flex min-h-[640px] overflow-hidden rounded-bilde [contain:paint] bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
             {/* Originalfotoet i to størrelser: mobil henter 1200 px, store
                 skjermer 2400 px. next/image lager ikke srcset med statisk
                 eksport (unoptimized), derfor vanlig <img> + preload over. */}
@@ -55,10 +56,11 @@ export default function HomePage() {
               alt="Flyd-teamet i en uformell prat på kontoret"
               fetchPriority="high"
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
+              className="hero-drift absolute inset-0 h-full w-full object-cover object-[70%_center]"
             />
             <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
             <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />
+            <FlytLinjer className="opacity-40 [mask-image:linear-gradient(to_right,black_0%,black_45%,transparent_75%)]" />
 
             <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
               <div className="max-w-2xl" data-reveal>
@@ -153,7 +155,7 @@ export default function HomePage() {
       </Section>
 
       {/* HVORFOR FLYD – Petrol som seksjonsskille */}
-      <Section tone="petrol">
+      <Section tone="petrol" flyt>
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>

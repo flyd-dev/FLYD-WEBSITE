@@ -30,7 +30,7 @@ export default function OfficeCards({
           href={`/kontor/${o.slug}/`}
           data-reveal
           className={clsx(
-            'group flex flex-col rounded-kort bg-flyd-sand transition-transform duration-300 ease-out hover:-translate-y-1 active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+            'lys group flex flex-col rounded-kort bg-flyd-sand transition-transform duration-300 ease-out hover:-translate-y-1 active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0',
             compact ? 'p-6' : 'p-7 md:p-8',
           )}
         >

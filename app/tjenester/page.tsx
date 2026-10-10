@@ -53,7 +53,7 @@ export default function TjenesterPage() {
     <ScrollProgressLineWrapper>
       <JsonLd data={servicesJsonLd} />
       {/* Seksjonsskille: Petrol, stor tittel og emnetagger. */}
-      <Section tone="petrol" size="lg">
+      <Section tone="petrol" size="lg" flyt>
         <Container>
           <Breadcrumbs items={[{ name: 'Tjenester', href: '/tjenester/' }]} tone="dark" />
           <Eyebrow tone="petrol" className="mt-10">Tjenester</Eyebrow>
@@ -98,17 +98,19 @@ export default function TjenesterPage() {
               >
                 <Link
                   href={serviceUrl(s)}
-                  className="lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint"
+                  className="lys lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint"
                 >
                   {s.image ? (
                     <div className="relative aspect-[16/10] overflow-hidden rounded-flis bg-flyd-linje-mint">
-                      <Image
-                        src={s.image.src}
-                        alt=""
-                        fill
-                        sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                      />
+                      <div className="rull-zoom absolute inset-0">
+                        <Image
+                          src={s.image.src}
+                          alt=""
+                          fill
+                          sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                        />
+                      </div>
                     </div>
                   ) : (
                     <ServiceTile

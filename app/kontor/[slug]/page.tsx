@@ -80,7 +80,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
       <JsonLd data={localBusinessJsonLd} />
 
       {/* HERO */}
-      <Section tone="sand" className="pt-10 md:pt-14">
+      <Section tone="sand" className="pt-10 md:pt-14" flyt>
         <Container>
           <Breadcrumbs
             items={[
@@ -218,7 +218,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
       )}
 
       {/* TJENESTER LOKALT – Petrol som seksjonsskille */}
-      <Section tone="petrol">
+      <Section tone="petrol" flyt>
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>

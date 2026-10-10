@@ -26,7 +26,7 @@ export const metadata: Metadata = pageMetadata({
 export default function KontorerPage() {
   return (
     <>
-      <Section tone="sand" className="pt-10 md:pt-14">
+      <Section tone="sand" className="pt-10 md:pt-14" flyt>
         <Container>
           <Breadcrumbs items={[{ name: 'Kontorer', href: '/kontor/' }]} />
           <div className="mt-10 max-w-3xl">
@@ -54,18 +54,20 @@ export default function KontorerPage() {
               <li key={o.slug} data-reveal style={{ '--i': i } as React.CSSProperties}>
                 <Link
                   href={`/kontor/${o.slug}/`}
-                  className="lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint"
+                  className="lys lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint"
                 >
                   <div className="relative aspect-[3/2] overflow-hidden rounded-flis bg-flyd-linje-mint">
                     {o.image && (
-                      <Image
-                        src={o.image.src.replace('/kontor/', '/kontor/kort/')}
-                        alt={o.image.alt}
-                        fill
-                        priority={i === 0}
-                        sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                      />
+                      <div className="rull-zoom absolute inset-0">
+                        <Image
+                          src={o.image.src.replace('/kontor/', '/kontor/kort/')}
+                          alt={o.image.alt}
+                          fill
+                          priority={i === 0}
+                          sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                        />
+                      </div>
                     )}
                   </div>
                   <div className="flex flex-1 flex-col px-3 pb-3 pt-6">

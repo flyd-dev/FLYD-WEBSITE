@@ -2,6 +2,7 @@ import Container from './Container';
 import Section from './Section';
 import Eyebrow from './Eyebrow';
 import Signatur from './Signatur';
+import FlytLinjer from './FlytLinjer';
 import { ButtonLink } from './Button';
 
 type Action = { href: string; label: string; external?: boolean };
@@ -26,12 +27,13 @@ export default function ClosingCta({
   secondary?: Action | null;
 }) {
   return (
-    <Section tone="skog" size="lg">
-      <Container>
+    <Section tone="skog" size="lg" className="overflow-hidden">
+      <FlytLinjer className="opacity-50" />
+      <Container className="relative">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6" data-reveal>
             {kicker && <Eyebrow tone="dark">{kicker}</Eyebrow>}
-            <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
+            <h2 className="rull-gli mt-5 font-display text-display-lg font-semibold text-flyd-sand">
               {title}
             </h2>
             {text && (

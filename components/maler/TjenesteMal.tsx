@@ -77,7 +77,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
       <JsonLd data={serviceJsonLd} />
 
       {/* HERO */}
-      <Section tone="sand" className="pt-10 md:pt-14">
+      <Section tone="sand" className="pt-10 md:pt-14" flyt>
         <Container>
           <Breadcrumbs items={[{ name: 'Tjenester', href: '/tjenester/' }, { name: s.title, href: serviceUrl(s) }]} />
           <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
@@ -179,7 +179,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                 return (
                   <li key={e.id} id={e.id} data-reveal style={{ '--i': i } as React.CSSProperties} className="h-full">
                     {linked ? (
-                      <Link href={erpUrl(e)} className="lenkekort flex h-full flex-col rounded-kort bg-flyd-lysmint p-7 hover:bg-flyd-linje-mint">
+                      <Link href={erpUrl(e)} className="lys lenkekort flex h-full flex-col rounded-kort bg-flyd-lysmint p-7 hover:bg-flyd-linje-mint">
                         {inner}
                       </Link>
                     ) : (
@@ -193,7 +193,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
               <div className="mt-10" data-reveal>
                 <Link
                   href="/tjenester/erp/sammenligning/"
-                  className="lenkekort group inline-flex items-center gap-3 rounded-pille bg-flyd-petrol px-6 py-3.5 text-[16px] font-medium text-flyd-sand hover:bg-flyd-skog"
+                  className="lys lenkekort group inline-flex items-center gap-3 rounded-pille bg-flyd-petrol px-6 py-3.5 text-[16px] font-medium text-flyd-sand hover:bg-flyd-skog"
                 >
                   Sammenlign systemene
                   <ArrowRight className="lenkekort-pil h-4 w-4 text-flyd-mint" strokeWidth={2} aria-hidden="true" />
@@ -205,7 +205,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
       )}
 
       {/* SLIK JOBBER VI: egen prosess for tjenesten, ellers Flyds fire steg */}
-      <Section tone="petrol">
+      <Section tone="petrol" flyt>
         <Container>
           <div className="max-w-3xl" data-reveal>
             <Eyebrow tone="petrol">Slik jobber vi</Eyebrow>
@@ -365,7 +365,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
               <li key={o.slug} data-reveal style={{ '--i': i } as React.CSSProperties}>
                 <Link
                   href={serviceUrl(o)}
-                  className={`lenkekort group flex h-full items-center gap-5 rounded-kort p-4 pr-6 ${
+                  className={`lys lenkekort group flex h-full items-center gap-5 rounded-kort p-4 pr-6 ${
                     visFaq ? 'bg-flyd-lysmint hover:bg-flyd-linje-mint' : 'bg-flyd-sand hover:bg-flyd-linje-sand'
                   }`}
                 >
