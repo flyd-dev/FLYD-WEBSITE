@@ -83,8 +83,9 @@ export default function StatsSection({
   columns?: 3 | 4;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  // Server-HTML og første render viser tallene ferdig. Animasjonen tar over
-  // bare når seksjonen ligger under bretten ved innlasting.
+  // Server-HTML og første render viser tallene ferdig (for søkemotorer og uten
+  // JavaScript). I nettleseren teller tallene opp når seksjonen kommer til syne,
+  // også når den er synlig med en gang. Ingen animasjon ved redusert bevegelse.
   const [animate, setAnimate] = useState(false);
   const [inView, setInView] = useState(true);
 
@@ -94,8 +95,7 @@ export default function StatsSection({
     const prefersReduced = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches;
-    const alreadyVisible = el.getBoundingClientRect().top < window.innerHeight;
-    if (prefersReduced || alreadyVisible) return;
+    if (prefersReduced) return;
     setAnimate(true);
     setInView(false);
     const io = new IntersectionObserver(
