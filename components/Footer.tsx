@@ -68,6 +68,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-3 text-[15px] text-flyd-sand">
               <li><Link href="/" className="transition-colors hover:text-flyd-mint">Forside</Link></li>
               <li><Link href="/tjenester" className="transition-colors hover:text-flyd-mint">Tjenester</Link></li>
+              <li><Link href="/kontor" className="transition-colors hover:text-flyd-mint">Kontorer</Link></li>
               <li><Link href="/om-flyd" className="transition-colors hover:text-flyd-mint">Om Flyd</Link></li>
               <li><Link href="/karriere" className="transition-colors hover:text-flyd-mint">Karriere</Link></li>
               <li><Link href="/kontakt" className="transition-colors hover:text-flyd-mint">Kontakt</Link></li>

@@ -1,5 +1,47 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/kontor/stavanger",
+      "destination": "/kontor/stavanger-sandnes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/kontor/stavanger/",
+      "destination": "/kontor/stavanger-sandnes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/karriere/regnskapsforer-stavanger",
+      "destination": "/karriere/",
+      "statusCode": 301
+    },
+    {
+      "source": "/karriere/regnskapsforer-stavanger/",
+      "destination": "/karriere/",
+      "statusCode": 301
+    },
+    {
+      "source": "/karriere/losningsradgiver-stavanger",
+      "destination": "/karriere/",
+      "statusCode": 301
+    },
+    {
+      "source": "/karriere/losningsradgiver-stavanger/",
+      "destination": "/karriere/",
+      "statusCode": 301
+    },
+    {
+      "source": "/karriere/erp-konsulent-stavanger",
+      "destination": "/karriere/",
+      "statusCode": 301
+    },
+    {
+      "source": "/karriere/erp-konsulent-stavanger/",
+      "destination": "/karriere/",
+      "statusCode": 301
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

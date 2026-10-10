@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
+    "postbuild": "node scripts/sjekk-bekreft.mjs",
+    "sjekk:bekreft": "node scripts/sjekk-bekreft.mjs --alltid",
+    "build:utkast": "FLYD_UTKAST=1 next build",
     "start": "next start",
     "lint": "next lint",
     "export": "next build"

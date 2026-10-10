@@ -9,8 +9,8 @@ import { ButtonLink } from './Button';
 import FlydLogo from './FlydLogo';
 
 const nav = [
-  { href: '/', label: 'Forside' },
   { href: '/tjenester', label: 'Tjenester' },
+  { href: '/kontor', label: 'Kontorer' },
   { href: '/om-flyd', label: 'Om Flyd' },
   { href: '/karriere', label: 'Karriere' },
   { href: '/kontakt', label: 'Kontakt' },
@@ -20,8 +20,12 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const isActive = (href: string) =>
-    (pathname ?? '').replace(/\/+$/, '') === href.replace(/\/+$/, '');
+  // Aktiv også på undersider: /tjenester/regnskap/ markerer «Tjenester».
+  const isActive = (href: string) => {
+    const path = (pathname ?? '').replace(/\/+$/, '');
+    const target = href.replace(/\/+$/, '');
+    return path === target || path.startsWith(`${target}/`);
+  };
   const openBtnRef = useRef<HTMLButtonElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
