@@ -114,7 +114,8 @@ export default function PersonvernPage() {
                 annet hvilke sider som besøkes og hvordan man navigerer – slik at
                 vi kan forbedre innholdet. Disse informasjonskapslene settes kun
                 dersom du aktivt godtar dem i samtykkebanneren. Frem til du har
-                gitt samtykke, samler vi ikke inn data via disse verktøyene. Det
+                gitt samtykke, lastes ikke skriptene fra Google og Microsoft i
+                det hele tatt, og det samles ikke inn data via dem. Det
                 rettslige grunnlaget er ditt samtykke, jf. ekomloven og
                 personvernforordningen (GDPR).
               </p>
@@ -129,10 +130,27 @@ export default function PersonvernPage() {
                 bare at et skjema ble sendt, og eventuelt at du ble kunde.
               </p>
               <p className="mt-3">
-                Når statistikk og annonsemåling er aktivert, behandles
-                opplysningene av Google og Microsoft som databehandlere på våre
-                vegne. Velger du «Kun nødvendige», samles ingen data inn via
-                disse verktøyene.
+                Når statistikk og annonsemåling er aktivert, behandler Google
+                opplysningene fra Google Analytics som databehandler på våre
+                vegne. For Google Ads (konverteringsmåling og remarketing) og
+                Microsoft Clarity bruker Google og Microsoft også opplysningene
+                til egne formål, og er da selvstendig behandlingsansvarlige.
+                Hvordan de gjør det, står i{' '}
+                <a
+                  href="https://policies.google.com/privacy?hl=no"
+                  className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-skog hover:decoration-flyd-skog"
+                >
+                  Googles personvernerklæring
+                </a>{' '}
+                og{' '}
+                <a
+                  href="https://www.microsoft.com/nb-no/privacy/privacystatement"
+                  className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-skog hover:decoration-flyd-skog"
+                >
+                  Microsofts personvernerklæring
+                </a>
+                . Velger du «Kun nødvendige», samles ingen data inn via disse
+                verktøyene.
               </p>
               <p className="mt-3">
                 Du kan når som helst trekke tilbake eller endre samtykket ditt
