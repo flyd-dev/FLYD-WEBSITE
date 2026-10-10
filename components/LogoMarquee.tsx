@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { PointerEvent as ReactPointerEvent, KeyboardEvent as ReactKeyboardEvent } from 'react';
 import Image from 'next/image';
 import { customerLogos } from '@/data/logos';
+import PauseToggle from '@/components/PauseToggle';
 
 /** Sekunder på én runde når karusellen ruller av seg selv. Samme tempo som før. */
 const LOOP_SECONDS = 40;
@@ -31,6 +32,14 @@ export default function LogoMarquee() {
   const lastMoveAt = useRef(0);
   const hovering = useRef(false);
   const reducedMotion = useRef(false);
+  const focused = useRef(false);
+  // Pauseknappen (WCAG 2.2.2). State for knappens ikon, ref for animasjonsløkka.
+  const [paused, setPaused] = useState(false);
+  const pausedRef = useRef(false);
+  const togglePaused = () => {
+    pausedRef.current = !pausedRef.current;
+    setPaused(pausedRef.current);
+  };
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -75,7 +84,9 @@ export default function LogoMarquee() {
 
       if (width > 0) {
         if (!dragging.current) {
-          const autoSpeed = reducedMotion.current || hovering.current ? 0 : width / LOOP_SECONDS;
+          const still =
+            reducedMotion.current || hovering.current || focused.current || pausedRef.current;
+          const autoSpeed = still ? 0 : width / LOOP_SECONDS;
           offset.current += (fling.current - autoSpeed) * elapsed;
           fling.current *= Math.exp(-FRICTION * elapsed);
           if (Math.abs(fling.current) < 1) fling.current = 0;
@@ -160,6 +171,7 @@ export default function LogoMarquee() {
   };
 
   return (
+    <div className="relative">
     <div
       ref={viewportRef}
       // touch-pan-y: loddrett sidescroll på mobil er fortsatt nettleserens jobb,
@@ -181,6 +193,13 @@ export default function LogoMarquee() {
         if (event.pointerType === 'mouse') hovering.current = false;
       }}
       onKeyDown={handleKeyDown}
+      // Står stille mens den har tastaturfokus, så piltastene kan brukes i ro.
+      onFocus={() => {
+        focused.current = true;
+      }}
+      onBlur={() => {
+        focused.current = false;
+      }}
     >
       {/* Fade edges */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-flyd-sand to-transparent" />
@@ -226,6 +245,13 @@ export default function LogoMarquee() {
           <li key={logo.name}>{logo.name}</li>
         ))}
       </ul>
+    </div>
+    <PauseToggle
+      paused={paused}
+      onToggle={togglePaused}
+      what="kundelogoene"
+      className="absolute right-4 top-1/2 z-20 -translate-y-1/2 active:-translate-y-[calc(50%-1px)] md:right-6"
+    />
     </div>
   );
 }
