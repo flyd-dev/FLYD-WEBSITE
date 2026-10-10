@@ -217,7 +217,7 @@ export default function LogoMarquee() {
             ref={setIndex === 0 ? firstSetRef : undefined}
             className="flex shrink-0 items-center"
           >
-            {customerLogos.map((logo, i) => (
+            {customerLogos.map((logo) => (
               <div
                 key={logo.name}
                 className="mr-20 flex h-10 flex-shrink-0 items-center justify-center opacity-60 grayscale mix-blend-multiply transition-[filter,opacity] duration-300 hover:opacity-100 hover:grayscale-0"
@@ -231,7 +231,6 @@ export default function LogoMarquee() {
                   sizes="160px"
                   className="h-10 w-auto object-contain"
                   draggable={false}
-                  priority={setIndex === 0 && i < 6}
                 />
               </div>
             ))}

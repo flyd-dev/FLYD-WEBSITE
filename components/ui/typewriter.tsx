@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, Variants } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 
@@ -17,10 +16,6 @@ interface TypewriterProps {
   showCursor?: boolean;
   hideCursorOnType?: boolean;
   cursorChar?: string | React.ReactNode;
-  cursorAnimationVariants?: {
-    initial: Variants['initial'];
-    animate: Variants['animate'];
-  };
   cursorClassName?: string;
   /** Stopper skrivingen der den er (WCAG 2.2.2). */
   paused?: boolean;
@@ -40,18 +35,6 @@ const Typewriter = ({
   cursorChar = '|',
   cursorClassName = 'ml-1',
   paused = false,
-  cursorAnimationVariants = {
-    initial: { opacity: 0 },
-    animate: {
-      opacity: 1,
-      transition: {
-        duration: 0.01,
-        repeat: Infinity,
-        repeatDelay: 0.4,
-        repeatType: 'reverse',
-      },
-    },
-  },
 }: TypewriterProps) => {
   // Første frase rendres ferdig skrevet på serveren, slik at H1 er komplett i
   // statisk HTML (SEO/skjermlesere/JS av). Animasjonen tar over etter mount.
@@ -140,21 +123,21 @@ const Typewriter = ({
       <span className="sr-only">{firstText}</span>
       <span aria-hidden="true">{displayText}</span>
       {showCursor && !reducedMotion && !paused && (
-        <motion.span
-          variants={cursorAnimationVariants}
+        // Blinkende markør i ren CSS (tw-cursor i globals.css), så forsiden
+        // slipper å laste framer-motion.
+        <span
           className={cn(
+            'tw-cursor',
             cursorClassName,
             hideCursorOnType &&
               (currentIndex < texts[currentTextIndex].length || isDeleting)
               ? 'hidden'
               : ''
           )}
-          initial="initial"
-          animate="animate"
           aria-hidden="true"
         >
           {cursorChar}
-        </motion.span>
+        </span>
       )}
     </span>
   );
