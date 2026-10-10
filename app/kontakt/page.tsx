@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
@@ -17,14 +18,12 @@ const breadcrumbJsonLd = {
   ],
 };
 
-export const metadata: Metadata = {
-  title: {
-    absolute: 'Kontakt Flyd – 6 kontorer i Sør-Vest-Norge',
-  },
+export const metadata: Metadata = pageMetadata({
+  absoluteTitle: 'Kontakt Flyd – 6 kontorer i Sør-Vest-Norge',
   description:
     'Ta kontakt med Flyd. Fortell oss hva du trenger hjelp med, så finner vi riktig person hos oss.',
-  alternates: { canonical: '/kontakt/' },
-};
+  path: '/kontakt/',
+});
 
 export default function KontaktPage() {
   const contactLink =

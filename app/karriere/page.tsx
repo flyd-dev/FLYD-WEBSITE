@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Briefcase, ArrowRight } from 'lucide-react';
@@ -21,12 +22,12 @@ const breadcrumbJsonLd = {
   ],
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Ledige stillinger – Karriere',
   description:
     'Bli en del av Flyd. Vi er alltid på utkikk etter dyktige folk innen økonomi, teknologi og rådgivning.',
-  alternates: { canonical: '/karriere/' },
-};
+  path: '/karriere/',
+});
 
 const perks: Gallery4Item[] = [
   {

@@ -8,6 +8,9 @@ import { ButtonLink } from '@/components/Button';
 export const metadata: Metadata = {
   title: 'Siden finnes ikke',
   robots: { index: false },
+  // Ikke arv forsidens canonical og Open Graph.
+  alternates: { canonical: null },
+  openGraph: null,
 };
 
 export default function NotFound() {

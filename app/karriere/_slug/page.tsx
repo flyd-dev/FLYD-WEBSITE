@@ -2,6 +2,7 @@
 // for å bygge denne siden. Gi mappen navnet `[slug]` igjen når stillinger
 // flyttes tilbake fra `arkiverteJobs` til `jobs`.
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import fs from 'node:fs';
 import path from 'node:path';
 import Link from 'next/link';
@@ -71,11 +72,11 @@ export function generateMetadata({
 }): Metadata {
   const job = getJobBySlug(params.slug);
   if (!job) return { title: 'Stilling ikke funnet' };
-  return {
+  return pageMetadata({
     title: `${job.title} – ${job.location}`,
     description: job.ingress,
-    alternates: { canonical: `/karriere/${job.slug}/` },
-  };
+    path: `/karriere/${job.slug}/`,
+  });
 }
 
 export default function JobDetailPage({

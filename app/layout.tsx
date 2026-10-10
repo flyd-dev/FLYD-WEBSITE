@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'nb_NO',
-    url: 'https://www.flyd.no',
+    url: 'https://www.flyd.no/',
     siteName: 'Flyd',
     title: 'Flyd – Regnskap, rådgivning og teknologi i samme hus',
     description:
