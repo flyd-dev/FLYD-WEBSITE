@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import FlytLinjer from './FlytLinjer';
 
 /**
  * Bakgrunnsrytme etter designmanualen: Sand og Lys mint veksler på innhold,
@@ -23,21 +24,34 @@ export default function Section({
   children,
   className,
   size = 'default',
+  flyt = false,
 }: {
   id?: string;
   tone?: Tone;
   children: React.ReactNode;
   className?: string;
   size?: 'sm' | 'default' | 'lg';
+  /** Animerte flytlinjer bak innholdet. På lys bunn tones de ut mot venstre, så de aldri står bak tekst. */
+  flyt?: boolean;
 }) {
   const padding =
     size === 'sm' ? 'py-16 md:py-20' : size === 'lg' ? 'py-24 md:py-32' : 'py-20 md:py-28';
   return (
     <section
       id={id}
-      className={clsx('relative scroll-mt-24', tones[tone], padding, className)}
+      className={clsx('relative scroll-mt-24', flyt && 'overflow-hidden', tones[tone], padding, className)}
     >
-      {children}
+      {flyt && (
+        <FlytLinjer
+          tone={isDark(tone) ? 'dark' : 'light'}
+          className={
+            isDark(tone)
+              ? 'opacity-50'
+              : 'opacity-60 [mask-image:linear-gradient(to_right,transparent_35%,black_75%)]'
+          }
+        />
+      )}
+      {flyt ? <div className="relative">{children}</div> : children}
     </section>
   );
 }

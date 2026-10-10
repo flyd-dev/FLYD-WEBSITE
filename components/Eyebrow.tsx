@@ -27,7 +27,7 @@ export default function Eyebrow({
       ? 'text-flyd-korall'
       : tone === 'petrol'
       ? 'text-flyd-mint'
-      : 'flex items-center gap-2.5 text-flyd-skog before:h-2 before:w-2 before:flex-shrink-0 before:rounded-[2px] before:bg-flyd-korall before:content-[""]';
+      : 'puls-prikk flex items-center gap-2.5 text-flyd-skog before:h-2 before:w-2 before:flex-shrink-0 before:rounded-[2px] before:bg-flyd-korall before:content-[""]';
 
   return (
     <Tag

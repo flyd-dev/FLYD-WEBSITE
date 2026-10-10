@@ -4,6 +4,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { jobs } from '@/data/jobs';
 import { offices } from '@/data/offices';
+import {
+  services,
+  erpSystems,
+  erpComparisonStatus,
+  serviceUrl,
+  erpUrl,
+} from '@/data/services';
 
 const base = 'https://www.flyd.no';
 
@@ -43,6 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }[] = [
     { path: '', source: 'app/page.tsx', priority: 1, changeFrequency: 'monthly' },
     { path: '/tjenester', source: 'app/tjenester/page.tsx', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/kontor', source: 'app/kontor/page.tsx', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/om-flyd', source: 'app/om-flyd/page.tsx', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/karriere', source: 'app/karriere/page.tsx', priority: 0.8, changeFrequency: 'weekly' },
     { path: '/kontakt', source: 'app/kontakt/page.tsx', priority: 0.7, changeFrequency: 'yearly' },
@@ -52,12 +60,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const jobsMtime = lastCommitOf('data/jobs.ts', 'app/karriere/[slug]');
   const officesMtime = lastCommitOf('data/offices.ts', 'app/kontor/[slug]');
 
+  // Bare publiserte sider – utkast skal aldri i sitemapen, heller ikke på
+  // forhåndsvisninger.
+  const servicesMtime = lastCommitOf('data/services.ts', 'components/maler');
+  const serviceRoutes = [
+    ...services.filter((s) => s.status === 'publisert').map((s) => serviceUrl(s)),
+    ...erpSystems.filter((e) => e.status === 'publisert').map((e) => erpUrl(e)),
+    ...(erpComparisonStatus === 'publisert' ? ['/tjenester/erp/sammenligning/'] : []),
+  ];
+
   return [
     ...staticRoutes.map((r) => ({
       url: `${base}${r.path}/`,
       lastModified: lastCommitOf(r.source),
       changeFrequency: r.changeFrequency,
       priority: r.priority,
+    })),
+    ...serviceRoutes.map((p) => ({
+      url: `${base}${p}`,
+      lastModified: servicesMtime,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
     })),
     ...offices.map((office) => ({
       url: `${base}/kontor/${office.slug}/`,

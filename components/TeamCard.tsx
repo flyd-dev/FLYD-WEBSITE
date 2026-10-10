@@ -10,7 +10,7 @@ export default function TeamCard({ m }: { m: TeamMember }) {
   const certified =
     m.certified || m.role.toLowerCase().includes('statsautorisert');
   return (
-    <article data-reveal className="group flex flex-col rounded-kort bg-flyd-lysmint p-3 pb-6">
+    <article data-reveal className="lys group flex flex-col rounded-kort bg-flyd-lysmint p-3 pb-6">
       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-flis bg-flyd-linje-mint">
         {m.image ? (
           <Image

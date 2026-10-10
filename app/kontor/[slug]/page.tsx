@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Eyebrow from "@/components/Eyebrow";
@@ -14,7 +14,8 @@ import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
 import FlydIcon from "@/components/FlydIcon";
 import { offices, getOfficeBySlug, openingHours, atOffice, officeLabel } from "@/data/offices";
-import { services } from "@/data/services";
+import { visibleServices, serviceUrl } from "@/data/services";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const SITE_URL = "https://www.flyd.no";
 
@@ -69,26 +70,6 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
     openingHoursSpecification: openingHours.schema,
   };
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Hjem", item: `${SITE_URL}/` },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Kontakt",
-        item: `${SITE_URL}/kontakt/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: office.city,
-        item: `${SITE_URL}/kontor/${office.slug}/`,
-      },
-    ],
-  };
-
   const visitRow = "flex items-start gap-3";
   const visitIcon = "mt-0.5 h-5 w-5 flex-shrink-0 text-flyd-teal";
   const visitLink =
@@ -97,22 +78,16 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
   return (
     <>
       <JsonLd data={localBusinessJsonLd} />
-      <JsonLd data={breadcrumbJsonLd} />
 
       {/* HERO */}
-      <Section tone="sand" className="pt-10 md:pt-14">
+      <Section tone="sand" className="pt-10 md:pt-14" flyt>
         <Container>
-          <Link
-            href="/kontakt/#kontorer"
-            className="group inline-flex items-center gap-2 rounded-pille text-[15px] font-medium text-flyd-petrol decoration-flyd-teal decoration-2 underline-offset-[6px] transition-colors hover:text-flyd-skog hover:underline"
-          >
-            <ArrowLeft
-              className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5"
-              strokeWidth={2}
-              aria-hidden="true"
-            />
-            Alle kontorer
-          </Link>
+          <Breadcrumbs
+            items={[
+              { name: "Kontorer", href: "/kontor/" },
+              { name: office.city, href: `/kontor/${office.slug}/` },
+            ]}
+          />
 
           <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
@@ -243,7 +218,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
       )}
 
       {/* TJENESTER LOKALT – Petrol som seksjonsskille */}
-      <Section tone="petrol">
+      <Section tone="petrol" flyt>
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>
@@ -263,10 +238,10 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             </div>
             <div className="lg:col-span-7" data-reveal>
               <ul className="border-t border-flyd-sand/15">
-                {services.map((s) => (
+                {visibleServices.map((s) => (
                   <li key={s.id}>
                     <Link
-                      href={`/tjenester#${s.id}`}
+                      href={serviceUrl(s)}
                       className="group flex items-center justify-between gap-4 border-b border-flyd-sand/15 py-5 transition-colors hover:text-flyd-mint"
                     >
                       <span className="flex items-center gap-4">

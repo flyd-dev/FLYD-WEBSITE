@@ -30,11 +30,11 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-flyd-skog text-flyd-sand border border-flyd-skog hover:bg-flyd-petrol hover:border-flyd-petrol',
+    'magnet bg-flyd-skog text-flyd-sand border border-flyd-skog hover:bg-flyd-petrol hover:border-flyd-petrol',
   secondary:
     'bg-transparent text-flyd-skog border border-flyd-skog hover:bg-flyd-skog hover:text-flyd-sand',
   'primary-dark':
-    'bg-flyd-korall text-flyd-skog border border-flyd-korall hover:bg-flyd-sand hover:border-flyd-sand',
+    'magnet bg-flyd-korall text-flyd-skog border border-flyd-korall hover:bg-flyd-sand hover:border-flyd-sand',
   'secondary-dark':
     'bg-transparent text-flyd-sand border border-flyd-mint hover:bg-flyd-mint hover:text-flyd-skog',
   'on-teal':
