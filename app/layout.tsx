@@ -157,9 +157,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     openingHoursSpecification: openingHours.schema,
   }));
 
+  const website = {
+    '@type': 'WebSite',
+    '@id': `${siteUrl}/#website`,
+    url: `${siteUrl}/`,
+    name: 'Flyd',
+    inLanguage: 'nb-NO',
+    publisher: { '@id': orgId },
+  };
+
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@graph': [organization, ...localBusinesses],
+    '@graph': [organization, website, ...localBusinesses],
   };
 
   return (

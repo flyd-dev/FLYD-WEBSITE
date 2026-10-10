@@ -30,6 +30,28 @@ export const metadata: Metadata = pageMetadata({
   path: '/om-flyd/',
 });
 
+// Medarbeiderne som Person, koblet til organisasjonen. Tittelen
+// «statsautorisert» ligger bare i jobTitle der den står i data/team.ts.
+const aboutJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  '@id': 'https://www.flyd.no/om-flyd/#webpage',
+  url: 'https://www.flyd.no/om-flyd/',
+  name: 'Om Flyd',
+  inLanguage: 'nb-NO',
+  isPartOf: { '@id': 'https://www.flyd.no/#website' },
+  about: {
+    '@id': 'https://www.flyd.no/#organization',
+    employee: [...leadership, ...officeLeads, ...otherTeam].map((m) => ({
+      '@type': 'Person',
+      name: m.name,
+      jobTitle: m.role,
+      worksFor: { '@id': 'https://www.flyd.no/#organization' },
+      ...(m.image ? { image: `https://www.flyd.no${m.image}` } : {}),
+    })),
+  },
+};
+
 const values = [
   {
     title: 'Personlig',
@@ -55,6 +77,7 @@ export default function OmFlydPage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
+      <JsonLd data={aboutJsonLd} />
       {/* HERO – «Innhold med tall»: Sand, bilde til venstre, tall med topplinje. */}
       <Section tone="sand" size="lg" className="pt-12 md:pt-16">
         <Container>
