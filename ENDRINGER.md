@@ -1,5 +1,12 @@
 # Endringslogg — analyse-forbedringer
 
+## Kontaktskjema via server (11.10.2026)
+
+- Skjemaet poster ikke lenger direkte fra nettleseren. `components/ContactForm.tsx` kaller `/api/kontakt`. `app/api/kontakt/route.ts` validerer feltene og videresender til miljøvariabelen `KONTAKT_WEBHOOK_URL`.
+- `output: 'export'` er fjernet fra `next.config.js` fordi en Route Handler ikke kan kjøre i ren statisk eksport. `images.unoptimized` og `trailingSlash` er beholdt. Sidene forhåndsgenereres fortsatt statisk.
+- Variabelen må settes i Vercel for Production og Preview før skjemaet virker. Den skal ikke ligge i kode. Se `.env.example` og `README.md`.
+- Honeypot-feltet `company`, feltet `bedrift` og hendelsen `career_inquiry` (når temaet er Karriere) er uendret i skjemaet.
+
 ## Google Ads: riktige konverteringer og klikk-ID i skjemaet (6.10.2026)
 
 - **Jobbsøkere teller ikke som kunder.** Tema «Karriere» sendte `generate_lead`, så Google Ads lærte seg å finne jobbsøkere. Nå sender det `career_inquiry`, som ikke skal importeres i Ads. «Ta kontakt» på /karriere åpner skjemaet med Karriere valgt (`/kontakt?tema=karriere`).
