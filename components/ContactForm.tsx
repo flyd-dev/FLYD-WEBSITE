@@ -5,23 +5,10 @@ import clsx from 'clsx';
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
 import { getAdClick, trackCareerInquiry, trackLead } from './Analytics';
+import { CAREER_TOPIC, CONTACT_TOPICS } from '@/lib/contact-topics';
 
-const WEBHOOK_URL = 'https://hook.eu2.make.com/g8aore8oidc681el311c4f1p55hmgxmx';
-
-// Samme navn som tjenestene i data/services.ts. Make-scenariet bruker temaet
-// bare som «Emne» i e-posten, så verdiene kan endres fritt. Lenker kan velge
-// tema på forhånd med ?tema= (f.eks. /kontakt?tema=karriere).
-const CAREER_TOPIC = 'Karriere';
-const topics = [
-  'Regnskap og rådgivning',
-  'Programvare / ERP',
-  'Integrasjoner',
-  'Analyse og rapportering',
-  'Nettsider og digitale flater',
-  'Lønn og HR',
-  CAREER_TOPIC,
-  'Annet',
-];
+// Temaene ligger i lib/contact-topics.ts, samme liste som serveren godtar.
+// Lenker kan velge tema på forhånd med ?tema= (f.eks. /kontakt?tema=karriere).
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 type FieldErrors = { name?: string; email?: string; message?: string };
@@ -54,7 +41,7 @@ export default function ContactForm() {
 
   useEffect(() => {
     const tema = new URLSearchParams(window.location.search).get('tema')?.toLowerCase();
-    const match = topics.find((t) => t.toLowerCase() === tema);
+    const match = CONTACT_TOPICS.find((t) => t.toLowerCase() === tema);
     if (match && topicRef.current) topicRef.current.value = match;
   }, []);
 
@@ -104,7 +91,7 @@ export default function ContactForm() {
     try {
       const payload = {
         name: String(formData.get('name') ?? '').trim(),
-        // Det ekte bedriftsfeltet. `company` under er honeypoten – Make sorterer bort boter på den.
+        // Det ekte bedriftsfeltet. `company` under er honeypoten – utfylt felt stoppes før sending.
         bedrift: String(formData.get('bedrift') ?? '').trim(),
         email: String(formData.get('email') ?? '').trim(),
         phone: String(formData.get('phone') ?? '').trim(),
@@ -115,7 +102,7 @@ export default function ContactForm() {
         ...(getAdClick() ?? { gclid: '', gbraid: '', wbraid: '' }),
       };
 
-      const res = await fetch(WEBHOOK_URL, {
+      const res = await fetch('/api/kontakt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -257,7 +244,7 @@ export default function ContactForm() {
           <option value="" disabled>
             Velg tema …
           </option>
-          {topics.map((t) => (
+          {CONTACT_TOPICS.map((t) => (
             <option key={t} value={t}>
               {t}
             </option>
