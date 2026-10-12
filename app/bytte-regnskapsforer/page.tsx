@@ -4,7 +4,6 @@ import { Check, Plus } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
-import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Bekreft from '@/components/Bekreft';
 import JsonLd from '@/components/JsonLd';
@@ -73,7 +72,7 @@ function Punkter({ items, linje = 'sand' }: { items: React.ReactNode[]; linje?: 
   );
 }
 
-// Stegkortene står på Lys mint, så lister og sitat bruker Lys mint-linjer og Sand-flate.
+// Stegkortene er Sand med Sand-linje (skissen), så lister bruker Sand-linjer og sitatet Lys mint-flate.
 const steg: { tittel: string; innhold: React.ReactNode }[] = [
   {
     tittel: 'Les oppdragsavtalen',
@@ -81,7 +80,6 @@ const steg: { tittel: string; innhold: React.ReactNode }[] = [
       <>
         <p className={brod}>Finn fram avtalen med regnskapsføreren du har i dag, og se etter dette:</p>
         <Punkter
-          linje="mint"
           items={[
             'Oppsigelsestid og eventuell bindingstid',
             'Hva som skal leveres når oppdraget avsluttes, og i hvilket format',
@@ -125,7 +123,6 @@ const steg: { tittel: string; innhold: React.ReactNode }[] = [
           samtidig hvem som leverer:
         </p>
         <Punkter
-          linje="mint"
           items={[
             'Siste mva-melding før byttet',
             'Siste a-melding før byttet',
@@ -133,7 +130,7 @@ const steg: { tittel: string; innhold: React.ReactNode }[] = [
           ]}
         />
         <p className={`mt-5 ${brod}`}>Du kan bruke denne teksten som utgangspunkt:</p>
-        <blockquote className="mt-4 rounded-flis bg-flyd-sand p-6 text-[16px] leading-relaxed text-flyd-skog md:p-7">
+        <blockquote className="mt-4 rounded-flis bg-flyd-lysmint p-6 text-[16px] leading-relaxed text-flyd-skog md:p-7">
           Vi sier med dette opp oppdragsavtalen om regnskapstjenester for (selskapsnavn), org.nr. (nummer), med
           virkning fra (dato). Vi ber om skriftlig bekreftelse på oppsigelsen og på hvem som leverer mva-melding og
           a-melding for (termin og måned). Ny regnskapsfører er (navn), som tar kontakt om overlevering av
@@ -155,7 +152,6 @@ const steg: { tittel: string; innhold: React.ReactNode }[] = [
           overføres regnskapsdataene i SAF-T Regnskap hvis ikke annet er avtalt. Be om:
         </p>
         <Punkter
-          linje="mint"
           items={[
             'Bilag, hovedbok og saldobalanse',
             'Kunde- og leverandørreskontro',
@@ -294,33 +290,47 @@ export default function BytteRegnskapsforerPage() {
       <JsonLd data={articleJsonLd} />
       <JsonLd data={faqJsonLd} />
 
-      {/* HERO + KORTSVAR – Skog, som i utkastet */}
-      <Section tone="skog" className="pt-10 md:pt-14" flyt>
-        <Container>
-          <Breadcrumbs tone="dark" items={[{ name: 'Bytte regnskapsfører', href: g.path }]} />
-          <div className="mt-10 max-w-3xl">
-            <Eyebrow tone="dark">Guide · Regnskapsfører</Eyebrow>
-            <h1 className="mt-6 font-display text-display-xl font-semibold text-flyd-sand">{g.h1}</h1>
-            <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
-              Ja, du kan bytte regnskapsfører når som helst, også midt i året. Les oppdragsavtalen, velg ny
-              regnskapsfører, si opp skriftlig med en sluttdato og avtal overlevering av regnskapsmaterialet, normalt
-              som SAF-T. Meld så ny regnskapsfører i Enhetsregisteret, og gi tilganger i Altinn og regnskapssystemet.
-              Den nye regnskapsføreren hjelper deg med det meste.
-            </p>
-            <p className="mt-6 text-[15px] text-flyd-dempet">
-              Sist oppdatert <time dateTime={g.modified}>12. oktober 2026</time>.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <ButtonLink href={kontakt} variant="primary-dark" withArrow>
-                Snakk med oss
-              </ButtonLink>
-              <ButtonLink href="#sjekkliste" variant="secondary-dark">
-                Gå til sjekklisten
-              </ButtonLink>
+      {/* HERO + KORTSVAR – innfelt Skog-flate på Sand, som i skissen. Eneste Korall-knapp på siden. */}
+      <section className="bg-flyd-sand px-3 pt-3 md:px-4 md:pt-4">
+        <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-skog py-14 text-flyd-sand md:py-20">
+          <Container className="relative">
+            <Breadcrumbs tone="dark" items={[{ name: 'Bytte regnskapsfører', href: g.path }]} />
+            <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+              <div className="lg:col-span-8">
+                <span className="block h-0.5 w-10 bg-flyd-mint" aria-hidden="true" />
+                <Eyebrow tone="petrol" className="mt-5">
+                  Guide · Regnskapsfører
+                </Eyebrow>
+                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{g.h1}</h1>
+                <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
+                  Ja, du kan bytte regnskapsfører når som helst, også midt i året. Les oppdragsavtalen, velg ny
+                  regnskapsfører, si opp skriftlig med en sluttdato og avtal overlevering av regnskapsmaterialet,
+                  normalt som SAF-T. Meld så ny regnskapsfører i Enhetsregisteret, og gi tilganger i Altinn og
+                  regnskapssystemet. Den nye regnskapsføreren hjelper deg med det meste.
+                </p>
+                <p className="mt-6 text-[15px] text-flyd-dempet">
+                  Sist oppdatert <time dateTime={g.modified}>12. oktober 2026</time>.
+                </p>
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <ButtonLink href={kontakt} variant="primary-dark" withArrow>
+                    Snakk med oss
+                  </ButtonLink>
+                  <ButtonLink href="#sjekkliste" variant="secondary-dark">
+                    Gå til sjekklisten
+                  </ButtonLink>
+                </div>
+              </div>
+              {/* Dekor: Petrol-sirkel med Mint-ring og Mint-prikk */}
+              <div className="hidden justify-end lg:col-span-4 lg:flex" aria-hidden="true">
+                <div className="relative aspect-square w-full max-w-[380px] rounded-full bg-flyd-petrol">
+                  <div className="absolute inset-[13%] rounded-full border border-flyd-mint/50" />
+                  <div className="absolute bottom-[10%] right-[10%] h-[28%] w-[28%] rounded-full bg-flyd-mint/90" />
+                </div>
+              </div>
             </div>
-          </div>
-        </Container>
-      </Section>
+          </Container>
+        </div>
+      </section>
 
       {/* SEKS STEG – kort med nummer */}
       <Section tone="sand" id="steg">
@@ -335,12 +345,12 @@ export default function BytteRegnskapsforerPage() {
               normalt mye av arbeidet.
             </p>
           </div>
-          <ol className="mt-12 max-w-4xl space-y-4 md:space-y-5">
+          <ol className="mt-12 grid grid-cols-1 gap-4 md:gap-5 lg:grid-cols-2">
             {steg.map((s, i) => (
               <li
                 key={s.tittel}
                 data-reveal
-                className="flex gap-5 rounded-kort bg-flyd-lysmint p-6 md:gap-7 md:p-8"
+                className="flex gap-5 rounded-kort border border-flyd-linje-sand bg-flyd-sand p-6 md:gap-6 md:p-8"
               >
                 <span
                   className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-flyd-petrol font-display text-[18px] font-semibold tabular-nums text-flyd-sand"
@@ -349,7 +359,7 @@ export default function BytteRegnskapsforerPage() {
                   {i + 1}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-display text-[22px] font-semibold leading-[1.3] md:pt-1">
+                  <h3 className="font-display text-[20px] font-semibold leading-[1.3] md:pt-1">
                     <span className="sr-only">Steg {i + 1}: </span>
                     {s.tittel}
                   </h3>
@@ -453,15 +463,15 @@ export default function BytteRegnskapsforerPage() {
         </Container>
       </Section>
 
-      {/* OFTE STILTE SPØRSMÅL */}
-      <Section tone="lysmint" id="sporsmal">
+      {/* OFTE STILTE SPØRSMÅL – Lys mint-kort på Sand, som i skissen */}
+      <Section tone="sand" id="sporsmal" className="pt-0 md:pt-0">
         <Container>
-          <div className="max-w-3xl" data-reveal>
+          <div className="border-t border-flyd-linje-sand pt-20 md:pt-28" data-reveal>
             <Eyebrow>Spørsmål og svar</Eyebrow>
-            <h2 className={`mt-5 ${h2}`}>Ofte stilte spørsmål om å bytte regnskapsfører</h2>
-            <div className="mt-8 space-y-3">
+            <h2 className={`mt-5 max-w-3xl ${h2}`}>Ofte stilte spørsmål om å bytte regnskapsfører</h2>
+            <div className="mt-8 max-w-4xl space-y-3">
               {bytteFaq.map((f) => (
-                <details key={f.q} className="faq group rounded-kort bg-flyd-sand px-6 md:px-7">
+                <details key={f.q} className="faq group rounded-kort bg-flyd-lysmint px-6 md:px-7">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
                     {f.q}
                     <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
@@ -481,40 +491,21 @@ export default function BytteRegnskapsforerPage() {
         </Container>
       </Section>
 
-      {/* HVA FLYD GJØR – Petrol-kort på Sand, som i utkastet */}
-      <Section tone="sand" id="flyd">
+      {/* HVA FLYD GJØR – Petrol-kort rett under FAQ, som i skissen. Avslutter siden; knappen er Mint-kontur, ikke Korall. */}
+      <Section tone="sand" id="flyd" className="pt-0 md:pt-0">
         <Container>
           <div className="on-dark grid grid-cols-1 gap-12 rounded-bilde bg-flyd-petrol p-8 text-flyd-sand md:p-12 lg:grid-cols-12 lg:gap-16 lg:p-14">
-            <div className="lg:col-span-5" data-reveal>
+            <div className="lg:col-span-8" data-reveal>
               <Eyebrow tone="petrol">Rogaland og Agder</Eyebrow>
               <h2 className="mt-5 font-display text-display-md font-semibold text-flyd-sand">
                 Hva gjør Flyd for deg når du bytter?
               </h2>
-              <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
+              <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-dempet">
                 Du skal ikke måtte kunne prosessen for å bytte. Når du har sagt ja, tar vi oss av overgangen.
               </p>
-              <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
-                Vi har kontorer i Rogaland og Agder. Ser du etter en{' '}
-                <Link
-                  href="/kontor/stavanger-sandnes/"
-                  className="font-medium text-flyd-sand underline decoration-flyd-mint decoration-2 underline-offset-4 transition-colors duration-200 hover:text-flyd-mint"
-                >
-                  regnskapsfører i Stavanger
-                </Link>
-                , sitter vi på Forus, midt i Stavanger-regionen.
-              </p>
-              <div className="mt-8 flex flex-col items-start gap-3">
-                <TextLink href="/kontor/" tone="dark">
-                  Finn nærmeste kontor
-                </TextLink>
-                <TextLink href="/tjenester/" tone="dark">
-                  Se alle tjenestene våre
-                </TextLink>
-              </div>
-            </div>
-            <div className="lg:col-span-7" data-reveal>
               <NumberedList
                 tone="dark"
+                className="mt-8"
                 items={[
                   'Vi tar kontakt med den forrige regnskapsføreren før vi tar oppdraget, slik regnskapsførerloven § 5-1 krever, og følger opp overleveringen.',
                   'Vi henter inn tidligere år fra SAF-T og legger inn åpningsbalansen for inneværende år i Tripletex, med åpne poster.',
@@ -529,22 +520,41 @@ export default function BytteRegnskapsforerPage() {
               <Bekreft className="mt-4">
                 kort kundecase eller sitat fra en kunde som har byttet til Flyd, med navn og samtykke
               </Bekreft>
-              <div className="mt-8">
-                <ButtonLink href={kontakt} variant="primary-dark" withArrow>
+              <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-flyd-dempet">
+                Vi har kontorer i Rogaland og Agder. Ser du etter en{' '}
+                <Link
+                  href="/kontor/stavanger-sandnes/"
+                  className="font-medium text-flyd-sand underline decoration-flyd-mint decoration-2 underline-offset-4 transition-colors duration-200 hover:text-flyd-mint"
+                >
+                  regnskapsfører i Stavanger
+                </Link>
+                , sitter vi på Forus, midt i Stavanger-regionen.
+              </p>
+              <p className="mt-4 max-w-xl text-[17px] leading-[1.65] text-flyd-dempet">
+                Ta en uforpliktende prat med oss. Vi ser på avtalen og systemet du har i dag, og forteller deg hvordan
+                et bytte vil gå for deg.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5">
+                <ButtonLink href={kontakt} variant="secondary-dark" withArrow>
                   Snakk med oss
                 </ButtonLink>
+                <TextLink href="/kontor/" tone="dark">
+                  Finn nærmeste kontor
+                </TextLink>
+                <TextLink href="/tjenester/" tone="dark">
+                  Se alle tjenestene våre
+                </TextLink>
+              </div>
+            </div>
+            {/* Dekor: Mint-ring med Flyd-teal-prikk */}
+            <div className="hidden items-center justify-center lg:col-span-4 lg:flex" aria-hidden="true">
+              <div className="flex aspect-square w-full max-w-[260px] items-center justify-center rounded-full border border-flyd-mint/50">
+                <div className="h-[38%] w-[38%] rounded-full bg-flyd-teal" />
               </div>
             </div>
           </div>
         </Container>
       </Section>
-
-      <ClosingCta
-        kicker="Neste steg"
-        title="Vurderer du å bytte regnskapsfører?"
-        text="Ta en uforpliktende prat med oss. Vi ser på avtalen og systemet du har i dag, og forteller deg hvordan et bytte vil gå for deg."
-        primary={{ href: kontakt, label: 'Snakk med oss' }}
-      />
     </>
   );
 }
