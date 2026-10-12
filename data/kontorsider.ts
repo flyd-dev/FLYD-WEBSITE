@@ -9,6 +9,8 @@
  * skal aldri inn i JSON-LD: FAQ-svar med `bekreft` tas bare med i FAQPage når
  * de også har en ferdig `a`, og da bare med `a`.
  */
+import type { OgImage } from '@/lib/seo';
+
 export type KontorFaq = {
   q: string;
   /** Det synlige svaret. Det samme står i FAQPage. */
@@ -23,6 +25,8 @@ export type Kontorside = {
   /** <title>; « · Flyd» legges til av malen i layout. */
   title: string;
   description: string;
+  /** Eget delingsbilde (1200×630) i public/og/. Uten det brukes forsidens. */
+  image?: OgImage;
   h1: string;
   kicker: string;
   ingress: string;
@@ -85,6 +89,13 @@ export const kontorsider: Record<string, Kontorside> = {
     title: 'Regnskapsfører i Stavanger – regnskap og rådgivning',
     description:
       'Regnskapsfører i Stavanger med kontor på Forus. Regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson og riktig regnskapssystem.',
+    image: {
+      url: 'https://www.flyd.no/og/kontor-stavanger-sandnes.png',
+      width: 1200,
+      height: 630,
+      type: 'image/png',
+      alt: 'Regnskapsfører i Stavanger – kontor på Forus. Regnskap, lønn og rådgivning med fast kontaktperson fra Flyd',
+    },
     h1: 'Regnskapsfører i Stavanger',
     kicker: 'Kontor · Forus',
     ingress:
