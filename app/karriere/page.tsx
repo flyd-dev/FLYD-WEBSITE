@@ -95,7 +95,7 @@ export default function KarrierePage() {
     <>
       <JsonLd data={breadcrumbJsonLd} />
       {/* HERO – portrettbilde ved siden av teksten (designmanualen kap. 07). */}
-      <Section tone="sand" size="lg" className="pt-12 md:pt-16">
+      <Section tone="sand" size="lg" className="pt-12 md:pt-16" flyt>
         <Container>
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">

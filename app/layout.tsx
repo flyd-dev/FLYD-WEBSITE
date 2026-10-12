@@ -3,6 +3,7 @@ import { DM_Sans, Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PointerFx from '@/components/PointerFx';
 import Reveal from '@/components/Reveal';
 import ScrollToTop from '@/components/ScrollToTop';
 import Analytics from '@/components/Analytics';
@@ -180,11 +181,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Hopp til hovedinnhold
         </a>
+        <div className="lesefremdrift" aria-hidden="true" />
         <Header />
         <main id="main">{children}</main>
         <Footer />
         <ScrollToTop />
         <Reveal />
+        <PointerFx />
         <CookieConsent />
         <Analytics />
         <script

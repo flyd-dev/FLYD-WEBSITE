@@ -23,13 +23,15 @@ export default function ProcessCards({ steps }: { steps: ProcessStep[] }) {
           key={step.n}
           className="group relative flex min-h-[340px] overflow-hidden rounded-bilde bg-flyd-skog md:min-h-[380px]"
         >
-          <Image
-            src={step.imgSrc}
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-          />
+          <div className="rull-zoom absolute inset-0">
+            <Image
+              src={step.imgSrc}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            />
+          </div>
           <div className="overlay-skog-bunn absolute inset-0" aria-hidden="true" />
           <div className="relative mt-auto p-7 md:p-8">
             <div className="flex items-center gap-3">

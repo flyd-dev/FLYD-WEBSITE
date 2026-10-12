@@ -79,7 +79,7 @@ export default function OmFlydPage() {
       <JsonLd data={breadcrumbJsonLd} />
       <JsonLd data={aboutJsonLd} />
       {/* HERO – «Innhold med tall»: Sand, bilde til venstre, tall med topplinje. */}
-      <Section tone="sand" size="lg" className="pt-12 md:pt-16">
+      <Section tone="sand" size="lg" className="pt-12 md:pt-16" flyt>
         <Container>
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="order-2 lg:order-1 lg:col-span-5">
@@ -141,7 +141,7 @@ export default function OmFlydPage() {
       </Section>
 
       {/* SLIK JOBBER VI */}
-      <Section tone="skog">
+      <Section tone="skog" flyt>
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>

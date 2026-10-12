@@ -29,7 +29,7 @@ export type Office = {
 export const offices: Office[] = [
   {
     city: 'Stavanger',
-    slug: 'stavanger',
+    slug: 'stavanger-sandnes',
     name: 'FOMO',
     street: 'Grenseveien 21',
     postal: '4313 Sandnes',

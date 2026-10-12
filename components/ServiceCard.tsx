@@ -23,7 +23,7 @@ export default function ServiceCard({
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col rounded-kort bg-flyd-sand p-3 transition-transform duration-300 ease-out hover:-translate-y-1 active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+      className="lys group flex h-full flex-col rounded-kort bg-flyd-sand p-3 transition-transform duration-300 ease-out hover:-translate-y-1 active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
     >
       <ServiceTile name={icon} tone={tone} className="h-36 w-full shrink-0 rounded-flis" />
       <div className="flex flex-1 flex-col px-3 pb-3 pt-5">

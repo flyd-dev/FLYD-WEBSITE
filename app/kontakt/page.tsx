@@ -31,7 +31,7 @@ export default function KontaktPage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
-      <Section tone="sand" size="lg" className="pt-12 md:pt-16">
+      <Section tone="sand" size="lg" className="pt-12 md:pt-16" flyt>
         <Container>
           <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">

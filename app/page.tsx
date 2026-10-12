@@ -7,13 +7,15 @@ import PartnerStrip from '@/components/PartnerStrip';
 import StatsSection from '@/components/StatsSection';
 import ServiceCard from '@/components/ServiceCard';
 import NumberedList from '@/components/NumberedList';
-import ProcessCards, { type ProcessStep } from '@/components/ProcessCards';
+import FlytLinjer from '@/components/FlytLinjer';
+import ProcessCards from '@/components/ProcessCards';
+import { process } from '@/data/process';
 import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { HeroTypewriter, HeroTypewriterPause } from '@/components/HeroTypewriter';
 import type { ServiceTone } from '@/components/ServiceIcon';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
-import { services, erpSystems } from '@/data/services';
+import { visibleServices, erpSystems, serviceUrl } from '@/data/services';
 import { stats } from '@/data/stats';
 
 const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
@@ -27,40 +29,6 @@ const whyFlyd: { icon: FlydIconName; text: string }[] = [
   { icon: 'innsikt', text: 'Innsikt og analyse som gir bedre beslutninger' },
 ];
 
-const process: ProcessStep[] = [
-  {
-    n: '01',
-    title: 'Dialog',
-    icon: 'dialog',
-    body:
-      'Vi starter med en uforpliktende samtale og blir kjent med bedriften, systemene og hvor du vil – og hvor skoen trykker i dag.',
-    imgSrc: '/process-bg/dialog.webp',
-  },
-  {
-    n: '02',
-    title: 'Plan',
-    icon: 'plan',
-    body:
-      'Vi designer en løsning tilpasset virksomheten: riktig ERP, integrasjoner, arbeidsflyt og hvem som gjør hva.',
-    imgSrc: '/process-bg/plan.webp',
-  },
-  {
-    n: '03',
-    title: 'I drift',
-    icon: 'i-drift',
-    body:
-      'Vi tar hånd om regnskap, lønn og rapportering. Du får oppdaterte tall og en fast rådgiver å støtte deg på.',
-    imgSrc: '/process-bg/drift.webp',
-  },
-  {
-    n: '04',
-    title: 'Videreutvikling',
-    icon: 'videreutvikling',
-    body:
-      'Vi følger med, justerer og foreslår forbedringer. Systemet skal vokse med bedriften – ikke bremse den.',
-    imgSrc: '/header/office-4.webp',
-  },
-];
 
 const HERO = {
   src: '/header/hero-1200.webp',
@@ -76,7 +44,7 @@ export default function HomePage() {
           Bildet står i et kort med radius 24 px, siden det ikke er utfallende. */}
       <Section tone="sand" className="!pb-0 !pt-0 md:!pt-1">
         <div className="px-3 md:px-5">
-          <div className="on-dark relative flex min-h-[640px] overflow-hidden rounded-bilde bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
+          <div className="on-dark relative flex min-h-[640px] overflow-hidden rounded-bilde [contain:paint] bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
             {/* Originalfotoet i to størrelser: mobil henter 1200 px, store
                 skjermer 2400 px. next/image lager ikke srcset med statisk
                 eksport (unoptimized), derfor vanlig <img> + preload over. */}
@@ -88,10 +56,11 @@ export default function HomePage() {
               alt="Flyd-teamet i en uformell prat på kontoret"
               fetchPriority="high"
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
+              className="hero-drift absolute inset-0 h-full w-full object-cover object-[70%_center]"
             />
             <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
             <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />
+            <FlytLinjer className="opacity-40 [mask-image:linear-gradient(to_right,black_0%,black_45%,transparent_75%)]" />
 
             <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
               <div className="max-w-2xl" data-reveal>
@@ -170,14 +139,14 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-            {services.map((s, i) => (
+            {visibleServices.map((s, i) => (
               <div key={s.id} data-reveal className="h-full">
                 <ServiceCard
                   title={s.title}
                   text={s.short}
                   icon={s.icon}
                   tone={serviceTones[i % serviceTones.length]}
-                  href={`/tjenester#${s.id}`}
+                  href={serviceUrl(s)}
                 />
               </div>
             ))}
@@ -186,7 +155,7 @@ export default function HomePage() {
       </Section>
 
       {/* HVORFOR FLYD – Petrol som seksjonsskille */}
-      <Section tone="petrol">
+      <Section tone="petrol" flyt>
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>
@@ -247,7 +216,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-10" data-reveal>
-            <TextLink href="/tjenester#nettsider">
+            <TextLink href="/tjenester/nettsider-og-digitale-flater/">
               Trenger du en nettside eller digital flate som snakker med systemet?
             </TextLink>
           </div>

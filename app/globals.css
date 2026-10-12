@@ -130,3 +130,243 @@ input, textarea, select, button {
 @media (prefers-reduced-motion: reduce) {
   .tw-cursor { animation: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   Sidemaler (tjenester, ERP, kontorer): små CSS-animasjoner uten JS-bibliotek.
+   Alt slås av ved prefers-reduced-motion.
+   --------------------------------------------------------------------------- */
+
+/* Kort i rutenett tones inn etter tur. Forsinkelsen settes per kort med
+   style={{ '--i': n }}. */
+.stagger > [data-reveal] {
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* Aksentlinje under sidetittelen: tegnes fra venstre når siden lastes.
+   Den er pynt, ikke innhold, så den påvirker ikke LCP. */
+.aksentlinje {
+  transform-origin: left center;
+  animation: aksentlinje-inn 900ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+}
+@keyframes aksentlinje-inn {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Lenkekort: løftes litt, får mørkere flate og pilen glir ut. */
+.lenkekort {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 300ms ease;
+}
+.lenkekort:hover {
+  transform: translateY(-4px);
+}
+.lenkekort:active {
+  transform: translateY(-1px);
+}
+.lenkekort .lenkekort-pil {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lenkekort:hover .lenkekort-pil,
+.lenkekort:focus-visible .lenkekort-pil {
+  transform: translateX(4px);
+}
+
+/* Prosessteg: linjen mellom stegene fylles når seksjonen kommer til syne. */
+.prosesslinje {
+  transform-origin: top center;
+  transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+[data-reveal="hidden"] .prosesslinje {
+  transform: scaleY(0);
+}
+
+/* Vanlige spørsmål: pilen snur når svaret er åpent. */
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq .faq-pil {
+  transition: transform 250ms ease;
+}
+.faq[open] .faq-pil {
+  transform: rotate(45deg);
+}
+.faq[open] .faq-svar {
+  animation: faq-inn 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes faq-inn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aksentlinje,
+  .faq[open] .faq-svar {
+    animation: none;
+  }
+  .lenkekort,
+  .lenkekort .lenkekort-pil,
+  .faq .faq-pil,
+  .prosesslinje {
+    transition: none;
+  }
+  .lenkekort:hover,
+  .lenkekort:active,
+  .lenkekort:hover .lenkekort-pil {
+    transform: none;
+  }
+  [data-reveal="hidden"] .prosesslinje {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Bevegelse over hele nettstedet (okt. 2026). Ren CSS + én liten lytter i
+   PointerFx.tsx. Alt er pynt; innhold og LCP-elementer animeres aldri med
+   opacity. Slås av ved prefers-reduced-motion (nederst).
+   --------------------------------------------------------------------------- */
+
+/* Flytlinjene: tegnes inn, så glir et lysere strøk langs linjen. */
+.flytlinje {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: calc(0.55 - var(--i, 0) * 0.1);
+  animation: flyt-tegn 2.2s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--i, 0) * 160ms + 200ms) forwards,
+    flyt-puls 7s ease-in-out calc(var(--i, 0) * 400ms + 2.4s) infinite;
+}
+@keyframes flyt-tegn {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes flyt-puls {
+  0%, 100% { opacity: calc(0.55 - var(--i, 0) * 0.1); }
+  50% { opacity: calc(0.85 - var(--i, 0) * 0.12); }
+}
+
+/* Fremdriftslinje øverst: viser hvor langt du har lest. Bare der nettleseren
+   støtter scroll-drevne animasjoner; ellers vises den ikke. */
+.lesefremdrift {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .lesefremdrift {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 3px;
+    z-index: 60;
+    background: var(--flyd-teal);
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: lese-fram linear both;
+    animation-timeline: scroll(root);
+  }
+  @keyframes lese-fram {
+    to { transform: scaleX(1); }
+  }
+
+  /* Bilder zoomer rolig ut mens de rulles inn i bildet. */
+  .rull-zoom {
+    animation: rull-zoom linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 50%;
+  }
+  @keyframes rull-zoom {
+    from { transform: scale(1.12); }
+    to { transform: scale(1); }
+  }
+
+  /* Store titler glir litt sidelengs mens de passerer. */
+  .rull-gli {
+    animation: rull-gli linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  @keyframes rull-gli {
+    from { transform: translateX(-24px); }
+    to { transform: translateX(0); }
+  }
+}
+
+/* Lyskjegle som følger pekeren over kort (PointerFx setter --mx/--my). */
+.lys {
+  position: relative;
+  isolation: isolate;
+}
+.lys::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(139, 194, 187, 0.35),
+    transparent 60%
+  );
+  z-index: -1;
+}
+.lys:hover::after {
+  opacity: 1;
+}
+
+/* Magnetknapper: trekkes et par piksler mot pekeren (PointerFx). */
+.magnet {
+  transform: translate(var(--tx, 0), var(--ty, 0));
+}
+
+/* Sideskifte: nytt innhold glir opp (kun transform – teller ikke mot LCP). */
+.side-inn {
+  animation: side-inn 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes side-inn {
+  from { transform: translateY(14px); }
+  to { transform: translateY(0); }
+}
+
+/* Kicker-punktumet pulserer én gang når overskriften kommer til syne. */
+[data-reveal="shown"] .puls-prikk::before {
+  animation: puls-prikk 900ms ease-out 200ms;
+}
+@keyframes puls-prikk {
+  0% { box-shadow: 0 0 0 0 rgba(242, 144, 90, 0.7); }
+  100% { box-shadow: 0 0 0 10px rgba(242, 144, 90, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flytlinje {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .flytprikk {
+    display: none;
+  }
+  .lesefremdrift,
+  .rull-zoom,
+  .rull-gli,
+  .side-inn,
+  [data-reveal="shown"] .puls-prikk::before {
+    animation: none !important;
+  }
+  .rull-zoom,
+  .rull-gli {
+    transform: none !important;
+  }
+  .magnet {
+    transform: none !important;
+  }
+}
+
+/* Forsidebildet driver langsomt (kun transform, så LCP påvirkes ikke). */
+.hero-drift {
+  transform-origin: 70% 50%;
+  animation: hero-drift 18s ease-in-out infinite alternate;
+}
+@keyframes hero-drift {
+  from { transform: scale(1.06) translate3d(0, 0, 0); }
+  to { transform: scale(1) translate3d(-1%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-drift { animation: none; }
+}
