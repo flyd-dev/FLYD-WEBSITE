@@ -69,6 +69,7 @@ export default function Footer() {
               <li><Link href="/" className="transition-colors hover:text-flyd-mint">Forside</Link></li>
               <li><Link href="/tjenester" className="transition-colors hover:text-flyd-mint">Tjenester</Link></li>
               <li><Link href="/kontor" className="transition-colors hover:text-flyd-mint">Kontorer</Link></li>
+              <li><Link href="/bytte-regnskapsforer/" className="transition-colors hover:text-flyd-mint">Bytte regnskapsfører</Link></li>
               <li><Link href="/om-flyd" className="transition-colors hover:text-flyd-mint">Om Flyd</Link></li>
               <li><Link href="/karriere" className="transition-colors hover:text-flyd-mint">Karriere</Link></li>
               <li><Link href="/kontakt" className="transition-colors hover:text-flyd-mint">Kontakt</Link></li>

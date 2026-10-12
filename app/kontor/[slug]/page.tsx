@@ -103,6 +103,16 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 riktig forretningssystem og integrasjoner som fjerner manuelt
                 arbeid – og en fast kontaktperson som kjenner virksomheten din.
               </p>
+              <p className="mt-5 max-w-2xl text-[17px] leading-[1.7] text-flyd-skifer">
+                Har du regnskapsfører i dag? Les hvordan du kan{" "}
+                <Link
+                  href="/bytte-regnskapsforer/"
+                  className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors duration-200 hover:text-flyd-skog hover:decoration-flyd-skog"
+                >
+                  bytte regnskapsfører
+                </Link>{" "}
+                og hva du bør avklare om frister og overlevering.
+              </p>
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <ButtonLink href="/kontakt" variant="primary" withArrow>
                   Snakk med oss

@@ -134,6 +134,10 @@ export default function TjenesterPage() {
               </li>
             ))}
           </ul>
+          <p className="mt-12 text-[17px] leading-[1.7] text-flyd-skifer" data-reveal>
+            Har du regnskapsfører i dag og vurderer å bytte?{' '}
+            <TextLink href="/bytte-regnskapsforer/">Slik går du fram for å bytte regnskapsfører</TextLink>
+          </p>
         </Container>
       </Section>
 
