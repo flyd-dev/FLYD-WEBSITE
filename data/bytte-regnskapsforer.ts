@@ -34,19 +34,19 @@ export const bytteFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Må den gamle regnskapsføreren gi fra seg regnskapet?',
-    a: 'Ja. Regnskapsmaterialet og regnskapsdataene skal gjøres tilgjengelig for deg så snart som mulig når oppdraget opphører, etter god regnskapsføringsskikk normalt i SAF-T-format.',
+    a: 'Ja. Etter god regnskapsføringsskikk (bransjestandarden GRFS) skal regnskapsmaterialet og regnskapsdataene utleveres til deg så snart som mulig når oppdraget opphører. Regnskapsdataene overføres i SAF-T-format hvis ikke annet er avtalt.',
   },
   {
     q: 'Hvorfor kontakter den nye regnskapsføreren den gamle?',
-    a: 'Regnskapsførerloven § 5-1 krever at den nye regnskapsføreren ber den forrige om å opplyse om forhold som tilsier at oppdraget ikke bør tas. Det er en fast rutine ved alle bytter, ikke et tegn på problemer.',
+    a: 'Regnskapsførerloven § 5-1 krever som hovedregel at det nye regnskapsforetaket, før det tar oppdraget, ber den forrige regnskapsføreren opplyse om forhold som tilsier at oppdraget ikke bør tas. Det er en fast rutine, ikke et tegn på problemer.',
   },
   {
     q: 'Hvordan gir jeg ny regnskapsfører tilgang i Altinn?',
-    a: 'Meld ny regnskapsfører i Samordnet registermelding. Regnskapsføreren signerer, og rollen følger da fra Enhetsregisteret. Ekstra fullmakter gir du som tilgangspakker under Tilgangsstyring i Altinn.',
+    a: 'Meld ny regnskapsfører i Samordnet registermelding. Regnskapsføreren får en signeringsoppgave i sin Altinn-innboks og bekrefter der. Regnskapsførerroller som er registrert i Enhetsregisteret, videreføres som tilgangspakker i Altinn. Ekstra fullmakter gir du som tilgangspakker under Tilgangsstyring i Altinn.',
   },
   {
     q: 'Koster det noe å melde ny regnskapsfører til Brønnøysundregistrene?',
-    a: 'Nei, endringen er gratis. Eventuelle kostnader kommer fra avtalene med den gamle og den nye regnskapsføreren.',
+    a: 'Nei. Å melde ny regnskapsfører koster ingenting hos Brønnøysundregistrene (endringen står ikke på gebyrlisten). Eventuelle kostnader kommer fra avtalene med den gamle og den nye regnskapsføreren.',
   },
   {
     q: 'Må jeg bytte regnskapssystem når jeg bytter regnskapsfører?',
@@ -58,7 +58,7 @@ export const bytteFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Hva gjør jeg hvis den gamle regnskapsføreren ikke svarer eller holder tilbake materialet?',
-    a: 'Ta det opp skriftlig, og vis til at regnskapsmaterialet skal gjøres tilgjengelig for deg når oppdraget opphører, etter god regnskapsføringsskikk. Den nye regnskapsføreren kan hjelpe deg med å følge opp. Er dere uenige, for eksempel om honorar, bør du snakke med den nye regnskapsføreren eller en rådgiver før du går videre.',
+    a: 'Ta det opp skriftlig, og vis til at regnskapsmaterialet etter god regnskapsføringsskikk skal utleveres til deg så snart som mulig når oppdraget opphører. Den nye regnskapsføreren kan hjelpe deg med å følge opp. Bransjestandarden tar ikke stilling til om materialet kan holdes tilbake, for eksempel ved ubetalt honorar. Er dere uenige, bør du snakke med den nye regnskapsføreren eller en rådgiver før du går videre.',
   },
 ];
 
@@ -68,7 +68,7 @@ export const bytteSjekkliste: { tittel: string; punkter: string[] }[] = [
     punkter: [
       'Les oppdragsavtalen: oppsigelsestid, binding og honorar for sluttarbeid',
       'Sjekk hvem som eier lisensen til regnskapssystemet',
-      'Velg ny regnskapsfører og aksepter tilbudet',
+      'Velg ny regnskapsfører',
     ],
   },
   {
@@ -95,6 +95,7 @@ export const bytteSjekkliste: { tittel: string; punkter: string[] }[] = [
       'Meld ny regnskapsfører i Samordnet registermelding',
       'Gi bare de tilgangspakkene i Altinn som trengs',
       'Gi ny regnskapsfører tilgang i regnskapssystem, bank og bilagsløsning',
+      'Fjern manuelt delegerte fullmakter til det gamle byrået under Tilgangsstyring i Altinn',
       'Fjern gamle brukere og tilganger når overleveringen er dokumentert',
       'Koble integrasjoner med API-nøkler til på nytt når gamle brukere fjernes',
     ],
