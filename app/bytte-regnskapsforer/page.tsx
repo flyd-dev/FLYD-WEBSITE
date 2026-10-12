@@ -187,8 +187,8 @@ const steg: { tittel: string; innhold: React.ReactNode }[] = [
         <p className={`mt-4 ${brod}`}>
           Altinn er godt i gang med overgangen fra roller til tilgangspakker, og tilgang via de gamle rollene opphører
           31.12.2026. Regnskapsførerrollene som er registrert i Enhetsregisteret, videreføres som tilgangspakker.
-          Fullmakter som er delegert manuelt, for eksempel til en person hos det gamle byrået, må gis på nytt som
-          tilgangspakker under Tilgangsstyring i Altinn. Gi bare de pakkene som trengs.
+          Fullmakter som tidligere er delegert manuelt, må gis på nytt som tilgangspakker i Altinn, nå til den nye
+          regnskapsføreren. Gi bare de pakkene som trengs.
         </p>
         <p className={`mt-4 ${brod}`}>
           Fullmakter du selv har delegert manuelt til den gamle regnskapsføreren, fjerner du under Tilgangsstyring i
