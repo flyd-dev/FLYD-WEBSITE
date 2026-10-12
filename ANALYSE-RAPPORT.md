@@ -74,7 +74,7 @@ Typewriteren starter tom ved SSR, så crawlere (og JS-avslåtte brukere) ser `<h
 **Fiks:** SSR-fallback: render første frase statisk (erstattes ved hydrering), eller gi H1 `aria-label="Økonomi og teknologi – full flyd."` og legg en `sr-only`/noscript-tekst. Typewriteren respekterer heller ikke `prefers-reduced-motion` — legg inn statisk visning av «full flyd.» for de brukerne.
 
 **V2 — Personvernerklæringen nevner ikke Make.**
-Kontaktskjemaet POST-er navn/e-post/telefon/melding til `hook.eu2.make.com` ([ContactForm.tsx:8](components/ContactForm.tsx#L8)), men [personvern-siden](app/personvern/page.tsx) lister bare Google og Microsoft som databehandlere. GDPR krever at databehandlere/tredjeparter opplyses. Mangler også: klageadgang til Datatilsynet (anbefalt standardpunkt).
+Kontaktskjemaet POST-er navn/e-post/telefon/melding til `[fjernet]` ([ContactForm.tsx:8](components/ContactForm.tsx#L8)), men [personvern-siden](app/personvern/page.tsx) lister bare Google og Microsoft som databehandlere. GDPR krever at databehandlere/tredjeparter opplyses. Mangler også: klageadgang til Datatilsynet (anbefalt standardpunkt).
 **Fiks:** Legg til avsnitt om skjemabehandling via Make (EU-datasenter, eu2) + klageadgang.
 
 **V3 — Samtykke kan ikke endres fra UI.**
