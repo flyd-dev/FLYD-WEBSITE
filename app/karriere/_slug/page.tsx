@@ -1,6 +1,6 @@
-// Deaktivert rute: `output: export` krever minst én stilling i `data/jobs.ts`
-// for å bygge denne siden. Gi mappen navnet `[slug]` igjen når stillinger
-// flyttes tilbake fra `arkiverteJobs` til `jobs`.
+// Deaktivert rute: mappen heter `_slug`, som Next.js ignorerer, fordi
+// `data/jobs.ts` ikke har aktive stillinger. Gi mappen navnet `[slug]` igjen
+// når stillinger flyttes tilbake fra `arkiverteJobs` til `jobs`.
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import fs from 'node:fs';
