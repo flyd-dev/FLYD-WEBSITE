@@ -238,25 +238,33 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
               <TextLink href="/om-flyd/">Les mer om Flyd og folkene våre</TextLink>
             </div>
           </div>
-          {/* Plassholderkort til ansatte og bilder er levert; da brukes TeamCard. */}
-          <ul className="stagger mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-            {Array.from({ length: side.team.plassholdere }, (_, i) => (
+          {/* Egne kort i stedet for TeamCard: bare navn, rolle og bilde, uten merkepiller. */}
+          <ul className="stagger mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
+            {side.team.ansatte.map((a, i) => (
               <li
-                key={i}
+                key={a.name}
                 data-reveal
                 style={{ '--i': i } as React.CSSProperties}
-                className="flex flex-col rounded-kort bg-flyd-sand p-5 pb-6"
+                className="flex flex-col rounded-kort bg-flyd-sand p-3 pb-6"
               >
-                <div
-                  aria-hidden="true"
-                  className="flex aspect-[16/9] w-full items-center justify-center rounded-flis bg-flyd-lysmint"
-                >
-                  <div className="aspect-square w-[22%] rounded-pille border-2 border-flyd-mint" />
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-flis bg-flyd-linje-mint">
+                  <Image
+                    src={a.image}
+                    alt={a.name}
+                    fill
+                    sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
+                    className="object-cover object-top"
+                  />
                 </div>
-                <Bekreft className="mt-5">{side.team.bekreft}</Bekreft>
+                <div className="px-3 pt-5">
+                  <h3 className="font-display text-[19px] font-semibold leading-tight text-flyd-skog">{a.name}</h3>
+                  {a.role && <p className="mt-1 text-[15px] leading-snug text-flyd-skifer">{a.role}</p>}
+                  {a.bekreft && <Bekreft className="mt-3">{a.bekreft}</Bekreft>}
+                </div>
               </li>
             ))}
           </ul>
+          {side.team.bekreft && <Bekreft className="mt-6">{side.team.bekreft}</Bekreft>}
         </Container>
       </Section>
 

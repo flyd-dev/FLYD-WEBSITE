@@ -70,10 +70,10 @@ export type Kontorside = {
     kicker: string;
     title: string;
     text: string;
-    /** Plassholder per ansattkort til navn og bilde er levert. */
-    bekreft: string;
-    /** Antall plassholderkort (som i designutkastet). Erstattes av de faktiske ansatte. */
-    plassholdere: number;
+    /** Ansattkortene. Uten `role` vises `bekreft` i stedet for rollen. */
+    ansatte: { name: string; role?: string; image: string; bekreft?: string }[];
+    /** Det som mangler for hele teamseksjonen (vises under kortene). */
+    bekreft?: string;
   };
   faq: KontorFaq[];
   andreKontorer: { kicker: string; title: string };
@@ -230,8 +230,18 @@ export const kontorsider: Record<string, Kontorside> = {
       kicker: 'Folkene',
       title: 'Møt teamet i Stavanger',
       text: 'Hos oss får du en fast kontaktperson på Forus, med kolleger innen regnskap, lønn og systemer rundt seg.',
-      bekreft: 'ansatt på Forus-kontoret: navn, rolle, bilde og ev. godkjenning/tittel',
-      plassholdere: 3,
+      ansatte: [
+        { name: 'Kai Mydland', image: '/team/flyd-kai.webp', bekreft: 'rolle for Kai Mydland' },
+        { name: 'Arnstein Bendiksen', image: '/team/flyd-arnstein.webp', bekreft: 'rolle for Arnstein Bendiksen' },
+        {
+          name: 'Marit Haga Christensen',
+          role: 'Kontorleder og statsautorisert regnskapsfører',
+          image: '/team/flyd-marit.webp',
+        },
+        { name: 'Tatjana Derksen', role: 'Regnskapskonsulent', image: '/team/flyd-tatjana.webp' },
+      ],
+      bekreft:
+        'samtykke til bruk av bildene av Kai Mydland, Arnstein Bendiksen, Marit Haga Christensen og Tatjana Derksen på kontorsiden',
     },
 
     faq: [
