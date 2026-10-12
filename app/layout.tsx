@@ -9,6 +9,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import Analytics from '@/components/Analytics';
 import CookieConsent from '@/components/CookieConsent';
 import { offices, openingHours } from '@/data/offices';
+import { getKontorside } from '@/data/kontorsider';
 import { leadership, officeLeads, otherTeam } from '@/data/team';
 
 // Designmanualen: Poppins (500 ingress, 600 overskrifter og tall) og
@@ -136,7 +137,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const localBusinesses = offices.map((o) => ({
     '@type': ['LocalBusiness', 'AccountingService'],
     '@id': `${siteUrl}/#office-${o.city.toLowerCase()}`,
-    name: `Flyd ${o.city}`,
+    name: getKontorside(o.slug)?.schemaName ?? `Flyd ${o.city}`,
     parentOrganization: { '@id': orgId },
     url: `${siteUrl}/kontor/${o.slug}/`,
     image: `${siteUrl}/brand/flyd-teal.png`,
