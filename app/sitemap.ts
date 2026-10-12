@@ -51,6 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '', source: 'app/page.tsx', priority: 1, changeFrequency: 'monthly' },
     { path: '/tjenester', source: 'app/tjenester/page.tsx', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/kontor', source: 'app/kontor/page.tsx', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/bytte-regnskapsforer', source: 'app/bytte-regnskapsforer/page.tsx', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/om-flyd', source: 'app/om-flyd/page.tsx', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/karriere', source: 'app/karriere/page.tsx', priority: 0.8, changeFrequency: 'weekly' },
     { path: '/kontakt', source: 'app/kontakt/page.tsx', priority: 0.7, changeFrequency: 'yearly' },
