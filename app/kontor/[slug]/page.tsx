@@ -16,6 +16,8 @@ import FlydIcon from "@/components/FlydIcon";
 import { offices, getOfficeBySlug, openingHours, atOffice, officeLabel } from "@/data/offices";
 import { visibleServices, serviceUrl } from "@/data/services";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import KontorMal from "@/components/maler/KontorMal";
+import { getKontorside } from "@/data/kontorsider";
 
 const SITE_URL = "https://www.flyd.no";
 
@@ -30,6 +32,14 @@ export function generateMetadata({
 }): Metadata {
   const office = getOfficeBySlug(params.slug);
   if (!office) return { title: "Kontor ikke funnet" };
+  const side = getKontorside(office.slug);
+  if (side) {
+    return pageMetadata({
+      title: side.title,
+      description: side.description,
+      path: `/kontor/${office.slug}/`,
+    });
+  }
   return pageMetadata({
     title: `Regnskapsfører ${atOffice(office)}`,
     description: `${office.blurb} Regnskap, rådgivning og teknologi – lokalt ${atOffice(office)}.`,
@@ -40,6 +50,10 @@ export function generateMetadata({
 export default function KontorPage({ params }: { params: { slug: string } }) {
   const office = getOfficeBySlug(params.slug);
   if (!office) notFound();
+
+  // Kontorer med eget innhold i data/kontorsider.ts får den utvidede siden.
+  const side = getKontorside(office.slug);
+  if (side) return <KontorMal office={office} side={side} />;
 
   const otherOffices = offices.filter((o) => o.slug !== office.slug);
 

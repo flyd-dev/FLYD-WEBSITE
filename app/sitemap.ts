@@ -58,7 +58,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const jobsMtime = lastCommitOf('data/jobs.ts', 'app/karriere/[slug]');
-  const officesMtime = lastCommitOf('data/offices.ts', 'app/kontor/[slug]');
+  const officesMtime = lastCommitOf(
+    'data/offices.ts',
+    'data/kontorsider.ts',
+    'components/maler/KontorMal.tsx',
+    'app/kontor/[slug]',
+  );
 
   // Bare publiserte sider – utkast skal aldri i sitemapen, heller ikke på
   // forhåndsvisninger.
