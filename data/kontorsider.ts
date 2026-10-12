@@ -231,8 +231,8 @@ export const kontorsider: Record<string, Kontorside> = {
       title: 'Møt teamet i Stavanger',
       text: 'Hos oss får du en fast kontaktperson på Forus, med kolleger innen regnskap, lønn og systemer rundt seg.',
       ansatte: [
-        { name: 'Kai Mydland', image: '/team/flyd-kai.webp', bekreft: 'rolle for Kai Mydland' },
-        { name: 'Arnstein Bendiksen', image: '/team/flyd-arnstein.webp', bekreft: 'rolle for Arnstein Bendiksen' },
+        { name: 'Kai Mydland', role: 'Daglig leder', image: '/team/flyd-kai.webp' },
+        { name: 'Arnstein Bendiksen', role: 'Salgssjef', image: '/team/flyd-arnstein.webp' },
         {
           name: 'Marit Haga Christensen',
           role: 'Kontorleder og statsautorisert regnskapsfører',
