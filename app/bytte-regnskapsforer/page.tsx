@@ -5,7 +5,6 @@ import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import Bekreft from '@/components/Bekreft';
 import JsonLd from '@/components/JsonLd';
 import NumberedList from '@/components/NumberedList';
 import { ButtonLink, TextLink } from '@/components/Button';
@@ -194,10 +193,10 @@ const steg: { tittel: string; innhold: React.ReactNode }[] = [
           Fullmakter du selv har delegert manuelt til den gamle regnskapsføreren, fjerner du under Tilgangsstyring i
           Altinn når overleveringen er dokumentert.
         </p>
-        <Bekreft className="mt-5">
-          hvordan den gamle regnskapsføreren fjernes fra Enhetsregisteret og Altinn, og om det skjer automatisk når
-          ny regnskapsfører meldes i Samordnet registermelding
-        </Bekreft>
+        <p className={`mt-4 ${brod}`}>
+          Daglig leder eller styreleder registrerer Flyd som ny regnskapsfører i Altinn, og vi hjelper deg med det. Den
+          gamle regnskapsføreren fjernes da automatisk.
+        </p>
       </>
     ),
   },
@@ -241,7 +240,10 @@ const fakta: { id: string; kicker: string; tittel: string; innhold: React.ReactN
           registreringen i Enhetsregisteret går raskt, siden enkle endringer behandles maskinelt. I praksis er det
           oppsigelsestiden som setter takten.
         </p>
-        <Bekreft className="mt-5">typisk tid hos Flyd fra kunden sier ja til regnskapet er i full drift</Bekreft>
+        <p className={`mt-4 ${brod}`}>
+          Hvor lang tid byttet tar, avhenger av hvor raskt det gamle byrået overleverer og når oppsigelsen gjelder fra.
+          Du får en konkret plan i oppstartsmøtet.
+        </p>
       </>
     ),
   },
@@ -263,7 +265,7 @@ const fakta: { id: string; kicker: string; tittel: string; innhold: React.ReactN
             'Systemlisens eller flytting av data, hvis du må over på et nytt abonnement',
           ]}
         />
-        <Bekreft className="mt-5">Flyds oppstartspris ved bytte, og om overtakelsen inngår i prisen</Bekreft>
+        <p className={`mt-4 ${brod}`}>Oppstartsprisen avtales i tilbudet du får fra oss.</p>
       </>
     ),
   },
@@ -278,7 +280,6 @@ const fakta: { id: string; kicker: string; tittel: string; innhold: React.ReactN
           tilgang. Står den i byråets navn, må dataene flyttes til et abonnement du eier eller den nye
           regnskapsføreren setter opp.
         </p>
-        <Bekreft className="mt-5">hvem som normalt eier systemlisensen hos Flyd-kunder – kunden eller Flyd</Bekreft>
       </>
     ),
   },
@@ -513,13 +514,9 @@ export default function BytteRegnskapsforerPage() {
                   'Du får en fast kontaktperson som kjenner virksomheten din.',
                 ]}
               />
-              <Bekreft className="mt-6">
-                hvilke andre steg Flyd tar ansvar for ved overtakelse, for eksempel Samordnet registermelding og
-                tilgangspakker i Altinn
-              </Bekreft>
-              <Bekreft className="mt-4">
-                kort kundecase eller sitat fra en kunde som har byttet til Flyd, med navn og samtykke
-              </Bekreft>
+              <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-dempet">
+                Vi tar ansvar for regnskapet fra avtalt startdato. Det gamle byrået har ansvaret for perioden før det.
+              </p>
               <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-flyd-dempet">
                 Vi har kontorer i Rogaland og Agder. Ser du etter en{' '}
                 <Link
