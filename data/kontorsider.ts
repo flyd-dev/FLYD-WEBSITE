@@ -34,7 +34,7 @@ export type Kontorside = {
     kicker: string;
     title: string;
     avsnitt: string[];
-    bekreft: string[];
+    bekreft?: string[];
   };
   tjenester: {
     kicker: string;
@@ -50,7 +50,7 @@ export type Kontorside = {
     title: string;
     intro: string;
     punkter: string[];
-    bekreft: string[];
+    bekreft?: string[];
   };
   kommIGang: {
     kicker: string;
@@ -64,7 +64,7 @@ export type Kontorside = {
     intro: string;
     faktorer: string[];
     avslutning: string;
-    bekreft: string;
+    bekreft?: string;
   };
   team: {
     kicker: string;
@@ -100,10 +100,6 @@ export const kontorsider: Record<string, Kontorside> = {
         'Kontoret ligger i FOMO-bygget i Grenseveien 21 på Forus, på grensen mellom Stavanger og Sandnes. Her har vi kort vei til de fleste næringsområdene på Nord-Jæren, og det er lett å komme seg hit både fra Stavanger, Sandnes og Sola. Vi har åpent mandag til fredag fra 07 til 16.',
         'Fra Forus betjener vi bedrifter i Stavanger, Sandnes, Sola, Randaberg og resten av Nord-Jæren. Møtene tar vi der det passer deg: hos oss på Forus, ute hos deg eller på video. Bilagene går digitalt, så du trenger ikke stikke innom med en perm for at regnskapet skal bli ført.',
         'Kontoret er en del av Flyd, med kolleger på fem andre kontorer i Rogaland og Agder. Blir det travelt, eller trenger saken en spesialist, har vi flere å spille på uten at du må forholde deg til nye folk.',
-      ],
-      bekreft: [
-        'parkering og adkomst ved FOMO (gjesteparkering, buss, inngang)',
-        'hvor mange rådgivere og regnskapsførere som sitter på Forus-kontoret',
       ],
     },
 
@@ -173,10 +169,6 @@ export const kontorsider: Record<string, Kontorside> = {
         'Etablerte industri- og eiendomsselskaper som vil ha en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
         'Selskaper som skal bytte system eller rydde opp etter en implementering som ikke ble helt ferdig.',
       ],
-      bekreft: [
-        'hvilke bransjer Forus-kontoret har mest erfaring med, ev. anonymiserte eksempler',
-        'én kort kundehistorie eller ett sitat fra en kunde i regionen, med navn og samtykke',
-      ],
     },
 
     kommIGang: {
@@ -222,8 +214,6 @@ export const kontorsider: Record<string, Kontorside> = {
       ],
       avslutning:
         'Vi oppgir ikke faste priser på nettsiden. Etter en gjennomgang av bedriften får du et konkret tilbud.',
-      bekreft:
-        'Flyds prismodell for regnskap: fastpris, timepris eller pakker, ev. en «fra»-pris',
     },
 
     team: {
@@ -240,24 +230,16 @@ export const kontorsider: Record<string, Kontorside> = {
         },
         { name: 'Tatjana Derksen', role: 'Regnskapskonsulent', image: '/team/flyd-tatjana.webp' },
       ],
-      bekreft:
-        'samtykke til bruk av bildene av Kai Mydland, Arnstein Bendiksen, Marit Haga Christensen og Tatjana Derksen på kontorsiden',
     },
 
     faq: [
-      {
-        q: 'Hva koster en regnskapsfører i Stavanger?',
-        a: 'Prisen avhenger av hvor mange bilag du har, om du har ansatte på lønn, mva-rapportering og hvor sammensatt virksomheten er. Flyd gir et konkret tilbud etter en gjennomgang av bedriften, så du vet hva du betaler for før du bestemmer deg.',
-        bekreft: 'Flyds prismodell (fastpris, timepris eller pakker) i svaret',
-      },
       {
         q: 'Hvor ligger Flyd sitt kontor i Stavanger?',
         a: 'Kontoret ligger i FOMO-bygget på Forus, Grenseveien 21, 4313 Sandnes, på grensen mellom Stavanger og Sandnes. Vi har åpent mandag til fredag fra 07 til 16. Du kan også møte oss hos deg eller på video.',
       },
       {
         q: 'Er Flyd godkjent av Finanstilsynet?',
-        bekreft:
-          'at Flyd er godkjent av Finanstilsynet som regnskapsforetak, og at hvert oppdrag har en oppdragsansvarlig med godkjenning – ev. med lenke til Finanstilsynets register',
+        a: 'Ja. Flyd er et autorisert regnskapsførerselskap med tillatelse fra Finanstilsynet.',
       },
       {
         q: 'Hvilke regnskapssystemer jobber dere med?',
@@ -274,7 +256,7 @@ export const kontorsider: Record<string, Kontorside> = {
       },
       {
         q: 'Tar dere små bedrifter og enkeltpersonforetak?',
-        bekreft: 'minste kundestørrelse, og om Flyd tar enkeltpersonforetak',
+        a: 'Ja. Vi hjelper både små bedrifter og enkeltpersonforetak med regnskapet.',
       },
       {
         q: 'Hjelper dere bedrifter i Sandnes og Sola også?',

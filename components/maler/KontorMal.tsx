@@ -213,7 +213,7 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
           <div className="max-w-3xl" data-reveal>
             <Eyebrow>{side.pris.kicker}</Eyebrow>
             <h2 className="mt-5 font-display text-display-lg font-semibold">{side.pris.title}</h2>
-            <Bekreft className="mt-6">{side.pris.bekreft}</Bekreft>
+            {side.pris.bekreft && <Bekreft className="mt-6">{side.pris.bekreft}</Bekreft>}
           </div>
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16" data-reveal>
             <div className="lg:col-span-5">
@@ -281,7 +281,7 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
                     {t}
                   </p>
                 ))}
-                {side.lokalt.bekreft.map((b) => (
+                {side.lokalt.bekreft?.map((b) => (
                   <Bekreft key={b}>{b}</Bekreft>
                 ))}
               </div>
@@ -379,11 +379,13 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
             </div>
             <div className="lg:col-span-7">
               <NumberedList items={side.passerFor.punkter} />
-              <div className="mt-8 space-y-4" data-reveal>
-                {side.passerFor.bekreft.map((b) => (
-                  <Bekreft key={b}>{b}</Bekreft>
-                ))}
-              </div>
+              {side.passerFor.bekreft && side.passerFor.bekreft.length > 0 && (
+                <div className="mt-8 space-y-4" data-reveal>
+                  {side.passerFor.bekreft.map((b) => (
+                    <Bekreft key={b}>{b}</Bekreft>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </Container>
