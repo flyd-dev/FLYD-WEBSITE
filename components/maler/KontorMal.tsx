@@ -4,7 +4,6 @@ import { ArrowRight, Check, Plus } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
-import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Bekreft from '@/components/Bekreft';
 import JsonLd from '@/components/JsonLd';
@@ -19,6 +18,9 @@ import type { Kontorside } from '@/data/kontorsider';
  * Utvidet kontorside (/kontor/[slug]/) for kontorer med eget innhold i
  * data/kontorsider.ts. Øvrige kontorer bruker standardsiden i
  * app/kontor/[slug]/page.tsx.
+ *
+ * Siden har nøyaktig én Korall-knapp (primærknappen i heroen). Alle andre
+ * handlinger er kontur, tekstlenker eller Mint-knappen i avslutningsboksen.
  *
  * [BEKREFT]-plassholderne vises alltid, slik at byggesjekken
  * (scripts/sjekk-bekreft.mjs) stopper produksjonsbygg til innholdet er levert.
@@ -81,14 +83,16 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
   const visitLink =
     'text-flyd-skog decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-petrol hover:underline';
   const brod = 'text-[17px] leading-[1.7] text-flyd-skifer';
+  // Kort strek i Flyd-teal over korttitler, som i designutkastet.
+  const strek = 'block h-1 w-8 rounded-pille bg-flyd-teal';
 
   return (
     <>
       <JsonLd data={localBusinessJsonLd} />
       <JsonLd data={faqJsonLd} />
 
-      {/* HERO */}
-      <Section tone="sand" className="pt-10 md:pt-14" flyt>
+      {/* HERO – avrundet Skog-flate. Korall-knappen her er den eneste på siden. */}
+      <Section tone="sand" size="sm" className="!pb-0 !pt-6 md:!pt-8">
         <Container>
           <Breadcrumbs
             items={[
@@ -96,84 +100,42 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
               { name: office.city, href: `/kontor/${office.slug}/` },
             ]}
           />
-
-          <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
-              <Eyebrow>{side.kicker}</Eyebrow>
-              <h1 className="mt-6 font-display text-display-xl font-semibold">{side.h1}</h1>
-              <span aria-hidden="true" className="aksentlinje mt-6 block h-1 w-24 rounded-pille bg-flyd-teal" />
-              <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
-                {side.ingress}
-              </p>
-              <div className="mt-10 flex flex-wrap items-center gap-4">
-                <ButtonLink href="/kontakt" variant="primary" withArrow>
-                  Snakk med oss
-                </ButtonLink>
-                <ButtonLink href="tel:+4748019958" variant="secondary" external>
-                  Ring +47 480 19 958
-                </ButtonLink>
-              </div>
-            </div>
-
-            <aside className="lg:col-span-5">
-              <div className="lg:sticky lg:top-24">
-                {office.image && (
-                  <div className="relative mb-4 aspect-[3/2] overflow-hidden rounded-bilde bg-flyd-lysmint">
-                    <Image
-                      src={office.image.src}
-                      alt={office.image.alt}
-                      fill
-                      sizes="(min-width:1024px) 40vw, 100vw"
-                      className="object-cover"
-                      priority
-                    />
-                  </div>
-                )}
-                <div className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
-                  <Eyebrow>Besøk oss</Eyebrow>
-                  <div className="mt-5 space-y-4 text-[16px]">
-                    <div className={visitRow}>
-                      <FlydIcon name="lokal" className={visitIcon} />
-                      <div>
-                        <div className="font-display font-semibold">{officeLabel(office)}</div>
-                        <div className="mt-0.5 text-flyd-skifer">
-                          {office.street}
-                          <br />
-                          {office.postal}
-                        </div>
-                      </div>
-                    </div>
-                    <div className={visitRow}>
-                      <FlydIcon name="telefon" className={visitIcon} />
-                      <a href="tel:+4748019958" className={visitLink}>
-                        +47 480 19 958
-                      </a>
-                    </div>
-                    <div className={visitRow}>
-                      <FlydIcon name="epost" className={visitIcon} />
-                      <a href="mailto:support@flyd.no" className={visitLink}>
-                        support@flyd.no
-                      </a>
-                    </div>
-                    <div className={visitRow}>
-                      <FlydIcon name="klokke" className={visitIcon} />
-                      <span>{openingHours.label}</span>
-                    </div>
-                  </div>
-                  <div className="mt-7">
-                    <ButtonLink href={office.mapsUrl} variant="secondary" withArrow external className="w-full">
-                      Åpne i Google Maps
+        </Container>
+        <div className="mx-auto mt-6 w-full max-w-[1400px] px-3 md:px-6">
+          <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-skog text-flyd-sand">
+            <Container className="py-16 md:py-24">
+              <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+                <div className="lg:col-span-8">
+                  <span aria-hidden="true" className="block h-1 w-10 rounded-pille bg-flyd-teal" />
+                  <Eyebrow tone="petrol" className="mt-6">
+                    {side.kicker}
+                  </Eyebrow>
+                  <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{side.h1}</h1>
+                  <p className="mt-8 max-w-2xl text-[18px] leading-[1.65] text-flyd-dempet">{side.ingress}</p>
+                  <div className="mt-10 flex flex-wrap items-center gap-4">
+                    <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
+                      Snakk med oss
+                    </ButtonLink>
+                    <ButtonLink href="tel:+4748019958" variant="secondary-dark" external>
+                      Ring +47 480 19 958
                     </ButtonLink>
                   </div>
                 </div>
+                {/* Dekor: Petrol-sirkel med Mint-ring og Mint-prikk */}
+                <div aria-hidden="true" className="hidden lg:col-span-4 lg:flex lg:justify-end">
+                  <div className="relative flex aspect-square w-full max-w-[380px] items-center justify-center rounded-pille bg-flyd-petrol">
+                    <div className="aspect-square w-[74%] rounded-pille border-2 border-flyd-mint/50" />
+                    <div className="absolute bottom-[8%] right-[10%] aspect-square w-[29%] rounded-pille bg-flyd-mint/90" />
+                  </div>
+                </div>
               </div>
-            </aside>
+            </Container>
           </div>
-        </Container>
+        </div>
       </Section>
 
       {/* TJENESTER – hele kortet er en lenke */}
-      <Section tone="lysmint">
+      <Section tone="sand">
         <Container>
           <div className="max-w-3xl" data-reveal>
             <Eyebrow>{side.tjenester.kicker}</Eyebrow>
@@ -185,9 +147,10 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
               <li key={p.title} data-reveal style={{ '--i': i } as React.CSSProperties}>
                 <Link
                   href={p.href}
-                  className="lenkekort group flex h-full flex-col rounded-kort bg-flyd-sand p-7 hover:bg-flyd-linje-mint"
+                  className="lenkekort group flex h-full flex-col rounded-kort border border-flyd-linje-sand bg-flyd-sand p-7 hover:bg-flyd-lysmint"
                 >
-                  <h3 className="font-display text-[21px] font-semibold leading-tight text-flyd-skog transition-colors duration-200 group-hover:text-flyd-petrol">
+                  <span aria-hidden="true" className={strek} />
+                  <h3 className="mt-5 font-display text-[21px] font-semibold leading-tight text-flyd-skog transition-colors duration-200 group-hover:text-flyd-petrol">
                     {p.title}
                   </h3>
                   <p className="mt-3 text-[16px] leading-relaxed text-flyd-skifer">{p.text}</p>
@@ -244,78 +207,128 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
         </Container>
       </Section>
 
-      {/* PRISER OG TEAM */}
-      <Section tone="sand">
+      {/* PRISER OG TEAM – Lys mint, overskriftene stablet som i designutkastet */}
+      <Section tone="lysmint">
         <Container>
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16" data-reveal>
-            <div className="lg:col-span-5">
-              <Eyebrow>{side.pris.kicker}</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">{side.pris.title}</h2>
-              <p className={`mt-6 ${brod}`}>{side.pris.intro}</p>
-            </div>
-            <div className="lg:col-span-7">
-              <ul className="border-t border-flyd-linje-sand">
-                {side.pris.faktorer.map((f) => (
-                  <li key={f} className="flex gap-3 border-b border-flyd-linje-sand py-4 text-[16px] text-flyd-skog">
-                    <Check className="mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal" strokeWidth={2.5} aria-hidden="true" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <p className={`mt-6 ${brod}`}>{side.pris.avslutning}</p>
-              <Bekreft className="mt-6">{side.pris.bekreft}</Bekreft>
-            </div>
+          <div className="max-w-3xl" data-reveal>
+            <Eyebrow>{side.pris.kicker}</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold">{side.pris.title}</h2>
+            <Bekreft className="mt-6">{side.pris.bekreft}</Bekreft>
           </div>
-
-          <div className="mt-20 border-t border-flyd-linje-sand pt-16 md:mt-24 md:pt-20">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-16" data-reveal>
-              <div className="lg:col-span-5">
-                <Eyebrow>{side.team.kicker}</Eyebrow>
-                <h2 className="mt-5 font-display text-display-lg font-semibold">{side.team.title}</h2>
-              </div>
-              <div className="lg:col-span-7 lg:pt-10">
-                <p className={brod}>{side.team.text}</p>
-                <div className="mt-6">
-                  <TextLink href="/om-flyd/">Les mer om Flyd og folkene våre</TextLink>
-                </div>
-              </div>
+          <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16" data-reveal>
+            <div className="lg:col-span-5">
+              <p className={brod}>{side.pris.intro}</p>
+              <p className={`mt-6 ${brod}`}>{side.pris.avslutning}</p>
             </div>
-            {/* Plassholderkort til ansatte og bilder er levert; da brukes TeamCard. */}
-            <ul className="stagger mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-              {Array.from({ length: side.team.plassholdere }, (_, i) => (
-                <li
-                  key={i}
-                  data-reveal
-                  style={{ '--i': i } as React.CSSProperties}
-                  className="flex flex-col rounded-kort bg-flyd-lysmint p-3 pb-6"
-                >
-                  <div aria-hidden="true" className="aspect-[4/5] w-full rounded-flis bg-flyd-linje-mint" />
-                  <Bekreft className="mx-3 mt-5">{side.team.bekreft}</Bekreft>
+            <ul className="border-t border-flyd-linje-mint lg:col-span-7">
+              {side.pris.faktorer.map((f) => (
+                <li key={f} className="flex gap-3 border-b border-flyd-linje-mint py-4 text-[16px] text-flyd-skog">
+                  <Check className="mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal" strokeWidth={2.5} aria-hidden="true" />
+                  {f}
                 </li>
               ))}
             </ul>
           </div>
+
+          <div className="mt-20 md:mt-24" data-reveal>
+            <Eyebrow>{side.team.kicker}</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold">{side.team.title}</h2>
+            <p className={`mt-6 max-w-3xl ${brod}`}>{side.team.text}</p>
+            <div className="mt-6">
+              <TextLink href="/om-flyd/">Les mer om Flyd og folkene våre</TextLink>
+            </div>
+          </div>
+          {/* Plassholderkort til ansatte og bilder er levert; da brukes TeamCard. */}
+          <ul className="stagger mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+            {Array.from({ length: side.team.plassholdere }, (_, i) => (
+              <li
+                key={i}
+                data-reveal
+                style={{ '--i': i } as React.CSSProperties}
+                className="flex flex-col rounded-kort bg-flyd-sand p-5 pb-6"
+              >
+                <div
+                  aria-hidden="true"
+                  className="flex aspect-[16/9] w-full items-center justify-center rounded-flis bg-flyd-lysmint"
+                >
+                  <div className="aspect-square w-[22%] rounded-pille border-2 border-flyd-mint" />
+                </div>
+                <Bekreft className="mt-5">{side.team.bekreft}</Bekreft>
+              </li>
+            ))}
+          </ul>
         </Container>
       </Section>
 
-      {/* LOKALT: kontoret på Forus */}
-      <Section tone="lysmint">
+      {/* LOKALT: kontoret på Forus, med besøksinfo */}
+      <Section tone="sand">
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
+            <div className="lg:col-span-7" data-reveal>
               <Eyebrow>{side.lokalt.kicker}</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">{side.lokalt.title}</h2>
+              <div className="mt-8 space-y-5">
+                {side.lokalt.avsnitt.map((t) => (
+                  <p key={t} className={brod}>
+                    {t}
+                  </p>
+                ))}
+                {side.lokalt.bekreft.map((b) => (
+                  <Bekreft key={b}>{b}</Bekreft>
+                ))}
+              </div>
             </div>
-            <div className="space-y-5 lg:col-span-7" data-reveal>
-              {side.lokalt.avsnitt.map((t) => (
-                <p key={t} className={brod}>
-                  {t}
-                </p>
-              ))}
-              {side.lokalt.bekreft.map((b) => (
-                <Bekreft key={b}>{b}</Bekreft>
-              ))}
-            </div>
+
+            <aside className="lg:col-span-5" data-reveal>
+              {office.image && (
+                <div className="relative mb-4 aspect-[3/2] overflow-hidden rounded-bilde bg-flyd-lysmint">
+                  <Image
+                    src={office.image.src}
+                    alt={office.image.alt}
+                    fill
+                    sizes="(min-width:1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              )}
+              <div className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
+                <Eyebrow>Besøk oss</Eyebrow>
+                <div className="mt-5 space-y-4 text-[16px]">
+                  <div className={visitRow}>
+                    <FlydIcon name="lokal" className={visitIcon} />
+                    <div>
+                      <div className="font-display font-semibold">{officeLabel(office)}</div>
+                      <div className="mt-0.5 text-flyd-skifer">
+                        {office.street}
+                        <br />
+                        {office.postal}
+                      </div>
+                    </div>
+                  </div>
+                  <div className={visitRow}>
+                    <FlydIcon name="telefon" className={visitIcon} />
+                    <a href="tel:+4748019958" className={visitLink}>
+                      +47 480 19 958
+                    </a>
+                  </div>
+                  <div className={visitRow}>
+                    <FlydIcon name="epost" className={visitIcon} />
+                    <a href="mailto:support@flyd.no" className={visitLink}>
+                      support@flyd.no
+                    </a>
+                  </div>
+                  <div className={visitRow}>
+                    <FlydIcon name="klokke" className={visitIcon} />
+                    <span>{openingHours.label}</span>
+                  </div>
+                </div>
+                <div className="mt-7">
+                  <ButtonLink href={office.mapsUrl} variant="secondary" withArrow external className="w-full">
+                    Åpne i Google Maps
+                  </ButtonLink>
+                </div>
+              </div>
+            </aside>
           </div>
           {office.gallery && office.gallery.length > 0 && (
             <div
@@ -327,7 +340,7 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
                 <div
                   key={img.src}
                   data-reveal
-                  className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-linje-mint"
+                  className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint"
                 >
                   <Image
                     src={img.src}
@@ -348,7 +361,7 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
       </Section>
 
       {/* PASSER FOR */}
-      <Section tone="sand">
+      <Section tone="lysmint">
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>
@@ -410,15 +423,15 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
         </Container>
       </Section>
 
-      {/* VANLIGE SPØRSMÅL */}
+      {/* VANLIGE SPØRSMÅL – hvert spørsmål på egen Lys mint-flis */}
       <Section tone="sand">
         <Container>
-          <div className="max-w-3xl" data-reveal>
+          <div data-reveal>
             <Eyebrow>Spørsmål og svar</Eyebrow>
             <h2 className="mt-5 font-display text-display-lg font-semibold">Ofte stilte spørsmål</h2>
-            <div className="mt-8 border-t border-flyd-linje-sand">
+            <div className="mt-8 space-y-3">
               {side.faq.map((f, i) => (
-                <details key={f.q} open={i === 0} className="faq group border-b border-flyd-linje-sand">
+                <details key={f.q} open={i === 0} className="faq group rounded-flis bg-flyd-lysmint px-6">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
                     {f.q}
                     <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
@@ -435,9 +448,37 @@ export default function KontorMal({ office, side }: { office: Office; side: Kont
         </Container>
       </Section>
 
-      <ClosingCta kicker={side.kontakt.kicker} title={side.kontakt.title} text={side.kontakt.text} />
+      {/* AVSLUTNING – Petrol-boks med Mint-knapp (ikke Korall: heroen har sidens eneste) */}
+      <Section tone="sand" className="!pt-0">
+        <Container>
+          <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-petrol p-8 md:p-14" data-reveal>
+            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
+              <div className="lg:col-span-8">
+                <Eyebrow tone="petrol">{side.kontakt.kicker}</Eyebrow>
+                <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">{side.kontakt.title}</h2>
+                <p className="mt-6 max-w-xl text-[18px] leading-[1.65] text-flyd-dempet">{side.kontakt.text}</p>
+                <div className="mt-8">
+                  <ButtonLink
+                    href="/kontakt"
+                    variant="secondary-dark"
+                    withArrow
+                    className="!bg-flyd-mint !text-flyd-skog hover:!border-flyd-sand hover:!bg-flyd-sand"
+                  >
+                    Snakk med oss
+                  </ButtonLink>
+                </div>
+              </div>
+              <div aria-hidden="true" className="hidden lg:col-span-4 lg:flex lg:justify-end">
+                <div className="flex aspect-square w-full max-w-[260px] items-center justify-center rounded-pille border-2 border-flyd-mint/50">
+                  <div className="aspect-square w-[38%] rounded-pille bg-flyd-teal" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
 
-      {/* ANDRE KONTORER – kort, én linje per kontor, etter avslutningen som i designutkastet */}
+      {/* ANDRE KONTORER – kort, én linje per kontor */}
       <Section tone="lysmint" size="sm">
         <Container>
           <div className="max-w-3xl" data-reveal>
