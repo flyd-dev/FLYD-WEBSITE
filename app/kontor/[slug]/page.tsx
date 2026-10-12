@@ -38,6 +38,7 @@ export function generateMetadata({
       title: side.title,
       description: side.description,
       path: `/kontor/${office.slug}/`,
+      image: side.image,
     });
   }
   return pageMetadata({
