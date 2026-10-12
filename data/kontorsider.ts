@@ -40,8 +40,9 @@ export type Kontorside = {
     kicker: string;
     title: string;
     intro: string;
+    /** Kortene i tjenesterutenettet. Hele kortet er en lenke. */
     punkter: { title: string; text: string; href: string; lenketekst: string }[];
-    /** Differensiatoren: ERP og systemvalg får egen, tyngre blokk. */
+    /** Differensiatoren: ERP og systemvalg får egen, tyngre blokk under kortene. */
     erp: { title: string; avsnitt: string[]; systemer: string[]; href: string; lenketekst: string };
   };
   passerFor: {
@@ -69,7 +70,10 @@ export type Kontorside = {
     kicker: string;
     title: string;
     text: string;
+    /** Plassholder per ansattkort til navn og bilde er levert. */
     bekreft: string;
+    /** Antall plassholderkort (som i designutkastet). Erstattes av de faktiske ansatte. */
+    plassholdere: number;
   };
   faq: KontorFaq[];
   andreKontorer: { kicker: string; title: string };
@@ -104,7 +108,7 @@ export const kontorsider: Record<string, Kontorside> = {
     },
 
     tjenester: {
-      kicker: 'Det hjelper vi deg med',
+      kicker: 'Tjenester',
       title: 'Dette hjelper vi bedrifter i Stavanger med',
       intro:
         'De fleste kundene våre i regionen bruker oss til det løpende regnskapet. Mange bruker oss også til lønn, rådgivning og systemet regnskapet føres i.',
@@ -132,6 +136,18 @@ export const kontorsider: Record<string, Kontorside> = {
           text: 'Budsjett, likviditet, selskapsstruktur og generasjonsskifte er spørsmål vi hjelper eiere og ledere med. Rådgivningen bygger på tallene vi allerede kjenner, så du slipper å forklare bedriften fra bunnen av.',
           href: '/tjenester/regnskap/',
           lenketekst: 'Les om regnskap og rådgivning',
+        },
+        {
+          title: 'Tripletex og ERP',
+          text: 'Vi hjelper deg med å velge system, setter det opp med kontoplan, roller og rapporter, bygger integrasjonene og flytter over historikken når du bytter.',
+          href: '/tjenester/erp/',
+          lenketekst: 'Les om programvare og ERP',
+        },
+        {
+          title: 'Bytte regnskapsfører',
+          text: 'Vi tar kontakt med den tidligere regnskapsføreren og henter over regnskapsdata, avtaler og dokumentasjon. Du slipper å være mellomledd.',
+          href: '/bytte-regnskapsforer/',
+          lenketekst: 'Les guiden',
         },
       ],
       erp: {
@@ -192,7 +208,7 @@ export const kontorsider: Record<string, Kontorside> = {
     },
 
     pris: {
-      kicker: 'Pris',
+      kicker: 'Priser og team',
       title: 'Hva koster regnskapsfører i Stavanger?',
       intro:
         'Prisen på regnskapsfører avhenger av hvor mye arbeid regnskapet krever. To bedrifter med samme omsetning kan ha helt ulike behov. Dette er det som påvirker prisen mest:',
@@ -214,8 +230,8 @@ export const kontorsider: Record<string, Kontorside> = {
       kicker: 'Folkene',
       title: 'Møt teamet i Stavanger',
       text: 'Hos oss får du en fast kontaktperson på Forus, med kolleger innen regnskap, lønn og systemer rundt seg.',
-      bekreft:
-        'navn, rolle, bilde og godkjenning/tittel for dem som jobber på Forus-kontoret',
+      bekreft: 'ansatt på Forus-kontoret: navn, rolle, bilde og ev. godkjenning/tittel',
+      plassholdere: 3,
     },
 
     faq: [
@@ -261,7 +277,7 @@ export const kontorsider: Record<string, Kontorside> = {
       title: 'Flyd har også kontorer i Dalane, Sirdal og Lister',
     },
     kontakt: {
-      kicker: 'Kontakt',
+      kicker: 'Forus',
       title: 'Ta en prat med oss i Stavanger',
       text: 'Ring +47 480 19 958, send en e-post til support@flyd.no eller fyll ut kontaktskjemaet. Vi tar praten på Forus, hos deg eller på video.',
     },
