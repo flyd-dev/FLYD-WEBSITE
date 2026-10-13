@@ -140,7 +140,7 @@ export const offices: Office[] = [
     areaServed: [{ type: 'AdministrativeArea', name: 'Sokndal' }],
     image: {
       src: '/kontor/sokndal.webp',
-      alt: 'Flyd-kontoret i «Banken», Gamleveien 13 i Hauge i Dalane – hvit fasade med flyd-skilt',
+      alt: 'Flyd-kontoret i «Banken» i Hauge i Dalane – hvit fasade med flyd-skilt',
     },
     gallery: [
       {
