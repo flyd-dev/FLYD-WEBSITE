@@ -96,7 +96,7 @@ export const kontorsider: Record<string, Kontorside> = {
       type: 'image/png',
       alt: 'Regnskapsfører i Stavanger – kontor på Forus. Regnskap, lønn og rådgivning med fast kontaktperson fra Flyd',
     },
-    h1: 'Regnskapsfører i Stavanger',
+    h1: 'Regnskapsfører i Stavanger.',
     kicker: 'Kontor · Forus',
     ingress:
       'Flyd er regnskapsfører for bedrifter i Stavanger-regionen, med kontor i FOMO på Forus (Grenseveien 21). Vi tar oss av regnskap, lønn, årsoppgjør og rådgivning, og hjelper deg med å velge og sette opp riktig regnskapssystem. Du får én fast kontaktperson som kjenner bedriften din og svarer når du ringer.',
