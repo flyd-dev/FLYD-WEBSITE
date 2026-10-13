@@ -130,9 +130,9 @@ export const offices: Office[] = [
     blurb:
       'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i Sokndal og omegn – med hele Flyds fagmiljø i ryggen.',
     meta: {
-      title: 'Regnskapsfører i Sokndal – Hauge i Dalane · Flyd',
+      title: 'Regnskapsfører Sokndal – regnskap og rådgivning · Flyd',
       description:
-        'Regnskapsfører i Sokndal med kontor i «Banken» i Hauge i Dalane. Regnskap, lønn, årsoppgjør og rådgivning med fast kontaktperson.',
+        'Trenger du regnskapsfører i Sokndal? Flyd har kontor i Gamleveien 13 i Hauge i Dalane. Regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson.',
       image: {
         url: 'https://www.flyd.no/og/kontor-sokndal.png',
         width: 1200,
@@ -174,9 +174,9 @@ export const offices: Office[] = [
     blurb:
       'Moi-kontoret betjener Lund og områdene langs E39 mellom Egersund og Flekkefjord. En lokal regnskapspartner, med kolleger på fem andre kontorer å spille på.',
     meta: {
-      title: 'Regnskapsfører på Moi – lokalt kontor i Lund · Flyd',
+      title: 'Regnskapsfører Moi – regnskap og rådgivning · Flyd',
       description:
-        'Regnskapsfører på Moi i Lund kommune. Regnskap, lønn, årsoppgjør og rådgivning for bedrifter langs E39 mellom Egersund og Flekkefjord.',
+        'Trenger du regnskapsfører på Moi? Flyd har kontor i Lund. Regnskap, lønn, årsoppgjør og rådgivning langs E39 – med fast kontaktperson.',
       image: {
         url: 'https://www.flyd.no/og/kontor-moi.png',
         width: 1200,
@@ -217,9 +217,9 @@ export const offices: Office[] = [
     blurb:
       'På Tjørhom i Sirdal finner du oss i Handleriet. Vi jobber tett med hytte-, bygg- og reiselivsnæringen i fjellbygda – og er til stede der verdiene skapes.',
     meta: {
-      title: 'Regnskapsfører i Sirdal – kontor på Tjørhom · Flyd',
+      title: 'Regnskapsfører Sirdal – regnskap og rådgivning · Flyd',
       description:
-        'Regnskapsfører i Sirdal med kontor i Handleriet på Tjørhom. Regnskap, lønn og rådgivning for bygg, hytte og reiseliv i fjellbygda.',
+        'Trenger du regnskapsfører i Sirdal? Flyd har kontor i Handleriet på Tjørhom. Regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson.',
       image: {
         url: 'https://www.flyd.no/og/kontor-sirdal.png',
         width: 1200,
@@ -261,9 +261,9 @@ export const offices: Office[] = [
     blurb:
       'I Flekkefjord sitter vi sentralt i Elvegaten 22. Kontoret betjener næringslivet i Lister-regionen – med kort vei til både kunder og kollegaer.',
     meta: {
-      title: 'Regnskapsfører i Flekkefjord – regnskap og rådgivning · Flyd',
+      title: 'Regnskapsfører Flekkefjord – regnskap og rådgivning · Flyd',
       description:
-        'Regnskapsfører i Flekkefjord med lokalt kontor. Regnskap, lønn, årsoppgjør og rådgivning for bedrifter i Lister – med fast kontaktperson.',
+        'Trenger du regnskapsfører i Flekkefjord? Flyd har kontor i Elvegaten 22. Regnskap, lønn, årsoppgjør og rådgivning i Lister – med fast kontaktperson.',
       image: {
         url: 'https://www.flyd.no/og/kontor-flekkefjord.png',
         width: 1200,
