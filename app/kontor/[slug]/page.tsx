@@ -41,9 +41,20 @@ export function generateMetadata({
       image: side.image,
     });
   }
+  const description =
+    office.meta?.description ??
+    `${office.blurb} Regnskap, rådgivning og teknologi – lokalt ${atOffice(office)}.`;
+  if (office.meta) {
+    return pageMetadata({
+      absoluteTitle: office.meta.title,
+      description,
+      path: `/kontor/${office.slug}/`,
+      image: office.meta.image,
+    });
+  }
   return pageMetadata({
     title: `Regnskapsfører ${atOffice(office)}`,
-    description: `${office.blurb} Regnskap, rådgivning og teknologi – lokalt ${atOffice(office)}.`,
+    description,
     path: `/kontor/${office.slug}/`,
   });
 }
@@ -83,6 +94,9 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
     },
     hasMap: office.mapsUrl,
     openingHoursSpecification: openingHours.schema,
+    ...(office.areaServed && {
+      areaServed: office.areaServed.map(({ type, name }) => ({ "@type": type, name })),
+    }),
   };
 
   const visitRow = "flex items-start gap-3";
