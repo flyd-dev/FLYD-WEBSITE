@@ -13,7 +13,13 @@ import { ButtonLink } from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
 import FlydIcon from "@/components/FlydIcon";
-import { offices, getOfficeBySlug, openingHours, atOffice, officeLabel } from "@/data/offices";
+import {
+  offices,
+  getOfficeBySlug,
+  openingHours,
+  atOffice,
+  officeLabel,
+} from "@/data/offices";
 import { visibleServices, serviceUrl } from "@/data/services";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import KontorMal from "@/components/maler/KontorMal";
@@ -82,20 +88,26 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
     description: office.blurb,
     address: {
       "@type": "PostalAddress",
-      streetAddress: office.street,
+      ...(office.street && { streetAddress: office.street }),
       postalCode: office.postal.split(" ")[0],
       addressLocality: office.postal.split(" ").slice(1).join(" "),
       addressCountry: "NO",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: office.lat,
-      longitude: office.lng,
-    },
-    hasMap: office.mapsUrl,
+    ...(office.lat != null &&
+      office.lng != null && {
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: office.lat,
+          longitude: office.lng,
+        },
+      }),
+    ...(office.mapsUrl && { hasMap: office.mapsUrl }),
     openingHoursSpecification: openingHours.schema,
     ...(office.areaServed && {
-      areaServed: office.areaServed.map(({ type, name }) => ({ "@type": type, name })),
+      areaServed: office.areaServed.map(({ type, name }) => ({
+        "@type": type,
+        name,
+      })),
     }),
   };
 
@@ -176,8 +188,12 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                           {officeLabel(office)}
                         </div>
                         <div className="mt-0.5 text-flyd-skifer">
-                          {office.street}
-                          <br />
+                          {office.street && (
+                            <>
+                              {office.street}
+                              <br />
+                            </>
+                          )}
                           {office.postal}
                         </div>
                       </div>
@@ -199,17 +215,19 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                       <span>{openingHours.label}</span>
                     </div>
                   </div>
-                  <div className="mt-7">
-                    <ButtonLink
-                      href={office.mapsUrl}
-                      variant="secondary"
-                      withArrow
-                      external
-                      className="w-full"
-                    >
-                      Åpne i Google Maps
-                    </ButtonLink>
-                  </div>
+                  {office.mapsUrl && (
+                    <div className="mt-7">
+                      <ButtonLink
+                        href={office.mapsUrl}
+                        variant="secondary"
+                        withArrow
+                        external
+                        className="w-full"
+                      >
+                        Åpne i Google Maps
+                      </ButtonLink>
+                    </div>
+                  )}
                 </div>
               </div>
             </aside>
@@ -221,7 +239,10 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
       {office.gallery && office.gallery.length > 0 && (
         <Section tone="sand" className="!pt-0">
           <Container>
-            <div className="border-t border-flyd-linje-sand pt-12 md:pt-16" data-reveal>
+            <div
+              className="border-t border-flyd-linje-sand pt-12 md:pt-16"
+              data-reveal
+            >
               <Eyebrow>Fra kontoret</Eyebrow>
               <h2 className="mt-5 font-display text-display-md font-semibold">
                 Hos oss {atOffice(office)}.
@@ -229,7 +250,9 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             </div>
             <div
               className={`mt-10 grid grid-cols-1 gap-4 md:gap-5 ${
-                office.gallery.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"
+                office.gallery.length === 2
+                  ? "sm:grid-cols-2"
+                  : "sm:grid-cols-3"
               }`}
             >
               {office.gallery.map((img) => (
@@ -270,7 +293,11 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 kontorene våre – forskjellen er at vi møter deg der du er.
               </p>
               <div className="mt-8">
-                <ButtonLink href="/tjenester" variant="secondary-dark" withArrow>
+                <ButtonLink
+                  href="/tjenester"
+                  variant="secondary-dark"
+                  withArrow
+                >
                   Utforsk alle tjenester
                 </ButtonLink>
               </div>

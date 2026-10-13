@@ -4,11 +4,14 @@ export type Office = {
   city: string;
   slug: string;
   name: string;
-  street: string;
+  /** Gateadresse. Valgfri – uten den vises bare postnummer/sted, og JSON-LD får ingen streetAddress. */
+  street?: string;
   postal: string;
-  mapsUrl: string;
-  lat: number;
-  lng: number;
+  /** Kartlenke (hasMap). Valgfri – uten den vises ingen kartknapp. */
+  mapsUrl?: string;
+  /** Koordinater (geo). Valgfrie – begge eller ingen. */
+  lat?: number;
+  lng?: number;
   /** 2–3 setninger til kontorsiden (/kontor/[slug]). */
   blurb: string;
   /**
@@ -119,17 +122,20 @@ export const offices: Office[] = [
     city: 'Sokndal',
     slug: 'sokndal',
     name: 'Banken',
-    street: 'Gamleveien 13',
     postal: '4380 Hauge i Dalane',
-    mapsUrl: 'https://maps.google.com/?q=Gamleveien+13,+4380+Hauge+i+Dalane',
-    lat: 58.3374,
-    lng: 6.2714,
     blurb:
       'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i Sokndal og omegn – med hele Flyds fagmiljø i ryggen.',
     meta: {
       title: 'Regnskapsfører i Sokndal – Hauge i Dalane · Flyd',
       description:
         'Regnskapsfører i Sokndal med kontor i «Banken» i Hauge i Dalane. Regnskap, lønn, årsoppgjør og rådgivning med fast kontaktperson.',
+      image: {
+        url: 'https://www.flyd.no/og/kontor-sokndal.png',
+        width: 1200,
+        height: 630,
+        type: 'image/png',
+        alt: 'Regnskapsfører i Sokndal – Hauge i Dalane. Regnskap, lønn og rådgivning fra Flyd',
+      },
     },
     areaServed: [{ type: 'AdministrativeArea', name: 'Sokndal' }],
     image: {
@@ -167,6 +173,13 @@ export const offices: Office[] = [
       title: 'Regnskapsfører på Moi – lokalt kontor i Lund · Flyd',
       description:
         'Regnskapsfører på Moi i Lund kommune. Regnskap, lønn, årsoppgjør og rådgivning for bedrifter langs E39 mellom Egersund og Flekkefjord.',
+      image: {
+        url: 'https://www.flyd.no/og/kontor-moi.png',
+        width: 1200,
+        height: 630,
+        type: 'image/png',
+        alt: 'Regnskapsfører på Moi – lokalt kontor i Lund. Regnskap, lønn og rådgivning fra Flyd',
+      },
     },
     areaServed: [{ type: 'AdministrativeArea', name: 'Lund' }],
     image: {

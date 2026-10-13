@@ -106,7 +106,7 @@ export default function Footer() {
                   </Link>
                   <br />
                   <span className="text-flyd-dempet">
-                    {o.street}, {o.postal}
+                    {[o.street, o.postal].filter(Boolean).join(', ')}
                   </span>
                 </li>
               ))}

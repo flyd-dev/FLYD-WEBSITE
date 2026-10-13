@@ -45,10 +45,10 @@ export default function OfficeCards({
           </h3>
           {!compact && hasOwnName(o) && <p className="mt-1 text-[15px] text-flyd-skifer">{o.name}</p>}
           <p className="mt-3 text-[15px] leading-relaxed text-flyd-skifer">
-            {o.street}
+            {o.street ?? (compact ? o.postal : null)}
             {!compact && (
               <>
-                <br />
+                {o.street && <br />}
                 {o.postal}
               </>
             )}
