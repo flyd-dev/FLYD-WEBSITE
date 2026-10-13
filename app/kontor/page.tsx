@@ -75,7 +75,7 @@ export default function KontorerPage() {
                     <p className="mt-3 flex items-start gap-2.5 text-[15px] text-flyd-skifer">
                       <FlydIcon name="lokal" className="mt-0.5 h-5 w-5 flex-shrink-0 text-flyd-teal" />
                       <span>
-                        {o.street}, {o.postal}
+                        {[o.street, o.postal].filter(Boolean).join(', ')}
                       </span>
                     </p>
                     <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[15px] font-medium text-flyd-petrol">
