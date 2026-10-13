@@ -23,6 +23,7 @@ import Eyebrow from '@/components/Eyebrow';
 import { ButtonLink } from '@/components/Button';
 import JsonLd from '@/components/JsonLd';
 import { jobs, getJobBySlug, type Job } from '@/data/jobs';
+import { offices, atOffice } from '@/data/offices';
 
 const SITE_URL = 'https://www.flyd.no';
 
@@ -73,8 +74,8 @@ export function generateMetadata({
   const job = getJobBySlug(params.slug);
   if (!job) return { title: 'Stilling ikke funnet' };
   return pageMetadata({
-    title: `${job.title} – ${job.location}`,
-    description: job.ingress,
+    title: `Ledig stilling: ${job.title} – ${job.location}`,
+    description: `Ledig stilling i Flyd: ${job.ingress}`,
     path: `/karriere/${job.slug}/`,
   });
 }
@@ -86,6 +87,12 @@ export default function JobDetailPage({
 }) {
   const job = getJobBySlug(params.slug);
   if (!job) notFound();
+
+  // Kontoret i samme by, så stillingsannonsen lenker videre til kontorsiden
+  // (som er siden som skal rangere på «regnskapsfører <by>»).
+  const kontor = offices.find(
+    (o) => o.city.toLowerCase() === job.location.toLowerCase(),
+  );
 
   const mailtoSubject = encodeURIComponent(
     `Søknad: ${job.title} – ${job.location}`,
@@ -251,6 +258,18 @@ export default function JobDetailPage({
                   )}
                   .
                 </p>
+                {kontor && (
+                  <p className="mt-5 text-[16px] leading-[1.75] text-flyd-skifer">
+                    Ser du etter regnskapsfører til bedriften din? Les om{' '}
+                    <Link
+                      href={`/kontor/${kontor.slug}/`}
+                      className="text-flyd-skog underline underline-offset-4 decoration-flyd-teal hover:text-flyd-petrol hover:decoration-flyd-skog"
+                    >
+                      regnskapsfører {atOffice(kontor)}
+                    </Link>
+                    .
+                  </p>
+                )}
                 <div className="mt-8 flex flex-wrap gap-4">
                   <ButtonLink
                     href={applyHref}

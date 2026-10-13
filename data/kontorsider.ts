@@ -86,9 +86,9 @@ export type Kontorside = {
 
 export const kontorsider: Record<string, Kontorside> = {
   'stavanger-sandnes': {
-    title: 'Regnskapsfører i Stavanger – regnskap og rådgivning',
+    title: 'Regnskapsfører Stavanger – regnskap og rådgivning på Forus',
     description:
-      'Regnskapsfører i Stavanger med kontor på Forus. Regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson og riktig regnskapssystem.',
+      'Trenger du regnskapsfører i Stavanger? Flyd har kontor på Forus og hjelper bedrifter i Stavanger og Sandnes med regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson.',
     image: {
       url: 'https://www.flyd.no/og/kontor-stavanger-sandnes.png',
       width: 1200,

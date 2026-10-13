@@ -169,6 +169,23 @@ export default function KarrierePage() {
               <h2 className="mt-5 font-display text-display-lg font-semibold">
                 {stillingsOverskrift(jobs.length)}
               </h2>
+              <p className="mt-5 text-[16px] leading-[1.7] text-flyd-skifer">
+                Ser du etter regnskapsfører til bedriften din? Les om{' '}
+                <Link
+                  href="/kontor/stavanger-sandnes/"
+                  className="text-flyd-skog underline underline-offset-4 decoration-flyd-teal hover:text-flyd-petrol hover:decoration-flyd-skog"
+                >
+                  regnskapsfører i Stavanger
+                </Link>{' '}
+                og{' '}
+                <Link
+                  href="/kontor/egersund/"
+                  className="text-flyd-skog underline underline-offset-4 decoration-flyd-teal hover:text-flyd-petrol hover:decoration-flyd-skog"
+                >
+                  regnskapsfører i Egersund
+                </Link>
+                .
+              </p>
             </div>
             {jobs.length > 0 && (
               <span className="inline-flex rounded-pille bg-flyd-korall px-4 py-2 text-[12px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-skog">

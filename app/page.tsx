@@ -108,6 +108,12 @@ export default function HomePage() {
           <div className="mt-12 md:mt-14">
             <StatsSection stats={stats} />
           </div>
+          <p className="mt-10 max-w-3xl text-[17px] leading-[1.7] text-flyd-skifer">
+            Vi har lokale kontorer i Sør-Vest-Norge. Les mer om{' '}
+            <TextLink href="/kontor/stavanger-sandnes/">regnskapsfører i Stavanger</TextLink>{' '}
+            og{' '}
+            <TextLink href="/kontor/egersund/">regnskapsfører i Egersund</TextLink>
+          </p>
 
           <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
             <Eyebrow>Et utvalg kunder</Eyebrow>

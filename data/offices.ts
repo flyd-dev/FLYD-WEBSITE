@@ -83,9 +83,9 @@ export const offices: Office[] = [
     blurb:
       'Kontoret ligger i Torvgården, midt på torget i Egersund. Her sitter vi tett på næringslivet i Eigersund og resten av Dalane – kom gjerne innom for en regnskapsprat.',
     meta: {
-      title: 'Regnskapsfører i Egersund – regnskap og rådgivning · Flyd',
+      title: 'Regnskapsfører Egersund – regnskap og rådgivning i Torvgården · Flyd',
       description:
-        'Regnskapsfører i Egersund med kontor i Torvgården på torget. Regnskap, lønn, årsoppgjør og rådgivning for bedrifter i Dalane – med fast kontaktperson.',
+        'Trenger du regnskapsfører i Egersund? Vi har kontor i Torvgården på torget. Regnskap, lønn, årsoppgjør og rådgivning for bedrifter i Dalane – med fast kontaktperson.',
       image: {
         url: 'https://www.flyd.no/og/kontor-egersund.png',
         width: 1200,
