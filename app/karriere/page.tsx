@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
+import { Fragment } from 'react';
+import { offices } from '@/data/offices';
 import Image from 'next/image';
 import { MapPin, Briefcase, ArrowRight } from 'lucide-react';
 import Container from '@/components/Container';
@@ -171,19 +173,17 @@ export default function KarrierePage() {
               </h2>
               <p className="mt-5 text-[16px] leading-[1.7] text-flyd-skifer">
                 Ser du etter regnskapsfører til bedriften din? Les om{' '}
-                <Link
-                  href="/kontor/stavanger-sandnes/"
-                  className="text-flyd-skog underline underline-offset-4 decoration-flyd-teal hover:text-flyd-petrol hover:decoration-flyd-skog"
-                >
-                  regnskapsfører i Stavanger
-                </Link>{' '}
-                og{' '}
-                <Link
-                  href="/kontor/egersund/"
-                  className="text-flyd-skog underline underline-offset-4 decoration-flyd-teal hover:text-flyd-petrol hover:decoration-flyd-skog"
-                >
-                  regnskapsfører i Egersund
-                </Link>
+                {offices.map((o, i) => (
+                  <Fragment key={o.slug}>
+                    {i > 0 && (i === offices.length - 1 ? ' og ' : ', ')}
+                    <Link
+                      href={`/kontor/${o.slug}/`}
+                      className="text-flyd-skog underline underline-offset-4 decoration-flyd-teal hover:text-flyd-petrol hover:decoration-flyd-skog"
+                    >
+                      Regnskapsfører {o.city}
+                    </Link>
+                  </Fragment>
+                ))}
                 .
               </p>
             </div>

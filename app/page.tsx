@@ -1,4 +1,6 @@
+import { Fragment } from 'react';
 import { preload } from 'react-dom';
+import { offices } from '@/data/offices';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
@@ -110,9 +112,12 @@ export default function HomePage() {
           </div>
           <p className="mt-10 max-w-3xl text-[17px] leading-[1.7] text-flyd-skifer">
             Vi har lokale kontorer i Sør-Vest-Norge. Les mer om{' '}
-            <TextLink href="/kontor/stavanger-sandnes/">regnskapsfører i Stavanger</TextLink>{' '}
-            og{' '}
-            <TextLink href="/kontor/egersund/">regnskapsfører i Egersund</TextLink>
+            {offices.map((o, i) => (
+              <Fragment key={o.slug}>
+                {i > 0 && (i === offices.length - 1 ? ' og ' : ', ')}
+                <TextLink href={`/kontor/${o.slug}/`}>Regnskapsfører {o.city}</TextLink>
+              </Fragment>
+            ))}
           </p>
 
           <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
