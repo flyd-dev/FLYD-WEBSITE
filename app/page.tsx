@@ -1,4 +1,5 @@
 import { preload } from 'react-dom';
+import KontorLenker from '@/components/KontorLenker';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
@@ -108,6 +109,7 @@ export default function HomePage() {
           <div className="mt-12 md:mt-14">
             <StatsSection stats={stats} />
           </div>
+          <KontorLenker className="mt-10" />
 
           <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
             <Eyebrow>Et utvalg kunder</Eyebrow>

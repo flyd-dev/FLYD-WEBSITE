@@ -13,12 +13,12 @@
     },
     {
       "source": "/karriere/regnskapsforer-stavanger",
-      "destination": "/karriere/",
+      "destination": "/kontor/stavanger-sandnes/",
       "statusCode": 301
     },
     {
       "source": "/karriere/regnskapsforer-stavanger/",
-      "destination": "/karriere/",
+      "destination": "/kontor/stavanger-sandnes/",
       "statusCode": 301
     },
     {

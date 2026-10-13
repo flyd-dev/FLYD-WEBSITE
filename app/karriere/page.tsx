@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
+import KontorLenker from '@/components/KontorLenker';
 import Image from 'next/image';
 import { MapPin, Briefcase, ArrowRight } from 'lucide-react';
 import Container from '@/components/Container';
@@ -169,6 +170,7 @@ export default function KarrierePage() {
               <h2 className="mt-5 font-display text-display-lg font-semibold">
                 {stillingsOverskrift(jobs.length)}
               </h2>
+              <KontorLenker className="mt-6" />
             </div>
             {jobs.length > 0 && (
               <span className="inline-flex rounded-pille bg-flyd-korall px-4 py-2 text-[12px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-skog">
