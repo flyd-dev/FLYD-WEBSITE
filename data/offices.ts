@@ -122,7 +122,11 @@ export const offices: Office[] = [
     city: 'Sokndal',
     slug: 'sokndal',
     name: 'Banken',
+    street: 'Gamleveien 13',
     postal: '4380 Hauge i Dalane',
+    mapsUrl: 'https://maps.google.com/?q=Gamleveien+13,+4380+Hauge+i+Dalane',
+    lat: 58.3374,
+    lng: 6.2714,
     blurb:
       'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i Sokndal og omegn – med hele Flyds fagmiljø i ryggen.',
     meta: {
@@ -140,7 +144,7 @@ export const offices: Office[] = [
     areaServed: [{ type: 'AdministrativeArea', name: 'Sokndal' }],
     image: {
       src: '/kontor/sokndal.webp',
-      alt: 'Flyd-kontoret i «Banken» i Hauge i Dalane – hvit fasade med flyd-skilt',
+      alt: 'Flyd-kontoret i «Banken», Gamleveien 13 i Hauge i Dalane – hvit fasade med flyd-skilt',
     },
     gallery: [
       {
