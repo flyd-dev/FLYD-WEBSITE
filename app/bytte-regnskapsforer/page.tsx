@@ -55,22 +55,26 @@ const brod = 'text-[17px] leading-[1.7] text-flyd-skifer';
 const h2 = 'font-display text-display-md font-semibold';
 
 // Forenklet versjon etter Frøyas tekst 14.10.2026 (briefs/2026-10-14-bytte-regnskapsforer-enklere.md).
-const steg: { tittel: string; tekst: string }[] = [
+const steg: { tittel: string; tekst: string; ikon: string }[] = [
   {
     tittel: 'Les avtalen du har i dag',
+    ikon: '/ikoner/bytte/steg1-avtale.svg',
     tekst: 'Se hvor lang oppsigelsestid du har, og om du eier lisensen til regnskapssystemet selv.',
   },
   {
     tittel: 'Velg ny regnskapsfører',
+    ikon: '/ikoner/bytte/steg2-velg.svg',
     tekst:
       'Be om et skriftlig tilbud. Den nye regnskapsføreren tar kontakt med den gamle før oppdraget starter. Det er en fast rutine etter regnskapsførerloven, ikke et tegn på problemer.',
   },
   {
     tittel: 'Si opp skriftlig',
+    ikon: '/ikoner/bytte/steg3-si-opp.svg',
     tekst: 'Send en e-post med sluttdato, og avklar hvem som leverer siste mva-melding, a-melding og årsoppgjøret.',
   },
   {
     tittel: 'La den nye regnskapsføreren ta over',
+    ikon: '/ikoner/bytte/steg4-overta.svg',
     tekst:
       'Regnskapet ditt skal overleveres, vanligvis som en SAF-T-fil. Den nye regnskapsføreren hjelper deg med å melde byttet til Brønnøysundregistrene (gratis) og med tilgangen i Altinn.',
   },
@@ -139,7 +143,9 @@ export default function BytteRegnskapsforerPage() {
                   {i + 1}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-display text-[20px] font-semibold leading-[1.3] md:pt-1">
+                  {/* Dekorativt ikon (Fia), godkjent av Marius 14.10.2026 */}
+                  <img src={s.ikon} alt="" aria-hidden="true" width={56} height={56} className="mb-4 h-14 w-14" />
+                  <h3 className="font-display text-[20px] font-semibold leading-[1.3]">
                     <span className="sr-only">Steg {i + 1}: </span>
                     {s.tittel}
                   </h3>
