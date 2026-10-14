@@ -76,7 +76,7 @@ const steg: { tittel: string; tekst: string; ikon: string }[] = [
     tittel: 'La den nye regnskapsføreren ta over',
     ikon: '/ikoner/bytte/steg4-overta.svg',
     tekst:
-      'Regnskapet ditt skal overleveres, vanligvis som en SAF‑T‑fil. Den nye regnskapsføreren hjelper deg med å melde byttet til Brønnøysundregistrene (gratis) og med tilgangen i Altinn.',
+      'Regnskapet ditt skal overleveres, vanligvis som en SAF‑T‑fil. Den nye regnskapsføreren hjelper deg med å melde byttet til Brønnøysundregistrene og med tilgangen i Altinn.',
   },
 ];
 
