@@ -134,23 +134,14 @@ export default function BytteRegnskapsforerPage() {
               <li
                 key={s.tittel}
                 data-reveal
-                className="flex gap-5 rounded-kort border border-flyd-linje-sand bg-flyd-sand p-6 md:gap-6 md:p-8"
+                className="rounded-kort border border-flyd-linje-sand bg-flyd-sand p-6 md:p-8"
               >
-                <span
-                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-flyd-petrol font-display text-[18px] font-semibold tabular-nums text-flyd-sand"
-                  aria-hidden="true"
-                >
-                  {i + 1}
-                </span>
-                <div className="min-w-0 flex-1">
-                  {/* Dekorativt ikon (Fia), godkjent av Marius 14.10.2026 */}
-                  <img src={s.ikon} alt="" aria-hidden="true" width={56} height={56} className="mb-4 h-14 w-14" />
-                  <h3 className="font-display text-[20px] font-semibold leading-[1.3]">
-                    <span className="sr-only">Steg {i + 1}: </span>
-                    {s.tittel}
-                  </h3>
-                  <p className={`mt-4 ${brod}`}>{s.tekst}</p>
-                </div>
+                {/* Dekorativt ikon (Fia), godkjent av Marius 14.10.2026 */}
+                <img src={s.ikon} alt="" aria-hidden="true" width={56} height={56} className="h-14 w-14" />
+                {/* Skifer, ikke Flyd-teal: teal på Sand er for svak kontrast for liten tekst */}
+                <p className="mt-5 text-[14px] font-medium text-flyd-skifer">Steg {i + 1}</p>
+                <h3 className="mt-1 font-display text-[20px] font-semibold leading-[1.3]">{s.tittel}</h3>
+                <p className={`mt-4 ${brod}`}>{s.tekst}</p>
               </li>
             ))}
           </ol>
