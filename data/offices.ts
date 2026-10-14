@@ -303,9 +303,7 @@ const officeList: Office[] = [
 /**
  * Google-anmeldelseslenker per kontor (slug → g.page-lenke). Stavanger-sandnes-
  * kontoret ligger i Grenseveien 21, 4313 Sandnes, og bruker Google-profilen
- * «Sandnes». Sirdal har ingen lenke ennå. Tjørhom har egen Google-profil
- * (https://g.page/r/Cd5b3Im8SzeNEBM/review), men ingen kontorside – legg den
- * inn her når siden finnes.
+ * «Sandnes». Sirdal-kontoret (Handleriet, Tjørhom) bruker profilen «Tjørhom».
  */
 export const googleReviewUrls: Record<string, string> = {
   'stavanger-sandnes': 'https://g.page/r/Cdr-fAv72mquEBM/review',
@@ -313,6 +311,7 @@ export const googleReviewUrls: Record<string, string> = {
   sokndal: 'https://g.page/r/CfqD8ogoztiQEBM/review',
   moi: 'https://g.page/r/CTZIQx0JxOyqEBM/review',
   flekkefjord: 'https://g.page/r/CfLqPGpUV6faEBM/review',
+  sirdal: 'https://g.page/r/Cd5b3Im8SzeNEBM/review',
 };
 
 export const offices: Office[] = officeList.map((o) =>
