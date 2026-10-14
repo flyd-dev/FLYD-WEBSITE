@@ -20,11 +20,11 @@ export const eFaktura2027 = {
     alt: 'E-faktura fra 2027: dette må bedriften din gjøre. Slik gjør du deg klar for EHF.',
   },
   hero: {
-    src: '/artikler/e-faktura-2027/topp-e-faktura-1600.webp',
-    srcSmall: '/artikler/e-faktura-2027/topp-e-faktura-800.webp',
+    // Fias kontorbilde (Viadesign, IMG_3571), konvertert som toppbildet på /bytte-regnskapsforer/.
+    src: '/header/topp-e-faktura-2027.webp',
     width: 1600,
     height: 900,
-    alt: 'Påbudt e-faktura fra 2027: slik gjør du deg klar. Hva som gjelder i 2027, 2028 og 2030. Bildet viser et møtebord sett ovenfra med bærbare PC-er og dokumenter.',
+    alt: 'Tre rådgivere i Flyd i et møte rundt et bord med bærbare PC-er',
   },
   figur: {
     src: '/artikler/e-faktura-2027/figur-e-faktura-flyt.webp',

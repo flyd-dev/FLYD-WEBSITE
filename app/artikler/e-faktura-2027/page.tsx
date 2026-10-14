@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Check, Plus } from 'lucide-react';
 import Container from '@/components/Container';
@@ -10,6 +11,7 @@ import NumberedList from '@/components/NumberedList';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { pageMetadata, siteUrl } from '@/lib/seo';
 import { eFaktura2027 as a, eFakturaFaq, kilder } from '@/data/e-faktura-2027';
+import toppbilde from '@/public/header/topp-e-faktura-2027.webp';
 
 // Tittelen i briefen har allerede « · Flyd», så den settes som absolutt tittel.
 const base = pageMetadata({
@@ -20,7 +22,12 @@ const base = pageMetadata({
 });
 export const metadata: Metadata = {
   ...base,
-  openGraph: { ...base.openGraph, type: 'article', publishedTime: a.published, modifiedTime: a.modified },
+  openGraph: {
+    ...base.openGraph,
+    type: 'article',
+    publishedTime: a.published,
+    modifiedTime: a.modified,
+  },
 };
 
 const url = `${siteUrl}${a.path}`;
@@ -73,7 +80,10 @@ function Punkter({ items, linje = 'sand' }: { items: React.ReactNode[]; linje?: 
   return (
     <ul className={`mt-5 border-t ${border}`}>
       {items.map((p, i) => (
-        <li key={i} className={`flex items-start gap-3 border-b ${border} py-3 text-[16px] leading-relaxed text-flyd-skog`}>
+        <li
+          key={i}
+          className={`flex items-start gap-3 border-b ${border} py-3 text-[16px] leading-relaxed text-flyd-skog`}
+        >
           <Check className="mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal" strokeWidth={2.5} aria-hidden="true" />
           <span>{p}</span>
         </li>
@@ -99,7 +109,11 @@ function MedUnntakLenke({ tekst }: { tekst: string }) {
   );
 }
 
-const tidslinje: { dato: string; hva: React.ReactNode; kilde: React.ReactNode }[] = [
+const tidslinje: {
+  dato: string;
+  hva: React.ReactNode;
+  kilde: React.ReactNode;
+}[] = [
   {
     dato: '1.1.2027',
     hva: 'Plikt til å sende e-faktura ved salg til andre bokføringspliktige. Kravene til godkjente formater trer i kraft. Unntaket fra kravet til elektronisk tilgjengelighet for virksomheter med omsetning under 5 mill. kr (bokføringsforskriften § 7-7 tredje ledd) oppheves.',
@@ -143,50 +157,44 @@ export default function EFaktura2027Page() {
         <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-skog py-14 text-flyd-sand md:py-20">
           <Container className="relative">
             <Breadcrumbs tone="dark" items={[{ name: 'E-faktura fra 2027', href: a.path }]} />
-            <div className="mt-10 max-w-4xl">
-              <span className="block h-0.5 w-10 bg-flyd-mint" aria-hidden="true" />
-              <Eyebrow tone="petrol" className="mt-5">
-                Artikkel · E-faktura og EHF
-              </Eyebrow>
-              <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{a.h1}</h1>
-              <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
-                Fra 1. januar 2027 skal bokføringspliktige sende elektronisk faktura (EHF/Peppol) når de selger til
-                andre bokføringspliktige. I praksis gjelder det kunder som kan motta e-faktura (registrert i ELMA).
-                Plikten til å <em>motta</em> e-faktura og kravet om elektronisk regnskapssystem kommer først 1. januar
-                2030.
-              </p>
-              <p className="mt-6 text-[15px] text-flyd-dempet">
-                Sist oppdatert <time dateTime={a.modified}>14. oktober 2026</time>.
-              </p>
-              <div className="mt-10 flex flex-wrap items-center gap-4">
-                <ButtonLink href={kontakt} variant="primary-dark" withArrow>
-                  Snakk med oss
-                </ButtonLink>
-                <ButtonLink href="#sjekkliste" variant="secondary-dark">
-                  Gå til sjekklisten
-                </ButtonLink>
+            <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+              <div className="lg:col-span-6">
+                <span className="block h-0.5 w-10 bg-flyd-mint" aria-hidden="true" />
+                <Eyebrow tone="petrol" className="mt-5">
+                  Artikkel · E-faktura og EHF
+                </Eyebrow>
+                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{a.h1}</h1>
+                <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
+                  Fra 1. januar 2027 skal bokføringspliktige sende elektronisk faktura (EHF/Peppol) når de selger til
+                  andre bokføringspliktige. I praksis gjelder det kunder som kan motta e-faktura (registrert i ELMA).
+                  Plikten til å <em>motta</em> e-faktura og kravet om elektronisk regnskapssystem kommer først 1. januar
+                  2030.
+                </p>
+                <p className="mt-6 text-[15px] text-flyd-dempet">
+                  Sist oppdatert <time dateTime={a.modified}>14. oktober 2026</time>.
+                </p>
+                <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <ButtonLink href={kontakt} variant="primary-dark" withArrow>
+                    Snakk med oss
+                  </ButtonLink>
+                  <ButtonLink href="#sjekkliste" variant="secondary-dark">
+                    Gå til sjekklisten
+                  </ButtonLink>
+                </div>
+              </div>
+              <div className="lg:col-span-6">
+                <Image
+                  src={toppbilde}
+                  alt={a.hero.alt}
+                  priority
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="h-auto w-full rounded-bilde"
+                />
               </div>
             </div>
           </Container>
         </div>
       </section>
-
-      {/* TOPPBILDE */}
-      <Section tone="sand" className="pb-0 md:pb-0">
-        <Container>
-          <picture>
-            <source media="(max-width: 800px)" srcSet={a.hero.srcSmall} />
-            <img
-              src={a.hero.src}
-              width={a.hero.width}
-              height={a.hero.height}
-              alt={a.hero.alt}
-              fetchPriority="high"
-              className="h-auto w-full rounded-bilde"
-            />
-          </picture>
-        </Container>
-      </Section>
 
       {/* HVA ER NYTT */}
       <Section tone="sand" id="nytt">
@@ -198,8 +206,7 @@ export default function EFaktura2027Page() {
               Fra 1. januar 2027 har bokføringspliktige plikt til å utstede e-faktura ved salg til andre
               bokføringspliktige (bokføringsloven § 10 annet ledd). Endringen kommer fra{' '}
               <Ekstern href={kilder.lov}>lov 19. juni 2026 nr. 39</Ekstern>. Stortinget vedtok lovendringen 8. juni
-              2026, og{' '}
-              <Ekstern href={kilder.ikraft}>ikrafttredelsen ble besluttet 19. juni 2026</Ekstern>.
+              2026, og <Ekstern href={kilder.ikraft}>ikrafttredelsen ble besluttet 19. juni 2026</Ekstern>.
             </p>
 
             <h3 className={h3}>Hva regnes som e-faktura?</h3>
@@ -213,7 +220,9 @@ export default function EFaktura2027Page() {
             <p className={`mt-4 ${brod}`}>
               Etter bokføringsforskriften § 5-2-9 annet ledd er disse formatene godkjent, i versjon 3.0 eller nyere:
             </p>
-            <Punkter items={['EHF Fakturering', 'Peppol BIS Billing', 'EHF Selvfakturering', 'Peppol BIS Self-Billing']} />
+            <Punkter
+              items={['EHF Fakturering', 'Peppol BIS Billing', 'EHF Selvfakturering', 'Peppol BIS Self-Billing']}
+            />
             <p className={`mt-5 ${brod}`}>
               Forskriftsendringen er fastsatt av Skattedirektoratet{' '}
               <Ekstern href={kilder.forskrift}>29. september 2026</Ekstern>. Skatteetaten har{' '}
@@ -256,9 +265,15 @@ export default function EFaktura2027Page() {
             <table className="w-full min-w-[640px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-mint font-display text-[15px] font-semibold">
-                  <th scope="col" className="py-3 pr-6">Dato</th>
-                  <th scope="col" className="py-3 pr-6">Hva skjer</th>
-                  <th scope="col" className="py-3">Kilde</th>
+                  <th scope="col" className="py-3 pr-6">
+                    Dato
+                  </th>
+                  <th scope="col" className="py-3 pr-6">
+                    Hva skjer
+                  </th>
+                  <th scope="col" className="py-3">
+                    Kilde
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -307,7 +322,8 @@ export default function EFaktura2027Page() {
             <h3 className={h3}>Kan man søke unntak?</h3>
             <p className={`mt-4 ${brod}`}>
               Ja. Søknad om unntak sendes til skattekontoret (
-              <Ekstern href={kilder.overgangNyhet}>regjeringen.no, 25. september 2026</Ekstern>).
+              <Ekstern href={kilder.overgangNyhet}>regjeringen.no, 25. september 2026</Ekstern>
+              ).
             </p>
           </div>
         </Container>
@@ -342,16 +358,15 @@ export default function EFaktura2027Page() {
 
             <h3 className={h3}>Tripletex</h3>
             <p className={`mt-4 ${brod}`}>
-              I Tripletex aktiverer du EHF under «Selskap &gt; Mitt abonnement»: først «Send EHF», deretter «Motta
-              EHF». Når du aktiverer mottak, blir du automatisk registrert i ELMA. Bare bruker- eller
-              kontoadministrator kan aktivere. Se{' '}
-              <Ekstern href={kilder.tripletex}>Tripletex hjelpesenter</Ekstern>.
+              I Tripletex aktiverer du EHF under «Selskap &gt; Mitt abonnement»: først «Send EHF», deretter «Motta EHF».
+              Når du aktiverer mottak, blir du automatisk registrert i ELMA. Bare bruker- eller kontoadministrator kan
+              aktivere. Se <Ekstern href={kilder.tripletex}>Tripletex hjelpesenter</Ekstern>.
             </p>
 
             <h3 className={h3}>Fiken</h3>
             <p className={`mt-4 ${brod}`}>
-              Fiken foreslår EHF automatisk når kunden finnes i ELMA. Mottak aktiveres under Foretak → Tilleggstjenester.
-              Se <Ekstern href={kilder.fiken}>Fiken hjelp</Ekstern>.
+              Fiken foreslår EHF automatisk når kunden finnes i ELMA. Mottak aktiveres under Foretak →
+              Tilleggstjenester. Se <Ekstern href={kilder.fiken}>Fiken hjelp</Ekstern>.
             </p>
 
             <h3 className={h3}>Andre systemer</h3>
@@ -398,7 +413,9 @@ export default function EFaktura2027Page() {
           <div className="on-dark rounded-bilde bg-flyd-petrol p-8 text-flyd-sand md:p-12 lg:p-14">
             <div className="max-w-3xl">
               <Eyebrow tone="petrol">Rogaland og Agder</Eyebrow>
-              <h2 className="mt-5 font-display text-display-md font-semibold text-flyd-sand">Hva Flyd kan hjelpe med</h2>
+              <h2 className="mt-5 font-display text-display-md font-semibold text-flyd-sand">
+                Hva Flyd kan hjelpe med
+              </h2>
               <p className="mt-6 text-[17px] leading-[1.65] text-flyd-dempet">
                 Usikker på om systemet ditt er klart for EHF? Vi hjelper deg med:
               </p>
