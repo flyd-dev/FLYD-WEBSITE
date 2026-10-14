@@ -39,11 +39,17 @@ export type Office = {
    * andre kontorer inntil videre – alt-teksten sier da ikke hvor det er tatt.
    */
   gallery?: { src: string; alt: string }[];
+  /**
+   * Lenke til kontorets anmeldelsesside i Google Bedriftsprofil. Settes i
+   * `googleReviewUrls` nederst i fila (ett sted for alle lenkene). Uten lenke
+   * vises ingen anmeldelsesknapp.
+   */
+  reviewUrl?: string;
   /** Preposisjon foran stedsnavnet («på Moi», «i Egersund»). Standard er «i». */
   preposition?: 'i' | 'på';
 };
 
-export const offices: Office[] = [
+const officeList: Office[] = [
   {
     city: 'Stavanger',
     slug: 'stavanger-sandnes',
@@ -293,6 +299,25 @@ export const offices: Office[] = [
     ],
   },
 ];
+
+/**
+ * Google-anmeldelseslenker per kontor (slug → g.page-lenke). Stavanger-sandnes-
+ * kontoret ligger i Grenseveien 21, 4313 Sandnes, og bruker Google-profilen
+ * «Sandnes». Sirdal har ingen lenke ennå. Tjørhom har egen Google-profil
+ * (https://g.page/r/Cd5b3Im8SzeNEBM/review), men ingen kontorside – legg den
+ * inn her når siden finnes.
+ */
+export const googleReviewUrls: Record<string, string> = {
+  'stavanger-sandnes': 'https://g.page/r/Cdr-fAv72mquEBM/review',
+  egersund: 'https://g.page/r/CYs0MN1GbdIPEBM/review',
+  sokndal: 'https://g.page/r/CfqD8ogoztiQEBM/review',
+  moi: 'https://g.page/r/CTZIQx0JxOyqEBM/review',
+  flekkefjord: 'https://g.page/r/CfLqPGpUV6faEBM/review',
+};
+
+export const offices: Office[] = officeList.map((o) =>
+  googleReviewUrls[o.slug] ? { ...o, reviewUrl: googleReviewUrls[o.slug] } : o,
+);
 
 /**
  * Åpningstider – like på alle seks kontorer og identiske med Google
