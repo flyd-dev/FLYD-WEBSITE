@@ -163,7 +163,8 @@ export default function BytteRegnskapsforerPage() {
               <p className={`mt-4 ${brod}`}>
                 Det er først og fremst oppsigelsestiden i avtalen din som bestemmer hvor raskt det går, og så hvor raskt
                 det gamle byrået overleverer. Å melde ny regnskapsfører koster
-                ingenting. Det du eventuelt betaler for, er oppsigelsestiden hos den gamle og oppstarten hos den nye.
+                ingenting. Det du eventuelt betaler for, er oppsigelsestiden hos den gamle, oppstarten hos den nye og
+                eventuelt sluttarbeid eller flytting av data.
               </p>
             </div>
             <div
