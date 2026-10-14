@@ -13,6 +13,7 @@ import { ButtonLink } from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
 import FlydIcon from "@/components/FlydIcon";
+import GoogleAnmeldelse from "@/components/GoogleAnmeldelse";
 import {
   offices,
   getOfficeBySlug,
@@ -228,6 +229,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                       </ButtonLink>
                     </div>
                   )}
+                  <GoogleAnmeldelse url={office.reviewUrl} />
                 </div>
               </div>
             </aside>

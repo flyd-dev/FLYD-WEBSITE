@@ -8,6 +8,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Bekreft from "@/components/Bekreft";
 import JsonLd from "@/components/JsonLd";
 import FlydIcon from "@/components/FlydIcon";
+import GoogleAnmeldelse from "@/components/GoogleAnmeldelse";
 import NumberedList from "@/components/NumberedList";
 import { ButtonLink, TextLink } from "@/components/Button";
 import { siteUrl } from "@/lib/seo";
@@ -432,6 +433,7 @@ export default function KontorMal({
                     </ButtonLink>
                   </div>
                 )}
+                <GoogleAnmeldelse url={office.reviewUrl} />
               </div>
             </aside>
           </div>
