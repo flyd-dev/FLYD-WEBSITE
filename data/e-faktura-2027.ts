@@ -56,7 +56,7 @@ export const eFakturaFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Kan jeg fortsatt sende PDF-faktura?',
-    a: 'Ikke til bedrifter som kan motta e-faktura. En PDF sendt på e-post regnes ikke som e-faktura. Fra 1. januar 2030 får alle bokføringspliktige plikt til å kunne motta e-faktura.',
+    a: 'Ikke til bedrifter som kan motta e-faktura. En PDF sendt på e-post regnes ikke som e-faktura. Fra 1. januar 2030 får bokføringspliktige plikt til å kunne motta e-faktura, med noen unntak (se «Hvem er unntatt?»).',
   },
   {
     q: 'Må jeg kunne motta e-faktura fra 2027?',
@@ -68,7 +68,7 @@ export const eFakturaFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Hva skjer i 2028 og 2030?',
-    a: 'Fra 1. januar 2028 kan bokføringspliktige parter ikke lenger avtale at salgsdokumentet ikke skal oversendes. Fra 1. januar 2030 får alle bokføringspliktige plikt til å motta e-faktura, og bokføringen skal skje i et elektronisk regnskapssystem. Fram til 31. desember 2029 kan partene avtale et annet strukturert elektronisk format.',
+    a: 'Fra 1. januar 2028 kan bokføringspliktige parter ikke lenger avtale at salgsdokumentet ikke skal oversendes. Fra 1. januar 2030 får bokføringspliktige plikt til å motta e-faktura, med noen unntak (se «Hvem er unntatt?»), og bokføringen skal skje i et elektronisk regnskapssystem. Fram til 31. desember 2029 kan partene avtale et annet strukturert elektronisk format.',
   },
   {
     q: 'Gjelder dette enkeltpersonforetak?',

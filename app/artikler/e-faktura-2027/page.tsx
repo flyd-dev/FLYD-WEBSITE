@@ -82,6 +82,23 @@ function Punkter({ items, linje = 'sand' }: { items: React.ReactNode[]; linje?: 
   );
 }
 
+// Svarene er ren tekst (de brukes også i FAQPage-JSON-LD). På siden blir
+// henvisningen «Hvem er unntatt?» en lenke til unntaksseksjonen.
+const unntakRef = '«Hvem er unntatt?»';
+function MedUnntakLenke({ tekst }: { tekst: string }) {
+  const i = tekst.indexOf(unntakRef);
+  if (i < 0) return <>{tekst}</>;
+  return (
+    <>
+      {tekst.slice(0, i)}
+      <a href="#unntak" className={lenke}>
+        {unntakRef}
+      </a>
+      {tekst.slice(i + unntakRef.length)}
+    </>
+  );
+}
+
 const tidslinje: { dato: string; hva: React.ReactNode; kilde: React.ReactNode }[] = [
   {
     dato: '1.1.2027',
@@ -366,7 +383,9 @@ export default function EFaktura2027Page() {
                   {f.q}
                   <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                 </summary>
-                <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>
+                <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">
+                  <MedUnntakLenke tekst={f.a} />
+                </p>
               </details>
             ))}
           </div>
