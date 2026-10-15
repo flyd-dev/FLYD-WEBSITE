@@ -402,7 +402,7 @@ export default function ArsavslutningPage() {
         </Container>
       </Section>
 
-      {/* TILGANG OG NYTT */}
+      {/* TILGANG */}
       <Section tone="sand" id="tilgang">
         <Container>
           <div className="max-w-3xl">
@@ -416,17 +416,6 @@ export default function ArsavslutningPage() {
               </Link>
               .
             </p>
-
-            <div className="mt-10 rounded-kort bg-flyd-lysmint p-6 md:p-8">
-              <h3 className="font-display text-[20px] font-semibold leading-[1.3] text-flyd-skog">Nytt fra 2027</h3>
-              <p className="mt-3 text-[16px] leading-relaxed text-flyd-skifer">
-                Fra 1. januar 2027 kommer krav om e-faktura mellom bedrifter. Les{' '}
-                <Link href="/artikler/e-faktura-2027/" className={lenke}>
-                  hva e-fakturakravet betyr for deg
-                </Link>
-                .
-              </p>
-            </div>
           </div>
         </Container>
       </Section>
