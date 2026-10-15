@@ -203,7 +203,7 @@ export const services: Service[] = [
         },
         {
           title: 'Arbeidsgiveravgift og finansskatt',
-          text: 'Arbeidsgiveravgift og finansskatt betales per termin på to måneder. Første frist i kalenderåret er 15. mars, deretter den 15. annenhver måned. Faller den 15. på en helg, flyttes betalingsfristen: i 2026 ble 15. mars til 16. mars og 15. november til 16. november. KID og kontonummer står i tilbakemeldingen i Altinn.',
+          text: 'Arbeidsgiveravgift og finansskatt betales per termin på to måneder. Første frist i kalenderåret er 15. mars, deretter den 15. annenhver måned. Faller den 15. på en lørdag, søndag eller helligdag, flyttes betalingsfristen til første virkedag etter: i 2026 ble 15. mars til 16. mars, og 15. november flyttes til 16. november. KID og kontonummer står i tilbakemeldingen i Altinn.',
         },
         {
           title: 'Hvilken måned skal rapporteres?',
@@ -243,8 +243,8 @@ export const services: Service[] = [
         },
         { navn: 'A-opplysningsforskriften § 2-1 (Lovdata)', url: 'https://lovdata.no/forskrift/2014-06-24-857/%C2%A72-1' },
         {
-          navn: 'Skatteetaten: Skattekalender for bedrift',
-          url: 'https://www.skatteetaten.no/rss/skattekalender-for-bedrift/',
+          navn: 'Skatteetaten: Skattebetalingshåndboken, utsatt forfall (§ 10-2)',
+          url: 'https://www.skatteetaten.no/rettskilder/type/handboker/skattebetalingshandboken/gjeldende/kapittel-10.-forfall/ID-10-2.001/ID-10-2.003/',
         },
       ],
       sjekket: '15. oktober 2026',
