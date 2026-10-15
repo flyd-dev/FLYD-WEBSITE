@@ -175,9 +175,7 @@ const steg: { tittel: string; tekst: React.ReactNode }[] = [
       <>
         Velg fanen <strong className={sterk}>Tilgangspakker</strong> og klikk{' '}
         <strong className={sterk}>Gi fullmakt</strong>. Søk opp pakken og klikk{' '}
-        <strong className={sterk}>Gi fullmakt</strong> til høyre for den. Du kan gi flere pakker i samme runde. Gi ikke
-        Hovedadministrator med mindre du bevisst vil det: den gir rett til å administrere alle fullmaktene i
-        virksomheten.
+        <strong className={sterk}>Gi fullmakt</strong> til høyre for den. Du kan gi flere pakker i samme runde.
       </>
     ),
   },

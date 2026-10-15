@@ -68,7 +68,7 @@ export const altinnFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Hvem i bedriften kan gi tilgang i Altinn?',
-    a: 'Daglig leder, styrets leder og innehaver får automatisk pakken Hovedadministrator og kan gi alle fullmakter. Andre kan gi fullmakt hvis de er tilgangsstyrer og selv har pakken de vil gi videre.',
+    a: 'Daglig leder, styrets leder og innehaver får automatisk pakken Hovedadministrator og kan gi alle tilgangspakker unntatt Hovedadministrator. Andre kan gi fullmakt hvis de er tilgangsstyrer og selv har pakken de vil gi videre.',
   },
   {
     q: 'Hva er forskjellen på regnskapsfører med og uten signeringsrettighet?',
