@@ -1,4 +1,5 @@
 import { eFaktura2027 } from './e-faktura-2027';
+import { altinnTilgang } from './altinn-tilgang-regnskapsforer';
 import { mvaFrister } from './mva-frister';
 
 /**
@@ -38,6 +39,16 @@ const alle: Artikkel[] = [
     published: eFaktura2027.published,
     modified: eFaktura2027.modified,
     bilde: eFaktura2027.hero,
+  },
+  {
+    slug: 'altinn-tilgang-regnskapsforer',
+    path: altinnTilgang.path,
+    title: altinnTilgang.h1,
+    ingress: altinnTilgang.description,
+    tema: 'Altinn',
+    published: altinnTilgang.published,
+    modified: altinnTilgang.modified,
+    bilde: altinnTilgang.hero,
   },
   {
     slug: 'mva-frister',
