@@ -207,7 +207,7 @@ export default function ForskuddsskattEnkPage() {
               Som innehaver av et enkeltpersonforetak betaler du skatt av forventet overskudd løpende gjennom året, i
               stedet for at arbeidsgiveren trekker skatt av lønnen. Forskuddsskatten forfaller i fire like store
               terminer: 15. mars, 15. juni, 15. september og 15. desember. Er forskuddsskatten under 2 000 kroner, forfaller
-              hele beløpet 15. juni (<Ekstern href={kilder.forskuddsutskrivingen}>Skattedirektoratet</Ekstern>).
+              hele beløpet 15. juni (<Ekstern href={kilder.forskuddsutskrivingen}>Skatteetaten</Ekstern>).
               Fakturaen kommer omtrent tre uker før fristen (
               <Ekstern href={kilder.forskuddsskattEnk}>Skatteetaten</Ekstern>).
             </p>
@@ -304,7 +304,7 @@ export default function ForskuddsskattEnkPage() {
                 'Fristen er 31. mai året etter inntektsåret. Faller den på en helg eller helligdag, flyttes den til første virkedag etter. For inntektsåret 2026 er fristen mandag 31. mai 2027.',
                 'KID og kontonummer står i opplysningene som fulgte med skattemeldingen. Mangler du dem, kan du lage KID hos Skatteetaten.',
                 'Med feil KID eller for sen betaling kan beløpet bli ikke godkjent som tilleggsforskudd. Da kan du få det tilbakebetalt før skatteoppgjøret, eller det brukes til forskudd på restskatt.',
-                'Du kan klage innen 3 uker fra du fikk beskjed om at beløpet ikke ble godkjent. Klagen sendes via Altinn.',
+                'Du kan klage innen 3 uker fra du fikk beskjed om at beløpet ikke ble godkjent.',
               ]}
             />
           </div>
@@ -360,7 +360,7 @@ export default function ForskuddsskattEnkPage() {
               <h2 className="mt-4 font-display text-[24px] font-semibold leading-[1.25]">Og hvis du har AS?</h2>
               <p className="mt-4 text-[16px] leading-relaxed text-flyd-skifer">
                 Aksjeselskap har andre regler. Forskuddsskatten forfaller i to terminer året etter inntektsåret, 15.
-                februar og 15. april (<Ekstern href={kilder.forskuddsutskrivingen}>Skattedirektoratet</Ekstern>).
+                februar og 15. april (<Ekstern href={kilder.forskuddsutskrivingen}>Skatteetaten</Ekstern>).
                 Rentetillegget på restskatt beregnes fra 15. mars året etter (
                 <Ekstern href={kilder.restskatt}>Skatteetaten</Ekstern>). Se også{' '}
                 <Link href="/artikler/frister-aksjeselskap/" className={lenke}>
