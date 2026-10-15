@@ -9,12 +9,49 @@ import { offices } from '@/data/offices';
 // deploy. Er variabelen ikke satt, rendres ingen lenke.
 const floydUrl = process.env.NEXT_PUBLIC_FLOYD_URL?.trim();
 
+const lenke = 'transition-colors hover:text-flyd-mint';
+
+const flydLenker = [
+  { href: '/', label: 'Forside' },
+  { href: '/tjenester', label: 'Tjenester' },
+  { href: '/kontor', label: 'Kontorer' },
+  { href: '/artikler/', label: 'Artikler' },
+  { href: '/om-flyd', label: 'Om Flyd' },
+];
+
+const komIGangLenker = [
+  { href: '/bytte-regnskapsforer/', label: 'Bytte regnskapsfører' },
+  { href: '/karriere', label: 'Karriere' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+
+function Lenkeliste({ tittel, lenker }: { tittel: string; lenker: { href: string; label: string }[] }) {
+  return (
+    <nav aria-label={tittel}>
+      <Eyebrow as="h3" tone="dark">
+        {tittel}
+      </Eyebrow>
+      <ul className="mt-5 space-y-3 text-[15px] text-flyd-sand">
+        {lenker.map((l) => (
+          <li key={l.href}>
+            <Link href={l.href} className={lenke}>
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="on-dark border-t border-flyd-sand/10 bg-flyd-skog text-flyd-sand">
       <Container className="py-20">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
+        {/* Mobil: logo, de to lenkekolonnene side om side, så kontorene.
+            Nettbrett: logo over, tre kolonner under. Desktop: fire kolonner. */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-12 md:gap-12">
+          <div className="col-span-2 md:col-span-12 lg:col-span-4">
             <Link href="/" aria-label="Flyd – til forsiden" className="inline-block">
               <FlydLogo className="-ml-2.5 h-16 w-auto text-flyd-sand" />
             </Link>
@@ -61,38 +98,15 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="md:col-span-3">
-            <Eyebrow as="h3" tone="dark">
-              Navigasjon
-            </Eyebrow>
-            <ul className="mt-5 space-y-3 text-[15px] text-flyd-sand">
-              <li><Link href="/" className="transition-colors hover:text-flyd-mint">Forside</Link></li>
-              <li><Link href="/tjenester" className="transition-colors hover:text-flyd-mint">Tjenester</Link></li>
-              <li><Link href="/kontor" className="transition-colors hover:text-flyd-mint">Kontorer</Link></li>
-              <li><Link href="/bytte-regnskapsforer/" className="transition-colors hover:text-flyd-mint">Bytte regnskapsfører</Link></li>
-              <li><Link href="/artikler/" className="transition-colors hover:text-flyd-mint">Artikler</Link></li>
-              <li><Link href="/om-flyd" className="transition-colors hover:text-flyd-mint">Om Flyd</Link></li>
-              <li><Link href="/karriere" className="transition-colors hover:text-flyd-mint">Karriere</Link></li>
-              <li><Link href="/kontakt" className="transition-colors hover:text-flyd-mint">Kontakt</Link></li>
-              <li><Link href="/personvern" className="transition-colors hover:text-flyd-mint">Personvern</Link></li>
-              <li><ConsentLink className="transition-colors hover:text-flyd-mint" /></li>
-              {floydUrl && (
-                <li>
-                  <a
-                    href={floydUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Floyd – for ansatte i Flyd (åpnes i nytt vindu)"
-                    className="transition-colors hover:text-flyd-mint"
-                  >
-                    For ansatte
-                  </a>
-                </li>
-              )}
-            </ul>
+          <div className="col-span-1 md:col-span-3 lg:col-span-2">
+            <Lenkeliste tittel="Flyd" lenker={flydLenker} />
           </div>
 
-          <div className="md:col-span-5">
+          <div className="col-span-1 md:col-span-3 lg:col-span-2">
+            <Lenkeliste tittel="Kom i gang" lenker={komIGangLenker} />
+          </div>
+
+          <nav aria-label="Kontorer" className="col-span-2 md:col-span-6 lg:col-span-4">
             <Eyebrow as="h3" tone="dark">
               Kontorer
             </Eyebrow>
@@ -112,13 +126,41 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
 
-        <div className="mt-16 flex flex-col-reverse items-start justify-between gap-4 border-t border-flyd-sand/15 pt-8 md:flex-row md:items-center">
-          <p className="text-[14px] text-flyd-dempet">
-            © {new Date().getFullYear()} Flyd AS. Alle rettigheter reservert.
-          </p>
+        {/* Med lenkeraden blir bunnlinja for trang på nettbrett, så den legges i én rad først fra lg. */}
+        <div className="mt-16 flex flex-col-reverse items-start justify-between gap-4 border-t border-flyd-sand/15 pt-8 lg:flex-row lg:items-center">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
+            <p className="text-[14px] text-flyd-dempet">
+              © {new Date().getFullYear()} Flyd AS. Alle rettigheter reservert.
+            </p>
+            <nav aria-label="Personvern og samtykke">
+              <ul className="flex flex-wrap gap-x-5 gap-y-2 text-[14px] text-flyd-dempet">
+                <li>
+                  <Link href="/personvern" className={lenke}>
+                    Personvern
+                  </Link>
+                </li>
+                <li>
+                  <ConsentLink className={lenke} />
+                </li>
+                {floydUrl && (
+                  <li>
+                    <a
+                      href={floydUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Floyd – for ansatte i Flyd (åpnes i nytt vindu)"
+                      className={lenke}
+                    >
+                      For ansatte
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </nav>
+          </div>
           <p className="text-[14px] text-flyd-dempet">
             Laget med omhu i Sør-Vest-Norge av{' '}
             <FlydLogo
