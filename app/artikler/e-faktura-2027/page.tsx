@@ -156,7 +156,13 @@ export default function EFaktura2027Page() {
       <section className="bg-flyd-sand px-3 pt-3 md:px-4 md:pt-4">
         <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-skog py-14 text-flyd-sand md:py-20">
           <Container className="relative">
-            <Breadcrumbs tone="dark" items={[{ name: 'E-faktura fra 2027', href: a.path }]} />
+            <Breadcrumbs
+              tone="dark"
+              items={[
+                { name: 'Artikler', href: '/artikler/' },
+                { name: 'E-faktura fra 2027', href: a.path },
+              ]}
+            />
             <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
               <div className="lg:col-span-6">
                 <span className="block h-0.5 w-10 bg-flyd-mint" aria-hidden="true" />

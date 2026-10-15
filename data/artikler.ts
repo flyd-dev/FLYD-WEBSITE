@@ -1,0 +1,60 @@
+import { eFaktura2027 } from './e-faktura-2027';
+
+/**
+ * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
+ * herfra, så en ny artikkel trenger bare en side i app/artikler/<slug>/ og en
+ * oppføring her. Bygget feiler hvis en artikkelmappe mangler oppføring (se
+ * app/artikler/page.tsx). Datoene er ISO (åååå-mm-dd); `modified` oppdateres
+ * når teksten endres.
+ */
+export type Artikkel = {
+  slug: string;
+  /** Med skråstrek på slutten, f.eks. '/artikler/e-faktura-2027/'. */
+  path: string;
+  /** Tittelen slik den står i oversikten (setningsstil, som h1 på siden). */
+  title: string;
+  /** Kort ingress, én til to setninger. */
+  ingress: string;
+  /** Tema, vises som kicker over tittelen. */
+  tema: string;
+  published: string;
+  modified: string;
+};
+
+const alle: Artikkel[] = [
+  {
+    slug: 'e-faktura-2027',
+    path: eFaktura2027.path,
+    title: eFaktura2027.h1,
+    ingress: eFaktura2027.description,
+    tema: 'E-faktura og EHF',
+    published: eFaktura2027.published,
+    modified: eFaktura2027.modified,
+  },
+];
+
+/** Nyeste først. */
+export const artikler: Artikkel[] = [...alle].sort(
+  (a, b) => b.published.localeCompare(a.published) || b.modified.localeCompare(a.modified),
+);
+
+const maaneder = [
+  'januar',
+  'februar',
+  'mars',
+  'april',
+  'mai',
+  'juni',
+  'juli',
+  'august',
+  'september',
+  'oktober',
+  'november',
+  'desember',
+];
+
+/** '2026-10-14' → '14. oktober 2026' (skriveregelen i designmanualen). */
+export function formatDato(iso: string): string {
+  const [aar, mnd, dag] = iso.split('-').map(Number);
+  return `${dag}. ${maaneder[mnd - 1]} ${aar}`;
+}

@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { jobs } from '@/data/jobs';
 import { offices } from '@/data/offices';
+import { artikler } from '@/data/artikler';
 import {
   services,
   erpSystems,
@@ -52,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/tjenester', source: 'app/tjenester/page.tsx', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/kontor', source: 'app/kontor/page.tsx', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/bytte-regnskapsforer', source: 'app/bytte-regnskapsforer/page.tsx', priority: 0.8, changeFrequency: 'monthly' },
-    { path: '/artikler/e-faktura-2027', source: 'app/artikler/e-faktura-2027/page.tsx', priority: 0.7, changeFrequency: 'monthly' },
+    { path: '/artikler', source: 'app/artikler/page.tsx', priority: 0.7, changeFrequency: 'weekly' },
     { path: '/om-flyd', source: 'app/om-flyd/page.tsx', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/karriere', source: 'app/karriere/page.tsx', priority: 0.8, changeFrequency: 'weekly' },
     { path: '/kontakt', source: 'app/kontakt/page.tsx', priority: 0.7, changeFrequency: 'yearly' },
@@ -88,6 +89,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: servicesMtime,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
+    })),
+    // Artiklene kommer fra data/artikler.ts. lastmod er artikkelens egen
+    // `modified`, som bare endres når teksten gjør det.
+    ...artikler.map((a) => ({
+      url: `${base}${a.path}`,
+      lastModified: new Date(a.modified),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     })),
     ...offices.map((office) => ({
       url: `${base}/kontor/${office.slug}/`,
