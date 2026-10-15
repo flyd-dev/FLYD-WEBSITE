@@ -6,6 +6,7 @@ import { forskuddsskattEnk } from './forskuddsskatt-enk';
 import { trengerRegnskapsforer } from './trenger-regnskapsforer';
 import { enkEllerAs } from './enk-eller-as';
 import { arsavslutning } from './arsavslutning-sjekkliste';
+import { lonnEllerUtbytte } from './lonn-eller-utbytte';
 
 /**
  * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
@@ -114,6 +115,16 @@ const alle: Artikkel[] = [
     published: arsavslutning.published,
     modified: arsavslutning.modified,
     bilde: arsavslutning.hero,
+  },
+  {
+    slug: 'lonn-eller-utbytte',
+    path: lonnEllerUtbytte.path,
+    title: lonnEllerUtbytte.h1,
+    ingress: lonnEllerUtbytte.description,
+    tema: 'Aksjeselskap',
+    published: lonnEllerUtbytte.published,
+    modified: lonnEllerUtbytte.modified,
+    bilde: lonnEllerUtbytte.hero,
   },
 ];
 
