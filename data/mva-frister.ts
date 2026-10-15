@@ -32,6 +32,8 @@ export const kilder = {
     'https://www.skatteetaten.no/rettskilder/type/handboker/skattebetalingshandboken/gjeldende/kapittel-10.-forfall/ID-10-13.001/ID-10-13.005/',
   forskrift: 'https://lovdata.no/forskrift/2016-11-23-1360/%C2%A78-3-10',
   skattebetalingsloven: 'https://lovdata.no/dokument/NL/lov/2005-06-17-67/KAPITTEL_10',
+  fristberegning: 'https://lovdata.no/lov/2016-05-27-14/%C2%A75-5',
+  domstolloven: 'https://lovdata.no/nav/lov/1915-08-13-5/kap8/%C2%A7149',
   skatteforvaltningsloven: 'https://lovdata.no/dokument/NL/lov/2016-05-27-14/KAPITTEL_8',
 };
 
@@ -70,7 +72,7 @@ export const mvaFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Hvilken frist gjelder for gårdsbruk, skogbruk og fiske?',
-    a: 'Primærnæringer som jordbruk, skogbruk, reindrift og fiske leverer normalt én mva-melding for hele kalenderåret. Fristen for levering og betaling er 10. april året etter. Grensen på 1 million kroner gjelder ikke for dem.',
+    a: 'Primærnæringer som jordbruk, skogbruk, reindrift og fiske leverer normalt én mva-melding for hele kalenderåret. Fristen for levering og betaling er 10. april året etter. For 2026 er 10. april 2027 en lørdag, så fristen blir mandag 12. april 2027. Grensen på 1 million kroner gjelder ikke for dem.',
   },
   {
     q: 'Kan regnskapsføreren levere mva-meldingen for meg?',

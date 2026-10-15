@@ -283,7 +283,12 @@ export default function MvaFristerPage() {
             <h3 className={h3}>Jordbruk, skogbruk og fiske</h3>
             <p className={`mt-4 ${brod}`}>
               Primærnæringer som jordbruk, skogbruk, reindrift og fiske leverer normalt én mva-melding for hele
-              kalenderåret, med frist for levering og betaling 10. april året etter. Grensen på 1 million kroner gjelder
+              kalenderåret, med frist for levering og betaling 10. april året etter. For 2026 faller 10. april 2027 på
+              en lørdag, så fristen blir mandag 12. april 2027 (
+              <Ekstern href={kilder.fristberegning}>skatteforvaltningsloven § 5-5</Ekstern> med{' '}
+              <Ekstern href={kilder.domstolloven}>domstolloven § 149</Ekstern>, og{' '}
+              <Ekstern href={kilder.skattebetalingsloven}>skattebetalingsloven § 10-2</Ekstern> for betalingen). Grensen
+              på 1 million kroner gjelder
               ikke for dem, men har du annen avgiftspliktig omsetning over 30 000 kroner, må du si fra til
               Skatteetaten (<Ekstern href={kilder.betaleMva}>Skatteetaten</Ekstern>).
             </p>
