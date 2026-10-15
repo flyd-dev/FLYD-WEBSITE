@@ -5,6 +5,25 @@ import { synlig, type Status } from '@/lib/utkast';
 /** Spørsmål og svar til «Vanlige spørsmål» på tjenestesiden. */
 export type Faq = { q: string; a: string };
 
+/**
+ * Faktaseksjon på tjenestesiden, f.eks. fristen for a-meldingen på lønnssiden.
+ * Bare tall og frister fra offisielle kilder, og kildene vises under seksjonen.
+ * Spørsmålene går også inn i sidens FAQPage-JSON-LD.
+ */
+export type Fagseksjon = {
+  /** Ankeret (#id), f.eks. 'a-melding-frist'. Ikke endre: lenker peker hit. */
+  id: string;
+  kicker: string;
+  title: string;
+  /** Kort svar øverst, 40–50 ord. */
+  svar: string;
+  deler: { title: string; text: string }[];
+  faq?: Faq[];
+  kilder: { navn: string; url: string }[];
+  /** Når fakta sist ble sjekket mot kildene, f.eks. '15. oktober 2026'. */
+  sjekket: string;
+};
+
 export type Service = {
   /** Ankeret på /tjenester/ (#id). Ikke endre: gamle lenker peker hit. */
   id: string;
@@ -38,6 +57,8 @@ export type Service = {
   fagperson?: string;
   /** Hvem tjenesten ikke passer for. */
   passerIkke?: string;
+  /** Faktaseksjon med frister o.l. (vises bare når den er satt). */
+  fagseksjon?: Fagseksjon;
 };
 
 export const services: Service[] = [
@@ -168,6 +189,62 @@ export const services: Service[] = [
     fitFor: 'Bedrifter som vil ha trygghet på at lønn og rapportering er riktig – og at de ansatte blir ivaretatt.',
     icon: 'lonn',
     image: { src: '/tjenestebilder/lonn-hr.webp', alt: 'Kollega ved pulten smiler opp til en kollega som stikker innom' },
+    // Brief 13.10.2026 (a-melding-frist). Konkrete forskjøvne datoer og plikt
+    // ved null lønnsutbetaling er utelatt til Skatteetaten publiserer dem.
+    fagseksjon: {
+      id: 'a-melding-frist',
+      kicker: 'A-meldingen',
+      title: 'Frist for a-meldingen',
+      svar: 'A-meldingen skal leveres senest den 5. i måneden etter den måneden opplysningene gjelder. Faller den 5. på en lørdag, søndag eller helligdag, flyttes fristen til første virkedag etter. Skatteetaten kan som hovedregel ikke gi utsatt frist.',
+      deler: [
+        {
+          title: 'Betaling av forskuddstrekk',
+          text: 'Fra januar 2026 er skattetrekkskontoen avviklet. Forskuddstrekk og utleggstrekk skal betales innen første virkedag etter at lønnen er utbetalt og trekket er gjennomført. Betalingsinformasjonen står i tilbakemeldingen på a-meldingen.',
+        },
+        {
+          title: 'Arbeidsgiveravgift og finansskatt',
+          text: 'Arbeidsgiveravgift og finansskatt betales per termin på to måneder. Første frist i kalenderåret er 15. mars, deretter den 15. annenhver måned. KID og kontonummer står i tilbakemeldingen i Altinn.',
+        },
+        {
+          title: 'Hvilken måned skal rapporteres?',
+          text: 'Lønn rapporteres i måneden den utbetales, og trekk i måneden det trekkes. Arbeidsforholdet rapporteres hver måned til og med måneden den ansatte slutter. Du kan levere inntil to måneder fram i tid, men bare innenfor inneværende år.',
+        },
+      ],
+      faq: [
+        {
+          q: 'Hva skjer når fristen for a-meldingen er på en helg eller helligdag?',
+          a: 'Da flyttes fristen. Faller den 5. på en lørdag, søndag eller helligdag, utskytes fristen til første påfølgende virkedag. Det står i a-opplysningsforskriften § 2-1.',
+        },
+        {
+          q: 'Kan jeg få utsatt frist for a-meldingen?',
+          a: 'Som hovedregel nei. Skatteetaten kan ikke gi utsettelse. Unntakene står i forskriften: starter et oppdrag etter den 20. i måneden, er første frist den 15. måneden etter, og har arbeidsgiveren fritak fra forskuddstrekk, kan opplysningene leveres én gang i året, senest 15. januar.',
+        },
+        {
+          q: 'Hva endret seg for forskuddstrekk i 2026?',
+          a: 'Skattetrekkskontoen er avviklet fra januar 2026. Forskuddstrekk og utleggstrekk betales nå innen første virkedag etter at lønnen er utbetalt og trekket er gjennomført. Arbeidsgiveravgiften har samme forfall som før, og fristen for a-meldingen er fortsatt den 5.',
+        },
+        {
+          q: 'Kan regnskapsføreren levere a-meldingen for meg?',
+          a: 'Ja. Regnskapsføreren trenger en av tilgangspakkene Skatteetaten oppgir for a-meldingen i Altinn, for eksempel «Regnskapsfører lønn» eller «Regnskapsfører med signeringsrettighet». Vi kjører lønn og leverer a-meldingen for kundene våre.',
+        },
+      ],
+      kilder: [
+        {
+          navn: 'Skatteetaten: Frister og betaling i a-meldingen',
+          url: 'https://www.skatteetaten.no/bedrift-og-organisasjon/arbeidsgiver/a-meldingen/frister-og-betaling-i-a-meldingen/',
+        },
+        {
+          navn: 'Skatteetaten: Nye frister for betaling av forskuddstrekk og utleggstrekk',
+          url: 'https://www.skatteetaten.no/bedrift-og-organisasjon/arbeidsgiver/a-meldingen/siste-fra-a-ordningen/nye-frister-for-betaling-av-forskuddstrekk-og-utleggstrekk/',
+        },
+        {
+          navn: 'Skatteetaten: Tilgangspakker for a-meldingen',
+          url: 'https://www.skatteetaten.no/en/business-and-organisation/employer/the-a-melding/siste-fra-a-ordningen/new-access-packages-for-the-a-melding-a-melding/',
+        },
+        { navn: 'A-opplysningsforskriften § 2-1 (Lovdata)', url: 'https://lovdata.no/forskrift/2014-06-24-857/%C2%A72-1' },
+      ],
+      sjekket: '15. oktober 2026',
+    },
   },
   {
     // UTKAST: ny tjeneste for gründere og nyetablerte.
