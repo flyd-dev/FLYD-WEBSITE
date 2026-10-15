@@ -226,7 +226,10 @@ export default function AltinnTilgangPage() {
                 <Eyebrow tone="petrol" className="mt-5">
                   Artikkel · Altinn
                 </Eyebrow>
-                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{a.h1}</h1>
+                {/* Myk bindestrek: «regnskapsføreren» er bredere enn skjermen på mobil. */}
+                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">
+                  {a.h1.replace('regnskapsføreren', 'regnskaps­føreren')}
+                </h1>
                 <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
                   De gamle Altinn-rollene er erstattet av tilgangspakker. Står regnskapsføreren registrert i
                   Enhetsregisteret, får byrået pakkene for regnskapsfører automatisk. Trenger byrået mer, eller tilgang
