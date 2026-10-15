@@ -4,6 +4,7 @@ import { mvaFrister } from './mva-frister';
 import { fristerAs } from './frister-aksjeselskap';
 import { forskuddsskattEnk } from './forskuddsskatt-enk';
 import { trengerRegnskapsforer } from './trenger-regnskapsforer';
+import { enkEllerAs } from './enk-eller-as';
 
 /**
  * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
@@ -92,6 +93,16 @@ const alle: Artikkel[] = [
     published: trengerRegnskapsforer.published,
     modified: trengerRegnskapsforer.modified,
     bilde: trengerRegnskapsforer.hero,
+  },
+  {
+    slug: 'enk-eller-as',
+    path: enkEllerAs.path,
+    title: enkEllerAs.h1,
+    ingress: enkEllerAs.description,
+    tema: 'Selskapsform',
+    published: enkEllerAs.published,
+    modified: enkEllerAs.modified,
+    bilde: enkEllerAs.hero,
   },
 ];
 
