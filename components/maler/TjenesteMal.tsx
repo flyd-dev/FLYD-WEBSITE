@@ -44,6 +44,9 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
   const isErp = s.slug === 'erp';
   const visFaq = Boolean(s.faq?.length || fagperson || (utkast && visUtkast));
   const comparisonVisible = erpComparisonStatus === 'publisert' || visUtkast;
+  const fag = s.fagseksjon;
+  // FAQPage-JSON-LD tar med både «Vanlige spørsmål» og spørsmålene i fagseksjonen.
+  const alleFaq = [...(s.faq ?? []), ...(fag?.faq ?? [])];
 
   const serviceJsonLd = {
     '@context': 'https://schema.org',
@@ -57,11 +60,11 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
       { '@type': 'AdministrativeArea', name: 'Rogaland' },
       { '@type': 'AdministrativeArea', name: 'Agder' },
     ],
-    ...(s.faq?.length
+    ...(alleFaq.length
       ? {
           subjectOf: {
             '@type': 'FAQPage',
-            mainEntity: s.faq.map((f) => ({
+            mainEntity: alleFaq.map((f) => ({
               '@type': 'Question',
               name: f.q,
               acceptedAnswer: { '@type': 'Answer', text: f.a },
@@ -144,6 +147,61 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
           </div>
         </Container>
       </Section>
+
+      {/* FAGSEKSJON (f.eks. a-meldingsfristen på lønnssiden) */}
+      {fag && (
+        <Section tone="sand" id={fag.id}>
+          <Container>
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5" data-reveal>
+                <Eyebrow>{fag.kicker}</Eyebrow>
+                <h2 className="mt-5 font-display text-display-md font-semibold">{fag.title}</h2>
+                <p className="mt-6 font-display text-ingress font-medium text-flyd-petrol">{fag.svar}</p>
+              </div>
+              <div className="lg:col-span-7" data-reveal>
+                <div className="border-t border-flyd-linje-sand">
+                  {fag.deler.map((d) => (
+                    <div key={d.title} className="border-b border-flyd-linje-sand py-6">
+                      <h3 className="font-display text-[20px] font-semibold">{d.title}</h3>
+                      <p className="mt-2 text-[16px] leading-relaxed text-flyd-skifer">{d.text}</p>
+                    </div>
+                  ))}
+                </div>
+                {fag.faq?.length ? (
+                  <div className="mt-10 space-y-3">
+                    {fag.faq.map((f) => (
+                      <details key={f.q} className="faq group rounded-kort bg-flyd-lysmint px-6 md:px-7">
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
+                          {f.q}
+                          <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
+                        </summary>
+                        <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>
+                      </details>
+                    ))}
+                  </div>
+                ) : null}
+                <p className="mt-8 text-[15px] leading-relaxed text-flyd-skifer">
+                  Kilder:{' '}
+                  {fag.kilder.map((k, i) => (
+                    <span key={k.url}>
+                      {i > 0 && ', '}
+                      <a
+                        href={k.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors duration-200 hover:text-flyd-skog hover:decoration-flyd-skog"
+                      >
+                        {k.navn}
+                      </a>
+                    </span>
+                  ))}
+                  . Sist sjekket {fag.sjekket}.
+                </p>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {/* SYSTEMENE (bare på ERP-siden) */}
       {isErp && (
