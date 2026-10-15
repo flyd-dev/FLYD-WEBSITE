@@ -183,12 +183,14 @@ export default function TrengerRegnskapsforerPage() {
               bokføringsplikt. Det samme har alle som er regnskapspliktige (
               <Ekstern href={kilder.bokforingsloven}>bokføringsloven § 2</Ekstern>). Bokføringen skal følge de
               grunnleggende prinsippene i § 4: blant annet et ordentlig regnskapssystem, fullstendighet, nøyaktighet,
-              dokumentasjon, sporbarhet og oppbevaring. Hovedregelen er at regnskapsmaterialet skal oppbevares i fem år
-              etter regnskapsårets slutt (§ 13).
+              dokumentasjon, sporbarhet og oppbevaring. Hovedregelen er at årsregnskap og dokumentasjon av bokførte
+              opplysninger skal oppbevares i fem år etter regnskapsårets slutt. Noe tilleggsdokumentasjon, som avtaler og
+              korrespondanse, skal oppbevares i tre år og seks måneder (§ 13).
             </p>
             <p className={`mt-5 ${brod}`}>
               Loven sier ikke at en bestemt person skal føre regnskapet. Kravet gjelder resultatet. Overlater du
-              bokføringen til andre, gjelder pliktene også for dem (§ 14), men du er fortsatt bokføringspliktig.
+              bokføringen til andre, må også de gi kontrollmyndighetene bistand til innsyn (§ 14), men du er fortsatt
+              bokføringspliktig og ansvarlig.
             </p>
           </div>
         </Container>
@@ -206,11 +208,12 @@ export default function TrengerRegnskapsforerPage() {
               (<Ekstern href={kilder.nyttEnk}>Skatteetaten</Ekstern>).
             </p>
 
-            <h3 className={h3}>Omsetning under 50 000 kroner</h3>
+            <h3 className={h3}>Omsetning under 50 000 kroner fra 2027</h3>
             <p className={`mt-4 ${brod}`}>
-              Har foretaket omsetning på høyst 50 000 kroner i året, og er det verken mva-registrert eller
+              Fra 1. januar 2027 gjelder et nytt unntak for deg som leverer skattemelding for formues- og inntektsskatt:
+              Har foretaket omsetning på høyst 50 000 kroner i et kalenderår, og er det verken mva-registrert eller
               regnskapspliktig, slipper du deler av bokføringsreglene. Du må likevel dokumentere transaksjonene og
-              oppbevare dokumentasjonen. Unntaket faller bort når omsetningen passerer grensen (
+              oppbevare dokumentasjonen. Unntaket faller bort fra det tidspunktet omsetningen passerer grensen (
               <Ekstern href={kilder.bokforingsforskriftenEndring}>bokføringsforskriften § 1-2</Ekstern>).
             </p>
 
@@ -310,7 +313,7 @@ export default function TrengerRegnskapsforerPage() {
             <Punkter
               linje="mint"
               items={[
-                '«Regnskapsføring i næring for andre kan bare utføres av regnskapsforetak» (regnskapsførerloven § 2-1). Foretaket må være godkjent av Finanstilsynet (§ 2-2).',
+                '«Regnskapsføring i næring for andre kan bare utføres av regnskapsforetak» (regnskapsførerloven § 2-1). Et regnskapsforetak er enten et regnskapsselskap godkjent av Finanstilsynet, eller en statsautorisert regnskapsfører med eget enkeltpersonforetak (§§ 1-2, 2-2 og 2-3).',
                 'Finanstilsynet fører et offentlig register over regnskapsforetak og statsautoriserte regnskapsførere (§ 2-5). Der kan du slå opp foretaket.',
                 'Regnskapsforetaket skal inngå en skriftlig oppdragsavtale med deg for hvert oppdrag (§ 5-2).',
                 'Foretaket skal utpeke en statsautorisert regnskapsfører som ansvarlig for hvert oppdrag (§ 5-1).',

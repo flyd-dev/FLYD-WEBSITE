@@ -52,7 +52,7 @@ export const trengerFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Hva gjelder hvis ENK-et omsetter for under 50 000 kroner?',
-    a: 'Har foretaket omsetning på høyst 50 000 kroner i året, og er det verken mva-registrert eller regnskapspliktig, slipper du deler av bokføringsreglene. Du må likevel dokumentere transaksjonene og oppbevare dokumentasjonen. Unntaket faller bort når omsetningen passerer grensen.',
+    a: 'Fra 1. januar 2027 gjelder et nytt unntak for deg som leverer skattemelding for formues- og inntektsskatt: Har foretaket omsetning på høyst 50 000 kroner i et kalenderår, og er det verken mva-registrert eller regnskapspliktig, slipper du deler av bokføringsreglene. Du må likevel dokumentere transaksjonene og oppbevare dokumentasjonen. Unntaket faller bort fra det tidspunktet omsetningen passerer grensen.',
   },
   {
     q: 'Hvem har ansvaret hvis regnskapsføreren gjør feil?',
