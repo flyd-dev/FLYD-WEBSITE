@@ -5,6 +5,7 @@ import { fristerAs } from './frister-aksjeselskap';
 import { forskuddsskattEnk } from './forskuddsskatt-enk';
 import { trengerRegnskapsforer } from './trenger-regnskapsforer';
 import { enkEllerAs } from './enk-eller-as';
+import { arsavslutning } from './arsavslutning-sjekkliste';
 import { lonnEllerUtbytte } from './lonn-eller-utbytte';
 
 /**
@@ -104,6 +105,16 @@ const alle: Artikkel[] = [
     published: enkEllerAs.published,
     modified: enkEllerAs.modified,
     bilde: enkEllerAs.hero,
+  },
+  {
+    slug: 'arsavslutning-sjekkliste',
+    path: arsavslutning.path,
+    title: arsavslutning.h1,
+    ingress: arsavslutning.description,
+    tema: 'Årsoppgjør',
+    published: arsavslutning.published,
+    modified: arsavslutning.modified,
+    bilde: arsavslutning.hero,
   },
   {
     slug: 'lonn-eller-utbytte',
