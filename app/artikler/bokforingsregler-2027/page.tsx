@@ -391,7 +391,7 @@ export default function Bokforingsregler2027Page() {
                 {
                   g: '2027',
                   tekst:
-                    'Får du lettelsen, gjelder kravet om å utstede e-faktura bare hvis du fakturerer i et faktureringssystem som har funksjonen (bokføringsforskriften § 1-2 første ledd).',
+                    'Får du lettelsen, gjelder kravet om å utstede e-faktura ved salg av varer bare hvis du fakturerer i et faktureringssystem som har funksjonen. Forskriften nevner salg av varer, mens e-fakturakravet i bokføringsloven § 10 annet ledd gjelder salg av varer og tjenester (bokføringsforskriften § 1-2 første ledd).',
                 },
               ]}
             />
