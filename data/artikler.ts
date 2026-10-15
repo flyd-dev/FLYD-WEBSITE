@@ -5,6 +5,7 @@ import { fristerAs } from './frister-aksjeselskap';
 import { forskuddsskattEnk } from './forskuddsskatt-enk';
 import { trengerRegnskapsforer } from './trenger-regnskapsforer';
 import { enkEllerAs } from './enk-eller-as';
+import { bokforingsregler2027 } from './bokforingsregler-2027';
 
 /**
  * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
@@ -103,6 +104,16 @@ const alle: Artikkel[] = [
     published: enkEllerAs.published,
     modified: enkEllerAs.modified,
     bilde: enkEllerAs.hero,
+  },
+  {
+    slug: 'bokforingsregler-2027',
+    path: bokforingsregler2027.path,
+    title: bokforingsregler2027.h1,
+    ingress: bokforingsregler2027.description,
+    tema: 'Enkeltpersonforetak',
+    published: bokforingsregler2027.published,
+    modified: bokforingsregler2027.modified,
+    bilde: bokforingsregler2027.hero,
   },
 ];
 
