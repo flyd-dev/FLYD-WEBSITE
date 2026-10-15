@@ -2,6 +2,7 @@ import { eFaktura2027 } from './e-faktura-2027';
 import { altinnTilgang } from './altinn-tilgang-regnskapsforer';
 import { mvaFrister } from './mva-frister';
 import { fristerAs } from './frister-aksjeselskap';
+import { enkEllerAs } from './enk-eller-as';
 
 /**
  * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
@@ -70,6 +71,16 @@ const alle: Artikkel[] = [
     published: fristerAs.published,
     modified: fristerAs.modified,
     bilde: fristerAs.hero,
+  },
+  {
+    slug: 'enk-eller-as',
+    path: enkEllerAs.path,
+    title: enkEllerAs.h1,
+    ingress: enkEllerAs.description,
+    tema: 'Selskapsform',
+    published: enkEllerAs.published,
+    modified: enkEllerAs.modified,
+    bilde: enkEllerAs.hero,
   },
 ];
 
