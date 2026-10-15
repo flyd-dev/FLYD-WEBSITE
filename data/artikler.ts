@@ -3,6 +3,7 @@ import { altinnTilgang } from './altinn-tilgang-regnskapsforer';
 import { mvaFrister } from './mva-frister';
 import { fristerAs } from './frister-aksjeselskap';
 import { forskuddsskattEnk } from './forskuddsskatt-enk';
+import { trengerRegnskapsforer } from './trenger-regnskapsforer';
 
 /**
  * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
@@ -81,6 +82,16 @@ const alle: Artikkel[] = [
     published: forskuddsskattEnk.published,
     modified: forskuddsskattEnk.modified,
     bilde: forskuddsskattEnk.hero,
+  },
+  {
+    slug: 'trenger-jeg-regnskapsforer',
+    path: trengerRegnskapsforer.path,
+    title: trengerRegnskapsforer.h1,
+    ingress: trengerRegnskapsforer.description,
+    tema: 'Regnskap',
+    published: trengerRegnskapsforer.published,
+    modified: trengerRegnskapsforer.modified,
+    bilde: trengerRegnskapsforer.hero,
   },
 ];
 
