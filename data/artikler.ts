@@ -5,6 +5,7 @@ import { fristerAs } from './frister-aksjeselskap';
 import { forskuddsskattEnk } from './forskuddsskatt-enk';
 import { trengerRegnskapsforer } from './trenger-regnskapsforer';
 import { enkEllerAs } from './enk-eller-as';
+import { lonnEllerUtbytte } from './lonn-eller-utbytte';
 
 /**
  * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
@@ -103,6 +104,16 @@ const alle: Artikkel[] = [
     published: enkEllerAs.published,
     modified: enkEllerAs.modified,
     bilde: enkEllerAs.hero,
+  },
+  {
+    slug: 'lonn-eller-utbytte',
+    path: lonnEllerUtbytte.path,
+    title: lonnEllerUtbytte.h1,
+    ingress: lonnEllerUtbytte.description,
+    tema: 'Aksjeselskap',
+    published: lonnEllerUtbytte.published,
+    modified: lonnEllerUtbytte.modified,
+    bilde: lonnEllerUtbytte.hero,
   },
 ];
 
