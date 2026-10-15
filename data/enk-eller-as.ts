@@ -31,8 +31,14 @@ export const kilder = {
   aksjeloven614: 'https://lovdata.no/lov/1997-06-13-44/%C2%A76-14',
   fsfin: 'https://lovdata.no/forskrift/1999-11-19-1158',
   skatteloven: 'https://lovdata.no/dokument/NL/lov/1999-03-26-14/KAPITTEL_11-2',
-  brregEnk: 'https://www.brreg.no/en/sole-proprietorship-2/make-changes-to-your-sole-proprietorship/',
-  omdanning: 'https://www.skatteetaten.no/bedrift-og-organisasjon/starte-og-drive/avslutte-bedrift/endring-av-organisasjonsform/',
+  brregEnk: 'https://www.brreg.no/enkeltpersonforetak/endre-opplysninger-for-et-enkeltpersonforetak/',
+  altinnOmdanning: 'https://info.altinn.no/starte-og-drive/drive-bedrift/juridiske-og-regulatoriske-krav/skattemessig-omdanning/',
+  fsfin3: 'https://lovdata.no/forskrift/1999-11-19-1158/%C2%A711-20-3',
+  fsfin5: 'https://lovdata.no/forskrift/1999-11-19-1158/%C2%A711-20-5',
+  enhetsregisterloven: 'https://lovdata.no/dokument/NL/lov/2025-06-20-105',
+  folketrygdloven: 'https://lovdata.no/lov/1997-02-28-19/%C2%A723-2',
+  skatteloven61: 'https://lovdata.no/lov/1999-03-26-14/%C2%A76-1',
+  nyttEnk: 'https://www.skatteetaten.no/bedrift-og-organisasjon/starte-og-drive/ny-som-naringsdrivende/nytt-enk/',
   inngangsverdi:
     'https://www.skatteetaten.no/person/skatt/hjelp-til-riktig-skatt/aksjer-og-verdipapirer/om/fastsette-inngangsverdien/skattefri-omdanning-fra-enkeltpersonsforetak-eller-selskap-med-deltakerfastsetting-til-aksjeselskapa/',
   forskuddsutskrivingen: 'https://www.skatteetaten.no/rettskilder/type/uttalelser/uttalelser/forskuddsutskrivingen-2026/',
@@ -50,11 +56,15 @@ export const enkEllerAsFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Kan jeg omdanne ENK til AS uten å betale skatt?',
-    a: 'Ja, hvis vilkårene er oppfylt. Du må eie alle aksjene i det nye selskapet, og aktivitet, driftsmidler og forpliktelser må i det vesentlige overføres. Aksjeselskapet må være nystiftet. Reglene står i skatteloven § 11-20 og skatteforskriften §§ 11-20-1 og videre.',
+    a: 'Ja, hvis vilkårene er oppfylt. Du må eie alle aksjene i det nye selskapet, og aktivitet, driftsmidler og forpliktelser må i det vesentlige overføres. Fast eiendom og gjeld kreves ikke overført, og bolig eller hytte du bruker selv, kan ikke overføres. Aksjeselskapet må være nystiftet. Reglene står i skatteloven § 11-20 og skatteforskriften §§ 11-20-1 og videre.',
   },
   {
     q: 'Må jeg gjøre det 1. januar?',
     a: 'Overgangen til selskapsfastsetting kan bare skje fra 1. januar. Er aksjeselskapet stiftet og meldt til Foretaksregisteret innen 1. juli, kan omdanningen få virkning fra 1. januar samme år, så lenge selskapet har foretatt skattetrekk og beregnet arbeidsgiveravgift senest fra 1. juli.',
+  },
+  {
+    q: 'Beholder jeg organisasjonsnummeret?',
+    a: 'Nei. En direkte omdanning fra ENK til AS kan ikke registreres. Du registrerer det nye aksjeselskapet og sletter deretter enkeltpersonforetaket. Ved nyregistrering tildeles aksjeselskapet et nytt organisasjonsnummer (enhetsregisterloven § 6-2), så avtaler med kunder og leverandører må normalt reforhandles.',
   },
   {
     q: 'Hvor mye aksjekapital trenger et AS?',
@@ -66,7 +76,7 @@ export const enkEllerAsFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Kan jeg ta inn en medeier når jeg omdanner?',
-    a: 'Ikke som en del av den skattefrie omdanningen. Skatteetaten skriver at du må eie 100 prosent av eierandelene i det nye selskapet etter omdanningen.',
+    a: 'Ikke som en del av den skattefrie omdanningen. Ved skattemessig omdanning av et enkeltpersonforetak kan det ikke tas inn nye eiere på omdanningstidspunktet, og du må eie alle aksjene i det nye selskapet.',
   },
   {
     q: 'Må et AS ha revisor?',

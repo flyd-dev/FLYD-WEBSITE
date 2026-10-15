@@ -128,9 +128,10 @@ const tidslinje: { tittel: string; tekst: React.ReactNode }[] = [
     tittel: 'Før stiftelsen: forbered overføringen',
     tekst: (
       <>
-        Aktivitet, driftsmidler og forpliktelser i virksomheten må i det vesentlige overføres til aksjeselskapet, og du
-        må eie alle aksjene. Det må også legges fram en erklæring fra revisor om at eiendelene ikke er oppført over
-        virkelig verdi (<Ekstern href={kilder.fsfin}>skatteforskriften §§ 11-20-3 og 11-20-5</Ekstern>).
+        Aktivitet, driftsmidler og forpliktelser i virksomheten må i det vesentlige overføres til aksjeselskapet (
+        <Ekstern href={kilder.fsfin5}>skatteforskriften § 11-20-5</Ekstern>), og du må eie alle aksjene. Det må også
+        legges fram en erklæring fra revisor om at eiendelene ikke er oppført over virkelig verdi (
+        <Ekstern href={kilder.fsfin3}>skatteforskriften § 11-20-3</Ekstern>).
       </>
     ),
   },
@@ -142,7 +143,9 @@ const tidslinje: { tittel: string; tekst: React.ReactNode }[] = [
         januar samme år, forutsatt at selskapet har foretatt skattetrekk og beregnet arbeidsgiveravgift senest fra 1. juli
         (<Ekstern href={kilder.fsfin}>skatteforskriften § 11-20-4</Ekstern>). Du registrerer det nye aksjeselskapet og
         avvikler deretter enkeltpersonforetaket. En direkte omdanning kan ikke registreres (
-        <Ekstern href={kilder.brregEnk}>Brønnøysundregistrene</Ekstern>).
+        <Ekstern href={kilder.brregEnk}>Brønnøysundregistrene</Ekstern>). Det nye aksjeselskapet får nytt
+        organisasjonsnummer (<Ekstern href={kilder.enhetsregisterloven}>enhetsregisterloven § 6-2</Ekstern>), så avtaler
+        med kunder og leverandører må normalt reforhandles (<Ekstern href={kilder.altinnOmdanning}>Altinn</Ekstern>).
       </>
     ),
   },
@@ -293,13 +296,20 @@ export default function EnkEllerAsPage() {
             <p className={`mt-4 ${brod}`}>
               Overskuddet skattes løpende hos deg, enten du tar pengene ut eller ikke. Det skattes som alminnelig inntekt
               med 22 prosent, og i tillegg betaler du trygdeavgift på 10,8 prosent og trinnskatt av personinntekten fra
-              næringen. Skatten betales som forskuddsskatt gjennom året.
+              næringen. Skatten betales som{' '}
+              <Link href="/artikler/forskuddsskatt-enk/" className={lenke}>
+                forskuddsskatt
+              </Link>{' '}
+              gjennom året. Går foretaket med underskudd, kan du få fradrag for det i annen inntekt, for eksempel lønn (
+              <Ekstern href={kilder.nyttEnk}>Skatteetaten</Ekstern>).
             </p>
 
             <h3 className={h3}>Aksjeselskap</h3>
             <p className={`mt-4 ${brod}`}>
               Selskapet betaler 22 prosent skatt av overskuddet. Du tar ut lønn, utbytte eller begge deler. Lønn skattes
-              som vanlig lønnsinntekt hos deg. Utbytte ut over skjermingsfradraget oppjusteres med faktoren 1,72 og
+              som vanlig lønnsinntekt hos deg. Selskapet betaler arbeidsgiveravgift av lønnen (
+              <Ekstern href={kilder.folketrygdloven}>folketrygdloven § 23-2</Ekstern>), og lønnen er en fradragsberettiget
+              kostnad for selskapet (<Ekstern href={kilder.skatteloven61}>skatteloven § 6-1</Ekstern>). Utbytte ut over skjermingsfradraget oppjusteres med faktoren 1,72 og
               skattes deretter med 22 prosent hos deg. Overskudd som blir stående i selskapet, skattes bare med
               selskapsskatten. Det er ofte der AS-et gir en fordel, for eksempel når pengene skal brukes til nye
               investeringer.
@@ -324,7 +334,12 @@ export default function EnkEllerAsPage() {
               Du har bokføringsplikt og leverer skattemelding med næringsspesifikasjon innen 31. mai (
               <Ekstern href={kilder.skattemeldingEnk}>Skatteetaten</Ekstern>). Regnskapsplikt får et ENK først når
               eiendelene er verdt over 20 millioner kroner, eller det har flere ansatte enn 20 årsverk (
-              <Ekstern href={kilder.regnskapSkatteetaten}>Skatteetaten</Ekstern>).
+              <Ekstern href={kilder.regnskapSkatteetaten}>Skatteetaten</Ekstern>). Et ENK kan også ha ansatte. Betaler du
+              lønn til andre, er du arbeidsgiver og leverer a-melding hver måned (
+              <Ekstern href={kilder.nyttEnk}>Skatteetaten</Ekstern>). Les også{' '}
+              <Link href="/artikler/trenger-jeg-regnskapsforer/" className={lenke}>
+                trenger jeg regnskapsfører?
+              </Link>
             </p>
 
             <h3 className={h3}>Aksjeselskap</h3>
@@ -367,7 +382,7 @@ export default function EnkEllerAsPage() {
             <Punkter
               items={[
                 'Risikoen øker, for eksempel med større kontrakter, garantiansvar eller lån.',
-                'Du skal ansette folk.',
+                'Du skal ansette folk og vil skille risikoen fra privatøkonomien.',
                 'Overskuddet blir større enn det du trenger å ta ut privat.',
                 'Du vil ta inn en medeier eller investor.',
                 'Kunder eller samarbeidspartnere forventer at du har et aksjeselskap.',
@@ -384,10 +399,14 @@ export default function EnkEllerAsPage() {
             <Eyebrow>Omdanning</Eyebrow>
             <h2 className={`mt-5 ${h2}`}>Slik går du fra ENK til AS rundt nyttår</h2>
             <p className={`mt-6 ${brod}`}>
-              Et enkeltpersonforetak kan omdannes til aksjeselskap skattefritt hvis vilkårene er oppfylt. Du må eie 100
-              prosent av eierandelene i det nye selskapet etter omdanningen, og alle eiendelene må overføres (
-              <Ekstern href={kilder.omdanning}>Skatteetaten</Ekstern>). Hjemmelen er{' '}
-              <Ekstern href={kilder.skatteloven}>skatteloven § 11-20</Ekstern>. Inngangsverdien på aksjene settes til de
+              Et enkeltpersonforetak kan omdannes til aksjeselskap skattefritt hvis vilkårene er oppfylt. Aksjeselskapet
+              må være nystiftet, og det kan ikke tas inn nye eiere ved omdanningen (
+              <Ekstern href={kilder.altinnOmdanning}>Altinn</Ekstern>). Du må eie 100 prosent av aksjene i det nye
+              selskapet etter omdanningen, og aktivitet, driftsmidler og forpliktelser må i det vesentlige overføres. Fast
+              eiendom og gjeld kreves ikke overført, og eiendeler du bruker privat, som bolig eller hytte, kan ikke
+              overføres (<Ekstern href={kilder.fsfin5}>skatteforskriften § 11-20-5</Ekstern>). Hjemmelen er{' '}
+              <Ekstern href={kilder.skatteloven}>skatteloven § 11-20</Ekstern>, med regler i{' '}
+              <Ekstern href={kilder.fsfin}>skatteforskriften §§ 11-20-3 til 11-20-5</Ekstern>. Inngangsverdien på aksjene settes til de
               skattemessige nettoverdiene som er overført (<Ekstern href={kilder.inngangsverdi}>Skatteetaten</Ekstern>).
             </p>
             <ol className="mt-8 space-y-4">
@@ -429,6 +448,10 @@ export default function EnkEllerAsPage() {
               items={[
                 'Risikoen i virksomheten er lav.',
                 'Overskuddet er lite, eller du tar ut det meste privat.',
+                <>
+                  Du venter underskudd de første årene. Underskudd i ENK kan trekkes fra i annen inntekt, for eksempel lønn
+                  (<Ekstern href={kilder.nyttEnk}>Skatteetaten</Ekstern>).
+                </>,
                 'Du ønsker minst mulig administrasjon og færrest mulig frister.',
               ]}
             />
