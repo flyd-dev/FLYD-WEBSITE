@@ -56,7 +56,7 @@ export const terminer2026: { termin: string; periode: string; frist: string; iso
 export const mvaFaq: { q: string; a: string }[] = [
   {
     q: 'Hva var fristen for mva i oktober 2026?',
-    a: 'Mandag 12. oktober 2026, for 4. termin (juli–august). Den vanlige fristen er 10. oktober, men den falt på en lørdag. Skatteetatens skattekalender oppga 12. oktober som frist for både levering og betaling.',
+    a: 'Mandag 12. oktober 2026, for 4. termin (juli–august). Den vanlige fristen er 10. oktober, men den falt på en lørdag. En frist som ender på lørdag eller helgedag, flyttes til nærmeste virkedag: leveringsfristen etter skatteforvaltningsloven § 5-5 og domstolloven § 149, betalingsfristen etter skattebetalingsloven § 10-2.',
   },
   {
     q: 'Når er siste mva-frist for 2026?',

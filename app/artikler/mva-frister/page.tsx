@@ -159,7 +159,7 @@ export default function MvaFristerPage() {
                 'Du leverer og betaler innen samme frist.',
                 'Har du høyst 1 million kroner i mva-pliktig omsetning og uttak i året, kan du søke om årstermin med frist 10. mars.',
                 'Mva-meldingen skal leveres også når omsetningen er null.',
-                'Faller betalingsfristen på helg eller helligdag, flyttes den til nærmeste virkedag. I 2026 oppga Skatteetaten mandag 12. oktober i stedet for lørdag 10. oktober.',
+                'Faller fristen på lørdag, søndag eller helligdag, flyttes den til nærmeste virkedag, både for levering og betaling. I 2026 ble lørdag 10. oktober til mandag 12. oktober.',
               ]}
             />
           </div>
@@ -222,9 +222,12 @@ export default function MvaFristerPage() {
 
             <h3 className={h3}>Hva skjer når fristen er på helg eller helligdag?</h3>
             <p className={`mt-4 ${brod}`}>
-              Utløper betalingsfristen på en lørdag, søndag, helligdag eller lovfestet høytidsdag, flyttes den til
-              nærmeste virkedag (<Ekstern href={kilder.skattebetalingsloven}>skattebetalingsloven § 10-2</Ekstern>). I
-              2026 gjaldt det 4. termin: 10. oktober var en lørdag, og Skatteetatens{' '}
+              Da flyttes fristen til nærmeste virkedag, både for levering og betaling. Leveringsfristen regnes etter{' '}
+              <Ekstern href={kilder.fristberegning}>skatteforvaltningsloven § 5-5</Ekstern> og{' '}
+              <Ekstern href={kilder.domstolloven}>domstolloven § 149</Ekstern>, som forlenger en frist som ender på en
+              lørdag eller helgedag. Betalingsfristen flyttes etter{' '}
+              <Ekstern href={kilder.skattebetalingsloven}>skattebetalingsloven § 10-2</Ekstern>. I 2026 gjaldt det 4.
+              termin: 10. oktober var en lørdag, og Skatteetatens{' '}
               <Ekstern href={kilder.skattekalender}>skattekalender</Ekstern> oppga mandag 12. oktober som frist for
               levering og betaling.
             </p>
