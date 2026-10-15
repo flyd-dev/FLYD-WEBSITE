@@ -19,6 +19,12 @@ export type Artikkel = {
   tema: string;
   published: string;
   modified: string;
+  /**
+   * Kortbilde i oversikten, vises i 16:9 (object-cover). Bruk et bilde
+   * artikkelen allerede har, helst toppbildet. Mangler det, får kortet en
+   * rolig Petrol-flate i stedet.
+   */
+  bilde?: { src: string; alt: string; width: number; height: number };
 };
 
 const alle: Artikkel[] = [
@@ -30,6 +36,7 @@ const alle: Artikkel[] = [
     tema: 'E-faktura og EHF',
     published: eFaktura2027.published,
     modified: eFaktura2027.modified,
+    bilde: eFaktura2027.hero,
   },
 ];
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import fs from 'node:fs';
 import path from 'node:path';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { pageMetadata } from '@/lib/seo';
@@ -9,6 +10,7 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import FlytLinjer from '@/components/FlytLinjer';
 import { artikler, formatDato } from '@/data/artikler';
 
 export const metadata: Metadata = pageMetadata({
@@ -56,30 +58,44 @@ export default function ArtiklerPage() {
 
       <Section tone="sand" className="!pt-0">
         <Container>
-          <ul className="stagger max-w-5xl border-t border-flyd-linje-sand">
+          <ul className="stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
             {artikler.map((a, i) => (
               <li key={a.slug} data-reveal style={{ '--i': i } as React.CSSProperties}>
                 <Link
                   href={a.path}
-                  className="group grid grid-cols-1 gap-x-10 gap-y-3 border-b border-flyd-linje-sand py-8 transition-colors duration-200 hover:bg-flyd-lysmint/60 active:bg-flyd-lysmint md:grid-cols-12 md:px-4 md:py-10"
+                  className="lys lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint"
                 >
-                  <p className="text-[15px] text-flyd-skifer md:col-span-3 md:pt-1">
-                    <time dateTime={a.published}>{formatDato(a.published)}</time>
-                  </p>
-                  <div className="md:col-span-9">
+                  <div className="relative aspect-video overflow-hidden rounded-flis bg-flyd-petrol">
+                    {a.bilde ? (
+                      <Image
+                        src={a.bilde.src}
+                        alt={a.bilde.alt}
+                        width={a.bilde.width}
+                        height={a.bilde.height}
+                        priority={i === 0}
+                        sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                      />
+                    ) : (
+                      // Uten bilde: rolig Petrol-flate med flytlinjene, bare pynt.
+                      <FlytLinjer className="opacity-40" />
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col px-3 pb-3 pt-6">
                     <Eyebrow>{a.tema}</Eyebrow>
-                    <h2 className="mt-4 font-display text-[24px] font-semibold leading-[1.25] text-flyd-skog transition-colors duration-200 group-hover:text-flyd-petrol md:text-[28px]">
+                    <h2 className="mt-4 font-display text-[22px] font-semibold leading-[1.25] text-flyd-skog">
                       {a.title}
                     </h2>
-                    <p className="mt-4 max-w-2xl text-[17px] leading-[1.65] text-flyd-skifer">{a.ingress}</p>
-                    <span className="mt-6 inline-flex items-center gap-1.5 text-[15px] font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4">
-                      Les artikkelen
-                      <ArrowRight
-                        className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
-                        strokeWidth={2}
-                        aria-hidden="true"
-                      />
-                    </span>
+                    <p className="mt-3 text-[16px] leading-[1.6] text-flyd-skifer">{a.ingress}</p>
+                    <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-6 text-[15px]">
+                      <time dateTime={a.published} className="text-flyd-skifer">
+                        {formatDato(a.published)}
+                      </time>
+                      <span className="inline-flex items-center gap-1.5 font-medium text-flyd-petrol">
+                        Les artikkelen
+                        <ArrowRight className="lenkekort-pil h-4 w-4" strokeWidth={2} aria-hidden="true" />
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </li>
