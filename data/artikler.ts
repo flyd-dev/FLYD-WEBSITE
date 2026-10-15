@@ -1,4 +1,5 @@
 import { eFaktura2027 } from './e-faktura-2027';
+import { mvaFrister } from './mva-frister';
 
 /**
  * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
@@ -37,6 +38,16 @@ const alle: Artikkel[] = [
     published: eFaktura2027.published,
     modified: eFaktura2027.modified,
     bilde: eFaktura2027.hero,
+  },
+  {
+    slug: 'mva-frister',
+    path: mvaFrister.path,
+    title: mvaFrister.h1,
+    ingress: mvaFrister.description,
+    tema: 'Merverdiavgift',
+    published: mvaFrister.published,
+    modified: mvaFrister.modified,
+    bilde: mvaFrister.hero,
   },
 ];
 
