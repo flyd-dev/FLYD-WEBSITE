@@ -112,7 +112,7 @@ const datoer: { dato: string; hva: React.ReactNode; kilde: React.ReactNode }[] =
   {
     dato: '19.06.2026',
     hva: 'Gamle Altinn stengte. Etter denne datoen kan det ikke gis nye fullmakter med Altinn-roller, bare med tilgangspakker.',
-    kilde: <Ekstern href={kilder.altinnOvergang}>Altinn</Ekstern>,
+    kilde: <Ekstern href={kilder.skatteetatenRegnskapsforer}>Skatteetaten</Ekstern>,
   },
   {
     dato: '17.11.2026',
@@ -450,19 +450,22 @@ export default function AltinnTilgangPage() {
               administrere alle fullmakter i virksomheten (
               <Ekstern href={kilder.altinnAdministrere}>Altinn</Ekstern>). Andre kan gi fullmakt hvis de er
               tilgangsstyrer og selv har pakken de vil gi videre (
-              <Ekstern href={kilder.altinnGiFullmakt}>Altinn</Ekstern>). Daglig leder og styreleder er også
-              automatisk klientadministrator (<Ekstern href={kilder.altinnKlientadmin}>Altinn</Ekstern>).
+              <Ekstern href={kilder.altinnGiFullmakt}>Altinn</Ekstern>). Daglig leder, styreleder og innehaver får
+              også automatisk pakken Klientadministrator (<Ekstern href={kilder.altinnAdministrere}>Altinn</Ekstern>).
             </p>
 
             <h3 className={h3}>Enkeltpersonforetak</h3>
             <p className={`mt-4 ${brod}`}>
-              Overgangen gjelder også enkeltpersonforetak. Innehaveren får Hovedadministrator automatisk og gir
-              regnskapsføreren tilgang på samme måte. Altinns utfasingsliste omfatter skattemeldingen for både person
-              og næring, med 17. november 2026 som siste dag for de gamle rollene (
-              <Ekstern href={kilder.altinnUtfasing}>Altinn</Ekstern>). Skattemeldingen for et enkeltpersonforetak er
-              én melding med både private opplysninger og næringsopplysninger, og fristen er 31. mai (
-              <Ekstern href={kilder.skatteetatenEnk}>Skatteetaten</Ekstern>). Avklar derfor med regnskapsføreren
-              hvilke pakker byrået trenger for å levere den.
+              Overgangen gjelder også enkeltpersonforetak. Innehaveren får Hovedadministrator og Klientadministrator
+              automatisk (<Ekstern href={kilder.altinnAdministrere}>Altinn</Ekstern>) og gir regnskapsføreren tilgang
+              på samme måte. Altinns utfasingsliste omfatter skattemeldingen for både person og næring, med 17.
+              november 2026 som siste dag for de gamle rollene (
+              <Ekstern href={kilder.altinnUtfasing}>Altinn</Ekstern>). For enkeltpersonforetak er skattemeldingen
+              innehaverens personlige skattemelding, med både private opplysninger og næringsopplysninger, og fristen er
+              31. mai (<Ekstern href={kilder.skatteetatenEnk}>Skatteetaten</Ekstern>). Har du gitt regnskapsføreren
+              fullmakten Skatteforhold for privatpersoner før mars 2021, må den gis på nytt (
+              <Ekstern href={kilder.skatteetatenRegnskapsforer}>Skatteetaten</Ekstern>). Avklar derfor med
+              regnskapsføreren hvilke pakker byrået trenger for å levere den.
             </p>
           </div>
         </Container>
