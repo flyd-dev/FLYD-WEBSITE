@@ -1,4 +1,5 @@
 import { eFaktura2027 } from './e-faktura-2027';
+import { fristerAs } from './frister-aksjeselskap';
 
 /**
  * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
@@ -37,6 +38,16 @@ const alle: Artikkel[] = [
     published: eFaktura2027.published,
     modified: eFaktura2027.modified,
     bilde: eFaktura2027.hero,
+  },
+  {
+    slug: 'frister-aksjeselskap',
+    path: fristerAs.path,
+    title: fristerAs.h1,
+    ingress: fristerAs.description,
+    tema: 'Aksjeselskap',
+    published: fristerAs.published,
+    modified: fristerAs.modified,
+    bilde: fristerAs.hero,
   },
 ];
 
