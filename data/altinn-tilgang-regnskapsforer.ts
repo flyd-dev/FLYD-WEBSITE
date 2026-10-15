@@ -64,7 +64,7 @@ export const altinnFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Gjelder dette også enkeltpersonforetak?',
-    a: 'Ja. Overgangen til tilgangspakker gjelder alle virksomheter i Altinn, og Altinns utfasingsliste omfatter skattemeldingen for både person og næring. Innehaveren får automatisk pakken Hovedadministrator og kan gi regnskapsføreren tilgang.',
+    a: 'Ja. Overgangen til tilgangspakker gjelder alle virksomheter i Altinn, og Altinns utfasingsliste omfatter skattemeldingen for både person og næring. Innehaveren får automatisk pakkene Hovedadministrator og Klientadministrator og kan gi regnskapsføreren tilgang. For enkeltpersonforetak er skattemeldingen innehaverens personlige skattemelding. Har du gitt regnskapsføreren fullmakten Skatteforhold for privatpersoner før mars 2021, må den gis på nytt.',
   },
   {
     q: 'Hvem i bedriften kan gi tilgang i Altinn?',

@@ -203,7 +203,7 @@ export const services: Service[] = [
         },
         {
           title: 'Arbeidsgiveravgift og finansskatt',
-          text: 'Arbeidsgiveravgift og finansskatt betales per termin på to måneder. Første frist i kalenderåret er 15. mars, deretter den 15. annenhver måned. KID og kontonummer står i tilbakemeldingen i Altinn.',
+          text: 'Arbeidsgiveravgift og finansskatt betales per termin på to måneder. Første frist i kalenderåret er 15. mars, deretter den 15. annenhver måned. Faller den 15. på en lørdag, søndag eller helligdag, flyttes betalingsfristen til første virkedag etter: i 2026 ble 15. mars til 16. mars, og 15. november flyttes til 16. november. KID og kontonummer står i tilbakemeldingen i Altinn.',
         },
         {
           title: 'Hvilken måned skal rapporteres?',
@@ -217,7 +217,7 @@ export const services: Service[] = [
         },
         {
           q: 'Kan jeg få utsatt frist for a-meldingen?',
-          a: 'Som hovedregel nei. Skatteetaten kan ikke gi utsettelse. Unntakene står i forskriften: starter et oppdrag etter den 20. i måneden, er første frist den 15. måneden etter, og har arbeidsgiveren fritak fra forskuddstrekk, kan opplysningene leveres én gang i året, senest 15. januar.',
+          a: 'Som hovedregel nei. Skatteetaten kan ikke gi utsatt frist. For utenlandske arbeidsgivere med oppdrag i Norge (skatteforvaltningsloven § 7-6) finnes to særregler: starter oppdraget etter den 20. i måneden, er første frist den 15. måneden etter, og er det gitt fritak fra forskuddstrekk, kan opplysningene leveres én gang i året, senest 15. januar.',
         },
         {
           q: 'Hva endret seg for forskuddstrekk i 2026?',
@@ -242,6 +242,10 @@ export const services: Service[] = [
           url: 'https://www.skatteetaten.no/en/business-and-organisation/employer/the-a-melding/siste-fra-a-ordningen/new-access-packages-for-the-a-melding-a-melding/',
         },
         { navn: 'A-opplysningsforskriften § 2-1 (Lovdata)', url: 'https://lovdata.no/forskrift/2014-06-24-857/%C2%A72-1' },
+        {
+          navn: 'Skatteetaten: Skattebetalingshåndboken, utsatt forfall (§ 10-2)',
+          url: 'https://www.skatteetaten.no/rettskilder/type/handboker/skattebetalingshandboken/gjeldende/kapittel-10.-forfall/ID-10-2.001/ID-10-2.003/',
+        },
       ],
       sjekket: '15. oktober 2026',
     },

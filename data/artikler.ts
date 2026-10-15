@@ -2,6 +2,8 @@ import { eFaktura2027 } from './e-faktura-2027';
 import { altinnTilgang } from './altinn-tilgang-regnskapsforer';
 import { mvaFrister } from './mva-frister';
 import { fristerAs } from './frister-aksjeselskap';
+import { forskuddsskattEnk } from './forskuddsskatt-enk';
+import { trengerRegnskapsforer } from './trenger-regnskapsforer';
 import { enkEllerAs } from './enk-eller-as';
 
 /**
@@ -71,6 +73,26 @@ const alle: Artikkel[] = [
     published: fristerAs.published,
     modified: fristerAs.modified,
     bilde: fristerAs.hero,
+  },
+  {
+    slug: 'forskuddsskatt-enk',
+    path: forskuddsskattEnk.path,
+    title: forskuddsskattEnk.h1,
+    ingress: forskuddsskattEnk.description,
+    tema: 'Enkeltpersonforetak',
+    published: forskuddsskattEnk.published,
+    modified: forskuddsskattEnk.modified,
+    bilde: forskuddsskattEnk.hero,
+  },
+  {
+    slug: 'trenger-jeg-regnskapsforer',
+    path: trengerRegnskapsforer.path,
+    title: trengerRegnskapsforer.h1,
+    ingress: trengerRegnskapsforer.description,
+    tema: 'Regnskap',
+    published: trengerRegnskapsforer.published,
+    modified: trengerRegnskapsforer.modified,
+    bilde: trengerRegnskapsforer.hero,
   },
   {
     slug: 'enk-eller-as',
