@@ -3,8 +3,9 @@
  * Kilde: brief 15.10.2026 (ideas-board id 21). Fakta er sjekket mot Lovdata,
  * Skatteetaten og Brønnøysundregistrene 15.10.2026, se `kilder`. Ingen priser
  * eller gebyrbeløp. Vinklingen er hva kunden leverer, ikke hvordan
- * regnskapsfører gjør årsoppgjøret. Spørsmålene brukes både på siden og i
- * FAQPage-JSON-LD.
+ * regnskapsfører gjør årsoppgjøret. Bare lovfestede frister med offisiell
+ * kilde, ingen leveringsfrister mot regnskapsfører (Marius 15.10.2026).
+ * Spørsmålene brukes både på siden og i FAQPage-JSON-LD.
  */
 export const arsavslutning = {
   path: '/artikler/arsavslutning-sjekkliste/',
@@ -32,6 +33,8 @@ export const kilder = {
   skattemeldingEnk: 'https://www.skatteetaten.no/bedrift-og-organisasjon/skatt/skattemelding-naringsdrivende/enk/',
   aksjonarregister:
     'https://www.skatteetaten.no/bedrift-og-organisasjon/rapportering-og-bransjer/aksjonarregisteroppgaven/',
+  mvaFrister:
+    'https://www.skatteetaten.no/rettskilder/type/handboker/skattebetalingshandboken/gjeldende/kapittel-10.-forfall/ID-10-13.001/ID-10-13.005/',
 };
 
 export const arsavslutningFaq: { q: string; a: string }[] = [
@@ -48,8 +51,8 @@ export const arsavslutningFaq: { q: string; a: string }[] = [
     a: 'En oppstilling per vare med varens art, antall med måleenhet og verdi, en sum og hvordan verdien er beregnet. Listen skal være datert og vise hvem som har talt. Tellelister på papir skal være nummerert før tellingen og tas vare på (bokføringsforskriften § 6-1).',
   },
   {
-    q: 'Når må alt være levert?',
-    a: 'Avtal en dato med regnskapsføreren. Lovfristene er 31. mai for skattemeldingen og 31. juli for årsregnskapet til Regnskapsregisteret. Regnskapsføreren trenger tid før fristene, så jo tidligere du leverer, jo bedre. For aksjeselskap er fristen for aksjonærregisteroppgaven allerede 31. januar.',
+    q: 'Hvilke frister gjelder for årsoppgjøret?',
+    a: 'Skattemeldingen for enkeltpersonforetak og aksjeselskap har frist 31. mai (Skatteetaten). Et aksjeselskap skal sende årsregnskapet til Regnskapsregisteret senest 31. juli, og den fristen kan ikke utsettes (Brønnøysundregistrene). Aksjonærregisteroppgaven har frist 31. januar (Skatteetaten).',
   },
   {
     q: 'Hvem har ansvaret hvis årsregnskapet kommer for sent?',
@@ -58,9 +61,5 @@ export const arsavslutningFaq: { q: string; a: string }[] = [
   {
     q: 'Må jeg levere noe hvis selskapet ikke har hatt aktivitet?',
     a: 'Ja. Et aksjeselskap må sende årsregnskap selv om det ikke har hatt drift eller aktivitet (Brønnøysundregistrene), og skattemeldingen må leveres selv om selskapet ikke har hatt omsetning (Skatteetaten).',
-  },
-  {
-    q: 'Hva gjør jeg med fakturaer for 2026 som kommer i januar?',
-    a: 'Lever dem til regnskapsføreren så snart de kommer, og si fra at de gjelder fjoråret. Regnskapsføreren trenger dem for å få med alt som hører til regnskapsåret 2026.',
   },
 ];

@@ -107,7 +107,6 @@ const sjekkliste: { tittel: string; punkter: React.ReactNode[]; etter?: React.Re
       'Liste over kundefakturaer som ikke var betalt per 31. desember.',
       'Liste over leverandørfakturaer du ikke hadde betalt per 31. desember.',
       'Kunder du tror ikke kommer til å betale.',
-      'Fakturaer for varer og tjenester fra året som først kommer i januar.',
     ],
   },
   {
@@ -121,7 +120,7 @@ const sjekkliste: { tittel: string; punkter: React.ReactNode[]; etter?: React.Re
       <>
         Kravene står i <Ekstern href={kilder.varetelling}>bokføringsforskriften § 6-1</Ekstern>. Fører du et
         betryggende lagerregnskap, kan du telle i løpet av året, men da må tilgang og avgang fram til årsslutt kunne
-        dokumenteres. Planlegg tellingen før jul, så den ikke kolliderer med ferien.
+        dokumenteres.
       </>
     ),
   },
@@ -190,16 +189,29 @@ const sjekkliste: { tittel: string; punkter: React.ReactNode[]; etter?: React.Re
 
 const tidslinje: { tittel: string; tekst: React.ReactNode }[] = [
   {
-    tittel: 'Desember: tell og rydd',
-    tekst: <>Tell varelageret ved årsskiftet, og gå gjennom ubetalte kunde- og leverandørfakturaer.</>,
-  },
-  {
-    tittel: 'Januar: lever bilag og saldoer',
+    tittel: '31. desember: varetelling',
     tekst: (
       <>
-        Lever bilag, kontoutskrifter og saldoer per 31. desember. Aksjeselskap leverer aksjonærregisteroppgaven innen
-        31. januar (<Ekstern href={kilder.aksjonarregister}>Skatteetaten</Ekstern>), så eieropplysningene bør komme
-        tidlig. Er bedriften mva-registrert med tomånedlige terminer, har siste termin frist 10. februar, se{' '}
+        Varelageret telles ved regnskapsårets slutt (
+        <Ekstern href={kilder.varetelling}>bokføringsforskriften § 6-1</Ekstern>).
+      </>
+    ),
+  },
+  {
+    tittel: '31. januar: aksjonærregisteroppgaven (AS)',
+    tekst: (
+      <>
+        Aksjeselskapet leverer aksjonærregisteroppgaven innen 31. januar (
+        <Ekstern href={kilder.aksjonarregister}>Skatteetaten</Ekstern>).
+      </>
+    ),
+  },
+  {
+    tittel: '10. februar: siste mva-termin',
+    tekst: (
+      <>
+        Er bedriften mva-registrert med tomånedlige terminer, har siste termin for året frist 10. februar (
+        <Ekstern href={kilder.mvaFrister}>Skattebetalingshåndboken</Ekstern>). Se også{' '}
         <Link href="/artikler/mva-frister/" className={lenke}>
           mva-fristene
         </Link>
@@ -265,7 +277,7 @@ export default function ArsavslutningPage() {
                 <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
                   Regnskapsføreren kan ikke lage årsregnskap og skattemelding før hele året er dokumentert. Lever alle
                   bilag, saldoer per 31. desember, varetelling, oversikt over hvem som skylder deg og hvem du skylder, og
-                  si fra om store endringer. Jo tidligere og mer komplett, jo færre spørsmål i vår.
+                  si fra om store endringer. Jo mer komplett, jo færre spørsmål.
                 </p>
                 <p className="mt-6 text-[15px] text-flyd-dempet">
                   Sist oppdatert <time dateTime={a.modified}>15. oktober 2026</time>.
@@ -321,8 +333,7 @@ export default function ArsavslutningPage() {
             <h2 className={`mt-5 ${h2}`}>Hvorfor årsavslutningen avhenger av deg</h2>
             <p className={`mt-6 ${brod}`}>
               Regnskapsføreren fører det som blir levert. Mangler et bilag eller en saldo, blir det spørsmål, og
-              årsoppgjøret tar lengre tid. Leverer du alt samlet og tidlig, kan regnskapsføreren gjøre jobben i én
-              omgang.
+              årsoppgjøret tar lengre tid. Leverer du alt samlet, kan regnskapsføreren gjøre jobben i én omgang.
             </p>
             <p className={`mt-5 ${brod}`}>
               I et aksjeselskap har styret, eventuelt deltakerne eller daglig leder, ansvaret for å sende årsregnskapet,
@@ -360,10 +371,9 @@ export default function ArsavslutningPage() {
         <Container>
           <div className="max-w-3xl">
             <Eyebrow>Tidslinje</Eyebrow>
-            <h2 className={`mt-5 ${h2}`}>Når bør du levere?</h2>
+            <h2 className={`mt-5 ${h2}`}>Fristene rundt årsoppgjøret</h2>
             <p className={`mt-6 ${brod}`}>
-              Avtal en dato med regnskapsføreren. Lovfristene ligger utover våren og sommeren, men regnskapsføreren
-              trenger tid før dem. Datoene under gjelder når regnskapsåret følger kalenderåret.
+              Dette er de lovfestede fristene. Datoene gjelder når regnskapsåret følger kalenderåret.
             </p>
             <ol className="mt-8 space-y-4">
               {tidslinje.map((s, i) => (
@@ -450,7 +460,7 @@ export default function ArsavslutningPage() {
                 Usikker på hva du skal levere?
               </h2>
               <p className="mt-6 text-[17px] leading-[1.65] text-flyd-dempet">
-                Ta en uforpliktende prat før årsskiftet, så vet du hva som trengs fra deg.
+                Ta en uforpliktende prat, så vet du hva som trengs fra deg.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5">
                 <ButtonLink href={kontakt} variant="secondary-dark" withArrow>
