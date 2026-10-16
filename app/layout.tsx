@@ -111,6 +111,7 @@ export default function RootLayout({
       "https://www.facebook.com/flyd.no",
       "https://virksomhet.brreg.no/nb/oppslag/enheter/933662934",
       "https://www.proff.no/selskap/flyd-as/sandnes/bedriftsr%C3%A5dgivning/IFFVMXI043Z",
+      "https://www.wikidata.org/wiki/Q141747053",
     ],
     numberOfEmployees: {
       "@type": "QuantitativeValue",
