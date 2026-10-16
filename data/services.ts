@@ -60,6 +60,12 @@ export type Service = {
   /** Faktaseksjon med frister o.l. (vises bare når den er satt). */
   fagseksjon?: Fagseksjon;
   /** Krysslenke til en tjeneste som hører sammen med denne (regnskap ↔ revisjon). Vises bare når målet er synlig. */
+  /**
+   * Seksjoner som er valgt bort for tjenesten, ikke bare mangler innhold. De vises
+   * verken med innhold eller som [BEKREFT]-merknad. «prosess» skjuler «Slik jobber
+   * vi», som ellers faller tilbake til Flyds generelle steg (ERP, regnskap og lønn).
+   */
+  utelatt?: ('prosess' | 'passerIkke' | 'pris')[];
   sammen?: { slug: string; title: string; text: string; lenketekst: string };
 };
 
@@ -87,7 +93,8 @@ export const services: Service[] = [
     sammen: {
       slug: 'revisjon',
       title: 'Regnskap og revisjon i Flyd',
-      text: 'Flyd leverer både regnskap og revisjon. Regnskapsførerne og de statsautoriserte revisorene våre er ett team.',
+      // Revisorloven: samme selskap kan ikke få både revisjon og regnskapsføring fra oss (faktasjekk 16.10.2026).
+      text: 'Flyd leverer både regnskap og revisjon. Du kan bruke oss til det ene eller det andre – revisjon og regnskapsføring for samme selskap holdes adskilt etter revisorlovens krav til uavhengighet.',
       lenketekst: 'Les om revisjon',
     },
   },
@@ -132,10 +139,13 @@ export const services: Service[] = [
       },
     ],
     fagperson: 'Irene Bendiksen',
+    // Faktasjekk 16.10.2026: de generelle prosesstegene passer ikke for revisjon,
+    // og «Passer ikke for» og pris har ingen kilde. Tas inn igjen med bekreftet innhold.
+    utelatt: ['prosess', 'passerIkke', 'pris'],
     sammen: {
       slug: 'regnskap',
       title: 'Regnskap og revisjon i Flyd',
-      text: 'Flyd leverer både revisjon og regnskap. Revisorene og regnskapsførerne våre er ett team.',
+      text: 'Flyd leverer både regnskap og revisjon. Du kan bruke oss til det ene eller det andre – revisjon og regnskapsføring for samme selskap holdes adskilt etter revisorlovens krav til uavhengighet.',
       lenketekst: 'Les om regnskap og rådgivning',
     },
   },

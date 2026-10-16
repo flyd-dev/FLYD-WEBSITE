@@ -12,7 +12,7 @@ import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
 import { allTeam, leadership, officeLeads, otherTeam } from '@/data/team';
 import { offices } from '@/data/offices';
-import { stat } from '@/data/stats';
+import { stat, medarbeidereTekst } from '@/data/stats';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -26,7 +26,7 @@ const breadcrumbJsonLd = {
 export const metadata: Metadata = pageMetadata({
   absoluteTitle: 'Om Flyd – Regnskap, revisjon og teknologi i ett hus',
   description:
-    'Flyd er et kompetansehus for økonomi og teknologi, med regnskap og revisjon i samme team. Møt oss og besøk et av våre seks kontorer i Sør-Vest-Norge.',
+    'Flyd er et kompetansehus for økonomi og teknologi som leverer både regnskap og revisjon. Møt oss og besøk et av våre seks kontorer i Sør-Vest-Norge.',
   path: '/om-flyd/',
 });
 
@@ -67,7 +67,7 @@ const values = [
   },
   {
     title: 'Kompetent',
-    body: 'Dyp fagkunnskap innen regnskap, revisjon, systemer og rådgivning – i samme team.',
+    body: 'Dyp fagkunnskap innen regnskap, revisjon, systemer og rådgivning.',
   },
 ];
 
@@ -181,12 +181,15 @@ export default function OmFlydPage() {
                 />
               </h2>
               <p className="mt-6 max-w-2xl text-[17px] leading-[1.65] text-flyd-skifer">
-                Regnskapsførere, revisorer, rådgivere og konsulenter i ett team
-                – med ett mål: at bedriften din skal ha full flyd.
+                Regnskapsførere, revisorer, rådgivere og konsulenter med ett mål:
+                at bedriften din skal ha full flyd. Flyd leverer både regnskap og
+                revisjon. Du kan bruke oss til det ene eller det andre – revisjon og
+                regnskapsføring for samme selskap holdes adskilt etter revisorlovens
+                krav til uavhengighet.
               </p>
             </div>
             <div className="hidden text-right text-[15px] text-flyd-skifer md:block">
-              {stat('medarbeidere').value} medarbeidere
+              {medarbeidereTekst}
               <br />
               {offices.length} kontorer
             </div>

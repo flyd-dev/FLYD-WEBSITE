@@ -71,7 +71,7 @@ export const leadership: TeamMember[] = [
   // bakgrunn som resten av teamet). De må godkjennes før publisering.
   mk({
     name: 'Irene Bendiksen',
-    role: 'Leder revisjon',
+    role: 'Leder revisjon, statsautorisert revisor',
     partner: true,
     revisor: true,
     phone: '+47 997 02 292',
@@ -243,5 +243,5 @@ export const otherTeam: TeamMember[] = [
   }),
 ];
 
-/** Alle medarbeidere: antall i nøkkeltall og JSON-LD, og oppslag av fagperson. */
+/** Alle på Om Flyd: Person-JSON-LD og oppslag av fagperson. Antall medarbeidere står i data/stats.ts. */
 export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...otherTeam];
