@@ -65,8 +65,13 @@ export default function HomePage() {
 
             <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
               <div className="max-w-2xl" data-reveal>
-                <Eyebrow tone="dark">Regnskap, rådgivning og teknologi</Eyebrow>
-                <h1 className="mt-6 font-display text-display-xl font-semibold text-flyd-sand">
+                {/* Kickeren står inne i H1, så overskriften begynner med merkenavnet
+                    (Google retter «flyd» til «floyd»). Poppins 600, versal, +8 %.
+                    Mint fordi bunnen er Skog – på lys bunn ville den vært Petrol. */}
+                <h1 className="font-display text-display-xl font-semibold text-flyd-sand">
+                  <span className="mb-5 block text-[13px] font-semibold uppercase leading-[1.3] tracking-[0.08em] text-flyd-mint md:mb-6 md:text-[15px]">
+                    Flyd AS – regnskap, ERP og teknologi
+                  </span>{' '}
                   Økonomi og teknologi
                   <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
                     <span>– </span>

@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     google: "etU_ZA2jeyyDin4pgdzxqQzG6LLkLYft9oiBM0HhzPA",
   },
   title: {
-    default: "Flyd – Regnskap, rådgivning og teknologi i samme hus",
+    default: "Flyd AS – regnskapsfører, ERP og teknologi i Rogaland",
     template: "%s · Flyd",
   },
   description:
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "nb_NO",
     url: "https://www.flyd.no/",
-    siteName: "Flyd",
-    title: "Flyd – Regnskap, rådgivning og teknologi i samme hus",
+    siteName: "Flyd AS",
+    title: "Flyd AS – regnskapsfører, ERP og teknologi i Rogaland",
     description:
       "Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak.",
     images: [
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Flyd – Regnskap, rådgivning og teknologi i samme hus",
+    title: "Flyd AS – regnskapsfører, ERP og teknologi i Rogaland",
     description:
       "Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak.",
     images: ["https://www.flyd.no/opengraph-image.png"],
@@ -89,12 +89,12 @@ export default function RootLayout({
 }) {
   const siteUrl = "https://www.flyd.no";
   const orgId = `${siteUrl}/#organization`;
-  const hq = offices[0];
 
   const organization = {
     "@type": ["Organization", "AccountingService"],
     "@id": orgId,
     name: "Flyd",
+    alternateName: ["Flyd AS", "Flyd Regnskap"],
     legalName: "Flyd AS",
     url: siteUrl,
     logo: `${siteUrl}/brand/flyd-teal.png`,
@@ -105,9 +105,12 @@ export default function RootLayout({
     taxID: "933662934",
     description:
       "Flyd er et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak – med kontorer i Sør-Vest-Norge.",
+    // Alle sjekket med curl 16.10.2026. Bare lenker som viser en ekte side.
     sameAs: [
       "https://www.linkedin.com/company/flyd-as/",
       "https://www.facebook.com/flyd.no",
+      "https://virksomhet.brreg.no/nb/oppslag/enheter/933662934",
+      "https://www.proff.no/selskap/flyd-as/sandnes/bedriftsr%C3%A5dgivning/IFFVMXI043Z",
     ],
     numberOfEmployees: {
       "@type": "QuantitativeValue",
@@ -118,11 +121,14 @@ export default function RootLayout({
       name: "Regnskap Norge",
       url: "https://www.regnskapnorge.no/",
     },
+    // Forretningsadressen i Enhetsregisteret (data.brreg.no, enheter/933662934),
+    // sjekket 16.10.2026. Hentes ikke fra kontorlista, så rekkefølgen der ikke
+    // flytter hovedadressen.
     address: {
       "@type": "PostalAddress",
-      streetAddress: hq.street,
-      postalCode: hq.postal.split(" ")[0],
-      addressLocality: hq.postal.split(" ").slice(1).join(" "),
+      streetAddress: "Grenseveien 21",
+      postalCode: "4313",
+      addressLocality: "Sandnes",
       addressCountry: "NO",
     },
     areaServed: offices.map((o) => ({ "@type": "City", name: o.city })),

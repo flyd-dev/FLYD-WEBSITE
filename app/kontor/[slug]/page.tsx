@@ -42,7 +42,7 @@ export function generateMetadata({
   const side = getKontorside(office.slug);
   if (side) {
     return pageMetadata({
-      title: side.title,
+      absoluteTitle: side.title,
       description: side.description,
       path: `/kontor/${office.slug}/`,
       image: side.image,
@@ -60,7 +60,7 @@ export function generateMetadata({
     });
   }
   return pageMetadata({
-    title: `Regnskapsfører ${atOffice(office)}`,
+    absoluteTitle: `Flyd ${office.city} – autorisert regnskapsfører ${atOffice(office)}`,
     description,
     path: `/kontor/${office.slug}/`,
   });

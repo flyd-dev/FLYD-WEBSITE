@@ -16,7 +16,8 @@ export type Office = {
   blurb: string;
   /**
    * Title og meta description for standardsiden, satt per kontor (ikke fra
-   * mal). `title` er hele <title> inkl. « · Flyd» og brukes også i og:title.
+   * mal). `title` er hele <title> og brukes også i og:title. Mønsteret er
+   * «Flyd [Sted] – autorisert regnskapsfører i [Sted]»: merkenavnet først.
    * Kontorer i data/kontorsider.ts bruker metadataen derfra. `image` er eget
    * delingsbilde (1200×630) i public/og/; uten det brukes forsidens.
    */
@@ -89,7 +90,7 @@ const officeList: Office[] = [
     blurb:
       'Kontoret ligger i Torvgården, midt på torget i Egersund. Her sitter vi tett på næringslivet i Eigersund og resten av Dalane – kom gjerne innom for en regnskapsprat.',
     meta: {
-      title: 'Regnskapsfører Egersund – regnskap og rådgivning · Flyd',
+      title: 'Flyd Egersund – autorisert regnskapsfører i Egersund',
       description:
         'Trenger du regnskapsfører i Egersund? Flyd har kontor i Torvgården. Regnskap, lønn, årsoppgjør og rådgivning i Dalane – med fast kontaktperson.',
       image: {
@@ -136,7 +137,7 @@ const officeList: Office[] = [
     blurb:
       'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i Sokndal og omegn – med hele Flyds fagmiljø i ryggen.',
     meta: {
-      title: 'Regnskapsfører Sokndal – regnskap og rådgivning · Flyd',
+      title: 'Flyd Sokndal – autorisert regnskapsfører i Sokndal',
       description:
         'Trenger du regnskapsfører i Sokndal? Flyd har kontor i Gamleveien 13 i Hauge i Dalane. Regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson.',
       image: {
@@ -180,7 +181,7 @@ const officeList: Office[] = [
     blurb:
       'Moi-kontoret betjener Lund og områdene langs E39 mellom Egersund og Flekkefjord. En lokal regnskapspartner, med kolleger på fem andre kontorer å spille på.',
     meta: {
-      title: 'Regnskapsfører Moi – regnskap og rådgivning · Flyd',
+      title: 'Flyd Moi – autorisert regnskapsfører på Moi',
       description:
         'Trenger du regnskapsfører på Moi? Flyd har kontor i Lund. Regnskap, lønn, årsoppgjør og rådgivning langs E39 – med fast kontaktperson.',
       image: {
@@ -223,7 +224,7 @@ const officeList: Office[] = [
     blurb:
       'På Tjørhom i Sirdal finner du oss i Handleriet. Vi jobber tett med hytte-, bygg- og reiselivsnæringen i fjellbygda – og er til stede der verdiene skapes.',
     meta: {
-      title: 'Regnskapsfører Sirdal – regnskap og rådgivning · Flyd',
+      title: 'Flyd Sirdal – autorisert regnskapsfører i Sirdal',
       description:
         'Trenger du regnskapsfører i Sirdal? Flyd har kontor i Handleriet på Tjørhom. Regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson.',
       image: {
@@ -267,7 +268,7 @@ const officeList: Office[] = [
     blurb:
       'I Flekkefjord sitter vi sentralt i Elvegaten 22. Kontoret betjener næringslivet i Lister-regionen – med kort vei til både kunder og kollegaer.',
     meta: {
-      title: 'Regnskapsfører Flekkefjord – regnskap og rådgivning · Flyd',
+      title: 'Flyd Flekkefjord – autorisert regnskapsfører i Flekkefjord',
       description:
         'Trenger du regnskapsfører i Flekkefjord? Flyd har kontor i Elvegaten 22. Regnskap, lønn, årsoppgjør og rådgivning i Lister – med fast kontaktperson.',
       image: {
