@@ -1,3 +1,9 @@
+/**
+ * Logofilene (public/customer-logo/*.webp) er transparente, beskåret tett
+ * rundt logoen og 300 px høye. Da får alle samme synlige høyde i karusellen
+ * (h-10). Logoer på farget boks er frigjort fra boksen; hvit tekst på boks
+ * (Sirdal Bygg/Eiendom) er gjort om til tekst i boksfargen.
+ */
 export type CustomerLogo = {
   name: string;
   src: string;
@@ -21,14 +27,14 @@ export const customerLogos: CustomerLogo[] = [
   { name: 'Bilstad Bygg', src: '/customer-logo/bilstad_bygg.webp', alt: 'Bilstad Bygg' },
   { name: 'Lervig', src: '/customer-logo/lervig.webp', alt: 'Lervig' },
   { name: 'Driftig', src: '/customer-logo/driftig.webp', alt: 'Driftig – Eiendomsservice fra OBOS' },
-  { name: 'Årring', src: '/customer-logo/arring.webp', alt: 'Årring' },
+  { name: 'Årring', src: '/customer-logo/arring.webp', alt: 'Årring', darken: 'litt' },
   { name: 'Sirdal Fjellpark', src: '/customer-logo/sirdal_fjellpark.webp', alt: 'Sirdal Fjellpark' },
-  { name: 'Sinneshyttå', src: '/customer-logo/sinneshytta.webp', alt: 'Sinneshyttå' },
+  { name: 'Sinneshyttå', src: '/customer-logo/sinneshytta.webp', alt: 'Sinneshyttå', darken: 'litt' },
   { name: 'Arkit Interiør', src: '/customer-logo/arkit.webp', alt: 'Arkit Interiør' },
   { name: 'Arkit Arealplan', src: '/customer-logo/arkit_arealplan.webp', alt: 'Arkit Arealplan' },
   { name: 'Sirdal Bygg', src: '/customer-logo/sirdalbygg.webp', alt: 'Sirdal Bygg' },
   { name: 'Sirdal Eiendom', src: '/customer-logo/sirdaleiendom.webp', alt: 'Sirdal Eiendom' },
-  { name: 'Steis', src: '/customer-logo/Steis.webp', alt: 'Steis' },
+  { name: 'Steis', src: '/customer-logo/Steis.webp', alt: 'Steis Mek. Verksted', darken: 'mye' },
   // PREVIEW (Liit-fusjon): Liit-kunder. Logoene er hentet fra kundenes egne
   // nettsider; innhent kundens godkjenning før publisering (Leo's sier at
   // logofilene er for lisenstakere).

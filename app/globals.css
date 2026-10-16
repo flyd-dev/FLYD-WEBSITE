@@ -40,6 +40,13 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   letter-spacing: -0.01em;
   font-weight: 600;
+  /* Jevne linjer, ingen enslige ord på siste linje. */
+  text-wrap: balance;
+}
+
+/* Brødtekst: unngå enslige ord på siste linje uten å jevne ut hele avsnittet. */
+p, li, blockquote, figcaption, dd {
+  text-wrap: pretty;
 }
 
 ::selection {

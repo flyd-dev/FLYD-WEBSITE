@@ -111,6 +111,21 @@ export const services: Service[] = [
     ],
     fitFor: 'Små og mellomstore bedrifter som trenger revisjon eller en revisorbekreftelse.',
     icon: 'revisjon',
+    problem: 'Revisjonen skal være i orden – uten å ta tiden fra driften.',
+    faq: [
+      {
+        q: 'Hvilke revisjonstjenester leverer Flyd?',
+        a: 'Vi leverer lovpålagt revisjon, revisorbekreftelser og andre attestasjonstjenester for små og mellomstore bedrifter.',
+      },
+      {
+        q: 'Er revisorene statsautoriserte?',
+        a: 'Ja. Revisjonen i Flyd ledes av statsautoriserte revisorer.',
+      },
+      {
+        q: 'Hvilke bransjer har dere erfaring med?',
+        a: 'Vi har lang erfaring med revisjon og rådgivning innen bygg og anlegg, handel, tjenesteyting og eiendom.',
+      },
+    ],
     fagperson: 'Irene Bendiksen',
     sammen: {
       slug: 'regnskap',

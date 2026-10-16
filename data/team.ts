@@ -6,6 +6,12 @@ export type TeamMember = {
   certified?: boolean;
   phone?: string;
   email: string;
+  /**
+   * Portrett i public/team/, f.eks. '/team/flyd-irene.webp'. Format som de
+   * andre: 800×1067 (3:4), gråtoner, WebP, hodet ca. 15 % fra toppen. Nye
+   * bilder byttes ved å lagre over filen på samme sti – ingen kodeendring.
+   * Uten bilde viser kortet initialene.
+   */
   image?: string;
   initials: string;
 };
@@ -59,6 +65,8 @@ export const leadership: TeamMember[] = [
   }),
   // PREVIEW (Liit-fusjon): nye partnere fra Liit. Fakta fra liit.no/kontakt.
   // Liit-bildene er kun for preview; byttes eller godkjennes før publisering.
+  // Fia leverer portretter i samme stil: lagres over flyd-irene.webp og
+  // flyd-heidi.webp (formatet står ved `image` øverst i fila).
   // TODO: Irene står som «daglig leder» på liit.no, men Kai er daglig leder i
   // Flyd. Tittelen er hentet fra pressemeldingen («leder revisjon i Flyd AS»)
   // og må bekreftes.
@@ -211,7 +219,8 @@ export const otherTeam: TeamMember[] = [
 
 // PREVIEW (Liit-fusjon): ansatte fra Liit. Navn, tittel og telefon fra
 // liit.no/kontakt. Liit-bildene er kun for preview; byttes eller godkjennes
-// før publisering.
+// før publisering. Fia leverer portretter i samme stil: lagres over
+// flyd-martha.webp, flyd-randi.webp og flyd-synne.webp.
 // TODO: Plasseringen under Revisjon er ikke bekreftet. liit.no sier ikke om
 // Martha, Randi og Synne jobber med revisjon eller regnskap.
 export const revisjon: TeamMember[] = [
