@@ -27,7 +27,7 @@ function EmailText({ email }: { email: string }) {
  */
 export default function TeamCard({ m }: { m: TeamMember }) {
   const certified =
-    m.certified || m.role.toLowerCase().includes('statsautorisert');
+    m.certified || m.revisor || m.role.toLowerCase().includes('statsautorisert');
   return (
     <article data-reveal className="lys group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 pb-6">
       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-flis bg-flyd-linje-mint">

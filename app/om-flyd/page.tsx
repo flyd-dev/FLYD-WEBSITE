@@ -10,7 +10,7 @@ import OfficeCards from '@/components/OfficeCards';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
-import { allTeam, leadership, officeLeads, otherTeam, revisjon } from '@/data/team';
+import { allTeam, leadership, officeLeads, otherTeam } from '@/data/team';
 import { offices } from '@/data/offices';
 import { stat } from '@/data/stats';
 
@@ -199,20 +199,10 @@ export default function OmFlydPage() {
           </div>
 
           <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Regnskap</Eyebrow>
+            <Eyebrow>Resten av teamet</Eyebrow>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[...officeLeads, ...otherTeam].map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
-          </div>
-
-          {/* PREVIEW (Liit-fusjon). TODO: plasseringen under Revisjon er ikke bekreftet (se data/team.ts). */}
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Revisjon</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {revisjon.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>

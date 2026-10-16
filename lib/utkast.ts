@@ -12,7 +12,9 @@ export const visUtkast =
   process.env.VERCEL_ENV === 'preview' ||
   process.env.FLYD_UTKAST === '1';
 
-export type Status = 'publisert' | 'utkast';
+/** «skjult» vises ingen steder, heller ikke på forhåndsvisninger. */
+export type Status = 'publisert' | 'utkast' | 'skjult';
 
-/** Med på nettstedet nå? Publiserte alltid, utkast bare i utkastmodus. */
-export const synlig = (x: { status: Status }) => x.status === 'publisert' || visUtkast;
+/** Med på nettstedet nå? Publiserte alltid, utkast bare i utkastmodus, skjulte aldri. */
+export const synlig = (x: { status: Status }) =>
+  x.status === 'publisert' || (x.status === 'utkast' && visUtkast);

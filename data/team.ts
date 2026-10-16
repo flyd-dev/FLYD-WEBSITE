@@ -3,7 +3,10 @@ export type TeamMember = {
   role: string;
   partner?: boolean;
   lead?: boolean;
+  /** Statsautorisert regnskapsfører. Telles i nøkkeltallet. */
   certified?: boolean;
+  /** Statsautorisert revisor. Gir samme «Statsautorisert»-pille, men telles ikke i nøkkeltallet. */
+  revisor?: boolean;
   phone?: string;
   email: string;
   /**
@@ -67,13 +70,11 @@ export const leadership: TeamMember[] = [
   // Liit-bildene er kun for preview; byttes eller godkjennes før publisering.
   // Fia leverer portretter i samme stil: lagres over flyd-irene.webp og
   // flyd-heidi.webp (formatet står ved `image` øverst i fila).
-  // TODO: Irene står som «daglig leder» på liit.no, men Kai er daglig leder i
-  // Flyd. Tittelen er hentet fra pressemeldingen («leder revisjon i Flyd AS»)
-  // og må bekreftes.
   mk({
     name: 'Irene Bendiksen',
-    role: 'Leder revisjon · Statsautorisert revisor',
+    role: 'Leder revisjon',
     partner: true,
+    revisor: true,
     phone: '+47 997 02 292',
     email: 'irene.bendiksen@flyd.no',
     image: '/team/flyd-irene.webp',
@@ -82,6 +83,7 @@ export const leadership: TeamMember[] = [
     name: 'Heidi Elizabeth Odden',
     role: 'Statsautorisert revisor',
     partner: true,
+    revisor: true,
     phone: '+47 928 19 975',
     email: 'heidi.odden@flyd.no',
     image: '/team/flyd-heidi.webp',
@@ -215,15 +217,10 @@ export const otherTeam: TeamMember[] = [
     email: 'tatjana.derksen@flyd.no',
     image: '/team/flyd-tatjana.webp',
   }),
-];
-
-// PREVIEW (Liit-fusjon): ansatte fra Liit. Navn, tittel og telefon fra
-// liit.no/kontakt. Liit-bildene er kun for preview; byttes eller godkjennes
-// før publisering. Fia leverer portretter i samme stil: lagres over
-// flyd-martha.webp, flyd-randi.webp og flyd-synne.webp.
-// TODO: Plasseringen under Revisjon er ikke bekreftet. liit.no sier ikke om
-// Martha, Randi og Synne jobber med revisjon eller regnskap.
-export const revisjon: TeamMember[] = [
+  // PREVIEW (Liit-fusjon): ansatte fra Liit. Navn, tittel og telefon fra
+  // liit.no/kontakt; titlene står som der. Liit-bildene er kun for preview;
+  // byttes eller godkjennes før publisering. Fia leverer portretter i samme
+  // stil: lagres over flyd-martha.webp, flyd-randi.webp og flyd-synne.webp.
   mk({
     name: 'Martha Egeli',
     role: 'Supervisor',
@@ -248,4 +245,4 @@ export const revisjon: TeamMember[] = [
 ];
 
 /** Alle medarbeidere: antall i nøkkeltall og JSON-LD, og oppslag av fagperson. */
-export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...otherTeam, ...revisjon];
+export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...otherTeam];

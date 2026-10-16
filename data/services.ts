@@ -29,7 +29,7 @@ export type Service = {
   id: string;
   /** Adressen: /tjenester/[slug]/. */
   slug: string;
-  /** «utkast» vises bare lokalt og på forhåndsvisninger (lib/utkast.ts). */
+  /** «utkast» vises bare lokalt og på forhåndsvisninger, «skjult» ingen steder (lib/utkast.ts). */
   status: Status;
   /** Tema i kontaktskjemaet (/kontakt?tema=…). Må finnes i ContactForm.tsx. */
   tema: string;
@@ -135,10 +135,10 @@ export const services: Service[] = [
     },
   },
   {
-    // UTKAST: i dag er rådgivning en del av «Regnskap og rådgivning».
+    // SKJULT: i dag er rådgivning en del av «Regnskap og rådgivning».
     id: 'radgivning',
     slug: 'radgivning',
-    status: 'utkast',
+    status: 'skjult',
     tema: 'Regnskap og rådgivning',
     title: 'Rådgivning',
     short: '[BEKREFT: én setning om hva rådgivningen hjelper med]',
@@ -303,10 +303,10 @@ export const services: Service[] = [
     },
   },
   {
-    // UTKAST: ny tjeneste for gründere og nyetablerte.
+    // SKJULT: ny tjeneste for gründere og nyetablerte.
     id: 'oppstart',
     slug: 'oppstart',
-    status: 'utkast',
+    status: 'skjult',
     tema: 'Regnskap og rådgivning',
     title: 'Oppstart',
     short: '[BEKREFT: én setning til gründere og nyetablerte]',
