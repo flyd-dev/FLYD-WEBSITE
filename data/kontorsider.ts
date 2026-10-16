@@ -22,7 +22,7 @@ export type KontorFaq = {
 };
 
 export type Kontorside = {
-  /** <title>; « · Flyd» legges til av malen i layout. */
+  /** Hele <title>, uten « · Flyd» fra malen: «Flyd [Sted] – autorisert regnskapsfører i [Sted]». */
   title: string;
   description: string;
   /** Eget delingsbilde (1200×630) i public/og/. Uten det brukes forsidens. */
@@ -86,7 +86,7 @@ export type Kontorside = {
 
 export const kontorsider: Record<string, Kontorside> = {
   'stavanger-sandnes': {
-    title: 'Regnskapsfører Stavanger – regnskap og rådgivning',
+    title: 'Flyd Stavanger – autorisert regnskapsfører på Forus',
     description:
       'Trenger du regnskapsfører i Stavanger? Flyd har kontor på Forus. Regnskap, lønn, årsoppgjør og rådgivning for bedrifter – med fast kontaktperson.',
     image: {

@@ -43,7 +43,7 @@ export function pageMetadata({
     openGraph: {
       type: 'website',
       locale: 'nb_NO',
-      siteName: 'Flyd',
+      siteName: 'Flyd AS',
       url: `${siteUrl}${path}`,
       title: fullTitle,
       description,
