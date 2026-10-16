@@ -46,7 +46,6 @@ export const customerLogos: CustomerLogo[] = [
   // PREVIEW (Liit-fusjon): Liit-kunder. Logoene er hentet fra kundenes egne
   // nettsider; innhent kundens godkjenning før publisering (Leo's sier at
   // logofilene er for lisenstakere).
-  // TODO: logoen fra norskstorkjokken.no viser «PB Distribusjon». Bekreft hvilket navn som skal stå.
   //
   // Pizzabakeren: standardlogoen i toppmenyen på pizzabakeren.no,
   // https://static.pizzabakeren.com/resources/img/logo.png (271×124, ikke oppskalert;
@@ -58,7 +57,6 @@ export const customerLogos: CustomerLogo[] = [
   // Nettstedet har ingen ferdig logo med løven, så be Leo's om den ved godkjenning.
   { name: 'Pizzabakeren', src: '/customer-logo/pizzabakeren.webp', alt: 'Pizzabakeren', featured: true },
   { name: "Leo's Lekeland", src: '/customer-logo/leos-lekeland.webp', alt: "Leo's Lekeland", featured: true },
-  { name: 'Norsk Storkjøkken', src: '/customer-logo/norsk-storkjokken.webp', alt: 'PB Distribusjon – Norsk Storkjøkken' },
   { name: 'Omdal Transport', src: '/customer-logo/omdal-transport.webp', alt: 'Omdal Transport' },
   { name: 'Norrøn Bolig', src: '/customer-logo/norron-bolig.webp', alt: 'Norrøn Bolig', darken: 'litt' },
 ];
