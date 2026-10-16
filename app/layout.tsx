@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     google: "etU_ZA2jeyyDin4pgdzxqQzG6LLkLYft9oiBM0HhzPA",
   },
   title: {
-    default: "Flyd AS – regnskapsfører, ERP og teknologi i Rogaland",
+    default: "Flyd AS – regnskapsfører, ERP og teknologi på Sør-Vestlandet",
     template: "%s · Flyd",
   },
   description:
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     locale: "nb_NO",
     url: "https://www.flyd.no/",
     siteName: "Flyd AS",
-    title: "Flyd AS – regnskapsfører, ERP og teknologi i Rogaland",
+    title: "Flyd AS – regnskapsfører, ERP og teknologi på Sør-Vestlandet",
     description:
       "Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak.",
     images: [
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Flyd AS – regnskapsfører, ERP og teknologi i Rogaland",
+    title: "Flyd AS – regnskapsfører, ERP og teknologi på Sør-Vestlandet",
     description:
       "Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak.",
     images: ["https://www.flyd.no/opengraph-image.png"],
@@ -94,7 +94,7 @@ export default function RootLayout({
     "@type": ["Organization", "AccountingService"],
     "@id": orgId,
     name: "Flyd",
-    alternateName: ["Flyd AS", "Flyd Regnskap"],
+    alternateName: ["Flyd AS"],
     legalName: "Flyd AS",
     url: siteUrl,
     logo: `${siteUrl}/brand/flyd-teal.png`,
