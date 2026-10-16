@@ -118,10 +118,9 @@ export const services: Service[] = [
     ],
     fitFor: 'Små og mellomstore bedrifter som trenger revisjon eller en revisorbekreftelse.',
     icon: 'revisjon',
-    // Fias portretter av de to statsautoriserte revisorene (scripts/make-revisjon-bilde.mjs).
     image: {
       src: '/tjenestebilder/revisjon.webp',
-      alt: 'Statsautoriserte revisorer Irene Bendiksen og Heidi Elizabeth Odden i Flyd',
+      alt: 'Flyd-medarbeider ved skrivebordet i samtale med en kollega på Moi-kontoret',
     },
     problem: 'Revisjonen skal være i orden – uten å ta tiden fra driften.',
     faq: [
