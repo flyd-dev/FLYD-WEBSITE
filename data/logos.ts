@@ -3,6 +3,8 @@
  * rundt logoen og 300 px høye. Da får alle samme synlige høyde i karusellen
  * (h-10). Logoer på farget boks er frigjort fra boksen; hvit tekst på boks
  * (Sirdal Bygg/Eiendom) er gjort om til tekst i boksfargen.
+ * Unntak: Pizzabakeren (124 px) og Leo's Lekeland (157 px) har kildenes egen
+ * oppløsning og er ikke oppskalert. De vises i h-12, så det holder for 2x-skjermer.
  */
 export type CustomerLogo = {
   name: string;
@@ -13,6 +15,12 @@ export type CustomerLogo = {
    * gjør dem mørkere til de har fått farge igjen ved hover (LogoMarquee.tsx).
    */
   darken?: 'litt' | 'mye';
+  /**
+   * Kjente merkevarer vises i full farge og 20 % høyere (h-12) mens resten av
+   * stripa er dempet i gråtone (LogoMarquee.tsx). `darken` gjelder ikke da.
+   * Bruk sparsomt – ellers forsvinner poenget og stripa blir broket.
+   */
+  featured?: boolean;
 };
 
 // Rekkefølgen bestemmer hva folk møter når karusellen kommer inn i synsfeltet —
@@ -39,8 +47,17 @@ export const customerLogos: CustomerLogo[] = [
   // nettsider; innhent kundens godkjenning før publisering (Leo's sier at
   // logofilene er for lisenstakere).
   // TODO: logoen fra norskstorkjokken.no viser «PB Distribusjon». Bekreft hvilket navn som skal stå.
-  { name: 'Pizzabakeren', src: '/customer-logo/pizzabakeren.webp', alt: 'Pizzabakeren', darken: 'litt' },
-  { name: "Leo's Lekeland", src: '/customer-logo/leos-lekeland.webp', alt: "Leo's Lekeland", darken: 'mye' },
+  //
+  // Pizzabakeren: standardlogoen i toppmenyen på pizzabakeren.no,
+  // https://static.pizzabakeren.com/resources/img/logo.png (271×124, ikke oppskalert;
+  // kopi i brand_assets/customer-logo-src/pizzabakeren-logo.png). logo.svg på samme
+  // sted er regnbueversjonen og skal ikke brukes. Be om vektor ved godkjenning.
+  // Leo's Lekeland: satt sammen av scripts/make-leos-lockup.mjs fra
+  // https://www.leoslekeland.no/icon.png (løvehodet, grønn flis fjernet) og
+  // https://www.leoslekeland.no/_next/static/media/logo.36b72qk9tq227.svg (ordmerket).
+  // Nettstedet har ingen ferdig logo med løven, så be Leo's om den ved godkjenning.
+  { name: 'Pizzabakeren', src: '/customer-logo/pizzabakeren.webp', alt: 'Pizzabakeren', featured: true },
+  { name: "Leo's Lekeland", src: '/customer-logo/leos-lekeland.webp', alt: "Leo's Lekeland", featured: true },
   { name: 'Norsk Storkjøkken', src: '/customer-logo/norsk-storkjokken.webp', alt: 'PB Distribusjon – Norsk Storkjøkken' },
   { name: 'Omdal Transport', src: '/customer-logo/omdal-transport.webp', alt: 'Omdal Transport' },
   { name: 'Norrøn Bolig', src: '/customer-logo/norron-bolig.webp', alt: 'Norrøn Bolig', darken: 'litt' },

@@ -225,16 +225,20 @@ export default function LogoMarquee() {
             {customerLogos.map((logo) => (
               <div
                 key={logo.name}
-                className={`mr-20 flex h-10 flex-shrink-0 items-center justify-center opacity-60 grayscale mix-blend-multiply transition-[filter,opacity] duration-300 hover:opacity-100 hover:grayscale-0 ${logo.darken ? DARKEN[logo.darken] : ''}`}
+                className={`mr-20 flex flex-shrink-0 items-center justify-center mix-blend-multiply ${
+                  logo.featured
+                    ? 'h-12'
+                    : `h-10 opacity-60 grayscale transition-[filter,opacity] duration-300 hover:opacity-100 hover:grayscale-0 ${logo.darken ? DARKEN[logo.darken] : ''}`
+                }`}
                 title={logo.name}
               >
                 <Image
                   src={logo.src}
                   alt={logo.alt}
-                  width={160}
-                  height={40}
-                  sizes="160px"
-                  className="h-10 w-auto object-contain"
+                  width={logo.featured ? 192 : 160}
+                  height={logo.featured ? 48 : 40}
+                  sizes={logo.featured ? '192px' : '160px'}
+                  className={`${logo.featured ? 'h-12' : 'h-10'} w-auto object-contain`}
                   draggable={false}
                 />
               </div>
