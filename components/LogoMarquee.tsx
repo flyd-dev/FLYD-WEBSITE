@@ -225,11 +225,9 @@ export default function LogoMarquee() {
             {customerLogos.map((logo) => (
               <div
                 key={logo.name}
-                className={`mr-20 flex flex-shrink-0 items-center justify-center mix-blend-multiply ${
-                  logo.featured
-                    ? 'h-12'
-                    : `h-10 opacity-60 grayscale transition-[filter,opacity] duration-300 hover:opacity-100 hover:grayscale-0 ${logo.darken ? DARKEN[logo.darken] : ''}`
-                }`}
+                className={`mr-20 flex flex-shrink-0 items-center justify-center mix-blend-multiply opacity-60 grayscale transition-[filter,opacity] duration-300 hover:opacity-100 hover:grayscale-0 ${
+                  logo.featured ? 'h-12' : 'h-10'
+                } ${logo.darken ? DARKEN[logo.darken] : ''}`}
                 title={logo.name}
               >
                 <Image

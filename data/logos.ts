@@ -16,9 +16,9 @@ export type CustomerLogo = {
    */
   darken?: 'litt' | 'mye';
   /**
-   * Kjente merkevarer vises i full farge og 20 % høyere (h-12) mens resten av
-   * stripa er dempet i gråtone (LogoMarquee.tsx). `darken` gjelder ikke da.
-   * Bruk sparsomt – ellers forsvinner poenget og stripa blir broket.
+   * Kjente merkevarer vises 20 % høyere (h-12) enn resten av stripa
+   * (LogoMarquee.tsx). Gråtone, demping og hover er som for de andre.
+   * Bruk sparsomt – ellers forsvinner poenget.
    */
   featured?: boolean;
 };
