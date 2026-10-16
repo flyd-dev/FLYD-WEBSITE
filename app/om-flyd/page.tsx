@@ -10,7 +10,7 @@ import OfficeCards from '@/components/OfficeCards';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
-import { leadership, officeLeads, otherTeam } from '@/data/team';
+import { allTeam, leadership, officeLeads, otherTeam, revisjon } from '@/data/team';
 import { offices } from '@/data/offices';
 import { stat } from '@/data/stats';
 
@@ -42,7 +42,7 @@ const aboutJsonLd = {
   isPartOf: { '@id': 'https://www.flyd.no/#website' },
   about: {
     '@id': 'https://www.flyd.no/#organization',
-    employee: [...leadership, ...officeLeads, ...otherTeam].map((m) => ({
+    employee: allTeam.map((m) => ({
       '@type': 'Person',
       name: m.name,
       jobTitle: m.role,
@@ -172,7 +172,7 @@ export default function OmFlydPage() {
         <Container>
           <div className="flex items-end justify-between gap-6" data-reveal>
             <div>
-              <Eyebrow>Ledelse og partnere</Eyebrow>
+              <Eyebrow>Partnere</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
                 Menneskene bak{' '}
                 <FlydLogo
@@ -195,19 +195,20 @@ export default function OmFlydPage() {
           </div>
 
           <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Kontorledere</Eyebrow>
+            <Eyebrow>Regnskap</Eyebrow>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {officeLeads.map((m) => (
+            {[...officeLeads, ...otherTeam].map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>
 
+          {/* PREVIEW (Liit-fusjon). TODO: plasseringen under Revisjon er ikke bekreftet (se data/team.ts). */}
           <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Resten av teamet</Eyebrow>
+            <Eyebrow>Revisjon</Eyebrow>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {otherTeam.map((m) => (
+            {revisjon.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>

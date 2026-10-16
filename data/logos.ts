@@ -2,6 +2,11 @@ export type CustomerLogo = {
   name: string;
   src: string;
   alt: string;
+  /**
+   * Lyse logoer (gult o.l.) forsvinner nesten i gråtonestripa. «litt» og «mye»
+   * gjør dem mørkere til de har fått farge igjen ved hover (LogoMarquee.tsx).
+   */
+  darken?: 'litt' | 'mye';
 };
 
 // Rekkefølgen bestemmer hva folk møter når karusellen kommer inn i synsfeltet —
@@ -24,4 +29,13 @@ export const customerLogos: CustomerLogo[] = [
   { name: 'Sirdal Bygg', src: '/customer-logo/sirdalbygg.webp', alt: 'Sirdal Bygg' },
   { name: 'Sirdal Eiendom', src: '/customer-logo/sirdaleiendom.webp', alt: 'Sirdal Eiendom' },
   { name: 'Steis', src: '/customer-logo/Steis.webp', alt: 'Steis' },
+  // PREVIEW (Liit-fusjon): Liit-kunder. Logoene er hentet fra kundenes egne
+  // nettsider; innhent kundens godkjenning før publisering (Leo's sier at
+  // logofilene er for lisenstakere).
+  // TODO: logoen fra norskstorkjokken.no viser «PB Distribusjon». Bekreft hvilket navn som skal stå.
+  { name: 'Pizzabakeren', src: '/customer-logo/pizzabakeren.webp', alt: 'Pizzabakeren', darken: 'litt' },
+  { name: "Leo's Lekeland", src: '/customer-logo/leos-lekeland.webp', alt: "Leo's Lekeland", darken: 'mye' },
+  { name: 'Norsk Storkjøkken', src: '/customer-logo/norsk-storkjokken.webp', alt: 'PB Distribusjon – Norsk Storkjøkken' },
+  { name: 'Omdal Transport', src: '/customer-logo/omdal-transport.webp', alt: 'Omdal Transport' },
+  { name: 'Norrøn Bolig', src: '/customer-logo/norron-bolig.webp', alt: 'Norrøn Bolig', darken: 'litt' },
 ];

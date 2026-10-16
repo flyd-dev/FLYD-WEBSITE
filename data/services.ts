@@ -96,6 +96,30 @@ export const services: Service[] = [
     icon: 'regnskap',
   },
   {
+    // PREVIEW (Liit-fusjon): utkast til revisjon som egen tjeneste. Teksten
+    // bygger bare på liit.no (forside og kontaktside, hentet 16.10.2026).
+    // TODO: Frida må faktasjekke teksten før publisering. Sjekk også hvordan
+    // revisoruavhengigheten skal omtales når regnskap og revisjon er i samme hus.
+    // Ikonet er midlertidig (det finnes ikke et eget revisjonsikon ennå).
+    id: 'revisjon',
+    slug: 'revisjon',
+    status: 'utkast',
+    tema: 'Revisjon',
+    title: 'Revisjon',
+    short: 'Lovpålagt revisjon, revisorbekreftelser og andre attestasjonstjenester – effektivt og med høy kvalitet.',
+    long: 'Revisjon høres kanskje kjedelig ut. Vi tar oss av den, slik at du kan fokusere på det du kan best. Våre statsautoriserte revisorer leverer lovpålagt revisjon, revisorbekreftelser og andre attestasjonstjenester for små og mellomstore bedrifter, med lang erfaring fra bygg og anlegg, handel, tjenesteyting og eiendom.',
+    bullets: [
+      'Lovpålagt revisjon',
+      'Revisorbekreftelser',
+      'Andre attestasjonstjenester',
+      'Statsautoriserte revisorer',
+      'Erfaring fra bygg og anlegg, handel, tjenesteyting og eiendom',
+    ],
+    fitFor: 'Små og mellomstore bedrifter som trenger revisjon eller en revisorbekreftelse.',
+    icon: 'regnskap',
+    fagperson: 'Irene Bendiksen',
+  },
+  {
     id: 'programvare',
     slug: 'erp',
     status: 'publisert',

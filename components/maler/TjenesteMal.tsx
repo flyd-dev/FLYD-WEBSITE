@@ -24,7 +24,7 @@ import {
   serviceUrl,
   type Service,
 } from '@/data/services';
-import { leadership, officeLeads, otherTeam } from '@/data/team';
+import { allTeam } from '@/data/team';
 
 const lc = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 
@@ -38,7 +38,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
   const mangler = (hva: string) => (utkast && visUtkast ? <Bekreft>{hva}</Bekreft> : null);
   const kontakt = `/kontakt?tema=${encodeURIComponent(s.tema.toLowerCase())}`;
   const fagperson = s.fagperson
-    ? [...leadership, ...officeLeads, ...otherTeam].find((m) => m.name === s.fagperson)
+    ? allTeam.find((m) => m.name === s.fagperson)
     : undefined;
   const andre = visibleServices.filter((o) => o.slug !== s.slug);
   const isErp = s.slug === 'erp';

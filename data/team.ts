@@ -57,6 +57,27 @@ export const leadership: TeamMember[] = [
     email: 'thomas.haaland@flyd.no',
     image: '/team/flyd-thomas.webp',
   }),
+  // PREVIEW (Liit-fusjon): nye partnere fra Liit. Fakta fra liit.no/kontakt.
+  // Liit-bildene er kun for preview; byttes eller godkjennes før publisering.
+  // TODO: Irene står som «daglig leder» på liit.no, men Kai er daglig leder i
+  // Flyd. Tittelen er hentet fra pressemeldingen («leder revisjon i Flyd AS»)
+  // og må bekreftes.
+  mk({
+    name: 'Irene Bendiksen',
+    role: 'Leder revisjon · Statsautorisert revisor',
+    partner: true,
+    phone: '+47 997 02 292',
+    email: 'irene.bendiksen@flyd.no',
+    image: '/team/flyd-irene.webp',
+  }),
+  mk({
+    name: 'Heidi Elizabeth Odden',
+    role: 'Statsautorisert revisor',
+    partner: true,
+    phone: '+47 928 19 975',
+    email: 'heidi.odden@flyd.no',
+    image: '/team/flyd-heidi.webp',
+  }),
 ];
 
 export const officeLeads: TeamMember[] = [
@@ -187,3 +208,35 @@ export const otherTeam: TeamMember[] = [
     image: '/team/flyd-tatjana.webp',
   }),
 ];
+
+// PREVIEW (Liit-fusjon): ansatte fra Liit. Navn, tittel og telefon fra
+// liit.no/kontakt. Liit-bildene er kun for preview; byttes eller godkjennes
+// før publisering.
+// TODO: Plasseringen under Revisjon er ikke bekreftet. liit.no sier ikke om
+// Martha, Randi og Synne jobber med revisjon eller regnskap.
+export const revisjon: TeamMember[] = [
+  mk({
+    name: 'Martha Egeli',
+    role: 'Supervisor',
+    phone: '+47 980 18 758',
+    email: 'martha.egeli@flyd.no',
+    image: '/team/flyd-martha.webp',
+  }),
+  mk({
+    name: 'Randi Egeli Handeland',
+    role: 'Supervisor',
+    phone: '+47 975 06 911',
+    email: 'randi.handeland@flyd.no',
+    image: '/team/flyd-randi.webp',
+  }),
+  mk({
+    name: 'Synne Mydland Johansen',
+    role: 'Associate',
+    phone: '+47 417 50 484',
+    email: 'synne.johansen@flyd.no',
+    image: '/team/flyd-synne.webp',
+  }),
+];
+
+/** Alle medarbeidere: antall i nøkkeltall og JSON-LD, og oppslag av fagperson. */
+export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...otherTeam, ...revisjon];

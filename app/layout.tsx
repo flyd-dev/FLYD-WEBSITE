@@ -10,7 +10,7 @@ import Analytics from "@/components/Analytics";
 import CookieConsent from "@/components/CookieConsent";
 import { offices, openingHours } from "@/data/offices";
 import { getKontorside } from "@/data/kontorsider";
-import { leadership, officeLeads, otherTeam } from "@/data/team";
+import { allTeam } from "@/data/team";
 
 // Designmanualen: Poppins (500 ingress, 600 overskrifter og tall) og
 // DM Sans (400 brødtekst, 400 kursiv sitater, 500 knapper, 700 kickers).
@@ -115,7 +115,7 @@ export default function RootLayout({
     ],
     numberOfEmployees: {
       "@type": "QuantitativeValue",
-      value: leadership.length + officeLeads.length + otherTeam.length,
+      value: allTeam.length,
     },
     memberOf: {
       "@type": "Organization",
