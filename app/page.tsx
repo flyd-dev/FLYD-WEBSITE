@@ -14,12 +14,12 @@ import { process } from '@/data/process';
 import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { HeroTypewriter, HeroTypewriterPause } from '@/components/HeroTypewriter';
-import type { ServiceTone } from '@/components/ServiceIcon';
+import { kortRutenett } from '@/components/kortRutenett';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
 import { visibleServices, erpSystems, serviceUrl } from '@/data/services';
 import { stats } from '@/data/stats';
 
-const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
+const rutenett = kortRutenett(visibleServices.length, 4);
 
 const whyFlyd: { icon: FlydIconName; text: string }[] = [
   { icon: 'samme-tak', text: 'Regnskap, revisjon, rådgivning og teknologi under samme tak' },
@@ -145,19 +145,25 @@ export default function HomePage() {
             </TextLink>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          {/* Kortene går opp med både seks og sju tjenester (4 + 3 midtstilt). */}
+          <ul className={`stagger mt-12 ${rutenett.liste}`}>
             {visibleServices.map((s, i) => (
-              <div key={s.id} data-reveal className="h-full">
+              <li
+                key={s.id}
+                data-reveal
+                style={{ '--i': i } as React.CSSProperties}
+                className={rutenett.kort(i)}
+              >
                 <ServiceCard
                   title={s.title}
                   text={s.short}
                   icon={s.icon}
-                  tone={serviceTones[i % serviceTones.length]}
+                  tone="petrol"
                   href={serviceUrl(s)}
                 />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </Section>
 

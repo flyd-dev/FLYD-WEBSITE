@@ -10,7 +10,8 @@ import ClosingCta from '@/components/ClosingCta';
 import { TextLink } from '@/components/Button';
 import { ScrollProgressLineWrapper } from '@/components/ScrollProgressLine';
 import JsonLd from '@/components/JsonLd';
-import { ServiceTile, type ServiceTone } from '@/components/ServiceIcon';
+import { ServiceTile } from '@/components/ServiceIcon';
+import { kortRutenett, kortRader } from '@/components/kortRutenett';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { siteUrl } from '@/lib/seo';
 import {
@@ -46,7 +47,7 @@ export const metadata: Metadata = pageMetadata({
   path: '/tjenester/',
 });
 
-const tileTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
+const rutenett = kortRutenett(visibleServices.length, 5);
 
 export default function TjenesterPage() {
   return (
@@ -88,18 +89,18 @@ export default function TjenesterPage() {
           lenker til /tjenester/#… lander på riktig kort og leder videre. */}
       <Section tone="sand">
         <Container>
-          <ul className="stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          <ul className={`stagger ${rutenett.liste}`}>
             {visibleServices.map((s, i) => (
               <li
                 key={s.id}
                 id={s.id}
                 data-reveal
                 style={{ '--i': i } as React.CSSProperties}
-                className="scroll-mt-28"
+                className={`scroll-mt-28 ${rutenett.kort(i)}`}
               >
                 <Link
                   href={serviceUrl(s)}
-                  className="lys lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint"
+                  className={`lys lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint ${kortRader(5)}`}
                 >
                   {s.image ? (
                     <div className="relative aspect-[16/10] overflow-hidden rounded-flis bg-flyd-linje-mint">
@@ -108,29 +109,23 @@ export default function TjenesterPage() {
                           src={s.image.src}
                           alt=""
                           fill
-                          sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
+                          sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
                           className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                         />
                       </div>
                     </div>
                   ) : (
-                    <ServiceTile
-                      name={s.icon}
-                      tone={tileTones[i % tileTones.length]}
-                      className="aspect-[16/10] w-full rounded-flis"
-                    />
+                    <ServiceTile name={s.icon} tone="petrol" className="aspect-[16/10] w-full rounded-flis" />
                   )}
-                  <div className="flex flex-1 flex-col px-3 pb-3 pt-6">
-                    <span className="text-[13px] font-bold uppercase tracking-[0.12em] text-flyd-petrol">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <h2 className="mt-2 font-display text-[24px] font-semibold leading-tight">{s.title}</h2>
-                    <p className="mt-3 text-[16px] leading-[1.6] text-flyd-skifer">{s.short}</p>
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[15px] font-medium text-flyd-petrol">
-                      Les mer om {s.title.charAt(0).toLowerCase() + s.title.slice(1)}
-                      <ArrowRight className="lenkekort-pil h-4 w-4" strokeWidth={2} aria-hidden="true" />
-                    </span>
-                  </div>
+                  <span className="px-3 pt-6 text-[13px] font-bold uppercase tracking-[0.12em] text-flyd-petrol">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h2 className="mt-2 px-3 font-display text-[24px] font-semibold leading-tight">{s.title}</h2>
+                  <p className="mt-3 px-3 text-[16px] leading-[1.6] text-flyd-skifer">{s.short}</p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 px-3 pb-3 pt-6 text-[15px] font-medium text-flyd-petrol">
+                    Les mer
+                    <ArrowRight className="lenkekort-pil h-4 w-4" strokeWidth={2} aria-hidden="true" />
+                  </span>
                 </Link>
               </li>
             ))}

@@ -67,9 +67,8 @@ export const leadership: TeamMember[] = [
     image: '/team/flyd-thomas.webp',
   }),
   // PREVIEW (Liit-fusjon): nye partnere fra Liit. Fakta fra liit.no/kontakt.
-  // Liit-bildene er kun for preview; byttes eller godkjennes før publisering.
-  // Fia leverer portretter i samme stil: lagres over flyd-irene.webp og
-  // flyd-heidi.webp (formatet står ved `image` øverst i fila).
+  // Portrettene er Fias bearbeiding av bildene fra liit.no (gråtone og samme
+  // bakgrunn som resten av teamet). De må godkjennes før publisering.
   mk({
     name: 'Irene Bendiksen',
     role: 'Leder revisjon',
@@ -218,9 +217,9 @@ export const otherTeam: TeamMember[] = [
     image: '/team/flyd-tatjana.webp',
   }),
   // PREVIEW (Liit-fusjon): ansatte fra Liit. Navn, tittel og telefon fra
-  // liit.no/kontakt; titlene står som der. Liit-bildene er kun for preview;
-  // byttes eller godkjennes før publisering. Fia leverer portretter i samme
-  // stil: lagres over flyd-martha.webp, flyd-randi.webp og flyd-synne.webp.
+  // liit.no/kontakt; titlene står som der (engelske: Supervisor/Associate).
+  // Portrettene er Fias bearbeiding av bildene fra liit.no og må godkjennes
+  // før publisering.
   mk({
     name: 'Martha Egeli',
     role: 'Supervisor',

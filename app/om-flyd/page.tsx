@@ -192,7 +192,7 @@ export default function OmFlydPage() {
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:[&>*:nth-child(3n+1)]:col-start-1">
             {leadership.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}

@@ -11,6 +11,7 @@ import JsonLd from '@/components/JsonLd';
 import FlydIcon from '@/components/FlydIcon';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { ServiceTile } from '@/components/ServiceIcon';
+import { kortRutenett } from '@/components/kortRutenett';
 import ProcessCards from '@/components/ProcessCards';
 import { process } from '@/data/process';
 import { siteUrl } from '@/lib/seo';
@@ -42,6 +43,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
     ? allTeam.find((m) => m.name === s.fagperson)
     : undefined;
   const andre = visibleServices.filter((o) => o.slug !== s.slug);
+  const rutenett = kortRutenett(andre.length);
   // Krysslenken (regnskap ↔ revisjon) vises bare når siden den peker til er synlig.
   const sammen = s.sammen && getServiceBySlug(s.sammen.slug) ? s.sammen : undefined;
   const isErp = s.slug === 'erp';
@@ -127,7 +129,8 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>
               <Eyebrow>Dette løser vi</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">
+              {/* Problemet er en hel setning, så det settes ett trinn mindre enn standardtittelen. */}
+              <h2 className={`mt-5 font-display font-semibold ${s.problem ? 'text-display-md' : 'text-display-lg'}`}>
                 {s.problem ? s.problem : `Slik hjelper vi deg med ${lc(s.title)}.`}
               </h2>
               {!s.problem && mangler('problemet tjenesten løser, i kundens egne ord')}
@@ -319,7 +322,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
               <p className="mt-4 max-w-3xl font-display text-ingress font-medium text-flyd-skog">{s.fitFor}</p>
             </div>
             {(s.passerIkke || (utkast && visUtkast)) && (
-              <div data-reveal style={{ '--i': 1 } as React.CSSProperties} className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
+              <div data-reveal style={{ '--i': 1 } as React.CSSProperties} className="rounded-kort bg-flyd-lysmint p-7 md:p-10">
                 <Eyebrow>Passer ikke for</Eyebrow>
                 {s.passerIkke ? (
                   <p className="mt-4 text-[17px] leading-relaxed text-flyd-skog">{s.passerIkke}</p>
@@ -430,9 +433,9 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
             <Eyebrow>Alt i ett hus</Eyebrow>
             <h2 className="mt-5 font-display text-display-md font-semibold">Andre tjenester</h2>
           </div>
-          <ul className="stagger mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          <ul className={`stagger mt-10 ${rutenett.liste}`}>
             {andre.map((o, i) => (
-              <li key={o.slug} data-reveal style={{ '--i': i } as React.CSSProperties}>
+              <li key={o.slug} data-reveal style={{ '--i': i } as React.CSSProperties} className={rutenett.kort(i)}>
                 <Link
                   href={serviceUrl(o)}
                   className={`lys lenkekort group flex h-full items-center gap-5 rounded-kort p-4 pr-6 ${
