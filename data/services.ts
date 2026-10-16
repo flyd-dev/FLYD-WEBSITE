@@ -120,7 +120,7 @@ export const services: Service[] = [
     icon: 'revisjon',
     image: {
       src: '/tjenestebilder/revisjon.webp',
-      alt: 'Flyd-medarbeider ved skrivebordet i samtale med en kollega på Moi-kontoret',
+      alt: 'Irene Bendiksen og kolleger i møte',
     },
     problem: 'Revisjonen skal være i orden – uten å ta tiden fra driften.',
     faq: [
