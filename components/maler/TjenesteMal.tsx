@@ -9,7 +9,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import Bekreft, { UtkastBanner } from '@/components/Bekreft';
 import JsonLd from '@/components/JsonLd';
 import FlydIcon from '@/components/FlydIcon';
-import { ButtonLink } from '@/components/Button';
+import { ButtonLink, TextLink } from '@/components/Button';
 import { ServiceTile } from '@/components/ServiceIcon';
 import ProcessCards from '@/components/ProcessCards';
 import { process } from '@/data/process';
@@ -21,6 +21,7 @@ import {
   erpSystems,
   erpComparisonStatus,
   erpUrl,
+  getServiceBySlug,
   serviceUrl,
   type Service,
 } from '@/data/services';
@@ -41,6 +42,8 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
     ? allTeam.find((m) => m.name === s.fagperson)
     : undefined;
   const andre = visibleServices.filter((o) => o.slug !== s.slug);
+  // Krysslenken (regnskap ↔ revisjon) vises bare når siden den peker til er synlig.
+  const sammen = s.sammen && getServiceBySlug(s.sammen.slug) ? s.sammen : undefined;
   const isErp = s.slug === 'erp';
   const visFaq = Boolean(s.faq?.length || fagperson || (utkast && visUtkast));
   const comparisonVisible = erpComparisonStatus === 'publisert' || visUtkast;
@@ -143,6 +146,15 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                   </li>
                 ))}
               </ul>
+              {sammen && (
+                <div className="mt-10 rounded-kort bg-flyd-sand p-6 md:p-7">
+                  <h3 className="font-display text-[20px] font-semibold">{sammen.title}</h3>
+                  <p className="mt-2 text-[16px] leading-relaxed text-flyd-skifer">{sammen.text}</p>
+                  <TextLink href={serviceUrl({ slug: sammen.slug })} className="mt-4">
+                    {sammen.lenketekst}
+                  </TextLink>
+                </div>
+              )}
             </div>
           </div>
         </Container>

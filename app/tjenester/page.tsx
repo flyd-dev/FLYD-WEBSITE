@@ -40,9 +40,9 @@ const servicesJsonLd = {
 };
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Regnskap, rådgivning og ERP – Tjenester',
+  title: 'Regnskap, revisjon og ERP – Tjenester',
   description:
-    'Regnskap og rådgivning, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR – samlet hos Flyd.',
+    'Regnskap og rådgivning, revisjon, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR – samlet hos Flyd.',
   path: '/tjenester/',
 });
 
@@ -62,7 +62,8 @@ export default function TjenesterPage() {
           </h1>
           <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
             Vi leverer alt du trenger innen økonomi og teknologi – fra daglig
-            bokføring til komplekse integrasjoner mellom forretningssystemer.
+            bokføring og revisjon til komplekse integrasjoner mellom
+            forretningssystemer.
             Velg det du trenger, eller sett oss til å ta hele bildet.
           </p>
 

@@ -59,6 +59,8 @@ export type Service = {
   passerIkke?: string;
   /** Faktaseksjon med frister o.l. (vises bare når den er satt). */
   fagseksjon?: Fagseksjon;
+  /** Krysslenke til en tjeneste som hører sammen med denne (regnskap ↔ revisjon). Vises bare når målet er synlig. */
+  sammen?: { slug: string; title: string; text: string; lenketekst: string };
 };
 
 export const services: Service[] = [
@@ -81,26 +83,18 @@ export const services: Service[] = [
     fitFor: 'Bedrifter som vil ha et trygt regnskap – og en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
     icon: 'regnskap',
     image: { src: '/tjenestebilder/regnskap-radgivning.webp', alt: 'Rådgivningsmøte: kollega lytter engasjert mens en annen forklarer' },
+    // Lenken vises bare når revisjonssiden er synlig (den er utkast).
+    sammen: {
+      slug: 'revisjon',
+      title: 'Regnskap og revisjon i Flyd',
+      text: 'Flyd leverer både regnskap og revisjon. Regnskapsførerne og de statsautoriserte revisorene våre er ett team.',
+      lenketekst: 'Les om revisjon',
+    },
   },
   {
-    // UTKAST: i dag er rådgivning en del av «Regnskap og rådgivning».
-    id: 'radgivning',
-    slug: 'radgivning',
-    status: 'utkast',
-    tema: 'Regnskap og rådgivning',
-    title: 'Rådgivning',
-    short: '[BEKREFT: én setning om hva rådgivningen hjelper med]',
-    long: '[BEKREFT: 2–4 setninger om rådgivningen som egen tjeneste, skrevet med en rådgiver i Flyd]',
-    bullets: ['[BEKREFT: hva som inngår, punkt for punkt]'],
-    fitFor: '[BEKREFT: hvem rådgivningen passer for]',
-    icon: 'regnskap',
-  },
-  {
-    // PREVIEW (Liit-fusjon): utkast til revisjon som egen tjeneste. Teksten
-    // bygger bare på liit.no (forside og kontaktside, hentet 16.10.2026).
-    // TODO: Frida må faktasjekke teksten før publisering. Sjekk også hvordan
-    // revisoruavhengigheten skal omtales når regnskap og revisjon er i samme hus.
-    // Ikonet er midlertidig (det finnes ikke et eget revisjonsikon ennå).
+    // PREVIEW (Liit-fusjon): revisjon som tjeneste ved siden av regnskap.
+    // Teksten bygger bare på liit.no (forside og kontaktside, hentet 16.10.2026).
+    // TODO: Frida må faktasjekke teksten før publisering.
     id: 'revisjon',
     slug: 'revisjon',
     status: 'utkast',
@@ -116,8 +110,27 @@ export const services: Service[] = [
       'Erfaring fra bygg og anlegg, handel, tjenesteyting og eiendom',
     ],
     fitFor: 'Små og mellomstore bedrifter som trenger revisjon eller en revisorbekreftelse.',
-    icon: 'regnskap',
+    icon: 'revisjon',
     fagperson: 'Irene Bendiksen',
+    sammen: {
+      slug: 'regnskap',
+      title: 'Regnskap og revisjon i Flyd',
+      text: 'Flyd leverer både revisjon og regnskap. Revisorene og regnskapsførerne våre er ett team.',
+      lenketekst: 'Les om regnskap og rådgivning',
+    },
+  },
+  {
+    // UTKAST: i dag er rådgivning en del av «Regnskap og rådgivning».
+    id: 'radgivning',
+    slug: 'radgivning',
+    status: 'utkast',
+    tema: 'Regnskap og rådgivning',
+    title: 'Rådgivning',
+    short: '[BEKREFT: én setning om hva rådgivningen hjelper med]',
+    long: '[BEKREFT: 2–4 setninger om rådgivningen som egen tjeneste, skrevet med en rådgiver i Flyd]',
+    bullets: ['[BEKREFT: hva som inngår, punkt for punkt]'],
+    fitFor: '[BEKREFT: hvem rådgivningen passer for]',
+    icon: 'regnskap',
   },
   {
     id: 'programvare',
