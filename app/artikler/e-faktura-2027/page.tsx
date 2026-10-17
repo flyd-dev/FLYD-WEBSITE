@@ -245,6 +245,7 @@ export default function EFaktura2027Page() {
 
           {/* FIGUR */}
           <figure className="mt-14">
+            {/* eslint-disable-next-line @next/next/no-img-element -- images.unoptimized, next/image gir ingenting her */}
             <img
               src={a.figur.src}
               width={a.figur.width}

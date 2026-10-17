@@ -137,6 +137,7 @@ export default function BytteRegnskapsforerPage() {
                 className="rounded-kort border border-flyd-linje-sand bg-flyd-sand p-6 md:p-8"
               >
                 {/* Dekorativt ikon (Fia), godkjent av Marius 14.10.2026 */}
+                {/* eslint-disable-next-line @next/next/no-img-element -- SVG, next/image gir ingenting her */}
                 <img src={s.ikon} alt="" aria-hidden="true" width={56} height={56} className="h-14 w-14" />
                 {/* Skifer, ikke Flyd-teal: teal på Sand er for svak kontrast for liten tekst */}
                 <p className="mt-5 text-[14px] font-medium text-flyd-skifer">Steg {i + 1}</p>
