@@ -1,10 +1,20 @@
-import { leadership, officeLeads, otherTeam } from './team';
+import { allTeam } from './team';
 import { offices } from './offices';
 
-const alle = [...leadership, ...officeLeads, ...otherTeam];
+const alle = allTeam;
 
+/**
+ * Antall medarbeidere etter fusjonen med Liit, fra pressemeldingen
+ * (https://www.liit.no/flyd-as-og-liit-as-fusjonerer). Teamlisten i data/team.ts
+ * har ikke alle med, så tallet telles ikke derfra. Faktasjekk 16.10.2026: vis
+ * aldri to ulike tall samtidig, og bruk samme ordlyd overalt (også i JSON-LD).
+ */
+export const MEDARBEIDERE = 26;
+export const medarbeidereTekst = `${MEDARBEIDERE} medarbeidere etter fusjonen med Liit`;
+
+// Bare regnskapsførere: statsautoriserte revisorer (Liit) skal ikke telles med.
 const statsautoriserte = alle.filter(
-  (m) => m.certified || m.role.toLowerCase().includes('statsautorisert'),
+  (m) => m.certified || m.role.toLowerCase().includes('statsautorisert regnskapsfører'),
 ).length;
 
 /**
@@ -26,8 +36,13 @@ export const stats: Stat[] = [
   // Bekreftet av Flyd 9. okt. 2026: tallene på flyd.no stemmer.
   { key: 'kunder', value: '670+', label: 'Kunder', bekreftet: true },
   { key: 'kontorer', value: String(offices.length), label: 'Kontorer', bekreftet: true },
-  // Telles fra data/team.ts.
-  { key: 'medarbeidere', value: String(alle.length), label: 'Medarbeidere', bekreftet: true },
+  // Fra pressemeldingen om fusjonen (se MEDARBEIDERE over).
+  {
+    key: 'medarbeidere',
+    value: String(MEDARBEIDERE),
+    label: 'Medarbeidere etter fusjonen med Liit',
+    bekreftet: true,
+  },
   // Telles fra `certified` i data/team.ts. Må stemme med Finanstilsynets register.
   {
     key: 'statsautoriserte',

@@ -3,9 +3,18 @@ export type TeamMember = {
   role: string;
   partner?: boolean;
   lead?: boolean;
+  /** Statsautorisert regnskapsfører. Telles i nøkkeltallet. */
   certified?: boolean;
+  /** Statsautorisert revisor. Gir samme «Statsautorisert»-pille, men telles ikke i nøkkeltallet. */
+  revisor?: boolean;
   phone?: string;
   email: string;
+  /**
+   * Portrett i public/team/, f.eks. '/team/flyd-irene.webp'. Format som de
+   * andre: 800×1067 (3:4), gråtoner, WebP, hodet ca. 15 % fra toppen. Nye
+   * bilder byttes ved å lagre over filen på samme sti – ingen kodeendring.
+   * Uten bilde viser kortet initialene.
+   */
   image?: string;
   initials: string;
 };
@@ -56,6 +65,27 @@ export const leadership: TeamMember[] = [
     phone: '+47 974 11 759',
     email: 'thomas.haaland@flyd.no',
     image: '/team/flyd-thomas.webp',
+  }),
+  // PREVIEW (Liit-fusjon): nye partnere fra Liit. Fakta fra liit.no/kontakt.
+  // Portrettene er Fias bearbeiding av bildene fra liit.no (gråtone og samme
+  // bakgrunn som resten av teamet). De må godkjennes før publisering.
+  mk({
+    name: 'Irene Bendiksen',
+    role: 'Leder revisjon, statsautorisert revisor',
+    partner: true,
+    revisor: true,
+    phone: '+47 997 02 292',
+    email: 'irene.bendiksen@flyd.no',
+    image: '/team/flyd-irene.webp',
+  }),
+  mk({
+    name: 'Heidi Elizabeth Odden',
+    role: 'Statsautorisert revisor',
+    partner: true,
+    revisor: true,
+    phone: '+47 928 19 975',
+    email: 'heidi.odden@flyd.no',
+    image: '/team/flyd-heidi.webp',
   }),
 ];
 
@@ -186,4 +216,32 @@ export const otherTeam: TeamMember[] = [
     email: 'tatjana.derksen@flyd.no',
     image: '/team/flyd-tatjana.webp',
   }),
+  // PREVIEW (Liit-fusjon): ansatte fra Liit. Navn, tittel og telefon fra
+  // liit.no/kontakt; titlene står som der (engelske: Supervisor/Associate).
+  // Portrettene er Fias bearbeiding av bildene fra liit.no og må godkjennes
+  // før publisering.
+  mk({
+    name: 'Martha Egeli',
+    role: 'Supervisor',
+    phone: '+47 980 18 758',
+    email: 'martha.egeli@flyd.no',
+    image: '/team/flyd-martha.webp',
+  }),
+  mk({
+    name: 'Randi Egeli Handeland',
+    role: 'Supervisor',
+    phone: '+47 975 06 911',
+    email: 'randi.handeland@flyd.no',
+    image: '/team/flyd-randi.webp',
+  }),
+  mk({
+    name: 'Synne Mydland Johansen',
+    role: 'Associate',
+    phone: '+47 417 50 484',
+    email: 'synne.johansen@flyd.no',
+    image: '/team/flyd-synne.webp',
+  }),
 ];
+
+/** Alle på Om Flyd: Person-JSON-LD og oppslag av fagperson. Antall medarbeidere står i data/stats.ts. */
+export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...otherTeam];

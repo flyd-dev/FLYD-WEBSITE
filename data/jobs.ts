@@ -39,7 +39,7 @@ export const arkiverteJobs: Job[] = [
     contact: {
       name: 'Marit Haga Christensen',
       role: 'Kontaktperson',
-      phone: '470 17 697',
+      phone: '+47 470 17 697',
       email: 'marit.christensen@flyd.no',
     },
     ingress:
@@ -105,7 +105,7 @@ export const arkiverteJobs: Job[] = [
     contact: {
       name: 'Kai Mydland',
       role: 'Kontaktperson',
-      phone: '480 19 958',
+      phone: '+47 480 19 958',
       email: 'kai.mydland@flyd.no',
     },
     ingress:
@@ -168,7 +168,7 @@ export const arkiverteJobs: Job[] = [
     contact: {
       name: 'Kai Mydland',
       role: 'Kontaktperson',
-      phone: '480 19 958',
+      phone: '+47 480 19 958',
       email: 'kai.mydland@flyd.no',
     },
     ingress:

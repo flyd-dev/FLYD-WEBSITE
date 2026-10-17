@@ -14,15 +14,15 @@ import { process } from '@/data/process';
 import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { HeroTypewriter, HeroTypewriterPause } from '@/components/HeroTypewriter';
-import type { ServiceTone } from '@/components/ServiceIcon';
+import { kortRutenett } from '@/components/kortRutenett';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
 import { visibleServices, erpSystems, serviceUrl } from '@/data/services';
 import { stats } from '@/data/stats';
 
-const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
+const rutenett = kortRutenett(visibleServices.length, 4);
 
 const whyFlyd: { icon: FlydIconName; text: string }[] = [
-  { icon: 'samme-tak', text: 'Regnskap, rådgivning og teknologi under samme tak' },
+  { icon: 'samme-tak', text: 'Regnskap, revisjon, rådgivning og teknologi under samme tak' },
   { icon: 'sparring', text: 'Rådgivere som stiller spørsmål – ikke bare leverer tall' },
   { icon: 'erp', text: 'Moderne ERP- og programvarekompetanse' },
   { icon: 'automatisering', text: 'Integrasjoner som reduserer manuelt arbeid' },
@@ -70,7 +70,7 @@ export default function HomePage() {
                     Mint fordi bunnen er Skog – på lys bunn ville den vært Petrol. */}
                 <h1 className="font-display text-display-xl font-semibold text-flyd-sand">
                   <span className="mb-5 block text-[13px] font-semibold uppercase leading-[1.3] tracking-[0.08em] text-flyd-mint md:mb-6 md:text-[15px]">
-                    Flyd AS – regnskap, ERP og teknologi
+                    Flyd AS – regnskap, revisjon, ERP og teknologi
                   </span>{' '}
                   Økonomi og teknologi
                   <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
@@ -82,8 +82,8 @@ export default function HomePage() {
                 </h1>
                 <p className="mt-8 max-w-xl font-display text-ingress font-medium text-flyd-dempet">
                   Flyd er et kompetansehus som hjelper bedrifter med hele bildet.
-                  Fra daglig regnskap til ERP og integrasjoner – én partner, ett
-                  nummer, full flyd.
+                  Fra daglig regnskap og revisjon til ERP og integrasjoner – én
+                  partner, ett nummer, full flyd.
                 </p>
                 <div className="mt-10 flex flex-wrap items-center gap-4">
                   <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
@@ -136,7 +136,7 @@ export default function HomePage() {
                 Alt du trenger – i ett hus.
               </h2>
               <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-skifer">
-                Vi kombinerer regnskap, rådgivning og teknologi for å gi deg bedre
+                Vi kombinerer regnskap, revisjon, rådgivning og teknologi for å gi deg bedre
                 kontroll, mer effektive prosesser og et sterkere beslutningsgrunnlag.
               </p>
             </div>
@@ -145,19 +145,25 @@ export default function HomePage() {
             </TextLink>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          {/* Kortene går opp med både seks og sju tjenester (4 + 3 midtstilt). */}
+          <ul className={`stagger mt-12 ${rutenett.liste}`}>
             {visibleServices.map((s, i) => (
-              <div key={s.id} data-reveal className="h-full">
+              <li
+                key={s.id}
+                data-reveal
+                style={{ '--i': i } as React.CSSProperties}
+                className={rutenett.kort(i)}
+              >
                 <ServiceCard
                   title={s.title}
                   text={s.short}
                   icon={s.icon}
-                  tone={serviceTones[i % serviceTones.length]}
+                  tone="petrol"
                   href={serviceUrl(s)}
                 />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </Section>
 

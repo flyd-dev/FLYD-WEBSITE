@@ -9,6 +9,8 @@ export const CONTACT_TOPICS = [
   'Analyse og rapportering',
   'Nettsider og digitale flater',
   'Lønn og HR',
+  // PREVIEW (Liit-fusjon): tema for tjenesten Revisjon (data/services.ts).
+  'Revisjon',
   CAREER_TOPIC,
   'Annet',
 ] as const;

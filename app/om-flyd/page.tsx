@@ -10,9 +10,9 @@ import OfficeCards from '@/components/OfficeCards';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
-import { leadership, officeLeads, otherTeam } from '@/data/team';
+import { allTeam, leadership, officeLeads, otherTeam } from '@/data/team';
 import { offices } from '@/data/offices';
-import { stat } from '@/data/stats';
+import { stat, medarbeidereTekst } from '@/data/stats';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -24,9 +24,9 @@ const breadcrumbJsonLd = {
 };
 
 export const metadata: Metadata = pageMetadata({
-  absoluteTitle: 'Om Flyd – Kompetansehus for økonomi og teknologi',
+  absoluteTitle: 'Om Flyd – Regnskap, revisjon og teknologi i ett hus',
   description:
-    'Flyd er et kompetansehus for økonomi og teknologi. Møt teamet og besøk et av våre seks kontorer i Sør-Vest-Norge.',
+    'Flyd er et kompetansehus for økonomi og teknologi som leverer både regnskap og revisjon. Møt oss og besøk et av våre seks kontorer i Sør-Vest-Norge.',
   path: '/om-flyd/',
 });
 
@@ -42,7 +42,7 @@ const aboutJsonLd = {
   isPartOf: { '@id': 'https://www.flyd.no/#website' },
   about: {
     '@id': 'https://www.flyd.no/#organization',
-    employee: [...leadership, ...officeLeads, ...otherTeam].map((m) => ({
+    employee: allTeam.map((m) => ({
       '@type': 'Person',
       name: m.name,
       jobTitle: m.role,
@@ -67,7 +67,7 @@ const values = [
   },
   {
     title: 'Kompetent',
-    body: 'Dyp fagkunnskap innen økonomi, systemer og rådgivning – i samme team.',
+    body: 'Dyp fagkunnskap innen regnskap, revisjon, systemer og rådgivning.',
   },
 ];
 
@@ -101,7 +101,7 @@ export default function OmFlydPage() {
               </h1>
               <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
                 Flyd er et kompetansehus for økonomi og teknologi. Vi leverer
-                regnskap, rådgivning, programvare og integrasjoner fra samme
+                regnskap, revisjon, rådgivning, programvare og integrasjoner fra samme
                 sted – slik at du slipper å koordinere fem leverandører og kan
                 konsentrere deg om å drive bedriften videre.
               </p>
@@ -172,7 +172,7 @@ export default function OmFlydPage() {
         <Container>
           <div className="flex items-end justify-between gap-6" data-reveal>
             <div>
-              <Eyebrow>Ledelse og partnere</Eyebrow>
+              <Eyebrow>Partnere</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
                 Menneskene bak{' '}
                 <FlydLogo
@@ -180,25 +180,23 @@ export default function OmFlydPage() {
                   className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline text-flyd-teal"
                 />
               </h2>
+              <p className="mt-6 max-w-2xl text-[17px] leading-[1.65] text-flyd-skifer">
+                Regnskapsførere, revisorer, rådgivere og konsulenter med ett mål:
+                at bedriften din skal ha full flyd. Flyd leverer både regnskap og
+                revisjon. Du kan bruke oss til det ene eller det andre – revisjon og
+                regnskapsføring for samme selskap holdes adskilt etter revisorlovens
+                krav til uavhengighet.
+              </p>
             </div>
             <div className="hidden text-right text-[15px] text-flyd-skifer md:block">
-              {stat('medarbeidere').value} medarbeidere
+              {medarbeidereTekst}
               <br />
               {offices.length} kontorer
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:[&>*:nth-child(3n+1)]:col-start-1">
             {leadership.map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
-          </div>
-
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Kontorledere</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {officeLeads.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>
@@ -207,7 +205,7 @@ export default function OmFlydPage() {
             <Eyebrow>Resten av teamet</Eyebrow>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {otherTeam.map((m) => (
+            {[...officeLeads, ...otherTeam].map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>
