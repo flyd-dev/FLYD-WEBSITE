@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -45,7 +45,7 @@ const Typewriter = ({
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  const texts = Array.isArray(text) ? text : [text];
+  const texts = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
