@@ -86,17 +86,19 @@ export type Kontorside = {
 
 export const kontorsider: Record<string, Kontorside> = {
   'stavanger-sandnes': {
-    title: 'Flyd Sandnes – autorisert regnskapsfører på Forus',
+    // Sandnes og Stavanger i title og H1: kontoret skal treffe søk på begge. URL-en
+    // /kontor/stavanger-sandnes/ beholdes (ingen 301).
+    title: 'Regnskapsfører i Sandnes og Stavanger · Flyd',
     description:
-      'Trenger du regnskapsfører i Sandnes? Flyd har kontor på Forus og betjener hele Stavanger-regionen. Regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson.',
+      'Autorisert regnskapsfører på Forus, Grenseveien 21 i Sandnes, for bedrifter i Sandnes og Stavanger. Regnskap, lønn og årsoppgjør med fast kontaktperson.',
     image: {
       url: 'https://www.flyd.no/og/kontor-sandnes.png',
       width: 1200,
       height: 630,
       type: 'image/png',
-      alt: 'Regnskapsfører i Sandnes – kontor på Forus. Regnskap, lønn og rådgivning med fast kontaktperson fra Flyd',
+      alt: 'Regnskapsfører i Sandnes og Stavanger – kontor på Forus. Regnskap, lønn og rådgivning med fast kontaktperson fra Flyd',
     },
-    h1: 'Regnskapsfører i Sandnes.',
+    h1: 'Regnskapsfører i Sandnes og Stavanger',
     kicker: 'Kontor · Forus',
     ingress:
       'Flyd er regnskapsfører for bedrifter i Stavanger-regionen, med kontor i FOMO på Forus (Grenseveien 21). Vi tar oss av regnskap, lønn, årsoppgjør og rådgivning, og hjelper deg med å velge og sette opp riktig regnskapssystem. Du får én fast kontaktperson som kjenner bedriften din og svarer når du ringer.',

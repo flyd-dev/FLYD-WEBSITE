@@ -22,7 +22,7 @@ export const kontorBlokker: Record<string, KontorBlokk> = {
     omrade: 'Stavanger, Sandnes, Sola, Randaberg og resten av Nord-Jæren',
     tekst:
       'Kontoret ligger i FOMO-bygget på Forus, på grensen mellom Stavanger og Sandnes, og er kontoret vårt for Stavanger-regionen. Herfra hjelper vi alt fra gründere til etablerte industri- og eiendomsselskaper.',
-    lenketekst: 'Les om regnskapsfører i Sandnes',
+    lenketekst: 'Les om regnskapsfører i Sandnes og Stavanger',
   },
   egersund: {
     omrade: 'Eigersund og resten av Dalane',
