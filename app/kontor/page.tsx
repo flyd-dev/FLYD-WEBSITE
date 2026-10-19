@@ -11,13 +11,12 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import FlydIcon from '@/components/FlydIcon';
 import JsonLd from '@/components/JsonLd';
 import { ButtonLink, TextLink } from '@/components/Button';
-import { offices } from '@/data/offices';
+import { offices, officeLabel } from '@/data/offices';
 import { stat } from '@/data/stats';
 import {
   kontorBlokker,
   regionTjenester,
   hubFaq,
-  hubLabel,
   virksomhetsregisteret,
 } from '@/data/kontoroversikt';
 
@@ -143,7 +142,7 @@ export default function KontorerPage() {
                       )}
                     </div>
                     <div className="flex flex-1 flex-col px-3 pb-3 pt-6">
-                      <h3 className="font-display text-[24px] font-semibold leading-tight">{hubLabel(o.slug)}</h3>
+                      <h3 className="font-display text-[24px] font-semibold leading-tight">{officeLabel(o)}</h3>
                       <p className="mt-3 flex items-start gap-2.5 text-[15px] text-flyd-skifer">
                         <FlydIcon name="lokal" className="mt-0.5 h-5 w-5 flex-shrink-0 text-flyd-teal" />
                         <span>{[o.street, o.postal].filter(Boolean).join(', ')}</span>

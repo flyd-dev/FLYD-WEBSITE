@@ -86,22 +86,22 @@ export type Kontorside = {
 
 export const kontorsider: Record<string, Kontorside> = {
   'stavanger-sandnes': {
-    title: 'Flyd Stavanger – autorisert regnskapsfører på Forus',
+    title: 'Flyd Sandnes – autorisert regnskapsfører på Forus',
     description:
-      'Trenger du regnskapsfører i Stavanger? Flyd har kontor på Forus. Regnskap, lønn, årsoppgjør og rådgivning for bedrifter – med fast kontaktperson.',
+      'Trenger du regnskapsfører i Sandnes? Flyd har kontor på Forus og betjener hele Stavanger-regionen. Regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson.',
     image: {
-      url: 'https://www.flyd.no/og/kontor-stavanger-sandnes.png',
+      url: 'https://www.flyd.no/og/kontor-sandnes.png',
       width: 1200,
       height: 630,
       type: 'image/png',
-      alt: 'Regnskapsfører i Stavanger – kontor på Forus. Regnskap, lønn og rådgivning med fast kontaktperson fra Flyd',
+      alt: 'Regnskapsfører i Sandnes – kontor på Forus. Regnskap, lønn og rådgivning med fast kontaktperson fra Flyd',
     },
-    h1: 'Regnskapsfører i Stavanger.',
+    h1: 'Regnskapsfører i Sandnes.',
     kicker: 'Kontor · Forus',
     ingress:
       'Flyd er regnskapsfører for bedrifter i Stavanger-regionen, med kontor i FOMO på Forus (Grenseveien 21). Vi tar oss av regnskap, lønn, årsoppgjør og rådgivning, og hjelper deg med å velge og sette opp riktig regnskapssystem. Du får én fast kontaktperson som kjenner bedriften din og svarer når du ringer.',
 
-    schemaName: 'Flyd – Stavanger (Forus)',
+    schemaName: 'Flyd – Sandnes (Forus)',
     areaServed: ['Stavanger', 'Sandnes', 'Sola', 'Randaberg'],
 
     lokalt: {
@@ -116,7 +116,7 @@ export const kontorsider: Record<string, Kontorside> = {
 
     tjenester: {
       kicker: 'Tjenester',
-      title: 'Dette hjelper vi bedrifter i Stavanger med',
+      title: 'Dette hjelper vi bedrifter i Sandnes og Stavanger med',
       intro:
         'De fleste kundene våre i regionen bruker oss til det løpende regnskapet. Mange bruker oss også til lønn, rådgivning og systemet regnskapet føres i.',
       punkter: [
@@ -212,7 +212,7 @@ export const kontorsider: Record<string, Kontorside> = {
 
     pris: {
       kicker: 'Priser og team',
-      title: 'Hva koster regnskapsfører i Stavanger?',
+      title: 'Hva koster regnskapsfører i Sandnes?',
       intro:
         'Prisen på regnskapsfører avhenger av hvor mye arbeid regnskapet krever. To bedrifter med samme omsetning kan ha helt ulike behov. Dette er det som påvirker prisen mest:',
       faktorer: [
@@ -229,7 +229,7 @@ export const kontorsider: Record<string, Kontorside> = {
 
     team: {
       kicker: 'Folkene',
-      title: 'Møt teamet i Stavanger',
+      title: 'Møt teamet i Sandnes',
       text: 'Hos oss får du en fast kontaktperson på Forus, med kolleger innen regnskap, lønn og systemer rundt seg.',
       ansatte: [
         { name: 'Kai Mydland', role: 'Daglig leder', image: '/team/flyd-kai.webp' },
@@ -245,7 +245,7 @@ export const kontorsider: Record<string, Kontorside> = {
 
     faq: [
       {
-        q: 'Hvor ligger Flyd sitt kontor i Stavanger?',
+        q: 'Hvor ligger Flyd sitt kontor i Sandnes?',
         a: 'Kontoret ligger i FOMO-bygget på Forus, Grenseveien 21, 4313 Sandnes, på grensen mellom Stavanger og Sandnes. Vi har åpent mandag til fredag fra 07 til 16. Du kan også møte oss hos deg eller på video.',
       },
       {
@@ -270,8 +270,8 @@ export const kontorsider: Record<string, Kontorside> = {
         a: 'Ja. Vi hjelper både små bedrifter og enkeltpersonforetak med regnskapet.',
       },
       {
-        q: 'Hjelper dere bedrifter i Sandnes og Sola også?',
-        a: 'Ja. Kontoret på Forus betjener hele Nord-Jæren, også Sandnes, Sola og Randaberg. Forus ligger midt mellom byene, så veien er kort uansett hvor bedriften holder til.',
+        q: 'Hjelper dere bedrifter i Stavanger og Sola også?',
+        a: 'Ja. Kontoret på Forus betjener hele Nord-Jæren, også Stavanger, Sola og Randaberg. Forus ligger midt mellom byene, så veien er kort uansett hvor bedriften holder til.',
       },
     ],
 
@@ -281,7 +281,7 @@ export const kontorsider: Record<string, Kontorside> = {
     },
     kontakt: {
       kicker: 'Forus',
-      title: 'Ta en prat med oss i Stavanger',
+      title: 'Ta en prat med oss i Sandnes',
       text: 'Ring +47 480 19 958, send en e-post til support@flyd.no eller fyll ut kontaktskjemaet. Vi tar praten på Forus, hos deg eller på video.',
     },
   },

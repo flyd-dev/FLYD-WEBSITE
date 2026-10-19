@@ -52,7 +52,7 @@ export type Office = {
 
 const officeList: Office[] = [
   {
-    city: 'Stavanger',
+    city: 'Sandnes',
     slug: 'stavanger-sandnes',
     name: 'FOMO',
     street: 'Grenseveien 21',
@@ -64,9 +64,9 @@ const officeList: Office[] = [
       'Regionkontoret vårt ligger i FOMO-miljøet på Forus, midt i Stavanger-regionen. Herfra betjener vi kunder på hele Nord-Jæren – fra gründere til etablerte industri- og eiendomsselskaper.',
     image: {
       src: '/kontor/stavanger.webp',
-      alt: 'FOMO-bygget i Grenseveien 21 på Forus, der Flyd har Stavanger-kontoret',
+      alt: 'FOMO-bygget i Grenseveien 21 på Forus, der Flyd har Sandnes-kontoret',
     },
-    // Det siste bildet er lånt fra Egersund til vi har flere fra Stavanger.
+    // Det siste bildet er lånt fra Egersund til vi har flere fra Sandnes.
     gallery: [
       {
         src: '/kontor/stavanger-fomo.webp',
