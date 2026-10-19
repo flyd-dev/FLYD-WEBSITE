@@ -9,7 +9,7 @@ import Section from "@/components/Section";
 import Eyebrow from "@/components/Eyebrow";
 import ClosingCta from "@/components/ClosingCta";
 import OfficeCards from "@/components/OfficeCards";
-import { ButtonLink } from "@/components/Button";
+import { ButtonLink, TextLink } from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
 import FlydIcon from "@/components/FlydIcon";
@@ -346,6 +346,9 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             </h2>
           </div>
           <OfficeCards offices={otherOffices} compact className="mt-10" />
+          <div className="mt-8">
+            <TextLink href="/kontor/">Alle kontorer i Rogaland og Agder</TextLink>
+          </div>
         </Container>
       </Section>
 

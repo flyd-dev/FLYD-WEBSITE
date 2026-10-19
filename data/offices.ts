@@ -7,7 +7,10 @@ export type Office = {
   /** Gateadresse. Valgfri – uten den vises bare postnummer/sted, og JSON-LD får ingen streetAddress. */
   street?: string;
   postal: string;
-  /** Kartlenke (hasMap). Valgfri – uten den vises ingen kartknapp. */
+  /**
+   * Kartlenke (hasMap) til kontorets Google-bedriftsprofil, på formen
+   * https://maps.google.com/?cid=<CID>. Valgfri – uten den vises ingen kartknapp.
+   */
   mapsUrl?: string;
   /** Koordinater (geo). Valgfrie – begge eller ingen. */
   lat?: number;
@@ -52,21 +55,21 @@ export type Office = {
 
 const officeList: Office[] = [
   {
-    city: 'Stavanger',
+    city: 'Sandnes',
     slug: 'stavanger-sandnes',
     name: 'FOMO',
     street: 'Grenseveien 21',
     postal: '4313 Sandnes',
-    mapsUrl: 'https://maps.google.com/?q=Grenseveien+21,+4313+Sandnes',
+    mapsUrl: 'https://maps.google.com/?cid=12568098481895177946',
     lat: 58.8529,
     lng: 5.7354,
     blurb:
       'Regionkontoret vårt ligger i FOMO-miljøet på Forus, midt i Stavanger-regionen. Herfra betjener vi kunder på hele Nord-Jæren – fra gründere til etablerte industri- og eiendomsselskaper.',
     image: {
       src: '/kontor/stavanger.webp',
-      alt: 'FOMO-bygget i Grenseveien 21 på Forus, der Flyd har Stavanger-kontoret',
+      alt: 'FOMO-bygget i Grenseveien 21 på Forus, der Flyd har Sandnes-kontoret',
     },
-    // Det siste bildet er lånt fra Egersund til vi har flere fra Stavanger.
+    // Det siste bildet er lånt fra Egersund til vi har flere fra Sandnes.
     gallery: [
       {
         src: '/kontor/stavanger-fomo.webp',
@@ -84,7 +87,7 @@ const officeList: Office[] = [
     name: 'Torvgården',
     street: 'Torget 2',
     postal: '4370 Egersund',
-    mapsUrl: 'https://maps.google.com/?q=Torget+2,+4370+Egersund',
+    mapsUrl: 'https://maps.google.com/?cid=1140093806804219019',
     lat: 58.4514,
     lng: 5.9989,
     blurb:
@@ -131,7 +134,7 @@ const officeList: Office[] = [
     name: 'Banken',
     street: 'Gamleveien 13',
     postal: '4380 Hauge i Dalane',
-    mapsUrl: 'https://maps.google.com/?q=Gamleveien+13,+4380+Hauge+i+Dalane',
+    mapsUrl: 'https://maps.google.com/?cid=10437318809922733050',
     lat: 58.3374,
     lng: 6.2714,
     blurb:
@@ -175,7 +178,7 @@ const officeList: Office[] = [
     preposition: 'på',
     street: 'Øyevollveien 10',
     postal: '4460 Moi',
-    mapsUrl: 'https://maps.google.com/?q=Øyevollveien+10,+4460+Moi',
+    mapsUrl: 'https://maps.google.com/?cid=12316434624376162358',
     lat: 58.4621,
     lng: 6.5334,
     blurb:
@@ -218,7 +221,7 @@ const officeList: Office[] = [
     name: 'Handleriet',
     street: 'Sirdalsveien 7432',
     postal: '4443 Tjørhom',
-    mapsUrl: 'https://maps.google.com/?q=Sirdalsveien+7432,+4443+Tjørhom',
+    mapsUrl: 'https://maps.google.com/?cid=10175685156205779934',
     lat: 58.9091,
     lng: 6.8094,
     blurb:
@@ -262,7 +265,7 @@ const officeList: Office[] = [
     name: 'Flekkefjord',
     street: 'Elvegaten 22',
     postal: '4400 Flekkefjord',
-    mapsUrl: 'https://maps.google.com/?q=Elvegaten+22,+4400+Flekkefjord',
+    mapsUrl: 'https://maps.google.com/?cid=15755657841450216178',
     lat: 58.2967,
     lng: 6.6628,
     blurb:
@@ -302,9 +305,9 @@ const officeList: Office[] = [
 ];
 
 /**
- * Google-anmeldelseslenker per kontor (slug → g.page-lenke). Stavanger-sandnes-
- * kontoret ligger i Grenseveien 21, 4313 Sandnes, og bruker Google-profilen
- * «Sandnes». Sirdal-kontoret (Handleriet, Tjørhom) bruker profilen «Tjørhom».
+ * Google-anmeldelseslenker per kontor (slug → g.page-lenke). Alle seks
+ * Google-profilene heter «Flyd AS». Lenkene og `mapsUrl` peker til de samme
+ * profilene (samme CID, sjekket mot NAP-rapporten 19.10.2026).
  */
 export const googleReviewUrls: Record<string, string> = {
   'stavanger-sandnes': 'https://g.page/r/Cdr-fAv72mquEBM/review',
