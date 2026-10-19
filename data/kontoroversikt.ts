@@ -45,7 +45,7 @@ export const kontorBlokker: Record<string, KontorBlokk> = {
   sirdal: {
     omrade: 'Sirdal',
     tekst:
-      'På Tjørhom finner du oss i Handleriet. Vi jobber tett med bygg-, hytte- og reiselivsnæringen i fjellbygda.',
+      'I Sirdal finner du oss i Handleriet. Vi jobber tett med bygg-, hytte- og reiselivsnæringen i fjellbygda.',
     lenketekst: 'Les om regnskapsfører i Sirdal',
   },
   flekkefjord: {
@@ -85,8 +85,8 @@ export const regionTjenester: { title: string; text: string; href: string }[] = 
   },
 ];
 
-/** Finanstilsynets virksomhetsregister, der tillatelsen kan sjekkes. */
-export const virksomhetsregisteret = 'https://www.finanstilsynet.no/virksomhetsregisteret/';
+/** Flyd AS i Finanstilsynets virksomhetsregister (konsesjon «Regnskapsselskap»). */
+export const virksomhetsregisteret = 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=241680';
 
 export type HubFaq = {
   q: string;
@@ -112,12 +112,12 @@ export const hubFaq: HubFaq[] = [
   },
   {
     q: 'Er Flyd et autorisert regnskapsforetak?',
-    a: 'Ja. Flyd AS (org.nr. 933 662 934) er et autorisert regnskapsførerselskap med tillatelse fra Finanstilsynet. Du kan slå opp foretaket i Finanstilsynets virksomhetsregister.',
+    a: 'Ja. Flyd AS (org.nr. 933 662 934) er et godkjent regnskapsselskap med tillatelse fra Finanstilsynet. Du kan se tillatelsen i Finanstilsynets virksomhetsregister.',
     lenke: { href: virksomhetsregisteret, tekst: 'Finanstilsynets virksomhetsregister' },
   },
   {
-    q: 'Kan dere være regnskapsfører for bedrifter på Jæren og i Stavanger?',
-    a: 'Ja. Sandnes-kontoret i FOMO på Forus ligger midt i Stavanger-regionen og betjener Stavanger, Sandnes, Sola, Randaberg og resten av Nord-Jæren. Bilagene går digitalt, og møtene tar vi på Forus, hos deg eller på video.',
+    q: 'Kan dere være regnskapsfører for bedrifter i Stavanger og på Nord-Jæren?',
+    a: 'Ja. Sandnes-kontoret i FOMO på Forus ligger midt i Stavanger-regionen og betjener Stavanger, Sandnes, Sola og Randaberg. Bilagene går digitalt, og møtene tar vi på Forus, hos deg eller på video.',
     lenke: { href: '/kontor/stavanger-sandnes/', tekst: 'Les om kontoret på Forus' },
   },
   {

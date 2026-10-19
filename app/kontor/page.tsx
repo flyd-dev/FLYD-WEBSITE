@@ -233,13 +233,12 @@ export default function KontorerPage() {
                 er gjort etter reglene.
               </p>
               <p className={`mt-5 ${brod}`}>
-                Flyd AS er et autorisert regnskapsførerselskap. Vi er {stat('statsautoriserte').value}{' '}
-                statsautoriserte regnskapsførere og har {stat('kunder').value} kunder. Du kan selv sjekke
-                tillatelsen i{' '}
+                Flyd AS er et godkjent regnskapsselskap. Vi er {stat('statsautoriserte').value}{' '}
+                statsautoriserte regnskapsførere og har {stat('kunder').value} kunder. Se tillatelsen vår i{' '}
                 <a href={virksomhetsregisteret} className={lenke}>
                   Finanstilsynets virksomhetsregister
                 </a>{' '}
-                ved å søke på org.nr. 933 662 934.
+                (org.nr. 933 662 934).
               </p>
             </div>
             <div data-reveal>
