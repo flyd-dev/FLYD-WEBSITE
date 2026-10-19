@@ -659,6 +659,9 @@ export default function KontorMal({
                 </li>
               ))}
             </ul>
+            <div className="mt-8">
+              <TextLink href="/kontor/">Alle kontorer i Rogaland og Agder</TextLink>
+            </div>
           </div>
         </Container>
       </Section>
