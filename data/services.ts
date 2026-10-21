@@ -136,11 +136,11 @@ export const services: Service[] = [
     faq: [
       {
         q: 'Hvilke revisjonstjenester leverer Flyd?',
-        a: 'Vi reviderer årsregnskap og leverer revisorbekreftelser og andre attestasjonstjenester. I tillegg utarbeider vi årsregnskap og skattemelding og gir rådgivning innen regnskap, skatt, forretningsutvikling og annet knyttet til bedriftsøkonomien.',
+        a: 'Vi reviderer årsregnskap og leverer revisorbekreftelser og andre attestasjonstjenester. Vi gir også rådgivning innen regnskap, skatt, forretningsutvikling og annet knyttet til bedriftsøkonomien. Årsregnskap og skattemelding lager vi bare for selskaper som ikke har oss som revisor.',
       },
       {
         q: 'Kan dere både føre regnskapet og revidere det?',
-        a: 'Nei. Er vi revisor for selskapet, fører vi ikke regnskapet. Vi reviderer årsregnskapet, men utarbeider det ikke.',
+        a: 'Nei. Er vi revisor for selskapet, fører vi ikke regnskapet, og vi lager verken årsregnskapet eller skattemeldingen. Vi reviderer årsregnskapet.',
       },
       {
         q: 'Er revisorene statsautoriserte?',
@@ -164,7 +164,7 @@ export const services: Service[] = [
         },
         {
           title: 'Årsregnskap og skattemelding',
-          text: 'Vi utarbeider årsregnskap og skattemelding for selskaper som ikke har oss som revisor.',
+          text: 'Har du ikke oss som revisor, kan regnskapsavdelingen vår, som er et godkjent regnskapsselskap, lage årsregnskapet og skattemeldingen. Er vi revisor for selskapet, gjør vi det ikke.',
         },
         {
           title: 'Rådgivning',
