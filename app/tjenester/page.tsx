@@ -40,9 +40,9 @@ const servicesJsonLd = {
 };
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Regnskap, rådgivning og ERP – Tjenester',
+  title: 'Regnskap, revisjon, rådgivning og ERP – Tjenester',
   description:
-    'Regnskap og rådgivning, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR – samlet hos Flyd.',
+    'Regnskap og rådgivning, revisjon, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR – samlet hos Flyd.',
   path: '/tjenester/',
 });
 
@@ -87,7 +87,8 @@ export default function TjenesterPage() {
           lenker til /tjenester/#… lander på riktig kort og leder videre. */}
       <Section tone="sand">
         <Container>
-          <ul className="stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          {/* Et enslig kort på siste rad står i midten på desktop. */}
+          <ul className="stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:[&>*:last-child:nth-child(3n+1)]:col-start-2">
             {visibleServices.map((s, i) => (
               <li
                 key={s.id}

@@ -109,7 +109,7 @@ const icons = {
     ),
     dot: [16, 4],
   },
-  /** Et bygg – brukes for kunder og for selskapet (org.nr.). */
+  /** Et bygg – brukes for kunder. */
   kunder: {
     body: (
       <path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M10 21v-4h4v4M8 7.5h2M14 7.5h2M8 11.5h2" />

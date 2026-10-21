@@ -22,7 +22,7 @@ import { stats } from '@/data/stats';
 const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
 
 const whyFlyd: { icon: FlydIconName; text: string }[] = [
-  { icon: 'samme-tak', text: 'Regnskap, rådgivning og teknologi under samme tak' },
+  { icon: 'samme-tak', text: 'Regnskap, revisjon, rådgivning og teknologi under samme tak' },
   { icon: 'sparring', text: 'Rådgivere som stiller spørsmål – ikke bare leverer tall' },
   { icon: 'erp', text: 'Moderne ERP- og programvarekompetanse' },
   { icon: 'automatisering', text: 'Integrasjoner som reduserer manuelt arbeid' },
@@ -145,7 +145,8 @@ export default function HomePage() {
             </TextLink>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          {/* Et enslig kort på siste rad står i midten på desktop. */}
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:[&>*:last-child:nth-child(3n+1)]:col-start-2">
             {visibleServices.map((s, i) => (
               <div key={s.id} data-reveal className="h-full">
                 <ServiceCard

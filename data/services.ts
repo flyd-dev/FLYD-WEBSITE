@@ -61,7 +61,18 @@ export type Service = {
   fagseksjon?: Fagseksjon;
 };
 
-export const services: Service[] = [
+/**
+ * Tjeneste med egen mappe under app/tjenester/ (f.eks. revisjon/) i stedet for TjenesteMal.
+ * Har bare feltene tjenestekortene, lister og kontaktskjemaet bruker.
+ */
+export type EgenTjeneste = Pick<Service, 'id' | 'slug' | 'status' | 'tema' | 'title' | 'short' | 'icon' | 'image'> & {
+  egenSide: true;
+};
+
+/** Tjenesten bruker malen (TjenesteMal) og har alle feltene til den. */
+export const harMal = (s: Service | EgenTjeneste): s is Service => !('egenSide' in s);
+
+export const services: (Service | EgenTjeneste)[] = [
   {
     id: 'regnskap-radgivning',
     slug: 'regnskap',
@@ -81,6 +92,21 @@ export const services: Service[] = [
     fitFor: 'Bedrifter som vil ha et trygt regnskap – og en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
     icon: 'regnskap',
     image: { src: '/tjenestebilder/regnskap-radgivning.webp', alt: 'Rådgivningsmøte: kollega lytter engasjert mens en annen forklarer' },
+  },
+  {
+    // Egen side (app/tjenester/revisjon/), tekstene står i data/revisjon.ts.
+    id: 'revisjon',
+    slug: 'revisjon',
+    status: 'publisert',
+    tema: 'Revisjon',
+    title: 'Revisjon',
+    short: 'Uavhengig revisjon av årsregnskapet, årsregnskap og skattemelding, og faglige råd om regnskap, skatt og avgift.',
+    icon: 'revisjon',
+    image: {
+      src: '/tjenestebilder/revisjon.webp',
+      alt: 'Tre kolleger fra revisjonsteamet i en samtale rundt et bord med kaffe og frukt',
+    },
+    egenSide: true,
   },
   {
     // UTKAST: i dag er rådgivning en del av «Regnskap og rådgivning».
@@ -270,8 +296,11 @@ export const visibleServices = services.filter(synlig);
 
 export const serviceUrl = (s: Pick<Service, 'slug'>) => `/tjenester/${s.slug}/`;
 
+/** Tjenestene som får side fra malen (/tjenester/[tjeneste]/). */
+export const malTjenester = visibleServices.filter(harMal);
+
 export function getServiceBySlug(slug: string): Service | undefined {
-  return visibleServices.find((s) => s.slug === slug);
+  return malTjenester.find((s) => s.slug === slug);
 }
 
 export type ErpSystem = {

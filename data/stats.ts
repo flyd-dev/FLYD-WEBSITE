@@ -1,11 +1,8 @@
-import { leadership, officeLeads, otherTeam } from './team';
+import { allTeam } from './team';
 import { offices } from './offices';
 
-const alle = [...leadership, ...officeLeads, ...otherTeam];
-
-const statsautoriserte = alle.filter(
-  (m) => m.certified || m.role.toLowerCase().includes('statsautorisert'),
-).length;
+// Bare regnskapsførere (`certified`), ikke statsautoriserte revisorer.
+const statsautoriserte = allTeam.filter((m) => m.certified).length;
 
 /**
  * Nøkkeltall – én kilde for hele nettstedet.
@@ -27,7 +24,7 @@ export const stats: Stat[] = [
   { key: 'kunder', value: '670+', label: 'Kunder', bekreftet: true },
   { key: 'kontorer', value: String(offices.length), label: 'Kontorer', bekreftet: true },
   // Telles fra data/team.ts.
-  { key: 'medarbeidere', value: String(alle.length), label: 'Medarbeidere', bekreftet: true },
+  { key: 'medarbeidere', value: String(allTeam.length), label: 'Medarbeidere', bekreftet: true },
   // Telles fra `certified` i data/team.ts. Må stemme med Finanstilsynets register.
   {
     key: 'statsautoriserte',
