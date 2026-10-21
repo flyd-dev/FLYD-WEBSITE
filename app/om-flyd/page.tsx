@@ -10,7 +10,7 @@ import OfficeCards from '@/components/OfficeCards';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
-import { leadership, officeLeads, otherTeam } from '@/data/team';
+import { allTeam, auditTeam, leadership, officeLeads, otherTeam } from '@/data/team';
 import { offices } from '@/data/offices';
 import { stat } from '@/data/stats';
 
@@ -42,7 +42,7 @@ const aboutJsonLd = {
   isPartOf: { '@id': 'https://www.flyd.no/#website' },
   about: {
     '@id': 'https://www.flyd.no/#organization',
-    employee: [...leadership, ...officeLeads, ...otherTeam].map((m) => ({
+    employee: allTeam.map((m) => ({
       '@type': 'Person',
       name: m.name,
       jobTitle: m.role,
@@ -200,6 +200,15 @@ export default function OmFlydPage() {
           </div>
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {officeLeads.map((m) => (
+              <TeamCard key={m.email} m={m} />
+            ))}
+          </div>
+
+          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
+            <Eyebrow>Revisjon</Eyebrow>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:[&>*:nth-child(3n+1)]:col-start-1">
+            {auditTeam.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>

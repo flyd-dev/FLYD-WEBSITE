@@ -25,6 +25,28 @@ const mk = (m: Omit<TeamMember, 'initials'> & { initials?: string }): TeamMember
       .toUpperCase(),
 });
 
+// Fra Liit. Partnere, og står både i ledelsen og i revisjonsgruppen.
+// Portrettene er Fias bearbeiding av bildene fra liit.no.
+const irene = mk({
+  name: 'Irene Bendiksen',
+  role: 'Leder revisjon',
+  partner: true,
+  revisor: true,
+  phone: '+47 997 02 292',
+  email: 'irene.bendiksen@flyd.no',
+  image: '/team/flyd-irene.webp',
+});
+
+const heidi = mk({
+  name: 'Heidi Elizabeth Odden',
+  role: 'partner / statsautorisert revisor',
+  partner: true,
+  revisor: true,
+  phone: '+47 928 19 975',
+  email: 'heidi.odden@flyd.no',
+  image: '/team/flyd-heidi.webp',
+});
+
 export const leadership: TeamMember[] = [
   mk({
     name: 'Kai Mydland',
@@ -60,25 +82,8 @@ export const leadership: TeamMember[] = [
     email: 'thomas.haaland@flyd.no',
     image: '/team/flyd-thomas.webp',
   }),
-  // Fra Liit. Portrettene er Fias bearbeiding av bildene fra liit.no.
-  mk({
-    name: 'Irene Bendiksen',
-    role: 'Leder revisjon',
-    partner: true,
-    revisor: true,
-    phone: '+47 997 02 292',
-    email: 'irene.bendiksen@flyd.no',
-    image: '/team/flyd-irene.webp',
-  }),
-  mk({
-    name: 'Heidi Elizabeth Odden',
-    role: 'partner / statsautorisert revisor',
-    partner: true,
-    revisor: true,
-    phone: '+47 928 19 975',
-    email: 'heidi.odden@flyd.no',
-    image: '/team/flyd-heidi.webp',
-  }),
+  irene,
+  heidi,
 ];
 
 export const officeLeads: TeamMember[] = [
@@ -109,14 +114,6 @@ export const otherTeam: TeamMember[] = [
     phone: '+47 902 75 304',
     email: 'marius.koldal@flyd.no',
     image: '/team/flyd-marius.webp',
-  }),
-  mk({
-    name: 'Julie Hagh',
-    role: 'Statsautorisert regnskapsfører',
-    certified: true,
-    phone: '+47 950 08 122',
-    email: 'julie.hagh@flyd.no',
-    image: '/team/flyd-julie.webp',
   }),
   mk({
     name: 'Christoffer Ellingham',
@@ -208,6 +205,15 @@ export const otherTeam: TeamMember[] = [
     email: 'tatjana.derksen@flyd.no',
     image: '/team/flyd-tatjana.webp',
   }),
+];
+
+/**
+ * Revisjonsgruppen. Irene og Heidi står også i `leadership`, så denne listen
+ * har dubletter av dem. Tell personer med `allTeam`.
+ */
+export const auditTeam: TeamMember[] = [
+  irene,
+  heidi,
   // Fra Liit. Titlene står som på liit.no.
   mk({
     name: 'Martha Egeli',
@@ -230,4 +236,18 @@ export const otherTeam: TeamMember[] = [
     email: 'synne.johansen@flyd.no',
     image: '/team/flyd-synne.webp',
   }),
+  // Jobber i revisjon, men er fortsatt statsautorisert regnskapsfører og telles i nøkkeltallet.
+  mk({
+    name: 'Julie Hagh',
+    role: 'associate, statsautorisert regnskapsfører',
+    certified: true,
+    phone: '+47 950 08 122',
+    email: 'julie.hagh@flyd.no',
+    image: '/team/flyd-julie.webp',
+  }),
 ];
+
+/** Alle unike personer: antall medarbeidere, Person-JSON-LD og oppslag av fagperson. */
+export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...otherTeam, ...auditTeam].filter(
+  (m, i, alle) => alle.findIndex((x) => x.email === m.email) === i,
+);

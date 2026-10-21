@@ -1,7 +1,7 @@
-import { leadership, officeLeads, otherTeam } from './team';
+import { allTeam } from './team';
 import { offices } from './offices';
 
-const alle = [...leadership, ...officeLeads, ...otherTeam];
+const alle = allTeam;
 
 // Bare regnskapsførere: statsautoriserte revisorer (`revisor`) telles ikke.
 const statsautoriserte = alle.filter(
