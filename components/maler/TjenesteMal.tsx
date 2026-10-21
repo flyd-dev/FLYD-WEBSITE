@@ -9,8 +9,9 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import Bekreft, { UtkastBanner } from '@/components/Bekreft';
 import JsonLd from '@/components/JsonLd';
 import FlydIcon from '@/components/FlydIcon';
-import { ButtonLink } from '@/components/Button';
+import { ButtonLink, TextLink } from '@/components/Button';
 import { ServiceTile } from '@/components/ServiceIcon';
+import { kortRutenett } from '@/components/kortRutenett';
 import ProcessCards from '@/components/ProcessCards';
 import { process } from '@/data/process';
 import { siteUrl } from '@/lib/seo';
@@ -21,6 +22,7 @@ import {
   erpSystems,
   erpComparisonStatus,
   erpUrl,
+  getServiceBySlug,
   serviceUrl,
   type Service,
 } from '@/data/services';
@@ -41,9 +43,16 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
     ? allTeam.find((m) => m.name === s.fagperson)
     : undefined;
   const andre = visibleServices.filter((o) => o.slug !== s.slug);
+  const rutenett = kortRutenett(andre.length);
+  // Krysslenken (regnskap ↔ revisjon) vises bare når siden den peker til er synlig.
+  const sammen = s.sammen && getServiceBySlug(s.sammen.slug) ? s.sammen : undefined;
   const isErp = s.slug === 'erp';
   const visFaq = Boolean(s.faq?.length || fagperson || (utkast && visUtkast));
   const comparisonVisible = erpComparisonStatus === 'publisert' || visUtkast;
+  // Valgt bort i data/services.ts (`utelatt`): verken innhold eller [BEKREFT].
+  const utelatt = (del: NonNullable<Service['utelatt']>[number]) => s.utelatt?.includes(del) ?? false;
+  const visPasserIkke = Boolean(s.passerIkke || (utkast && visUtkast && !utelatt('passerIkke')));
+  const visPris = Boolean(s.prisfaktorer?.length || (utkast && visUtkast && !utelatt('pris')));
   const fag = s.fagseksjon;
   // FAQPage-JSON-LD tar med både «Vanlige spørsmål» og spørsmålene i fagseksjonen.
   const alleFaq = [...(s.faq ?? []), ...(fag?.faq ?? [])];
@@ -124,7 +133,8 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>
               <Eyebrow>Dette løser vi</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">
+              {/* Problemet er en hel setning, så det settes ett trinn mindre enn standardtittelen. */}
+              <h2 className={`mt-5 font-display font-semibold ${s.problem ? 'text-display-md' : 'text-display-lg'}`}>
                 {s.problem ? s.problem : `Slik hjelper vi deg med ${lc(s.title)}.`}
               </h2>
               {!s.problem && mangler('problemet tjenesten løser, i kundens egne ord')}
@@ -143,6 +153,15 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                   </li>
                 ))}
               </ul>
+              {sammen && (
+                <div className="mt-10 rounded-kort bg-flyd-sand p-6 md:p-7">
+                  <h3 className="font-display text-[20px] font-semibold">{sammen.title}</h3>
+                  <p className="mt-2 text-[16px] leading-relaxed text-flyd-skifer">{sammen.text}</p>
+                  <TextLink href={serviceUrl({ slug: sammen.slug })} className="mt-4">
+                    {sammen.lenketekst}
+                  </TextLink>
+                </div>
+              )}
             </div>
           </div>
         </Container>
@@ -262,52 +281,52 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
         </Section>
       )}
 
-      {/* SLIK JOBBER VI: egen prosess for tjenesten, ellers Flyds fire steg */}
-      <Section tone="petrol" flyt>
-        <Container>
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow tone="petrol">Slik jobber vi</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-              Fra første samtale til full flyd.
-            </h2>
-          </div>
-          <div className="mt-12" data-reveal>
-            {s.prosess?.length ? (
-              <ol className="relative max-w-3xl">
-                <span aria-hidden="true" className="prosesslinje absolute bottom-6 left-[23px] top-6 w-0.5 bg-flyd-mint/40" />
-                {s.prosess.map((p, i) => (
-                  <li key={p.title} className="relative flex gap-6 pb-10 last:pb-0">
-                    <span className="relative z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-pille bg-flyd-skog font-display text-[20px] font-semibold text-flyd-korall">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div className="pt-2">
-                      <h3 className="font-display text-[20px] font-semibold text-flyd-sand">{p.title}</h3>
-                      <p className="mt-2 text-[16px] leading-relaxed text-flyd-dempet">{p.text}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            ) : (
-              <ProcessCards steps={process} />
-            )}
-          </div>
-        </Container>
-      </Section>
+      {/* SLIK JOBBER VI: egen prosess for tjenesten, ellers Flyds fire steg (med mindre den er valgt bort) */}
+      {!utelatt('prosess') && (
+        <Section tone="petrol" flyt>
+          <Container>
+            <div className="max-w-3xl" data-reveal>
+              <Eyebrow tone="petrol">Slik jobber vi</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
+                Fra første samtale til full flyd.
+              </h2>
+            </div>
+            <div className="mt-12" data-reveal>
+              {s.prosess?.length ? (
+                <ol className="relative max-w-3xl">
+                  <span aria-hidden="true" className="prosesslinje absolute bottom-6 left-[23px] top-6 w-0.5 bg-flyd-mint/40" />
+                  {s.prosess.map((p, i) => (
+                    <li key={p.title} className="relative flex gap-6 pb-10 last:pb-0">
+                      <span className="relative z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-pille bg-flyd-skog font-display text-[20px] font-semibold text-flyd-korall">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <div className="pt-2">
+                        <h3 className="font-display text-[20px] font-semibold text-flyd-sand">{p.title}</h3>
+                        <p className="mt-2 text-[16px] leading-relaxed text-flyd-dempet">{p.text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              ) : (
+                <ProcessCards steps={process} />
+              )}
+            </div>
+          </Container>
+        </Section>
+      )}
 
       {/* PASSER FOR / IKKE + PRIS */}
       <Section tone="sand">
         <Container>
           <div
-            className={`stagger grid grid-cols-1 gap-4 md:gap-5 ${
-              s.passerIkke || (utkast && visUtkast) ? 'md:grid-cols-2' : ''
-            }`}
+            className={`stagger grid grid-cols-1 gap-4 md:gap-5 ${visPasserIkke ? 'md:grid-cols-2' : ''}`}
           >
             <div data-reveal className="rounded-kort bg-flyd-lysmint p-7 md:p-10">
               <Eyebrow>Passer for</Eyebrow>
               <p className="mt-4 max-w-3xl font-display text-ingress font-medium text-flyd-skog">{s.fitFor}</p>
             </div>
-            {(s.passerIkke || (utkast && visUtkast)) && (
-              <div data-reveal style={{ '--i': 1 } as React.CSSProperties} className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
+            {visPasserIkke && (
+              <div data-reveal style={{ '--i': 1 } as React.CSSProperties} className="rounded-kort bg-flyd-lysmint p-7 md:p-10">
                 <Eyebrow>Passer ikke for</Eyebrow>
                 {s.passerIkke ? (
                   <p className="mt-4 text-[17px] leading-relaxed text-flyd-skog">{s.passerIkke}</p>
@@ -318,7 +337,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
             )}
           </div>
 
-          {(s.prisfaktorer?.length || (utkast && visUtkast)) && (
+          {visPris && (
             <div className="mt-16 grid grid-cols-1 gap-10 border-t border-flyd-linje-sand pt-14 lg:grid-cols-12 lg:gap-16" data-reveal>
               <div className="lg:col-span-5">
                 <Eyebrow>Pris</Eyebrow>
@@ -418,9 +437,9 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
             <Eyebrow>Alt i ett hus</Eyebrow>
             <h2 className="mt-5 font-display text-display-md font-semibold">Andre tjenester</h2>
           </div>
-          <ul className="stagger mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          <ul className={`stagger mt-10 ${rutenett.liste}`}>
             {andre.map((o, i) => (
-              <li key={o.slug} data-reveal style={{ '--i': i } as React.CSSProperties}>
+              <li key={o.slug} data-reveal style={{ '--i': i } as React.CSSProperties} className={rutenett.kort(i)}>
                 <Link
                   href={serviceUrl(o)}
                   className={`lys lenkekort group flex h-full items-center gap-5 rounded-kort p-4 pr-6 ${

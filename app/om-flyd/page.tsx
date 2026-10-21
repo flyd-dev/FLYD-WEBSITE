@@ -24,9 +24,9 @@ const breadcrumbJsonLd = {
 };
 
 export const metadata: Metadata = pageMetadata({
-  absoluteTitle: 'Om Flyd – Kompetansehus for økonomi og teknologi',
+  absoluteTitle: 'Om Flyd – Regnskap, revisjon og teknologi i ett hus',
   description:
-    'Flyd er et kompetansehus for økonomi og teknologi. Møt teamet og besøk et av våre seks kontorer i Sør-Vest-Norge.',
+    'Flyd er et kompetansehus for økonomi og teknologi som leverer både regnskap og revisjon. Møt oss og besøk et av våre seks kontorer i Sør-Vest-Norge.',
   path: '/om-flyd/',
 });
 
@@ -67,7 +67,7 @@ const values = [
   },
   {
     title: 'Kompetent',
-    body: 'Dyp fagkunnskap innen økonomi, systemer og rådgivning – i samme team.',
+    body: 'Dyp fagkunnskap innen regnskap, revisjon, systemer og rådgivning.',
   },
 ];
 
@@ -101,8 +101,8 @@ export default function OmFlydPage() {
               </h1>
               <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
                 Flyd er et kompetansehus for økonomi og teknologi. Vi leverer
-                regnskap, rådgivning, programvare og integrasjoner fra samme
-                sted – slik at du slipper å koordinere fem leverandører og kan
+                regnskap, revisjon, rådgivning, programvare og integrasjoner fra
+                samme sted – slik at du slipper å koordinere fem leverandører og kan
                 konsentrere deg om å drive bedriften videre.
               </p>
               <div className="mt-12 max-w-xl">
