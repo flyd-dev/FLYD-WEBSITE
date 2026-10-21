@@ -39,7 +39,7 @@ export default function PersonvernPage() {
                 Behandlingsansvarlig
               </h2>
               <p className="mt-3">
-                Flyd AS, org.nr. 933 662 934, er behandlingsansvarlig for
+                Flyd AS er behandlingsansvarlig for
                 personopplysningene som samles inn gjennom dette nettstedet.
               </p>
             </section>

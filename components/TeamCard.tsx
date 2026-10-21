@@ -8,7 +8,7 @@ const pill =
 /** Ansattkort: Lys mint-kort (radius 16 px) med bildet på en flis (12 px). */
 export default function TeamCard({ m }: { m: TeamMember }) {
   const certified =
-    m.certified || m.role.toLowerCase().includes('statsautorisert');
+    m.certified || m.revisor || m.role.toLowerCase().includes('statsautorisert');
   return (
     <article data-reveal className="lys group flex flex-col rounded-kort bg-flyd-lysmint p-3 pb-6">
       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-flis bg-flyd-linje-mint">

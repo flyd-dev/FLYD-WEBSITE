@@ -10,7 +10,7 @@ import Analytics from "@/components/Analytics";
 import CookieConsent from "@/components/CookieConsent";
 import { offices, openingHours } from "@/data/offices";
 import { getKontorside } from "@/data/kontorsider";
-import { leadership, officeLeads, otherTeam } from "@/data/team";
+import { allTeam } from "@/data/team";
 
 // Designmanualen: Poppins (500 ingress, 600 overskrifter og tall) og
 // DM Sans (400 brødtekst, 400 kursiv sitater, 500 knapper, 700 kickers).
@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     google: "etU_ZA2jeyyDin4pgdzxqQzG6LLkLYft9oiBM0HhzPA",
   },
   title: {
-    default: "Flyd AS – regnskapsfører, ERP og teknologi på Sør-Vestlandet",
+    default: "Flyd AS – regnskapsfører, revisor, ERP og teknologi på Sør-Vestlandet",
     template: "%s · Flyd",
   },
   description:
-    "Flyd er et kompetansehus for økonomi og teknologi. Fra daglig regnskap til ERP og integrasjoner – én partner, ett nummer, full oversikt.",
+    "Flyd er et kompetansehus for økonomi og teknologi. Fra daglig regnskap og revisjon til ERP og integrasjoner – én partner, ett nummer, full oversikt.",
   alternates: {
     canonical: "/",
   },
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
     locale: "nb_NO",
     url: "https://www.flyd.no/",
     siteName: "Flyd AS",
-    title: "Flyd AS – regnskapsfører, ERP og teknologi på Sør-Vestlandet",
+    title: "Flyd AS – regnskapsfører, revisor, ERP og teknologi på Sør-Vestlandet",
     description:
-      "Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak.",
+      "Et kompetansehus for økonomi og teknologi. Regnskap, revisjon, rådgivning, ERP og integrasjoner under samme tak.",
     images: [
       {
         url: "https://www.flyd.no/opengraph-image.png",
@@ -63,9 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Flyd AS – regnskapsfører, ERP og teknologi på Sør-Vestlandet",
+    title: "Flyd AS – regnskapsfører, revisor, ERP og teknologi på Sør-Vestlandet",
     description:
-      "Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak.",
+      "Et kompetansehus for økonomi og teknologi. Regnskap, revisjon, rådgivning, ERP og integrasjoner under samme tak.",
     images: ["https://www.flyd.no/opengraph-image.png"],
   },
   icons: {
@@ -101,28 +101,25 @@ export default function RootLayout({
     image: `${siteUrl}/brand/flyd-teal.png`,
     email: "support@flyd.no",
     telephone: "+4748019958",
-    vatID: "NO933662934MVA",
-    taxID: "933662934",
     description:
-      "Flyd er et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak – med kontorer i Sør-Vest-Norge.",
+      "Flyd er et kompetansehus for økonomi og teknologi. Regnskap, revisjon, rådgivning, ERP og integrasjoner under samme tak – med kontorer i Sør-Vest-Norge.",
     // Alle sjekket med curl 16.10.2026. Bare lenker som viser en ekte side.
     sameAs: [
       "https://www.linkedin.com/company/flyd-as/",
       "https://www.facebook.com/flyd.no",
-      "https://virksomhet.brreg.no/nb/oppslag/enheter/933662934",
       "https://www.proff.no/selskap/flyd-as/sandnes/bedriftsr%C3%A5dgivning/IFFVMXI043Z",
       "https://www.wikidata.org/wiki/Q141747053",
     ],
     numberOfEmployees: {
       "@type": "QuantitativeValue",
-      value: leadership.length + officeLeads.length + otherTeam.length,
+      value: allTeam.length,
     },
     memberOf: {
       "@type": "Organization",
       name: "Regnskap Norge",
       url: "https://www.regnskapnorge.no/",
     },
-    // Forretningsadressen i Enhetsregisteret (data.brreg.no, enheter/933662934),
+    // Forretningsadressen i Enhetsregisteret (data.brreg.no),
     // sjekket 16.10.2026. Hentes ikke fra kontorlista, så rekkefølgen der ikke
     // flytter hovedadressen.
     address: {

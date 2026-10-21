@@ -112,7 +112,7 @@ export const hubFaq: HubFaq[] = [
   },
   {
     q: 'Er Flyd et autorisert regnskapsforetak?',
-    a: 'Ja. Flyd AS (org.nr. 933 662 934) er et godkjent regnskapsselskap med tillatelse fra Finanstilsynet. Du kan se tillatelsen i Finanstilsynets virksomhetsregister.',
+    a: 'Ja. Flyd AS er et godkjent regnskapsselskap med tillatelse fra Finanstilsynet. Du kan se tillatelsen i Finanstilsynets virksomhetsregister.',
     lenke: { href: virksomhetsregisteret, tekst: 'Finanstilsynets virksomhetsregister' },
   },
   {

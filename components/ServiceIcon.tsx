@@ -21,6 +21,18 @@ const icons = {
     ),
     dot: [14, 14.5],
   },
+  revisjon: {
+    body: (
+      <>
+        <path d="M11 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3" />
+        <path d="M7.5 7.5h4" />
+        <path d="M7.5 11h2.5" />
+        <circle cx="16" cy="15.5" r="4.5" />
+        <path d="m19.2 18.7 2.3 2.3" />
+      </>
+    ),
+    dot: [14.5, 14],
+  },
   erp: {
     body: (
       <>

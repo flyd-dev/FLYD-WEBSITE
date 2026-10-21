@@ -59,6 +59,14 @@ export type Service = {
   passerIkke?: string;
   /** Faktaseksjon med frister o.l. (vises bare når den er satt). */
   fagseksjon?: Fagseksjon;
+  /**
+   * Seksjoner som er valgt bort for tjenesten, ikke bare mangler innhold. De vises
+   * verken med innhold eller som [BEKREFT]-merknad. «prosess» skjuler «Slik jobber
+   * vi», som ellers faller tilbake til Flyds generelle steg (ERP, regnskap og lønn).
+   */
+  utelatt?: ('prosess' | 'passerIkke' | 'pris')[];
+  /** Krysslenke til en tjeneste som hører sammen med denne (regnskap ↔ revisjon). Vises bare når målet er synlig. */
+  sammen?: { slug: string; title: string; text: string; lenketekst: string };
 };
 
 export const services: Service[] = [
@@ -81,6 +89,60 @@ export const services: Service[] = [
     fitFor: 'Bedrifter som vil ha et trygt regnskap – og en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
     icon: 'regnskap',
     image: { src: '/tjenestebilder/regnskap-radgivning.webp', alt: 'Rådgivningsmøte: kollega lytter engasjert mens en annen forklarer' },
+    sammen: {
+      slug: 'revisjon',
+      title: 'Regnskap og revisjon i Flyd',
+      // Revisorloven kap. 8: samme kunde får ikke både revisjon og regnskapsføring fra oss (faktasjekk 21.10.2026).
+      text: 'Flyd leverer både regnskap og revisjon, men ikke begge deler til samme kunde. Revisorloven kapittel 8 krever at revisor er uavhengig av kunden, og at heller ikke selskaper i samme nettverk har en tilknytning som gir risiko for egenkontroll (§ 8-1). Er vi revisor for selskapet ditt, fører vi ikke regnskapet – og omvendt.',
+      lenketekst: 'Les om revisjon',
+    },
+  },
+  {
+    id: 'revisjon',
+    slug: 'revisjon',
+    status: 'publisert',
+    tema: 'Revisjon',
+    title: 'Revisjon',
+    short: 'Lovpålagt revisjon, revisorbekreftelser og andre attestasjonstjenester – effektivt og med høy kvalitet.',
+    long: 'Revisjon høres kanskje kjedelig ut. Vi tar oss av den, slik at du kan fokusere på det du kan best. Våre statsautoriserte revisorer leverer lovpålagt revisjon, revisorbekreftelser og andre attestasjonstjenester for små og mellomstore bedrifter, med lang erfaring fra bygg og anlegg, handel, tjenesteyting og eiendom.',
+    bullets: [
+      'Lovpålagt revisjon',
+      'Revisorbekreftelser',
+      'Andre attestasjonstjenester',
+      'Statsautoriserte revisorer',
+      'Erfaring fra bygg og anlegg, handel, tjenesteyting og eiendom',
+    ],
+    fitFor: 'Små og mellomstore bedrifter som trenger revisjon eller en revisorbekreftelse.',
+    icon: 'revisjon',
+    image: {
+      src: '/tjenestebilder/revisjon.webp',
+      alt: 'Kolleger i møte',
+    },
+    problem: 'Revisjonen skal være i orden – uten å ta tiden fra driften.',
+    faq: [
+      {
+        q: 'Hvilke revisjonstjenester leverer Flyd?',
+        a: 'Vi leverer lovpålagt revisjon, revisorbekreftelser og andre attestasjonstjenester for små og mellomstore bedrifter.',
+      },
+      {
+        q: 'Er revisorene statsautoriserte?',
+        a: 'Ja. Revisjonen i Flyd ledes av statsautoriserte revisorer.',
+      },
+      {
+        q: 'Hvilke bransjer har dere erfaring med?',
+        a: 'Vi har lang erfaring med revisjon og rådgivning innen bygg og anlegg, handel, tjenesteyting og eiendom.',
+      },
+    ],
+    fagperson: 'Irene Bendiksen',
+    // Faktasjekk 16.10.2026: de generelle prosesstegene passer ikke for revisjon,
+    // og «Passer ikke for» og pris har ingen kilde. Tas inn igjen med bekreftet innhold.
+    utelatt: ['prosess', 'passerIkke', 'pris'],
+    sammen: {
+      slug: 'regnskap',
+      title: 'Regnskap og revisjon i Flyd',
+      text: 'Flyd leverer både regnskap og revisjon, men ikke begge deler til samme kunde. Revisorloven kapittel 8 krever at revisor er uavhengig av kunden, og at heller ikke selskaper i samme nettverk har en tilknytning som gir risiko for egenkontroll (§ 8-1). Er vi revisor for selskapet ditt, fører vi ikke regnskapet – og omvendt.',
+      lenketekst: 'Les om regnskap og rådgivning',
+    },
   },
   {
     // UTKAST: i dag er rådgivning en del av «Regnskap og rådgivning».
