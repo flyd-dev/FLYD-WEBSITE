@@ -132,7 +132,7 @@ export const services: Service[] = [
       },
       {
         q: 'Kan dere både føre regnskapet og revidere det?',
-        a: 'Nei. Er vi revisor for selskapet, fører vi ikke regnskapet. Vi kontrollerer årsregnskapet og skattemeldingen, men utarbeider dem ikke.',
+        a: 'Nei. Er vi revisor for selskapet, fører vi ikke regnskapet. Vi reviderer årsregnskapet, men utarbeider det ikke.',
       },
       {
         q: 'Er revisorene statsautoriserte?',
@@ -156,24 +156,24 @@ export const services: Service[] = [
           text: 'Vi reviderer årsregnskapet og avgir revisjonsberetning. Det vi ser underveis, i regnskapet og i rutinene, tar vi opp med deg.',
         },
         {
-          title: 'Kontroll av årsoppgjør og skattemelding',
-          text: 'Som ledd i revisjonen kontrollerer vi årsoppgjøret og går gjennom skattemeldingen. Selve årsoppgjøret og skattemeldingen lager selskapet eller regnskapsføreren, ikke vi.',
+          title: 'Kontroll av årsregnskapet',
+          text: 'Som ledd i revisjonen kontrollerer vi årsregnskapet. Selve årsoppgjøret og skattemeldingen lager selskapet eller regnskapsføreren, ikke vi.',
         },
         {
           title: 'Stifte selskap',
-          text: 'Når du stifter aksjeselskap, kan vi bekrefte at aksjekapitalen er innbetalt, og lage redegjørelsen som trengs når kapitalen skytes inn i annet enn penger.',
+          text: 'Når du stifter aksjeselskap, kan vi bekrefte at aksjekapitalen er innbetalt. Skytes kapitalen inn i annet enn penger, skal revisor bekrefte redegjørelsen som stifterne lager (aksjeloven §§ 2-6 og 2-18).',
         },
         {
           title: 'Kapitalbekreftelser og andre attestasjoner',
-          text: 'Bekreftelser ved kapitalforhøyelse og kapitalnedsettelse, og andre attestasjoner som myndigheter, banker eller avtaleparter ber om.',
+          text: 'Bekreftelser ved kapitalforhøyelse, revisjon av mellombalanse når den trengs, for eksempel ved kapitalnedsettelse eller ekstraordinært utbytte, og andre attestasjoner som myndigheter, banker eller avtaleparter ber om.',
         },
         {
           title: 'Fusjon og fisjon',
-          text: 'Ved fusjon og fisjon trengs ofte redegjørelser eller bekreftelser fra revisor. Vi avklarer hva som gjelder i din sak, og leverer det som kreves.',
+          text: 'Ved fusjon og fisjon skal revisor som hovedregel bekrefte styrets redegjørelse for fusjons- eller fisjonsplanen (aksjeloven §§ 13-10 og 14-4). Vi avklarer hva som gjelder i din sak.',
         },
         {
           title: 'Avvikling av selskaper',
-          text: 'Skal et selskap avvikles, kan det være behov for bekreftelser fra revisor. Vi avklarer hva som gjelder for selskapet ditt.',
+          text: 'Skal et selskap avvikles, skal avviklingsbalansen og sluttoppgjøret som hovedregel revideres (aksjeloven §§ 16-6 og 16-10). Vi avklarer hva som gjelder for selskapet ditt.',
         },
         {
           title: 'Due diligence',
