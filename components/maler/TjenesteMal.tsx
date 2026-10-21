@@ -294,6 +294,30 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
         </Section>
       )}
 
+      {/* DELTJENESTER (revisjon): står på Petrol, på plassen til «Slik jobber vi» */}
+      {s.deltjenester && (
+        <Section tone="petrol" flyt>
+          <Container>
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5" data-reveal>
+                <Eyebrow tone="petrol">{s.deltjenester.kicker}</Eyebrow>
+                <h2 className="mt-5 font-display text-display-md font-semibold text-flyd-sand">
+                  {s.deltjenester.title}
+                </h2>
+              </div>
+              <ul className="border-t border-flyd-mint/30 lg:col-span-7" data-reveal>
+                {s.deltjenester.deler.map((d) => (
+                  <li key={d.title} className="border-b border-flyd-mint/30 py-6">
+                    <h3 className="font-display text-[20px] font-semibold text-flyd-sand">{d.title}</h3>
+                    <p className="mt-2 text-[16px] leading-relaxed text-flyd-dempet">{d.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Container>
+        </Section>
+      )}
+
       {/* SLIK JOBBER VI: egen prosess for tjenesten, ellers Flyds fire steg (med mindre den er valgt bort) */}
       {!utelatt('prosess') && (
         <Section tone="petrol" flyt>

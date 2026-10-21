@@ -69,6 +69,11 @@ export type Service = {
   sammen?: { slug: string; title: string; text: string; lenketekst: string };
   /** Linje om hvem som utfører tjenesten, med lenke til godkjenningen. Vises bare på tjenestesiden. */
   godkjenning?: { foer: string; lenketekst: string; etter: string; href: string };
+  /**
+   * Deltjenester med en kort forklaring. Vises som egen seksjon på tjenestesiden,
+   * på plassen til «Slik jobber vi».
+   */
+  deltjenester?: { kicker: string; title: string; deler: { title: string; text: string }[] };
 };
 
 export const services: Service[] = [
@@ -105,16 +110,15 @@ export const services: Service[] = [
     status: 'publisert',
     tema: 'Revisjon',
     title: 'Revisjon',
-    short: 'Lovpålagt revisjon, revisorbekreftelser og andre attestasjonstjenester – effektivt og med høy kvalitet.',
-    long: 'Revisjon høres kanskje kjedelig ut. Vi tar oss av den, slik at du kan fokusere på det du kan best. Våre statsautoriserte revisorer leverer lovpålagt revisjon, revisorbekreftelser og andre attestasjonstjenester for små og mellomstore bedrifter, med lang erfaring fra bygg og anlegg, handel, tjenesteyting og eiendom.',
+    short: 'Revisjon av årsregnskapet, revisorbekreftelser og andre attestasjoner for små og mellomstore bedrifter.',
+    long: 'Våre statsautoriserte revisorer reviderer årsregnskap og leverer revisorbekreftelser og andre attestasjoner for små og mellomstore bedrifter. Vi har erfaring fra bygg og anlegg, handel, tjenesteyting og eiendom.',
     bullets: [
-      'Lovpålagt revisjon',
-      'Revisorbekreftelser',
-      'Andre attestasjonstjenester',
+      'Revisjon av årsregnskapet',
+      'Revisorbekreftelser og attestasjoner',
       'Statsautoriserte revisorer',
       'Erfaring fra bygg og anlegg, handel, tjenesteyting og eiendom',
     ],
-    fitFor: 'Små og mellomstore bedrifter som trenger revisjon eller en revisorbekreftelse.',
+    fitFor: 'Små og mellomstore bedrifter som har revisjonsplikt, har valgt å ha revisor eller trenger en revisorbekreftelse.',
     icon: 'revisjon',
     image: {
       src: '/tjenestebilder/revisjon.webp',
@@ -124,7 +128,11 @@ export const services: Service[] = [
     faq: [
       {
         q: 'Hvilke revisjonstjenester leverer Flyd?',
-        a: 'Vi leverer lovpålagt revisjon, revisorbekreftelser og andre attestasjonstjenester for små og mellomstore bedrifter.',
+        a: 'Vi reviderer årsregnskap og leverer revisorbekreftelser og andre attestasjoner, blant annet ved stiftelse, kapitalendringer, fusjon, fisjon og avvikling.',
+      },
+      {
+        q: 'Kan dere både føre regnskapet og revidere det?',
+        a: 'Nei. Er vi revisor for selskapet, fører vi ikke regnskapet. Vi kontrollerer årsregnskapet og skattemeldingen, men utarbeider dem ikke.',
       },
       {
         q: 'Er revisorene statsautoriserte?',
@@ -132,10 +140,51 @@ export const services: Service[] = [
       },
       {
         q: 'Hvilke bransjer har dere erfaring med?',
-        a: 'Vi har lang erfaring med revisjon og rådgivning innen bygg og anlegg, handel, tjenesteyting og eiendom.',
+        a: 'Vi har erfaring med revisjon og rådgivning innen bygg og anlegg, handel, tjenesteyting og eiendom.',
       },
     ],
     fagperson: 'Irene Bendiksen',
+    // Strukturen følger det revisorer typisk tilbyr (inspirert av credorevisjon.no/tjenester,
+    // ingen tekst kopiert). Uavhengighet: for revisjonskunder kontrollerer vi årsoppgjøret,
+    // vi utarbeider det ikke.
+    deltjenester: {
+      kicker: 'Tjenester innen revisjon',
+      title: 'Dette kan revisor hjelpe deg med.',
+      deler: [
+        {
+          title: 'Revisjon av årsregnskapet',
+          text: 'Vi reviderer årsregnskapet og avgir revisjonsberetning. Det vi ser underveis, i regnskapet og i rutinene, tar vi opp med deg.',
+        },
+        {
+          title: 'Kontroll av årsoppgjør og skattemelding',
+          text: 'Som ledd i revisjonen kontrollerer vi årsoppgjøret og går gjennom skattemeldingen. Selve årsoppgjøret og skattemeldingen lager selskapet eller regnskapsføreren, ikke vi.',
+        },
+        {
+          title: 'Stifte selskap',
+          text: 'Når du stifter aksjeselskap, kan vi bekrefte at aksjekapitalen er innbetalt, og lage redegjørelsen som trengs når kapitalen skytes inn i annet enn penger.',
+        },
+        {
+          title: 'Kapitalbekreftelser og andre attestasjoner',
+          text: 'Bekreftelser ved kapitalforhøyelse og kapitalnedsettelse, og andre attestasjoner som myndigheter, banker eller avtaleparter ber om.',
+        },
+        {
+          title: 'Fusjon og fisjon',
+          text: 'Ved fusjon og fisjon trengs ofte redegjørelser eller bekreftelser fra revisor. Vi avklarer hva som gjelder i din sak, og leverer det som kreves.',
+        },
+        {
+          title: 'Avvikling av selskaper',
+          text: 'Skal et selskap avvikles, kan det være behov for bekreftelser fra revisor. Vi avklarer hva som gjelder for selskapet ditt.',
+        },
+        {
+          title: 'Due diligence',
+          text: 'Før kjøp eller salg av en virksomhet går vi gjennom regnskapet og andre forhold du bør kjenne til før du bestemmer deg.',
+        },
+        {
+          title: 'Rådgivning om skatt og avgifter',
+          text: 'Spørsmål om regnskap, skatt og merverdiavgift, innenfor rammene revisorloven setter for rådgivning til revisjonskunder.',
+        },
+      ],
+    },
     // Faktasjekk 16.10.2026: de generelle prosesstegene passer ikke for revisjon,
     // og «Passer ikke for» og pris har ingen kilde. Tas inn igjen med bekreftet innhold.
     utelatt: ['prosess', 'passerIkke', 'pris'],

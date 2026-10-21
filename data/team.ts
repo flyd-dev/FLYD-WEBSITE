@@ -26,6 +26,25 @@ const mk = (m: Omit<TeamMember, 'initials'> & { initials?: string }): TeamMember
 });
 
 export const leadership: TeamMember[] = [
+  // Partnere i revisjon. Kontaktinfo og portretter som på liit.no, men med @flyd.no.
+  mk({
+    name: 'Irene Bendiksen',
+    role: 'Partner, leder revisjon',
+    partner: true,
+    revisor: true,
+    phone: '+47 997 02 292',
+    email: 'irene.bendiksen@flyd.no',
+    image: '/team/flyd-irene.webp',
+  }),
+  mk({
+    name: 'Heidi Elizabeth Odden',
+    role: 'Partner, statsautorisert revisor',
+    partner: true,
+    revisor: true,
+    phone: '+47 928 19 975',
+    email: 'heidi.odden@flyd.no',
+    image: '/team/flyd-heidi.webp',
+  }),
   mk({
     name: 'Kai Mydland',
     role: 'Daglig leder',
@@ -59,25 +78,6 @@ export const leadership: TeamMember[] = [
     phone: '+47 974 11 759',
     email: 'thomas.haaland@flyd.no',
     image: '/team/flyd-thomas.webp',
-  }),
-  // Partnere i revisjon. Kontaktinfo og portretter som på liit.no, men med @flyd.no.
-  mk({
-    name: 'Irene Bendiksen',
-    role: 'Partner, leder revisjon',
-    partner: true,
-    revisor: true,
-    phone: '+47 997 02 292',
-    email: 'irene.bendiksen@flyd.no',
-    image: '/team/flyd-irene.webp',
-  }),
-  mk({
-    name: 'Heidi Elizabeth Odden',
-    role: 'Partner, statsautorisert revisor',
-    partner: true,
-    revisor: true,
-    phone: '+47 928 19 975',
-    email: 'heidi.odden@flyd.no',
-    image: '/team/flyd-heidi.webp',
   }),
 ];
 
