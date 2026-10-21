@@ -67,6 +67,8 @@ export type Service = {
   utelatt?: ('prosess' | 'passerIkke' | 'pris')[];
   /** Krysslenke til en tjeneste som hører sammen med denne (regnskap ↔ revisjon). Vises bare når målet er synlig. */
   sammen?: { slug: string; title: string; text: string; lenketekst: string };
+  /** Linje om hvem som utfører tjenesten, med lenke til godkjenningen. Vises bare på tjenestesiden. */
+  godkjenning?: { foer: string; lenketekst: string; etter: string; href: string };
 };
 
 export const services: Service[] = [
@@ -92,8 +94,8 @@ export const services: Service[] = [
     sammen: {
       slug: 'revisjon',
       title: 'Regnskap og revisjon i Flyd',
-      // Revisorloven: samme selskap kan ikke få både revisjon og regnskapsføring fra oss (faktasjekk 16.10.2026).
-      text: 'Flyd leverer både regnskap og revisjon. Du kan bruke oss til det ene eller det andre – revisjon og regnskapsføring for samme selskap holdes adskilt etter revisorlovens krav til uavhengighet.',
+      // Revisorloven kap. 8: samme kunde får ikke både revisjon og regnskapsføring fra oss (faktasjekk 21.10.2026).
+      text: 'Flyd leverer både regnskap og revisjon, men ikke begge deler til samme kunde. Revisorloven kapittel 8 krever at revisor er uavhengig av kunden, og at heller ikke selskaper i samme nettverk har en tilknytning som gir risiko for egenkontroll (§ 8-1). Er vi revisor for selskapet ditt, fører vi ikke regnskapet – og omvendt.',
       lenketekst: 'Les om revisjon',
     },
   },
@@ -116,7 +118,7 @@ export const services: Service[] = [
     icon: 'revisjon',
     image: {
       src: '/tjenestebilder/revisjon.webp',
-      alt: 'Irene Bendiksen og kolleger i møte',
+      alt: 'Kolleger i møte',
     },
     problem: 'Revisjonen skal være i orden – uten å ta tiden fra driften.',
     faq: [
@@ -140,8 +142,15 @@ export const services: Service[] = [
     sammen: {
       slug: 'regnskap',
       title: 'Regnskap og revisjon i Flyd',
-      text: 'Flyd leverer både regnskap og revisjon. Du kan bruke oss til det ene eller det andre – revisjon og regnskapsføring for samme selskap holdes adskilt etter revisorlovens krav til uavhengighet.',
+      text: 'Flyd leverer både regnskap og revisjon, men ikke begge deler til samme kunde. Revisorloven kapittel 8 krever at revisor er uavhengig av kunden, og at heller ikke selskaper i samme nettverk har en tilknytning som gir risiko for egenkontroll (§ 8-1). Er vi revisor for selskapet ditt, fører vi ikke regnskapet – og omvendt.',
       lenketekst: 'Les om regnskap og rådgivning',
+    },
+    // Godkjent av Marius 21.10.2026: org.nr. står bare her, ikke i footer, kontakt eller JSON-LD.
+    godkjenning: {
+      foer: 'Revisjonen utføres av FLYD AS (org.nr. 931 900 420), ',
+      lenketekst: 'godkjent revisjonsselskap',
+      etter: '.',
+      href: 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=235342',
     },
   },
   {

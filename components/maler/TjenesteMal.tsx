@@ -162,6 +162,18 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                   </TextLink>
                 </div>
               )}
+              {s.godkjenning && (
+                <p className="mt-6 text-[15px] leading-relaxed text-flyd-skifer">
+                  {s.godkjenning.foer}
+                  <a
+                    href={s.godkjenning.href}
+                    className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors duration-200 hover:text-flyd-skog hover:decoration-flyd-skog"
+                  >
+                    {s.godkjenning.lenketekst}
+                  </a>
+                  {s.godkjenning.etter}
+                </p>
+              )}
             </div>
           </div>
         </Container>
