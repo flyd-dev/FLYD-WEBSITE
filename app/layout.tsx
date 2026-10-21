@@ -101,15 +101,12 @@ export default function RootLayout({
     image: `${siteUrl}/brand/flyd-teal.png`,
     email: "support@flyd.no",
     telephone: "+4748019958",
-    vatID: "NO933662934MVA",
-    taxID: "933662934",
     description:
       "Flyd er et kompetansehus for økonomi og teknologi. Regnskap, rådgivning, ERP og integrasjoner under samme tak – med kontorer i Sør-Vest-Norge.",
     // Alle sjekket med curl 16.10.2026. Bare lenker som viser en ekte side.
     sameAs: [
       "https://www.linkedin.com/company/flyd-as/",
       "https://www.facebook.com/flyd.no",
-      "https://virksomhet.brreg.no/nb/oppslag/enheter/933662934",
       "https://www.proff.no/selskap/flyd-as/sandnes/bedriftsr%C3%A5dgivning/IFFVMXI043Z",
       "https://www.wikidata.org/wiki/Q141747053",
     ],
@@ -122,7 +119,7 @@ export default function RootLayout({
       name: "Regnskap Norge",
       url: "https://www.regnskapnorge.no/",
     },
-    // Forretningsadressen i Enhetsregisteret (data.brreg.no, enheter/933662934),
+    // Forretningsadressen i Enhetsregisteret (data.brreg.no),
     // sjekket 16.10.2026. Hentes ikke fra kontorlista, så rekkefølgen der ikke
     // flytter hovedadressen.
     address: {

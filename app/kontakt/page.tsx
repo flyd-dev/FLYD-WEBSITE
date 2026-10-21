@@ -68,15 +68,6 @@ export default function KontaktPage() {
                     </a>
                   </dd>
                 </div>
-                <div className="relative border-b border-flyd-linje-sand py-6 pl-11">
-                  <dt className="text-[15px] text-flyd-skifer">
-                    <FlydIcon name="kunder" className="absolute left-0 top-7 h-6 w-6 text-flyd-teal" />
-                    Org.nr.
-                  </dt>
-                  <dd className="mt-1 font-display text-[22px] font-semibold">
-                    933 662 934 · Flyd AS
-                  </dd>
-                </div>
               </dl>
             </div>
 

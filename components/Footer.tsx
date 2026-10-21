@@ -70,7 +70,6 @@ export default function Footer() {
                   support@flyd.no
                 </a>
               </div>
-              <div>Org.nr. 933 662 934</div>
             </div>
             <div className="mt-6 flex items-center gap-3">
               <a
