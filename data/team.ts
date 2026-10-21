@@ -37,7 +37,7 @@ export const leadership: TeamMember[] = [
   // Partnere i revisjon. Kontaktinfo og portretter som på liit.no, men med @flyd.no.
   mk({
     name: 'Irene Bendiksen',
-    role: 'Partner, leder revisjon',
+    role: 'Leder revisjon',
     partner: true,
     revisor: true,
     phone: '+47 997 02 292',
@@ -46,7 +46,7 @@ export const leadership: TeamMember[] = [
   }),
   mk({
     name: 'Heidi Elizabeth Odden',
-    role: 'Partner, statsautorisert revisor',
+    role: 'Statsautorisert revisor',
     partner: true,
     revisor: true,
     phone: '+47 928 19 975',
