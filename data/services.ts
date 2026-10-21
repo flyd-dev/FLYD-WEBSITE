@@ -45,8 +45,15 @@ export type Service = {
 
   // Feltene under fyller malen for tjenestesiden. Seksjonen vises bare når
   // feltet har innhold. På utkast vises en [BEKREFT]-merknad i stedet.
+  /**
+   * Ingress under H1 på tjenestesiden, også i sidens metadata og Service-JSON-LD.
+   * Uten den brukes `short`, som også står på tjenestekortene på /tjenester og forsiden.
+   */
+  ingress?: string;
   /** Tekstblokk rett under ingressen (vises bare når den er satt). */
-  innledning?: { kicker: string; title: string; text: string };
+  innledning?: { kicker?: string; title: string; text: string };
+  /** Kicker over problemet. Standard: «Dette løser vi». */
+  problemKicker?: string;
   /** Problemet tjenesten løser, i kundens ord. */
   problem?: string;
   /** Slik jobber vi: 3–5 steg. */
@@ -76,6 +83,8 @@ export type Service = {
    * på plassen til «Slik jobber vi».
    */
   deltjenester?: { kicker: string; title: string; deler: { title: string; text: string }[] };
+  /** Egen tekst i avslutningen (ClosingCta). Standard: «Neste steg» / «Skal vi se på … sammen?». */
+  avslutning?: { kicker: string; title: string; text: string };
 };
 
 export const services: Service[] = [
@@ -126,13 +135,16 @@ export const services: Service[] = [
       src: '/tjenestebilder/revisjon.webp',
       alt: 'Kolleger i møte',
     },
-    // Marius' tekst 21.10.2026, ordrett.
+    // Revisjon skal ikke selges: saklig og informativ tekst på hele siden (Marius 21.10.2026).
+    // Ingressen og innledningen er Marius' tekst, ordrett.
+    ingress:
+      'Med en revisor får regnskapet et uavhengig blikk utenfra. Det gir banken, kundene, leverandørene og eierne trygghet for at tallene stemmer.',
     innledning: {
-      kicker: 'Hvorfor revisjon',
       title: 'Revisjon gir tillit',
-      text: 'Med en revisor får regnskapet ditt et uavhengig blikk utenfra. Det gir banken, kundene, leverandørene og eierne trygghet for at tallene stemmer, at regelverket følges og at de viktige rutinene i bedriften fungerer. Derfor velger også mange små bedrifter revisjon. De ser verdien av en uavhengig kvalitetssikring av alt de rapporterer, både internt og eksternt.',
+      text: 'Revisjonen bekrefter også at regelverket følges og at de viktige rutinene i bedriften fungerer. Mange små bedrifter velger revisjon fordi de ønsker en uavhengig kvalitetssikring av det de rapporterer, både internt og eksternt.',
     },
-    problem: 'Revisjonen skal være i orden – uten å ta tiden fra driften.',
+    problemKicker: 'Om tjenesten',
+    problem: 'Vi reviderer årsregnskapet og avgir revisjonsberetning.',
     faq: [
       {
         q: 'Hvilke revisjonstjenester leverer Flyd?',
@@ -156,7 +168,7 @@ export const services: Service[] = [
     // Uavhengighet: for revisjonskunder utarbeider vi ikke årsregnskapet eller skattemeldingen.
     deltjenester: {
       kicker: 'Tjenester',
-      title: 'Dette kan vi hjelpe deg med.',
+      title: 'Dette leverer vi.',
       deler: [
         {
           title: 'Revisjon',
@@ -187,6 +199,11 @@ export const services: Service[] = [
       lenketekst: 'godkjent revisjonsselskap',
       etter: '.',
       href: 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=235342',
+    },
+    avslutning: {
+      kicker: 'Kontakt',
+      title: 'Spørsmål om revisjon?',
+      text: 'Ring oss eller send en henvendelse via kontaktskjemaet.',
     },
   },
   {

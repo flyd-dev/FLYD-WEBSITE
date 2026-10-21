@@ -62,7 +62,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
     '@type': 'Service',
     '@id': `${siteUrl}${serviceUrl(s)}#service`,
     name: s.title,
-    description: s.short,
+    description: s.ingress ?? s.short,
     url: `${siteUrl}${serviceUrl(s)}`,
     // Revisjon uten provider: #organization er regnskapsselskapet, ikke revisjonsselskapet.
     ...(s.slug === 'revisjon' ? {} : { provider: { '@id': `${siteUrl}/#organization` } }),
@@ -98,7 +98,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
               <Eyebrow>Tjeneste</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">{s.title}</h1>
               <span aria-hidden="true" className="aksentlinje mt-6 block h-1 w-24 rounded-pille bg-flyd-teal" />
-              <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">{s.short}</p>
+              <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">{s.ingress ?? s.short}</p>
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <ButtonLink href={kontakt} variant="primary" withArrow>
                   Snakk med oss
@@ -129,8 +129,8 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
           {s.innledning && (
             <div className="mt-16 grid grid-cols-1 gap-8 border-t border-flyd-linje-sand pt-12 lg:grid-cols-12 lg:gap-16" data-reveal>
               <div className="lg:col-span-5">
-                <Eyebrow>{s.innledning.kicker}</Eyebrow>
-                <h2 className="mt-5 font-display text-display-md font-semibold">{s.innledning.title}</h2>
+                {s.innledning.kicker && <Eyebrow className="mb-5">{s.innledning.kicker}</Eyebrow>}
+                <h2 className="font-display text-display-md font-semibold">{s.innledning.title}</h2>
               </div>
               <p className="text-[17px] leading-[1.7] text-flyd-skifer lg:col-span-7">{s.innledning.text}</p>
             </div>
@@ -143,7 +143,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5" data-reveal>
-              <Eyebrow>Dette løser vi</Eyebrow>
+              <Eyebrow>{s.problemKicker ?? 'Dette løser vi'}</Eyebrow>
               {/* Problemet er en hel setning, så det settes ett trinn mindre enn standardtittelen. */}
               <h2 className={`mt-5 font-display font-semibold ${s.problem ? 'text-display-md' : 'text-display-lg'}`}>
                 {s.problem ? s.problem : `Slik hjelper vi deg med ${lc(s.title)}.`}
@@ -504,9 +504,9 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
       </Section>
 
       <ClosingCta
-        kicker="Neste steg"
-        title={`Skal vi se på ${lc(s.title)} sammen?`}
-        text="Fortell oss litt om virksomheten din, så finner vi ut hva som er riktig første steg."
+        kicker={s.avslutning?.kicker ?? 'Neste steg'}
+        title={s.avslutning?.title ?? `Skal vi se på ${lc(s.title)} sammen?`}
+        text={s.avslutning?.text ?? 'Fortell oss litt om virksomheten din, så finner vi ut hva som er riktig første steg.'}
         primary={{ href: kontakt, label: 'Snakk med oss' }}
       />
     </>

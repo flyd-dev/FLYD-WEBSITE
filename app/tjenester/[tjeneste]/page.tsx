@@ -18,7 +18,7 @@ export function generateMetadata({ params }: Props): Metadata {
   return {
     ...pageMetadata({
       title: s.slug === 'erp' ? 'ERP og systemvalg' : s.title,
-      description: s.short,
+      description: s.ingress ?? s.short,
       path: serviceUrl(s),
     }),
     ...(s.status === 'utkast' ? { robots: { index: false, follow: false } } : {}),
