@@ -45,6 +45,8 @@ export type Service = {
 
   // Feltene under fyller malen for tjenestesiden. Seksjonen vises bare når
   // feltet har innhold. På utkast vises en [BEKREFT]-merknad i stedet.
+  /** Tekstblokk rett under ingressen (vises bare når den er satt). */
+  innledning?: { kicker: string; title: string; text: string };
   /** Problemet tjenesten løser, i kundens ord. */
   problem?: string;
   /** Slik jobber vi: 3–5 steg. */
@@ -123,6 +125,12 @@ export const services: Service[] = [
     image: {
       src: '/tjenestebilder/revisjon.webp',
       alt: 'Kolleger i møte',
+    },
+    // Marius' tekst 21.10.2026, ordrett.
+    innledning: {
+      kicker: 'Hvorfor revisjon',
+      title: 'Revisjon gir tillit',
+      text: 'Med en revisor får regnskapet ditt et uavhengig blikk utenfra. Det gir banken, kundene, leverandørene og eierne trygghet for at tallene stemmer, at regelverket følges og at de viktige rutinene i bedriften fungerer. Derfor velger også mange små bedrifter revisjon. De ser verdien av en uavhengig kvalitetssikring av alt de rapporterer, både internt og eksternt.',
     },
     problem: 'Revisjonen skal være i orden – uten å ta tiden fra driften.',
     faq: [

@@ -125,6 +125,16 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
               )}
             </div>
           </div>
+          {/* INNLEDNING: tekstblokk rett under ingressen, på samme flate som heroen */}
+          {s.innledning && (
+            <div className="mt-16 grid grid-cols-1 gap-8 border-t border-flyd-linje-sand pt-12 lg:grid-cols-12 lg:gap-16" data-reveal>
+              <div className="lg:col-span-5">
+                <Eyebrow>{s.innledning.kicker}</Eyebrow>
+                <h2 className="mt-5 font-display text-display-md font-semibold">{s.innledning.title}</h2>
+              </div>
+              <p className="text-[17px] leading-[1.7] text-flyd-skifer lg:col-span-7">{s.innledning.text}</p>
+            </div>
+          )}
         </Container>
       </Section>
 
