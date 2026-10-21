@@ -26,6 +26,14 @@ const mk = (m: Omit<TeamMember, 'initials'> & { initials?: string }): TeamMember
 });
 
 export const leadership: TeamMember[] = [
+  mk({
+    name: 'Kai Mydland',
+    role: 'Daglig leder',
+    partner: true,
+    phone: '+47 480 19 958',
+    email: 'kai.mydland@flyd.no',
+    image: '/team/flyd-kai.webp',
+  }),
   // Partnere i revisjon. Kontaktinfo og portretter som på liit.no, men med @flyd.no.
   mk({
     name: 'Irene Bendiksen',
@@ -44,14 +52,6 @@ export const leadership: TeamMember[] = [
     phone: '+47 928 19 975',
     email: 'heidi.odden@flyd.no',
     image: '/team/flyd-heidi.webp',
-  }),
-  mk({
-    name: 'Kai Mydland',
-    role: 'Daglig leder',
-    partner: true,
-    phone: '+47 480 19 958',
-    email: 'kai.mydland@flyd.no',
-    image: '/team/flyd-kai.webp',
   }),
   mk({
     name: 'Arnstein Bendiksen',

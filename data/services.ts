@@ -128,7 +128,7 @@ export const services: Service[] = [
     faq: [
       {
         q: 'Hvilke revisjonstjenester leverer Flyd?',
-        a: 'Vi reviderer årsregnskap og leverer revisorbekreftelser og andre attestasjoner, blant annet ved stiftelse, kapitalendringer, fusjon, fisjon og avvikling.',
+        a: 'Vi reviderer årsregnskap og leverer revisorbekreftelser og andre attestasjonstjenester. I tillegg utarbeider vi årsregnskap og skattemelding og gir rådgivning innen regnskap, skatt, forretningsutvikling og annet knyttet til bedriftsøkonomien.',
       },
       {
         q: 'Kan dere både føre regnskapet og revidere det?',
@@ -144,44 +144,23 @@ export const services: Service[] = [
       },
     ],
     fagperson: 'Irene Bendiksen',
-    // Strukturen følger det revisorer typisk tilbyr (inspirert av credorevisjon.no/tjenester,
-    // ingen tekst kopiert). Uavhengighet: for revisjonskunder kontrollerer vi årsoppgjøret,
-    // vi utarbeider det ikke.
+    // Samme tre tjenester, med samme navn og omfang, som på liit.no (Irene 21.10.2026).
+    // Uavhengighet: for revisjonskunder utarbeider vi ikke årsregnskapet eller skattemeldingen.
     deltjenester: {
-      kicker: 'Tjenester innen revisjon',
-      title: 'Dette kan revisor hjelpe deg med.',
+      kicker: 'Tjenester',
+      title: 'Dette kan vi hjelpe deg med.',
       deler: [
         {
-          title: 'Revisjon av årsregnskapet',
-          text: 'Vi reviderer årsregnskapet og avgir revisjonsberetning. Det vi ser underveis, i regnskapet og i rutinene, tar vi opp med deg.',
+          title: 'Revisjon',
+          text: 'Vi reviderer årsregnskapet og leverer revisorbekreftelser og andre attestasjonstjenester.',
         },
         {
-          title: 'Kontroll av årsregnskapet',
-          text: 'Som ledd i revisjonen kontrollerer vi årsregnskapet. Selve årsoppgjøret og skattemeldingen lager selskapet eller regnskapsføreren, ikke vi.',
+          title: 'Årsregnskap og skattemelding',
+          text: 'Vi utarbeider årsregnskap og skattemelding for selskaper som ikke har oss som revisor.',
         },
         {
-          title: 'Stifte selskap',
-          text: 'Når du stifter aksjeselskap, kan vi bekrefte at aksjekapitalen er innbetalt. Skytes kapitalen inn i annet enn penger, skal revisor bekrefte redegjørelsen som stifterne lager (aksjeloven §§ 2-6 og 2-18).',
-        },
-        {
-          title: 'Kapitalbekreftelser og andre attestasjoner',
-          text: 'Bekreftelser ved kapitalforhøyelse, revisjon av mellombalanse når den trengs, for eksempel ved kapitalnedsettelse eller ekstraordinært utbytte, og andre attestasjoner som myndigheter, banker eller avtaleparter ber om.',
-        },
-        {
-          title: 'Fusjon og fisjon',
-          text: 'Ved fusjon og fisjon skal revisor som hovedregel bekrefte styrets redegjørelse for fusjons- eller fisjonsplanen (aksjeloven §§ 13-10 og 14-4). Vi avklarer hva som gjelder i din sak.',
-        },
-        {
-          title: 'Avvikling av selskaper',
-          text: 'Skal et selskap avvikles, skal avviklingsbalansen og sluttoppgjøret som hovedregel revideres (aksjeloven §§ 16-6 og 16-10). Vi avklarer hva som gjelder for selskapet ditt.',
-        },
-        {
-          title: 'Due diligence',
-          text: 'Før kjøp eller salg av en virksomhet går vi gjennom regnskapet og andre forhold du bør kjenne til før du bestemmer deg.',
-        },
-        {
-          title: 'Rådgivning om skatt og avgifter',
-          text: 'Spørsmål om regnskap, skatt og merverdiavgift, innenfor rammene revisorloven setter for rådgivning til revisjonskunder.',
+          title: 'Rådgivning',
+          text: 'Rådgivning innen regnskap, skatt, forretningsutvikling og annet knyttet til bedriftsøkonomien. For revisjonskunder gir vi råd innenfor rammene revisorloven setter.',
         },
       ],
     },
