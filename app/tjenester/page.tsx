@@ -35,7 +35,8 @@ const servicesJsonLd = {
       name: s.title,
       description: s.short,
       url: `${siteUrl}${serviceUrl(s)}`,
-      provider: { '@id': `${siteUrl}/#organization` },
+      // Revisjon uten provider: #organization er regnskapsselskapet, ikke revisjonsselskapet.
+      ...(s.slug === 'revisjon' ? {} : { provider: { '@id': `${siteUrl}/#organization` } }),
     },
   })),
 };
@@ -43,7 +44,7 @@ const servicesJsonLd = {
 export const metadata: Metadata = pageMetadata({
   title: 'Regnskap, revisjon og ERP – Tjenester',
   description:
-    'Regnskap og rådgivning, revisjon, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR – samlet hos Flyd.',
+    'Flyd tilbyr regnskap og rådgivning, revisjon, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR.',
   path: '/tjenester/',
 });
 
@@ -65,7 +66,7 @@ export default function TjenesterPage() {
             Vi leverer alt du trenger innen økonomi og teknologi – fra daglig
             bokføring og revisjon til komplekse integrasjoner mellom
             forretningssystemer.
-            Velg det du trenger, eller sett oss til å ta hele bildet.
+            Velg tjenestene du trenger – revisjon leverer vi alltid uavhengig av regnskapet.
           </p>
 
           <nav aria-label="Tjenester" className="mt-12">

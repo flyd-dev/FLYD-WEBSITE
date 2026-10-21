@@ -24,7 +24,7 @@ const breadcrumbJsonLd = {
 };
 
 export const metadata: Metadata = pageMetadata({
-  absoluteTitle: 'Om Flyd – Regnskap, revisjon og teknologi i ett hus',
+  absoluteTitle: 'Om Flyd – Regnskap, revisjon og teknologi',
   description:
     'Flyd er et kompetansehus for økonomi og teknologi som leverer både regnskap og revisjon. Møt oss og besøk et av våre seks kontorer i Sør-Vest-Norge.',
   path: '/om-flyd/',
@@ -101,9 +101,10 @@ export default function OmFlydPage() {
               </h1>
               <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
                 Flyd er et kompetansehus for økonomi og teknologi, med bred
-                kompetanse innen revisjon, regnskap, rådgivning og teknologi. Vi
-                leverer tjenestene fra samme sted – slik at du slipper å koordinere
-                fem leverandører og kan konsentrere deg om å drive bedriften videre.
+                kompetanse innen revisjon, regnskap, rådgivning og teknologi. Du
+                får en fast kontaktperson, og vi samordner regnskap, rådgivning og
+                teknologi for deg. Revisjon leverer vi uavhengig – aldri til en
+                kunde vi fører regnskapet for.
               </p>
               <div className="mt-12 max-w-xl">
                 <StatsSection stats={figures} columns={3} />
@@ -150,7 +151,7 @@ export default function OmFlydPage() {
                 Langsiktige relasjoner.
               </h2>
               <blockquote className="mt-10 border-l-4 border-flyd-korall pl-6 font-display text-[24px] font-semibold leading-[1.3] text-flyd-mint">
-                Én partner, ett nummer – full flyd.
+                Fast kontaktperson, ett nummer – full flyd.
               </blockquote>
             </div>
             <div className="space-y-6 lg:col-span-7" data-reveal>
@@ -230,7 +231,7 @@ export default function OmFlydPage() {
           <div className="max-w-2xl" data-reveal>
             <Eyebrow>Kontorer</Eyebrow>
             <h2 className="mt-5 font-display text-display-lg font-semibold">
-              Seks steder. Én partner.
+              Seks steder. Ett nummer.
             </h2>
             <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
               Vi er lokalt til stede der kundene våre er – fra Stavanger i nord

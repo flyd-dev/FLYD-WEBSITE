@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     google: "etU_ZA2jeyyDin4pgdzxqQzG6LLkLYft9oiBM0HhzPA",
   },
   title: {
-    default: "Flyd AS – regnskapsfører, revisor, ERP og teknologi på Sør-Vestlandet",
+    default: "Flyd – regnskapsfører, revisor, ERP og teknologi på Sør-Vestlandet",
     template: "%s · Flyd",
   },
   description:
-    "Flyd er et kompetansehus for økonomi og teknologi. Fra daglig regnskap og revisjon til ERP og integrasjoner – én partner, ett nummer, full oversikt.",
+    "Flyd er et kompetansehus for økonomi og teknologi med regnskap, revisjon, ERP og integrasjoner. Ett nummer, lokale folk og full oversikt.",
   alternates: {
     canonical: "/",
   },
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
     locale: "nb_NO",
     url: "https://www.flyd.no/",
     siteName: "Flyd AS",
-    title: "Flyd AS – regnskapsfører, revisor, ERP og teknologi på Sør-Vestlandet",
+    title: "Flyd – regnskapsfører, revisor, ERP og teknologi på Sør-Vestlandet",
     description:
-      "Et kompetansehus for økonomi og teknologi. Regnskap, revisjon, rådgivning, ERP og integrasjoner under samme tak.",
+      "Et kompetansehus for økonomi og teknologi: regnskap, revisjon, rådgivning, ERP og integrasjoner.",
     images: [
       {
         url: "https://www.flyd.no/opengraph-image.png",
@@ -63,9 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Flyd AS – regnskapsfører, revisor, ERP og teknologi på Sør-Vestlandet",
+    title: "Flyd – regnskapsfører, revisor, ERP og teknologi på Sør-Vestlandet",
     description:
-      "Et kompetansehus for økonomi og teknologi. Regnskap, revisjon, rådgivning, ERP og integrasjoner under samme tak.",
+      "Et kompetansehus for økonomi og teknologi: regnskap, revisjon, rådgivning, ERP og integrasjoner.",
     images: ["https://www.flyd.no/opengraph-image.png"],
   },
   icons: {
@@ -102,7 +102,7 @@ export default function RootLayout({
     email: "support@flyd.no",
     telephone: "+4748019958",
     description:
-      "Flyd er et kompetansehus for økonomi og teknologi. Regnskap, revisjon, rådgivning, ERP og integrasjoner under samme tak – med kontorer i Sør-Vest-Norge.",
+      "Flyd er et kompetansehus for økonomi og teknologi som tilbyr regnskap, revisjon, rådgivning, ERP og integrasjoner, med kontorer i Sør-Vest-Norge.",
     // Alle sjekket med curl 16.10.2026. Bare lenker som viser en ekte side.
     sameAs: [
       "https://www.linkedin.com/company/flyd-as/",

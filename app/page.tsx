@@ -22,7 +22,7 @@ import { stats } from '@/data/stats';
 const rutenett = kortRutenett(visibleServices.length, 4);
 
 const whyFlyd: { icon: FlydIconName; text: string }[] = [
-  { icon: 'samme-tak', text: 'Regnskap, revisjon, rådgivning og teknologi under samme tak' },
+  { icon: 'samme-tak', text: 'Regnskap, revisjon, rådgivning og teknologi – med revisjonen uavhengig av regnskapet' },
   { icon: 'sparring', text: 'Rådgivere som stiller spørsmål – ikke bare leverer tall' },
   { icon: 'erp', text: 'Moderne ERP- og programvarekompetanse' },
   { icon: 'automatisering', text: 'Integrasjoner som reduserer manuelt arbeid' },
@@ -70,7 +70,7 @@ export default function HomePage() {
                     Mint fordi bunnen er Skog – på lys bunn ville den vært Petrol. */}
                 <h1 className="font-display text-display-xl font-semibold text-flyd-sand">
                   <span className="mb-5 block text-[13px] font-semibold uppercase leading-[1.3] tracking-[0.08em] text-flyd-mint md:mb-6 md:text-[15px]">
-                    Flyd AS – regnskap, revisjon, ERP og teknologi
+                    Flyd – regnskap, revisjon, ERP og teknologi
                   </span>{' '}
                   Økonomi og teknologi
                   <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
@@ -81,9 +81,9 @@ export default function HomePage() {
                   </span>
                 </h1>
                 <p className="mt-8 max-w-xl font-display text-ingress font-medium text-flyd-dempet">
-                  Flyd er et kompetansehus som hjelper bedrifter med hele bildet.
-                  Fra daglig regnskap og revisjon til ERP og integrasjoner – én
-                  partner, ett nummer, full flyd.
+                  Flyd er et kompetansehus for økonomi og teknologi. Vi tilbyr
+                  regnskap, revisjon, ERP og integrasjoner – ett nummer, lokale
+                  folk, full flyd.
                 </p>
                 <div className="mt-10 flex flex-wrap items-center gap-4">
                   <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
@@ -133,10 +133,10 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <Eyebrow>Tjenester</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Alt du trenger – i ett hus.
+                Alt du trenger innen økonomi og teknologi.
               </h2>
               <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-skifer">
-                Vi kombinerer regnskap, revisjon, rådgivning og teknologi for å gi deg bedre
+                Vi tilbyr regnskap, revisjon, rådgivning og teknologi som gir deg bedre
                 kontroll, mer effektive prosesser og et sterkere beslutningsgrunnlag.
               </p>
             </div>

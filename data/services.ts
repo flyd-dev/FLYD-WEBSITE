@@ -67,6 +67,8 @@ export type Service = {
   utelatt?: ('prosess' | 'passerIkke' | 'pris')[];
   /** Krysslenke til en tjeneste som hører sammen med denne (regnskap ↔ revisjon). Vises bare når målet er synlig. */
   sammen?: { slug: string; title: string; text: string; lenketekst: string };
+  /** Linje om hvem som utfører tjenesten, med lenke til godkjenningen. Vises bare på tjenestesiden. */
+  godkjenning?: { foer: string; lenketekst: string; etter: string; href: string };
 };
 
 export const services: Service[] = [
@@ -76,7 +78,7 @@ export const services: Service[] = [
     status: 'publisert',
     tema: 'Regnskap og rådgivning',
     title: 'Regnskap og rådgivning',
-    short: 'Fra daglig bokføring til strategisk sparring – én partner for både tallene og beslutningene.',
+    short: 'Fra daglig bokføring til strategisk sparring – én fast kontaktperson for både tallene og beslutningene.',
     long: 'Regnskapet skal være i orden, men det skal også fortelle deg noe. Vi tar ansvar for bokføring, fakturering, mva-oppgjør og årsoppgjør – og er samtidig sparringspartneren som hjelper deg å tolke tallene, se muligheter og ta bedre beslutninger. Enten du står foran oppkjøp, vekst, generasjonsskifte eller en vanskelig periode, får du en fast kontaktperson som kjenner virksomheten – og en rådgiver å støtte deg på når det virkelig gjelder.',
     bullets: [
       'Løpende bokføring, fakturering og årsoppgjør',
@@ -142,6 +144,13 @@ export const services: Service[] = [
       title: 'Regnskap og revisjon i Flyd',
       text: 'Flyd leverer både regnskap og revisjon, men ikke begge deler til samme kunde. Revisorloven kapittel 8 krever at revisor er uavhengig av kunden, og at heller ikke selskaper i samme nettverk har en tilknytning som gir risiko for egenkontroll (§ 8-1). Er vi revisor for selskapet ditt, fører vi ikke regnskapet – og omvendt.',
       lenketekst: 'Les om regnskap og rådgivning',
+    },
+    // Godkjent av Marius 21.10.2026: org.nr. står bare her, ikke i footer, kontakt eller JSON-LD.
+    godkjenning: {
+      foer: 'Revisjonen utføres av FLYD AS (org.nr. 931 900 420), ',
+      lenketekst: 'godkjent revisjonsselskap',
+      etter: '.',
+      href: 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=235342',
     },
   },
   {

@@ -57,7 +57,7 @@ export default function Footer() {
             </Link>
             <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-flyd-dempet">
               Et kompetansehus for økonomi og teknologi. Regnskap, revisjon,
-              rådgivning, programvare og integrasjoner under samme tak.
+              rådgivning, programvare og integrasjoner.
             </p>
             <div className="mt-8 space-y-1.5 text-[15px] text-flyd-dempet">
               <div>

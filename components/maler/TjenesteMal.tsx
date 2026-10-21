@@ -64,7 +64,8 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
     name: s.title,
     description: s.short,
     url: `${siteUrl}${serviceUrl(s)}`,
-    provider: { '@id': `${siteUrl}/#organization` },
+    // Revisjon uten provider: #organization er regnskapsselskapet, ikke revisjonsselskapet.
+    ...(s.slug === 'revisjon' ? {} : { provider: { '@id': `${siteUrl}/#organization` } }),
     areaServed: [
       { '@type': 'AdministrativeArea', name: 'Rogaland' },
       { '@type': 'AdministrativeArea', name: 'Agder' },
@@ -161,6 +162,18 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                     {sammen.lenketekst}
                   </TextLink>
                 </div>
+              )}
+              {s.godkjenning && (
+                <p className="mt-6 text-[15px] leading-relaxed text-flyd-skifer">
+                  {s.godkjenning.foer}
+                  <a
+                    href={s.godkjenning.href}
+                    className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors duration-200 hover:text-flyd-skog hover:decoration-flyd-skog"
+                  >
+                    {s.godkjenning.lenketekst}
+                  </a>
+                  {s.godkjenning.etter}
+                </p>
               )}
             </div>
           </div>
@@ -434,7 +447,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
       <Section tone={visFaq ? 'sand' : 'lysmint'}>
         <Container>
           <div className="max-w-3xl" data-reveal>
-            <Eyebrow>Alt i ett hus</Eyebrow>
+            <Eyebrow>Flere tjenester</Eyebrow>
             <h2 className="mt-5 font-display text-display-md font-semibold">Andre tjenester</h2>
           </div>
           <ul className={`stagger mt-10 ${rutenett.liste}`}>

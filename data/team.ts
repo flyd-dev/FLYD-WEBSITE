@@ -204,7 +204,8 @@ export const otherTeam: TeamMember[] = [
 
 /**
  * Revisjonsgruppen på /om-flyd. Partnerne i revisjon (Irene og Heidi) står bare
- * i `leadership`, så ingen vises to ganger. Titlene står som på liit.no.
+ * i `leadership`, så ingen vises to ganger. Titlene til Martha, Randi og Synne
+ * står som på liit.no. Julies tittel er godkjent i PR #45.
  */
 export const auditTeam: TeamMember[] = [
   mk({
