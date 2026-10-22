@@ -107,14 +107,7 @@ export const officeLeads: TeamMember[] = [
   }),
 ];
 
-export const otherTeam: TeamMember[] = [
-  mk({
-    name: 'Marius Koldal',
-    role: 'ERP-konsulent',
-    phone: '+47 902 75 304',
-    email: 'marius.koldal@flyd.no',
-    image: '/team/flyd-marius.webp',
-  }),
+export const accountingTeam: TeamMember[] = [
   mk({
     name: 'Christoffer Ellingham',
     role: 'Regnskapskonsulent',
@@ -241,5 +234,16 @@ export const auditTeam: TeamMember[] = [
   }),
 ];
 
+// ERP, systemer og teknologi.
+export const techTeam: TeamMember[] = [
+  mk({
+    name: 'Marius Koldal',
+    role: 'ERP-konsulent',
+    phone: '+47 902 75 304',
+    email: 'marius.koldal@flyd.no',
+    image: '/team/flyd-marius.webp',
+  }),
+];
+
 /** Alle medarbeidere: til nøkkeltall, JSON-LD og oppslag av fagperson. */
-export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...auditTeam, ...otherTeam];
+export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...auditTeam, ...accountingTeam, ...techTeam];

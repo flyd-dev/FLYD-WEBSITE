@@ -10,7 +10,7 @@ import OfficeCards from '@/components/OfficeCards';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
-import { allTeam, auditTeam, leadership, officeLeads, otherTeam } from '@/data/team';
+import { accountingTeam, allTeam, auditTeam, leadership, officeLeads, techTeam } from '@/data/team';
 import { offices } from '@/data/offices';
 import { stat } from '@/data/stats';
 
@@ -214,10 +214,19 @@ export default function OmFlydPage() {
           </div>
 
           <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Resten av teamet</Eyebrow>
+            <Eyebrow>Regnskap</Eyebrow>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {otherTeam.map((m) => (
+            {accountingTeam.map((m) => (
+              <TeamCard key={m.email} m={m} />
+            ))}
+          </div>
+
+          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
+            <Eyebrow>Teknologi</Eyebrow>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {techTeam.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>
