@@ -178,8 +178,8 @@ export default function HomePage() {
               </h2>
               <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
                 Flyd kombinerer fagkompetanse med moderne teknologiforståelse. Vi
-                er ikke et tradisjonelt regnskapsbyrå – vi ser tallene, systemene
-                og arbeidsflyten under ett.
+                er opptatt av helheten – vi ser tallene, systemene og arbeidsflyten
+                under ett.
               </p>
             </div>
             <div className="lg:col-span-7">

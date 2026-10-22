@@ -85,3 +85,11 @@ export const bytteRevisor = {
     tekst: 'Ring oss eller send en melding, så setter vi deg i kontakt med en av revisorene.',
   },
 };
+
+/**
+ * Irenes tekst om revisjonsselskapet (22.10.2026). Står ved siden av
+ * regnskapsføreren i toppen av /kontor og i revisjonsblokken på kontorsiden
+ * i Sokndal.
+ */
+export const revisjonOmtale =
+  'Flyd er godkjent revisjonsselskap med rett til å påta seg revisjonsoppdrag. Vi utfører revisjonstjenester som lovbestemt revisjon, revisorbekreftelser og andre attestasjonstjenester.';
