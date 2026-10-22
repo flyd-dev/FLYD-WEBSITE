@@ -2,6 +2,48 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/flyd-as-og-liit-as-fusjonerer",
+      "has": [{ "type": "host", "value": "(www\\.)?liit\\.no" }],
+      "destination": "https://www.flyd.no/om-flyd/",
+      "statusCode": 301
+    },
+    {
+      "source": "/flyd-as-og-liit-as-fusjonerer/",
+      "has": [{ "type": "host", "value": "(www\\.)?liit\\.no" }],
+      "destination": "https://www.flyd.no/om-flyd/",
+      "statusCode": 301
+    },
+    {
+      "source": "/kontakt",
+      "has": [{ "type": "host", "value": "(www\\.)?liit\\.no" }],
+      "destination": "https://www.flyd.no/kontakt/",
+      "statusCode": 301
+    },
+    {
+      "source": "/kontakt/",
+      "has": [{ "type": "host", "value": "(www\\.)?liit\\.no" }],
+      "destination": "https://www.flyd.no/kontakt/",
+      "statusCode": 301
+    },
+    {
+      "source": "/personvern",
+      "has": [{ "type": "host", "value": "(www\\.)?liit\\.no" }],
+      "destination": "https://www.flyd.no/personvern/",
+      "statusCode": 301
+    },
+    {
+      "source": "/personvern/",
+      "has": [{ "type": "host", "value": "(www\\.)?liit\\.no" }],
+      "destination": "https://www.flyd.no/personvern/",
+      "statusCode": 301
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "(www\\.)?liit\\.no" }],
+      "destination": "https://www.flyd.no/",
+      "statusCode": 301
+    },
+    {
       "source": "/kontor/stavanger",
       "destination": "/kontor/stavanger-sandnes/",
       "statusCode": 301
