@@ -16,7 +16,7 @@ import { ButtonLink, TextLink } from '@/components/Button';
 import { HeroTypewriter, HeroTypewriterPause } from '@/components/HeroTypewriter';
 import type { ServiceTone } from '@/components/ServiceIcon';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
-import { visibleServices, erpSystems, serviceUrl } from '@/data/services';
+import { kombinerbareTjenester, uavhengigeTjenester, erpSystems, serviceUrl } from '@/data/services';
 import { stats } from '@/data/stats';
 
 const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
@@ -145,9 +145,9 @@ export default function HomePage() {
             </TextLink>
           </div>
 
-          {/* Et enslig kort på siste rad står i midten på desktop. */}
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:[&>*:last-child:nth-child(3n+1)]:col-start-2">
-            {visibleServices.map((s, i) => (
+          {/* Tjenestene som kan leveres sammen i rutenettet, revisjon i egen bred rad under. */}
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+            {kombinerbareTjenester.map((s, i) => (
               <div key={s.id} data-reveal className="h-full">
                 <ServiceCard
                   title={s.title}
@@ -156,6 +156,11 @@ export default function HomePage() {
                   tone={serviceTones[i % serviceTones.length]}
                   href={serviceUrl(s)}
                 />
+              </div>
+            ))}
+            {uavhengigeTjenester.map((s) => (
+              <div key={s.id} data-reveal className="sm:col-span-2 lg:col-span-3">
+                <ServiceCard title={s.title} text={s.short} icon={s.icon} tone="teal" href={serviceUrl(s)} wide />
               </div>
             ))}
           </div>

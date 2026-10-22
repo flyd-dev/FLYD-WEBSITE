@@ -102,22 +102,6 @@ export const services: (Service | EgenTjeneste)[] = [
     image: { src: '/tjenestebilder/regnskap-radgivning.webp', alt: 'Rådgivningsmøte: kollega lytter engasjert mens en annen forklarer' },
   },
   {
-    // Egen side (app/tjenester/revisjon/), tekstene står i data/revisjon.ts.
-    id: 'revisjon',
-    slug: 'revisjon',
-    status: 'publisert',
-    tema: 'Revisjon',
-    title: 'Revisjon',
-    short: 'Revisjonstjenester som lovbestemt revisjon, revisorbekreftelser og andre attestasjonstjenester.',
-    icon: 'revisjon',
-    image: {
-      src: '/tjenestebilder/revisjon.webp',
-      alt: 'Tre kolleger fra revisjonsteamet i en samtale rundt et bord med kaffe og frukt',
-    },
-    egenSide: true,
-    uavhengig: true,
-  },
-  {
     // UTKAST: i dag er rådgivning en del av «Regnskap og rådgivning».
     id: 'radgivning',
     slug: 'radgivning',
@@ -298,10 +282,33 @@ export const services: (Service | EgenTjeneste)[] = [
     fitFor: '[BEKREFT: hvem oppstartshjelpen passer for]',
     icon: 'regnskap',
   },
+  {
+    // Egen side (app/tjenester/revisjon/), tekstene står i data/revisjon.ts.
+    // Står sist: vises i egen rad under de andre tjenestene (uavhengig).
+    id: 'revisjon',
+    slug: 'revisjon',
+    status: 'publisert',
+    tema: 'Revisjon',
+    title: 'Revisjon',
+    short: 'Revisjonstjenester som lovbestemt revisjon, revisorbekreftelser og andre attestasjonstjenester.',
+    icon: 'revisjon',
+    image: {
+      src: '/tjenestebilder/revisjon.webp',
+      alt: 'Tre kolleger fra revisjonsteamet i en samtale rundt et bord med kaffe og frukt',
+    },
+    egenSide: true,
+    uavhengig: true,
+  },
 ];
 
 /** Tjenestene som vises nå (utkast bare lokalt og på forhåndsvisninger). */
 export const visibleServices = services.filter(synlig);
+
+/** Tjenestene som kan leveres sammen. Vises i rutenettet på forsiden og /tjenester. */
+export const kombinerbareTjenester = visibleServices.filter(kanKombineres);
+
+/** Tjenester som leveres for seg (revisjon). Vises i egen bred rad under rutenettet. */
+export const uavhengigeTjenester = visibleServices.filter((s) => !kanKombineres(s));
 
 export const serviceUrl = (s: Pick<Service, 'slug'>) => `/tjenester/${s.slug}/`;
 
