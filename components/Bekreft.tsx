@@ -18,15 +18,6 @@ export default function Bekreft({ children, className }: { children: React.React
   );
 }
 
-/** Samme plassholder inne i en setning. Byggesjekken stopper publisering på samme måte. */
-export function BekreftTekst({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="rounded-[4px] border border-dashed border-flyd-rust/60 bg-flyd-sand px-1.5 font-medium text-flyd-skog">
-      [BEKREFT: {children}]
-    </span>
-  );
-}
-
 /** Banner øverst på sider som ikke er publisert ennå. */
 export function UtkastBanner() {
   return (
