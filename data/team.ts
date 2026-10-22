@@ -48,6 +48,29 @@ export const auditPartners: TeamMember[] = [
   }),
 ];
 
+// Partnerne i regnskap. Står blant partnerne på /om-flyd og først i regnskap
+// (Irene 22.10.2026).
+export const accountingPartners: TeamMember[] = [
+  mk({
+    name: 'Svein Zwygart',
+    role: 'Kvalitetsansvarlig regnskap · Statsautorisert regnskapsfører',
+    partner: true,
+    certified: true,
+    phone: '+47 913 96 137',
+    email: 'svein.zwygart@flyd.no',
+    image: '/team/flyd-svein.webp',
+  }),
+  mk({
+    name: 'Thomas Haaland',
+    role: 'Økonomisjef · Statsautorisert regnskapsfører',
+    partner: true,
+    certified: true,
+    phone: '+47 974 11 759',
+    email: 'thomas.haaland@flyd.no',
+    image: '/team/flyd-thomas.webp',
+  }),
+];
+
 // Kai først (daglig leder), så partnerne i revisjon (Irene 21.10.2026).
 export const leadership: TeamMember[] = [
   mk({
@@ -67,36 +90,11 @@ export const leadership: TeamMember[] = [
     email: 'arnstein.bendiksen@flyd.no',
     image: '/team/flyd-arnstein.webp',
   }),
-  mk({
-    name: 'Svein Zwygart',
-    role: 'Kvalitetsansvarlig',
-    partner: true,
-    certified: true,
-    phone: '+47 913 96 137',
-    email: 'svein.zwygart@flyd.no',
-    image: '/team/flyd-svein.webp',
-  }),
-  mk({
-    name: 'Thomas Haaland',
-    role: 'Økonomisjef',
-    partner: true,
-    certified: true,
-    phone: '+47 974 11 759',
-    email: 'thomas.haaland@flyd.no',
-    image: '/team/flyd-thomas.webp',
-  }),
+  ...accountingPartners,
 ];
 
+// Kontorlederne står i regnskap, etter Svein og Thomas (Irene 22.10.2026).
 export const officeLeads: TeamMember[] = [
-  mk({
-    name: 'Kristian Odland',
-    role: 'Kontorleder · Statsautorisert regnskapsfører',
-    lead: true,
-    certified: true,
-    phone: '+47 969 08 575',
-    email: 'kristian.odland@flyd.no',
-    image: '/team/flyd-kristian.webp',
-  }),
   mk({
     name: 'Marit Haga Christensen',
     role: 'Kontorleder · Statsautorisert regnskapsfører',
@@ -105,6 +103,15 @@ export const officeLeads: TeamMember[] = [
     phone: '+47 470 17 697',
     email: 'marit.christensen@flyd.no',
     image: '/team/flyd-marit.webp',
+  }),
+  mk({
+    name: 'Kristian Odland',
+    role: 'Kontorleder · Statsautorisert regnskapsfører',
+    lead: true,
+    certified: true,
+    phone: '+47 969 08 575',
+    email: 'kristian.odland@flyd.no',
+    image: '/team/flyd-kristian.webp',
   }),
 ];
 
@@ -201,19 +208,21 @@ export const accountingTeam: TeamMember[] = [
   }),
 ];
 
-// Resten av revisjonsteamet. Julie har gått over fra regnskap og er fortsatt
-// statsautorisert regnskapsfører (telles i nøkkeltallet).
+// Resten av revisjonsteamet. Martha, Randi og Julie er statsautoriserte
+// regnskapsførere (telles i nøkkeltallet). Julie har gått over fra regnskap.
 export const auditTeam: TeamMember[] = [
   mk({
     name: 'Martha Egeli',
-    role: 'Supervisor',
+    role: 'Supervisor · Statsautorisert regnskapsfører',
+    certified: true,
     phone: '+47 980 18 758',
     email: 'martha.egeli@flyd.no',
     image: '/team/flyd-martha.webp',
   }),
   mk({
     name: 'Randi Egeli Handeland',
-    role: 'Supervisor',
+    role: 'Supervisor · Statsautorisert regnskapsfører',
+    certified: true,
     phone: '+47 975 06 911',
     email: 'randi.handeland@flyd.no',
     image: '/team/flyd-randi.webp',
@@ -246,5 +255,15 @@ export const techTeam: TeamMember[] = [
   }),
 ];
 
-/** Alle medarbeidere: til nøkkeltall, JSON-LD og oppslag av fagperson. */
+/** Alle medarbeidere, hver én gang: til nøkkeltall, JSON-LD og oppslag av fagperson. */
 export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...auditTeam, ...accountingTeam, ...techTeam];
+
+/**
+ * Gruppene på /om-flyd. Partnerne står både i ledelsen og først i faggruppen sin
+ * (Irene 22.10.2026), så bruk allTeam når hver person skal telles én gang.
+ */
+export const teamGroups: { tittel: string; medlemmer: TeamMember[] }[] = [
+  { tittel: 'Revisjon', medlemmer: [...auditPartners, ...auditTeam] },
+  { tittel: 'Regnskap', medlemmer: [...accountingPartners, ...officeLeads, ...accountingTeam] },
+  { tittel: 'Teknologi', medlemmer: techTeam },
+];

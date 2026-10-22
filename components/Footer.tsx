@@ -21,6 +21,7 @@ const flydLenker = [
 
 const komIGangLenker = [
   { href: '/bytte-regnskapsforer/', label: 'Bytte regnskapsfører' },
+  { href: '/bytte-revisor/', label: 'Bytte revisor' },
   { href: '/karriere', label: 'Karriere' },
   { href: '/kontakt', label: 'Kontakt' },
 ];

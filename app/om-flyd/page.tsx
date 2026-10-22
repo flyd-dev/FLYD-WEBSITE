@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Fragment } from 'react';
 import { pageMetadata } from '@/lib/seo';
 import Image from 'next/image';
 import Container from '@/components/Container';
@@ -10,7 +11,7 @@ import OfficeCards from '@/components/OfficeCards';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
-import { accountingTeam, allTeam, auditTeam, leadership, officeLeads, techTeam } from '@/data/team';
+import { allTeam, leadership, teamGroups } from '@/data/team';
 import { offices } from '@/data/offices';
 import { stat } from '@/data/stats';
 
@@ -195,41 +196,18 @@ export default function OmFlydPage() {
             ))}
           </div>
 
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Kontorledere</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {officeLeads.map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
-          </div>
-
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Revisjon</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {auditTeam.map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
-          </div>
-
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Regnskap</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {accountingTeam.map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
-          </div>
-
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Teknologi</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {techTeam.map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
-          </div>
+          {teamGroups.map((g) => (
+            <Fragment key={g.tittel}>
+              <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
+                <Eyebrow>{g.tittel}</Eyebrow>
+              </div>
+              <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {g.medlemmer.map((m) => (
+                  <TeamCard key={m.email} m={m} />
+                ))}
+              </div>
+            </Fragment>
+          ))}
         </Container>
       </Section>
 
