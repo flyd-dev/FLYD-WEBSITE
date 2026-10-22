@@ -3,6 +3,8 @@ import { offices } from './offices';
 
 // Bare regnskapsførere (`certified`), ikke statsautoriserte revisorer.
 const statsautoriserte = allTeam.filter((m) => m.certified).length;
+// Statsautoriserte revisorer har det i tittelen (Irene og Heidi).
+const revisorer = allTeam.filter((m) => m.role.toLowerCase().includes('statsautorisert revisor')).length;
 
 /**
  * Nøkkeltall – én kilde for hele nettstedet.
@@ -13,7 +15,7 @@ const statsautoriserte = allTeam.filter((m) => m.certified).length;
  * når tallet er sjekket.
  */
 export type Stat = {
-  key: 'kunder' | 'kontorer' | 'medarbeidere' | 'statsautoriserte';
+  key: 'kunder' | 'kontorer' | 'medarbeidere' | 'statsautoriserte' | 'revisorer';
   value: string;
   label: string;
   bekreftet: boolean;
@@ -32,6 +34,8 @@ export const stats: Stat[] = [
     label: 'Statsautoriserte regnskapsførere',
     bekreftet: true,
   },
+  // Telles fra titlene i data/team.ts (Irene 22.10.2026).
+  { key: 'revisorer', value: String(revisorer), label: 'Statsautoriserte revisorer', bekreftet: true },
 ];
 
 export function stat(key: Stat['key']): Stat {

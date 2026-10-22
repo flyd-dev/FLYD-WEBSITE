@@ -22,37 +22,37 @@ export const kontorBlokker: Record<string, KontorBlokk> = {
     omrade: 'Stavanger, Sandnes, Sola, Randaberg og resten av Nord-Jæren',
     tekst:
       'Kontoret ligger i FOMO-bygget på Forus, på grensen mellom Stavanger og Sandnes, og er kontoret vårt for Stavanger-regionen. Herfra hjelper vi alt fra gründere til etablerte industri- og eiendomsselskaper.',
-    lenketekst: 'Les om regnskapsfører i Sandnes og Stavanger',
+    lenketekst: 'Se mer om kontoret og folkene i Sandnes',
   },
   egersund: {
     omrade: 'Eigersund og resten av Dalane',
     tekst:
       'Kontoret ligger i Torvgården, midt på torget i Egersund, tett på næringslivet i byen og omegnen. Kom gjerne innom for en prat om regnskapet.',
-    lenketekst: 'Les om regnskapsfører i Egersund',
+    lenketekst: 'Se mer om kontoret og folkene i Egersund',
   },
   sokndal: {
     omrade: 'Sokndal og omegn',
     tekst:
       'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i kommunen, med hele Flyds fagmiljø i ryggen.',
-    lenketekst: 'Les om regnskapsfører i Sokndal',
+    lenketekst: 'Se mer om kontoret og folkene i Sokndal',
   },
   moi: {
     omrade: 'Lund og områdene langs E39 mellom Egersund og Flekkefjord',
     tekst:
       'Moi-kontoret er en lokal regnskapspartner for bedrifter i Lund, med kolleger på fem andre kontorer å spille på når det trengs.',
-    lenketekst: 'Les om regnskapsfører på Moi',
+    lenketekst: 'Se mer om kontoret og folkene på Moi',
   },
   sirdal: {
     omrade: 'Sirdal',
     tekst:
       'I Sirdal finner du oss i Handleriet. Vi jobber tett med bygg-, hytte- og reiselivsnæringen i fjellbygda.',
-    lenketekst: 'Les om regnskapsfører i Sirdal',
+    lenketekst: 'Se mer om kontoret og folkene i Sirdal',
   },
   flekkefjord: {
     omrade: 'Flekkefjord og resten av Lister-regionen',
     tekst:
       'Kontoret ligger sentralt i Elvegaten i Flekkefjord og betjener næringslivet i Lister, med kort vei til både kunder og kolleger.',
-    lenketekst: 'Les om regnskapsfører i Flekkefjord',
+    lenketekst: 'Se mer om kontoret og folkene i Flekkefjord',
   },
 };
 

@@ -24,6 +24,8 @@ import {
 import { visibleServices, serviceUrl } from "@/data/services";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import KontorMal from "@/components/maler/KontorMal";
+import TeamCard from "@/components/TeamCard";
+import { kontorTeam } from "@/data/team";
 import { getKontorside } from "@/data/kontorsider";
 
 const SITE_URL = "https://www.flyd.no";
@@ -275,6 +277,28 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                     className="object-cover"
                   />
                 </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {/* FOLKENE PÅ KONTORET – fra kontorTeam i data/team.ts, kontorlederen først */}
+      {(kontorTeam[office.slug] ?? []).length > 0 && (
+        <Section tone="sand" className="!pt-0">
+          <Container>
+            <div
+              className="border-t border-flyd-linje-sand pt-12 md:pt-16"
+              data-reveal
+            >
+              <Eyebrow>Folkene</Eyebrow>
+              <h2 className="mt-5 font-display text-display-md font-semibold">
+                Møt teamet {atOffice(office)}.
+              </h2>
+            </div>
+            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {kontorTeam[office.slug].map((m) => (
+                <TeamCard key={m.email} m={m} />
               ))}
             </div>
           </Container>

@@ -74,10 +74,7 @@ export type Kontorside = {
     kicker: string;
     title: string;
     text: string;
-    /** Ansattkortene. Uten `role` vises `bekreft` i stedet for rollen. */
-    ansatte: { name: string; role?: string; image: string; bekreft?: string }[];
-    /** Det som mangler for hele teamseksjonen (vises under kortene). */
-    bekreft?: string;
+    /* Ansattkortene hentes fra `kontorTeam` i data/team.ts. */
   };
   faq: KontorFaq[];
   andreKontorer: { kicker: string; title: string };
@@ -233,16 +230,6 @@ export const kontorsider: Record<string, Kontorside> = {
       kicker: 'Folkene',
       title: 'Møt teamet i Sandnes',
       text: 'Hos oss får du en fast kontaktperson på Forus, med kolleger innen regnskap, lønn og systemer rundt seg.',
-      ansatte: [
-        { name: 'Kai Mydland', role: 'Daglig leder', image: '/team/flyd-kai.webp' },
-        { name: 'Arnstein Bendiksen', role: 'Salgssjef', image: '/team/flyd-arnstein.webp' },
-        {
-          name: 'Marit Haga Christensen',
-          role: 'Kontorleder og statsautorisert regnskapsfører',
-          image: '/team/flyd-marit.webp',
-        },
-        { name: 'Tatjana Derksen', role: 'Regnskapskonsulent', image: '/team/flyd-tatjana.webp' },
-      ],
     },
 
     faq: [

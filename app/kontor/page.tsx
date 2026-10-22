@@ -20,12 +20,6 @@ import {
   virksomhetsregisteret,
   virksomhetsregisteretRevisjon,
 } from '@/data/kontoroversikt';
-import { allTeam } from '@/data/team';
-
-// Statsautoriserte revisorer har det i tittelen (ikke `certified`, som er regnskapsførere).
-const statsautoriserteRevisorer = allTeam.filter((m) =>
-  m.role.toLowerCase().includes('statsautorisert revisor'),
-).length;
 
 export const metadata: Metadata = pageMetadata({
   absoluteTitle: 'Regnskapsfører i Rogaland og Agder – seks kontorer · Flyd',
@@ -259,7 +253,7 @@ export default function KontorerPage() {
                 til lovverket.
               </p>
               <p className={`mt-5 ${brod}`}>
-                Flyd AS er et godkjent revisjonsselskap. Vi er {statsautoriserteRevisorer} statsautoriserte
+                Flyd AS er et godkjent revisjonsselskap. Vi er {stat('revisorer').value} statsautoriserte
                 revisorer. Se tillatelsen vår i{' '}
                 <a href={virksomhetsregisteretRevisjon} className={lenke}>
                   Finanstilsynets virksomhetsregister

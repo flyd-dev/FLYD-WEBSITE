@@ -79,8 +79,8 @@ export default function StatsSection({
   columns = 4,
 }: {
   stats: Stat[];
-  /** 4 på forsiden; 3 der tallene står i en smalere kolonne. */
-  columns?: 3 | 4;
+  /** 5 på forsiden; 3 der tallene står i en smalere kolonne. */
+  columns?: 3 | 4 | 5;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   // Server-HTML og første render viser tallene ferdig (for søkemotorer og uten
@@ -122,7 +122,11 @@ export default function StatsSection({
     <div
       ref={ref}
       className={`grid gap-x-6 gap-y-10 md:gap-8 ${
-        columns === 3 ? 'grid-cols-3' : 'grid-cols-2 md:grid-cols-4'
+        columns === 3
+          ? 'grid-cols-3'
+          : columns === 5
+            ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-5'
+            : 'grid-cols-2 md:grid-cols-4'
       }`}
     >
       {stats.map((s, i) => {

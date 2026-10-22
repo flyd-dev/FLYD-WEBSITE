@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     google: "etU_ZA2jeyyDin4pgdzxqQzG6LLkLYft9oiBM0HhzPA",
   },
   title: {
-    default: "Flyd AS – regnskapsfører, ERP og teknologi på Sør-Vestlandet",
+    default: "Flyd AS – regnskapsfører, revisor og ERP på Sør-Vestlandet",
     template: "%s · Flyd",
   },
   description:
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     locale: "nb_NO",
     url: "https://www.flyd.no/",
     siteName: "Flyd AS",
-    title: "Flyd AS – regnskapsfører, ERP og teknologi på Sør-Vestlandet",
+    title: "Flyd AS – regnskapsfører, revisor og ERP på Sør-Vestlandet",
     description:
       "Et kompetansehus for økonomi og teknologi. Vi hjelper bedrifter med regnskap, revisjon, rådgivning, ERP og integrasjoner.",
     images: [
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Flyd AS – regnskapsfører, ERP og teknologi på Sør-Vestlandet",
+    title: "Flyd AS – regnskapsfører, revisor og ERP på Sør-Vestlandet",
     description:
       "Et kompetansehus for økonomi og teknologi. Vi hjelper bedrifter med regnskap, revisjon, rådgivning, ERP og integrasjoner.",
     images: ["https://www.flyd.no/opengraph-image.png"],
