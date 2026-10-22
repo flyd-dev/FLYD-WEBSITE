@@ -7,7 +7,7 @@ import Eyebrow from '@/components/Eyebrow';
 import JsonLd from '@/components/JsonLd';
 import ConsentLink from '@/components/ConsentLink';
 import { BekreftTekst } from '@/components/Bekreft';
-import { personvern, ORGNR_ETTER_FUSJON } from '@/data/personvern';
+import { personvern } from '@/data/personvern';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Personvern',
@@ -148,9 +148,7 @@ export default function PersonvernPage() {
             <div className="mt-12 space-y-12 text-[17px] leading-[1.7] text-flyd-skifer">
               <Del id="ansvarlig">
                 <p className="mt-3">
-                  {selskap.navn} (org.nr. <Fylt verdi={selskap.orgnr} mangler={`org.nr. ${ORGNR_ETTER_FUSJON} – kan det publiseres?`} />)
-                  er ansvarlig for personopplysningene vi behandler. Flyd AS og Liit AS er fusjonert til ett
-                  selskap, som heter Flyd AS og har organisasjonsnummeret til Liit. Vi leverer revisjon og
+                  {selskap.navn} er ansvarlig for personopplysningene vi behandler. Vi leverer revisjon og
                   attestasjon, og regnskap, lønn, rådgivning og teknologi.
                 </p>
                 <p className="mt-3">
