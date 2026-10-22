@@ -16,7 +16,7 @@ import { ButtonLink, TextLink } from '@/components/Button';
 import { HeroTypewriter, HeroTypewriterPause } from '@/components/HeroTypewriter';
 import type { ServiceTone } from '@/components/ServiceIcon';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
-import { visibleServices, erpSystems, serviceUrl } from '@/data/services';
+import { kombinerbareTjenester, uavhengigeTjenester, erpSystems, serviceUrl } from '@/data/services';
 import { stats } from '@/data/stats';
 
 const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
@@ -133,7 +133,7 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <Eyebrow>Tjenester</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Alt du trenger – i ett hus.
+                Regnskap, revisjon og teknologi.
               </h2>
               <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-skifer">
                 Vi kombinerer regnskap, rådgivning og teknologi for å gi deg bedre
@@ -145,8 +145,9 @@ export default function HomePage() {
             </TextLink>
           </div>
 
+          {/* Tjenestene som kan leveres sammen i rutenettet, revisjon i egen bred rad under. */}
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-            {visibleServices.map((s, i) => (
+            {kombinerbareTjenester.map((s, i) => (
               <div key={s.id} data-reveal className="h-full">
                 <ServiceCard
                   title={s.title}
@@ -155,6 +156,11 @@ export default function HomePage() {
                   tone={serviceTones[i % serviceTones.length]}
                   href={serviceUrl(s)}
                 />
+              </div>
+            ))}
+            {uavhengigeTjenester.map((s) => (
+              <div key={s.id} data-reveal className="sm:col-span-2 lg:col-span-3">
+                <ServiceCard title={s.title} text={s.short} icon={s.icon} tone="teal" href={serviceUrl(s)} wide />
               </div>
             ))}
           </div>

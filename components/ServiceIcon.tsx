@@ -21,6 +21,19 @@ const icons = {
     ),
     dot: [14, 14.5],
   },
+  // Dokument med lupe. Dokumentet åpner seg rundt lupen, punktumet står midt i glasset.
+  revisjon: {
+    body: (
+      <>
+        <path d="M10 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v4" />
+        <path d="M8 7.5h5" />
+        <path d="M8 11h2.5" />
+        <circle cx="16" cy="16" r="4.5" />
+        <path d="m19.2 19.2 2.3 2.3" />
+      </>
+    ),
+    dot: [14.5, 14.5],
+  },
   erp: {
     body: (
       <>

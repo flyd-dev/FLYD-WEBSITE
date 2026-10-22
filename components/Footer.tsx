@@ -56,8 +56,8 @@ export default function Footer() {
               <FlydLogo className="-ml-2.5 h-16 w-auto text-flyd-sand" />
             </Link>
             <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-flyd-dempet">
-              Et kompetansehus for økonomi og teknologi. Regnskap, rådgivning,
-              programvare og integrasjoner under samme tak.
+              Et kompetansehus for økonomi og teknologi. Vi hjelper bedrifter
+              med regnskap, revisjon, rådgivning og programvare.
             </p>
             <div className="mt-8 space-y-1.5 text-[15px] text-flyd-dempet">
               <div>
@@ -70,7 +70,6 @@ export default function Footer() {
                   support@flyd.no
                 </a>
               </div>
-              <div>Org.nr. 933 662 934</div>
             </div>
             <div className="mt-6 flex items-center gap-3">
               <a

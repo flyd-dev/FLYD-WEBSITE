@@ -3,6 +3,10 @@ export type TeamMember = {
   role: string;
   partner?: boolean;
   lead?: boolean;
+  /**
+   * Statsautorisert regnskapsfører. Telles i nøkkeltallet. Statsautoriserte
+   * revisorer får samme pille på kortet via tittelen, men telles ikke.
+   */
   certified?: boolean;
   phone?: string;
   email: string;
@@ -22,6 +26,29 @@ const mk = (m: Omit<TeamMember, 'initials'> & { initials?: string }): TeamMember
       .toUpperCase(),
 });
 
+// Partnerne i revisjon (tidligere Liit). Titler og telefon er sjekket mot
+// liit.no/kontakt 22.10.2026, e-post på @flyd.no. Står blant partnerne på
+// /om-flyd og først i revisjonsteamet.
+export const auditPartners: TeamMember[] = [
+  mk({
+    name: 'Irene Bendiksen',
+    role: 'Leder revisjon · Statsautorisert revisor',
+    partner: true,
+    phone: '+47 997 02 292',
+    email: 'irene.bendiksen@flyd.no',
+    image: '/team/flyd-irene.webp',
+  }),
+  mk({
+    name: 'Heidi Elizabeth Odden',
+    role: 'Statsautorisert revisor',
+    partner: true,
+    phone: '+47 928 19 975',
+    email: 'heidi.odden@flyd.no',
+    image: '/team/flyd-heidi.webp',
+  }),
+];
+
+// Kai først (daglig leder), så partnerne i revisjon (Irene 21.10.2026).
 export const leadership: TeamMember[] = [
   mk({
     name: 'Kai Mydland',
@@ -31,6 +58,7 @@ export const leadership: TeamMember[] = [
     email: 'kai.mydland@flyd.no',
     image: '/team/flyd-kai.webp',
   }),
+  ...auditPartners,
   mk({
     name: 'Arnstein Bendiksen',
     role: 'Salgssjef',
@@ -80,22 +108,7 @@ export const officeLeads: TeamMember[] = [
   }),
 ];
 
-export const otherTeam: TeamMember[] = [
-  mk({
-    name: 'Marius Koldal',
-    role: 'ERP-konsulent',
-    phone: '+47 902 75 304',
-    email: 'marius.koldal@flyd.no',
-    image: '/team/flyd-marius.webp',
-  }),
-  mk({
-    name: 'Julie Hagh',
-    role: 'Statsautorisert regnskapsfører',
-    certified: true,
-    phone: '+47 950 08 122',
-    email: 'julie.hagh@flyd.no',
-    image: '/team/flyd-julie.webp',
-  }),
+export const accountingTeam: TeamMember[] = [
   mk({
     name: 'Christoffer Ellingham',
     role: 'Regnskapskonsulent',
@@ -187,3 +200,51 @@ export const otherTeam: TeamMember[] = [
     image: '/team/flyd-tatjana.webp',
   }),
 ];
+
+// Resten av revisjonsteamet. Julie har gått over fra regnskap og er fortsatt
+// statsautorisert regnskapsfører (telles i nøkkeltallet).
+export const auditTeam: TeamMember[] = [
+  mk({
+    name: 'Martha Egeli',
+    role: 'Supervisor',
+    phone: '+47 980 18 758',
+    email: 'martha.egeli@flyd.no',
+    image: '/team/flyd-martha.webp',
+  }),
+  mk({
+    name: 'Randi Egeli Handeland',
+    role: 'Supervisor',
+    phone: '+47 975 06 911',
+    email: 'randi.handeland@flyd.no',
+    image: '/team/flyd-randi.webp',
+  }),
+  mk({
+    name: 'Synne Mydland Johansen',
+    role: 'Associate',
+    phone: '+47 417 50 484',
+    email: 'synne.johansen@flyd.no',
+    image: '/team/flyd-synne.webp',
+  }),
+  mk({
+    name: 'Julie Hagh',
+    role: 'Associate · Statsautorisert regnskapsfører',
+    certified: true,
+    phone: '+47 950 08 122',
+    email: 'julie.hagh@flyd.no',
+    image: '/team/flyd-julie.webp',
+  }),
+];
+
+// ERP, systemer og teknologi.
+export const techTeam: TeamMember[] = [
+  mk({
+    name: 'Marius Koldal',
+    role: 'ERP-konsulent',
+    phone: '+47 902 75 304',
+    email: 'marius.koldal@flyd.no',
+    image: '/team/flyd-marius.webp',
+  }),
+];
+
+/** Alle medarbeidere: til nøkkeltall, JSON-LD og oppslag av fagperson. */
+export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...auditTeam, ...accountingTeam, ...techTeam];
