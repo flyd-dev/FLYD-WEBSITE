@@ -18,8 +18,6 @@ export const revisjon = {
   tjenester: {
     kicker: 'Tjenester',
     tittel: 'Revisjon, årsregnskap og rådgivning.',
-    tekst:
-      'Også mange mindre bedrifter velger å ha revisor. En uavhengig gjennomgang gjør det bedriften rapporterer, både internt og til bank, myndigheter og andre, mer til å stole på.',
     punkter: [
       { tittel: 'Revisjon', tekst: 'Vi reviderer årsregnskapet og avgir revisjonsberetning.' },
       { tittel: 'Årsregnskap og skattemelding', tekst: 'Vi utarbeider årsregnskapet og skattemeldingen.' },
@@ -33,6 +31,55 @@ export const revisjon = {
   avslutning: {
     kicker: 'Kontakt',
     tittel: 'Lurer du på noe om revisjon?',
+    tekst: 'Ring oss eller send en melding, så setter vi deg i kontakt med en av revisorene.',
+  },
+};
+
+/**
+ * /bytte-revisor/ (app/bytte-revisor/page.tsx), lenket fra «Kom i gang» i footer
+ * slik «Bytte regnskapsfører» er (Irene 22.10.2026). Saklig, uten salgsspråk.
+ * Revisorene leser teksten før den publiseres.
+ */
+export const bytteRevisor = {
+  path: '/bytte-revisor/',
+  meta: {
+    title: 'Bytte revisor – slik gjør du det',
+    description:
+      'Slik bytter et aksjeselskap revisor: generalforsamlingen velger ny revisor, den nye revisoren tar kontakt med den forrige, og byttet meldes til Foretaksregisteret.',
+  },
+  tittel: 'Slik bytter du revisor.',
+  ingress:
+    'Et aksjeselskap kan bytte revisor når det vil. Det er generalforsamlingen som velger revisor, og byttet meldes til Foretaksregisteret.',
+  steg: {
+    kicker: 'Steg for steg',
+    tittel: 'Tre steg.',
+    punkter: [
+      {
+        tittel: 'Ta kontakt med en ny revisor',
+        tekst:
+          'Den nye revisoren vurderer oppdraget og tar kontakt med den forrige revisoren før oppdraget aksepteres. Det er en fast rutine, ikke et tegn på problemer.',
+      },
+      {
+        tittel: 'Generalforsamlingen velger ny revisor',
+        tekst:
+          'Valget kan gjøres på den ordinære generalforsamlingen eller på en ekstraordinær generalforsamling.',
+      },
+      {
+        tittel: 'Meld byttet til Foretaksregisteret',
+        tekst:
+          'Byttet meldes med Samordnet registermelding i Altinn, med bekreftelse fra den nye revisoren på at oppdraget er påtatt.',
+      },
+    ],
+  },
+  adskilt: {
+    kicker: 'Revisjon og regnskap',
+    tittel: 'Holdes adskilt.',
+    tekst:
+      'Revisorene våre kan ikke revidere regnskap som Flyd har ført. Har bedriften regnskapsfører hos oss, må revisoren være et annet selskap.',
+  },
+  avslutning: {
+    kicker: 'Kontakt',
+    tittel: 'Spørsmål om å bytte revisor?',
     tekst: 'Ring oss eller send en melding, så setter vi deg i kontakt med en av revisorene.',
   },
 };

@@ -88,6 +88,13 @@ export const regionTjenester: { title: string; text: string; href: string }[] = 
 /** Flyd AS i Finanstilsynets virksomhetsregister (konsesjon «Regnskapsselskap»). */
 export const virksomhetsregisteret = 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=241680';
 
+/**
+ * Revisjonsselskapet (tidligere Liit AS, står som FLYD AS) i Finanstilsynets
+ * virksomhetsregister (konsesjon «Revisjonsselskap»). Lenken bruker registerets
+ * egen id, ikke org.nr.
+ */
+export const virksomhetsregisteretRevisjon = 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=235342';
+
 export type HubFaq = {
   q: string;
   /** Det synlige svaret. Det samme står i FAQPage. */

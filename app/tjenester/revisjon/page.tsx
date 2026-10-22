@@ -105,9 +105,6 @@ export default function RevisjonPage() {
               <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
                 {revisjon.tjenester.tittel}
               </h2>
-              <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
-                {revisjon.tjenester.tekst}
-              </p>
             </div>
             <div className="lg:col-span-7">
               <NumberedList

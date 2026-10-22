@@ -18,7 +18,14 @@ import {
   regionTjenester,
   hubFaq,
   virksomhetsregisteret,
+  virksomhetsregisteretRevisjon,
 } from '@/data/kontoroversikt';
+import { allTeam } from '@/data/team';
+
+// Statsautoriserte revisorer har det i tittelen (ikke `certified`, som er regnskapsførere).
+const statsautoriserteRevisorer = allTeam.filter((m) =>
+  m.role.toLowerCase().includes('statsautorisert revisor'),
+).length;
 
 export const metadata: Metadata = pageMetadata({
   absoluteTitle: 'Regnskapsfører i Rogaland og Agder – seks kontorer · Flyd',
@@ -218,7 +225,7 @@ export default function KontorerPage() {
         </Container>
       </Section>
 
-      {/* AUTORISASJON OG KONTAKT */}
+      {/* AUTORISASJON OG KONTAKT – regnskap og revisjon side om side, hver for seg. */}
       <Section tone="lysmint">
         <Container>
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
@@ -242,9 +249,33 @@ export default function KontorerPage() {
               </p>
             </div>
             <div data-reveal>
+              <Eyebrow>Autorisasjon</Eyebrow>
+              <h2 className="mt-5 font-display text-display-md font-semibold">
+                Autorisert revisor – hva det betyr for deg
+              </h2>
+              <p className={`mt-6 ${brod}`}>
+                Et selskap som er revisor, må ha tillatelse fra Finanstilsynet. Hvert oppdrag skal ha en
+                oppdragsansvarlig statsautorisert revisor, som har ansvaret for at revisjonen utføres i henhold
+                til lovverket.
+              </p>
+              <p className={`mt-5 ${brod}`}>
+                Flyd AS er et godkjent revisjonsselskap. Vi er {statsautoriserteRevisorer} statsautoriserte
+                revisorer. Se tillatelsen vår i{' '}
+                <a href={virksomhetsregisteretRevisjon} className={lenke}>
+                  Finanstilsynets virksomhetsregister
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-16 grid grid-cols-1 gap-6 border-t border-flyd-linje-mint pt-16 lg:grid-cols-2 lg:gap-20" data-reveal>
+            <div>
               <Eyebrow>Ett nummer</Eyebrow>
               <h2 className="mt-5 font-display text-display-md font-semibold">Ett nummer, lokale folk</h2>
-              <p className={`mt-6 ${brod}`}>
+            </div>
+            <div>
+              <p className={brod}>
                 Uansett hvilket kontor du hører til, ringer du{' '}
                 <a href="tel:+4748019958" className={`whitespace-nowrap ${lenke}`}>
                   +47 480 19 958
