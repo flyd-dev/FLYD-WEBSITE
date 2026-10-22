@@ -51,6 +51,11 @@ export type Office = {
   reviewUrl?: string;
   /** Preposisjon foran stedsnavnet («på Moi», «i Egersund»). Standard er «i». */
   preposition?: 'i' | 'på';
+  /**
+   * Revisjonsteamet holder til her (Sokndal). Gir «Regnskapsfører og revisor» i
+   * H1 og en egen revisjonsblokk i toppen av kontorsiden (Irene 22.10.2026).
+   */
+  revisjon?: boolean;
 };
 
 const officeList: Office[] = [
@@ -139,10 +144,11 @@ const officeList: Office[] = [
     lng: 6.2714,
     blurb:
       'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i Sokndal og omegn – med hele Flyds fagmiljø i ryggen.',
+    revisjon: true,
     meta: {
-      title: 'Flyd Sokndal – autorisert regnskapsfører i Sokndal',
+      title: 'Flyd Sokndal – regnskapsfører og revisor i Sokndal',
       description:
-        'Trenger du regnskapsfører i Sokndal? Flyd har kontor i Gamleveien 13 i Hauge i Dalane. Regnskap, lønn, årsoppgjør og rådgivning – med fast kontaktperson.',
+        'Trenger du regnskapsfører eller revisor i Sokndal? Flyd har kontor i Gamleveien 13 i Hauge i Dalane, der også revisjonsteamet vårt holder til.',
       image: {
         url: 'https://www.flyd.no/og/kontor-sokndal.png',
         width: 1200,

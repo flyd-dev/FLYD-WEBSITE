@@ -33,7 +33,7 @@ export const kontorBlokker: Record<string, KontorBlokk> = {
   sokndal: {
     omrade: 'Sokndal og omegn',
     tekst:
-      'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i kommunen, med hele Flyds fagmiljø i ryggen.',
+      'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i kommunen, med hele Flyds fagmiljø i ryggen. Her sitter også revisjonsteamet vårt.',
     lenketekst: 'Se mer om kontoret og folkene i Sokndal',
   },
   moi: {
@@ -82,6 +82,12 @@ export const regionTjenester: { title: string; text: string; href: string }[] = 
     title: 'Tripletex og ERP',
     text: 'Vi hjelper deg med å velge system, setter det opp og bygger integrasjonene, så regnskapet og resten av bedriften henger sammen.',
     href: '/tjenester/erp/',
+  },
+  {
+    // Står sist og for seg: revisjon leveres ikke sammen med regnskapet (Irene 22.10.2026).
+    title: 'Revisjon',
+    text: 'Lovbestemt revisjon, revisorbekreftelser og andre attestasjonstjenester, fra revisjonsteamet i Sokndal.',
+    href: '/tjenester/revisjon/',
   },
 ];
 
