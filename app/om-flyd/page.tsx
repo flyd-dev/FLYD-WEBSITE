@@ -10,7 +10,7 @@ import OfficeCards from '@/components/OfficeCards';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
-import { accountingTeam, allTeam, auditTeam, leadership, officeLeads, techTeam } from '@/data/team';
+import { allTeam, ledelse, restenAvTeamet } from '@/data/team';
 import { offices } from '@/data/offices';
 import { stat } from '@/data/stats';
 
@@ -173,9 +173,9 @@ export default function OmFlydPage() {
         <Container>
           <div className="flex items-end justify-between gap-6" data-reveal>
             <div>
-              <Eyebrow>Ledelse og partnere</Eyebrow>
+              <Eyebrow>Folkene</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Menneskene bak{' '}
+                Menneskene i{' '}
                 <FlydLogo
                   title="Flyd"
                   className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline text-flyd-teal"
@@ -189,44 +189,20 @@ export default function OmFlydPage() {
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {leadership.map((m) => (
+          {/* Ledelsen, en tynn strek, og så resten av gjengen uten inndeling (Arnstein 22.10.2026).
+              Revisjonsteamet står samlet på /tjenester/revisjon/, og folkene per kontor på kontorsidene. */}
+          <div className="mt-12" data-reveal>
+            <Eyebrow as="h3">Ledelse</Eyebrow>
+          </div>
+          {/* Fem i ledelsen: én rad på brede skjermer, så ingen står alene. */}
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {ledelse.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>
 
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Kontorledere</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {officeLeads.map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
-          </div>
-
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Revisjon</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {auditTeam.map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
-          </div>
-
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Regnskap</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {accountingTeam.map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
-          </div>
-
-          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Teknologi</Eyebrow>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {techTeam.map((m) => (
+          <div className="mt-16 grid grid-cols-1 gap-5 border-t border-flyd-linje-sand pt-16 sm:grid-cols-2 lg:grid-cols-4">
+            {restenAvTeamet.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>

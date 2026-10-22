@@ -18,7 +18,9 @@ import {
   regionTjenester,
   hubFaq,
   virksomhetsregisteret,
+  virksomhetsregisteretRevisjon,
 } from '@/data/kontoroversikt';
+import { revisjonOmtale } from '@/data/revisjon';
 
 export const metadata: Metadata = pageMetadata({
   absoluteTitle: 'Regnskapsfører i Rogaland og Agder – seks kontorer · Flyd',
@@ -75,34 +77,42 @@ export default function KontorerPage() {
           <Breadcrumbs items={[{ name: 'Kontorer', href: '/kontor/' }]} />
           <div className="mt-10 max-w-3xl">
             <Eyebrow>Kontorer</Eyebrow>
-            <h1 className="mt-6 font-display text-display-xl font-semibold">
-              Regnskapsfører i Rogaland og Agder
-            </h1>
-            <p className="mt-4 font-display text-display-md font-semibold text-flyd-petrol">
-              Seks kontorer. Ett nummer.
-            </p>
+            <h1 className="mt-6 font-display text-display-xl font-semibold">Seks kontorer. Ett nummer.</h1>
             <span aria-hidden="true" className="aksentlinje mt-6 block h-1 w-24 rounded-pille bg-flyd-teal" />
-            <p className="mt-8 font-display text-ingress font-medium text-flyd-petrol">
-              Flyd er autorisert regnskapsfører for bedrifter i Rogaland og Agder, med seks kontorer: Sandnes
-              (Forus), Egersund, Sokndal, Moi, Sirdal og Flekkefjord. Vi tar regnskap, lønn, årsoppgjør og
-              rådgivning, og hjelper deg med Tripletex og andre regnskapssystemer. Ett nummer gjelder for alle
-              kontorene:{' '}
-              <a
-                href="tel:+4748019958"
-                className="whitespace-nowrap underline decoration-flyd-teal decoration-2 underline-offset-4 hover:text-flyd-skog"
-              >
-                +47 480 19 958
-              </a>
-              .
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <ButtonLink href="/kontakt" variant="primary" withArrow>
-                Snakk med oss
-              </ButtonLink>
-              <ButtonLink href="tel:+4748019958" variant="secondary" external>
-                Ring oss
-              </ButtonLink>
+          </div>
+          {/* Regnskapsfører og revisor side om side, hver for seg (Irene 22.10.2026). */}
+          <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <h2 className="font-display text-display-md font-semibold">Regnskapsfører</h2>
+              <p className="mt-4 font-display text-ingress font-medium text-flyd-petrol">
+                Flyd er autorisert regnskapsfører for bedrifter i Rogaland og Agder, med seks kontorer: Sandnes
+                (Forus), Egersund, Sokndal, Moi, Sirdal og Flekkefjord. Vi tar regnskap, lønn, årsoppgjør og
+                rådgivning, og hjelper deg med Tripletex og andre regnskapssystemer. Ett nummer gjelder for alle
+                kontorene:{' '}
+                <a
+                  href="tel:+4748019958"
+                  className="whitespace-nowrap underline decoration-flyd-teal decoration-2 underline-offset-4 hover:text-flyd-skog"
+                >
+                  +47 480 19 958
+                </a>
+                .
+              </p>
             </div>
+            <div>
+              <h2 className="font-display text-display-md font-semibold">Revisor</h2>
+              <p className="mt-4 font-display text-ingress font-medium text-flyd-petrol">{revisjonOmtale}</p>
+              <div className="mt-5">
+                <TextLink href="/tjenester/revisjon/">Les om revisjon</TextLink>
+              </div>
+            </div>
+          </div>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <ButtonLink href="/kontakt" variant="primary" withArrow>
+              Snakk med oss
+            </ButtonLink>
+            <ButtonLink href="tel:+4748019958" variant="secondary" external>
+              Ring oss
+            </ButtonLink>
           </div>
         </Container>
       </Section>
@@ -218,7 +228,7 @@ export default function KontorerPage() {
         </Container>
       </Section>
 
-      {/* AUTORISASJON OG KONTAKT */}
+      {/* AUTORISASJON OG KONTAKT – regnskap og revisjon side om side, hver for seg. */}
       <Section tone="lysmint">
         <Container>
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
@@ -234,7 +244,7 @@ export default function KontorerPage() {
               </p>
               <p className={`mt-5 ${brod}`}>
                 Flyd AS er et godkjent regnskapsselskap. Vi er {stat('statsautoriserte').value}{' '}
-                statsautoriserte regnskapsførere og har {stat('kunder').value} kunder. Se tillatelsen vår i{' '}
+                statsautoriserte regnskapsførere. Se tillatelsen vår i{' '}
                 <a href={virksomhetsregisteret} className={lenke}>
                   Finanstilsynets virksomhetsregister
                 </a>
@@ -242,9 +252,33 @@ export default function KontorerPage() {
               </p>
             </div>
             <div data-reveal>
+              <Eyebrow>Autorisasjon</Eyebrow>
+              <h2 className="mt-5 font-display text-display-md font-semibold">
+                Autorisert revisor – hva det betyr for deg
+              </h2>
+              <p className={`mt-6 ${brod}`}>
+                Et selskap som er revisor, må ha tillatelse fra Finanstilsynet. Hvert oppdrag skal ha en
+                oppdragsansvarlig statsautorisert revisor, som har ansvaret for at revisjonen utføres i henhold
+                til lovverket.
+              </p>
+              <p className={`mt-5 ${brod}`}>
+                Flyd AS er et godkjent revisjonsselskap. Vi er {stat('revisorer').value} statsautoriserte
+                revisorer. Se tillatelsen vår i{' '}
+                <a href={virksomhetsregisteretRevisjon} className={lenke}>
+                  Finanstilsynets virksomhetsregister
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-16 grid grid-cols-1 gap-6 border-t border-flyd-linje-mint pt-16 lg:grid-cols-2 lg:gap-20" data-reveal>
+            <div>
               <Eyebrow>Ett nummer</Eyebrow>
               <h2 className="mt-5 font-display text-display-md font-semibold">Ett nummer, lokale folk</h2>
-              <p className={`mt-6 ${brod}`}>
+            </div>
+            <div>
+              <p className={brod}>
                 Uansett hvilket kontor du hører til, ringer du{' '}
                 <a href="tel:+4748019958" className={`whitespace-nowrap ${lenke}`}>
                   +47 480 19 958
@@ -272,7 +306,7 @@ export default function KontorerPage() {
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-5">
                 <Eyebrow>Bytte</Eyebrow>
-                <h2 className="mt-5 font-display text-display-md font-semibold">Bytte regnskapsfører?</h2>
+                <h2 className="mt-5 font-display text-display-md font-semibold">Bytte regnskapsfører eller revisor?</h2>
               </div>
               <div className="lg:col-span-7">
                 <p className={brod}>
@@ -282,6 +316,13 @@ export default function KontorerPage() {
                 </p>
                 <div className="mt-6">
                   <TextLink href="/bytte-regnskapsforer/">Slik bytter du regnskapsfører</TextLink>
+                </div>
+                <p className={`mt-8 border-t border-flyd-linje-mint pt-8 ${brod}`}>
+                  Skal du bytte revisor, er det generalforsamlingen som velger ny revisor. Den nye revisoren
+                  vurderer oppdraget og veileder deg gjennom resten.
+                </p>
+                <div className="mt-6">
+                  <TextLink href="/bytte-revisor/">Slik bytter du revisor</TextLink>
                 </div>
               </div>
             </div>

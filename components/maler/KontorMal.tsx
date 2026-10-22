@@ -10,6 +10,7 @@ import JsonLd from "@/components/JsonLd";
 import FlydIcon from "@/components/FlydIcon";
 import GoogleAnmeldelse from "@/components/GoogleAnmeldelse";
 import NumberedList from "@/components/NumberedList";
+import TeamCard from "@/components/TeamCard";
 import { ButtonLink, TextLink } from "@/components/Button";
 import { siteUrl } from "@/lib/seo";
 import {
@@ -20,6 +21,7 @@ import {
   type Office,
 } from "@/data/offices";
 import type { Kontorside } from "@/data/kontorsider";
+import { kontorTeam } from "@/data/team";
 
 /**
  * Utvidet kontorside (/kontor/[slug]/) for kontorer med eget innhold i
@@ -312,41 +314,12 @@ export default function KontorMal({
               </TextLink>
             </div>
           </div>
-          {/* Egne kort i stedet for TeamCard: bare navn, rolle og bilde, uten merkepiller. */}
-          <ul className="stagger mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
-            {side.team.ansatte.map((a, i) => (
-              <li
-                key={a.name}
-                data-reveal
-                style={{ "--i": i } as React.CSSProperties}
-                className="flex flex-col rounded-kort bg-flyd-sand p-3 pb-6"
-              >
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-flis bg-flyd-linje-mint">
-                  <Image
-                    src={a.image}
-                    alt={a.name}
-                    fill
-                    sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
-                    className="object-cover object-top"
-                  />
-                </div>
-                <div className="px-3 pt-5">
-                  <h3 className="font-display text-[19px] font-semibold leading-tight text-flyd-skog">
-                    {a.name}
-                  </h3>
-                  {a.role && (
-                    <p className="mt-1 text-[15px] leading-snug text-flyd-skifer">
-                      {a.role}
-                    </p>
-                  )}
-                  {a.bekreft && <Bekreft className="mt-3">{a.bekreft}</Bekreft>}
-                </div>
-              </li>
+          {/* Folkene på kontoret fra data/team.ts (kontorTeam), kontorlederen først. */}
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
+            {(kontorTeam[office.slug] ?? []).map((m) => (
+              <TeamCard key={m.email} m={m} tone="sand" />
             ))}
-          </ul>
-          {side.team.bekreft && (
-            <Bekreft className="mt-6">{side.team.bekreft}</Bekreft>
-          )}
+          </div>
         </Container>
       </Section>
 

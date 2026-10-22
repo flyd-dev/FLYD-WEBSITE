@@ -22,37 +22,37 @@ export const kontorBlokker: Record<string, KontorBlokk> = {
     omrade: 'Stavanger, Sandnes, Sola, Randaberg og resten av Nord-Jæren',
     tekst:
       'Kontoret ligger i FOMO-bygget på Forus, på grensen mellom Stavanger og Sandnes, og er kontoret vårt for Stavanger-regionen. Herfra hjelper vi alt fra gründere til etablerte industri- og eiendomsselskaper.',
-    lenketekst: 'Les om regnskapsfører i Sandnes og Stavanger',
+    lenketekst: 'Se mer om kontoret og folkene i Sandnes',
   },
   egersund: {
     omrade: 'Eigersund og resten av Dalane',
     tekst:
       'Kontoret ligger i Torvgården, midt på torget i Egersund, tett på næringslivet i byen og omegnen. Kom gjerne innom for en prat om regnskapet.',
-    lenketekst: 'Les om regnskapsfører i Egersund',
+    lenketekst: 'Se mer om kontoret og folkene i Egersund',
   },
   sokndal: {
     omrade: 'Sokndal og omegn',
     tekst:
-      'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i kommunen, med hele Flyds fagmiljø i ryggen.',
-    lenketekst: 'Les om regnskapsfører i Sokndal',
+      'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i kommunen, med hele Flyds fagmiljø i ryggen. Her sitter også revisjonsteamet vårt.',
+    lenketekst: 'Se mer om kontoret og folkene i Sokndal',
   },
   moi: {
     omrade: 'Lund og områdene langs E39 mellom Egersund og Flekkefjord',
     tekst:
       'Moi-kontoret er en lokal regnskapspartner for bedrifter i Lund, med kolleger på fem andre kontorer å spille på når det trengs.',
-    lenketekst: 'Les om regnskapsfører på Moi',
+    lenketekst: 'Se mer om kontoret og folkene på Moi',
   },
   sirdal: {
     omrade: 'Sirdal',
     tekst:
       'I Sirdal finner du oss i Handleriet. Vi jobber tett med bygg-, hytte- og reiselivsnæringen i fjellbygda.',
-    lenketekst: 'Les om regnskapsfører i Sirdal',
+    lenketekst: 'Se mer om kontoret og folkene i Sirdal',
   },
   flekkefjord: {
     omrade: 'Flekkefjord og resten av Lister-regionen',
     tekst:
       'Kontoret ligger sentralt i Elvegaten i Flekkefjord og betjener næringslivet i Lister, med kort vei til både kunder og kolleger.',
-    lenketekst: 'Les om regnskapsfører i Flekkefjord',
+    lenketekst: 'Se mer om kontoret og folkene i Flekkefjord',
   },
 };
 
@@ -83,10 +83,23 @@ export const regionTjenester: { title: string; text: string; href: string }[] = 
     text: 'Vi hjelper deg med å velge system, setter det opp og bygger integrasjonene, så regnskapet og resten av bedriften henger sammen.',
     href: '/tjenester/erp/',
   },
+  {
+    // Står sist og for seg: revisjon leveres ikke sammen med regnskapet (Irene 22.10.2026).
+    title: 'Revisjon',
+    text: 'Lovbestemt revisjon, revisorbekreftelser og andre attestasjonstjenester, fra revisjonsteamet i Sokndal.',
+    href: '/tjenester/revisjon/',
+  },
 ];
 
 /** Flyd AS i Finanstilsynets virksomhetsregister (konsesjon «Regnskapsselskap»). */
 export const virksomhetsregisteret = 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=241680';
+
+/**
+ * Revisjonsselskapet (tidligere Liit AS, står som FLYD AS) i Finanstilsynets
+ * virksomhetsregister (konsesjon «Revisjonsselskap»). Lenken bruker registerets
+ * egen id, ikke org.nr.
+ */
+export const virksomhetsregisteretRevisjon = 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=235342';
 
 export type HubFaq = {
   q: string;

@@ -24,7 +24,10 @@ import {
 import { visibleServices, serviceUrl } from "@/data/services";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import KontorMal from "@/components/maler/KontorMal";
+import TeamCard from "@/components/TeamCard";
+import { kontorTeam } from "@/data/team";
 import { getKontorside } from "@/data/kontorsider";
+import { revisjonOmtale } from "@/data/revisjon";
 
 const SITE_URL = "https://www.flyd.no";
 
@@ -135,7 +138,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             <div className="lg:col-span-7">
               <Eyebrow>Kontor · {office.name}</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">
-                Regnskapsfører {atOffice(office)}.
+                {office.revisjon ? "Regnskapsfører og revisor" : "Regnskapsfører"} {atOffice(office)}.
               </h1>
               <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
                 {office.blurb}
@@ -155,6 +158,18 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 </Link>{" "}
                 og hva du bør avklare om frister og overlevering.
               </p>
+              {/* Revisjon står for seg, ikke som en del av regnskapstilbudet (uavhengighet). */}
+              {office.revisjon && (
+                <div className="mt-8 max-w-2xl border-t border-flyd-linje-sand pt-8">
+                  <Eyebrow as="h2">Revisor {atOffice(office)}</Eyebrow>
+                  <p className="mt-4 text-[17px] leading-[1.7] text-flyd-skifer">
+                    Revisjonsteamet vårt holder til her. {revisjonOmtale}
+                  </p>
+                  <div className="mt-5">
+                    <TextLink href="/tjenester/revisjon/">Les om revisjon</TextLink>
+                  </div>
+                </div>
+              )}
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <ButtonLink href="/kontakt" variant="primary" withArrow>
                   Snakk med oss
@@ -275,6 +290,28 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                     className="object-cover"
                   />
                 </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {/* FOLKENE PÅ KONTORET – fra kontorTeam i data/team.ts, kontorlederen først */}
+      {(kontorTeam[office.slug] ?? []).length > 0 && (
+        <Section tone="sand" className="!pt-0">
+          <Container>
+            <div
+              className="border-t border-flyd-linje-sand pt-12 md:pt-16"
+              data-reveal
+            >
+              <Eyebrow>Folkene</Eyebrow>
+              <h2 className="mt-5 font-display text-display-md font-semibold">
+                Møt teamet {atOffice(office)}.
+              </h2>
+            </div>
+            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {kontorTeam[office.slug].map((m) => (
+                <TeamCard key={m.email} m={m} />
               ))}
             </div>
           </Container>
