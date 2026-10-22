@@ -235,7 +235,7 @@ export default function KontorerPage() {
               </p>
               <p className={`mt-5 ${brod}`}>
                 Flyd AS er et godkjent regnskapsselskap. Vi er {stat('statsautoriserte').value}{' '}
-                statsautoriserte regnskapsførere og har {stat('kunder').value} kunder. Se tillatelsen vår i{' '}
+                statsautoriserte regnskapsførere. Se tillatelsen vår i{' '}
                 <a href={virksomhetsregisteret} className={lenke}>
                   Finanstilsynets virksomhetsregister
                 </a>
