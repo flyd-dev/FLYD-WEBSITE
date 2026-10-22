@@ -26,12 +26,13 @@ const mk = (m: Omit<TeamMember, 'initials'> & { initials?: string }): TeamMember
       .toUpperCase(),
 });
 
-// Partnerne i revisjon (tidligere Liit). Kontaktinfo som på liit.no, e-post på
-// @flyd.no. Står blant partnerne på /om-flyd og først i revisjonsteamet.
+// Partnerne i revisjon (tidligere Liit). Titler og telefon er sjekket mot
+// liit.no/kontakt 22.10.2026, e-post på @flyd.no. Står blant partnerne på
+// /om-flyd og først i revisjonsteamet.
 export const auditPartners: TeamMember[] = [
   mk({
     name: 'Irene Bendiksen',
-    role: 'Leder revisjon',
+    role: 'Leder revisjon · Statsautorisert revisor',
     partner: true,
     phone: '+47 997 02 292',
     email: 'irene.bendiksen@flyd.no',
