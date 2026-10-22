@@ -14,12 +14,15 @@ export const revisjon = {
   },
   tittel: 'Revisjon gir tillit.',
   ingress:
-    'En revisor går gjennom regnskapet og kontrollerer at tallene stemmer, at regelverket er fulgt og at bedriften har gode rutiner. Det gir trygghet for eierne, ledelsen og alle som bruker regnskapet.',
+    'Revisor er allmennhetens tillitsperson. En revisor gjennomgår regnskapet og kontrollerer at tallene stemmer, at regelverket er fulgt og at bedriften har gode rutiner. Det gir trygghet for eierne, ledelsen og alle som bruker regnskapet.',
   tjenester: {
     kicker: 'Tjenester',
     tittel: 'Revisjon, årsregnskap og rådgivning.',
     punkter: [
-      { tittel: 'Revisjon', tekst: 'Vi reviderer årsregnskapet og avgir revisjonsberetning.' },
+      {
+        tittel: 'Revisjon',
+        tekst: 'Vi utfører revisjonstjenester som lovbestemt revisjon, revisorbekreftelser og andre attestasjonstjenester.',
+      },
       { tittel: 'Årsregnskap og skattemelding', tekst: 'Vi utarbeider årsregnskapet og skattemeldingen.' },
       { tittel: 'Rådgivning', tekst: 'Faglige råd om regnskap, skatt og avgift.' },
     ],
@@ -56,8 +59,7 @@ export const bytteRevisor = {
     punkter: [
       {
         tittel: 'Ta kontakt med en ny revisor',
-        tekst:
-          'Den nye revisoren vurderer oppdraget og tar kontakt med den forrige revisoren før oppdraget aksepteres. Det er en fast rutine, ikke et tegn på problemer.',
+        tekst: 'Den nye revisoren vil vurdere oppdraget og veilede deg igjennom prosessen.',
       },
       {
         tittel: 'Generalforsamlingen velger ny revisor',

@@ -2,11 +2,11 @@ import Link from 'next/link';
 import Eyebrow from '@/components/Eyebrow';
 import { offices } from '@/data/offices';
 
-/** «Regnskapsfører nær deg» med lenke til hver kontorside, hentet fra data/offices.ts. */
+/** «Økonomitjenester nær deg» (Irene 22.10.2026) med lenke til hver kontorside, hentet fra data/offices.ts. */
 export default function KontorLenker({ className }: { className?: string }) {
   return (
-    <nav aria-label="Regnskapsfører nær deg" className={className}>
-      <Eyebrow>Regnskapsfører nær deg</Eyebrow>
+    <nav aria-label="Økonomitjenester nær deg" className={className}>
+      <Eyebrow>Økonomitjenester nær deg</Eyebrow>
       <ul className="mt-4 flex flex-wrap gap-2">
         {offices.map((o) => (
           <li key={o.slug}>

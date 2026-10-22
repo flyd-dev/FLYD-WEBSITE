@@ -70,7 +70,7 @@ export default function HomePage() {
                     Mint fordi bunnen er Skog – på lys bunn ville den vært Petrol. */}
                 <h1 className="font-display text-display-xl font-semibold text-flyd-sand">
                   <span className="mb-5 block text-[13px] font-semibold uppercase leading-[1.3] tracking-[0.08em] text-flyd-mint md:mb-6 md:text-[15px]">
-                    Flyd AS – regnskap, ERP og teknologi
+                    Flyd AS – regnskap, revisjon, ERP og teknologi
                   </span>{' '}
                   Økonomi og teknologi
                   <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
@@ -81,9 +81,9 @@ export default function HomePage() {
                   </span>
                 </h1>
                 <p className="mt-8 max-w-xl font-display text-ingress font-medium text-flyd-dempet">
-                  Flyd er et kompetansehus som hjelper bedrifter med hele bildet.
-                  Fra daglig regnskap til ERP og integrasjoner – én partner, ett
-                  nummer, full flyd.
+                  Flyd er et kompetansehus for økonomi og teknologi. Vi hjelper
+                  bedrifter med regnskap, revisjon, rådgivning og programvare – fra
+                  daglig bokføring til ERP og integrasjoner.
                 </p>
                 <div className="mt-10 flex flex-wrap items-center gap-4">
                   <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
@@ -112,7 +112,7 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="mt-12 md:mt-14">
-            <StatsSection stats={stats} />
+            <StatsSection stats={stats} columns={5} />
           </div>
           <KontorLenker className="mt-10" />
 
