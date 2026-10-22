@@ -209,7 +209,7 @@ export const accountingTeam: TeamMember[] = [
 export const auditTeam: TeamMember[] = [
   mk({
     name: 'Martha Egeli',
-    role: 'Supervisor · Statsautorisert regnskapsfører',
+    role: 'Supervisor revisjon · Statsautorisert regnskapsfører',
     certified: true,
     phone: '+47 980 18 758',
     email: 'martha.egeli@flyd.no',
@@ -217,7 +217,7 @@ export const auditTeam: TeamMember[] = [
   }),
   mk({
     name: 'Randi Egeli Handeland',
-    role: 'Supervisor · Statsautorisert regnskapsfører',
+    role: 'Supervisor revisjon · Statsautorisert regnskapsfører',
     certified: true,
     phone: '+47 975 06 911',
     email: 'randi.handeland@flyd.no',
@@ -225,14 +225,14 @@ export const auditTeam: TeamMember[] = [
   }),
   mk({
     name: 'Synne Mydland Johansen',
-    role: 'Associate',
+    role: 'Associate revisjon',
     phone: '+47 417 50 484',
     email: 'synne.johansen@flyd.no',
     image: '/team/flyd-synne.webp',
   }),
   mk({
     name: 'Julie Hagh',
-    role: 'Associate · Statsautorisert regnskapsfører',
+    role: 'Associate revisjon · Statsautorisert regnskapsfører',
     certified: true,
     phone: '+47 950 08 122',
     email: 'julie.hagh@flyd.no',
