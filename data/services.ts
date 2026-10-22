@@ -102,19 +102,6 @@ export const services: (Service | EgenTjeneste)[] = [
     image: { src: '/tjenestebilder/regnskap-radgivning.webp', alt: 'Rådgivningsmøte: kollega lytter engasjert mens en annen forklarer' },
   },
   {
-    // UTKAST: i dag er rådgivning en del av «Regnskap og rådgivning».
-    id: 'radgivning',
-    slug: 'radgivning',
-    status: 'utkast',
-    tema: 'Regnskap og rådgivning',
-    title: 'Rådgivning',
-    short: '[BEKREFT: én setning om hva rådgivningen hjelper med]',
-    long: '[BEKREFT: 2–4 setninger om rådgivningen som egen tjeneste, skrevet med en rådgiver i Flyd]',
-    bullets: ['[BEKREFT: hva som inngår, punkt for punkt]'],
-    fitFor: '[BEKREFT: hvem rådgivningen passer for]',
-    icon: 'regnskap',
-  },
-  {
     id: 'programvare',
     slug: 'erp',
     status: 'publisert',
@@ -268,19 +255,6 @@ export const services: (Service | EgenTjeneste)[] = [
       ],
       sjekket: '15. oktober 2026',
     },
-  },
-  {
-    // UTKAST: ny tjeneste for gründere og nyetablerte.
-    id: 'oppstart',
-    slug: 'oppstart',
-    status: 'utkast',
-    tema: 'Regnskap og rådgivning',
-    title: 'Oppstart',
-    short: '[BEKREFT: én setning til gründere og nyetablerte]',
-    long: '[BEKREFT: hva Flyd hjelper med ved oppstart: selskapsform, registrering, mva og første regnskapsår]',
-    bullets: ['[BEKREFT: hva som inngår, punkt for punkt]'],
-    fitFor: '[BEKREFT: hvem oppstartshjelpen passer for]',
-    icon: 'regnskap',
   },
   {
     // Egen side (app/tjenester/revisjon/), tekstene står i data/revisjon.ts.
