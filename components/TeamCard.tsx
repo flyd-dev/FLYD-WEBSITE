@@ -1,16 +1,31 @@
 import Image from 'next/image';
 import clsx from 'clsx';
-import { Mail, Phone } from 'lucide-react';
+import { Check, Mail, Phone } from 'lucide-react';
 import type { TeamMember } from '@/data/team';
 
 /**
+ * Deler `role` fra data/team.ts i stilling og godkjenning, så kortet slipper
+ * lange linjer med prikker: «Kontorleder · Statsautorisert regnskapsfører»
+ * blir «Kontorleder og partner» og en egen linje «Statsautorisert
+ * regnskapsfører». Partner står i stillingslinjen, eller alene («Partner»).
+ */
+function titler(m: TeamMember) {
+  const deler = m.role.split(' · ');
+  const godkjenning = deler.filter((d) => d.startsWith('Statsautorisert'));
+  const stilling = deler.filter((d) => !d.startsWith('Statsautorisert')).join(' · ');
+  const medPartner = m.partner ? (stilling ? `${stilling} og partner` : 'Partner') : stilling;
+  return { stilling: medPartner, godkjenning };
+}
+
+/**
  * Ansattkort: Lys mint-kort (radius 16 px) med bildet på en flis (12 px).
- * Ingen merkelapper på bildet (Arnstein 22.10.2026): «Partner» står etter
- * tittelen, og statsautorisert står i tittelen i data/team.ts.
+ * Ingen merkelapper på bildet (Arnstein 22.10.2026). Under navnet står
+ * stillingen (med «og partner»), og statsautorisasjonen på egen linje med hake.
  * `tone="sand"` brukes på Lys mint-bunn.
  */
 export default function TeamCard({ m, tone = 'lysmint' }: { m: TeamMember; tone?: 'lysmint' | 'sand' }) {
-  const tittel = m.partner ? `${m.role} · Partner` : m.role;
+  const { stilling, godkjenning } = titler(m);
+  const tittel = [stilling, ...godkjenning].filter(Boolean).join(', ');
   return (
     <article
       data-reveal
@@ -41,7 +56,13 @@ export default function TeamCard({ m, tone = 'lysmint' }: { m: TeamMember; tone?
         <h3 className="font-display text-[19px] font-semibold leading-tight text-flyd-skog">
           {m.name}
         </h3>
-        <p className="mt-1 text-[15px] leading-snug text-flyd-skifer">{tittel}</p>
+        {stilling && <p className="mt-1 text-[15px] leading-snug text-flyd-skifer">{stilling}</p>}
+        {godkjenning.map((g) => (
+          <p key={g} className="mt-1.5 flex items-start gap-1.5 text-[14px] leading-snug text-flyd-petrol">
+            <Check className="mt-[3px] h-3.5 w-3.5 flex-shrink-0 text-flyd-teal" strokeWidth={2.5} aria-hidden="true" />
+            {g}
+          </p>
+        ))}
 
         <div className="mt-4 flex flex-col gap-2 text-[14px]">
           {m.phone && (
