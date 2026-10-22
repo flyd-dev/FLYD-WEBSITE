@@ -2,7 +2,6 @@ export type TeamMember = {
   name: string;
   role: string;
   partner?: boolean;
-  lead?: boolean;
   /**
    * Statsautorisert regnskapsfører. Telles i nøkkeltallet. Statsautoriserte
    * revisorer får samme pille på kortet via tittelen, men telles ikke.
@@ -27,8 +26,8 @@ const mk = (m: Omit<TeamMember, 'initials'> & { initials?: string }): TeamMember
 });
 
 // Partnerne i revisjon (tidligere Liit). Titler og telefon er sjekket mot
-// liit.no/kontakt 22.10.2026, e-post på @flyd.no. Står blant partnerne på
-// /om-flyd og først i revisjonsteamet.
+// liit.no/kontakt 22.10.2026, e-post på @flyd.no. Står først i revisjonsteamet
+// på /tjenester/revisjon/.
 export const auditPartners: TeamMember[] = [
   mk({
     name: 'Irene Bendiksen',
@@ -48,8 +47,7 @@ export const auditPartners: TeamMember[] = [
   }),
 ];
 
-// Partnerne i regnskap. Står blant partnerne på /om-flyd og først i regnskap
-// (Irene 22.10.2026).
+// Partnerne i regnskap. Svein er kvalitetsansvarlig for regnskap, ikke revisjon.
 export const accountingPartners: TeamMember[] = [
   mk({
     name: 'Svein Zwygart',
@@ -71,7 +69,7 @@ export const accountingPartners: TeamMember[] = [
   }),
 ];
 
-// Kai først (daglig leder), så partnerne i revisjon (Irene 21.10.2026).
+// Partnerne. Hvem som står under «Ledelse» på /om-flyd, styres av `ledelse` nederst.
 export const leadership: TeamMember[] = [
   mk({
     name: 'Kai Mydland',
@@ -93,12 +91,11 @@ export const leadership: TeamMember[] = [
   ...accountingPartners,
 ];
 
-// Kontorlederne står i regnskap, etter Svein og Thomas (Irene 22.10.2026).
+// Kontorlederne i Sandnes og Egersund. Hvem som står på hvert kontor, styres av `kontorTeam` nederst.
 export const officeLeads: TeamMember[] = [
   mk({
     name: 'Marit Haga Christensen',
     role: 'Kontorleder · Statsautorisert regnskapsfører',
-    lead: true,
     certified: true,
     phone: '+47 470 17 697',
     email: 'marit.christensen@flyd.no',
@@ -107,7 +104,6 @@ export const officeLeads: TeamMember[] = [
   mk({
     name: 'Kristian Odland',
     role: 'Kontorleder · Statsautorisert regnskapsfører',
-    lead: true,
     certified: true,
     phone: '+47 969 08 575',
     email: 'kristian.odland@flyd.no',
@@ -258,12 +254,64 @@ export const techTeam: TeamMember[] = [
 /** Alle medarbeidere, hver én gang: til nøkkeltall, JSON-LD og oppslag av fagperson. */
 export const allTeam: TeamMember[] = [...leadership, ...officeLeads, ...auditTeam, ...accountingTeam, ...techTeam];
 
+const medEpost = (epost: string): TeamMember => {
+  const m = allTeam.find((x) => x.email === epost);
+  if (!m) throw new Error(`Ukjent ansatt: ${epost}`);
+  return m;
+};
+
+/** «Ledelse» på /om-flyd (Arnstein 22.10.2026). */
+export const ledelse: TeamMember[] = [
+  'kai.mydland@flyd.no',
+  'irene.bendiksen@flyd.no',
+  'thomas.haaland@flyd.no',
+  'kristian.odland@flyd.no',
+  'marit.christensen@flyd.no',
+].map(medEpost);
+
+/** Resten av gjengen på /om-flyd, uten inndeling, i alfabetisk rekkefølge. */
+export const restenAvTeamet: TeamMember[] = allTeam
+  .filter((m) => !ledelse.includes(m))
+  .sort((a, b) => a.name.localeCompare(b.name, 'nb'));
+
 /**
- * Gruppene på /om-flyd. Partnerne står både i ledelsen og først i faggruppen sin
- * (Irene 22.10.2026), så bruk allTeam når hver person skal telles én gang.
+ * Folkene per kontor (kontorsidene, /kontor/[slug]). Kontorlederen står først
+ * (Arnstein 22.10.2026). Thomas leder Moi, Flekkefjord og Sirdal. Nøkkelen er
+ * `slug` i data/offices.ts.
  */
-export const teamGroups: { tittel: string; medlemmer: TeamMember[] }[] = [
-  { tittel: 'Revisjon', medlemmer: [...auditPartners, ...auditTeam] },
-  { tittel: 'Regnskap', medlemmer: [...accountingPartners, ...officeLeads, ...accountingTeam] },
-  { tittel: 'Teknologi', medlemmer: techTeam },
-];
+export const kontorTeam: Record<string, TeamMember[]> = Object.fromEntries(
+  Object.entries({
+    'stavanger-sandnes': [
+      'marit.christensen@flyd.no',
+      'tatjana.derksen@flyd.no',
+      'kai.mydland@flyd.no',
+      'arnstein.bendiksen@flyd.no',
+    ],
+    egersund: [
+      'kristian.odland@flyd.no',
+      'henriette.gjertsen@flyd.no',
+      'christoffer.ellingham@flyd.no',
+      'marius.koldal@flyd.no',
+    ],
+    sokndal: [
+      'irene.bendiksen@flyd.no',
+      'heidi.odden@flyd.no',
+      'martha.egeli@flyd.no',
+      'randi.handeland@flyd.no',
+      'synne.johansen@flyd.no',
+      'julie.hagh@flyd.no',
+      'lennart.berntsen@flyd.no',
+    ],
+    moi: [
+      'thomas.haaland@flyd.no',
+      'svein.zwygart@flyd.no',
+      'synnove.thoresen@flyd.no',
+      'beate.sorgulen@flyd.no',
+      'anne.marit.midboe@flyd.no',
+      'espen.hetland@flyd.no',
+      'arne.olav.ostrem@flyd.no',
+    ],
+    flekkefjord: ['thomas.haaland@flyd.no', 'oyvind.nedland@flyd.no'],
+    sirdal: ['thomas.haaland@flyd.no', 'aslaug.karin.fidjeland@flyd.no', 'eira.hagland@flyd.no'],
+  }).map(([slug, eposter]) => [slug, eposter.map(medEpost)]),
+);
