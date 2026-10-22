@@ -6,6 +6,7 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import JsonLd from '@/components/JsonLd';
 import ConsentLink from '@/components/ConsentLink';
+import FlydLogo from '@/components/FlydLogo';
 import { personvern } from '@/data/personvern';
 
 export const metadata: Metadata = pageMetadata({
@@ -101,7 +102,13 @@ export default function PersonvernPage() {
           <div className="max-w-3xl">
             <Eyebrow>Personvern</Eyebrow>
             {/* Myk bindestrek: det lange ordet deles på smale skjermer i stedet for å gå ut av siden. */}
-            <h1 className="mt-6 font-display text-display-xl font-semibold">Personvern&shy;erklæring for Flyd.</h1>
+            <h1 className="mt-6 font-display text-display-xl font-semibold">
+              Personvern&shy;erklæring for{' '}
+              <FlydLogo
+                title="Flyd"
+                className="inline-block h-[1em] w-auto translate-y-[0.22em] align-baseline text-flyd-teal"
+              />
+            </h1>
             <p className="mt-8 font-display text-ingress font-medium text-flyd-petrol">
               Denne personvernerklæringen forteller hvordan {personvern.selskap} samler inn og bruker
               personopplysninger. Målet er å gi deg overordnet informasjon om vår behandling av
@@ -114,7 +121,7 @@ export default function PersonvernPage() {
             </p>
 
             <div className="mt-10 rounded-kort bg-flyd-lysmint p-6 text-[17px] leading-[1.7] text-flyd-skifer md:p-8">
-              <p>Henvendelser om vår behandling av personopplysninger kan rettes til:</p>
+              <p>Henvendelse om vår behandling av personopplysninger kan rettes til:</p>
               <address className="mt-3 not-italic text-flyd-skog">
                 {personvern.selskap}
                 <br />
@@ -345,8 +352,11 @@ export default function PersonvernPage() {
                   </Link>
                   , registrerer vi navn, bedrift, e-postadresse, telefonnummer, emne og meldingen din. Vi bruker
                   opplysningene til å svare deg og følge opp henvendelsen. Vi har en berettiget interesse i å besvare
-                  henvendelser (personvernforordningen artikkel 6.1.f). Henvendelsen sendes til oss gjennom
-                  automatiseringstjenesten Make, som er vår databehandler og har servere i EU. Blir du kunde,
+                  henvendelser (personvernforordningen artikkel 6.1.f). Nettstedet driftes av Vercel, og henvendelsen
+                  sendes videre til oss gjennom automatiseringstjenesten Make. Begge er våre databehandlere. Make har
+                  servere i EU. Vercel kan behandle opplysningene i USA, på grunnlag av{' '}
+                  <span className="whitespace-nowrap">EU–US</span> Data Privacy Framework.
+                  Blir du kunde,
                   oppbevarer vi opplysningene som beskrevet i{' '}
                   <a href="#sikkerhet" className={lenke}>
                     punkt 6
@@ -401,18 +411,17 @@ export default function PersonvernPage() {
                   <Ekstern href="https://www.microsoft.com/nb-no/privacy/privacystatement">
                     Microsofts personvernerklæring
                   </Ekstern>
-                  . Google og Microsoft kan behandle opplysningene i USA. Overføringen skjer på grunnlag av EU–US Data
-                  Privacy Framework, se{' '}
-                  <a href="#lagring-i-eos" className={lenke}>
-                    punkt 7.1
-                  </a>
-                  .
+                  . Google og Microsoft kan behandle opplysningene i USA. Overføringen skjer på grunnlag av{' '}
+                  <span className="whitespace-nowrap">EU–US</span> Data Privacy Framework.
                 </p>
 
                 <H4>Endre samtykke</H4>
                 <p className="mt-2">
-                  Du kan når som helst endre eller trekke tilbake samtykket ditt med lenken «
-                  <ConsentLink className={lenke} />» nederst på siden. Trekker du samtykket tilbake, slettes også en
+                  Du kan når som helst endre eller trekke tilbake samtykket ditt med lenken{' '}
+                  <span className="whitespace-nowrap">
+                    «<ConsentLink className={lenke} />»
+                  </span>{' '}
+                  nederst på siden. Trekker du samtykket tilbake, slettes også en
                   lagret klikk-ID.
                 </p>
 
@@ -476,19 +485,14 @@ export default function PersonvernPage() {
                 <p className="mt-3">
                   Vi oppbevarer våre kundedata, inkludert alle personopplysninger, i Norge eller andre EØS-land. Det
                   samme gjelder opplysninger om medarbeidere og jobbsøkere. Vi benytter kun databehandlere som
-                  oppbevarer opplysningene i Norge eller andre EØS-land. Unntaket er verktøyene for statistikk og
-                  annonser på nettstedet, som bare brukes hvis du samtykker (se{' '}
-                  <a href="#nettstedet" className={lenke}>
-                    punkt 5.6
-                  </a>
-                  ).
+                  oppbevarer opplysningene i Norge eller andre EØS-land.
                 </p>
                 <p className="mt-3">
                   For kunder som er en del av en internasjonal virksomhet, kan det være nødvendig å overføre
                   personopplysninger til et annet land. Hvis overføringen ikke skjer til et EØS-land eller et land
                   godkjent av EU-kommisjonen, skjer overføringen basert på standard personvernbestemmelser vedtatt av
                   EU-kommisjonen, bindende virksomhetsregler for et konsern eller gruppe av foretak eller til noen som
-                  er sertifisert under EU–US Data Privacy Framework (USA).
+                  er bundet av Privacy Shield (USA).
                 </p>
 
                 <H3 id="lovpalagt-overforing">7.2 Overføring av personopplysninger som følge av lov</H3>
