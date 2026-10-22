@@ -7,7 +7,7 @@ import Eyebrow from '@/components/Eyebrow';
 import JsonLd from '@/components/JsonLd';
 import ConsentLink from '@/components/ConsentLink';
 import { BekreftTekst } from '@/components/Bekreft';
-import { personvern } from '@/data/personvern';
+import { personvern, ORGNR_ETTER_FUSJON } from '@/data/personvern';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Personvern',
@@ -112,7 +112,7 @@ const oppbevaring = [
 ];
 
 export default function PersonvernPage() {
-  const { regnskap, revisjon } = personvern;
+  const { selskap } = personvern;
 
   return (
     <>
@@ -147,22 +147,15 @@ export default function PersonvernPage() {
 
             <div className="mt-12 space-y-12 text-[17px] leading-[1.7] text-flyd-skifer">
               <Del id="ansvarlig">
-                <p className="mt-3">Flyd består av to selskaper:</p>
-                <Liste>
-                  <li>
-                    {regnskap.navn} (org.nr. <Fylt verdi={regnskap.orgnr} mangler="org.nr." />) leverer regnskap,
-                    lønn, rådgivning og teknologi.
-                  </li>
-                  <li>
-                    <Fylt verdi={revisjon.navn} mangler="revisjonsselskapets navn" /> (org.nr.{' '}
-                    <Fylt verdi={revisjon.orgnr} mangler="org.nr." />
-                    ), tidligere Liit AS, leverer revisjon og attestasjon.
-                  </li>
-                </Liste>
                 <p className="mt-3">
-                  Hvert selskap er ansvarlig for opplysningene det behandler i sine egne oppdrag. Revisjon og
-                  regnskap holdes adskilt: vi tilbyr ikke regnskapstjenester til revisjonskundene våre, og ikke
-                  revisjon til regnskapskundene.
+                  {selskap.navn} (org.nr. <Fylt verdi={selskap.orgnr} mangler={`org.nr. ${ORGNR_ETTER_FUSJON} – kan det publiseres?`} />)
+                  er ansvarlig for personopplysningene vi behandler. Flyd AS og Liit AS er fusjonert til ett
+                  selskap, som heter Flyd AS og har organisasjonsnummeret til Liit. Vi leverer revisjon og
+                  attestasjon, og regnskap, lønn, rådgivning og teknologi.
+                </p>
+                <p className="mt-3">
+                  Revisjon og regnskap holdes adskilt: vi tilbyr ikke regnskapstjenester til revisjonskundene våre,
+                  og ikke revisjon til regnskapskundene.
                 </p>
                 <p className="mt-3">
                   Spørsmål om hvordan vi behandler personopplysninger, sender du til <Personvernansvarlig />,
@@ -187,8 +180,8 @@ export default function PersonvernPage() {
                     autorisert etter regnskapsførerloven og er under tilsyn av Finanstilsynet.
                   </li>
                   <li>
-                    <strong className="font-semibold text-flyd-skog">Begge:</strong> Hvitvaskingsloven,
-                    bokføringsloven og ekomloven (informasjonskapsler på nettstedet) gjelder for begge selskapene.
+                    <strong className="font-semibold text-flyd-skog">Hele virksomheten:</strong> Hvitvaskingsloven,
+                    bokføringsloven og ekomloven (informasjonskapsler på nettstedet) gjelder for hele virksomheten.
                   </li>
                 </Liste>
               </Del>
