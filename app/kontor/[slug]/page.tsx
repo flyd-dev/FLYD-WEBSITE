@@ -288,7 +288,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
             <div className="lg:col-span-5" data-reveal>
               <Eyebrow tone="petrol">Det hjelper vi deg med</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-                Alt du trenger – også {atOffice(office)}.
+                Tjenestene våre – også {atOffice(office)}.
               </h2>
               <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
                 Samme tjenester, samme fagmiljø og samme systemer på alle

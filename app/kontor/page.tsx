@@ -237,8 +237,8 @@ export default function KontorerPage() {
                 statsautoriserte regnskapsførere og har {stat('kunder').value} kunder. Se tillatelsen vår i{' '}
                 <a href={virksomhetsregisteret} className={lenke}>
                   Finanstilsynets virksomhetsregister
-                </a>{' '}
-                (org.nr. 933 662 934).
+                </a>
+                .
               </p>
             </div>
             <div data-reveal>

@@ -10,7 +10,7 @@ import OfficeCards from '@/components/OfficeCards';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
-import { leadership, officeLeads, otherTeam } from '@/data/team';
+import { accountingTeam, allTeam, auditTeam, leadership, officeLeads, techTeam } from '@/data/team';
 import { offices } from '@/data/offices';
 import { stat } from '@/data/stats';
 
@@ -42,7 +42,7 @@ const aboutJsonLd = {
   isPartOf: { '@id': 'https://www.flyd.no/#website' },
   about: {
     '@id': 'https://www.flyd.no/#organization',
-    employee: [...leadership, ...officeLeads, ...otherTeam].map((m) => ({
+    employee: allTeam.map((m) => ({
       '@type': 'Person',
       name: m.name,
       jobTitle: m.role,
@@ -67,7 +67,7 @@ const values = [
   },
   {
     title: 'Kompetent',
-    body: 'Dyp fagkunnskap innen økonomi, systemer og rådgivning – i samme team.',
+    body: 'God fagkunnskap innen regnskap, revisjon, systemer og rådgivning.',
   },
 ];
 
@@ -97,12 +97,13 @@ export default function OmFlydPage() {
             <div className="order-1 lg:order-2 lg:col-span-7">
               <Eyebrow>Om Flyd</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">
-                Mer enn et regnskapskontor.
+                Et komplett kompetansehus.
               </h1>
               <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
-                Flyd er et kompetansehus for økonomi og teknologi. Vi leverer
-                regnskap, rådgivning, programvare og integrasjoner fra samme
-                sted – slik at du slipper å koordinere fem leverandører og kan
+                Flyd er et kompetansehus for økonomi og teknologi. Vi hjelper
+                bedrifter med regnskap, revisjon, rådgivning og programvare.
+                Regnskap, programvare og integrasjoner kan du få fra samme sted
+                – slik at du slipper å koordinere flere leverandører og kan
                 konsentrere deg om å drive bedriften videre.
               </p>
               <div className="mt-12 max-w-xl">
@@ -204,10 +205,28 @@ export default function OmFlydPage() {
           </div>
 
           <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
-            <Eyebrow>Resten av teamet</Eyebrow>
+            <Eyebrow>Revisjon</Eyebrow>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {otherTeam.map((m) => (
+            {auditTeam.map((m) => (
+              <TeamCard key={m.email} m={m} />
+            ))}
+          </div>
+
+          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
+            <Eyebrow>Regnskap</Eyebrow>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {accountingTeam.map((m) => (
+              <TeamCard key={m.email} m={m} />
+            ))}
+          </div>
+
+          <div className="mt-20 border-t border-flyd-linje-sand pt-10" data-reveal>
+            <Eyebrow>Teknologi</Eyebrow>
+          </div>
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {techTeam.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
           </div>

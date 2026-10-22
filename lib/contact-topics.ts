@@ -4,6 +4,7 @@ export const CAREER_TOPIC = 'Karriere';
 
 export const CONTACT_TOPICS = [
   'Regnskap og rådgivning',
+  'Revisjon',
   'Programvare / ERP',
   'Integrasjoner',
   'Analyse og rapportering',

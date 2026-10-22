@@ -61,7 +61,26 @@ export type Service = {
   fagseksjon?: Fagseksjon;
 };
 
-export const services: Service[] = [
+/**
+ * Tjeneste med egen mappe under app/tjenester/ (f.eks. revisjon/) i stedet for TjenesteMal.
+ * Har bare feltene tjenestekortene, lister og kontaktskjemaet bruker.
+ */
+export type EgenTjeneste = Pick<Service, 'id' | 'slug' | 'status' | 'tema' | 'title' | 'short' | 'icon' | 'image'> & {
+  egenSide: true;
+  /**
+   * Leveres uavhengig av de andre tjenestene (revisjon): samme kunde kan ikke få
+   * både revisjon og regnskap fra oss. Står derfor ikke under «Andre tjenester».
+   */
+  uavhengig?: true;
+};
+
+/** Kan foreslås sammen med andre tjenester (ikke revisjon). */
+export const kanKombineres = (s: Service | EgenTjeneste) => !('uavhengig' in s && s.uavhengig);
+
+/** Tjenesten bruker malen (TjenesteMal) og har alle feltene til den. */
+export const harMal = (s: Service | EgenTjeneste): s is Service => !('egenSide' in s);
+
+export const services: (Service | EgenTjeneste)[] = [
   {
     id: 'regnskap-radgivning',
     slug: 'regnskap',
@@ -81,19 +100,6 @@ export const services: Service[] = [
     fitFor: 'Bedrifter som vil ha et trygt regnskap – og en rådgiver som ser hele bildet, ikke bare fjorårets tall.',
     icon: 'regnskap',
     image: { src: '/tjenestebilder/regnskap-radgivning.webp', alt: 'Rådgivningsmøte: kollega lytter engasjert mens en annen forklarer' },
-  },
-  {
-    // UTKAST: i dag er rådgivning en del av «Regnskap og rådgivning».
-    id: 'radgivning',
-    slug: 'radgivning',
-    status: 'utkast',
-    tema: 'Regnskap og rådgivning',
-    title: 'Rådgivning',
-    short: '[BEKREFT: én setning om hva rådgivningen hjelper med]',
-    long: '[BEKREFT: 2–4 setninger om rådgivningen som egen tjeneste, skrevet med en rådgiver i Flyd]',
-    bullets: ['[BEKREFT: hva som inngår, punkt for punkt]'],
-    fitFor: '[BEKREFT: hvem rådgivningen passer for]',
-    icon: 'regnskap',
   },
   {
     id: 'programvare',
@@ -251,27 +257,40 @@ export const services: Service[] = [
     },
   },
   {
-    // UTKAST: ny tjeneste for gründere og nyetablerte.
-    id: 'oppstart',
-    slug: 'oppstart',
-    status: 'utkast',
-    tema: 'Regnskap og rådgivning',
-    title: 'Oppstart',
-    short: '[BEKREFT: én setning til gründere og nyetablerte]',
-    long: '[BEKREFT: hva Flyd hjelper med ved oppstart: selskapsform, registrering, mva og første regnskapsår]',
-    bullets: ['[BEKREFT: hva som inngår, punkt for punkt]'],
-    fitFor: '[BEKREFT: hvem oppstartshjelpen passer for]',
-    icon: 'regnskap',
+    // Egen side (app/tjenester/revisjon/), tekstene står i data/revisjon.ts.
+    // Står sist: vises i egen rad under de andre tjenestene (uavhengig).
+    id: 'revisjon',
+    slug: 'revisjon',
+    status: 'publisert',
+    tema: 'Revisjon',
+    title: 'Revisjon',
+    short: 'Revisjonstjenester som lovbestemt revisjon, revisorbekreftelser og andre attestasjonstjenester.',
+    icon: 'revisjon',
+    image: {
+      src: '/tjenestebilder/revisjon.webp',
+      alt: 'Tre kolleger fra revisjonsteamet i en samtale rundt et bord med kaffe og frukt',
+    },
+    egenSide: true,
+    uavhengig: true,
   },
 ];
 
 /** Tjenestene som vises nå (utkast bare lokalt og på forhåndsvisninger). */
 export const visibleServices = services.filter(synlig);
 
+/** Tjenestene som kan leveres sammen. Vises i rutenettet på forsiden og /tjenester. */
+export const kombinerbareTjenester = visibleServices.filter(kanKombineres);
+
+/** Tjenester som leveres for seg (revisjon). Vises i egen bred rad under rutenettet. */
+export const uavhengigeTjenester = visibleServices.filter((s) => !kanKombineres(s));
+
 export const serviceUrl = (s: Pick<Service, 'slug'>) => `/tjenester/${s.slug}/`;
 
+/** Tjenestene som får side fra malen (/tjenester/[tjeneste]/). */
+export const malTjenester = visibleServices.filter(harMal);
+
 export function getServiceBySlug(slug: string): Service | undefined {
-  return visibleServices.find((s) => s.slug === slug);
+  return malTjenester.find((s) => s.slug === slug);
 }
 
 export type ErpSystem = {

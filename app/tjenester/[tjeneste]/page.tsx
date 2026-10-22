@@ -2,12 +2,15 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { pageMetadata } from '@/lib/seo';
 import TjenesteMal from '@/components/maler/TjenesteMal';
-import { visibleServices, getServiceBySlug, serviceUrl } from '@/data/services';
+import { malTjenester, getServiceBySlug, serviceUrl } from '@/data/services';
 
-/** Én side per tjeneste: /tjenester/[tjeneste]/. Innholdet ligger i data/services.ts. */
+/**
+ * Én side per tjeneste: /tjenester/[tjeneste]/. Innholdet ligger i data/services.ts.
+ * Tjenester med egen side (f.eks. revisjon) har sin egen mappe under app/tjenester/.
+ */
 
 export function generateStaticParams() {
-  return visibleServices.map((s) => ({ tjeneste: s.slug }));
+  return malTjenester.map((s) => ({ tjeneste: s.slug }));
 }
 
 type Props = { params: { tjeneste: string } };
