@@ -133,7 +133,7 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <Eyebrow>Tjenester</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Alt du trenger – i ett hus.
+                Regnskap, revisjon og teknologi.
               </h2>
               <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-skifer">
                 Vi kombinerer regnskap, rådgivning og teknologi for å gi deg bedre

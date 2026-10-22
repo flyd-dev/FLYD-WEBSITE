@@ -58,7 +58,7 @@ export default function TjenesterPage() {
           <Breadcrumbs items={[{ name: 'Tjenester', href: '/tjenester/' }]} tone="dark" />
           <Eyebrow tone="petrol" className="mt-10">Tjenester</Eyebrow>
           <h1 className="mt-6 max-w-4xl font-display text-display-xl font-semibold text-flyd-sand">
-            Alt du trenger. Ett kompetansehus.
+            Ett kompetansehus for økonomi og teknologi.
           </h1>
           <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
             Vi hjelper bedrifter med regnskap, revisjon, rådgivning og
