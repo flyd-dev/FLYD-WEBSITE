@@ -42,7 +42,7 @@ const servicesJsonLd = {
 export const metadata: Metadata = pageMetadata({
   title: 'Regnskap, revisjon, rådgivning og ERP – Tjenester',
   description:
-    'Regnskap og rådgivning, revisjon, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR – samlet hos Flyd.',
+    'Tjenestene til Flyd: regnskap og rådgivning, revisjon, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR.',
   path: '/tjenester/',
 });
 
@@ -61,9 +61,9 @@ export default function TjenesterPage() {
             Alt du trenger. Ett kompetansehus.
           </h1>
           <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
-            Vi leverer alt du trenger innen økonomi og teknologi – fra daglig
-            bokføring til komplekse integrasjoner mellom forretningssystemer.
-            Velg det du trenger, eller sett oss til å ta hele bildet.
+            Vi hjelper bedrifter med regnskap, revisjon, rådgivning og
+            programvare – fra daglig bokføring til integrasjoner mellom
+            forretningssystemer. Velg det du trenger.
           </p>
 
           <nav aria-label="Tjenester" className="mt-12">

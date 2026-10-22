@@ -67,7 +67,7 @@ const values = [
   },
   {
     title: 'Kompetent',
-    body: 'Dyp fagkunnskap innen regnskap, revisjon, systemer og rådgivning – i samme team.',
+    body: 'Dyp fagkunnskap innen regnskap, revisjon, systemer og rådgivning.',
   },
 ];
 
@@ -100,10 +100,11 @@ export default function OmFlydPage() {
                 Mer enn et regnskapskontor.
               </h1>
               <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
-                Flyd er et kompetansehus for økonomi og teknologi. Vi leverer
-                regnskap, revisjon, rådgivning, programvare og integrasjoner fra
-                samme sted – slik at du slipper å koordinere fem leverandører og
-                kan konsentrere deg om å drive bedriften videre.
+                Flyd er et kompetansehus for økonomi og teknologi. Vi hjelper
+                bedrifter med regnskap, revisjon, rådgivning og programvare.
+                Regnskap, programvare og integrasjoner kan du få fra samme sted
+                – slik at du slipper å koordinere flere leverandører og kan
+                konsentrere deg om å drive bedriften videre.
               </p>
               <div className="mt-12 max-w-xl">
                 <StatsSection stats={figures} columns={3} />

@@ -22,7 +22,7 @@ import { stats } from '@/data/stats';
 const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
 
 const whyFlyd: { icon: FlydIconName; text: string }[] = [
-  { icon: 'samme-tak', text: 'Regnskap, revisjon, rådgivning og teknologi under samme tak' },
+  { icon: 'samme-tak', text: 'Regnskap, rådgivning og teknologi under samme tak' },
   { icon: 'sparring', text: 'Rådgivere som stiller spørsmål – ikke bare leverer tall' },
   { icon: 'erp', text: 'Moderne ERP- og programvarekompetanse' },
   { icon: 'automatisering', text: 'Integrasjoner som reduserer manuelt arbeid' },

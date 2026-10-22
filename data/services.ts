@@ -67,7 +67,15 @@ export type Service = {
  */
 export type EgenTjeneste = Pick<Service, 'id' | 'slug' | 'status' | 'tema' | 'title' | 'short' | 'icon' | 'image'> & {
   egenSide: true;
+  /**
+   * Leveres uavhengig av de andre tjenestene (revisjon): samme kunde kan ikke få
+   * både revisjon og regnskap fra oss. Står derfor ikke under «Andre tjenester».
+   */
+  uavhengig?: true;
 };
+
+/** Kan foreslås sammen med andre tjenester (ikke revisjon). */
+export const kanKombineres = (s: Service | EgenTjeneste) => !('uavhengig' in s && s.uavhengig);
 
 /** Tjenesten bruker malen (TjenesteMal) og har alle feltene til den. */
 export const harMal = (s: Service | EgenTjeneste): s is Service => !('egenSide' in s);
@@ -107,6 +115,7 @@ export const services: (Service | EgenTjeneste)[] = [
       alt: 'Tre kolleger fra revisjonsteamet i en samtale rundt et bord med kaffe og frukt',
     },
     egenSide: true,
+    uavhengig: true,
   },
   {
     // UTKAST: i dag er rådgivning en del av «Regnskap og rådgivning».

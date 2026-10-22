@@ -22,6 +22,7 @@ import {
   erpComparisonStatus,
   erpUrl,
   serviceUrl,
+  kanKombineres,
   type Service,
 } from '@/data/services';
 import { allTeam } from '@/data/team';
@@ -40,7 +41,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
   const fagperson = s.fagperson
     ? allTeam.find((m) => m.name === s.fagperson)
     : undefined;
-  const andre = visibleServices.filter((o) => o.slug !== s.slug);
+  const andre = visibleServices.filter((o) => o.slug !== s.slug && kanKombineres(o));
   const isErp = s.slug === 'erp';
   const visFaq = Boolean(s.faq?.length || fagperson || (utkast && visUtkast));
   const comparisonVisible = erpComparisonStatus === 'publisert' || visUtkast;
