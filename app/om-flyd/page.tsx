@@ -67,7 +67,7 @@ const values = [
   },
   {
     title: 'Kompetent',
-    body: 'Dyp fagkunnskap innen regnskap, revisjon, systemer og rådgivning.',
+    body: 'God fagkunnskap innen regnskap, revisjon, systemer og rådgivning.',
   },
 ];
 
@@ -97,7 +97,7 @@ export default function OmFlydPage() {
             <div className="order-1 lg:order-2 lg:col-span-7">
               <Eyebrow>Om Flyd</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">
-                Mer enn et regnskapskontor.
+                Et komplett kompetansehus.
               </h1>
               <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-petrol">
                 Flyd er et kompetansehus for økonomi og teknologi. Vi hjelper

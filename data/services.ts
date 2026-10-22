@@ -108,7 +108,7 @@ export const services: (Service | EgenTjeneste)[] = [
     status: 'publisert',
     tema: 'Revisjon',
     title: 'Revisjon',
-    short: 'Uavhengig revisjon av årsregnskapet, årsregnskap og skattemelding, og faglige råd om regnskap, skatt og avgift.',
+    short: 'Revisjonstjenester som lovbestemt revisjon, revisorbekreftelser og andre attestasjonstjenester.',
     icon: 'revisjon',
     image: {
       src: '/tjenestebilder/revisjon.webp',
