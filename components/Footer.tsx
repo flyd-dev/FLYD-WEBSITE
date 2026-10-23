@@ -45,10 +45,10 @@ function Lenkeliste({ tittel, lenker }: { tittel: string; lenker: { href: string
   );
 }
 
-export default function Footer() {
+export default function Footer({ ordmerke = false }: { ordmerke?: boolean }) {
   return (
     <footer className="on-dark border-t border-flyd-sand/10 bg-flyd-skog text-flyd-sand">
-      <Container className="py-20">
+      <Container className={ordmerke ? 'pt-20 pb-10 md:pb-14' : 'py-20'}>
         {/* Mobil: logo, de to lenkekolonnene side om side, så kontorene.
             Nettbrett: logo over, tre kolonner under. Desktop: fire kolonner. */}
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-12 md:gap-12">
@@ -169,6 +169,14 @@ export default function Footer() {
             />
           </p>
         </div>
+
+        {/* Designlab-forslag: logoen i full bredde som avslutning (idé fra «Giant
+            Wordmark Footer» på 21st.dev). Originalen, Sand på Skog, ubeskåret. */}
+        {ordmerke && (
+          <div data-reveal className="mt-14 md:mt-20">
+            <FlydLogo tett className="h-auto w-full text-flyd-sand" />
+          </div>
+        )}
       </Container>
     </footer>
   );

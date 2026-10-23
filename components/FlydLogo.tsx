@@ -7,13 +7,16 @@
 export default function FlydLogo({
   className,
   title,
+  tett = false,
 }: {
   className?: string;
   title?: string;
+  /** Beskjær viewBox tett rundt konturene, så logoen kan flukte med en kant. Formen er den samme. */
+  tett?: boolean;
 }) {
   return (
     <svg
-      viewBox="0 0 997 527"
+      viewBox={tett ? '80 80 847 404' : '0 0 997 527'}
       fill="currentColor"
       fillRule="evenodd"
       xmlns="http://www.w3.org/2000/svg"
