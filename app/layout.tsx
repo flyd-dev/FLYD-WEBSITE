@@ -11,6 +11,7 @@ import CookieConsent from "@/components/CookieConsent";
 import { offices, openingHours } from "@/data/offices";
 import { getKontorside } from "@/data/kontorsider";
 import { allTeam } from "@/data/team";
+import { visUtkast } from "@/lib/utkast";
 
 // Designmanualen: Poppins (500 ingress, 600 overskrifter og tall) og
 // DM Sans (400 brødtekst, 400 kursiv sitater, 500 knapper, 700 kickers).
@@ -192,7 +193,8 @@ export default function RootLayout({
         <div className="lesefremdrift" aria-hidden="true" />
         <Header />
         <main id="main">{children}</main>
-        <Footer />
+        {/* Designlab-forslag: stor logo nederst i footeren, bare på forhåndsvisning. */}
+        <Footer ordmerke={visUtkast} />
         <ScrollToTop />
         <Reveal />
         <PointerFx />

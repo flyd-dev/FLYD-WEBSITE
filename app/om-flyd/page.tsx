@@ -7,12 +7,14 @@ import Eyebrow from '@/components/Eyebrow';
 import TeamCard from '@/components/TeamCard';
 import FlydLogo from '@/components/FlydLogo';
 import OfficeCards from '@/components/OfficeCards';
+import KontorAkkordeon from '@/components/designlab/KontorAkkordeon';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
 import { allTeam, ledelse, restenAvTeamet } from '@/data/team';
 import { offices } from '@/data/offices';
 import { stat } from '@/data/stats';
+import { visUtkast } from '@/lib/utkast';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -222,7 +224,12 @@ export default function OmFlydPage() {
               til Flekkefjord i sør.
             </p>
           </div>
-          <OfficeCards offices={offices} className="mt-12" />
+          {/* Designlab-forslag, bare på forhåndsvisning: kontorflater i stedet for kortene. */}
+          {visUtkast ? (
+            <KontorAkkordeon className="mt-12" />
+          ) : (
+            <OfficeCards offices={offices} className="mt-12" />
+          )}
         </Container>
       </Section>
 

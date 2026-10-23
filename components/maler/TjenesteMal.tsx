@@ -12,6 +12,7 @@ import FlydIcon from '@/components/FlydIcon';
 import { ButtonLink } from '@/components/Button';
 import { ServiceTile } from '@/components/ServiceIcon';
 import ProcessCards from '@/components/ProcessCards';
+import SystemBane from '@/components/designlab/SystemBane';
 import { process } from '@/data/process';
 import { siteUrl } from '@/lib/seo';
 import { visUtkast } from '@/lib/utkast';
@@ -100,7 +101,10 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
               </div>
             </div>
             <div className="lg:col-span-5">
-              {s.image ? (
+              {/* Designlab-forslag, bare på forhåndsvisning: systembanen i stedet for bildet. */}
+              {visUtkast && s.id === 'integrasjoner' ? (
+                <SystemBane kompakt />
+              ) : s.image ? (
                 <div className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint">
                   <Image
                     src={s.image.src}

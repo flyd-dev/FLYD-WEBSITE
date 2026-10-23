@@ -45,7 +45,16 @@ function punkt(r: number, vinkel: number) {
 
 const bue = (r: number) => `M ${C.x - r} ${C.y} A ${r} ${r} 0 0 1 ${C.x + r} ${C.y}`;
 
-export default function SystemBane({ className }: { className?: string }) {
+export default function SystemBane({
+  className,
+  kompakt = false,
+}: {
+  className?: string;
+  /** For smale kolonner (f.eks. ved siden av H1): korte systemnavn og mindre tekst. */
+  kompakt?: boolean;
+}) {
+  // Når den ytre ringen får plass: fra md vanligvis, fra sm i kompakt utgave (smal kolonne først fra lg).
+  const ytreSvg = kompakt ? 'hidden sm:inline' : 'hidden md:inline';
   const alle = [
     ...indre.map((n) => ({ ...n, ...punkt(R_INDRE, n.vinkel), ring: 'indre' as const })),
     ...ytre.map((n) => ({ ...n, ...punkt(R_YTRE, n.vinkel), ring: 'ytre' as const })),
@@ -54,8 +63,13 @@ export default function SystemBane({ className }: { className?: string }) {
   return (
     <div className={className}>
       <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-skog px-3 pt-6 sm:px-6 sm:pt-10">
-        {/* Under md er den ytre ringen skjult, så toppen av scenen er tom – den trekkes opp. */}
-        <div className="relative mx-auto -mt-[18%] aspect-[25/14] w-full max-w-[1000px] md:mt-0">
+        {/* Uten den ytre ringen er toppen av scenen tom – den trekkes opp. */}
+        <div
+          className={clsx(
+            'relative mx-auto -mt-[18%] aspect-[25/14] w-full max-w-[1000px]',
+            kompakt ? 'sm:mt-0' : 'md:mt-0',
+          )}
+        >
           <svg
             viewBox={`0 0 ${W} ${H}`}
             aria-hidden="true"
@@ -71,7 +85,7 @@ export default function SystemBane({ className }: { className?: string }) {
               strokeWidth={1.5}
               strokeDasharray="2 7"
               strokeLinecap="round"
-              className="hidden md:inline"
+              className={ytreSvg}
             />
             {alle.map((n) => (
               <line
@@ -83,7 +97,7 @@ export default function SystemBane({ className }: { className?: string }) {
                 stroke="currentColor"
                 strokeOpacity={n.ring === 'indre' ? 0.22 : 0.12}
                 strokeWidth={1}
-                className={n.ring === 'ytre' ? 'hidden md:inline' : undefined}
+                className={n.ring === 'ytre' ? ytreSvg : undefined}
               />
             ))}
             <g className="motion-reduce:hidden">
@@ -95,7 +109,7 @@ export default function SystemBane({ className }: { className?: string }) {
                   width={8}
                   height={8}
                   rx={1.5}
-                  className={clsx('fill-flyd-korall', n.ring === 'ytre' && 'hidden md:inline')}
+                  className={clsx('fill-flyd-korall', n.ring === 'ytre' && ytreSvg)}
                   opacity={0}
                 >
                   <animateMotion
@@ -123,12 +137,20 @@ export default function SystemBane({ className }: { className?: string }) {
               className={clsx(
                 'absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap',
                 n.ring === 'indre'
-                  ? 'rounded-flis bg-flyd-petrol px-2.5 py-1.5 text-[11px] font-medium text-flyd-sand sm:px-3.5 sm:py-2 sm:text-[15px]'
-                  : 'hidden rounded-pille border border-flyd-mint/40 bg-flyd-skog px-3 py-1.5 text-[13px] text-flyd-dempet md:block',
+                  ? clsx(
+                      'rounded-flis bg-flyd-petrol px-2.5 py-1.5 font-medium text-flyd-sand',
+                      kompakt ? 'text-[12px]' : 'text-[11px] sm:px-3.5 sm:py-2 sm:text-[15px]',
+                    )
+                  : clsx(
+                      'hidden rounded-pille border border-flyd-mint/40 bg-flyd-skog text-flyd-dempet',
+                      kompakt ? 'px-2.5 py-1 text-[11px] sm:block' : 'px-3 py-1.5 text-[13px] md:block',
+                    ),
               )}
               style={{ left: `${(n.x / W) * 100}%`, top: `${(n.y / H) * 100}%` }}
             >
-              {n.kort ? (
+              {n.kort && kompakt ? (
+                n.kort
+              ) : n.kort ? (
                 <>
                   <span className="sm:hidden">{n.kort}</span>
                   <span className="hidden sm:inline">{n.navn}</span>
@@ -143,13 +165,13 @@ export default function SystemBane({ className }: { className?: string }) {
             className="absolute -translate-x-1/2 -translate-y-1/2 rounded-kort bg-flyd-sand px-3 py-2 sm:px-5 sm:py-3"
             style={{ left: `${(C.x / W) * 100}%`, top: `${(C.y / H) * 100}%` }}
           >
-            <FlydLogo title="Flyd" className="h-7 w-auto text-flyd-teal sm:h-10" />
+            <FlydLogo title="Flyd" className={clsx('w-auto text-flyd-teal', kompakt ? 'h-8' : 'h-7 sm:h-10')} />
           </div>
         </div>
       </div>
 
       {/* Den ytre ringen blir for trang på mobil – der står den som liste under. */}
-      <ul className="mt-4 flex flex-wrap gap-2 md:hidden" aria-label="Vi kobler også">
+      <ul className={clsx('mt-4 flex flex-wrap gap-2', kompakt ? 'sm:hidden' : 'md:hidden')} aria-label="Vi kobler også">
         {ytre.map((n) => (
           <li
             key={n.navn}

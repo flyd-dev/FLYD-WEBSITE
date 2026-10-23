@@ -16,8 +16,15 @@ import { ButtonLink, TextLink } from '@/components/Button';
 import { HeroTypewriter, HeroTypewriterPause } from '@/components/HeroTypewriter';
 import type { ServiceTone } from '@/components/ServiceIcon';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
+import Bekreft from '@/components/Bekreft';
+import KundeHistorier from '@/components/designlab/KundeHistorier';
+import LogoFlyt from '@/components/designlab/LogoFlyt';
+import SystemBane from '@/components/designlab/SystemBane';
+import Variant from '@/components/designlab/Variant';
 import { kombinerbareTjenester, uavhengigeTjenester, erpSystems, serviceUrl } from '@/data/services';
 import { stats } from '@/data/stats';
+import { kundehistorier } from '@/data/kundehistorier';
+import { visUtkast } from '@/lib/utkast';
 
 const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
 
@@ -30,6 +37,26 @@ const whyFlyd: { icon: FlydIconName; text: string }[] = [
   { icon: 'innsikt', text: 'Innsikt og analyse som gir bedre beslutninger' },
 ];
 
+
+const kunderTopp = (
+  <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
+    <Eyebrow>Et utvalg kunder</Eyebrow>
+    <TextLink href="/kontakt">Bli kunde</TextLink>
+  </div>
+);
+
+const programvareIntro = (
+  <>
+    <Eyebrow>Programvare</Eyebrow>
+    <h2 className="mt-5 font-display text-display-lg font-semibold">
+      Riktig system for din virksomhet.
+    </h2>
+    <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
+      Vi hjelper deg å velge, implementere og utnytte forretningssystemet
+      som passer bedriften – ikke det vi tilfeldigvis selger.
+    </p>
+  </>
+);
 
 const HERO = {
   src: '/header/hero-1200.webp',
@@ -116,14 +143,46 @@ export default function HomePage() {
           </div>
           <KontorLenker className="mt-10" />
 
-          <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
-            <Eyebrow>Et utvalg kunder</Eyebrow>
-            <TextLink href="/kontakt">Bli kunde</TextLink>
-          </div>
+          {!visUtkast && kunderTopp}
         </Container>
-        <div className="mt-8">
-          <LogoMarquee />
-        </div>
+        {visUtkast ? (
+          // Designlab-forslag, bare på forhåndsvisning: kundehistorier (standard)
+          // eller logoene langs flytlinjen (?kunder=flyt). Produksjon har stripa.
+          <Variant
+            navn="kunder"
+            standard="historier"
+            varianter={{
+              historier: (
+                <Container>
+                  <div className="mt-20 border-t border-flyd-linje-sand pt-10 md:mt-24">
+                    <div className="flex items-center justify-between gap-6">
+                      <Eyebrow>Kundehistorier</Eyebrow>
+                      <TextLink href="/kontakt">Bli kunde</TextLink>
+                    </div>
+                    <Bekreft className="mt-6 max-w-3xl">
+                      Sitatene, tallene og navnene er eksempler og må byttes med ekte, godkjente kundesitater.
+                    </Bekreft>
+                    <div className="mt-4">
+                      <KundeHistorier historier={kundehistorier} />
+                    </div>
+                  </div>
+                </Container>
+              ),
+              flyt: (
+                <>
+                  <Container>{kunderTopp}</Container>
+                  <div className="mt-6">
+                    <LogoFlyt />
+                  </div>
+                </>
+              ),
+            }}
+          />
+        ) : (
+          <div className="mt-8">
+            <LogoMarquee />
+          </div>
+        )}
       </Section>
 
       {/* TJENESTER */}
@@ -196,16 +255,21 @@ export default function HomePage() {
       {/* PROGRAMVARE */}
       <Section tone="sand">
         <Container>
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow>Programvare</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">
-              Riktig system for din virksomhet.
-            </h2>
-            <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
-              Vi hjelper deg å velge, implementere og utnytte forretningssystemet
-              som passer bedriften – ikke det vi tilfeldigvis selger.
-            </p>
-          </div>
+          {visUtkast ? (
+            // Designlab-forslag, bare på forhåndsvisning: systembanen ved siden av ingressen.
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
+              <div className="lg:col-span-5" data-reveal>
+                {programvareIntro}
+              </div>
+              <div className="lg:col-span-7" data-reveal>
+                <SystemBane />
+              </div>
+            </div>
+          ) : (
+            <div className="max-w-3xl" data-reveal>
+              {programvareIntro}
+            </div>
+          )}
 
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5">
             {erpSystems.map((e) => (
