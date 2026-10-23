@@ -26,9 +26,9 @@ export const metadata: Metadata = {
 };
 
 const plasser = [
-  { href: '/', side: 'Forsiden', hva: '– kundehistorier under nøkkeltallene og systembanen i Programvare' },
+  { href: '/', side: 'Forsiden', hva: '– heltebildet vokser til full bredde, kundehistorier, systembanen og «Slik jobber vi» med faste bilder' },
   { href: '/?kunder=flyt', side: 'Forsiden med ?kunder=flyt', hva: '– logoene langs flytlinjen i stedet for kundehistoriene' },
-  { href: '/om-flyd/#kontorer', side: '/om-flyd/', hva: '– kontorflatene nederst' },
+  { href: '/om-flyd/', side: '/om-flyd/', hva: '– bilder som zoomer ut av hverandre, budskap som avdekkes ord for ord og kontorflatene nederst' },
   { href: '/tjenester/integrasjoner/', side: '/tjenester/integrasjoner/', hva: '– systembanen øverst' },
   { href: '#footer', side: 'Footeren', hva: '– stor logo nederst på alle sider' },
 ];
@@ -56,7 +56,7 @@ export default function DesignlabPage() {
             <Eyebrow>Designlab</Eyebrow>
             <h1 className="mt-5 font-display text-display-xl font-semibold">Forslag fra 21st.dev, tegnet om til Flyd.</h1>
             <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-skifer">
-              Fem komponenter som kan løfte designet. Alle følger designmanualen: bare Flyd-paletten, ingen skygger,
+              Ni komponenter som kan løfte designet. De fem første står under; de fire med scrolleffekter ser du best på sidene selv. Alle følger designmanualen: bare Flyd-paletten, ingen skygger,
               ingen blur, og bevegelse som står stille ved redusert bevegelse.
             </p>
             <p className="mt-8 text-[17px] leading-[1.65] text-flyd-skifer">

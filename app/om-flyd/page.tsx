@@ -8,6 +8,8 @@ import TeamCard from '@/components/TeamCard';
 import FlydLogo from '@/components/FlydLogo';
 import OfficeCards from '@/components/OfficeCards';
 import KontorAkkordeon from '@/components/designlab/KontorAkkordeon';
+import ZoomParallax, { type ZoomBilde } from '@/components/designlab/ZoomParallax';
+import TekstAvdekking from '@/components/designlab/TekstAvdekking';
 import StatsSection from '@/components/StatsSection';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
@@ -73,6 +75,17 @@ const values = [
   },
 ];
 
+// Designlab: bildene i zoom-sekvensen. Midtbildet (først) fyller skjermen til slutt.
+const zoomBilder: ZoomBilde[] = [
+  { src: '/kontor/egersund-glassdor.webp', alt: 'To Flyd-ansatte i døråpningen ved glassveggen med flyd-logoen' },
+  { src: '/kontor/moi-teamet.webp', alt: 'Flyd-kolleger på rad utendørs på Moi, med skogkledde åser og gule bygninger i bakgrunnen' },
+  { src: '/kontor/sokndal-latter.webp', alt: 'Tre kolleger ler sammen ved et ståbord' },
+  { src: '/kontor/egersund-mote.webp', alt: 'Teamet i Egersund samlet rundt møtebordet ved vinduene mot sentrum' },
+  { src: '/kontor/stavanger-fomo.webp', alt: 'To Flyd-kolleger smiler foran inngangen til FOMO-bygget på Forus' },
+  { src: '/kontor/moi-korridor.webp', alt: 'To kolleger ler sammen i gangen på kontoret' },
+  { src: '/kontor/egersund-motebord.webp', alt: 'Latter rundt møtebordet på kontoret i Egersund' },
+];
+
 export default function OmFlydPage() {
   const figures = [stat('medarbeidere'), stat('kontorer'), stat('kunder')];
 
@@ -116,6 +129,13 @@ export default function OmFlydPage() {
         </Container>
       </Section>
 
+      {/* Designlab-forslag, bare på forhåndsvisning: bilder fra kontorene som zoomer ut av hverandre. */}
+      {visUtkast && (
+        <section aria-label="Bilder fra kontorene" className="bg-flyd-sand">
+          <ZoomParallax bilder={zoomBilder} />
+        </section>
+      )}
+
       {/* VERDIER */}
       <Section tone="lysmint">
         <Container>
@@ -157,10 +177,18 @@ export default function OmFlydPage() {
               </blockquote>
             </div>
             <div className="space-y-6 lg:col-span-7" data-reveal>
-              <p className="font-display text-ingress font-medium text-flyd-sand">
-                Hver kunde får en fast kontaktperson som kjenner virksomheten,
-                utfordringene og målene – og som er der år etter år.
-              </p>
+              {/* Designlab-forslag, bare på forhåndsvisning: budskapet avdekkes ord for ord. */}
+              {visUtkast ? (
+                <TekstAvdekking
+                  tekst="Hver kunde får en fast kontaktperson som kjenner virksomheten, utfordringene og målene – og som er der år etter år."
+                  className="font-display text-[clamp(1.5rem,2.6vw,2.125rem)] font-medium leading-[1.3] text-flyd-sand"
+                />
+              ) : (
+                <p className="font-display text-ingress font-medium text-flyd-sand">
+                  Hver kunde får en fast kontaktperson som kjenner virksomheten,
+                  utfordringene og målene – og som er der år etter år.
+                </p>
+              )}
               <p className="text-[17px] leading-[1.7] text-flyd-dempet">
                 Ved å kombinere fagkompetanse med teknologiforståelse skaper vi
                 bedre flyt – i prosesser, systemer og beslutninger.

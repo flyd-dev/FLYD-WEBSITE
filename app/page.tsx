@@ -21,6 +21,8 @@ import KundeHistorier from '@/components/designlab/KundeHistorier';
 import LogoFlyt from '@/components/designlab/LogoFlyt';
 import SystemBane from '@/components/designlab/SystemBane';
 import Variant from '@/components/designlab/Variant';
+import UtvidendeHero from '@/components/designlab/UtvidendeHero';
+import StegScroll from '@/components/designlab/StegScroll';
 import { kombinerbareTjenester, uavhengigeTjenester, erpSystems, serviceUrl } from '@/data/services';
 import { stats } from '@/data/stats';
 import { kundehistorier } from '@/data/kundehistorier';
@@ -58,6 +60,27 @@ const programvareIntro = (
   </>
 );
 
+const slikIntro = (
+  <>
+    <Eyebrow>Slik jobber vi</Eyebrow>
+    <h2 className="mt-5 font-display text-display-lg font-semibold">
+      Fra første samtale til full flyd.
+    </h2>
+    <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-skifer">
+      Vi tror på tydelige forventninger og kort vei fra plan til
+      handling. Her er hvordan et samarbeid med Flyd vanligvis ser ut.
+    </p>
+    <div className="mt-8">
+      <ButtonLink href="/kontakt" variant="secondary" withArrow>
+        Ta første steg
+      </ButtonLink>
+    </div>
+  </>
+);
+
+const heroKort =
+  'on-dark relative flex min-h-[640px] overflow-hidden [contain:paint] bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]';
+
 const HERO = {
   src: '/header/hero-1200.webp',
   srcSet: '/header/hero-1200.webp 1200w, /header/hero-2400.webp 2400w',
@@ -66,65 +89,73 @@ const HERO = {
 export default function HomePage() {
   // Heltebildet er det største elementet i første skjermbilde (LCP).
   preload(HERO.src, { as: 'image', imageSrcSet: HERO.srcSet, imageSizes: '100vw', fetchPriority: 'high' });
+  const heroInnhold = (
+    <>
+      {/* Originalfotoet i to størrelser: mobil henter 1200 px, store
+          skjermer 2400 px. next/image lager ikke srcset med statisk
+          eksport (unoptimized), derfor vanlig <img> + preload over. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={HERO.src}
+        srcSet={HERO.srcSet}
+        sizes="100vw"
+        alt="Flyd-teamet i en uformell prat på kontoret"
+        fetchPriority="high"
+        decoding="async"
+        className="hero-drift absolute inset-0 h-full w-full object-cover object-[70%_center]"
+      />
+      <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
+      <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />
+      <FlytLinjer className="opacity-40 [mask-image:linear-gradient(to_right,black_0%,black_45%,transparent_75%)]" />
+
+      <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
+        <div className="max-w-2xl" data-reveal>
+          {/* Kickeren står inne i H1, så overskriften begynner med merkenavnet
+              (Google retter «flyd» til «floyd»). Poppins 600, versal, +8 %.
+              Mint fordi bunnen er Skog – på lys bunn ville den vært Petrol. */}
+          <h1 className="font-display text-display-xl font-semibold text-flyd-sand">
+            <span className="mb-5 block text-[13px] font-semibold uppercase leading-[1.3] tracking-[0.08em] text-flyd-mint md:mb-6 md:text-[15px]">
+              Flyd AS – regnskap, revisjon, ERP og teknologi
+            </span>{' '}
+            Økonomi og teknologi
+            <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
+              <span>– </span>
+              <HeroTypewriter
+                text={['full flyd.', 'god kontroll.', 'full oversikt.', 'trygg vekst.']}
+              />
+            </span>
+          </h1>
+          <p className="mt-8 max-w-xl font-display text-ingress font-medium text-flyd-dempet">
+            Flyd er et kompetansehus for økonomi og teknologi. Vi hjelper
+            bedrifter med regnskap, revisjon, rådgivning og programvare – fra
+            daglig bokføring til ERP og integrasjoner.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
+              Snakk med oss
+            </ButtonLink>
+            <ButtonLink href="/tjenester" variant="secondary-dark">
+              Se våre tjenester
+            </ButtonLink>
+          </div>
+        </div>
+        <HeroTypewriterPause className="absolute bottom-4 right-4 md:bottom-6 md:right-6" />
+      </Container>
+    </>
+  );
   return (
     <>
       {/* HERO – forsiden er Skog + foto med overlay (designmanualen kap. 07/08).
           Bildet står i et kort med radius 24 px, siden det ikke er utfallende. */}
       <Section tone="sand" className="!pb-0 !pt-0 md:!pt-1">
-        <div className="px-3 md:px-5">
-          <div className="on-dark relative flex min-h-[640px] overflow-hidden rounded-bilde [contain:paint] bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
-            {/* Originalfotoet i to størrelser: mobil henter 1200 px, store
-                skjermer 2400 px. next/image lager ikke srcset med statisk
-                eksport (unoptimized), derfor vanlig <img> + preload over. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={HERO.src}
-              srcSet={HERO.srcSet}
-              sizes="100vw"
-              alt="Flyd-teamet i en uformell prat på kontoret"
-              fetchPriority="high"
-              decoding="async"
-              className="hero-drift absolute inset-0 h-full w-full object-cover object-[70%_center]"
-            />
-            <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
-            <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />
-            <FlytLinjer className="opacity-40 [mask-image:linear-gradient(to_right,black_0%,black_45%,transparent_75%)]" />
-
-            <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
-              <div className="max-w-2xl" data-reveal>
-                {/* Kickeren står inne i H1, så overskriften begynner med merkenavnet
-                    (Google retter «flyd» til «floyd»). Poppins 600, versal, +8 %.
-                    Mint fordi bunnen er Skog – på lys bunn ville den vært Petrol. */}
-                <h1 className="font-display text-display-xl font-semibold text-flyd-sand">
-                  <span className="mb-5 block text-[13px] font-semibold uppercase leading-[1.3] tracking-[0.08em] text-flyd-mint md:mb-6 md:text-[15px]">
-                    Flyd AS – regnskap, revisjon, ERP og teknologi
-                  </span>{' '}
-                  Økonomi og teknologi
-                  <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
-                    <span>– </span>
-                    <HeroTypewriter
-                      text={['full flyd.', 'god kontroll.', 'full oversikt.', 'trygg vekst.']}
-                    />
-                  </span>
-                </h1>
-                <p className="mt-8 max-w-xl font-display text-ingress font-medium text-flyd-dempet">
-                  Flyd er et kompetansehus for økonomi og teknologi. Vi hjelper
-                  bedrifter med regnskap, revisjon, rådgivning og programvare – fra
-                  daglig bokføring til ERP og integrasjoner.
-                </p>
-                <div className="mt-10 flex flex-wrap items-center gap-4">
-                  <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
-                    Snakk med oss
-                  </ButtonLink>
-                  <ButtonLink href="/tjenester" variant="secondary-dark">
-                    Se våre tjenester
-                  </ButtonLink>
-                </div>
-              </div>
-              <HeroTypewriterPause className="absolute bottom-4 right-4 md:bottom-6 md:right-6" />
-            </Container>
+        {visUtkast ? (
+          // Designlab-forslag, bare på forhåndsvisning: kortet vokser til full bredde når du scroller.
+          <UtvidendeHero className={heroKort}>{heroInnhold}</UtvidendeHero>
+        ) : (
+          <div className="px-3 md:px-5">
+            <div className={`${heroKort} rounded-bilde`}>{heroInnhold}</div>
           </div>
-        </div>
+        )}
       </Section>
 
       {/* NØKKELTALL + KUNDER */}
@@ -303,27 +334,20 @@ export default function HomePage() {
       {/* SLIK JOBBER VI */}
       <Section tone="lysmint">
         <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-4" data-reveal>
-              <Eyebrow>Slik jobber vi</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">
-                Fra første samtale til full flyd.
-              </h2>
-              <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-skifer">
-                Vi tror på tydelige forventninger og kort vei fra plan til
-                handling. Her er hvordan et samarbeid med Flyd vanligvis ser ut.
-              </p>
-              <div className="mt-8">
-                <ButtonLink href="/kontakt" variant="secondary" withArrow>
-                  Ta første steg
-                </ButtonLink>
+          {visUtkast ? (
+            // Designlab-forslag, bare på forhåndsvisning: stegene scrolles mens bildet står fast.
+            <StegScroll steps={process} intro={slikIntro} />
+          ) : (
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-4" data-reveal>
+                {slikIntro}
+              </div>
+
+              <div className="lg:col-span-8" data-reveal>
+                <ProcessCards steps={process} />
               </div>
             </div>
-
-            <div className="lg:col-span-8" data-reveal>
-              <ProcessCards steps={process} />
-            </div>
-          </div>
+          )}
         </Container>
       </Section>
 
