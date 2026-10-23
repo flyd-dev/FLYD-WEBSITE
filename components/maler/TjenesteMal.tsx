@@ -104,7 +104,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
             <div className="lg:col-span-5">
               {/* Designlab-forslag, bare på forhåndsvisning: systembanen i stedet for bildet. */}
               {visUtkast && s.id === 'integrasjoner' ? (
-                <SystemBane kompakt />
+                <SystemBane />
               ) : s.image ? (
                 <div className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint">
                   <Image
