@@ -474,7 +474,7 @@ input, textarea, select, button {
 
 /* Forsidebildet driver langsomt (kun transform, så LCP påvirkes ikke). */
 .hero-drift {
-  transform-origin: 70% 50%;
+  transform-origin: 70% 15%;
   animation: hero-drift 18s ease-in-out infinite alternate;
 }
 @keyframes hero-drift {

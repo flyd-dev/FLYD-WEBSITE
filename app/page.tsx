@@ -44,6 +44,8 @@ export default function HomePage() {
         {/* Kortet starter innrykket med radius 24 px og vokser til full bredde
             (utfallende, uten radius) når du scroller. */}
         <UtvidendeHero className="on-dark relative flex min-h-[640px] overflow-hidden [contain:paint] bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
+          {/* Bildet er festet høyt (15 %) og zoomer fra samme punkt, så hodene ikke
+              kuttes i toppen; det som må beskjæres, tas nedenfra. */}
           {/* Originalfotoet i to størrelser: mobil henter 1200 px, store
               skjermer 2400 px. next/image lager ikke srcset med statisk
               eksport (unoptimized), derfor vanlig <img> + preload over. */}
@@ -55,7 +57,7 @@ export default function HomePage() {
             alt="Flyd-teamet i en uformell prat på kontoret"
             fetchPriority="high"
             decoding="async"
-            className="hero-drift absolute inset-0 h-full w-full object-cover object-[70%_center]"
+            className="hero-drift absolute inset-0 h-full w-full object-cover object-[70%_15%]"
           />
           <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
           <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />
