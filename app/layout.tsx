@@ -8,6 +8,7 @@ import Reveal from "@/components/Reveal";
 import ScrollToTop from "@/components/ScrollToTop";
 import Analytics from "@/components/Analytics";
 import CookieConsent from "@/components/CookieConsent";
+import FlydPeker from "@/components/FlydPeker";
 import { offices, openingHours } from "@/data/offices";
 import { getKontorside } from "@/data/kontorsider";
 import { allTeam } from "@/data/team";
@@ -205,6 +206,7 @@ export default function RootLayout({
         <Reveal />
         <PointerFx />
         <CookieConsent />
+        <FlydPeker />
         <Analytics />
         <script
           type="application/ld+json"

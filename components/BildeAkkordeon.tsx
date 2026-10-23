@@ -55,6 +55,7 @@ export default function BildeAkkordeon({
           >
             <button
               type="button"
+              aria-expanded={apen}
               onMouseEnter={() => setAktiv(i)}
               onFocus={() => setAktiv(i)}
               onClick={() => setAktiv(i)}
