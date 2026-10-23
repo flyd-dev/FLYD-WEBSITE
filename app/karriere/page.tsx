@@ -11,6 +11,8 @@ import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink } from '@/components/Button';
 import FlydLogo from '@/components/FlydLogo';
 import { Gallery4, type Gallery4Item } from '@/components/ui/gallery4';
+import BildeAkkordeon from '@/components/designlab/BildeAkkordeon';
+import { visUtkast } from '@/lib/utkast';
 import JsonLd from '@/components/JsonLd';
 import { jobs } from '@/data/jobs';
 
@@ -151,11 +153,31 @@ export default function KarrierePage() {
       </Section>
 
       <Section tone="lysmint" className="overflow-hidden">
-        <Gallery4
-          eyebrow="Hvorfor jobbe i Flyd"
-          title="Seks grunner til å vurdere oss."
-          items={perks}
-        />
+        {visUtkast ? (
+          // Designlab-forslag, bare på forhåndsvisning: bildeflater i stedet for karusellen.
+          <Container>
+            <div className="max-w-3xl" data-reveal>
+              <Eyebrow>Hvorfor jobbe i Flyd</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold">Seks grunner til å vurdere oss.</h2>
+            </div>
+            <BildeAkkordeon
+              className="mt-12"
+              flater={perks.map((p) => ({
+                src: p.background,
+                alt: '',
+                tittel: p.title,
+                tekst: p.description,
+                icon: p.icon,
+              }))}
+            />
+          </Container>
+        ) : (
+          <Gallery4
+            eyebrow="Hvorfor jobbe i Flyd"
+            title="Seks grunner til å vurdere oss."
+            items={perks}
+          />
+        )}
       </Section>
 
       {/* OPEN POSITIONS */}

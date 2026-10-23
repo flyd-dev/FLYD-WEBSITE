@@ -12,6 +12,8 @@ import { offices, openingHours } from "@/data/offices";
 import { getKontorside } from "@/data/kontorsider";
 import { allTeam } from "@/data/team";
 import { visUtkast } from "@/lib/utkast";
+import { kombinerbareTjenester, uavhengigeTjenester, serviceUrl } from "@/data/services";
+import type { MenyTjeneste } from "@/components/designlab/TjenesteMeny";
 
 // Designmanualen: Poppins (500 ingress, 600 overskrifter og tall) og
 // DM Sans (400 brødtekst, 400 kursiv sitater, 500 knapper, 700 kickers).
@@ -82,6 +84,12 @@ export const metadata: Metadata = {
     ],
   },
 };
+
+// Designlab-forslag: tjenestene i nedtrekksmenyen (bare på forhåndsvisning). Revisjon på egen rad.
+const menyTjenester: MenyTjeneste[] = [
+  ...kombinerbareTjenester.map((t) => ({ title: t.title, short: t.short, icon: t.icon, href: serviceUrl(t) })),
+  ...uavhengigeTjenester.map((t) => ({ title: t.title, short: t.short, icon: t.icon, href: serviceUrl(t), separat: true })),
+];
 
 export default function RootLayout({
   children,
@@ -191,7 +199,7 @@ export default function RootLayout({
           Hopp til hovedinnhold
         </a>
         <div className="lesefremdrift" aria-hidden="true" />
-        <Header />
+        <Header tjenester={visUtkast ? menyTjenester : undefined} />
         <main id="main">{children}</main>
         {/* Designlab-forslag: stor logo nederst i footeren, bare på forhåndsvisning. */}
         <Footer ordmerke={visUtkast} />

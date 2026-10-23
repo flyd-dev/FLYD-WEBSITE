@@ -28,6 +28,8 @@ import TeamCard from "@/components/TeamCard";
 import { kontorTeam } from "@/data/team";
 import { getKontorside } from "@/data/kontorsider";
 import { revisjonOmtale } from "@/data/revisjon";
+import BildeAkkordeon from "@/components/designlab/BildeAkkordeon";
+import { visUtkast } from "@/lib/utkast";
 
 const SITE_URL = "https://www.flyd.no";
 
@@ -265,6 +267,10 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 Hos oss {atOffice(office)}.
               </h2>
             </div>
+            {/* Designlab-forslag, bare på forhåndsvisning: bildene åpner seg ved hover, fokus eller trykk. */}
+            {visUtkast ? (
+              <BildeAkkordeon className="mt-10" hoyde="liten" flater={office.gallery} />
+            ) : (
             <div
               className={`mt-10 grid grid-cols-1 gap-4 md:gap-5 ${
                 office.gallery.length === 2
@@ -292,6 +298,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 </div>
               ))}
             </div>
+            )}
           </Container>
         </Section>
       )}

@@ -9,6 +9,8 @@ import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { pageMetadata } from '@/lib/seo';
 import { bytteRevisor as b } from '@/data/revisjon';
+import StegScroll from '@/components/designlab/StegScroll';
+import { visUtkast } from '@/lib/utkast';
 
 /**
  * Bytte revisor: samme oppbygning som revisjonssiden, kort og saklig.
@@ -47,25 +49,40 @@ export default function BytteRevisorPage() {
       </Section>
 
       {/* STEGENE – Petrol som seksjonsskille */}
-      <Section tone="petrol" flyt>
+      {/* overflow: clip i stedet for hidden, ellers virker ikke sticky i StegScroll (designlab). */}
+      <Section tone="petrol" flyt className={visUtkast ? '!overflow-clip' : undefined}>
         <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
-              <Eyebrow tone="petrol">{b.steg.kicker}</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">{b.steg.tittel}</h2>
+          {visUtkast ? (
+            // Designlab-forslag, bare på forhåndsvisning: stegene som tidslinje som fylles når du scroller.
+            <StegScroll
+              tone="petrol"
+              steps={b.steg.punkter.map((p, i) => ({ n: String(i + 1), title: p.tittel, body: p.tekst }))}
+              intro={
+                <>
+                  <Eyebrow tone="petrol">{b.steg.kicker}</Eyebrow>
+                  <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">{b.steg.tittel}</h2>
+                </>
+              }
+            />
+          ) : (
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5" data-reveal>
+                <Eyebrow tone="petrol">{b.steg.kicker}</Eyebrow>
+                <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">{b.steg.tittel}</h2>
+              </div>
+              <div className="lg:col-span-7">
+                <NumberedList
+                  tone="dark"
+                  items={b.steg.punkter.map((p) => (
+                    <Fragment key={p.tittel}>
+                      <strong className="block font-display text-[20px] font-semibold leading-tight">{p.tittel}</strong>
+                      <span className="mt-2 block text-[16px] text-flyd-dempet">{p.tekst}</span>
+                    </Fragment>
+                  ))}
+                />
+              </div>
             </div>
-            <div className="lg:col-span-7">
-              <NumberedList
-                tone="dark"
-                items={b.steg.punkter.map((p) => (
-                  <Fragment key={p.tittel}>
-                    <strong className="block font-display text-[20px] font-semibold leading-tight">{p.tittel}</strong>
-                    <span className="mt-2 block text-[16px] text-flyd-dempet">{p.tekst}</span>
-                  </Fragment>
-                ))}
-              />
-            </div>
-          </div>
+          )}
         </Container>
       </Section>
 

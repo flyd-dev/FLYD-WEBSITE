@@ -30,7 +30,14 @@ const plasser = [
   { href: '/?kunder=flyt', side: 'Forsiden med ?kunder=flyt', hva: '– logoene langs flytlinjen i stedet for kundehistoriene' },
   { href: '/om-flyd/', side: '/om-flyd/', hva: '– bilder som zoomer ut av hverandre, budskap som avdekkes ord for ord og kontorflatene nederst' },
   { href: '/tjenester/integrasjoner/', side: '/tjenester/integrasjoner/', hva: '– systembanen øverst' },
-  { href: '#footer', side: 'Footeren', hva: '– stor logo nederst på alle sider' },
+  { href: '/tjenester/regnskap/', side: 'Tjenestesidene', hva: '– «Slik jobber vi» med scroll-steg (alle seks)' },
+  { href: '/kontor/', side: '/kontor/', hva: '– kontorflatene under toppen' },
+  { href: '/kontor/stavanger-sandnes/', side: 'Kontorsidene', hva: '– bildene åpner seg ved hover, og «Slik kommer du i gang» som tidslinje' },
+  { href: '/bytte-regnskapsforer/', side: '/bytte-regnskapsforer/', hva: '– de fire stegene som tidslinje' },
+  { href: '/bytte-revisor/', side: '/bytte-revisor/', hva: '– stegene som tidslinje' },
+  { href: '/karriere/', side: '/karriere/', hva: '– «Seks grunner» som bildeflater i stedet for karusellen' },
+  { href: '/artikler/', side: '/artikler/', hva: '– den nyeste artikkelen fremhevet i full bredde' },
+  { href: '#footer', side: 'Alle sider', hva: '– nedtrekksmeny under «Tjenester» i menyen og stor logo nederst i footeren' },
 ];
 
 function Forslag({ n, kilde, plass }: { n: number; kilde: string; plass: string }) {
