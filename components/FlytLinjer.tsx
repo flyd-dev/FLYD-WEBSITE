@@ -1,9 +1,13 @@
 import clsx from 'clsx';
 
 /**
- * «Flyt»: myke linjer som tegnes inn og glir sakte videre – navnet Flyd som
- * bevegelse. Bare pynt (aria-hidden), ren SVG og CSS, ingen JavaScript.
- * Mint på mørk bunn, Flyd-teal på lys. Står stille ved prefers-reduced-motion.
+ * «Flyt»: myke linjer som tegnes inn – navnet Flyd som bevegelse. Etterpå
+ * glir et svakt lysstreif langs to av linjene (fra «Animated Beam» på
+ * 21st.dev): en kort, lys kjerne med en lengre, svakere hale, som kommer inn
+ * fra venstre og forsvinner til høyre. Erstatter Korall-prikken som gikk langs
+ * linjen (for leken). Bare pynt (aria-hidden), ren SVG og CSS, ingen
+ * JavaScript. Mint på mørk bunn, Flyd-teal på lys. Står stille ved
+ * prefers-reduced-motion.
  */
 const paths = [
   'M-40 260 C 160 120, 340 360, 560 220 S 900 80, 1140 200',
@@ -44,9 +48,13 @@ export default function FlytLinjer({
           style={{ '--i': i } as React.CSSProperties}
         />
       ))}
-      <circle r="5" className="flytprikk fill-flyd-korall">
-        <animateMotion dur="9s" repeatCount="indefinite" path={paths[0]} />
-      </circle>
+      {/* Lysstreifene: hale og kjerne på samme linje, med samme fart, så de henger sammen. */}
+      {[0, 2].map((p, k) => (
+        <g key={p} className="flytstrale" style={{ '--k': k } as React.CSSProperties}>
+          <path d={paths[p]} pathLength={1} fill="none" stroke="currentColor" strokeWidth={4} strokeLinecap="round" className="flytstrale-hale" />
+          <path d={paths[p]} pathLength={1} fill="none" strokeWidth={2.5} strokeLinecap="round" className="flytstrale-kjerne stroke-flyd-sand" />
+        </g>
+      ))}
     </svg>
   );
 }
