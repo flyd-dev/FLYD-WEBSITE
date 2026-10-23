@@ -2,15 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import { Send, CheckCircle2, AlertCircle, ChevronDown } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
-import Eyebrow from './Eyebrow';
+import { useTemaVelger } from './TemaVelger';
 import { getAdClick, trackCareerInquiry, trackLead } from './Analytics';
 import { CAREER_TOPIC, CONTACT_TOPICS } from '@/lib/contact-topics';
-import { temaValg } from '@/data/kontaktskjema';
 
 // Temaene ligger i lib/contact-topics.ts, samme liste som serveren godtar.
-// Hvordan de leses i setningen og hintet i meldingsfeltet ligger i data/kontaktskjema.ts.
+// Hvordan de står i overskriften og menyen, ikonene og hintet i meldingsfeltet
+// ligger i data/kontaktskjema.ts.
 // Lenker kan velge tema på forhånd med ?tema= (f.eks. /kontakt?tema=karriere).
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
@@ -18,33 +18,24 @@ type FieldErrors = { name?: string; email?: string; message?: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Feltene i setningen: understrek i Mint (4,9:1 mot Petrol), plassholder i Mint
-// og det du skriver i Sand, så de utfylte delene skiller seg fra teksten rundt
-// (Dempet, 6,6:1). Feil får Korall-understrek (4,2:1, godkjent for UI-elementer).
-// Bredden følger teksten der nettleseren støtter det (.setning-felt i globals.css).
-const ordFelt =
-  'setning-felt rounded-none border-0 border-b-2 bg-transparent px-1 pb-0.5 align-baseline font-medium leading-tight placeholder:text-flyd-mint transition-[border-color,background-color] duration-200 hover:border-flyd-sand focus:border-flyd-sand focus:bg-flyd-sand/10 focus:outline-none focus-visible:outline-none';
-const ordFeltOk = `${ordFelt} border-flyd-mint text-flyd-sand`;
-const ordFeltFeil = `${ordFelt} border-flyd-korall text-flyd-sand`;
+// Felt med understrek på Petrol: Mint-strek (4,9:1, godkjent for UI-elementer),
+// etikett i Dempet (6,6:1), det du skriver i Sand. Feil gir Korall-strek, og
+// feiltekstene står samlet under meldingsfeltet.
+const labelCls = 'block text-[14px] font-medium text-flyd-dempet';
+const fieldBase =
+  'mt-1.5 w-full rounded-none border-0 border-b-2 bg-transparent px-0 py-2 text-[17px] text-flyd-sand placeholder:text-flyd-dempet/70 transition-[border-color] duration-200 hover:border-flyd-sand focus:border-flyd-sand focus:outline-none focus-visible:outline-none';
+const inputCls = `${fieldBase} border-flyd-mint`;
+const inputErrCls = `${fieldBase} border-flyd-korall`;
 
 const lenkeCls =
   'font-medium text-flyd-sand underline decoration-flyd-mint decoration-2 underline-offset-4 transition-colors hover:decoration-flyd-sand';
 
-function FieldError({ id, children }: { id: string; children: React.ReactNode }) {
-  return (
-    <p id={id} className="flex items-center gap-2 text-[15px] text-flyd-sand">
-      <AlertCircle className="h-4 w-4 flex-shrink-0 text-flyd-korall" strokeWidth={2} aria-hidden="true" />
-      {children}
-    </p>
-  );
-}
-
 /**
- * Kontaktskjemaet som en setning du fyller ut («Hei! Jeg vil gjerne snakke
- * om … Jeg heter … og jobber i …»), på et Petrol-kort med Korall-knapp.
- * Ett steg, ingen ikoner: det skal lese som starten på en samtale, i tråd med
- * «La oss ta en prat.». Hvert felt har en egen (skjult) etikett, så skjermlesere
- * får vanlige skjemafelt. Velger du «en jobb hos dere», faller bedriften ut av setningen.
+ * Kontaktskjemaet på et Petrol-kort. Overskriften er starten på en samtale
+ * («Hei! Jeg vil gjerne snakke om [tema].»), der temaet velges i en egen
+ * nedtrekksmeny (TemaVelger). Under står vanlige felt med understrek og
+ * Korall-knappen. Valgt i designlab (okt. 2026) foran et rolig skjema med
+ * temapiller og et delt kort.
  */
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
@@ -52,7 +43,8 @@ export default function ContactForm() {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [tema, setTema] = useState('');
   const takkRef = useRef<HTMLHeadingElement>(null);
-  const nyRef = useRef(false);
+  const rotRef = useRef<HTMLDivElement>(null);
+  const velger = useTemaVelger(tema, setTema);
 
   useEffect(() => {
     const fraLenke = new URLSearchParams(window.location.search).get('tema')?.toLowerCase();
@@ -60,16 +52,14 @@ export default function ContactForm() {
     if (match) setTema(match);
   }, []);
 
-  // Fokus til takken etter sending, og tilbake til første felt ved «Send en ny».
+  // Fokus til takken etter sending, og tilbake til temaet ved «Send en ny».
+  const fokusEtter = useRef<'takk' | 'tema' | null>(null);
   useEffect(() => {
-    if (status === 'success') takkRef.current?.focus();
-    if (status === 'idle' && nyRef.current) {
-      nyRef.current = false;
-      document.getElementById('topic')?.focus();
-    }
+    if (fokusEtter.current === 'takk') takkRef.current?.focus();
+    if (fokusEtter.current === 'tema') rotRef.current?.querySelector<HTMLButtonElement>('button[aria-haspopup]')?.focus();
+    fokusEtter.current = null;
   }, [status]);
 
-  const valgt = temaValg.find((v) => v.tema === tema);
   const erKarriere = tema === CAREER_TOPIC;
 
   function validate(formData: FormData): FieldErrors {
@@ -95,6 +85,7 @@ export default function ContactForm() {
     const formData = new FormData(form);
 
     if (formData.get('company')) {
+      fokusEtter.current = 'takk';
       setStatus('success');
       return;
     }
@@ -139,6 +130,7 @@ export default function ContactForm() {
         throw new Error(`HTTP ${res.status}`);
       }
 
+      fokusEtter.current = 'takk';
       setStatus('success');
       form.reset();
       setTema('');
@@ -158,7 +150,7 @@ export default function ContactForm() {
   const feil = (['name', 'email', 'message'] as const).filter((k) => fieldErrors[k]);
 
   return (
-    <div className="on-dark rounded-kort bg-flyd-petrol p-6 sm:p-8 md:p-10">
+    <div ref={rotRef} className="on-dark rounded-kort bg-flyd-petrol p-6 sm:p-8 md:p-10">
       {status === 'success' ? (
         <div>
           <CheckCircle2 className="h-8 w-8 text-flyd-mint" strokeWidth={2} aria-hidden="true" />
@@ -181,7 +173,7 @@ export default function ContactForm() {
             variant="secondary-dark"
             className="mt-8"
             onClick={() => {
-              nyRef.current = true;
+              fokusEtter.current = 'tema';
               setStatus('idle');
             }}
           >
@@ -197,150 +189,93 @@ export default function ContactForm() {
             <label htmlFor="trap-field">Name</label>
             <input id="trap-field" type="text" name="company" tabIndex={-1} autoComplete="off" />
           </div>
+          <input type="hidden" name="topic" value={tema} />
 
-          <Eyebrow as="h2" tone="petrol">
-            Send oss en melding
-          </Eyebrow>
-
-          {/* Setningen. Etikettene er skjult; teksten rundt feltene viser hva de er til. */}
-          <div className="mt-6 font-display text-[20px] font-medium leading-[1.95] text-flyd-dempet sm:text-[24px] sm:leading-[2.1] md:text-[26px]">
-            Hei! Jeg vil gjerne snakke om{' '}
-            {/* Temaet vises som tekst som kan bryte linjen (en select kan ikke det, og
-                «nettsider og digitale flater» ble kuttet på mobil). Den ekte selecten ligger
-                usynlig over teksten, så klikk, tastatur og skjermlesere bruker den. */}
-            <span className="group/tema relative inline-block max-w-full align-baseline">
-              <span
-                aria-hidden="true"
-                className={clsx(
-                  'border-b-2 border-flyd-mint px-1 pb-0.5 leading-tight transition-[border-color,background-color] duration-200 [box-decoration-break:clone] group-hover/tema:border-flyd-sand group-focus-within/tema:border-flyd-sand group-focus-within/tema:bg-flyd-sand/10',
-                  valgt ? 'text-flyd-sand' : 'text-flyd-mint',
-                )}
-              >
-                {valgt?.setning ?? 'velg tema'}
-                <ChevronDown
-                  className="ml-1 inline h-[0.7em] w-[0.7em] align-[-0.02em] text-flyd-mint"
-                  strokeWidth={2.25}
-                />
-              </span>
-              {/* Punktumet står inne i blokken, ellers havner det til høyre for den når temaet går over to linjer. */}
-              .
-              <label htmlFor="topic" className="sr-only">
-                Hva gjelder henvendelsen?
-              </label>
-              <select
-                id="topic"
-                name="topic"
-                value={tema}
-                onChange={(e) => setTema(e.target.value)}
-                className="absolute inset-0 h-full w-full cursor-pointer appearance-none text-[16px] opacity-0 [&>option]:bg-flyd-sand [&>option]:font-body [&>option]:text-flyd-skog"
-              >
-                <option value="">velg tema</option>
-                {temaValg.map((v) => (
-                  <option key={v.tema} value={v.tema}>
-                    {v.setning}
-                  </option>
-                ))}
-              </select>
-            </span>
-            {' '}Jeg heter{' '}
-            <label htmlFor="name" className="sr-only">
-              Navn (må fylles ut)
-            </label>
-            <input
-              id="name"
-              name="name"
-              aria-required="true"
-              autoComplete="name"
-              aria-invalid={fieldErrors.name ? true : undefined}
-              aria-describedby={fieldErrors.name ? 'name-error' : undefined}
-              className={fieldErrors.name ? ordFeltFeil : ordFeltOk}
-              style={{ '--bredde': '9em' } as React.CSSProperties}
-              placeholder="navnet ditt"
-            />
-            {/* Jobbsøkere har ingen bedrift å oppgi. */}
-            {!erKarriere && (
-              <>
-                {' '}og jobber i{' '}
-                <label htmlFor="bedrift" className="sr-only">
-                  Bedrift
-                </label>
-                <span className="whitespace-nowrap">
-                  <input
-                    id="bedrift"
-                    name="bedrift"
-                    autoComplete="organization"
-                    className={ordFeltOk}
-                    style={{ '--bredde': '8em' } as React.CSSProperties}
-                    placeholder="bedriften"
-                  />
-                  .
-                </span>
-              </>
-            )}
-            {erKarriere && '.'} Dere når meg på{' '}
-            <label htmlFor="email" className="sr-only">
-              E-post (må fylles ut)
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              aria-required="true"
-              autoComplete="email"
-              aria-invalid={fieldErrors.email ? true : undefined}
-              aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-              className={fieldErrors.email ? ordFeltFeil : ordFeltOk}
-              style={{ '--bredde': '11em' } as React.CSSProperties}
-              placeholder="e-postadressen din"
-            />{' '}
-            eller{' '}
-            <label htmlFor="phone" className="sr-only">
-              Telefon
-            </label>
-            <span className="whitespace-nowrap">
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                autoComplete="tel"
-                className={ordFeltOk}
-                style={{ '--bredde': '6.5em' } as React.CSSProperties}
-                placeholder="telefon"
-              />
-              .
-            </span>
+          {/* Menyen legger seg rett under overskriften (posisjonert mot denne boksen). */}
+          <div className="relative">
+            <h2 className="font-display text-[24px] font-semibold leading-[1.6] text-flyd-dempet sm:text-[28px]">
+              Hei! Jeg vil gjerne snakke om {velger.knapp}
+            </h2>
+            {velger.liste}
           </div>
 
-          <div className="mt-8">
-            <label htmlFor="message" className="text-[15px] font-medium text-flyd-sand">
-              Fortell gjerne litt mer
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              aria-required="true"
-              rows={5}
-              aria-invalid={fieldErrors.message ? true : undefined}
-              aria-describedby={fieldErrors.message ? 'message-error' : undefined}
-              className={clsx(
-                'mt-2 w-full resize-none rounded-flis border bg-flyd-skog/40 px-4 py-3.5 text-[16px] leading-relaxed text-flyd-sand placeholder:text-flyd-dempet/70 transition-[border-color,box-shadow] duration-200 hover:border-flyd-sand focus:border-flyd-sand focus:outline-none focus:ring-1 focus:ring-flyd-sand focus-visible:outline-none',
-                fieldErrors.message ? 'border-flyd-korall' : 'border-flyd-mint/70',
+          <div className="mt-8 border-t border-flyd-sand/15 pt-8">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2">
+              <div>
+                <label htmlFor="name" className={labelCls}>
+                  Navn<span aria-hidden="true"> *</span>
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  aria-required="true"
+                  autoComplete="name"
+                  aria-invalid={fieldErrors.name ? true : undefined}
+                  aria-describedby={fieldErrors.name ? 'name-error' : undefined}
+                  className={fieldErrors.name ? inputErrCls : inputCls}
+                />
+              </div>
+              {/* Jobbsøkere har ingen bedrift å oppgi. */}
+              {!erKarriere && (
+                <div>
+                  <label htmlFor="bedrift" className={labelCls}>
+                    Bedrift
+                  </label>
+                  <input id="bedrift" name="bedrift" autoComplete="organization" className={inputCls} />
+                </div>
               )}
-              placeholder={valgt?.hint ?? 'Hva kan vi hjelpe deg med?'}
-            />
+              <div>
+                <label htmlFor="email" className={labelCls}>
+                  E-post<span aria-hidden="true"> *</span>
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  aria-required="true"
+                  autoComplete="email"
+                  aria-invalid={fieldErrors.email ? true : undefined}
+                  aria-describedby={fieldErrors.email ? 'email-error' : undefined}
+                  className={fieldErrors.email ? inputErrCls : inputCls}
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className={labelCls}>
+                  Telefon
+                </label>
+                <input id="phone" name="phone" type="tel" autoComplete="tel" className={inputCls} />
+              </div>
+            </div>
+
+            <div className="mt-7">
+              <label htmlFor="message" className={labelCls}>
+                Melding<span aria-hidden="true"> *</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                aria-required="true"
+                rows={3}
+                aria-invalid={fieldErrors.message ? true : undefined}
+                aria-describedby={fieldErrors.message ? 'message-error' : undefined}
+                className={clsx(fieldErrors.message ? inputErrCls : inputCls, 'resize-none leading-relaxed')}
+                placeholder={velger.valgt?.hint ?? 'Hva kan vi hjelpe deg med?'}
+              />
+            </div>
           </div>
 
           {feil.length > 0 && (
-            <div className="mt-5 space-y-2">
+            <div className="mt-6 space-y-2">
               {feil.map((k) => (
-                <FieldError key={k} id={`${k}-error`}>
+                <p key={k} id={`${k}-error`} className="flex items-center gap-2 text-[15px] text-flyd-sand">
+                  <AlertCircle className="h-4 w-4 flex-shrink-0 text-flyd-korall" strokeWidth={2} aria-hidden="true" />
                   {fieldErrors[k]}
-                </FieldError>
+                </p>
               ))}
             </div>
           )}
 
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-5">
+          <div className="mt-9 flex flex-wrap items-center justify-between gap-x-6 gap-y-5">
             <p className="max-w-sm text-[14px] leading-relaxed text-flyd-dempet">
               Navn, e-post og melding må fylles ut. Vi lagrer opplysningene for
               å svare deg, se{' '}
