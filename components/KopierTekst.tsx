@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import clsx from 'clsx';
 import { Check, Copy } from 'lucide-react';
 
 /**
@@ -8,7 +9,16 @@ import { Check, Copy } from 'lucide-react';
  * har ikke e-postprogram satt opp på jobb-PC-en, så mailto: åpner ingenting.
  * Bekreftelsen leses opp via aria-live.
  */
-export default function KopierTekst({ tekst, etikett }: { tekst: string; etikett: string }) {
+export default function KopierTekst({
+  tekst,
+  etikett,
+  tone = 'lys',
+}: {
+  tekst: string;
+  etikett: string;
+  /** Mørk bunn: Mint-kant og Sand-tekst. */
+  tone?: 'lys' | 'mork';
+}) {
   const [kopiert, setKopiert] = useState(false);
   const tidsur = useRef<number>();
 
@@ -41,7 +51,12 @@ export default function KopierTekst({ tekst, etikett }: { tekst: string; etikett
         onClick={kopier}
         aria-label={etikett}
         data-peker="kopier"
-        className="inline-flex items-center gap-1.5 rounded-pille border border-flyd-teal px-3 py-1 text-[14px] font-medium text-flyd-skog transition-[background-color,color,border-color] duration-200 hover:border-flyd-skog hover:bg-flyd-skog hover:text-flyd-sand active:translate-y-[1px]"
+        className={clsx(
+          'inline-flex items-center gap-1.5 rounded-pille border px-3 py-1 text-[14px] font-medium transition-[background-color,color,border-color] duration-200 active:translate-y-[1px]',
+          tone === 'mork'
+            ? 'border-flyd-mint text-flyd-sand hover:bg-flyd-mint hover:text-flyd-skog'
+            : 'border-flyd-teal text-flyd-skog hover:border-flyd-skog hover:bg-flyd-skog hover:text-flyd-sand',
+        )}
       >
         {kopiert ? (
           <Check className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden="true" />
