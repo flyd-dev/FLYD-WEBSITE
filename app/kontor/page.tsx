@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Plus } from 'lucide-react';
 import { pageMetadata, siteUrl } from '@/lib/seo';
@@ -10,8 +9,10 @@ import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
 import Kontorkart from '@/components/Kontorkart';
+import KontorListe from '@/components/KontorListe';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { offices, officeLabel } from '@/data/offices';
+import { kontorTeam } from '@/data/team';
 import { kontorBlokker, regionTjenester, hubFaq } from '@/data/kontoroversikt';
 import { revisjonOmtale } from '@/data/revisjon';
 
@@ -31,28 +32,13 @@ export const metadata: Metadata = pageMetadata({
  * tjenestene og spørsmål og svar. Autorisasjonen og bytte står som spørsmål,
  * ikke som egne seksjoner.
  *
- * Kortene bruker små utgaver av fasadebildene (public/kontor/kort/, 720 px
- * bred), ellers laster siden nesten 1 MB bilder på mobil.
+ * Radene i kontorlisten bruker små utgaver av fasadebildene
+ * (public/kontor/kort/, 720 px bred) på mobil; bildefeltet ved siden av
+ * listen (fra lg) bruker de store.
  *
  * Kontorene står fullt beskrevet i layoutens @graph. Her refereres de bare
  * med @id som `department`, så de ikke dupliseres.
  */
-/** Lenketekst med pil, der siste ord og pilen aldri skilles når teksten brytes. */
-function PilLenketekst({ tekst }: { tekst: string }) {
-  const ord = tekst.split(' ');
-  const siste = ord.pop();
-  const strek = 'underline decoration-flyd-teal decoration-2 underline-offset-[5px]';
-  return (
-    <>
-      {ord.length > 0 && <span className={strek}>{ord.join(' ')} </span>}
-      <span className="whitespace-nowrap">
-        <span className={strek}>{siste}</span>
-        <ArrowRight className="lenkekort-pil ml-1.5 inline-block h-4 w-4 align-[-0.2em]" strokeWidth={2} aria-hidden="true" />
-      </span>
-    </>
-  );
-}
-
 export default function KontorerPage() {
   const orgJsonLd = {
     '@context': 'https://schema.org',
@@ -130,7 +116,7 @@ export default function KontorerPage() {
         </Container>
       </Section>
 
-      {/* KONTORENE – hele kortet lenker til kontorsiden */}
+      {/* KONTORENE – listen med bilde ved siden av (KontorListe) */}
       <Section tone="sand" className="!pt-0">
         <Container>
           <div className="grid grid-cols-1 gap-10 border-t border-flyd-linje-sand pt-12 md:pt-16 lg:grid-cols-12 lg:items-center lg:gap-16">
@@ -144,42 +130,27 @@ export default function KontorerPage() {
             </div>
             <Kontorkart className="lg:col-span-7" />
           </div>
-          <ul className="stagger mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-            {offices.map((o, i) => {
-              const k = kontorBlokker[o.slug];
-              return (
-                <li key={o.slug} data-reveal style={{ '--i': i } as React.CSSProperties}>
-                  {/* Kompakt rad på mobil (lite bilde til venstre), stort kort fra nettbrett. */}
-                  <Link
-                    href={`/kontor/${o.slug}/`}
-                    className="lys lenkekort group flex h-full flex-row gap-4 rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint sm:flex-col sm:gap-0"
-                  >
-                    <div className="relative aspect-[4/3] w-28 flex-shrink-0 overflow-hidden rounded-flis bg-flyd-linje-mint sm:aspect-[3/2] sm:w-auto">
-                      {o.image && (
-                        <div className="rull-zoom absolute inset-0">
-                          <Image
-                            src={o.image.src.replace('/kontor/', '/kontor/kort/')}
-                            alt={o.image.alt}
-                            fill
-                            sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 112px"
-                            className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                          />
-                        </div>
-                      )}
-                    </div>
-                    {/* Bare navn og område: adressen står på kontorsiden, i footeren og i spørsmålene under. */}
-                    <div className="flex min-w-0 flex-1 flex-col py-1 pr-1 sm:px-3 sm:pb-3 sm:pt-5">
-                      <h3 className="font-display text-[18px] font-semibold leading-tight sm:text-[22px]">{officeLabel(o)}</h3>
-                      {k && <p className="mt-1.5 text-[14px] leading-snug text-flyd-skifer sm:mt-2 sm:text-[15px] sm:leading-relaxed">{k.omrade}</p>}
-                      <span className="mt-auto block pt-3 text-[14px] font-medium leading-snug text-flyd-petrol sm:pt-5 sm:text-[15px]">
-                        <PilLenketekst tekst={k?.lenketekst ?? 'Til kontoret'} />
-                      </span>
-                    </div>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <div className="mt-12 md:mt-16">
+            <KontorListe
+              kontorer={offices.map((o) => {
+                const k = kontorBlokker[o.slug];
+                return {
+                  slug: o.slug,
+                  href: `/kontor/${o.slug}/`,
+                  navn: officeLabel(o),
+                  // Bare navn og område: adressen står på kontorsiden, i footeren og i spørsmålene under.
+                  omrade: k?.omrade ?? '',
+                  lenketekst: k?.lenketekst ?? 'Til kontoret',
+                  bilde: o.image && {
+                    src: o.image.src,
+                    kort: o.image.src.replace('/kontor/', '/kontor/kort/'),
+                    alt: o.image.alt,
+                  },
+                  folk: kontorTeam[o.slug] ?? [],
+                };
+              })}
+            />
+          </div>
         </Container>
       </Section>
 
