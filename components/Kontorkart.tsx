@@ -101,3 +101,18 @@ export default function Kontorkart({
     </figure>
   );
 }
+
+/**
+ * Bare kartflaten (hav og land, uten navn og punkter), til det lille kartet i
+ * kontorlisten på /kontor. `utsnitt` er [x, y, bredde, høyde] i kartets
+ * koordinater (standard hele kartet). Fyller forelderen; punktene tegnes av
+ * den som bruker den.
+ */
+export function KartFlate({ utsnitt = [0, 0, kartBredde, kartHoyde] }: { utsnitt?: [number, number, number, number] }) {
+  return (
+    <svg viewBox={utsnitt.join(' ')} className="absolute inset-0 h-full w-full" aria-hidden="true" focusable="false">
+      <path d={kartNaboer} className="fill-flyd-sand/70 stroke-flyd-teal/40" strokeWidth={3} strokeLinejoin="round" />
+      <path d={kartLand} className="fill-flyd-sand stroke-flyd-teal/40" strokeWidth={3} strokeLinejoin="round" />
+    </svg>
+  );
+}

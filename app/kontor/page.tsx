@@ -8,7 +8,8 @@ import Eyebrow from '@/components/Eyebrow';
 import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
-import Kontorkart from '@/components/Kontorkart';
+import { KartFlate } from '@/components/Kontorkart';
+import { kartBredde, kartHoyde, kartPunkt } from '@/data/kontorkart';
 import KontorListe from '@/components/KontorListe';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { offices, officeLabel } from '@/data/offices';
@@ -39,6 +40,37 @@ export const metadata: Metadata = pageMetadata({
  * Kontorene står fullt beskrevet i layoutens @graph. Her refereres de bare
  * med @id som `department`, så de ikke dupliseres.
  */
+/**
+ * Utsnittet til det lille kartet i kontorlisten: alle kontorene med litt luft
+ * rundt, i samme format som kartet (5:4), så punktene ikke blir små i et stort hav.
+ */
+const kartPunkter = offices.filter((o) => o.lat != null && o.lng != null).map((o) => kartPunkt(o.lat!, o.lng!));
+const kartUtsnitt = ((): [number, number, number, number] => {
+  const luft = 110;
+  const xs = kartPunkter.map(([x]) => x);
+  const ys = kartPunkter.map(([, y]) => y);
+  let [x0, x1, y0, y1] = [Math.min(...xs) - luft, Math.max(...xs) + luft, Math.min(...ys) - luft, Math.max(...ys) + luft];
+  const forhold = kartBredde / kartHoyde;
+  if ((x1 - x0) / (y1 - y0) < forhold) {
+    const b = (y1 - y0) * forhold;
+    const m = (x0 + x1) / 2;
+    [x0, x1] = [m - b / 2, m + b / 2];
+  } else {
+    const h = (x1 - x0) / forhold;
+    const m = (y0 + y1) / 2;
+    [y0, y1] = [m - h / 2, m + h / 2];
+  }
+  return [x0, y0, x1 - x0, y1 - y0];
+})();
+
+/** Kontorets plass i det lille kartet, i prosent av utsnittet. */
+function kartPosisjon(o: (typeof offices)[number]) {
+  if (o.lat == null || o.lng == null) return undefined;
+  const [x, y] = kartPunkt(o.lat, o.lng);
+  const [ux, uy, ub, uh] = kartUtsnitt;
+  return { x: ((x - ux) / ub) * 100, y: ((y - uy) / uh) * 100 };
+}
+
 export default function KontorerPage() {
   const orgJsonLd = {
     '@context': 'https://schema.org',
@@ -119,8 +151,8 @@ export default function KontorerPage() {
       {/* KONTORENE – listen med bilde ved siden av (KontorListe) */}
       <Section tone="sand" className="!pt-0">
         <Container>
-          <div className="grid grid-cols-1 gap-10 border-t border-flyd-linje-sand pt-12 md:pt-16 lg:grid-cols-12 lg:items-center lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
+          <div className="border-t border-flyd-linje-sand pt-12 md:pt-16">
+            <div className="max-w-2xl" data-reveal>
               <Eyebrow>Kontorene</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">Finn kontoret nærmest deg</h2>
               <p className={`mt-6 ${brod}`}>
@@ -128,10 +160,10 @@ export default function KontorerPage() {
                 kontor du hører til.
               </p>
             </div>
-            <Kontorkart className="lg:col-span-7" />
           </div>
-          <div className="mt-12 md:mt-16">
+          <div className="mt-10 md:mt-12">
             <KontorListe
+              kart={<KartFlate utsnitt={kartUtsnitt} />}
               kontorer={offices.map((o) => {
                 const k = kontorBlokker[o.slug];
                 return {
@@ -147,6 +179,7 @@ export default function KontorerPage() {
                     alt: o.image.alt,
                   },
                   folk: kontorTeam[o.slug] ?? [],
+                  kart: kartPosisjon(o),
                 };
               })}
             />
@@ -154,51 +187,52 @@ export default function KontorerPage() {
         </Container>
       </Section>
 
-      {/* TJENESTER – Petrol som seksjonsskille */}
+      {/* TJENESTER – Petrol som seksjonsskille. Overskriften over et rutenett (to/tre spalter), så
+          seksjonen ikke blir en lang liste; på mobil bare navnene, beskrivelsene står på tjenestesidene. */}
       <Section tone="petrol" flyt>
         <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end lg:gap-16" data-reveal>
+            <div className="lg:col-span-6">
               <Eyebrow tone="petrol">Tjenester</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
                 Hva vi gjør for bedrifter i regionen
               </h2>
-              <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
+            </div>
+            <div className="lg:col-span-6">
+              <p className="max-w-2xl text-[17px] leading-[1.65] text-flyd-dempet">
                 Samme tjenester, samme fagmiljø og samme systemer på alle seks kontorene. Regnskapsførere og
                 systemkonsulenter sitter i samme hus, så vi kan hjelpe deg med selve systemet regnskapet
                 føres i, ikke bare med føringen.
               </p>
-              <div className="mt-8">
+              <div className="mt-6">
                 <ButtonLink href="/tjenester/" variant="secondary-dark" withArrow>
                   Utforsk alle tjenester
                 </ButtonLink>
               </div>
             </div>
-            <div className="lg:col-span-7" data-reveal>
-              <ul className="border-t border-flyd-sand/15">
-                {regionTjenester.map((t) => (
-                  <li key={t.title}>
-                    <Link
-                      href={t.href}
-                      className="group flex items-start justify-between gap-4 border-b border-flyd-sand/15 py-5 transition-colors"
-                    >
-                      <span>
-                        <span className="block font-display text-[19px] font-semibold text-flyd-sand transition-colors duration-200 group-hover:text-flyd-mint">
-                          {t.title}
-                        </span>
-                        <span className="mt-1.5 block text-[16px] leading-relaxed text-flyd-dempet">{t.text}</span>
-                      </span>
-                      <ArrowRight
-                        className="mt-1 h-5 w-5 flex-shrink-0 text-flyd-mint transition-transform duration-200 group-hover:translate-x-1"
-                        strokeWidth={2}
-                        aria-hidden="true"
-                      />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
+          <ul className="mt-10 grid grid-cols-1 border-t border-flyd-sand/15 sm:mt-12 sm:grid-cols-2 sm:gap-x-10 sm:border-t-0 lg:grid-cols-3" data-reveal>
+            {regionTjenester.map((t) => (
+              <li key={t.title} className="sm:border-t sm:border-flyd-sand/15">
+                <Link
+                  href={t.href}
+                  className="group block border-b border-flyd-sand/15 py-4 sm:border-b-0 sm:py-6"
+                >
+                  <span className="flex items-start justify-between gap-4">
+                    <span className="font-display text-[18px] font-semibold text-flyd-sand transition-colors duration-200 group-hover:text-flyd-mint sm:text-[19px]">
+                      {t.title}
+                    </span>
+                    <ArrowRight
+                      className="mt-1 h-5 w-5 flex-shrink-0 text-flyd-mint transition-transform duration-200 group-hover:translate-x-1"
+                      strokeWidth={2}
+                      aria-hidden="true"
+                    />
+                  </span>
+                  <span className="mt-2 hidden text-[15px] leading-relaxed text-flyd-dempet sm:block">{t.text}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </Container>
       </Section>
 
