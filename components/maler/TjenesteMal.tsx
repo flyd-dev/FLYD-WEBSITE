@@ -86,7 +86,8 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
         <Container>
           <Breadcrumbs items={[{ name: 'Tjenester', href: '/tjenester/' }, { name: s.title, href: serviceUrl(s) }]} />
           <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
+            {/* Systembanen på integrasjoner trenger mer plass enn et bilde: halvparten hver. */}
+            <div className={s.id === 'integrasjoner' ? 'lg:col-span-6' : 'lg:col-span-7'}>
               <Eyebrow>Tjeneste</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">{s.title}</h1>
               <span aria-hidden="true" className="aksentlinje mt-6 block h-1 w-24 rounded-pille bg-flyd-teal" />
@@ -100,7 +101,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                 </ButtonLink>
               </div>
             </div>
-            <div className="lg:col-span-5">
+            <div className={s.id === 'integrasjoner' ? 'lg:col-span-6' : 'lg:col-span-5'}>
               {/* Integrasjoner viser hvordan systemene henger sammen i stedet for et bilde. */}
               {s.id === 'integrasjoner' ? (
                 <SystemBane />

@@ -15,9 +15,9 @@ import SystemLogo, { type SystemLogoName } from '@/components/SystemLogo';
  * dataene går ikke gjennom oss.
  *
  * Teksten krymper ikke under lesbar størrelse: navnene rundt er minst 13 px
- * (12 px på de smaleste telefonene), etiketten i midten minst 11 px. Når
- * flaten er smalere enn 420 px, byttes tegningen ut med en høyere oppstilling
- * (`liten`), så det blir plass til teksten i stedet for at alt skaleres ned.
+ * (12 px på de smaleste telefonene), etiketten i midten minst 11 px. I
+ * stedet for å skalere alt ned byttes tegningen ut med høyere oppstillinger
+ * når flaten blir smal: `middels` under 600 px og `liten` under 420 px.
  *
  * Ved prefers-reduced-motion står alt stille: midten viser de fire logoene i et
  * rutenett i stedet for å veksle, og punktumene (SMIL) skjules.
@@ -67,6 +67,23 @@ const stor: Oppstilling = {
   ],
 };
 
+// Middels flate (smal spalte, nettbrett, 420–600 px): høyere enn den brede, så sidene går
+// klar av midtflisen og linjene synes. Plassert for hånd.
+const middels: Oppstilling = {
+  W: 1000,
+  H: 900,
+  C: { x: 500, y: 470 },
+  ringer: [170, 470],
+  bane: 390,
+  noder: [
+    { ...crm, x: 500, y: 90 },
+    { ...nettbutikk, x: 230, y: 270 },
+    { ...bransje, x: 770, y: 270 },
+    { ...lonn, x: 260, y: 760 },
+    { ...rapporter, x: 740, y: 760 },
+  ],
+};
+
 // Smal flate (telefon): høyere, med to og to på hver side. Plassert for hånd, så
 // «Bransjeløsninger» får plass også på 320 px brede skjermer.
 const liten: Oppstilling = {
@@ -89,9 +106,13 @@ const RUNDE_S = VEKSEL_S * systemer.length;
 
 const css = `
   .systembane { container-type: inline-size; }
-  .systembane .sb-liten { display: none; }
-  @container (max-width: 420px) {
+  .systembane .sb-middels, .systembane .sb-liten { display: none; }
+  @container (max-width: 600px) {
     .systembane .sb-stor { display: none; }
+    .systembane .sb-middels { display: block; }
+  }
+  @container (max-width: 420px) {
+    .systembane .sb-middels { display: none; }
     .systembane .sb-liten { display: block; }
   }
   @container (max-width: 300px) {
@@ -264,6 +285,7 @@ export default function SystemBane({ className }: { className?: string }) {
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-skog p-3 sm:p-6">
         <Scene o={stor} liste={liste} className="sb-stor max-w-[1000px] text-[clamp(13px,1.6cqw,15px)]" />
+        <Scene o={middels} liste={liste} className="sb-middels text-[13px]" />
         {/* Ikonene på ringen tar for mye plass på telefon. */}
         <Scene o={liten} liste={liste} className="sb-liten text-[13px] [&_.sb-ikon]:hidden" />
 
