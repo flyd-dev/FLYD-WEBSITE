@@ -9,7 +9,6 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import ClosingCta from '@/components/ClosingCta';
 import { TextLink } from '@/components/Button';
-import { ScrollProgressLineWrapper } from '@/components/ScrollProgressLine';
 import JsonLd from '@/components/JsonLd';
 import { ServiceTile, type ServiceTone } from '@/components/ServiceIcon';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -116,7 +115,7 @@ function Tjenestekort({
 
 export default function TjenesterPage() {
   return (
-    <ScrollProgressLineWrapper>
+    <>
       <JsonLd data={servicesJsonLd} />
       {/* Seksjonsskille: Petrol og stor tittel. Kortene rett under er menyen. */}
       <Section tone="petrol" size="lg" flyt>
@@ -199,6 +198,6 @@ export default function TjenesterPage() {
         title="Usikker på hvor du skal begynne?"
         text="Vi tar gjerne en uforpliktende prat for å forstå situasjonen din og anbefale hva som bør være første steg."
       />
-    </ScrollProgressLineWrapper>
+    </>
   );
 }

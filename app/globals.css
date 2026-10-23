@@ -33,15 +33,6 @@ body {
   color: var(--flyd-skog);
   background: var(--flyd-sand);
   line-height: 1.6;
-  /* Lange sammensatte ord («Merverdiavgiftsregisteret») brytes i stedet for å skyve siden sidelengs på smale skjermer. */
-  overflow-wrap: break-word;
-}
-
-/* På de smaleste mobilene (320 px) får lange ord i overskrifter bindestrek i stedet for et brudd midt i ordet. */
-@media (max-width: 359px) {
-  h1, h2, h3, summary {
-    hyphens: auto;
-  }
 }
 
 h1, h2, h3, h4, h5, h6 {

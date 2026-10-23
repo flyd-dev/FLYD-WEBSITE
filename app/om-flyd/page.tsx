@@ -152,7 +152,7 @@ export default function OmFlydPage() {
                 Langsiktige relasjoner.
               </h2>
               <blockquote className="mt-10 border-l-4 border-flyd-korall pl-6 font-display text-[24px] font-semibold leading-[1.3] text-flyd-mint">
-                Én partner, ett nummer – full flyd.
+                Én kontaktperson, ett nummer – full flyd.
               </blockquote>
             </div>
             <div className="space-y-6 lg:col-span-7" data-reveal>
@@ -217,7 +217,7 @@ export default function OmFlydPage() {
           <div className="max-w-2xl" data-reveal>
             <Eyebrow>Kontorer</Eyebrow>
             <h2 className="mt-5 font-display text-display-lg font-semibold">
-              Seks steder. Én partner.
+              Seks steder. Samme fagmiljø.
             </h2>
             <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
               Vi er lokalt til stede der kundene våre er – fra Stavanger i nord

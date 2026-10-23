@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Plus } from "lucide-react";
+import { ArrowRight, Plus } from "lucide-react";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Eyebrow from "@/components/Eyebrow";
@@ -9,11 +9,11 @@ import Bekreft from "@/components/Bekreft";
 import JsonLd from "@/components/JsonLd";
 import FlydIcon from "@/components/FlydIcon";
 import GoogleAnmeldelse from "@/components/GoogleAnmeldelse";
-import NumberedList from "@/components/NumberedList";
 import TeamCard from "@/components/TeamCard";
+import ClosingCta from "@/components/ClosingCta";
+import BildeAkkordeon from "@/components/BildeAkkordeon";
 import { ButtonLink, TextLink } from "@/components/Button";
 import { siteUrl } from "@/lib/seo";
-import BildeAkkordeon from "@/components/BildeAkkordeon";
 import {
   offices,
   openingHours,
@@ -21,37 +21,43 @@ import {
   officeLabel,
   type Office,
 } from "@/data/offices";
-import type { Kontorside } from "@/data/kontorsider";
+import { getKontorside, kontorFaq } from "@/data/kontorsider";
+import { regionTjenester } from "@/data/kontoroversikt";
+import { revisjonOmtale } from "@/data/revisjon";
 import { kontorTeam } from "@/data/team";
 
 /**
- * Utvidet kontorside (/kontor/[slug]/) for kontorer med eget innhold i
- * data/kontorsider.ts. Øvrige kontorer bruker standardsiden i
- * app/kontor/[slug]/page.tsx.
+ * Kontorsiden (/kontor/[slug]/). Alle seks kontorene har de samme seksjonene i
+ * samme rekkefølge: topp med fasadebilde, tjenester, fra kontoret, folkene,
+ * spørsmål og avslutning. Sandnes har utvidet tekst i data/kontorsider.ts; de
+ * andre bruker tjenestelisten fra /kontor og spørsmålene i `kontorSporsmal`.
  *
- * Siden har nøyaktig én Korall-knapp (primærknappen i heroen). Alle andre
- * handlinger er kontur, tekstlenker eller Mint-knappen i avslutningsboksen.
+ * Pris, oppstart og hvem vi passer for står som spørsmål med svar, ikke som
+ * egne seksjoner, så siden er kort å lese, men har teksten for søk.
  *
  * [BEKREFT]-plassholderne vises alltid, slik at byggesjekken
  * (scripts/sjekk-bekreft.mjs) stopper produksjonsbygg til innholdet er levert.
  * De står aldri i JSON-LD.
  */
-export default function KontorMal({
-  office,
-  side,
-}: {
-  office: Office;
-  side: Kontorside;
-}) {
-  const url = `${siteUrl}/kontor/${office.slug}/`;
+export default function KontorMal({ office }: { office: Office }) {
+  const side = getKontorside(office.slug);
+  const faq = kontorFaq(office.slug);
+  const team = kontorTeam[office.slug] ?? [];
   const andre = offices.filter((o) => o.slug !== office.slug);
+  const url = `${siteUrl}/kontor/${office.slug}/`;
+  const sted = atOffice(office);
+
+  const h1 =
+    side?.h1 ??
+    `${office.revisjon ? "Regnskapsfører og revisor" : "Regnskapsfører"} ${sted}`;
+  const tjenester = side?.tjenester.punkter ?? regionTjenester;
 
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "AccountingService"],
     // Samme @id som kontoret i layoutens @graph, så Google ser én enhet.
     "@id": `${siteUrl}/#office-${office.city.toLowerCase()}`,
-    name: side.schemaName,
+    name: side?.schemaName ?? `Flyd ${office.city}`,
     parentOrganization: {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
@@ -62,7 +68,7 @@ export default function KontorMal({
     image: `${siteUrl}${office.image?.src ?? "/brand/flyd-teal.png"}`,
     telephone: "+4748019958",
     email: "support@flyd.no",
-    description: side.description,
+    description: side?.description ?? office.meta?.description ?? office.blurb,
     address: {
       "@type": "PostalAddress",
       ...(office.street && { streetAddress: office.street }),
@@ -79,21 +85,30 @@ export default function KontorMal({
         },
       }),
     ...(office.mapsUrl && { hasMap: office.mapsUrl }),
-    openingHours: "Mo-Fr 07:00-16:00",
     openingHoursSpecification: openingHours.schema,
-    areaServed: side.areaServed.map((name) => ({ "@type": "City", name })),
+    ...(side
+      ? { areaServed: side.areaServed.map((name) => ({ "@type": "City", name })) }
+      : office.areaServed && {
+          areaServed: office.areaServed.map(({ type, name }) => ({
+            "@type": type,
+            name,
+          })),
+        }),
   };
 
   // Bare spørsmål med ferdig svar. Svaret er det samme som vises på siden.
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: side.faq
+    mainEntity: faq
       .filter((f) => f.a)
       .map((f) => ({
         "@type": "Question",
         name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: [f.a, ...(f.punkter ?? [])].join(" "),
+        },
       })),
   };
 
@@ -102,16 +117,16 @@ export default function KontorMal({
   const visitLink =
     "text-flyd-skog decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-petrol hover:underline";
   const brod = "text-[17px] leading-[1.7] text-flyd-skifer";
-  // Kort strek i Flyd-teal over korttitler, som i designutkastet.
-  const strek = "block h-1 w-8 rounded-pille bg-flyd-teal";
+  const kontorLenke =
+    "font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-skog";
 
   return (
     <>
       <JsonLd data={localBusinessJsonLd} />
       <JsonLd data={faqJsonLd} />
 
-      {/* HERO – avrundet Skog-flate. Korall-knappen her er den eneste på siden. */}
-      <Section tone="sand" size="sm" className="!pb-0 !pt-6 md:!pt-8">
+      {/* TOPP – tittel, ingress og fasadebilde */}
+      <Section tone="sand" className="pt-10 md:pt-14">
         <Container>
           <Breadcrumbs
             items={[
@@ -119,224 +134,99 @@ export default function KontorMal({
               { name: office.city, href: `/kontor/${office.slug}/` },
             ]}
           />
-        </Container>
-        <div className="mx-auto mt-6 w-full max-w-[1400px] px-3 md:px-6">
-          <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-skog text-flyd-sand">
-            <Container className="py-16 md:py-24">
-              <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-                <div className="lg:col-span-8">
-                  <span
-                    aria-hidden="true"
-                    className="block h-1 w-10 rounded-pille bg-flyd-teal"
-                  />
-                  <Eyebrow tone="petrol" className="mt-6">
-                    {side.kicker}
-                  </Eyebrow>
-                  <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">
-                    {side.h1}
-                  </h1>
-                  <p className="mt-8 max-w-2xl text-[18px] leading-[1.65] text-flyd-dempet">
-                    {side.ingress}
-                  </p>
-                  <div className="mt-10 flex flex-wrap items-center gap-4">
-                    <ButtonLink
-                      href="/kontakt"
-                      variant="primary-dark"
-                      withArrow
-                    >
-                      Snakk med oss
-                    </ButtonLink>
-                    <ButtonLink
-                      href="tel:+4748019958"
-                      variant="secondary-dark"
-                      external
-                    >
-                      Ring +47 480 19 958
-                    </ButtonLink>
+          <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <Eyebrow>{side?.kicker ?? `Kontor · ${office.name}`}</Eyebrow>
+              <h1 className="mt-6 font-display text-display-xl font-semibold">{h1}</h1>
+              <p className="mt-8 max-w-2xl text-[18px] leading-[1.65] text-flyd-skifer">
+                {side?.ingress ?? office.blurb}
+              </p>
+              {/* Revisjon står for seg, ikke som en del av regnskapstilbudet (uavhengighet). */}
+              {office.revisjon && (
+                <div className="mt-8 max-w-2xl border-t border-flyd-linje-sand pt-8">
+                  <Eyebrow as="h2">Revisor {sted}</Eyebrow>
+                  <p className={`mt-4 ${brod}`}>Revisjonsteamet vårt holder til her. {revisjonOmtale}</p>
+                  <div className="mt-5">
+                    <TextLink href="/tjenester/revisjon/">Les om revisjon</TextLink>
                   </div>
                 </div>
-                {/* Dekor: Petrol-sirkel med Mint-ring og Mint-prikk */}
-                <div
-                  aria-hidden="true"
-                  className="hidden lg:col-span-4 lg:flex lg:justify-end"
-                >
-                  <div className="relative flex aspect-square w-full max-w-[380px] items-center justify-center rounded-pille bg-flyd-petrol">
-                    <div className="aspect-square w-[74%] rounded-pille border-2 border-flyd-mint/50" />
-                    <div className="absolute bottom-[8%] right-[10%] aspect-square w-[29%] rounded-pille bg-flyd-mint/90" />
-                  </div>
+              )}
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <ButtonLink href="/kontakt" variant="primary" withArrow>
+                  Snakk med oss
+                </ButtonLink>
+                <ButtonLink href="tel:+4748019958" variant="secondary" external>
+                  Ring +47 480 19 958
+                </ButtonLink>
+              </div>
+            </div>
+            {office.image && (
+              <div className="lg:col-span-5">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint">
+                  <Image
+                    src={office.image.src}
+                    alt={office.image.alt}
+                    fill
+                    priority
+                    sizes="(min-width:1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
                 </div>
               </div>
-            </Container>
+            )}
           </div>
-        </div>
+        </Container>
       </Section>
 
-      {/* TJENESTER – hele kortet er en lenke */}
-      <Section tone="sand">
+      {/* TJENESTER – Petrol som seksjonsskille, samme liste som på /kontor */}
+      <Section tone="petrol" flyt>
         <Container>
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow>{side.tjenester.kicker}</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">
-              {side.tjenester.title}
-            </h2>
-            <p className={`mt-6 ${brod}`}>{side.tjenester.intro}</p>
-          </div>
-          <ul className="stagger mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
-            {side.tjenester.punkter.map((p, i) => (
-              <li
-                key={p.title}
-                data-reveal
-                style={{ "--i": i } as React.CSSProperties}
-              >
-                <Link
-                  href={p.href}
-                  className="lenkekort group flex h-full flex-col rounded-kort border border-flyd-linje-sand bg-flyd-sand p-7 hover:bg-flyd-lysmint"
-                >
-                  <span aria-hidden="true" className={strek} />
-                  <h3 className="mt-5 font-display text-[21px] font-semibold leading-tight text-flyd-skog transition-colors duration-200 group-hover:text-flyd-petrol">
-                    {p.title}
-                  </h3>
-                  <p className="mt-3 text-[16px] leading-relaxed text-flyd-skifer">
-                    {p.text}
-                  </p>
-                  <span className="mt-auto flex items-center gap-1.5 pt-5 text-[16px] font-medium text-flyd-petrol">
-                    <span className="underline decoration-flyd-teal decoration-2 underline-offset-[6px]">
-                      {p.lenketekst}
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5" data-reveal>
+              <Eyebrow tone="petrol">Tjenester</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
+                {side?.tjenester.title ?? `Dette hjelper vi bedrifter ${sted} med`}
+              </h2>
+              <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
+                {side?.tjenester.intro ??
+                  "Samme tjenester, samme fagmiljø og samme systemer på alle kontorene våre – forskjellen er at vi møter deg der du er."}
+              </p>
+            </div>
+            <ul className="border-t border-flyd-sand/15 lg:col-span-7" data-reveal>
+              {tjenester.map((t) => (
+                <li key={t.title}>
+                  <Link
+                    href={t.href}
+                    className="group flex items-start justify-between gap-6 border-b border-flyd-sand/15 py-5 transition-colors"
+                  >
+                    <span>
+                      <span className="block font-display text-[18px] font-semibold text-flyd-sand transition-colors group-hover:text-flyd-mint">
+                        {t.title}
+                      </span>
+                      <span className="mt-1.5 block text-[15px] leading-relaxed text-flyd-dempet">{t.text}</span>
                     </span>
                     <ArrowRight
-                      className="lenkekort-pil h-4 w-4 flex-shrink-0"
+                      className="mt-1 h-5 w-5 flex-shrink-0 text-flyd-mint transition-transform duration-200 group-hover:translate-x-1"
                       strokeWidth={2}
                       aria-hidden="true"
                     />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* ERP: differensiatoren, på mørk flate */}
-          <div
-            className="on-dark mt-5 rounded-kort bg-flyd-petrol p-7 md:p-10"
-            data-reveal
-          >
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
-              <div className="lg:col-span-7">
-                <h3 className="font-display text-[26px] font-semibold leading-tight text-flyd-sand">
-                  {side.tjenester.erp.title}
-                </h3>
-                {side.tjenester.erp.avsnitt.map((t) => (
-                  <p
-                    key={t}
-                    className="mt-4 text-[17px] leading-[1.65] text-flyd-dempet"
-                  >
-                    {t}
-                  </p>
-                ))}
-                <div className="mt-6">
-                  <TextLink href={side.tjenester.erp.href} tone="dark">
-                    {side.tjenester.erp.lenketekst}
-                  </TextLink>
-                </div>
-              </div>
-              <div className="lg:col-span-5">
-                <Eyebrow tone="petrol">Systemer vi jobber med</Eyebrow>
-                <ul className="mt-4 border-t border-flyd-sand/15">
-                  {side.tjenester.erp.systemer.map((s) => (
-                    <li
-                      key={s}
-                      className="flex items-center gap-3 border-b border-flyd-sand/15 py-4 text-[17px] text-flyd-sand"
-                    >
-                      <Check
-                        className="h-4 w-4 flex-shrink-0 text-flyd-mint"
-                        strokeWidth={2.5}
-                        aria-hidden="true"
-                      />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6">
-                  <TextLink href="/tjenester/integrasjoner/" tone="dark">
-                    Les om integrasjoner
-                  </TextLink>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* PRIS OG HVEM VI PASSER FOR – Lys mint */}
-      <Section tone="lysmint">
-        <Container>
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow>{side.pris.kicker}</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">
-              {side.pris.title}
-            </h2>
-            {side.pris.bekreft && (
-              <Bekreft className="mt-6">{side.pris.bekreft}</Bekreft>
-            )}
-          </div>
-          <div
-            className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16"
-            data-reveal
-          >
-            <div className="lg:col-span-5">
-              <p className={brod}>{side.pris.intro}</p>
-              <p className={`mt-6 ${brod}`}>{side.pris.avslutning}</p>
-            </div>
-            <ul className="border-t border-flyd-linje-mint lg:col-span-7">
-              {side.pris.faktorer.map((f) => (
-                <li
-                  key={f}
-                  className="flex gap-3 border-b border-flyd-linje-mint py-4 text-[16px] text-flyd-skog"
-                >
-                  <Check
-                    className="mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal"
-                    strokeWidth={2.5}
-                    aria-hidden="true"
-                  />
-                  {f}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Hvem vi passer for står sammen med prisen: begge er det du vurderer før du tar kontakt. */}
-          <div className="mt-20 border-t border-flyd-linje-mint pt-16 md:mt-24 md:pt-20">
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-              <div className="lg:col-span-5" data-reveal>
-                <Eyebrow>{side.passerFor.kicker}</Eyebrow>
-                <h2 className="mt-5 font-display text-display-lg font-semibold">
-                  {side.passerFor.title}
-                </h2>
-                <p className={`mt-6 ${brod}`}>{side.passerFor.intro}</p>
-              </div>
-              <div className="lg:col-span-7">
-                <NumberedList items={side.passerFor.punkter} />
-                {side.passerFor.bekreft && side.passerFor.bekreft.length > 0 && (
-                  <div className="mt-8 space-y-4" data-reveal>
-                    {side.passerFor.bekreft.map((b) => (
-                      <Bekreft key={b}>{b}</Bekreft>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
         </Container>
       </Section>
 
-      {/* LOKALT: kontoret, besøksinfo, bilder og folkene som jobber der */}
+      {/* FRA KONTORET – besøksinfo og bilder */}
       <Section tone="sand">
         <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7" data-reveal>
-              <Eyebrow>{side.lokalt.kicker}</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">
-                {side.lokalt.title}
-              </h2>
+          <div className="max-w-3xl" data-reveal>
+            <Eyebrow>Fra kontoret</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold">
+              {side?.lokalt.title ?? `Hos oss ${sted}`}
+            </h2>
+            {side && (
               <div className="mt-8 space-y-5">
                 {side.lokalt.avsnitt.map((t) => (
                   <p key={t} className={brod}>
@@ -347,255 +237,146 @@ export default function KontorMal({
                   <Bekreft key={b}>{b}</Bekreft>
                 ))}
               </div>
-            </div>
-
-            <div className="lg:col-span-5" data-reveal>
-              {office.image && (
-                <div className="relative mb-4 aspect-[3/2] overflow-hidden rounded-bilde bg-flyd-lysmint">
-                  <Image
-                    src={office.image.src}
-                    alt={office.image.alt}
-                    fill
-                    sizes="(min-width:1024px) 40vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              )}
-              <div className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
-                <Eyebrow>Besøk oss</Eyebrow>
-                <div className="mt-5 space-y-4 text-[16px]">
-                  <div className={visitRow}>
-                    <FlydIcon name="lokal" className={visitIcon} />
-                    <div>
-                      <div className="font-display font-semibold">
-                        {officeLabel(office)}
-                      </div>
-                      <div className="mt-0.5 text-flyd-skifer">
-                        {office.street && (
-                          <>
-                            {office.street}
-                            <br />
-                          </>
-                        )}
-                        {office.postal}
-                      </div>
+            )}
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-12">
+            <div className="rounded-kort bg-flyd-lysmint p-7 md:p-8 lg:col-span-4" data-reveal>
+              <Eyebrow as="h3">Besøk oss</Eyebrow>
+              <div className="mt-5 space-y-4 text-[16px]">
+                <div className={visitRow}>
+                  <FlydIcon name="lokal" className={visitIcon} />
+                  <div>
+                    <div className="font-display font-semibold">{officeLabel(office)}</div>
+                    <div className="mt-0.5 text-flyd-skifer">
+                      {office.street && (
+                        <>
+                          {office.street}
+                          <br />
+                        </>
+                      )}
+                      {office.postal}
                     </div>
                   </div>
-                  <div className={visitRow}>
-                    <FlydIcon name="telefon" className={visitIcon} />
-                    <a href="tel:+4748019958" className={visitLink}>
-                      +47 480 19 958
-                    </a>
-                  </div>
-                  <div className={visitRow}>
-                    <FlydIcon name="epost" className={visitIcon} />
-                    <a href="mailto:support@flyd.no" className={visitLink}>
-                      support@flyd.no
-                    </a>
-                  </div>
-                  <div className={visitRow}>
-                    <FlydIcon name="klokke" className={visitIcon} />
-                    <span>{openingHours.label}</span>
-                  </div>
                 </div>
-                {office.mapsUrl && (
-                  <div className="mt-7">
-                    <ButtonLink
-                      href={office.mapsUrl}
-                      variant="secondary"
-                      withArrow
-                      external
-                      className="w-full"
-                    >
-                      Åpne i Google Maps
-                    </ButtonLink>
-                  </div>
-                )}
-                <GoogleAnmeldelse url={office.reviewUrl} />
+                <div className={visitRow}>
+                  <FlydIcon name="telefon" className={visitIcon} />
+                  <a href="tel:+4748019958" className={visitLink}>
+                    +47 480 19 958
+                  </a>
+                </div>
+                <div className={visitRow}>
+                  <FlydIcon name="epost" className={visitIcon} />
+                  <a href="mailto:support@flyd.no" className={visitLink}>
+                    support@flyd.no
+                  </a>
+                </div>
+                <div className={visitRow}>
+                  <FlydIcon name="klokke" className={visitIcon} />
+                  <span>{openingHours.label}</span>
+                </div>
               </div>
+              {office.mapsUrl && (
+                <div className="mt-7">
+                  <ButtonLink href={office.mapsUrl} variant="secondary" withArrow external className="w-full">
+                    Åpne i Google Maps
+                  </ButtonLink>
+                </div>
+              )}
+              <GoogleAnmeldelse url={office.reviewUrl} />
             </div>
-          </div>
-          {/* Bildene fra kontoret åpner seg ved hover, fokus eller trykk. */}
-          {office.gallery && office.gallery.length > 0 && (
-            <BildeAkkordeon className="mt-12" hoyde="liten" flater={office.gallery} />
-          )}
-          <div className="mt-20 border-t border-flyd-linje-sand pt-16 md:mt-24 md:pt-20" data-reveal>
-            <Eyebrow>{side.team.kicker}</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">
-              {side.team.title}
-            </h2>
-            <p className={`mt-6 max-w-3xl ${brod}`}>{side.team.text}</p>
-            <div className="mt-6">
-              <TextLink href="/om-flyd/">
-                Les mer om Flyd og folkene våre
-              </TextLink>
-            </div>
-          </div>
-          {/* Folkene på kontoret fra data/team.ts (kontorTeam), kontorlederen først. */}
-          <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:grid-cols-4">
-            {(kontorTeam[office.slug] ?? []).map((m) => (
-              <TeamCard key={m.email} m={m} />
-            ))}
+            {/* Bildene fra kontoret åpner seg ved hover, fokus eller trykk. */}
+            {office.gallery && office.gallery.length > 0 && (
+              // På desktop like høy som besøkskortet ved siden av.
+              <BildeAkkordeon className="lg:col-span-8 lg:!h-auto lg:min-h-[420px]" hoyde="liten" flater={office.gallery} />
+            )}
           </div>
         </Container>
       </Section>
 
-      {/* SLIK KOMMER DU I GANG – Petrol som seksjonsskille */}
-      <Section tone="petrol" flyt>
-        <Container>
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow tone="petrol">{side.kommIGang.kicker}</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-              {side.kommIGang.title}
-            </h2>
-          </div>
-          <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <ol className="relative lg:col-span-7" data-reveal>
-              <span
-                aria-hidden="true"
-                className="prosesslinje absolute bottom-6 left-[23px] top-6 w-0.5 bg-flyd-mint/40"
-              />
-              {side.kommIGang.steg.map((p, i) => (
-                <li
-                  key={p.title}
-                  className="relative flex gap-6 pb-10 last:pb-0"
-                >
-                  <span className="relative z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-pille bg-flyd-skog font-display text-[20px] font-semibold text-flyd-korall">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="pt-2">
-                    <h3 className="font-display text-[20px] font-semibold text-flyd-sand">
-                      {p.title}
-                    </h3>
-                    <p className="mt-2 text-[16px] leading-relaxed text-flyd-dempet">
-                      {p.text}
-                    </p>
-                  </div>
-                </li>
+      {/* FOLKENE – fra kontorTeam i data/team.ts, kontorlederen først */}
+      {team.length > 0 && (
+        <Section tone="lysmint">
+          <Container>
+            <div data-reveal>
+              <Eyebrow>Folkene</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold">Møt teamet {sted}</h2>
+            </div>
+            <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+              {team.map((m) => (
+                <TeamCard key={m.email} m={m} tone="sand" />
               ))}
-            </ol>
-            <div className="lg:col-span-5" data-reveal>
-              <div className="rounded-kort bg-flyd-skog p-7 md:p-8">
-                <Eyebrow tone="dark">Har du regnskapsfører fra før?</Eyebrow>
-                <p className="mt-4 text-[17px] leading-[1.65] text-flyd-dempet">
-                  {side.kommIGang.bytte.text}
-                </p>
-                <div className="mt-6">
-                  <TextLink href={side.kommIGang.bytte.href} tone="dark">
-                    {side.kommIGang.bytte.lenketekst}
-                  </TextLink>
-                </div>
-              </div>
             </div>
-          </div>
-        </Container>
-      </Section>
+          </Container>
+        </Section>
+      )}
 
-      {/* VANLIGE SPØRSMÅL – hvert spørsmål på egen Lys mint-flis */}
+      {/* SPØRSMÅL – pris, oppstart, systemer og bytte; så de andre kontorene */}
       <Section tone="sand">
         <Container>
-          <div data-reveal>
-            <Eyebrow>Spørsmål og svar</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">
-              Ofte stilte spørsmål
-            </h2>
-            <div className="mt-8 space-y-3">
-              {side.faq.map((f, i) => (
-                <details
-                  key={f.q}
-                  open={i === 0}
-                  className="faq group rounded-flis bg-flyd-lysmint px-6"
-                >
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5" data-reveal>
+              <Eyebrow>Spørsmål og svar</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold">
+                Spørsmål om regnskapsfører {sted}
+              </h2>
+            </div>
+            <div className="space-y-3 lg:col-span-7" data-reveal>
+              {faq.map((f) => (
+                <details key={f.q} className="faq group rounded-flis bg-flyd-lysmint px-6">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                    <span className="min-w-0">{f.q}</span>
-                    <Plus
-                      className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal"
-                      strokeWidth={2}
-                      aria-hidden="true"
-                    />
+                    <span className="min-w-0 break-words max-sm:hyphens-auto">{f.q}</span>
+                    <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                   </summary>
-                  <div className="faq-svar space-y-4 pb-6">
-                    {f.a && (
-                      <p className="text-[16px] leading-relaxed text-flyd-skifer">
-                        {f.a}
-                      </p>
-                    )}
-                    {f.lenke && (
-                      <TextLink href={f.lenke.href}>{f.lenke.tekst}</TextLink>
-                    )}
+                  <div className="faq-svar space-y-4 pb-6 text-[16px] leading-relaxed text-flyd-skifer">
+                    {f.a && <p>{f.a}</p>}
+                    {f.punkter &&
+                      (f.nummerert ? (
+                        <ol className="list-decimal space-y-2 pl-5 marker:font-semibold marker:text-flyd-petrol">
+                          {f.punkter.map((p) => (
+                            <li key={p}>{p}</li>
+                          ))}
+                        </ol>
+                      ) : (
+                        <ul className="list-disc space-y-2 pl-5 marker:text-flyd-teal">
+                          {f.punkter.map((p) => (
+                            <li key={p}>{p}</li>
+                          ))}
+                        </ul>
+                      ))}
+                    {f.lenke && <TextLink href={f.lenke.href}>{f.lenke.tekst}</TextLink>}
                     {f.bekreft && <Bekreft>{f.bekreft}</Bekreft>}
                   </div>
                 </details>
               ))}
             </div>
           </div>
+
+          {/* De andre kontorene som en lenkerad (alle står også i footeren). */}
+          <nav aria-label="Andre kontorer" className="mt-16 border-t border-flyd-linje-sand pt-8">
+            <p className="text-[15px] text-flyd-skifer">Flyd har også kontorer her:</p>
+            <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[16px]">
+              {andre.map((o) => (
+                <li key={o.slug}>
+                  <Link href={`/kontor/${o.slug}/`} className={kontorLenke}>
+                    Regnskapsfører {atOffice(o)}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/kontor/" className={kontorLenke}>
+                  Alle kontorer
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </Container>
       </Section>
 
-      {/* AVSLUTNING – Petrol-boks med Mint-knapp (ikke Korall: heroen har sidens eneste) */}
-      <Section tone="sand" className="!pt-0">
-        <Container>
-          <div
-            className="on-dark relative overflow-hidden rounded-bilde bg-flyd-petrol p-8 md:p-14"
-            data-reveal
-          >
-            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
-              <div className="lg:col-span-8">
-                <Eyebrow tone="petrol">{side.kontakt.kicker}</Eyebrow>
-                <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-                  {side.kontakt.title}
-                </h2>
-                <p className="mt-6 max-w-xl text-[18px] leading-[1.65] text-flyd-dempet">
-                  {side.kontakt.text}
-                </p>
-                <div className="mt-8">
-                  <ButtonLink
-                    href="/kontakt"
-                    variant="secondary-dark"
-                    withArrow
-                    className="!bg-flyd-mint !text-flyd-skog hover:!border-flyd-sand hover:!bg-flyd-sand"
-                  >
-                    Snakk med oss
-                  </ButtonLink>
-                </div>
-                {/* De andre kontorene som en kompakt lenkerad (alle står også i footeren). */}
-                <nav aria-label={side.andreKontorer.title} className="mt-10 border-t border-flyd-sand/15 pt-6">
-                  <p className="text-[15px] text-flyd-dempet">{side.andreKontorer.title}</p>
-                  <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[15px]">
-                    {andre.map((o) => (
-                      <li key={o.slug}>
-                        <Link
-                          href={`/kontor/${o.slug}/`}
-                          className="text-flyd-sand underline decoration-flyd-mint decoration-2 underline-offset-4 transition-colors hover:text-flyd-mint"
-                        >
-                          Regnskapsfører {atOffice(o)}
-                        </Link>
-                      </li>
-                    ))}
-                    <li>
-                      <Link
-                        href="/kontor/"
-                        className="text-flyd-sand underline decoration-flyd-mint decoration-2 underline-offset-4 transition-colors hover:text-flyd-mint"
-                      >
-                        Alle kontorer
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-              <div
-                aria-hidden="true"
-                className="hidden lg:col-span-4 lg:flex lg:justify-end"
-              >
-                <div className="flex aspect-square w-full max-w-[260px] items-center justify-center rounded-pille border-2 border-flyd-mint/50">
-                  <div className="aspect-square w-[38%] rounded-pille bg-flyd-teal" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
+      <ClosingCta
+        kicker="Kontakt"
+        title={`Ta en prat med oss ${sted}`}
+        text={`Fortell oss om virksomheten din, så finner vi ut hvordan vi kan hjelpe – på kontoret ${sted}, hos deg eller på video.`}
+      />
     </>
   );
 }

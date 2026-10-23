@@ -83,15 +83,15 @@ export default function KontorerPage() {
           {/* Regnskapsfører og revisor side om side, hver for seg (Irene 22.10.2026). */}
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <h2 className="font-display text-display-md font-semibold">Regnskapsfører</h2>
-              <p className="mt-4 font-display text-ingress font-medium text-flyd-petrol">
+              <h2 className="font-display text-[24px] font-semibold leading-tight">Regnskapsfører</h2>
+              <p className={`mt-3 ${brod}`}>
                 Flyd er autorisert regnskapsfører for bedrifter i Rogaland og Agder, med seks kontorer: Sandnes
                 (Forus), Egersund, Sokndal, Moi, Sirdal og Flekkefjord. Vi tar regnskap, lønn, årsoppgjør og
                 rådgivning, og hjelper deg med Tripletex og andre regnskapssystemer. Ett nummer gjelder for alle
                 kontorene:{' '}
                 <a
                   href="tel:+4748019958"
-                  className="whitespace-nowrap underline decoration-flyd-teal decoration-2 underline-offset-4 hover:text-flyd-skog"
+                  className={`whitespace-nowrap ${lenke}`}
                 >
                   +47 480 19 958
                 </a>
@@ -99,8 +99,8 @@ export default function KontorerPage() {
               </p>
             </div>
             <div>
-              <h2 className="font-display text-display-md font-semibold">Revisor</h2>
-              <p className="mt-4 font-display text-ingress font-medium text-flyd-petrol">{revisjonOmtale}</p>
+              <h2 className="font-display text-[24px] font-semibold leading-tight">Revisor</h2>
+              <p className={`mt-3 ${brod}`}>{revisjonOmtale}</p>
               <div className="mt-5">
                 <TextLink href="/tjenester/revisjon/">Les om revisjon</TextLink>
               </div>
@@ -120,14 +120,16 @@ export default function KontorerPage() {
       {/* KONTORENE – hele kortet lenker til kontorsiden */}
       <Section tone="sand" className="!pt-0">
         <Container>
-          <div className="max-w-3xl border-t border-flyd-linje-sand pt-12 md:pt-16" data-reveal>
-            <Eyebrow>Kontorene</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">Finn kontoret nærmest deg</h2>
-            <p className={`mt-6 ${brod}`}>
-              Kontorene ligger fra Forus i nord til Flekkefjord i sør, og alle har åpent mandag til fredag
-              fra 07 til 16. Du får de samme tjenestene og det samme fagmiljøet uansett hvilket kontor du
-              hører til.
-            </p>
+          <div className="border-t border-flyd-linje-sand pt-12 md:pt-16" data-reveal>
+            <div className="max-w-3xl">
+              <Eyebrow>Kontorene</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold">Finn kontoret nærmest deg</h2>
+              <p className={`mt-6 ${brod}`}>
+                Kontorene ligger fra Forus i nord til Flekkefjord i sør, og alle har åpent mandag til fredag
+                fra 07 til 16. Du får de samme tjenestene og det samme fagmiljøet uansett hvilket kontor du
+                hører til.
+              </p>
+            </div>
           </div>
           <ul className="stagger mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
             {offices.map((o, i) => {
@@ -302,7 +304,7 @@ export default function KontorerPage() {
               {hubFaq.map((f, i) => (
                 <details key={f.q} open={i === 0} className="faq group rounded-flis bg-flyd-lysmint px-6">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                    <span className="min-w-0">{f.q}</span>
+                    <span className="min-w-0 break-words max-sm:hyphens-auto">{f.q}</span>
                     <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                   </summary>
                   <div className="faq-svar space-y-4 pb-6">

@@ -134,7 +134,7 @@ export default function BytteRegnskapsforerPage() {
               <li
                 key={s.tittel}
                 data-reveal
-                className="rounded-kort border border-flyd-linje-sand bg-flyd-sand p-6 md:p-8"
+                className="rounded-kort bg-flyd-lysmint p-6 md:p-8"
               >
                 {/* Dekorativt ikon (Fia), godkjent av Marius 14.10.2026 */}
                 {/* eslint-disable-next-line @next/next/no-img-element -- SVG, next/image gir ingenting her */}
@@ -262,7 +262,7 @@ export default function BytteRegnskapsforerPage() {
               {bytteFaq.map((f) => (
                 <details key={f.q} className="faq group rounded-kort bg-flyd-lysmint px-6 md:px-7">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                    <span className="min-w-0">{f.q}</span>
+                    <span className="min-w-0 break-words max-sm:hyphens-auto">{f.q}</span>
                     <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                   </summary>
                   <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>

@@ -444,7 +444,7 @@ export default function Bokforingsregler2027Page() {
             {bokforingsregler2027Faq.map((f) => (
               <details key={f.q} className="faq group rounded-kort bg-flyd-sand px-6 md:px-7">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                  <span className="min-w-0">{f.q}</span>
+                  <span className="min-w-0 break-words max-sm:hyphens-auto">{f.q}</span>
                   <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                 </summary>
                 <div className="faq-svar pb-6">

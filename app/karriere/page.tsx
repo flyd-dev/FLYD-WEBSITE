@@ -183,7 +183,6 @@ export default function KarrierePage() {
               <h2 className="mt-5 font-display text-display-lg font-semibold">
                 {stillingsOverskrift(jobs.length)}
               </h2>
-              <KontorLenker className="mt-6" />
             </div>
             {jobs.length > 0 && (
               <span className="inline-flex rounded-pille bg-flyd-korall px-4 py-2 text-[12px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-skog">
@@ -256,6 +255,8 @@ export default function KarrierePage() {
               </ButtonLink>
             </div>
           </div>
+          {/* Kontorlenkene står for seg under søknadsboksen, ikke mellom overskriften og stillingene. */}
+          <KontorLenker className="mt-12" />
         </Container>
       </Section>
 

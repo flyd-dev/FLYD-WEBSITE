@@ -273,7 +273,7 @@ export default function ForskuddsskattEnkPage() {
                   >
                     {i + 1}
                   </span>
-                  <div className="min-w-0 pt-1">
+                  <div className="min-w-0 break-words pt-1 max-sm:hyphens-auto">
                     <h3 className="font-display text-[18px] font-semibold leading-[1.3] text-flyd-skog">{s.tittel}</h3>
                     <p className="mt-2 text-[16px] leading-relaxed text-flyd-skifer">{s.tekst}</p>
                   </div>
@@ -382,7 +382,7 @@ export default function ForskuddsskattEnkPage() {
             {forskuddsskattFaq.map((f) => (
               <details key={f.q} className="faq group rounded-kort bg-flyd-sand px-6 md:px-7">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                  <span className="min-w-0">{f.q}</span>
+                  <span className="min-w-0 break-words max-sm:hyphens-auto">{f.q}</span>
                   <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                 </summary>
                 <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>
