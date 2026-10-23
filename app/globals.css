@@ -40,6 +40,13 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   letter-spacing: -0.01em;
   font-weight: 600;
+  /* Jevne linjer i overskrifter, så ingen slutter med ett ord alene («Møt oss der du / er.»). */
+  text-wrap: balance;
+}
+
+/* Avsnitt: unngå ett ord alene på siste linje der nettleseren støtter det. */
+p, li, dd {
+  text-wrap: pretty;
 }
 
 ::selection {
@@ -85,6 +92,11 @@ input, textarea, select, button {
 .on-dark *:focus-visible,
 .on-dark:focus-visible {
   outline-color: var(--flyd-mint);
+}
+
+/* Kontorkartet: Sand-glorie rundt stedsnavnene, så de leses over kystlinjene. */
+.kart-navn {
+  text-shadow: 0 0 2px var(--flyd-sand), 0 0 4px var(--flyd-sand), 0 0 6px var(--flyd-sand);
 }
 
 /* Overlay for tekst på bilde (manualen kap. 07): gradient fra venstre i Skog,

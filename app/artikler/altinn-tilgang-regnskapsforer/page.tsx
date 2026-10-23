@@ -295,7 +295,7 @@ export default function AltinnTilgangPage() {
               må byrået få dem på nytt som tilgangspakker.
             </p>
           </div>
-          <div className="mt-10 max-w-5xl overflow-x-auto" tabIndex={0} role="region" aria-label="Fra Altinn-roller til tilgangspakker">
+          <div className="mt-10 max-w-4xl overflow-x-auto" tabIndex={0} role="region" aria-label="Fra Altinn-roller til tilgangspakker">
             <table className="w-full min-w-[640px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-mint font-display text-[15px] font-semibold">
@@ -340,7 +340,7 @@ export default function AltinnTilgangPage() {
               <Ekstern href={kilder.altinnRegnskapsforerPakker}>Altinn</Ekstern>).
             </p>
           </div>
-          <div className="mt-8 max-w-5xl overflow-x-auto" tabIndex={0} role="region" aria-label="Tilgangspakker for regnskapsføreren">
+          <div className="mt-8 max-w-4xl overflow-x-auto" tabIndex={0} role="region" aria-label="Tilgangspakker for regnskapsføreren">
             <table className="w-full min-w-[560px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-sand font-display text-[15px] font-semibold">

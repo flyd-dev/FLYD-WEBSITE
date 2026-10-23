@@ -221,7 +221,7 @@ export default function FristerAksjeselskapPage() {
               Fristene gjelder for et regnskapsår som følger kalenderåret, med levering året etter.
             </p>
           </div>
-          <div className="mt-10 max-w-5xl overflow-x-auto" tabIndex={0} role="region" aria-label="Årskalender for aksjeselskap">
+          <div className="mt-10 max-w-4xl overflow-x-auto" tabIndex={0} role="region" aria-label="Årskalender for aksjeselskap">
             <table className="w-full min-w-[640px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-mint font-display text-[15px] font-semibold">

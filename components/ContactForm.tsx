@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Check } from 'lucide-react';
 import { Button } from './Button';
 import { getAdClick, trackCareerInquiry, trackLead } from './Analytics';
 import { CAREER_TOPIC, CONTACT_TOPICS } from '@/lib/contact-topics';
@@ -37,12 +37,12 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
-  const topicRef = useRef<HTMLSelectElement>(null);
+  const [tema, setTema] = useState('');
 
   useEffect(() => {
-    const tema = new URLSearchParams(window.location.search).get('tema')?.toLowerCase();
-    const match = CONTACT_TOPICS.find((t) => t.toLowerCase() === tema);
-    if (match && topicRef.current) topicRef.current.value = match;
+    const fraLenke = new URLSearchParams(window.location.search).get('tema')?.toLowerCase();
+    const match = CONTACT_TOPICS.find((t) => t.toLowerCase() === fraLenke);
+    if (match) setTema(match);
   }, []);
 
   function validate(formData: FormData): FieldErrors {
@@ -114,6 +114,7 @@ export default function ContactForm() {
 
       setStatus('success');
       form.reset();
+      setTema('');
       // Konvertering til GA4/Google Ads – kun ekte innsendinger, ikke honeypot,
       // og ikke jobbsøkere.
       if (payload.subject === CAREER_TOPIC) {
@@ -230,27 +231,28 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div>
-        <label htmlFor="topic" className={labelCls}>
-          Hva gjelder henvendelsen?
-        </label>
-        <select
-          ref={topicRef}
-          id="topic"
-          name="topic"
-          defaultValue=""
-          className={clsx(inputCls, 'appearance-none cursor-pointer')}
-        >
-          <option value="" disabled>
-            Velg tema …
-          </option>
+      {/* Temaet som piller (radioknapper), ikke nedtrekksliste: alt synlig med ett blikk. */}
+      <fieldset>
+        <legend className={labelCls}>Hva gjelder henvendelsen?</legend>
+        <div className="mt-3 flex flex-wrap gap-2">
           {CONTACT_TOPICS.map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
+            <label key={t} className="cursor-pointer">
+              <input
+                type="radio"
+                name="topic"
+                value={t}
+                checked={tema === t}
+                onChange={() => setTema(t)}
+                className="peer sr-only"
+              />
+              <span className="inline-flex items-center gap-1.5 rounded-pille border border-flyd-linje-mint bg-flyd-sand px-4 py-2 text-[15px] text-flyd-skog transition-colors duration-200 hover:border-flyd-teal active:translate-y-[1px] peer-checked:border-flyd-petrol peer-checked:bg-flyd-petrol peer-checked:text-flyd-sand peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-flyd-teal">
+                {tema === t && <Check className="h-4 w-4 text-flyd-mint" strokeWidth={2.5} aria-hidden="true" />}
+                {t}
+              </span>
+            </label>
           ))}
-        </select>
-      </div>
+        </div>
+      </fieldset>
 
       <div>
         <label htmlFor="message" className={labelCls}>

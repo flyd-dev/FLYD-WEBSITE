@@ -9,6 +9,7 @@ import Eyebrow from '@/components/Eyebrow';
 import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
+import Kontorkart from '@/components/Kontorkart';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { offices, officeLabel } from '@/data/offices';
 import { kontorBlokker, regionTjenester, hubFaq } from '@/data/kontoroversikt';
@@ -132,8 +133,8 @@ export default function KontorerPage() {
       {/* KONTORENE – hele kortet lenker til kontorsiden */}
       <Section tone="sand" className="!pt-0">
         <Container>
-          <div className="border-t border-flyd-linje-sand pt-12 md:pt-16" data-reveal>
-            <div className="max-w-3xl">
+          <div className="grid grid-cols-1 gap-10 border-t border-flyd-linje-sand pt-12 md:pt-16 lg:grid-cols-12 lg:items-center lg:gap-16">
+            <div className="lg:col-span-5" data-reveal>
               <Eyebrow>Kontorene</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">Finn kontoret nærmest deg</h2>
               <p className={`mt-6 ${brod}`}>
@@ -141,6 +142,7 @@ export default function KontorerPage() {
                 kontor du hører til.
               </p>
             </div>
+            <Kontorkart className="lg:col-span-7" />
           </div>
           <ul className="stagger mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
             {offices.map((o, i) => {

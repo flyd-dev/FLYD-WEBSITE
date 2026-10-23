@@ -222,7 +222,7 @@ export default function EnkEllerAsPage() {
             <Eyebrow>Kort fortalt</Eyebrow>
             <h2 className={`mt-5 ${h2}`}>ENK og AS side om side</h2>
           </div>
-          <div className="mt-10 max-w-5xl overflow-x-auto" tabIndex={0} role="region" aria-label="ENK og AS side om side">
+          <div className="mt-10 max-w-4xl overflow-x-auto" tabIndex={0} role="region" aria-label="ENK og AS side om side">
             <table className="w-full min-w-[640px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-sand font-display text-[15px] font-semibold">

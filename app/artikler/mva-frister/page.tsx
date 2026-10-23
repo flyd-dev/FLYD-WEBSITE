@@ -178,7 +178,7 @@ export default function MvaFristerPage() {
               <Ekstern href={kilder.skattekalender}>Skatteetatens skattekalender</Ekstern>).
             </p>
           </div>
-          <div className="mt-10 max-w-5xl overflow-x-auto">
+          <div className="mt-10 max-w-4xl overflow-x-auto">
             {/* Ingen minstebredde: tabellen er smal nok til mobil, og fristkolonnen skal ikke skjules bak scroll. */}
             <table className="w-full border-collapse text-left text-[15px] leading-relaxed text-flyd-skog sm:text-[16px] [&_td]:pr-3 [&_th]:pr-3 sm:[&_td]:pr-6 sm:[&_th]:pr-6">
               <thead>

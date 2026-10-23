@@ -72,6 +72,19 @@ const values = [
   },
 ];
 
+/** Lite kryss i Flyd-teal der linjene i verdirutenettet møtes. */
+function Kryss({ className }: { className: string }) {
+  return (
+    <svg
+      viewBox="0 0 13 13"
+      aria-hidden="true"
+      className={`pointer-events-none absolute z-10 h-[13px] w-[13px] text-flyd-teal ${className}`}
+    >
+      <path d="M6.5 0v13M0 6.5h13" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 export default function OmFlydPage() {
   const figures = [stat('medarbeidere'), stat('kontorer'), stat('kunder')];
 
@@ -125,16 +138,22 @@ export default function OmFlydPage() {
             </h2>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
+          {/* Hårlinjerutenett med kryss i hjørnene (fra «Interactive Values Grid» på 21st.dev). */}
+          <div className="mt-12 grid grid-cols-1 border-l border-t border-flyd-linje-mint sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => (
-              <div key={v.title} data-reveal className="rounded-kort bg-flyd-sand p-7 md:p-8">
+              <div key={v.title} data-reveal className="relative border-b border-r border-flyd-linje-mint p-7 md:p-9">
+                {/* Kryss i alle fire hjørner; der rutene møtes, ligger to kryss oppå hverandre. */}
+                <Kryss className="-left-[7px] -top-[7px]" />
+                <Kryss className="-right-[7px] -top-[7px]" />
+                <Kryss className="-bottom-[7px] -left-[7px]" />
+                <Kryss className="-bottom-[7px] -right-[7px]" />
                 <span
                   className="font-display text-[24px] font-semibold leading-none tabular-nums text-flyd-rust"
                   aria-hidden="true"
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="mt-6 font-display text-[24px] font-semibold">{v.title}</h3>
+                <h3 className="mt-8 font-display text-[24px] font-semibold">{v.title}</h3>
                 <p className="mt-3 text-[16px] leading-relaxed text-flyd-skifer">{v.body}</p>
               </div>
             ))}

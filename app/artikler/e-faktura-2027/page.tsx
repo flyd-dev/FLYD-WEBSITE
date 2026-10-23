@@ -268,7 +268,7 @@ export default function EFaktura2027Page() {
             <Eyebrow>Tidslinje</Eyebrow>
             <h2 className={`mt-5 ${h2}`}>Tidslinje: 2027, 2028 og 2030</h2>
           </div>
-          <div className="mt-10 max-w-5xl overflow-x-auto" tabIndex={0} role="region" aria-label="Tidslinje: 2027, 2028 og 2030">
+          <div className="mt-10 max-w-4xl overflow-x-auto" tabIndex={0} role="region" aria-label="Tidslinje: 2027, 2028 og 2030">
             <table className="w-full min-w-[640px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-mint font-display text-[15px] font-semibold">

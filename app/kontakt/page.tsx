@@ -5,9 +5,11 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import FlydIcon from '@/components/FlydIcon';
 import ContactForm from '@/components/ContactForm';
-import OfficeCards from '@/components/OfficeCards';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import Kontorkart from '@/components/Kontorkart';
 import JsonLd from '@/components/JsonLd';
-import { offices } from '@/data/offices';
+import { offices, officeLabel } from '@/data/offices';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -86,16 +88,42 @@ export default function KontaktPage() {
         </Container>
       </Section>
 
-      {/* KONTORER */}
+      {/* KONTORER – adressene ved siden av kartet */}
       <Section tone="lysmint" id="kontorer">
         <Container>
-          <div className="max-w-2xl" data-reveal>
-            <Eyebrow>Kontorer</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">
-              Møt oss der du er.
-            </h2>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5" data-reveal>
+              <Eyebrow>Kontorer</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold">
+                Møt oss der du er.
+              </h2>
+              <ul className="mt-8 border-t border-flyd-linje-mint">
+                {offices.map((o) => (
+                  <li key={o.slug}>
+                    <Link
+                      href={`/kontor/${o.slug}/`}
+                      className="group flex items-center justify-between gap-4 border-b border-flyd-linje-mint py-4"
+                    >
+                      <span>
+                        <span className="block font-display text-[17px] font-semibold text-flyd-skog transition-colors group-hover:text-flyd-petrol">
+                          {officeLabel(o)}
+                        </span>
+                        <span className="mt-0.5 block text-[15px] text-flyd-skifer">
+                          {[o.street, o.postal].filter(Boolean).join(', ')}
+                        </span>
+                      </span>
+                      <ArrowRight
+                        className="h-5 w-5 flex-shrink-0 text-flyd-teal transition-transform duration-200 group-hover:translate-x-1"
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Kontorkart tone="lysmint" className="lg:col-span-7 lg:pt-2" />
           </div>
-          <OfficeCards offices={offices} className="mt-12" />
         </Container>
       </Section>
     </>
