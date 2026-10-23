@@ -6,7 +6,8 @@ import { useEffect, useRef } from 'react';
 const FELT = 'input:not([type="radio"]):not([type="checkbox"]), textarea, select, [contenteditable="true"]';
 const KLIKKBART = 'a, button, label, summary, [role="button"]';
 
-type Tilstand = 'vanlig' | 'felt' | 'lenke' | 'ekstern' | 'tel' | 'epost' | 'apne' | 'velg';
+type Tilstand = 'vanlig' | 'felt' | 'lenke' | 'ekstern' | 'tel' | 'epost' | 'apne' | 'velg' | 'kopier';
+const EGNE: Tilstand[] = ['kopier'];
 
 /** Hva et klikk på elementet gjør, så pekeren kan vise riktig ikon. */
 function tilstandFor(el: Element | null): Tilstand {
@@ -14,6 +15,9 @@ function tilstandFor(el: Element | null): Tilstand {
   if (el.closest(FELT)) return 'felt';
   const k = el.closest<HTMLElement>(KLIKKBART);
   if (!k) return 'vanlig';
+  // Knapper kan si selv hva de gjør (data-peker), f.eks. «Kopier» på /kontakt.
+  const egen = k.dataset.peker as Tilstand | undefined;
+  if (egen && EGNE.includes(egen)) return egen;
   const href = k.getAttribute('href') ?? '';
   if (href.startsWith('tel:')) return 'tel';
   if (href.startsWith('mailto:')) return 'epost';
@@ -31,7 +35,8 @@ function tilstandFor(el: Element | null): Tilstand {
  * flytlinjene i profilen. Over noe klikkbart blir punktumet til en liten
  * liten pilleknapp ved siden av punktumet, med et ikon som viser hva klikket
  * gjør: pil for lenker og knapper, skrå pil for andre nettsteder, telefon,
- * konvolutt, pluss for det som åpner seg på stedet og hake for valg i skjema.
+ * konvolutt, pluss for det som åpner seg på stedet, hake for valg i skjema og
+ * to ark for kopiering (knapper med data-peker="kopier").
  * Pillen står nede til høyre for punktumet, så den ikke dekker teksten du
  * peker på. Den følger knappefargene: Skog på lys bunn, Korall på mørk.
  *
@@ -172,6 +177,10 @@ export default function FlydPeker() {
           </svg>
           <svg viewBox="0 0 24 24" data-ikon="velg" {...ikon}>
             <path d="M5 12.5 10 17l9-10" />
+          </svg>
+          <svg viewBox="0 0 24 24" data-ikon="kopier" {...ikon}>
+            <rect x="9" y="9" width="12" height="12" rx="2" />
+            <path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5" />
           </svg>
         </span>
       </div>

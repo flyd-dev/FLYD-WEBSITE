@@ -5,11 +5,14 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import FlydIcon from '@/components/FlydIcon';
 import ContactForm from '@/components/ContactForm';
+import KopierTekst from '@/components/KopierTekst';
+import NumberedList from '@/components/NumberedList';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Kontorkart from '@/components/Kontorkart';
 import JsonLd from '@/components/JsonLd';
 import { offices, officeLabel } from '@/data/offices';
+import { etterSending } from '@/data/kontaktskjema';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -35,7 +38,9 @@ export default function KontaktPage() {
       <JsonLd data={breadcrumbJsonLd} />
       <Section tone="sand" size="lg" className="pt-12 md:pt-16" flyt>
         <Container>
-          <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
+          {/* Skjemaet spenner over begge radene i høyre spalte på desktop. På mobil
+              kommer det rett etter innledningen, og «Hva skjer når du sender?» etter skjemaet. */}
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-14">
             <div className="lg:col-span-5">
               <Eyebrow>Kontakt</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">
@@ -43,7 +48,7 @@ export default function KontaktPage() {
               </h1>
               <p className="mt-8 font-display text-ingress font-medium text-flyd-petrol">
                 Fortell oss hva du trenger hjelp med, så finner vi riktig person
-                hos oss. Vi svarer normalt innen én arbeidsdag.
+                hos oss.
               </p>
 
               <dl className="mt-12 border-t border-flyd-linje-sand">
@@ -53,10 +58,11 @@ export default function KontaktPage() {
                     <FlydIcon name="epost" className="absolute left-0 top-7 h-6 w-6 text-flyd-teal" />
                     E-post
                   </dt>
-                  <dd className="mt-1">
+                  <dd className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-2">
                     <a href="mailto:support@flyd.no" className={contactLink}>
                       support@flyd.no
                     </a>
+                    <KopierTekst tekst="support@flyd.no" etikett="Kopier e-postadressen" />
                   </dd>
                 </div>
                 <div className="relative border-b border-flyd-linje-sand py-6 pl-11">
@@ -73,16 +79,15 @@ export default function KontaktPage() {
               </dl>
             </div>
 
-            <div className="lg:col-span-7">
-              <div className="rounded-kort bg-flyd-lysmint p-7 md:p-10">
-                <h2 className="font-display text-[28px] font-semibold">Send oss en melding</h2>
-                <p className="mt-2 text-[15px] text-flyd-skifer">
-                  Felt merket med <span className="text-flyd-petrol">*</span> er obligatoriske.
-                </p>
-                <div className="mt-8">
-                  <ContactForm />
-                </div>
+            <div className="lg:col-span-7 lg:row-span-2">
+              <div className="rounded-kort bg-flyd-lysmint p-6 sm:p-7 md:p-10">
+                <ContactForm />
               </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <h2 className="font-display text-[22px] font-semibold">Hva skjer når du sender?</h2>
+              <NumberedList items={etterSending} className="mt-6" />
             </div>
           </div>
         </Container>

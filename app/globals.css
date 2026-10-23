@@ -177,7 +177,7 @@ input, textarea, select, button {
   width: 15px;
   height: 15px;
 }
-.flyd-peker:is([data-tilstand="lenke"], [data-tilstand="ekstern"], [data-tilstand="tel"], [data-tilstand="epost"], [data-tilstand="apne"], [data-tilstand="velg"]) .flyd-peker-pille {
+.flyd-peker:is([data-tilstand="lenke"], [data-tilstand="ekstern"], [data-tilstand="tel"], [data-tilstand="epost"], [data-tilstand="apne"], [data-tilstand="velg"], [data-tilstand="kopier"]) .flyd-peker-pille {
   opacity: 1;
   transform: scale(1) rotate(0);
 }
@@ -186,7 +186,8 @@ input, textarea, select, button {
 .flyd-peker[data-tilstand="tel"] [data-ikon="tel"],
 .flyd-peker[data-tilstand="epost"] [data-ikon="epost"],
 .flyd-peker[data-tilstand="apne"] [data-ikon="apne"],
-.flyd-peker[data-tilstand="velg"] [data-ikon="velg"] {
+.flyd-peker[data-tilstand="velg"] [data-ikon="velg"],
+.flyd-peker[data-tilstand="kopier"] [data-ikon="kopier"] {
   display: block;
 }
 .flyd-peker.trykk .flyd-peker-pille {
@@ -313,8 +314,14 @@ input, textarea, select, button {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Stegskifte i kontaktskjemaet: steget som vises glir inn (samme bevegelse som svarene). */
+.steg-inn {
+  animation: faq-inn 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .aksentlinje,
+  .steg-inn,
   .faq[open] .faq-svar {
     animation: none;
   }

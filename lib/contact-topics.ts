@@ -13,3 +13,5 @@ export const CONTACT_TOPICS = [
   CAREER_TOPIC,
   'Annet',
 ] as const;
+
+export type ContactTopic = (typeof CONTACT_TOPICS)[number];
