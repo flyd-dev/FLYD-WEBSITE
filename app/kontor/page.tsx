@@ -8,18 +8,10 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import FlydIcon from '@/components/FlydIcon';
 import JsonLd from '@/components/JsonLd';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { offices, officeLabel } from '@/data/offices';
-import { stat } from '@/data/stats';
-import {
-  kontorBlokker,
-  regionTjenester,
-  hubFaq,
-  virksomhetsregisteret,
-  virksomhetsregisteretRevisjon,
-} from '@/data/kontoroversikt';
+import { kontorBlokker, regionTjenester, hubFaq } from '@/data/kontoroversikt';
 import { revisjonOmtale } from '@/data/revisjon';
 
 export const metadata: Metadata = pageMetadata({
@@ -34,12 +26,32 @@ export const metadata: Metadata = pageMetadata({
  * som sender videre til kontorsidene. Adresser og bilder kommer fra
  * data/offices.ts, teksten fra data/kontoroversikt.ts.
  *
+ * Fire deler: toppen (regnskapsfører og revisor side om side), kontorene,
+ * tjenestene og spørsmål og svar. Autorisasjonen og bytte står som spørsmål,
+ * ikke som egne seksjoner.
+ *
  * Kortene bruker små utgaver av fasadebildene (public/kontor/kort/, 720 px
  * bred), ellers laster siden nesten 1 MB bilder på mobil.
  *
  * Kontorene står fullt beskrevet i layoutens @graph. Her refereres de bare
  * med @id som `department`, så de ikke dupliseres.
  */
+/** Lenketekst med pil, der siste ord og pilen aldri skilles når teksten brytes. */
+function PilLenketekst({ tekst }: { tekst: string }) {
+  const ord = tekst.split(' ');
+  const siste = ord.pop();
+  const strek = 'underline decoration-flyd-teal decoration-2 underline-offset-[5px]';
+  return (
+    <>
+      {ord.length > 0 && <span className={strek}>{ord.join(' ')} </span>}
+      <span className="whitespace-nowrap">
+        <span className={strek}>{siste}</span>
+        <ArrowRight className="lenkekort-pil ml-1.5 inline-block h-4 w-4 align-[-0.2em]" strokeWidth={2} aria-hidden="true" />
+      </span>
+    </>
+  );
+}
+
 export default function KontorerPage() {
   const orgJsonLd = {
     '@context': 'https://schema.org',
@@ -72,7 +84,7 @@ export default function KontorerPage() {
       <JsonLd data={faqJsonLd} />
 
       {/* HERO */}
-      <Section tone="sand" className="pt-10 md:pt-14" flyt>
+      <Section tone="sand" className="pt-10 md:pt-14">
         <Container>
           <Breadcrumbs items={[{ name: 'Kontorer', href: '/kontor/' }]} />
           <div className="mt-10 max-w-3xl">
@@ -125,9 +137,8 @@ export default function KontorerPage() {
               <Eyebrow>Kontorene</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold">Finn kontoret nærmest deg</h2>
               <p className={`mt-6 ${brod}`}>
-                Kontorene ligger fra Forus i nord til Flekkefjord i sør, og alle har åpent mandag til fredag
-                fra 07 til 16. Du får de samme tjenestene og det samme fagmiljøet uansett hvilket kontor du
-                hører til.
+                Fra Forus i nord til Flekkefjord i sør. Samme tjenester og samme fagmiljø, uansett hvilket
+                kontor du hører til.
               </p>
             </div>
           </div>
@@ -136,42 +147,30 @@ export default function KontorerPage() {
               const k = kontorBlokker[o.slug];
               return (
                 <li key={o.slug} data-reveal style={{ '--i': i } as React.CSSProperties}>
+                  {/* Kompakt rad på mobil (lite bilde til venstre), stort kort fra nettbrett. */}
                   <Link
                     href={`/kontor/${o.slug}/`}
-                    className="lys lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint"
+                    className="lys lenkekort group flex h-full flex-row gap-4 rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint sm:flex-col sm:gap-0"
                   >
-                    <div className="relative aspect-[3/2] overflow-hidden rounded-flis bg-flyd-linje-mint">
+                    <div className="relative aspect-[4/3] w-28 flex-shrink-0 overflow-hidden rounded-flis bg-flyd-linje-mint sm:aspect-[3/2] sm:w-auto">
                       {o.image && (
                         <div className="rull-zoom absolute inset-0">
                           <Image
                             src={o.image.src.replace('/kontor/', '/kontor/kort/')}
                             alt={o.image.alt}
                             fill
-                            sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
+                            sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 112px"
                             className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                           />
                         </div>
                       )}
                     </div>
-                    <div className="flex flex-1 flex-col px-3 pb-3 pt-6">
-                      <h3 className="font-display text-[24px] font-semibold leading-tight">{officeLabel(o)}</h3>
-                      <p className="mt-3 flex items-start gap-2.5 text-[15px] text-flyd-skifer">
-                        <FlydIcon name="lokal" className="mt-0.5 h-5 w-5 flex-shrink-0 text-flyd-teal" />
-                        <span>{[o.street, o.postal].filter(Boolean).join(', ')}</span>
-                      </p>
-                      {k && (
-                        <>
-                          <p className="mt-4 text-[15px] leading-relaxed text-flyd-skog">
-                            <span className="font-medium">Betjener:</span> {k.omrade}.
-                          </p>
-                          <p className="mt-2 text-[15px] leading-relaxed text-flyd-skifer">{k.tekst}</p>
-                        </>
-                      )}
-                      <span className="mt-auto flex items-center gap-1.5 pt-6 text-[15px] font-medium text-flyd-petrol">
-                        <span className="underline decoration-flyd-teal decoration-2 underline-offset-[6px]">
-                          {k?.lenketekst ?? 'Til kontoret'}
-                        </span>
-                        <ArrowRight className="lenkekort-pil h-4 w-4 flex-shrink-0" strokeWidth={2} aria-hidden="true" />
+                    {/* Bare navn og område: adressen står på kontorsiden, i footeren og i spørsmålene under. */}
+                    <div className="flex min-w-0 flex-1 flex-col py-1 pr-1 sm:px-3 sm:pb-3 sm:pt-5">
+                      <h3 className="font-display text-[18px] font-semibold leading-tight sm:text-[22px]">{officeLabel(o)}</h3>
+                      {k && <p className="mt-1.5 text-[14px] leading-snug text-flyd-skifer sm:mt-2 sm:text-[15px] sm:leading-relaxed">{k.omrade}</p>}
+                      <span className="mt-auto block pt-3 text-[14px] font-medium leading-snug text-flyd-petrol sm:pt-5 sm:text-[15px]">
+                        <PilLenketekst tekst={k?.lenketekst ?? 'Til kontoret'} />
                       </span>
                     </div>
                   </Link>
@@ -230,79 +229,17 @@ export default function KontorerPage() {
         </Container>
       </Section>
 
-      {/* AUTORISASJON – regnskap og revisjon side om side, hver for seg. */}
+      {/* SPØRSMÅL – kontorene, autorisasjonen (regnskap og revisjon hver for seg) og bytte */}
       <Section tone="lysmint">
         <Container>
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
-            <div data-reveal>
-              <Eyebrow>Autorisasjon</Eyebrow>
-              <h2 className="mt-5 font-display text-display-md font-semibold">
-                Autoriserte regnskapsførere – hva det betyr for deg
-              </h2>
-              <p className={`mt-6 ${brod}`}>
-                Et selskap som fører regnskap for andre, må ha tillatelse fra Finanstilsynet. Hvert oppdrag
-                skal ha en oppdragsansvarlig statsautorisert regnskapsfører, som har ansvaret for at arbeidet
-                er gjort etter reglene.
-              </p>
-              <p className={`mt-5 ${brod}`}>
-                Flyd AS er et godkjent regnskapsselskap. Vi er {stat('statsautoriserte').value}{' '}
-                statsautoriserte regnskapsførere. Se tillatelsen vår i{' '}
-                <a href={virksomhetsregisteret} className={lenke}>
-                  Finanstilsynets virksomhetsregister
-                </a>
-                .
-              </p>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5" data-reveal>
+              <Eyebrow>Spørsmål og svar</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold">Ofte stilte spørsmål</h2>
             </div>
-            <div data-reveal>
-              <Eyebrow>Autorisasjon</Eyebrow>
-              <h2 className="mt-5 font-display text-display-md font-semibold">
-                Autorisert revisor – hva det betyr for deg
-              </h2>
-              <p className={`mt-6 ${brod}`}>
-                Et selskap som er revisor, må ha tillatelse fra Finanstilsynet. Hvert oppdrag skal ha en
-                oppdragsansvarlig statsautorisert revisor, som har ansvaret for at revisjonen utføres i henhold
-                til lovverket.
-              </p>
-              <p className={`mt-5 ${brod}`}>
-                Flyd AS er et godkjent revisjonsselskap. Vi er {stat('revisorer').value} statsautoriserte
-                revisorer. Se tillatelsen vår i{' '}
-                <a href={virksomhetsregisteretRevisjon} className={lenke}>
-                  Finanstilsynets virksomhetsregister
-                </a>
-                .
-              </p>
-            </div>
-          </div>
-
-        </Container>
-      </Section>
-
-      {/* BYTTE OG VANLIGE SPØRSMÅL */}
-      <Section tone="sand">
-        <Container>
-          {/* Kort: hele forklaringen står i guidene. Revisjon har egen lenke, adskilt fra regnskap. */}
-          <div className="rounded-kort bg-flyd-lysmint p-7 md:p-10" data-reveal>
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center lg:gap-14">
-              <div className="lg:col-span-6">
-                <Eyebrow>Bytte</Eyebrow>
-                <h2 className="mt-5 font-display text-display-md font-semibold">Bytte regnskapsfører eller revisor?</h2>
-                <p className={`mt-4 ${brod}`}>
-                  Guidene viser hva du må gjøre, steg for steg, og hva vi tar oss av for deg.
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 lg:col-span-6 lg:items-end">
-                <TextLink href="/bytte-regnskapsforer/">Slik bytter du regnskapsfører</TextLink>
-                <TextLink href="/bytte-revisor/">Slik bytter du revisor</TextLink>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-20 md:mt-24" data-reveal>
-            <Eyebrow>Spørsmål og svar</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">Ofte stilte spørsmål</h2>
-            <div className="mt-8 space-y-3">
-              {hubFaq.map((f, i) => (
-                <details key={f.q} open={i === 0} className="faq group rounded-flis bg-flyd-lysmint px-6">
+            <div className="space-y-3 lg:col-span-7" data-reveal>
+              {hubFaq.map((f) => (
+                <details key={f.q} className="faq group rounded-flis bg-flyd-sand px-6">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
                     <span className="min-w-0 break-words max-sm:hyphens-auto">{f.q}</span>
                     <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
