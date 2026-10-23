@@ -268,7 +268,7 @@ export default function EFaktura2027Page() {
             <Eyebrow>Tidslinje</Eyebrow>
             <h2 className={`mt-5 ${h2}`}>Tidslinje: 2027, 2028 og 2030</h2>
           </div>
-          <div className="mt-10 max-w-5xl overflow-x-auto">
+          <div className="mt-10 max-w-5xl overflow-x-auto" tabIndex={0} role="region" aria-label="Tidslinje: 2027, 2028 og 2030">
             <table className="w-full min-w-[640px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-mint font-display text-[15px] font-semibold">
@@ -402,7 +402,7 @@ export default function EFaktura2027Page() {
             {eFakturaFaq.map((f) => (
               <details key={f.q} className="faq group rounded-kort bg-flyd-lysmint px-6 md:px-7">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                  {f.q}
+                  <span className="min-w-0">{f.q}</span>
                   <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                 </summary>
                 <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">

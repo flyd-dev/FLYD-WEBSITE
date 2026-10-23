@@ -221,7 +221,7 @@ export default function FristerAksjeselskapPage() {
               Fristene gjelder for et regnskapsår som følger kalenderåret, med levering året etter.
             </p>
           </div>
-          <div className="mt-10 max-w-5xl overflow-x-auto">
+          <div className="mt-10 max-w-5xl overflow-x-auto" tabIndex={0} role="region" aria-label="Årskalender for aksjeselskap">
             <table className="w-full min-w-[640px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-mint font-display text-[15px] font-semibold">
@@ -261,7 +261,7 @@ export default function FristerAksjeselskapPage() {
         <Container>
           <div className="max-w-3xl">
             <Eyebrow>31. januar</Eyebrow>
-            <h2 className={`mt-5 ${h2}`}>Aksjonærregisteroppgaven (RF-1086)</h2>
+            <h2 className={`mt-5 ${h2}`}>Aksjonær&shy;register&shy;oppgaven (RF-1086)</h2>
             <p className={`mt-6 ${brod}`}>
               Alle norske aksjeselskap og allmennaksjeselskap skal levere aksjonærregisteroppgaven hvert år, med frist
               31. januar. Boligaksjeselskap er unntatt, og det samme er selskap der Euronext VPS står for
@@ -447,7 +447,7 @@ export default function FristerAksjeselskapPage() {
             {fristerFaq.map((f) => (
               <details key={f.q} className="faq group rounded-kort bg-flyd-lysmint px-6 md:px-7">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                  {f.q}
+                  <span className="min-w-0">{f.q}</span>
                   <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                 </summary>
                 <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>

@@ -266,7 +266,7 @@ export default function KontorMal({
         </Container>
       </Section>
 
-      {/* PRISER OG TEAM – Lys mint, overskriftene stablet som i designutkastet */}
+      {/* PRIS OG HVEM VI PASSER FOR – Lys mint */}
       <Section tone="lysmint">
         <Container>
           <div className="max-w-3xl" data-reveal>
@@ -303,28 +303,32 @@ export default function KontorMal({
             </ul>
           </div>
 
-          <div className="mt-20 md:mt-24" data-reveal>
-            <Eyebrow>{side.team.kicker}</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">
-              {side.team.title}
-            </h2>
-            <p className={`mt-6 max-w-3xl ${brod}`}>{side.team.text}</p>
-            <div className="mt-6">
-              <TextLink href="/om-flyd/">
-                Les mer om Flyd og folkene våre
-              </TextLink>
+          {/* Hvem vi passer for står sammen med prisen: begge er det du vurderer før du tar kontakt. */}
+          <div className="mt-20 border-t border-flyd-linje-mint pt-16 md:mt-24 md:pt-20">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5" data-reveal>
+                <Eyebrow>{side.passerFor.kicker}</Eyebrow>
+                <h2 className="mt-5 font-display text-display-lg font-semibold">
+                  {side.passerFor.title}
+                </h2>
+                <p className={`mt-6 ${brod}`}>{side.passerFor.intro}</p>
+              </div>
+              <div className="lg:col-span-7">
+                <NumberedList items={side.passerFor.punkter} />
+                {side.passerFor.bekreft && side.passerFor.bekreft.length > 0 && (
+                  <div className="mt-8 space-y-4" data-reveal>
+                    {side.passerFor.bekreft.map((b) => (
+                      <Bekreft key={b}>{b}</Bekreft>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          {/* Folkene på kontoret fra data/team.ts (kontorTeam), kontorlederen først. */}
-          <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:grid-cols-4">
-            {(kontorTeam[office.slug] ?? []).map((m) => (
-              <TeamCard key={m.email} m={m} tone="sand" />
-            ))}
           </div>
         </Container>
       </Section>
 
-      {/* LOKALT: kontoret på Forus, med besøksinfo */}
+      {/* LOKALT: kontoret, besøksinfo, bilder og folkene som jobber der */}
       <Section tone="sand">
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
@@ -345,7 +349,7 @@ export default function KontorMal({
               </div>
             </div>
 
-            <aside className="lg:col-span-5" data-reveal>
+            <div className="lg:col-span-5" data-reveal>
               {office.image && (
                 <div className="relative mb-4 aspect-[3/2] overflow-hidden rounded-bilde bg-flyd-lysmint">
                   <Image
@@ -409,36 +413,29 @@ export default function KontorMal({
                 )}
                 <GoogleAnmeldelse url={office.reviewUrl} />
               </div>
-            </aside>
+            </div>
           </div>
           {/* Bildene fra kontoret åpner seg ved hover, fokus eller trykk. */}
           {office.gallery && office.gallery.length > 0 && (
             <BildeAkkordeon className="mt-12" hoyde="liten" flater={office.gallery} />
           )}
-        </Container>
-      </Section>
-
-      {/* PASSER FOR */}
-      <Section tone="lysmint">
-        <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
-              <Eyebrow>{side.passerFor.kicker}</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">
-                {side.passerFor.title}
-              </h2>
-              <p className={`mt-6 ${brod}`}>{side.passerFor.intro}</p>
+          <div className="mt-20 border-t border-flyd-linje-sand pt-16 md:mt-24 md:pt-20" data-reveal>
+            <Eyebrow>{side.team.kicker}</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold">
+              {side.team.title}
+            </h2>
+            <p className={`mt-6 max-w-3xl ${brod}`}>{side.team.text}</p>
+            <div className="mt-6">
+              <TextLink href="/om-flyd/">
+                Les mer om Flyd og folkene våre
+              </TextLink>
             </div>
-            <div className="lg:col-span-7">
-              <NumberedList items={side.passerFor.punkter} />
-              {side.passerFor.bekreft && side.passerFor.bekreft.length > 0 && (
-                <div className="mt-8 space-y-4" data-reveal>
-                  {side.passerFor.bekreft.map((b) => (
-                    <Bekreft key={b}>{b}</Bekreft>
-                  ))}
-                </div>
-              )}
-            </div>
+          </div>
+          {/* Folkene på kontoret fra data/team.ts (kontorTeam), kontorlederen først. */}
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:grid-cols-4">
+            {(kontorTeam[office.slug] ?? []).map((m) => (
+              <TeamCard key={m.email} m={m} />
+            ))}
           </div>
         </Container>
       </Section>
@@ -477,7 +474,7 @@ export default function KontorMal({
                 </li>
               ))}
             </ol>
-            <aside className="lg:col-span-5" data-reveal>
+            <div className="lg:col-span-5" data-reveal>
               <div className="rounded-kort bg-flyd-skog p-7 md:p-8">
                 <Eyebrow tone="dark">Har du regnskapsfører fra før?</Eyebrow>
                 <p className="mt-4 text-[17px] leading-[1.65] text-flyd-dempet">
@@ -489,7 +486,7 @@ export default function KontorMal({
                   </TextLink>
                 </div>
               </div>
-            </aside>
+            </div>
           </div>
         </Container>
       </Section>
@@ -510,7 +507,7 @@ export default function KontorMal({
                   className="faq group rounded-flis bg-flyd-lysmint px-6"
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                    {f.q}
+                    <span className="min-w-0">{f.q}</span>
                     <Plus
                       className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal"
                       strokeWidth={2}
@@ -561,6 +558,30 @@ export default function KontorMal({
                     Snakk med oss
                   </ButtonLink>
                 </div>
+                {/* De andre kontorene som en kompakt lenkerad (alle står også i footeren). */}
+                <nav aria-label={side.andreKontorer.title} className="mt-10 border-t border-flyd-sand/15 pt-6">
+                  <p className="text-[15px] text-flyd-dempet">{side.andreKontorer.title}</p>
+                  <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[15px]">
+                    {andre.map((o) => (
+                      <li key={o.slug}>
+                        <Link
+                          href={`/kontor/${o.slug}/`}
+                          className="text-flyd-sand underline decoration-flyd-mint decoration-2 underline-offset-4 transition-colors hover:text-flyd-mint"
+                        >
+                          Regnskapsfører {atOffice(o)}
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
+                      <Link
+                        href="/kontor/"
+                        className="text-flyd-sand underline decoration-flyd-mint decoration-2 underline-offset-4 transition-colors hover:text-flyd-mint"
+                      >
+                        Alle kontorer
+                      </Link>
+                    </li>
+                  </ul>
+                </nav>
               </div>
               <div
                 aria-hidden="true"
@@ -575,45 +596,6 @@ export default function KontorMal({
         </Container>
       </Section>
 
-      {/* ANDRE KONTORER – kort, én linje per kontor */}
-      <Section tone="lysmint" size="sm">
-        <Container>
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow>{side.andreKontorer.kicker}</Eyebrow>
-            <h2 className="mt-5 font-display text-display-md font-semibold">
-              {side.andreKontorer.title}
-            </h2>
-            <ul className="mt-8 border-t border-flyd-linje-mint">
-              {andre.map((o) => (
-                <li key={o.slug}>
-                  <Link
-                    href={`/kontor/${o.slug}/`}
-                    className="group flex items-center justify-between gap-4 border-b border-flyd-linje-mint py-4 text-[17px] text-flyd-skog transition-colors hover:text-flyd-petrol"
-                  >
-                    <span>
-                      <span className="font-display font-semibold">
-                        Regnskapsfører {atOffice(o)}
-                      </span>
-                      <span className="text-flyd-skifer">
-                        {" "}
-                        – {[o.street, o.postal].filter(Boolean).join(", ")}
-                      </span>
-                    </span>
-                    <ArrowRight
-                      className="h-5 w-5 flex-shrink-0 text-flyd-teal transition-transform duration-200 group-hover:translate-x-1"
-                      strokeWidth={2}
-                      aria-hidden="true"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8">
-              <TextLink href="/kontor/">Alle kontorer i Rogaland og Agder</TextLink>
-            </div>
-          </div>
-        </Container>
-      </Section>
     </>
   );
 }

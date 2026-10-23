@@ -177,7 +177,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                     {fag.faq.map((f) => (
                       <details key={f.q} className="faq group rounded-kort bg-flyd-lysmint px-6 md:px-7">
                         <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                          {f.q}
+                          <span className="min-w-0">{f.q}</span>
                           <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                         </summary>
                         <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>
@@ -364,7 +364,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                     {s.faq.map((f) => (
                       <details key={f.q} className="faq group border-b border-flyd-linje-mint">
                         <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                          {f.q}
+                          <span className="min-w-0">{f.q}</span>
                           <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                         </summary>
                         <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>

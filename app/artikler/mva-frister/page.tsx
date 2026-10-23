@@ -304,7 +304,7 @@ export default function MvaFristerPage() {
         <Container>
           <div className="max-w-3xl">
             <Eyebrow>Registrering</Eyebrow>
-            <h2 className={`mt-5 ${h2}`}>Når må jeg registrere meg i Merverdiavgiftsregisteret?</h2>
+            <h2 className={`mt-5 ${h2}`}>Når må jeg registrere meg i Merverdi&shy;avgifts&shy;registeret?</h2>
             <p className={`mt-6 ${brod}`}>
               Du skal registrere virksomheten når salget av mva-pliktige varer og tjenester har passert 50 000 kroner i
               løpet av en periode på 12 måneder. For veldedige og allmennyttige organisasjoner er grensen 140 000 kroner.
@@ -372,7 +372,7 @@ export default function MvaFristerPage() {
             {mvaFaq.map((f) => (
               <details key={f.q} className="faq group rounded-kort bg-flyd-sand px-6 md:px-7">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                  {f.q}
+                  <span className="min-w-0">{f.q}</span>
                   <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                 </summary>
                 <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>

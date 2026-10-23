@@ -51,12 +51,14 @@ export default function SammenligningMal() {
 
       <Section tone="lysmint" className="!pt-0 md:!pt-0">
         <Container>
-          <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0" data-reveal>
+          <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0" data-reveal tabIndex={0} role="region" aria-label="Sammenligning av fire ERP-systemer">
             <table className="w-full min-w-[760px] border-separate border-spacing-0 text-left text-[15px]">
               <caption className="sr-only">Sammenligning av fire ERP-systemer</caption>
               <thead>
                 <tr>
-                  <th scope="col" className="w-40 p-4" />
+                  <th scope="col" className="w-40 p-4">
+                    <span className="sr-only">Egenskap</span>
+                  </th>
                   {erpSystems.map((e) => (
                     <th key={e.id} scope="col" className="p-4 align-bottom font-display text-[18px] font-semibold">
                       {visibleErpSystems.includes(e) ? (

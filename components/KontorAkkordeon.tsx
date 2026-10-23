@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import clsx from 'clsx';
@@ -16,10 +16,15 @@ import { offices, atOffice } from '@/data/offices';
  * Hver flate er en lenke til kontorsiden. Med mus åpnes flaten ved hover, så
  * klikket går rett til siden. På touch åpner første trykk flaten og det andre
  * følger lenken. Tastatur: fokus åpner, Enter følger lenken.
+ *
+ * Touch sender mouseenter og fokus før click, så flaten er alt åpen når
+ * klikket kommer. Derfor huskes om flaten var åpen da fingeren traff
+ * (pointerdown), og det er det som avgjør om trykket åpner eller navigerer.
  */
 export default function KontorAkkordeon({ className }: { className?: string }) {
   const kontorer = offices.filter((o) => o.image);
   const [aktiv, setAktiv] = useState(0);
+  const trykk = useRef<{ type: string; varApen: boolean }>({ type: 'mouse', varApen: false });
 
   return (
     <ul
@@ -38,10 +43,14 @@ export default function KontorAkkordeon({ className }: { className?: string }) {
           >
             <Link
               href={`/kontor/${o.slug}/`}
+              onPointerDown={(e) => {
+                trykk.current = { type: e.pointerType, varApen: apen };
+              }}
               onMouseEnter={() => setAktiv(i)}
               onFocus={() => setAktiv(i)}
               onClick={(e) => {
-                if (!apen) {
+                // detail 0 = tastatur (Enter): følg lenken. Mus: hover har alt åpnet flaten.
+                if (e.detail !== 0 && trykk.current.type !== 'mouse' && !trykk.current.varApen) {
                   e.preventDefault();
                   setAktiv(i);
                 }

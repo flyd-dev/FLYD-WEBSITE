@@ -295,7 +295,7 @@ export default function AltinnTilgangPage() {
               må byrået få dem på nytt som tilgangspakker.
             </p>
           </div>
-          <div className="mt-10 max-w-5xl overflow-x-auto">
+          <div className="mt-10 max-w-5xl overflow-x-auto" tabIndex={0} role="region" aria-label="Fra Altinn-roller til tilgangspakker">
             <table className="w-full min-w-[640px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-mint font-display text-[15px] font-semibold">
@@ -340,7 +340,7 @@ export default function AltinnTilgangPage() {
               <Ekstern href={kilder.altinnRegnskapsforerPakker}>Altinn</Ekstern>).
             </p>
           </div>
-          <div className="mt-8 max-w-5xl overflow-x-auto">
+          <div className="mt-8 max-w-5xl overflow-x-auto" tabIndex={0} role="region" aria-label="Tilgangspakker for regnskapsføreren">
             <table className="w-full min-w-[560px] border-collapse text-left text-[16px] leading-relaxed text-flyd-skog">
               <thead>
                 <tr className="border-b-2 border-flyd-linje-sand font-display text-[15px] font-semibold">
@@ -422,7 +422,7 @@ export default function AltinnTilgangPage() {
                   >
                     {i + 1}
                   </span>
-                  <div className="pt-1">
+                  <div className="min-w-0 pt-1">
                     <h3 className="font-display text-[18px] font-semibold leading-[1.3] text-flyd-skog">{s.tittel}</h3>
                     <p className="mt-2 text-[16px] leading-relaxed text-flyd-skifer">{s.tekst}</p>
                   </div>
@@ -519,7 +519,7 @@ export default function AltinnTilgangPage() {
             {altinnFaq.map((f) => (
               <details key={f.q} className="faq group rounded-kort bg-flyd-sand px-6 md:px-7">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                  {f.q}
+                  <span className="min-w-0">{f.q}</span>
                   <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                 </summary>
                 <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>

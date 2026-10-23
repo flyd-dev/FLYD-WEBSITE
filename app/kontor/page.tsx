@@ -228,7 +228,7 @@ export default function KontorerPage() {
         </Container>
       </Section>
 
-      {/* AUTORISASJON OG KONTAKT – regnskap og revisjon side om side, hver for seg. */}
+      {/* AUTORISASJON – regnskap og revisjon side om side, hver for seg. */}
       <Section tone="lysmint">
         <Container>
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
@@ -272,58 +272,25 @@ export default function KontorerPage() {
             </div>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 gap-6 border-t border-flyd-linje-mint pt-16 lg:grid-cols-2 lg:gap-20" data-reveal>
-            <div>
-              <Eyebrow>Ett nummer</Eyebrow>
-              <h2 className="mt-5 font-display text-display-md font-semibold">Ett nummer, lokale folk</h2>
-            </div>
-            <div>
-              <p className={brod}>
-                Uansett hvilket kontor du hører til, ringer du{' '}
-                <a href="tel:+4748019958" className={`whitespace-nowrap ${lenke}`}>
-                  +47 480 19 958
-                </a>{' '}
-                eller skriver til{' '}
-                <a href="mailto:support@flyd.no" className={lenke}>
-                  support@flyd.no
-                </a>
-                . Du får én fast kontaktperson som kjenner bedriften din, med kolleger innen regnskap, lønn og
-                systemer rundt seg.
-              </p>
-              <p className={`mt-5 ${brod}`}>
-                Bilagene går digitalt, så du trenger ikke levere permer for at regnskapet skal bli ført. Møtene
-                tar vi der det passer deg: på kontoret, hos deg eller på video.
-              </p>
-            </div>
-          </div>
         </Container>
       </Section>
 
       {/* BYTTE OG VANLIGE SPØRSMÅL */}
       <Section tone="sand">
         <Container>
+          {/* Kort: hele forklaringen står i guidene. Revisjon har egen lenke, adskilt fra regnskap. */}
           <div className="rounded-kort bg-flyd-lysmint p-7 md:p-10" data-reveal>
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-14">
-              <div className="lg:col-span-5">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center lg:gap-14">
+              <div className="lg:col-span-6">
                 <Eyebrow>Bytte</Eyebrow>
                 <h2 className="mt-5 font-display text-display-md font-semibold">Bytte regnskapsfører eller revisor?</h2>
+                <p className={`mt-4 ${brod}`}>
+                  Guidene viser hva du må gjøre, steg for steg, og hva vi tar oss av for deg.
+                </p>
               </div>
-              <div className="lg:col-span-7">
-                <p className={brod}>
-                  Har du regnskapsfører i dag og vurderer å bytte? Vi tar kontakt med den tidligere
-                  regnskapsføreren og henter over regnskapsdata, avtaler og dokumentasjon, så du slipper å være
-                  mellomledd. I guiden står det du bør vite om oppsigelse, overgangsdato og frister.
-                </p>
-                <div className="mt-6">
-                  <TextLink href="/bytte-regnskapsforer/">Slik bytter du regnskapsfører</TextLink>
-                </div>
-                <p className={`mt-8 border-t border-flyd-linje-mint pt-8 ${brod}`}>
-                  Skal du bytte revisor, er det generalforsamlingen som velger ny revisor. Den nye revisoren
-                  vurderer oppdraget og veileder deg gjennom resten.
-                </p>
-                <div className="mt-6">
-                  <TextLink href="/bytte-revisor/">Slik bytter du revisor</TextLink>
-                </div>
+              <div className="flex flex-col gap-4 lg:col-span-6 lg:items-end">
+                <TextLink href="/bytte-regnskapsforer/">Slik bytter du regnskapsfører</TextLink>
+                <TextLink href="/bytte-revisor/">Slik bytter du revisor</TextLink>
               </div>
             </div>
           </div>
@@ -335,7 +302,7 @@ export default function KontorerPage() {
               {hubFaq.map((f, i) => (
                 <details key={f.q} open={i === 0} className="faq group rounded-flis bg-flyd-lysmint px-6">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                    {f.q}
+                    <span className="min-w-0">{f.q}</span>
                     <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                   </summary>
                   <div className="faq-svar space-y-4 pb-6">

@@ -8,7 +8,6 @@ import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Eyebrow from "@/components/Eyebrow";
 import ClosingCta from "@/components/ClosingCta";
-import OfficeCards from "@/components/OfficeCards";
 import { ButtonLink, TextLink } from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceIcon from "@/components/ServiceIcon";
@@ -181,7 +180,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
               </div>
             </div>
 
-            <aside className="lg:col-span-5">
+            <div className="lg:col-span-5">
               <div className="lg:sticky lg:top-24">
                 {office.image && (
                   <div className="relative mb-4 aspect-[3/2] overflow-hidden rounded-bilde bg-flyd-lysmint">
@@ -248,7 +247,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                   <GoogleAnmeldelse url={office.reviewUrl} />
                 </div>
               </div>
-            </aside>
+            </div>
           </div>
         </Container>
       </Section>
@@ -349,19 +348,29 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
         </Container>
       </Section>
 
-      {/* ANDRE KONTORER */}
-      <Section tone="lysmint">
+      {/* ANDRE KONTORER – kompakt lenkerad (alle kontorene står også i footeren) */}
+      <Section tone="lysmint" size="sm">
         <Container>
-          <div className="max-w-2xl" data-reveal>
-            <Eyebrow>Andre kontorer</Eyebrow>
-            <h2 className="mt-5 font-display text-display-md font-semibold">
-              Vi er også nær deg andre steder.
-            </h2>
-          </div>
-          <OfficeCards offices={otherOffices} compact className="mt-10" />
-          <div className="mt-8">
-            <TextLink href="/kontor/">Alle kontorer i Rogaland og Agder</TextLink>
-          </div>
+          <nav aria-label="Andre kontorer" className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between" data-reveal>
+            <div>
+              <Eyebrow>Andre kontorer</Eyebrow>
+              <h2 className="mt-4 font-display text-[24px] font-semibold leading-tight">
+                Vi er også nær deg andre steder.
+              </h2>
+            </div>
+            <ul className="flex flex-wrap gap-2">
+              {otherOffices.map((o) => (
+                <li key={o.slug}>
+                  <Link
+                    href={`/kontor/${o.slug}/`}
+                    className="inline-flex items-center rounded-pille border border-flyd-teal px-4 py-2 text-[15px] font-medium text-flyd-skog transition-colors duration-200 hover:bg-flyd-teal hover:text-flyd-sand active:translate-y-[1px]"
+                  >
+                    {o.city}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </Container>
       </Section>
 
