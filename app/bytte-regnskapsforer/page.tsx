@@ -10,8 +10,6 @@ import JsonLd from '@/components/JsonLd';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { pageMetadata, siteUrl } from '@/lib/seo';
 import { bytteRegnskapsforer as g, bytteFaq, bytteSjekkliste } from '@/data/bytte-regnskapsforer';
-import StegScroll from '@/components/designlab/StegScroll';
-import { visUtkast } from '@/lib/utkast';
 import toppbilde from '@/public/header/topp-bytte-regnskapsforer.webp';
 
 export const metadata: Metadata = pageMetadata({
@@ -127,43 +125,27 @@ export default function BytteRegnskapsforerPage() {
       {/* FIRE STEG */}
       <Section tone="sand" id="steg">
         <Container>
-          {visUtkast ? (
-            // Designlab-forslag, bare på forhåndsvisning: stegene som tidslinje som fylles når du scroller.
-            <StegScroll
-              tone="sand"
-              steps={steg.map((st, i) => ({ n: String(i + 1), title: st.tittel, body: st.tekst, ikonSrc: st.ikon }))}
-              intro={
-                <>
-                  <Eyebrow>Fire steg</Eyebrow>
-                  <h2 className="mt-5 font-display text-display-lg font-semibold">Slik bytter du regnskapsfører i 4 steg</h2>
-                </>
-              }
-            />
-          ) : (
-            <>
-            <div className="max-w-3xl" data-reveal>
-              <Eyebrow>Fire steg</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold">Slik bytter du regnskapsfører i 4 steg</h2>
-            </div>
-            <ol className="mt-12 grid grid-cols-1 gap-4 md:gap-5 lg:grid-cols-2">
-              {steg.map((s, i) => (
-                <li
-                  key={s.tittel}
-                  data-reveal
-                  className="rounded-kort border border-flyd-linje-sand bg-flyd-sand p-6 md:p-8"
-                >
-                  {/* Dekorativt ikon (Fia), godkjent av Marius 14.10.2026 */}
-                  {/* eslint-disable-next-line @next/next/no-img-element -- SVG, next/image gir ingenting her */}
-                  <img src={s.ikon} alt="" aria-hidden="true" width={56} height={56} className="h-14 w-14" />
-                  {/* Skifer, ikke Flyd-teal: teal på Sand er for svak kontrast for liten tekst */}
-                  <p className="mt-5 text-[14px] font-medium text-flyd-skifer">Steg {i + 1}</p>
-                  <h3 className="mt-1 font-display text-[20px] font-semibold leading-[1.3]">{s.tittel}</h3>
-                  <p className={`mt-4 ${brod}`}>{s.tekst}</p>
-                </li>
-              ))}
-            </ol>
-            </>
-          )}
+          <div className="max-w-3xl" data-reveal>
+            <Eyebrow>Fire steg</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold">Slik bytter du regnskapsfører i 4 steg</h2>
+          </div>
+          <ol className="mt-12 grid grid-cols-1 gap-4 md:gap-5 lg:grid-cols-2">
+            {steg.map((s, i) => (
+              <li
+                key={s.tittel}
+                data-reveal
+                className="rounded-kort border border-flyd-linje-sand bg-flyd-sand p-6 md:p-8"
+              >
+                {/* Dekorativt ikon (Fia), godkjent av Marius 14.10.2026 */}
+                {/* eslint-disable-next-line @next/next/no-img-element -- SVG, next/image gir ingenting her */}
+                <img src={s.ikon} alt="" aria-hidden="true" width={56} height={56} className="h-14 w-14" />
+                {/* Skifer, ikke Flyd-teal: teal på Sand er for svak kontrast for liten tekst */}
+                <p className="mt-5 text-[14px] font-medium text-flyd-skifer">Steg {i + 1}</p>
+                <h3 className="mt-1 font-display text-[20px] font-semibold leading-[1.3]">{s.tittel}</h3>
+                <p className={`mt-4 ${brod}`}>{s.tekst}</p>
+              </li>
+            ))}
+          </ol>
         </Container>
       </Section>
 

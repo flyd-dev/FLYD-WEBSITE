@@ -12,8 +12,7 @@ import FlydIcon from '@/components/FlydIcon';
 import { ButtonLink } from '@/components/Button';
 import { ServiceTile } from '@/components/ServiceIcon';
 import ProcessCards from '@/components/ProcessCards';
-import SystemBane from '@/components/designlab/SystemBane';
-import StegScroll from '@/components/designlab/StegScroll';
+import SystemBane from '@/components/SystemBane';
 import { process } from '@/data/process';
 import { siteUrl } from '@/lib/seo';
 import { visUtkast } from '@/lib/utkast';
@@ -102,8 +101,8 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
               </div>
             </div>
             <div className="lg:col-span-5">
-              {/* Designlab-forslag, bare på forhåndsvisning: systembanen i stedet for bildet. */}
-              {visUtkast && s.id === 'integrasjoner' ? (
+              {/* Integrasjoner viser hvordan systemene henger sammen i stedet for et bilde. */}
+              {s.id === 'integrasjoner' ? (
                 <SystemBane />
               ) : s.image ? (
                 <div className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint">
@@ -269,57 +268,34 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
       )}
 
       {/* SLIK JOBBER VI: egen prosess for tjenesten, ellers Flyds fire steg */}
-      {/* overflow: clip i stedet for hidden, ellers virker ikke sticky i StegScroll (designlab). */}
-      <Section tone="petrol" flyt className={visUtkast ? '!overflow-clip' : undefined}>
+      <Section tone="petrol" flyt>
         <Container>
-          {visUtkast ? (
-            // Designlab-forslag, bare på forhåndsvisning: stegene scrolles mens overskriften står fast.
-            <StegScroll
-              tone="petrol"
-              steps={
-                s.prosess?.length
-                  ? s.prosess.map((p, i) => ({ n: String(i + 1).padStart(2, '0'), title: p.title, body: p.text }))
-                  : process
-              }
-              intro={
-                <>
-                  <Eyebrow tone="petrol">Slik jobber vi</Eyebrow>
-                  <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-                    Fra første samtale til full flyd.
-                  </h2>
-                </>
-              }
-            />
-          ) : (
-            <>
-            <div className="max-w-3xl" data-reveal>
-              <Eyebrow tone="petrol">Slik jobber vi</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-                Fra første samtale til full flyd.
-              </h2>
-            </div>
-            <div className="mt-12" data-reveal>
-              {s.prosess?.length ? (
-                <ol className="relative max-w-3xl">
-                  <span aria-hidden="true" className="prosesslinje absolute bottom-6 left-[23px] top-6 w-0.5 bg-flyd-mint/40" />
-                  {s.prosess.map((p, i) => (
-                    <li key={p.title} className="relative flex gap-6 pb-10 last:pb-0">
-                      <span className="relative z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-pille bg-flyd-skog font-display text-[20px] font-semibold text-flyd-korall">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <div className="pt-2">
-                        <h3 className="font-display text-[20px] font-semibold text-flyd-sand">{p.title}</h3>
-                        <p className="mt-2 text-[16px] leading-relaxed text-flyd-dempet">{p.text}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              ) : (
-                <ProcessCards steps={process} />
-              )}
-            </div>
-            </>
-          )}
+          <div className="max-w-3xl" data-reveal>
+            <Eyebrow tone="petrol">Slik jobber vi</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
+              Fra første samtale til full flyd.
+            </h2>
+          </div>
+          <div className="mt-12" data-reveal>
+            {s.prosess?.length ? (
+              <ol className="relative max-w-3xl">
+                <span aria-hidden="true" className="prosesslinje absolute bottom-6 left-[23px] top-6 w-0.5 bg-flyd-mint/40" />
+                {s.prosess.map((p, i) => (
+                  <li key={p.title} className="relative flex gap-6 pb-10 last:pb-0">
+                    <span className="relative z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-pille bg-flyd-skog font-display text-[20px] font-semibold text-flyd-korall">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div className="pt-2">
+                      <h3 className="font-display text-[20px] font-semibold text-flyd-sand">{p.title}</h3>
+                      <p className="mt-2 text-[16px] leading-relaxed text-flyd-dempet">{p.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <ProcessCards steps={process} />
+            )}
+          </div>
         </Container>
       </Section>
 

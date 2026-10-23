@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { Menu, X } from 'lucide-react';
 import { ButtonLink } from './Button';
 import FlydLogo from './FlydLogo';
-import TjenesteMeny, { type MenyTjeneste } from './designlab/TjenesteMeny';
+import TjenesteMeny, { type MenyTjeneste } from './TjenesteMeny';
 
 const nav = [
   { href: '/tjenester', label: 'Tjenester' },
@@ -111,7 +111,7 @@ export default function Header({ tjenester }: { tjenester?: MenyTjeneste[] } = {
                   ? 'text-flyd-skog underline !decoration-flyd-teal'
                   : 'text-flyd-skifer',
               );
-              // Designlab-forslag: nedtrekksmeny for Tjenester, bare når layouten sender listen (forhåndsvisning).
+              // Nedtrekksmeny for Tjenester når layouten sender listen.
               if (item.href === '/tjenester' && tjenester?.length) {
                 return (
                   <TjenesteMeny key={item.href} tjenester={tjenester} aktiv={isActive(item.href)} lenkeKlasse={klasse} />

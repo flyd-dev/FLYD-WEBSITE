@@ -118,7 +118,7 @@ export default function TjenesterPage() {
   return (
     <ScrollProgressLineWrapper>
       <JsonLd data={servicesJsonLd} />
-      {/* Seksjonsskille: Petrol, stor tittel og emnetagger. */}
+      {/* Seksjonsskille: Petrol og stor tittel. Kortene rett under er menyen. */}
       <Section tone="petrol" size="lg" flyt>
         <Container>
           <Breadcrumbs items={[{ name: 'Tjenester', href: '/tjenester/' }]} tone="dark" />
@@ -131,21 +131,6 @@ export default function TjenesterPage() {
             programvare – fra daglig bokføring til integrasjoner mellom
             forretningssystemer. Velg det du trenger.
           </p>
-
-          <nav aria-label="Tjenester" className="mt-12">
-            <ul className="flex flex-wrap gap-3">
-              {visibleServices.map((s) => (
-                <li key={s.id}>
-                  <Link
-                    href={serviceUrl(s)}
-                    className="inline-flex items-center rounded-pille border border-flyd-mint px-4 py-2 text-[15px] font-medium text-flyd-sand transition-colors duration-200 hover:bg-flyd-mint hover:text-flyd-skog active:translate-y-[1px]"
-                  >
-                    {s.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
         </Container>
       </Section>
 

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 
 /**
- * Prototype (designlab): et kjernebudskap som avdekkes ord for ord mens du
+ * Et kjernebudskap som avdekkes ord for ord mens du
  * scroller. Idé fra «Text Reveal» på 21st.dev. Teksten ligger ferdig i
  * HTML-en med full styrke (søkemotorer og uten JavaScript); skriptet demper
  * ordene som ikke er nådd ennå. Ordet er fullt synlig før avsnittet er

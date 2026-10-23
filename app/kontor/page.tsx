@@ -21,8 +21,6 @@ import {
   virksomhetsregisteretRevisjon,
 } from '@/data/kontoroversikt';
 import { revisjonOmtale } from '@/data/revisjon';
-import KontorAkkordeon from '@/components/designlab/KontorAkkordeon';
-import { visUtkast } from '@/lib/utkast';
 
 export const metadata: Metadata = pageMetadata({
   absoluteTitle: 'Regnskapsfører i Rogaland og Agder – seks kontorer · Flyd',
@@ -116,8 +114,6 @@ export default function KontorerPage() {
               Ring oss
             </ButtonLink>
           </div>
-          {/* Designlab-forslag, bare på forhåndsvisning: kontorflatene som inngang til kontorene. */}
-          {visUtkast && <KontorAkkordeon className="mt-14" />}
         </Container>
       </Section>
 

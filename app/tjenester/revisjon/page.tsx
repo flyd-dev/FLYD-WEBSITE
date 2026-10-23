@@ -128,7 +128,7 @@ export default function RevisjonPage() {
             <Eyebrow>{revisjon.team.kicker}</Eyebrow>
             <h2 className="mt-5 font-display text-display-lg font-semibold">{revisjon.team.tittel}</h2>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
             {team.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}

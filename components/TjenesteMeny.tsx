@@ -10,7 +10,7 @@ import Eyebrow from '@/components/Eyebrow';
 import { ServiceTile, type ServiceIconName, type ServiceTone } from '@/components/ServiceIcon';
 
 /**
- * Prototype (designlab): nedtrekksmeny for «Tjenester» i headeren (desktop).
+ * Nedtrekksmeny for «Tjenester» i headeren (desktop).
  * Idé fra «Navigation Menu» på 21st.dev. «Tjenester» er fortsatt en lenke
  * til oversikten; pilknappen ved siden av åpner panelet (og hover gjør det
  * samme med mus). Escape, klikk utenfor og fokus som forlater menyen lukker.

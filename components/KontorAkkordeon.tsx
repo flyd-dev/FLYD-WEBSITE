@@ -8,7 +8,7 @@ import { ArrowRight } from 'lucide-react';
 import { offices, atOffice } from '@/data/offices';
 
 /**
- * Prototype (designlab): de seks kontorene som bildeflater som åpner seg ved
+ * Kontorflatene: de seks kontorene som bildeflater som åpner seg ved
  * hover, fokus eller trykk. Idé fra «Interactive Image Accordion» og «Hover
  * Expand» på 21st.dev, tegnet om: fasadefotoene fra data/offices.ts, radius
  * 24 px og Skog-overlay nedenfra der teksten står. Ingen blur.

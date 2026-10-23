@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 
 /**
- * Prototype (designlab): heltekortet starter innrykket med radius 24 px og
+ * Heltekortet på forsiden starter innrykket med radius 24 px og
  * vokser til full bredde (uten radius – utfallende bilde) mens du scroller
  * forbi det. Idé fra «Scroll Expansion Hero» på 21st.dev, men teksten står
  * stille og er synlig fra første stund, så H1 og typewriteren er urørt.

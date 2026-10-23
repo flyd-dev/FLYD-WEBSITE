@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
 
 /**
- * Prototype (designlab): bildeflater på rad der én er åpen om gangen. Hover,
+ * Bildeflater på rad der én er åpen om gangen. Hover,
  * fokus eller trykk åpner en flate. Idé fra «Interactive Image Accordion» og
  * «Hover Expand» på 21st.dev. Samme grep som KontorAkkordeon, men uten
  * lenker: brukes til «Hvorfor jobbe i Flyd» på /karriere og til bildene fra

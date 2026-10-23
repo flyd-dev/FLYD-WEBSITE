@@ -1,7 +1,7 @@
 import type { Kundehistorie } from '@/components/designlab/KundeHistorier';
 
 /**
- * Kundehistoriene på forsiden (forslag fra designlab, bare på forhåndsvisning).
+ * Kundehistoriene (forslag i designlab, ikke i bruk på sidene ennå).
  *
  * EKSEMPLER. Tallene, sitatene og navnene er ikke ekte. De må byttes med
  * godkjente sitater fra kundene (med samtykke til navn og logo) før noe av

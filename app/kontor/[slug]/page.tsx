@@ -28,8 +28,7 @@ import TeamCard from "@/components/TeamCard";
 import { kontorTeam } from "@/data/team";
 import { getKontorside } from "@/data/kontorsider";
 import { revisjonOmtale } from "@/data/revisjon";
-import BildeAkkordeon from "@/components/designlab/BildeAkkordeon";
-import { visUtkast } from "@/lib/utkast";
+import BildeAkkordeon from "@/components/BildeAkkordeon";
 
 const SITE_URL = "https://www.flyd.no";
 
@@ -267,38 +266,8 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 Hos oss {atOffice(office)}.
               </h2>
             </div>
-            {/* Designlab-forslag, bare på forhåndsvisning: bildene åpner seg ved hover, fokus eller trykk. */}
-            {visUtkast ? (
-              <BildeAkkordeon className="mt-10" hoyde="liten" flater={office.gallery} />
-            ) : (
-            <div
-              className={`mt-10 grid grid-cols-1 gap-4 md:gap-5 ${
-                office.gallery.length === 2
-                  ? "sm:grid-cols-2"
-                  : "sm:grid-cols-3"
-              }`}
-            >
-              {office.gallery.map((img) => (
-                <div
-                  key={img.src}
-                  data-reveal
-                  className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint"
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    sizes={
-                      office.gallery!.length === 2
-                        ? "(min-width: 640px) 50vw, 100vw"
-                        : "(min-width: 640px) 33vw, 100vw"
-                    }
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-            )}
+            {/* Bildene åpner seg ved hover, fokus eller trykk. */}
+            <BildeAkkordeon className="mt-10" hoyde="liten" flater={office.gallery} />
           </Container>
         </Section>
       )}
@@ -316,7 +285,7 @@ export default function KontorPage({ params }: { params: { slug: string } }) {
                 Møt teamet {atOffice(office)}.
               </h2>
             </div>
-            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
               {kontorTeam[office.slug].map((m) => (
                 <TeamCard key={m.email} m={m} />
               ))}

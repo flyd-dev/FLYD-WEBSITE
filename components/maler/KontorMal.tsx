@@ -13,9 +13,7 @@ import NumberedList from "@/components/NumberedList";
 import TeamCard from "@/components/TeamCard";
 import { ButtonLink, TextLink } from "@/components/Button";
 import { siteUrl } from "@/lib/seo";
-import { visUtkast } from "@/lib/utkast";
-import BildeAkkordeon from "@/components/designlab/BildeAkkordeon";
-import StegScroll from "@/components/designlab/StegScroll";
+import BildeAkkordeon from "@/components/BildeAkkordeon";
 import {
   offices,
   openingHours,
@@ -318,7 +316,7 @@ export default function KontorMal({
             </div>
           </div>
           {/* Folkene på kontoret fra data/team.ts (kontorTeam), kontorlederen først. */}
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:grid-cols-4">
             {(kontorTeam[office.slug] ?? []).map((m) => (
               <TeamCard key={m.email} m={m} tone="sand" />
             ))}
@@ -413,38 +411,9 @@ export default function KontorMal({
               </div>
             </aside>
           </div>
-          {/* Designlab-forslag, bare på forhåndsvisning: bildene åpner seg ved hover, fokus eller trykk. */}
-          {visUtkast && office.gallery && office.gallery.length > 0 && (
+          {/* Bildene fra kontoret åpner seg ved hover, fokus eller trykk. */}
+          {office.gallery && office.gallery.length > 0 && (
             <BildeAkkordeon className="mt-12" hoyde="liten" flater={office.gallery} />
-          )}
-          {!visUtkast && office.gallery && office.gallery.length > 0 && (
-            <div
-              className={`mt-12 grid grid-cols-1 gap-4 md:gap-5 ${
-                office.gallery.length === 2
-                  ? "sm:grid-cols-2"
-                  : "sm:grid-cols-3"
-              }`}
-            >
-              {office.gallery.map((img) => (
-                <div
-                  key={img.src}
-                  data-reveal
-                  className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint"
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    sizes={
-                      office.gallery!.length === 2
-                        ? "(min-width: 640px) 50vw, 100vw"
-                        : "(min-width: 640px) 33vw, 100vw"
-                    }
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
           )}
         </Container>
       </Section>
@@ -475,87 +444,53 @@ export default function KontorMal({
       </Section>
 
       {/* SLIK KOMMER DU I GANG – Petrol som seksjonsskille */}
-      {/* overflow: clip i stedet for hidden, ellers virker ikke sticky i StegScroll (designlab). */}
-      <Section tone="petrol" flyt className={visUtkast ? "!overflow-clip" : undefined}>
+      <Section tone="petrol" flyt>
         <Container>
-          {visUtkast ? (
-            // Designlab-forslag, bare på forhåndsvisning: stegene som tidslinje som fylles når du scroller.
-            <StegScroll
-              tone="petrol"
-              steps={side.kommIGang.steg.map((p, i) => ({
-                n: String(i + 1).padStart(2, "0"),
-                title: p.title,
-                body: p.text,
-              }))}
-              intro={
-                <>
-                  <Eyebrow tone="petrol">{side.kommIGang.kicker}</Eyebrow>
-                  <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-                    {side.kommIGang.title}
-                  </h2>
-                  <div className="mt-10 rounded-kort bg-flyd-skog p-7 md:p-8">
-                    <Eyebrow tone="dark">Har du regnskapsfører fra før?</Eyebrow>
-                    <p className="mt-4 text-[17px] leading-[1.65] text-flyd-dempet">
-                      {side.kommIGang.bytte.text}
+          <div className="max-w-3xl" data-reveal>
+            <Eyebrow tone="petrol">{side.kommIGang.kicker}</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
+              {side.kommIGang.title}
+            </h2>
+          </div>
+          <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+            <ol className="relative lg:col-span-7" data-reveal>
+              <span
+                aria-hidden="true"
+                className="prosesslinje absolute bottom-6 left-[23px] top-6 w-0.5 bg-flyd-mint/40"
+              />
+              {side.kommIGang.steg.map((p, i) => (
+                <li
+                  key={p.title}
+                  className="relative flex gap-6 pb-10 last:pb-0"
+                >
+                  <span className="relative z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-pille bg-flyd-skog font-display text-[20px] font-semibold text-flyd-korall">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="pt-2">
+                    <h3 className="font-display text-[20px] font-semibold text-flyd-sand">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 text-[16px] leading-relaxed text-flyd-dempet">
+                      {p.text}
                     </p>
-                    <div className="mt-6">
-                      <TextLink href={side.kommIGang.bytte.href} tone="dark">
-                        {side.kommIGang.bytte.lenketekst}
-                      </TextLink>
-                    </div>
                   </div>
-                </>
-              }
-            />
-          ) : (
-            <>
-            <div className="max-w-3xl" data-reveal>
-              <Eyebrow tone="petrol">{side.kommIGang.kicker}</Eyebrow>
-              <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-                {side.kommIGang.title}
-              </h2>
-            </div>
-            <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-              <ol className="relative lg:col-span-7" data-reveal>
-                <span
-                  aria-hidden="true"
-                  className="prosesslinje absolute bottom-6 left-[23px] top-6 w-0.5 bg-flyd-mint/40"
-                />
-                {side.kommIGang.steg.map((p, i) => (
-                  <li
-                    key={p.title}
-                    className="relative flex gap-6 pb-10 last:pb-0"
-                  >
-                    <span className="relative z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-pille bg-flyd-skog font-display text-[20px] font-semibold text-flyd-korall">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="pt-2">
-                      <h3 className="font-display text-[20px] font-semibold text-flyd-sand">
-                        {p.title}
-                      </h3>
-                      <p className="mt-2 text-[16px] leading-relaxed text-flyd-dempet">
-                        {p.text}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-              <aside className="lg:col-span-5" data-reveal>
-                <div className="rounded-kort bg-flyd-skog p-7 md:p-8">
-                  <Eyebrow tone="dark">Har du regnskapsfører fra før?</Eyebrow>
-                  <p className="mt-4 text-[17px] leading-[1.65] text-flyd-dempet">
-                    {side.kommIGang.bytte.text}
-                  </p>
-                  <div className="mt-6">
-                    <TextLink href={side.kommIGang.bytte.href} tone="dark">
-                      {side.kommIGang.bytte.lenketekst}
-                    </TextLink>
-                  </div>
+                </li>
+              ))}
+            </ol>
+            <aside className="lg:col-span-5" data-reveal>
+              <div className="rounded-kort bg-flyd-skog p-7 md:p-8">
+                <Eyebrow tone="dark">Har du regnskapsfører fra før?</Eyebrow>
+                <p className="mt-4 text-[17px] leading-[1.65] text-flyd-dempet">
+                  {side.kommIGang.bytte.text}
+                </p>
+                <div className="mt-6">
+                  <TextLink href={side.kommIGang.bytte.href} tone="dark">
+                    {side.kommIGang.bytte.lenketekst}
+                  </TextLink>
                 </div>
-              </aside>
-            </div>
-            </>
-          )}
+              </div>
+            </aside>
+          </div>
         </Container>
       </Section>
 

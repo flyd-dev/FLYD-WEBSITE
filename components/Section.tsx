@@ -31,27 +31,20 @@ export default function Section({
   children: React.ReactNode;
   className?: string;
   size?: 'sm' | 'default' | 'lg';
-  /** Animerte flytlinjer bak innholdet. På lys bunn tones de ut mot venstre, så de aldri står bak tekst. */
+  /** Animerte flytlinjer bak innholdet. Vises bare på mørke toner (Skog, Petrol, Flyd-teal). */
   flyt?: boolean;
 }) {
   const padding =
     size === 'sm' ? 'py-16 md:py-20' : size === 'lg' ? 'py-24 md:py-32' : 'py-20 md:py-28';
+  // Flytlinjene vises bare på mørke flater. Bak overskrifter på lys bunn ble det for mye uro.
+  const visFlyt = flyt && isDark(tone);
   return (
     <section
       id={id}
-      className={clsx('relative scroll-mt-24', flyt && 'overflow-hidden', tones[tone], padding, className)}
+      className={clsx('relative scroll-mt-24', visFlyt && 'overflow-hidden', tones[tone], padding, className)}
     >
-      {flyt && (
-        <FlytLinjer
-          tone={isDark(tone) ? 'dark' : 'light'}
-          className={
-            isDark(tone)
-              ? 'opacity-50'
-              : 'opacity-60 [mask-image:linear-gradient(to_right,transparent_35%,black_75%)]'
-          }
-        />
-      )}
-      {flyt ? <div className="relative">{children}</div> : children}
+      {visFlyt && <FlytLinjer tone="dark" className="opacity-50" />}
+      {visFlyt ? <div className="relative">{children}</div> : children}
     </section>
   );
 }

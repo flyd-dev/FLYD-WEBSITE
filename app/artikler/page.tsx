@@ -12,7 +12,6 @@ import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import FlytLinjer from '@/components/FlytLinjer';
 import { artikler, formatDato } from '@/data/artikler';
-import { visUtkast } from '@/lib/utkast';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Artikler om regnskap, regelverk og systemer',
@@ -61,8 +60,8 @@ export default function ArtiklerPage() {
         <Container>
           <ul className="stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
             {artikler.map((a, i) => {
-              // Designlab-forslag, bare på forhåndsvisning: den nyeste artikkelen fremhevet i full bredde.
-              const fremhevet = visUtkast && i === 0;
+              // Den nyeste artikkelen fremhevet i full bredde.
+              const fremhevet = i === 0;
               return (
               <li
                 key={a.slug}

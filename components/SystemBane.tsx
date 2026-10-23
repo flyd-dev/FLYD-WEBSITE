@@ -3,7 +3,7 @@ import FlydLogo from '@/components/FlydLogo';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
 
 /**
- * Prototype (designlab): Flyd i midten av en bane. Forretningssystemene står
+ * Systembanen: Flyd i midten av en bane. Forretningssystemene står
  * på den indre ringen (diagonalene), og det vi kobler dem til står på den
  * ytre (rett opp, ned og til sidene). Da går linjene inn mot midten mellom
  * flisene, aldri gjennom dem. Korall-punktum flyter inn mot Flyd, midten
