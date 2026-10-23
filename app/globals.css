@@ -341,49 +341,93 @@ input, textarea, select, button {
    opacity. Slås av ved prefers-reduced-motion (nederst).
    --------------------------------------------------------------------------- */
 
-/* Flytlinjene: tegnes inn én gang og ligger så stille. */
-.flytlinje {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  opacity: calc(0.55 - var(--i, 0) * 0.1);
-  animation: flyt-tegn 2.2s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--i, 0) * 160ms + 200ms) forwards;
+/* Punktumflaten (components/PunktumFlate.tsx): bakgrunnen på mørke flater.
+   Rutenett av logoens punktum (3 × 3 px, hjørneradius 0,9) hver 28. px, festet i
+   høyre kant så glimtene kan plasseres i ruter fra høyre. Tones ut med en maske,
+   sterkest øverst til høyre. Lyset er en radialgradient som flyttes med transform
+   (billig å animere). Glimtene ligger nøyaktig oppå et punktum i rutenettet. */
+.punktumflate {
+  --rute: 28px;
+  --prikk: rgb(139 194 187 / 0.26);
+  --lys: rgb(76 134 135 / 0.42);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
-@keyframes flyt-tegn {
-  to { stroke-dashoffset: 0; }
+.punktumflate-petrol {
+  --prikk: rgb(139 194 187 / 0.24);
+  --lys: rgb(76 134 135 / 0.5);
 }
-
-/* Lysstreifet langs linjene (FlytLinjer.tsx). Linjene har pathLength 1, så et streif er
-   et kort strek-stykke som flyttes fra før starten til etter slutten. Hale (0,24) og
-   kjerne (0,07) har ulik lengde, men samme forflytning (1,3), så hodene følges. Faste
-   verdier i keyframes: med var() animerer Chrome trinnvis. Pause mellom rundene, og
-   det andre streifet går forskjøvet. */
-.flytstrale path {
-  animation-duration: 14s;
-  animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1);
-  animation-delay: calc(2.6s + var(--k, 0) * 7s);
-  animation-iteration-count: infinite;
+.punktumflate-teal {
+  --prikk: rgb(248 246 241 / 0.22);
+  --lys: rgb(139 194 187 / 0.35);
 }
-.flytstrale-hale {
-  stroke-dasharray: 0.24 2;
-  stroke-dashoffset: 0.24;
-  opacity: 0.3;
-  animation-name: flyt-strale-hale;
+.punktumflate-lys {
+  position: absolute;
+  width: 70rem;
+  height: 70rem;
+  right: -18rem;
+  top: -32rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--lys) 0%, transparent 62%);
+  animation: punktum-lys 26s ease-in-out infinite alternate;
 }
-.flytstrale-kjerne {
-  stroke-dasharray: 0.07 2;
-  stroke-dashoffset: 0.07;
-  opacity: 0.65;
-  animation-name: flyt-strale-kjerne;
+@keyframes punktum-lys {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-22rem, 12rem, 0); }
 }
-@keyframes flyt-strale-hale {
-  0% { stroke-dashoffset: 0.24; }
-  55%, 100% { stroke-dashoffset: -1.06; }
+.punktumflate-rutenett {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: radial-gradient(ellipse 85% 80% at 78% 30%, #000 15%, transparent 72%);
+  mask-image: radial-gradient(ellipse 85% 80% at 78% 30%, #000 15%, transparent 72%);
 }
-@keyframes flyt-strale-kjerne {
-  0% { stroke-dashoffset: 0.07; }
-  55%, 100% { stroke-dashoffset: -1.23; }
+.punktumflate-rutenett::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--prikk);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect width='3' height='3' rx='0.9'/%3E%3C/svg%3E") right top / var(--rute) var(--rute) repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect width='3' height='3' rx='0.9'/%3E%3C/svg%3E") right top / var(--rute) var(--rute) repeat;
 }
-
+.punktumflate-glimt {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 0.9px;
+  right: calc(var(--rute) * var(--x) - 3px);
+  top: calc(var(--rute) * var(--y));
+  background: var(--flyd-mint);
+  opacity: 0;
+  box-shadow: 0 0 0 3px rgb(139 194 187 / 0.18), 0 0 14px 4px rgb(139 194 187 / 0.35);
+  animation: punktum-glimt 11s ease-in-out calc(1.5s + var(--i) * 1.6s) infinite;
+}
+.punktumflate-teal .punktumflate-glimt {
+  background: var(--flyd-sand);
+}
+.punktumflate-glimt-korall,
+.punktumflate-teal .punktumflate-glimt-korall {
+  background: var(--flyd-korall);
+  box-shadow: 0 0 0 3px rgb(242 144 90 / 0.2), 0 0 14px 4px rgb(242 144 90 / 0.35);
+}
+/* Smale skjermer: teksten fyller hele bredden, så rutenettet samles oppe til høyre og er svakere. */
+@media (max-width: 640px) {
+  .punktumflate {
+    --prikk: rgb(139 194 187 / 0.16);
+  }
+  .punktumflate-teal {
+    --prikk: rgb(248 246 241 / 0.14);
+  }
+  .punktumflate-rutenett {
+    -webkit-mask-image: radial-gradient(ellipse 90% 45% at 90% 0%, #000 10%, transparent 70%);
+    mask-image: radial-gradient(ellipse 90% 45% at 90% 0%, #000 10%, transparent 70%);
+  }
+}
+@keyframes punktum-glimt {
+  0%, 22%, 100% { opacity: 0; }
+  9% { opacity: 1; }
+}
 
 /* Fremdriftslinje øverst: viser hvor langt du har lest. Bare der nettleseren
    støtter scroll-drevne animasjoner; ellers vises den ikke. */
@@ -478,11 +522,10 @@ input, textarea, select, button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flytlinje {
+  .punktumflate-lys {
     animation: none;
-    stroke-dashoffset: 0;
   }
-  .flytstrale {
+  .punktumflate-glimt {
     display: none;
   }
   .lesefremdrift,

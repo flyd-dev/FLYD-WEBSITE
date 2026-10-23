@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import FlytLinjer from './FlytLinjer';
+import PunktumFlate, { type PunktumTone } from './PunktumFlate';
 
 /**
  * Bakgrunnsrytme etter designmanualen: Sand og Lys mint veksler på innhold,
@@ -31,19 +31,19 @@ export default function Section({
   children: React.ReactNode;
   className?: string;
   size?: 'sm' | 'default' | 'lg';
-  /** Animerte flytlinjer bak innholdet. Vises bare på mørke toner (Skog, Petrol, Flyd-teal). */
+  /** Punktumflaten bak innholdet (PunktumFlate). Vises bare på mørke toner (Skog, Petrol, Flyd-teal). */
   flyt?: boolean;
 }) {
   const padding =
     size === 'sm' ? 'py-16 md:py-20' : size === 'lg' ? 'py-24 md:py-32' : 'py-20 md:py-28';
-  // Flytlinjene vises bare på mørke flater. Bak overskrifter på lys bunn ble det for mye uro.
+  // Bare på mørke flater. Bak overskrifter på lys bunn ble det for mye uro.
   const visFlyt = flyt && isDark(tone);
   return (
     <section
       id={id}
       className={clsx('relative scroll-mt-24', visFlyt && 'overflow-hidden', tones[tone], padding, className)}
     >
-      {visFlyt && <FlytLinjer tone="dark" className="opacity-50" />}
+      {visFlyt && <PunktumFlate tone={tone as PunktumTone} />}
       {visFlyt ? <div className="relative">{children}</div> : children}
     </section>
   );

@@ -7,7 +7,6 @@ import PartnerStrip from '@/components/PartnerStrip';
 import StatsSection from '@/components/StatsSection';
 import ServiceCard from '@/components/ServiceCard';
 import NumberedList from '@/components/NumberedList';
-import FlytLinjer from '@/components/FlytLinjer';
 import ProcessCards from '@/components/ProcessCards';
 import { process } from '@/data/process';
 import ClosingCta from '@/components/ClosingCta';
@@ -61,7 +60,6 @@ export default function HomePage() {
           />
           <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
           <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />
-          <FlytLinjer className="opacity-40 [mask-image:linear-gradient(to_right,black_0%,black_45%,transparent_75%)]" />
 
           <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
             <div className="max-w-2xl" data-reveal>
