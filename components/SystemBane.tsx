@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import FlydLogo from '@/components/FlydLogo';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
+import SystemLogo, { type SystemLogoName } from '@/components/SystemLogo';
 
 /**
  * Systembanen: Flyd i midten av en bane. Forretningssystemene står
@@ -12,8 +13,11 @@ import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
  *
  * Alt skalerer med bredden på flaten: posisjonene er prosent av samme
  * viewBox som linjene, og teksten er i container-enheter (cqw), så flisene
- * holder avstand også i smale kolonner. Under 560 px brede får systemene
- * korte navn, og under 420 px faller ikonene bort. Systemnavnene står som tekst, ingen tredjepartslogoer.
+ * holder avstand også i smale kolonner. Under 560 px faller «Business NXT»
+ * bort ved Visma-logoen, og under 420 px faller ikonene på den ytre ringen bort.
+ *
+ * Forretningssystemene vises med sine egne logoer i Sand (SystemLogo), de vi
+ * kobler til som Flyd-ikoner, fordi det er kategorier og ikke bestemte produkter.
  *
  * SMIL-animasjonene (punktum, puls) lytter ikke på prefers-reduced-motion,
  * så de skjules helt da; ringen står stille.
@@ -24,22 +28,25 @@ const C = { x: 500, y: 360 };
 const R_INDRE = 170;
 const R_YTRE = 305;
 
-type Node = { navn: string; kort?: string; vinkel: number; icon?: FlydIconName };
+type Node = { navn: string; vinkel: number };
+// `hoyde` jevner ut logoene, så de ser like store ut (formatene er ulike).
+type SystemNode = Node & { logo: SystemLogoName; hoyde: string; tillegg?: string };
+type KategoriNode = Node & { icon: FlydIconName };
 
-// Diagonalene. Ikonene er de samme som på systemkortene (erpSystems i data/services.ts).
-const indre: Node[] = [
-  { navn: 'Tripletex', vinkel: 135, icon: 'sky' },
-  { navn: 'Visma Business NXT', kort: 'Visma', vinkel: 45, icon: 'erp' },
-  { navn: 'Uni Micro', vinkel: 225, icon: 'plugg' },
-  { navn: 'PowerOffice Go', kort: 'PowerOffice', vinkel: 315, icon: 'automatisering' },
+// Diagonalene: systemene vi jobber i (erpSystems i data/services.ts).
+const indre: SystemNode[] = [
+  { navn: 'Tripletex', vinkel: 135, logo: 'tripletex', hoyde: '1.7em' },
+  { navn: 'Visma Business NXT', vinkel: 45, logo: 'visma', hoyde: '0.82em', tillegg: 'Business NXT' },
+  { navn: 'Uni Micro', vinkel: 225, logo: 'unimicro', hoyde: '1.02em' },
+  { navn: 'PowerOffice Go', vinkel: 315, logo: 'poweroffice', hoyde: '0.86em' },
 ];
 
 // Rett opp, ned og til sidene. Fra integrasjonsteksten i data/services.ts.
-const ytre: Node[] = [
-  { navn: 'CRM', vinkel: 90 },
-  { navn: 'Bransjeløsninger', vinkel: 0 },
-  { navn: 'Lønnssystem', vinkel: 270 },
-  { navn: 'Nettbutikk', vinkel: 180 },
+const ytre: KategoriNode[] = [
+  { navn: 'CRM', vinkel: 90, icon: 'medarbeidere' },
+  { navn: 'Bransjeløsninger', vinkel: 0, icon: 'bransje' },
+  { navn: 'Lønnssystem', vinkel: 270, icon: 'lonn-hr' },
+  { navn: 'Nettbutikk', vinkel: 180, icon: 'nettbutikk' },
 ];
 
 function punkt(r: number, vinkel: number) {
@@ -49,14 +56,18 @@ function punkt(r: number, vinkel: number) {
 
 const css = `
   .systembane { container-type: inline-size; }
-  .systembane .sb-kort { display: none; }
   @container (max-width: 560px) {
     .systembane .sb-lang { display: none; }
-    .systembane .sb-kort { display: inline; }
   }
   @container (max-width: 420px) {
     .systembane .sb-ikon { display: none; }
     .systembane .sb-scene { font-size: 10.5px; }
+    .systembane .sb-system { font-size: 0.8em; }
+    .systembane .sb-midt { font-size: 0.85em; }
+  }
+  @container (max-width: 300px) {
+    .systembane .sb-scene { font-size: 9px; }
+    .systembane .sb-system { font-size: 0.78em; }
   }
   @keyframes sb-drift { to { stroke-dashoffset: -180; } }
   .systembane .sb-drift { animation: sb-drift 24s linear infinite; }
@@ -147,39 +158,43 @@ export default function SystemBane({ className }: { className?: string }) {
             </g>
           </svg>
 
-          {/* Det vi kobler til */}
+          {/* Det vi kobler til: Flyd-ikon og navn */}
           {yNoder.map((n) => (
             <div
               key={n.navn}
-              className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-pille border border-flyd-mint/35 bg-flyd-skog px-[0.95em] py-[0.45em] leading-tight text-flyd-dempet"
+              className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-[0.45em] whitespace-nowrap rounded-pille border border-flyd-mint/35 bg-flyd-skog py-[0.45em] pl-[0.7em] pr-[0.95em] leading-tight text-flyd-dempet"
               style={pst(n)}
             >
+              <FlydIcon name={n.icon} className="sb-ikon h-[1.2em] w-[1.2em] flex-shrink-0 text-flyd-mint" />
               {n.navn}
             </div>
           ))}
 
-          {/* Forretningssystemene */}
+          {/* Forretningssystemene: egne logoer i Sand, samme høyde på alle flisene */}
           {iNoder.map((n) => (
             <div
               key={n.navn}
-              className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-[0.5em] whitespace-nowrap rounded-flis bg-flyd-petrol px-[0.85em] py-[0.6em] font-medium leading-tight text-flyd-sand"
+              className="sb-system absolute flex h-[2.7em] -translate-x-1/2 -translate-y-1/2 items-center gap-[0.55em] whitespace-nowrap rounded-flis bg-flyd-petrol px-[0.95em] font-medium leading-tight text-flyd-sand"
               style={pst(n)}
             >
-              {n.icon && <FlydIcon name={n.icon} className="sb-ikon h-[1.25em] w-[1.25em] flex-shrink-0 text-flyd-mint" />}
-              {n.kort ? (
-                <>
-                  <span className="sb-lang">{n.navn}</span>
-                  <span className="sb-kort">{n.kort}</span>
-                </>
-              ) : (
-                n.navn
+              <SystemLogo
+                name={n.logo}
+                label={n.navn}
+                className="w-auto flex-shrink-0"
+                style={{ height: n.hoyde }}
+              />
+              {/* Hele navnet står i logoens aria-label, så tillegget skjules for skjermlesere. */}
+              {n.tillegg && (
+                <span aria-hidden="true" className="sb-lang text-[0.9em] text-flyd-dempet">
+                  {n.tillegg}
+                </span>
               )}
             </div>
           ))}
 
           {/* Flyd i midten */}
           <div
-            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-kort bg-flyd-sand px-[1.1em] py-[0.7em]"
+            className="sb-midt absolute -translate-x-1/2 -translate-y-1/2 rounded-kort bg-flyd-sand px-[1.1em] py-[0.7em]"
             style={pst(C)}
           >
             <FlydLogo title="Flyd" className="h-[2.4em] w-auto text-flyd-teal" />

@@ -157,6 +157,36 @@ const icons = {
     ),
     dot: [10.5, 11],
   },
+  'lonn-hr': {
+    body: (
+      <>
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <circle cx="9" cy="9.5" r="2" />
+        <path d="M5.5 18a3.5 3.5 0 0 1 7 0M15 9h3" />
+      </>
+    ),
+    dot: [15, 12.5],
+  },
+  // Handlepose: punktumet midt i posen, under hanken.
+  nettbutikk: {
+    body: (
+      <>
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+        <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
+      </>
+    ),
+    dot: [10.5, 16.5],
+  },
+  // Fabrikk for bransjeløsninger: punktumet er det tredje vinduet.
+  bransje: {
+    body: (
+      <>
+        <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+        <path d="M7 18h1M12 18h1" />
+      </>
+    ),
+    dot: [15.5, 16.5],
+  },
 } satisfies Record<string, { body: ReactNode; dot: [number, number] }>;
 
 export type FlydIconName = keyof typeof icons;
