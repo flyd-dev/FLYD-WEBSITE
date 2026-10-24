@@ -4,21 +4,29 @@ import { useRef } from 'react';
 import { useLerret } from './useLerret';
 
 /**
- * «Glassbrett» (designlab): gjennomsiktige glassplater i Flyd-teal, brettet
- * over hverandre, med et svakt Mint-lys i brettene og en myk skygge under.
- * Platene bærer uttrykket, ikke strekene: lyset i brettene er dempet, så det
- * ikke blir striper bak teksten.
+ * «Glassbrett»: bakgrunnen på de mørke flatene (Section flyt, ClosingCta og
+ * artikkelkort uten bilde). Gjennomsiktige glassplater i Flyd-teal, brettet
+ * over hverandre, med et dempet Mint-lys i brettene og en myk skygge under.
+ * Platene bærer uttrykket, ikke strekene, så det ikke blir striper bak teksten.
  * Idé fra «Glass Fold» (meerbahadin10) på 21st.dev, skrevet på nytt som en
- * liten WebGL-shader i Flyds farger. Platene er svakest til venstre, der
- * teksten står. Tegnes uten retina-oppløsning, 30 bilder i sekundet, og bare
- * når flaten er synlig.
+ * liten WebGL-shader i Flyds farger. Valgt i designlab (okt. 2026) foran en
+ * prikkebølge og nordlys. Platene er svakest til venstre, der teksten står.
+ *
+ * Tegnes uten retina-oppløsning, 30 bilder i sekundet og bare når flaten er
+ * synlig (useLerret); ett stillbilde ved prefers-reduced-motion. Uten WebGL
+ * står lerretet tomt, og flatens egen bakgrunnsfarge vises.
  */
 
 const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
 
-const BUNN = { skog: rgb('#17292A'), petrol: rgb('#24494B') };
-const GLASS = rgb('#4C8687');
-const LYS = rgb('#8BC2BB');
+// Bunn, glass og lys per flate. På Flyd-teal er glasset Mint og lyset Sand.
+const FARGER = {
+  skog: { bunn: rgb('#17292A'), glass: rgb('#4C8687'), lys: rgb('#8BC2BB') },
+  petrol: { bunn: rgb('#24494B'), glass: rgb('#4C8687'), lys: rgb('#8BC2BB') },
+  teal: { bunn: rgb('#4C8687'), glass: rgb('#8BC2BB'), lys: rgb('#F8F6F1') },
+};
+
+export type GlassTone = keyof typeof FARGER;
 
 const vert = `
 attribute vec2 aPos;
@@ -50,7 +58,8 @@ void main() {
   for (int i = 0; i < 4; i++) {
     float fi = float(i);
     float fase = fi * 2.1;
-    float kurve = -0.35 + fi * 0.32 + 0.55 * uv.x
+    // Helningen regnes i p (bredde målt i høyder), så vinkelen er lik på mobil og desktop.
+    float kurve = -0.35 + fi * 0.32 + 0.21 * p.x
       + 0.10 * sin(p.x * 1.6 + t + fase)
       + 0.05 * sin(p.x * 3.1 - t * 1.4 + fase * 1.7);
     float d = p.y - kurve;
@@ -67,7 +76,7 @@ void main() {
 }
 `;
 
-export default function GlassBrett({ tone = 'skog' }: { tone?: 'skog' | 'petrol' }) {
+export default function GlassBrett({ tone = 'skog' }: { tone?: GlassTone }) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useLerret(
@@ -95,9 +104,10 @@ export default function GlassBrett({ tone = 'skog' }: { tone?: 'skog' | 'petrol'
       gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
       const uRes = gl.getUniformLocation(prog, 'uRes');
       const uTid = gl.getUniformLocation(prog, 'uTid');
-      gl.uniform3fv(gl.getUniformLocation(prog, 'uBunn'), BUNN[tone]);
-      gl.uniform3fv(gl.getUniformLocation(prog, 'uGlass'), GLASS);
-      gl.uniform3fv(gl.getUniformLocation(prog, 'uLys'), LYS);
+      const f = FARGER[tone];
+      gl.uniform3fv(gl.getUniformLocation(prog, 'uBunn'), f.bunn);
+      gl.uniform3fv(gl.getUniformLocation(prog, 'uGlass'), f.glass);
+      gl.uniform3fv(gl.getUniformLocation(prog, 'uLys'), f.lys);
       return {
         tilpass: () => {
           gl.viewport(0, 0, lerret.width, lerret.height);

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import PunktumFlate, { type PunktumTone } from './PunktumFlate';
+import GlassBrett, { type GlassTone } from './GlassBrett';
 
 /**
  * Bakgrunnsrytme etter designmanualen: Sand og Lys mint veksler på innhold,
@@ -31,7 +31,7 @@ export default function Section({
   children: React.ReactNode;
   className?: string;
   size?: 'sm' | 'default' | 'lg';
-  /** Punktumflaten bak innholdet (PunktumFlate). Vises bare på mørke toner (Skog, Petrol, Flyd-teal). */
+  /** Glassbrettet bak innholdet (GlassBrett). Vises bare på mørke toner (Skog, Petrol, Flyd-teal). */
   flyt?: boolean;
 }) {
   const padding =
@@ -43,7 +43,7 @@ export default function Section({
       id={id}
       className={clsx('relative scroll-mt-24', visFlyt && 'overflow-hidden', tones[tone], padding, className)}
     >
-      {visFlyt && <PunktumFlate tone={tone as PunktumTone} />}
+      {visFlyt && <GlassBrett tone={tone as GlassTone} />}
       {visFlyt ? <div className="relative">{children}</div> : children}
     </section>
   );

@@ -10,7 +10,7 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import PunktumFlate from '@/components/PunktumFlate';
+import GlassBrett from '@/components/GlassBrett';
 import { artikler, formatDato } from '@/data/artikler';
 
 export const metadata: Metadata = pageMetadata({
@@ -91,8 +91,8 @@ export default function ArtiklerPage() {
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                       />
                     ) : (
-                      // Uten bilde: rolig Petrol-flate med punktumflaten, bare pynt.
-                      <PunktumFlate tone="petrol" />
+                      // Uten bilde: Petrol-flate med glassbrettet, bare pynt.
+                      <GlassBrett tone="petrol" />
                     )}
                   </div>
                   <div className={`flex flex-1 flex-col px-3 pb-3 pt-6 ${fremhevet ? 'lg:justify-center lg:px-8 lg:py-8' : ''}`}>
