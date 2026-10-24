@@ -19,7 +19,7 @@ export const enkEllerAs = {
     src: '/header/topp-enk-eller-as.webp',
     width: 900,
     height: 506,
-    alt: 'To kolleger i Flyd som prater og ler sammen i gangen på kontoret i Moi',
+    alt: 'To kolleger i Flyd som prater og ler sammen i gangen på kontoret på Moi',
   },
 };
 

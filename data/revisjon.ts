@@ -1,3 +1,5 @@
+import type { Status } from '@/lib/utkast';
+
 /**
  * Innholdet på /tjenester/revisjon/ (app/tjenester/revisjon/page.tsx).
  *
@@ -5,6 +7,9 @@
  * og uten store ord (Arnstein og Irene, 21.10.2026). Ikke nevn SkatteFUNN, og
  * ikke bruk «lovpålagt» o.l. Tjenestene er de tre Liit hadde på liit.no.
  * «Tillit» er ordet navnet Liit kommer fra, derfor overskriften.
+ *
+ * Felter med `status: 'utkast'` vises bare lokalt og på forhåndsvisninger
+ * (lib/utkast.ts), til revisorene har godkjent dem. Sett da `publisert`.
  */
 export const revisjon = {
   meta: {
@@ -26,10 +31,23 @@ export const revisjon = {
       { tittel: 'Årsregnskap og skattemelding', tekst: 'Vi utarbeider årsregnskapet og skattemeldingen.' },
       { tittel: 'Rådgivning', tekst: 'Faglige råd om regnskap, skatt og avgift.' },
     ],
+    // Omskrevet etter Irenes forslag fra Forus Revisjon (22.10.2026). Utkast til
+    // revisorene har godkjent ordlyden.
+    tekst: {
+      status: 'utkast' as Status,
+      tekst:
+        'I revisjonsberetningen uttaler revisor seg om årsregnskapet er avgitt i samsvar med lover og forskrifter. Det har verdi for både små og store virksomheter.',
+    },
   },
   team: {
     kicker: 'Revisjonsteamet',
     tittel: 'Ta kontakt direkte.',
+    // Samme forslag som over (Irene 22.10.2026). Utkast til det er godkjent.
+    tekst: {
+      status: 'utkast' as Status,
+      tekst:
+        'Det skal være enkelt å få tak i oss. Kundene følges opp av de samme erfarne medarbeiderne over tid, og vi tar gjerne en prat.',
+    },
   },
   avslutning: {
     kicker: 'Kontakt',
