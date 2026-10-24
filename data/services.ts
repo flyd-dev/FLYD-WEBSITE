@@ -35,6 +35,12 @@ export type Service = {
   tema: string;
   title: string;
   short: string;
+  /**
+   * Tittel og beskrivelse for Google (title og meta description). Tittelen får
+   * « · Flyd» etter seg og bør holde seg under ca. 53 tegn, beskrivelsen
+   * 120–158 tegn. Uten feltet brukes `title` og `short`.
+   */
+  seo?: { title: string; description: string };
   long: string;
   bullets: string[];
   fitFor: string;
@@ -88,6 +94,11 @@ export const services: (Service | EgenTjeneste)[] = [
     tema: 'Regnskap og rådgivning',
     title: 'Regnskap og rådgivning',
     short: 'Fra daglig bokføring til strategisk sparring – én partner for både tallene og beslutningene.',
+    seo: {
+      title: 'Regnskapsfører og økonomisk rådgivning for bedrifter',
+      description:
+        'Statsautoriserte regnskapsførere med fast kontaktperson: bokføring, mva, årsoppgjør og rådgivning om tall, skatt og vekst. Seks kontorer i Rogaland og Agder.',
+    },
     long: 'Regnskapet skal være i orden, men det skal også fortelle deg noe. Vi tar ansvar for bokføring, fakturering, mva-oppgjør og årsoppgjør – og er samtidig sparringspartneren som hjelper deg å tolke tallene, se muligheter og ta bedre beslutninger. Enten du står foran oppkjøp, vekst, generasjonsskifte eller en vanskelig periode, får du en fast kontaktperson som kjenner virksomheten – og en rådgiver å støtte deg på når det virkelig gjelder.',
     bullets: [
       'Løpende bokføring, fakturering og årsoppgjør',
@@ -108,6 +119,11 @@ export const services: (Service | EgenTjeneste)[] = [
     tema: 'Programvare / ERP',
     title: 'Programvare / ERP',
     short: 'Velg, implementer og utnytt riktig forretningssystem. Tripletex, Visma Business NXT, Uni Micro, PowerOffice Go.',
+    seo: {
+      title: 'Velg og innfør ERP – Tripletex, Visma og PowerOffice',
+      description:
+        'Hjelp til å velge, innføre og bruke riktig forretningssystem: Tripletex, Visma Business NXT, Uni Micro eller PowerOffice Go. Oppsett, migrering og opplæring.',
+    },
     long: 'Vi hjelper deg å velge det systemet som passer virksomheten – ikke det vi tilfeldigvis selger. Vi implementerer, setter opp kontoplan, roller og rapporter, og sørger for at teamet ditt faktisk bruker systemet slik det var ment.',
     bullets: [
       'Systemvalg basert på faktiske behov',
@@ -127,6 +143,11 @@ export const services: (Service | EgenTjeneste)[] = [
     tema: 'Integrasjoner',
     title: 'Integrasjoner',
     short: 'Sømløs dataflyt mellom systemene dine. Mindre manuelt arbeid, mer oversikt.',
+    seo: {
+      title: 'Integrasjoner mellom ERP, nettbutikk, lønn og CRM',
+      description:
+        'Vi kobler ERP, nettbutikk, lønnssystem, CRM og bransjeløsninger, så dataene flyter automatisk og stemmer. Mindre manuell inntasting og færre feil.',
+    },
     long: 'Ingen grunn til å taste inn de samme dataene tre ganger. Vi kobler ERP, nettbutikk, lønnssystem, CRM og bransjeløsninger slik at dataene flyter dit de skal – automatisk, korrekt og etterprøvbart.',
     bullets: [
       'Kartlegging av dagens systemer og flaskehalser',
@@ -146,6 +167,11 @@ export const services: (Service | EgenTjeneste)[] = [
     tema: 'Analyse og rapportering',
     title: 'Analyse og rapportering',
     short: 'Standardrapporter og skreddersydde dashboards som gir deg innsikten du trenger.',
+    seo: {
+      title: 'Analyse og rapportering – dashboards i Power BI',
+      description:
+        'Rapporter og dashboards som viser det som betyr noe for bedriften: KPI-er, lønnsomhet per kunde og produkt, lederrapporter og prognoser. Lette å lese.',
+    },
     long: 'Gode beslutninger krever god innsikt. Vi bygger rapporter og dashboards som viser det som faktisk betyr noe for din virksomhet – på en måte som er lett å lese, også for ikke-økonomer.',
     bullets: [
       'KPI-er som passer forretningsmodellen',
@@ -165,6 +191,11 @@ export const services: (Service | EgenTjeneste)[] = [
     tema: 'Nettsider og digitale flater',
     title: 'Nettsider og digitale flater',
     short: 'Nettsider, kundeportaler og interne arbeidsflater – bygget tett på tallene og systemene dine.',
+    seo: {
+      title: 'Nettsider og kundeportaler koblet til ERP og regnskap',
+      description:
+        'Raske og tilgjengelige nettsider, kundeportaler og interne arbeidsflater som henger sammen med ERP, regnskap og dataene dine. Vi bygde flyd.no selv.',
+    },
     long: 'En nettside skal gjøre en jobb – ikke bare se bra ut. Vi lager nettsider og digitale flater som henger sammen med ERP, regnskap og dataene dine, slik at teamet får mindre manuelt arbeid og kundene en ryddigere opplevelse. Denne siden, flyd.no, bygde vi selv.',
     bullets: [
       'Nettsider som er raske, tilgjengelige og enkle å vedlikeholde',
@@ -184,6 +215,11 @@ export const services: (Service | EgenTjeneste)[] = [
     tema: 'Lønn og HR',
     title: 'Lønn og HR',
     short: 'Trygg lønnskjøring og gode rutiner for alt som har med de ansatte å gjøre.',
+    seo: {
+      title: 'Lønn og HR – lønnskjøring, a-melding og feriepenger',
+      description:
+        'Lønnskjøring, feriepenger, skattekort, a-melding og reiseregninger – riktig og i tide hver måned. Og hjelp med personalhåndbok, rutiner og arbeidsavtaler.',
+    },
     long: 'Lønn skal være riktig, til rett tid, hver gang. Vi tar ansvar for lønnskjøring, feriepenger, reiseregninger, a-melding og rapportering – og hjelper deg med personalhåndboka, rutiner og arbeidsavtaler når det trengs.',
     bullets: [
       'Lønnskjøring, feriepenger og skattekort',

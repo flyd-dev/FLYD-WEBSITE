@@ -225,13 +225,17 @@ input, textarea, select, button {
 
 /* Signaturen «full flyd.»: originalfilen (public/brand/fullflyd-outline.png)
    brukes som maske, slik at den alltid tegnes i Sand på Flyd-teal uten at
-   ordmerket skrives på nytt med en skrift. */
+   ordmerket skrives på nytt med en skrift. Masken er originalen skalert til
+   1320 px (3× den største visningen, 440 px) som palett-PNG: 9 kB i stedet
+   for 35 kB. Den hentes med en gang siden lastes, også når signaturen står
+   nederst. Lag den på nytt med sharp: resize({ width: 1320 }) og
+   png({ palette: true, colours: 64, dither: 0 }). */
 .signatur {
   display: block;
   aspect-ratio: 3000 / 801;
   background-color: var(--flyd-sand);
-  -webkit-mask: url('/brand/fullflyd-outline.png') center / contain no-repeat;
-  mask: url('/brand/fullflyd-outline.png') center / contain no-repeat;
+  -webkit-mask: url('/brand/fullflyd-outline-1320.png') center / contain no-repeat;
+  mask: url('/brand/fullflyd-outline-1320.png') center / contain no-repeat;
 }
 
 /* Typewriter-markøren: av/på hvert 0,4 s, uten mellomtoner. */

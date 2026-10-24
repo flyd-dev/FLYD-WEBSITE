@@ -20,8 +20,8 @@ export function generateMetadata({ params }: Props): Metadata {
   if (!s) return { title: 'Fant ikke siden' };
   return {
     ...pageMetadata({
-      title: s.slug === 'erp' ? 'ERP og systemvalg' : s.title,
-      description: s.short,
+      title: s.seo?.title ?? s.title,
+      description: s.seo?.description ?? s.short,
       path: serviceUrl(s),
     }),
     ...(s.status === 'utkast' ? { robots: { index: false, follow: false } } : {}),

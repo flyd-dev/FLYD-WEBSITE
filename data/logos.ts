@@ -5,6 +5,8 @@
  * (Sirdal Bygg/Eiendom) er gjort om til tekst i boksfargen.
  * Unntak: Pizzabakeren (124 px), Leo's Lekeland (157 px) og Norsk Storkjøkken
  * (195 px) har kildenes egen oppløsning og er ikke oppskalert.
+ * Karusellen viser småbilder (144 px høye) fra public/customer-logo/sma/, som
+ * scripts/make-logo-thumbs.mjs lager før bygg. Legg nye logoer i 300 px her.
  */
 export type CustomerLogo = {
   name: string;

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
-import SystemLogo, { type SystemLogoName } from '@/components/SystemLogo';
+import SystemLogo, { SystemLogoSymboler, type SystemLogoName } from '@/components/SystemLogo';
 
 /**
  * Systembanen: forretningssystemet ditt i midten, og det vi kobler det til
@@ -153,7 +153,7 @@ function Midten({ liste }: { liste: string }) {
             className="sb-logo absolute inset-0 flex items-center justify-center gap-[0.4em]"
             style={{ animationDelay: `${i * VEKSEL_S}s` }}
           >
-            <SystemLogo name={s.logo} label="" className="w-auto flex-shrink-0" style={{ height: s.hoyde }} />
+            <SystemLogo name={s.logo} label="" delt className="w-auto flex-shrink-0" style={{ height: s.hoyde }} />
             {s.tillegg && <span className="text-[0.85em] font-medium text-flyd-petrol">{s.tillegg}</span>}
           </div>
         ))}
@@ -170,7 +170,7 @@ function Midten({ liste }: { liste: string }) {
       </div>
       <div aria-hidden="true" className="mt-[0.5em] hidden w-[10.5em] grid-cols-2 place-items-center gap-[0.5em] motion-reduce:grid">
         {systemer.map((s) => (
-          <SystemLogo key={s.navn} name={s.logo} label="" className="w-auto" style={{ height: `calc(${s.hoyde} * 0.62)` }} />
+          <SystemLogo key={s.navn} name={s.logo} label="" delt className="w-auto" style={{ height: `calc(${s.hoyde} * 0.62)` }} />
         ))}
       </div>
     </>
@@ -283,6 +283,8 @@ export default function SystemBane({ className }: { className?: string }) {
     <figure className={clsx('systembane m-0', className)}>
       {/* dangerouslySetInnerHTML: ellers escapes tegnene ulikt på server og klient (hydreringsfeil). */}
       <style dangerouslySetInnerHTML={{ __html: css }} />
+      {/* Logoene én gang; de tre oppstillingene peker hit (se SystemLogoSymboler). */}
+      <SystemLogoSymboler />
       <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-skog p-3 sm:p-6">
         <Scene o={stor} liste={liste} className="sb-stor max-w-[1000px] text-[clamp(13px,1.6cqw,15px)]" />
         <Scene o={middels} liste={liste} className="sb-middels text-[13px]" />

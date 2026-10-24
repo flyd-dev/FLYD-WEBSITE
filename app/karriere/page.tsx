@@ -27,7 +27,7 @@ const breadcrumbJsonLd = {
 export const metadata: Metadata = pageMetadata({
   title: 'Ledige stillinger – Karriere',
   description:
-    'Bli en del av Flyd. Vi er alltid på utkikk etter dyktige folk innen økonomi, teknologi og rådgivning.',
+    'Bli en del av Flyd. Vi er alltid på utkikk etter dyktige folk innen økonomi, teknologi og rådgivning. Se ledige stillinger ved kontorene i Rogaland og Agder.',
   path: '/karriere/',
 });
 

@@ -8,7 +8,7 @@
  */
 export const fristerAs = {
   path: '/artikler/frister-aksjeselskap/',
-  title: 'Frister for aksjeselskap – skattemelding, årsregnskap og aksjonærer · Flyd',
+  title: 'Frister for aksjeselskap – skattemelding og årsregnskap · Flyd',
   description:
     'Alle viktige frister for AS: aksjonærregisteroppgaven, skattemelding, generalforsamling og årsregnskap – med datoer og hva som skjer ved forsinkelse.',
   h1: 'Frister for aksjeselskap: dette må leveres og når',

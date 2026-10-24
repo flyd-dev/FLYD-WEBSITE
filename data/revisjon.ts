@@ -8,7 +8,7 @@
  */
 export const revisjon = {
   meta: {
-    title: 'Revisjon',
+    title: 'Revisor – revisjon og revisorbekreftelser',
     description:
       'Revisjon gir tillit til at regnskapet stemmer. Flyd tilbyr revisjon, årsregnskap og skattemelding, og rådgivning om regnskap, skatt og avgift.',
   },
@@ -48,7 +48,7 @@ export const bytteRevisor = {
   meta: {
     title: 'Bytte revisor – slik gjør du det',
     description:
-      'Slik bytter et aksjeselskap revisor: generalforsamlingen velger ny revisor, den nye revisoren tar kontakt med den forrige, og byttet meldes til Foretaksregisteret.',
+      'Slik bytter et aksjeselskap revisor: generalforsamlingen velger ny revisor, den nye tar kontakt med den forrige, og byttet meldes til Foretaksregisteret.',
   },
   tittel: 'Slik bytter du revisor.',
   ingress:

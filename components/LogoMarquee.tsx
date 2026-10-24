@@ -229,8 +229,9 @@ export default function LogoMarquee() {
                 } ${logo.darken ? DARKEN[logo.darken] : ''}`}
                 title={logo.name}
               >
+                {/* Småbildene (144 px høye) fra scripts/make-logo-thumbs.mjs. */}
                 <Image
-                  src={logo.src}
+                  src={logo.src.replace('/customer-logo/', '/customer-logo/sma/')}
                   alt={logo.alt}
                   width={logo.featured ? 192 : 160}
                   height={logo.featured ? 48 : 40}

@@ -16,7 +16,10 @@ import { kombinerbareTjenester, uavhengigeTjenester, serviceUrl } from "@/data/s
 import type { MenyTjeneste } from "@/components/TjenesteMeny";
 
 // Designmanualen: Poppins (500 ingress, 600 overskrifter og tall) og
-// DM Sans (400 brødtekst, 400 kursiv sitater, 500 knapper, 700 kickers).
+// DM Sans (400 brødtekst, 500 knapper, 700 kickers). Kursiv (400, til sitater)
+// er ikke med før det kommer sitater på sidene: den ble forhåndslastet med høy
+// prioritet (40 kB) og konkurrerte med heltebildet på forsiden. Legg den da inn
+// i et eget DM_Sans-kall med `preload: false`.
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["500", "600"],
@@ -27,7 +30,7 @@ const poppins = Poppins({
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   variable: "--font-dm-sans",
   display: "swap",
 });
@@ -157,7 +160,8 @@ export default function RootLayout({
     name: getKontorside(o.slug)?.schemaName ?? `Flyd ${o.city}`,
     parentOrganization: { "@id": orgId },
     url: `${siteUrl}/kontor/${o.slug}/`,
-    image: `${siteUrl}/brand/flyd-teal.png`,
+    // Fasadebildet, som på kontorsiden (KontorMal). Logoen står på organisasjonen.
+    image: `${siteUrl}${o.image?.src ?? "/brand/flyd-teal.png"}`,
     telephone: "+4748019958",
     email: "support@flyd.no",
     address: {

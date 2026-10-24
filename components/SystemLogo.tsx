@@ -72,17 +72,42 @@ const logoer: Record<SystemLogoName, { navn: string; viewBox: string; paths: str
   },
 };
 
+const symbolId = (name: SystemLogoName) => `systemlogo-${name}`;
+
+/**
+ * Logoene én gang som <symbol>, for sider som viser hver logo mange ganger
+ * (systembanen har tre oppstillinger med logoene to ganger hver). Legg den
+ * inn én gang på siden og bruk `delt` på SystemLogo. Sparte ca. 150 kB HTML og
+ * React-data på forsiden, som ga raskere første visning på mobil.
+ */
+export function SystemLogoSymboler() {
+  return (
+    <svg aria-hidden="true" focusable="false" width="0" height="0" className="absolute">
+      {(Object.keys(logoer) as SystemLogoName[]).map((name) => (
+        <symbol key={name} id={symbolId(name)} viewBox={logoer[name].viewBox}>
+          {logoer[name].paths.map((d, i) => (
+            <path key={i} d={d} />
+          ))}
+        </symbol>
+      ))}
+    </svg>
+  );
+}
+
 export default function SystemLogo({
   name,
   className,
   style,
   label,
+  delt = false,
 }: {
   name: SystemLogoName;
   className?: string;
   style?: React.CSSProperties;
   /** Tilgjengelig navn. Standard er systemets navn; send tom streng når navnet står i teksten ved siden av. */
   label?: string;
+  /** Pek på symbolet fra SystemLogoSymboler i stedet for å tegne logoen på nytt. */
+  delt?: boolean;
 }) {
   const { navn, viewBox, paths } = logoer[name];
   const tekst = label ?? navn;
@@ -95,9 +120,7 @@ export default function SystemLogo({
       focusable="false"
       {...(tekst ? { role: 'img', 'aria-label': tekst } : { 'aria-hidden': true })}
     >
-      {paths.map((d, i) => (
-        <path key={i} d={d} />
-      ))}
+      {delt ? <use href={`#${symbolId(name)}`} /> : paths.map((d, i) => <path key={i} d={d} />)}
     </svg>
   );
 }
