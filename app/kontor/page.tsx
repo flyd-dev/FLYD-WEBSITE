@@ -14,7 +14,7 @@ import KontorListe from '@/components/KontorListe';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { offices, officeLabel } from '@/data/offices';
 import { kontorTeam } from '@/data/team';
-import { kontorBlokker, regionTjenester, hubFaq } from '@/data/kontoroversikt';
+import { kontorBlokker, regionTjenester, hubFaq, autorisasjon } from '@/data/kontoroversikt';
 import { revisjonOmtale } from '@/data/revisjon';
 
 export const metadata: Metadata = pageMetadata({
@@ -29,13 +29,13 @@ export const metadata: Metadata = pageMetadata({
  * som sender videre til kontorsidene. Adresser og bilder kommer fra
  * data/offices.ts, teksten fra data/kontoroversikt.ts.
  *
- * Fire deler: toppen (regnskapsfører og revisor side om side), kontorene,
- * tjenestene og spørsmål og svar. Autorisasjonen og bytte står som spørsmål,
- * ikke som egne seksjoner.
+ * Fem deler: toppen (regnskapsfører og revisor side om side), kontorene,
+ * tjenestene, autorisasjonen (regnskap og revisjon hver for seg, med
+ * bytteguidene) og spørsmål og svar.
  *
  * Radene i kontorlisten bruker små utgaver av fasadebildene
- * (public/kontor/kort/, 720 px bred) på mobil; bildefeltet ved siden av
- * listen (fra lg) bruker de store.
+ * (public/kontor/kort/, 336 px brede, 3× de 112 px de vises i) under lg;
+ * bildefeltet ved siden av listen (fra lg) bruker de store.
  *
  * Kontorene står fullt beskrevet i layoutens @graph. Her refereres de bare
  * med @id som `department`, så de ikke dupliseres.
@@ -236,7 +236,36 @@ export default function KontorerPage() {
         </Container>
       </Section>
 
-      {/* SPØRSMÅL – kontorene, autorisasjonen (regnskap og revisjon hver for seg) og bytte */}
+      {/* AUTORISASJON – regnskap og revisjon side om side, hver for seg, med bytteguiden under hver
+          (Irene 22.10.2026). Synlig på siden, ikke gjemt i spørsmål og svar. */}
+      <Section tone="sand">
+        <Container>
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-20">
+            {autorisasjon.map((a) => (
+              <div key={a.tittel} data-reveal>
+                <Eyebrow>Autorisasjon</Eyebrow>
+                <h2 className="mt-5 font-display text-display-md font-semibold">{a.tittel}</h2>
+                <p className={`mt-6 ${brod}`}>{a.tekst}</p>
+                <p className={`mt-5 ${brod}`}>
+                  {a.oss} Se tillatelsen vår i{' '}
+                  <a href={a.register} className={lenke}>
+                    Finanstilsynets virksomhetsregister
+                  </a>
+                  .
+                </p>
+                <div className="mt-8 border-t border-flyd-linje-sand pt-8">
+                  <p className={brod}>{a.bytte.tekst}</p>
+                  <div className="mt-5">
+                    <TextLink href={a.bytte.href}>{a.bytte.lenketekst}</TextLink>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* SPØRSMÅL – kontorene og systemene. Autorisasjonen og bytte står i blokkene over. */}
       <Section tone="lysmint">
         <Container>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">

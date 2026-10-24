@@ -1,4 +1,3 @@
-import { preload } from 'react-dom';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
@@ -15,6 +14,7 @@ import { HeroTypewriter, HeroTypewriterPause } from '@/components/HeroTypewriter
 import { type FlydIconName } from '@/components/FlydIcon';
 import SystemBane from '@/components/SystemBane';
 import UtvidendeHero from '@/components/UtvidendeHero';
+import ForhandslastBilde from '@/components/ForhandslastBilde';
 import { kombinerbareTjenester, uavhengigeTjenester, serviceUrl } from '@/data/services';
 import { stats } from '@/data/stats';
 
@@ -27,17 +27,16 @@ const whyFlyd: { icon: FlydIconName; text: string }[] = [
   { icon: 'innsikt', text: 'Innsikt og analyse som gir bedre beslutninger' },
 ];
 
-
 const HERO = {
   src: '/header/hero-1200.webp',
   srcSet: '/header/hero-1200.webp 1200w, /header/hero-2400.webp 2400w',
 };
 
 export default function HomePage() {
-  // Heltebildet er det største elementet i første skjermbilde (LCP).
-  preload(HERO.src, { as: 'image', imageSrcSet: HERO.srcSet, imageSizes: '100vw', fetchPriority: 'high' });
   return (
     <>
+      {/* Heltebildet er det største elementet i første skjermbilde (LCP). */}
+      <ForhandslastBilde src={HERO.src} srcSet={HERO.srcSet} sizes="100vw" />
       {/* HERO – forsiden er Skog + foto med overlay (designmanualen kap. 07/08). */}
       <Section tone="sand" className="!pb-0 !pt-0 md:!pt-1">
         {/* Kortet starter innrykket med radius 24 px og vokser til full bredde
@@ -166,7 +165,8 @@ export default function HomePage() {
       <Section tone="petrol" flyt>
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
+            {/* Halv bredde: med 5 av 12 ble «sparringspartner.» bredere enn spalten fra ca. 1 340 px. */}
+            <div className="lg:col-span-6" data-reveal>
               <Eyebrow tone="petrol">Hvorfor Flyd</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
                 Din strategiske sparrings&shy;partner.
@@ -177,7 +177,7 @@ export default function HomePage() {
                 under ett.
               </p>
             </div>
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-6">
               <NumberedList
                 items={whyFlyd.map((w) => w.text)}
                 icons={whyFlyd.map((w) => w.icon)}

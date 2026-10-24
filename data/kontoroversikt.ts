@@ -90,6 +90,41 @@ export const virksomhetsregisteret = 'https://www.finanstilsynet.no/virksomhetsr
  */
 export const virksomhetsregisteretRevisjon = 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=235342';
 
+/**
+ * Autorisasjonen på /kontor: regnskap og revisjon side om side, hver for seg,
+ * synlig på siden og ikke gjemt i spørsmål og svar (Irene 22.10.2026, som på
+ * flyd.no før omleggingen). Antall statsautoriserte, ikke antall kunder
+ * (Arnstein 22.10.2026). Under hver står bytteguiden for samme fag.
+ */
+export const autorisasjon = [
+  {
+    tittel: 'Autoriserte regnskapsførere – hva det betyr for deg',
+    tekst:
+      'Et selskap som fører regnskap for andre, må ha tillatelse fra Finanstilsynet. Hvert oppdrag skal ha en oppdragsansvarlig statsautorisert regnskapsfører, som har ansvaret for at arbeidet er gjort etter reglene.',
+    oss: `Flyd AS er et godkjent regnskapsselskap. Vi er ${stat('statsautoriserte').value} statsautoriserte regnskapsførere.`,
+    register: virksomhetsregisteret,
+    bytte: {
+      tekst:
+        'Har du regnskapsfører i dag og vurderer å bytte? Vi tar kontakt med den tidligere regnskapsføreren og henter over regnskapsdata, avtaler og dokumentasjon, så du slipper å være mellomledd.',
+      href: '/bytte-regnskapsforer/',
+      lenketekst: 'Slik bytter du regnskapsfører',
+    },
+  },
+  {
+    tittel: 'Autorisert revisor – hva det betyr for deg',
+    tekst:
+      'Et selskap som er revisor, må ha tillatelse fra Finanstilsynet. Hvert oppdrag skal ha en oppdragsansvarlig statsautorisert revisor, som har ansvaret for at revisjonen utføres i henhold til lovverket.',
+    oss: `Flyd AS er et godkjent revisjonsselskap. Vi er ${stat('revisorer').value} statsautoriserte revisorer.`,
+    register: virksomhetsregisteretRevisjon,
+    bytte: {
+      tekst:
+        'Skal du bytte revisor, er det generalforsamlingen som velger ny revisor. Den nye revisoren vurderer oppdraget og veileder deg gjennom resten.',
+      href: bytteRevisor.path,
+      lenketekst: 'Slik bytter du revisor',
+    },
+  },
+];
+
 export type HubFaq = {
   q: string;
   /** Det synlige svaret. Det samme står i FAQPage. */
@@ -121,31 +156,9 @@ export const hubFaq: HubFaq[] = [
     a: 'Ja. Sandnes-kontoret i FOMO på Forus ligger midt i Stavanger-regionen og betjener Stavanger, Sandnes, Sola og Randaberg. Bilagene går digitalt, og møtene tar vi på Forus, hos deg eller på video.',
     lenke: { href: '/kontor/stavanger-sandnes/', tekst: 'Les om kontoret på Forus' },
   },
-  // Autorisasjonen: antall statsautoriserte, ikke antall kunder (Arnstein 22.10.2026).
-  {
-    q: 'Er Flyd et autorisert regnskapsforetak?',
-    a: `Ja. Et selskap som fører regnskap for andre, må ha tillatelse fra Finanstilsynet, og hvert oppdrag skal ha en oppdragsansvarlig statsautorisert regnskapsfører som har ansvaret for at arbeidet er gjort etter reglene. Flyd AS er et godkjent regnskapsselskap, og vi er ${stat('statsautoriserte').value} statsautoriserte regnskapsførere.`,
-    lenke: { href: virksomhetsregisteret, tekst: 'Se tillatelsen i Finanstilsynets virksomhetsregister' },
-  },
-  {
-    q: 'Er Flyd et godkjent revisjonsselskap?',
-    a: `Ja. Et selskap som er revisor, må ha tillatelse fra Finanstilsynet, og hvert oppdrag skal ha en oppdragsansvarlig statsautorisert revisor som har ansvaret for at revisjonen utføres i henhold til lovverket. Flyd AS er et godkjent revisjonsselskap, og vi er ${stat('revisorer').value} statsautoriserte revisorer.`,
-    lenke: { href: virksomhetsregisteretRevisjon, tekst: 'Se tillatelsen i Finanstilsynets virksomhetsregister' },
-  },
   {
     q: 'Hvilke regnskapssystemer jobber dere i?',
     a: 'Vi jobber i Tripletex, Visma Business NXT, Uni Micro og PowerOffice Go. Vi hjelper deg også med å velge system, sette det opp og koble det til andre systemer, som nettbutikk, timeføring eller lager.',
     lenke: { href: '/tjenester/erp/', tekst: 'Les om programvare og ERP' },
-  },
-  // Bytte regnskapsfører og bytte revisor står hver for seg (revisjon og regnskap holdes adskilt).
-  {
-    q: 'Hvordan bytter jeg regnskapsfører?',
-    a: 'Du sier opp skriftlig etter avtalen du har, og avtaler en tydelig overgangsdato. Vi tar kontakt med den tidligere regnskapsføreren og henter over det vi trenger, så regnskapet fortsetter uten opphold.',
-    lenke: { href: '/bytte-regnskapsforer/', tekst: 'Slik bytter du regnskapsfører' },
-  },
-  {
-    q: 'Hvordan bytter jeg revisor?',
-    a: bytteRevisor.ingress,
-    lenke: { href: bytteRevisor.path, tekst: 'Slik bytter du revisor' },
   },
 ];
