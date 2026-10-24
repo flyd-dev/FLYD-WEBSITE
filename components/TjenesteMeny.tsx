@@ -43,6 +43,8 @@ export default function TjenesteMeny({
   const omraade = useRef<HTMLDivElement>(null);
   const knapp = useRef<HTMLButtonElement>(null);
   const lukkTimer = useRef<number | undefined>(undefined);
+  // Åpnet ved at musa holdt over? Da skal et klikk på pila holde menyen åpen, ikke lukke den.
+  const viaHover = useRef(false);
   const pathname = usePathname();
 
   useEffect(() => setApen(false), [pathname]);
@@ -67,9 +69,13 @@ export default function TjenesteMeny({
   }, [apen]);
 
   useEffect(() => () => window.clearTimeout(lukkTimer.current), []);
+  useEffect(() => {
+    if (!apen) viaHover.current = false;
+  }, [apen]);
 
   const vis = () => {
     window.clearTimeout(lukkTimer.current);
+    if (!apen) viaHover.current = true;
     setApen(true);
   };
   // Litt ventetid, så musa rekker fra lenken ned til panelet.
@@ -114,7 +120,13 @@ export default function TjenesteMeny({
         aria-expanded={apen}
         aria-controls="tjenestemeny"
         aria-label="Vis alle tjenester"
-        onClick={() => setApen((v) => !v)}
+        onClick={() => {
+          if (apen && viaHover.current) {
+            viaHover.current = false;
+            return;
+          }
+          setApen((v) => !v);
+        }}
         className="rounded-sm p-1 text-flyd-skifer transition-colors hover:text-flyd-skog active:text-flyd-petrol"
       >
         <ChevronDown

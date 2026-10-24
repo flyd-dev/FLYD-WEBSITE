@@ -17,6 +17,9 @@ function titler(m: TeamMember) {
   return { stilling: medPartner, godkjenning };
 }
 
+// Myke bindestreker i de lange ordene, så de kan deles på smale kort (to spalter på 320 px).
+const delbar = (t: string) => t.replace('Statsautorisert', 'Stats\u00ADautorisert').replace(/([Rr]egnskaps)(?=[a-zæøå])/g, '$1\u00AD');
+
 /** Telefon og e-post med ikon. Delt av vanlig og kompakt kort. */
 function Kontakt({ m, className }: { m: TeamMember; className?: string }) {
   return (
@@ -87,11 +90,11 @@ export default function TeamCard({
         </div>
         <div className="min-w-0 pt-1">
           <h3 className="font-display text-[16px] font-semibold leading-tight text-flyd-skog">{m.name}</h3>
-          {stilling && <p className="mt-1 text-[14px] leading-snug text-flyd-skifer">{stilling}</p>}
+          {stilling && <p className="mt-1 text-[14px] leading-snug text-flyd-skifer">{delbar(stilling)}</p>}
           {godkjenning.map((g) => (
             <p key={g} className="mt-1 flex items-start gap-1.5 text-[13px] leading-snug text-flyd-petrol">
               <Check className="mt-[2px] h-3.5 w-3.5 flex-shrink-0 text-flyd-teal" strokeWidth={2.5} aria-hidden="true" />
-              {g}
+              {delbar(g)}
             </p>
           ))}
           <Kontakt m={m} className="mt-2 text-[13px]" />
@@ -127,11 +130,11 @@ export default function TeamCard({
         <h3 className="font-display text-[16px] font-semibold leading-tight text-flyd-skog sm:text-[19px]">
           {m.name}
         </h3>
-        {stilling && <p className="mt-1 text-[14px] leading-snug text-flyd-skifer sm:text-[15px]">{stilling}</p>}
+        {stilling && <p className="mt-1 text-[14px] leading-snug text-flyd-skifer sm:text-[15px]">{delbar(stilling)}</p>}
         {godkjenning.map((g) => (
           <p key={g} className="mt-1.5 flex items-start gap-1.5 text-[13px] leading-snug text-flyd-petrol sm:text-[14px]">
             <Check className="mt-[3px] h-3.5 w-3.5 flex-shrink-0 text-flyd-teal" strokeWidth={2.5} aria-hidden="true" />
-            {g}
+            {delbar(g)}
           </p>
         ))}
 

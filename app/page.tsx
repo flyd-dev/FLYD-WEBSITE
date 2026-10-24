@@ -169,7 +169,7 @@ export default function HomePage() {
             <div className="lg:col-span-5" data-reveal>
               <Eyebrow tone="petrol">Hvorfor Flyd</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-                Din strategiske sparringspartner.
+                Din strategiske sparrings&shy;partner.
               </h2>
               <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
                 Flyd kombinerer fagkompetanse med moderne teknologiforståelse. Vi

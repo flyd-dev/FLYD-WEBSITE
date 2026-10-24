@@ -122,7 +122,7 @@ export default function TrengerRegnskapsforerPage() {
                 <Eyebrow tone="petrol" className="mt-5">
                   Artikkel · Regnskap
                 </Eyebrow>
-                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{a.h1}</h1>
+                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{a.h1.replace('regnskapsfører?', 'regnskaps\u00ADfører?')}</h1>
                 <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
                   Nei, ingen lov krever at du bruker regnskapsfører. Både enkeltpersonforetak og aksjeselskap har
                   bokføringsplikt og kan føre selv, men du står ansvarlig for at alt er riktig og levert til fristen.

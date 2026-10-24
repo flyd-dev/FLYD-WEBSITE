@@ -279,7 +279,7 @@ export default function ContactForm() {
             <p className="max-w-sm text-[14px] leading-relaxed text-flyd-dempet">
               Navn, e-post og melding må fylles ut. Vi lagrer opplysningene for
               å svare deg, se{' '}
-              <a href="/personvern" className={lenkeCls}>
+              <a href="/personvern/" className={lenkeCls}>
                 personvernerklæringen
               </a>
               .

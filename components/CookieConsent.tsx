@@ -146,7 +146,7 @@ export default function CookieConsent() {
           annonsene våre fører til henvendelser. Du velger selv om du vil
           tillate dette. Les mer i{' '}
           <Link
-            href="/personvern"
+            href="/personvern/"
             className="font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors hover:text-flyd-skog hover:decoration-flyd-skog"
           >
             personvernerklæringen

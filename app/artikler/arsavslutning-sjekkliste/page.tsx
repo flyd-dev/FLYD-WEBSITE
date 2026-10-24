@@ -273,7 +273,7 @@ export default function ArsavslutningPage() {
                 <Eyebrow tone="petrol" className="mt-5">
                   Artikkel · Årsoppgjør
                 </Eyebrow>
-                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{a.h1}</h1>
+                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{a.h1.replace('regnskapsføreren', 'regnskaps\u00ADføreren')}</h1>
                 <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
                   Regnskapsføreren kan ikke lage årsregnskap og skattemelding før hele året er dokumentert. Lever alle
                   bilag, saldoer per 31. desember, varetelling, oversikt over hvem som skylder deg og hvem du skylder, og

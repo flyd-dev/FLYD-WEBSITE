@@ -133,7 +133,7 @@ export default function Bokforingsregler2027Page() {
                 <Eyebrow tone="petrol" className="mt-5">
                   Artikkel · Enkeltpersonforetak
                 </Eyebrow>
-                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{a.h1}</h1>
+                <h1 className="mt-5 font-display text-display-xl font-semibold text-flyd-sand">{a.h1.replace('bokføringsregler', 'bokførings\u00ADregler')}</h1>
                 <p className="mt-8 max-w-2xl font-display text-ingress font-medium text-flyd-dempet">
                   Fra 1. januar 2027 slipper bokføringspliktige med omsetning på høyst 50 000 kroner i året en rekke
                   bokføringskrav. Du må fortsatt dokumentere salg og kjøp og ta vare på dokumentasjonen. Unntaket gjelder
