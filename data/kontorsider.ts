@@ -154,7 +154,7 @@ export const kontorsider: Record<string, Kontorside> = {
     areaServed: ['Stavanger', 'Sandnes', 'Sola', 'Randaberg'],
 
     lokalt: {
-      title: 'Regnskapsføreren din på Forus – midt i Stavanger-regionen',
+      title: 'Regnskaps\u00ADføreren din på Forus – midt i Stavanger-regionen',
       avsnitt: [
         'Kontoret ligger i FOMO-bygget i Grenseveien 21 på Forus, på grensen mellom Stavanger og Sandnes. Her har vi kort vei til de fleste næringsområdene på Nord-Jæren, og det er lett å komme seg hit både fra Stavanger, Sandnes og Sola.',
         'Fra Forus betjener vi bedrifter i Stavanger, Sandnes, Sola, Randaberg og resten av Nord-Jæren. Kontoret er en del av Flyd, med kolleger på fem andre kontorer i Rogaland og Agder. Blir det travelt, eller trenger saken en spesialist, har vi flere å spille på uten at du må forholde deg til nye folk.',

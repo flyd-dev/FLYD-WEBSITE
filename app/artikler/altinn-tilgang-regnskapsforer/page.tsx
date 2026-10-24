@@ -536,7 +536,7 @@ export default function AltinnTilgangPage() {
             <div className="max-w-3xl">
               <Eyebrow tone="petrol">Rogaland og Agder</Eyebrow>
               <h2 className="mt-5 font-display text-display-md font-semibold text-flyd-sand">
-                Usikker på om regnskapsføreren har riktig tilgang?
+                Usikker på om regnskaps&shy;føreren har riktig tilgang?
               </h2>
               <p className="mt-6 text-[17px] leading-[1.65] text-flyd-dempet">
                 Send oss organisasjonsnummeret ditt, så sjekker vi det for deg før fristene. Vi hjelper deg med:

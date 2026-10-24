@@ -173,7 +173,7 @@ export default function BytteRegnskapsforerPage() {
               className="scroll-mt-24 rounded-kort bg-flyd-sand p-7 md:p-8"
             >
               <Eyebrow>System</Eyebrow>
-              <h2 className="mt-4 font-display text-[24px] font-semibold leading-[1.25]">Må jeg bytte regnskapssystem?</h2>
+              <h2 className="mt-4 font-display text-[24px] font-semibold leading-[1.25]">Må jeg bytte regnskaps&shy;system?</h2>
               <p className={`mt-4 ${brod}`}>
                 Nei, ikke hvis du eier lisensen selv. Da gir du bare den nye regnskapsføreren tilgang, for eksempel i
                 Tripletex.

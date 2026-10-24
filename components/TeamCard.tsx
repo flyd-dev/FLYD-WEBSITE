@@ -18,7 +18,11 @@ function titler(m: TeamMember) {
 }
 
 // Myke bindestreker i de lange ordene, så de kan deles på smale kort (to spalter på 320 px).
-const delbar = (t: string) => t.replace('Statsautorisert', 'Stats\u00ADautorisert').replace(/([Rr]egnskaps)(?=[a-zæøå])/g, '$1\u00AD');
+const delbar = (t: string) =>
+  t
+    .replace('Statsautorisert', 'Stats\u00ADautorisert')
+    .replace('Kvalitetsansvarlig', 'Kvalitets\u00ADansvarlig')
+    .replace(/([Rr]egnskaps)(?=[a-zæøå])/g, '$1\u00AD');
 
 /** Telefon og e-post med ikon. Delt av vanlig og kompakt kort. */
 function Kontakt({ m, className }: { m: TeamMember; className?: string }) {
