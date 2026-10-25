@@ -31,10 +31,10 @@ export const revisjon = {
       { tittel: 'Årsregnskap og skattemelding', tekst: 'Vi utarbeider årsregnskapet og skattemeldingen.' },
       { tittel: 'Rådgivning', tekst: 'Faglige råd om regnskap, skatt og avgift.' },
     ],
-    // Omskrevet etter Irenes forslag fra Forus Revisjon (22.10.2026). Utkast til
-    // revisorene har godkjent ordlyden.
+    // Omskrevet etter Irenes forslag fra Forus Revisjon (22.10.2026), godkjent av
+    // Irene 25.10.2026.
     tekst: {
-      status: 'utkast' as Status,
+      status: 'publisert' as Status,
       tekst:
         'I revisjonsberetningen uttaler revisor seg om årsregnskapet er avgitt i samsvar med lover og forskrifter. Det har verdi for både små og store virksomheter.',
     },
@@ -42,9 +42,9 @@ export const revisjon = {
   team: {
     kicker: 'Revisjonsteamet',
     tittel: 'Ta kontakt direkte.',
-    // Samme forslag som over (Irene 22.10.2026). Utkast til det er godkjent.
+    // Samme forslag som over (Irene 22.10.2026, godkjent 25.10.2026).
     tekst: {
-      status: 'utkast' as Status,
+      status: 'publisert' as Status,
       tekst:
         'Det skal være enkelt å få tak i oss. Kundene følges opp av de samme erfarne medarbeiderne over tid, og vi tar gjerne en prat.',
     },
