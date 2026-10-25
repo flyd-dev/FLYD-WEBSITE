@@ -1,4 +1,6 @@
 import { offices, hasOwnName, openingHours } from './offices';
+import { stat } from './stats';
+import { bytteRevisor } from './revisjon';
 
 /**
  * Innhold for kontoroversikten (/kontor/), den regionale siden for
@@ -12,7 +14,6 @@ import { offices, hasOwnName, openingHours } from './offices';
 export type KontorBlokk = {
   /** Hvilke kommuner og områder kontoret betjener. */
   omrade: string;
-  tekst: string;
   /** Lenketeksten til kontorsiden. */
   lenketekst: string;
 };
@@ -20,38 +21,26 @@ export type KontorBlokk = {
 export const kontorBlokker: Record<string, KontorBlokk> = {
   'stavanger-sandnes': {
     omrade: 'Stavanger, Sandnes, Sola, Randaberg og resten av Nord-Jæren',
-    tekst:
-      'Kontoret ligger i FOMO-bygget på Forus, på grensen mellom Stavanger og Sandnes, og er kontoret vårt for Stavanger-regionen. Herfra hjelper vi alt fra gründere til etablerte industri- og eiendomsselskaper.',
     lenketekst: 'Se mer om kontoret og folkene i Sandnes',
   },
   egersund: {
     omrade: 'Eigersund og resten av Dalane',
-    tekst:
-      'Kontoret ligger i Torvgården, midt på torget i Egersund, tett på næringslivet i byen og omegnen. Kom gjerne innom for en prat om regnskapet.',
     lenketekst: 'Se mer om kontoret og folkene i Egersund',
   },
   sokndal: {
     omrade: 'Sokndal og omegn',
-    tekst:
-      'I Sokndal holder vi til i «Banken» i Hauge i Dalane. Kort vei for deg som driver virksomhet i kommunen, med hele Flyds fagmiljø i ryggen. Her sitter også revisjonsteamet vårt.',
     lenketekst: 'Se mer om kontoret og folkene i Sokndal',
   },
   moi: {
     omrade: 'Lund og områdene langs E39 mellom Egersund og Flekkefjord',
-    tekst:
-      'Moi-kontoret er en lokal regnskapspartner for bedrifter i Lund, med kolleger på fem andre kontorer å spille på når det trengs.',
     lenketekst: 'Se mer om kontoret og folkene på Moi',
   },
   sirdal: {
     omrade: 'Sirdal',
-    tekst:
-      'I Sirdal finner du oss i Handleriet. Vi jobber tett med bygg-, hytte- og reiselivsnæringen i fjellbygda.',
     lenketekst: 'Se mer om kontoret og folkene i Sirdal',
   },
   flekkefjord: {
     omrade: 'Flekkefjord og resten av Lister-regionen',
-    tekst:
-      'Kontoret ligger sentralt i Elvegaten i Flekkefjord og betjener næringslivet i Lister, med kort vei til både kunder og kolleger.',
     lenketekst: 'Se mer om kontoret og folkene i Flekkefjord',
   },
 };
@@ -101,6 +90,41 @@ export const virksomhetsregisteret = 'https://www.finanstilsynet.no/virksomhetsr
  */
 export const virksomhetsregisteretRevisjon = 'https://www.finanstilsynet.no/virksomhetsregisteret/detalj/?id=235342';
 
+/**
+ * Autorisasjonen på /kontor: regnskap og revisjon side om side, hver for seg,
+ * synlig på siden og ikke gjemt i spørsmål og svar (Irene 22.10.2026, som på
+ * flyd.no før omleggingen). Antall statsautoriserte, ikke antall kunder
+ * (Arnstein 22.10.2026). Under hver står bytteguiden for samme fag.
+ */
+export const autorisasjon = [
+  {
+    tittel: 'Autoriserte regnskapsførere – hva det betyr for deg',
+    tekst:
+      'Et selskap som fører regnskap for andre, må ha tillatelse fra Finanstilsynet. Hvert oppdrag skal ha en oppdragsansvarlig statsautorisert regnskapsfører, som har ansvaret for at arbeidet er gjort etter reglene.',
+    oss: `Flyd AS er et godkjent regnskapsselskap. Vi er ${stat('statsautoriserte').value} statsautoriserte regnskapsførere.`,
+    register: virksomhetsregisteret,
+    bytte: {
+      tekst:
+        'Har du regnskapsfører i dag og vurderer å bytte? Vi tar kontakt med den tidligere regnskapsføreren og henter over regnskapsdata, avtaler og dokumentasjon, så du slipper å være mellomledd.',
+      href: '/bytte-regnskapsforer/',
+      lenketekst: 'Slik bytter du regnskapsfører',
+    },
+  },
+  {
+    tittel: 'Autorisert revisor – hva det betyr for deg',
+    tekst:
+      'Et selskap som er revisor, må ha tillatelse fra Finanstilsynet. Hvert oppdrag skal ha en oppdragsansvarlig statsautorisert revisor, som har ansvaret for at revisjonen utføres i henhold til lovverket.',
+    oss: `Flyd AS er et godkjent revisjonsselskap. Vi er ${stat('revisorer').value} statsautoriserte revisorer.`,
+    register: virksomhetsregisteretRevisjon,
+    bytte: {
+      tekst:
+        'Skal du bytte revisor, er det generalforsamlingen som velger ny revisor. Den nye revisoren vurderer oppdraget og veileder deg gjennom resten.',
+      href: bytteRevisor.path,
+      lenketekst: 'Slik bytter du revisor',
+    },
+  },
+];
+
 export type HubFaq = {
   q: string;
   /** Det synlige svaret. Det samme står i FAQPage. */
@@ -124,18 +148,13 @@ export const hubFaq: HubFaq[] = [
     a: `Flyd har seks kontorer: ${adresser}. Alle kontorene har åpent ${openingHours.label.replace('Man–fre', 'mandag til fredag')}.`,
   },
   {
-    q: 'Er Flyd et autorisert regnskapsforetak?',
-    a: 'Ja. Flyd AS er et godkjent regnskapsselskap med tillatelse fra Finanstilsynet. Du kan se tillatelsen i Finanstilsynets virksomhetsregister.',
-    lenke: { href: virksomhetsregisteret, tekst: 'Finanstilsynets virksomhetsregister' },
+    q: 'Må jeg bruke kontoret nærmest meg?',
+    a: 'Nei. Ett nummer gjelder for alle kontorene. Ring +47 480 19 958 eller skriv til support@flyd.no, så setter vi deg i kontakt med riktig person.',
   },
   {
     q: 'Kan dere være regnskapsfører for bedrifter i Stavanger og på Nord-Jæren?',
     a: 'Ja. Sandnes-kontoret i FOMO på Forus ligger midt i Stavanger-regionen og betjener Stavanger, Sandnes, Sola og Randaberg. Bilagene går digitalt, og møtene tar vi på Forus, hos deg eller på video.',
     lenke: { href: '/kontor/stavanger-sandnes/', tekst: 'Les om kontoret på Forus' },
-  },
-  {
-    q: 'Må jeg bruke kontoret nærmest meg?',
-    a: 'Nei. Ett nummer gjelder for alle kontorene. Ring +47 480 19 958 eller skriv til support@flyd.no, så setter vi deg i kontakt med riktig person.',
   },
   {
     q: 'Hvilke regnskapssystemer jobber dere i?',

@@ -10,7 +10,8 @@ import Eyebrow from '@/components/Eyebrow';
 import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink } from '@/components/Button';
 import FlydLogo from '@/components/FlydLogo';
-import { Gallery4, type Gallery4Item } from '@/components/ui/gallery4';
+import BildeAkkordeon from '@/components/BildeAkkordeon';
+import type { FlydIconName } from '@/components/FlydIcon';
 import JsonLd from '@/components/JsonLd';
 import { jobs } from '@/data/jobs';
 
@@ -26,11 +27,12 @@ const breadcrumbJsonLd = {
 export const metadata: Metadata = pageMetadata({
   title: 'Ledige stillinger – Karriere',
   description:
-    'Bli en del av Flyd. Vi er alltid på utkikk etter dyktige folk innen økonomi, teknologi og rådgivning.',
+    'Bli en del av Flyd. Vi er alltid på utkikk etter dyktige folk innen økonomi, teknologi og rådgivning. Se ledige stillinger ved kontorene i Rogaland og Agder.',
   path: '/karriere/',
 });
 
-const perks: Gallery4Item[] = [
+/** «Hvorfor jobbe i Flyd»: tittel, tekst, ikon og bilde til bildeflatene. */
+const perks: { id: string; icon: FlydIconName; title: string; description: string; background: string }[] = [
   {
     id: 'fagmiljo',
     icon: 'samme-tak',
@@ -150,12 +152,23 @@ export default function KarrierePage() {
         </Container>
       </Section>
 
-      <Section tone="lysmint" className="overflow-hidden">
-        <Gallery4
-          eyebrow="Hvorfor jobbe i Flyd"
-          title="Seks grunner til å vurdere oss."
-          items={perks}
-        />
+      <Section tone="lysmint">
+        <Container>
+          <div className="max-w-3xl" data-reveal>
+            <Eyebrow>Hvorfor jobbe i Flyd</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold">Seks grunner til å vurdere oss.</h2>
+          </div>
+          <BildeAkkordeon
+            className="mt-12"
+            flater={perks.map((p) => ({
+              src: p.background,
+              alt: '',
+              tittel: p.title,
+              tekst: p.description,
+              icon: p.icon,
+            }))}
+          />
+        </Container>
       </Section>
 
       {/* OPEN POSITIONS */}
@@ -170,7 +183,6 @@ export default function KarrierePage() {
               <h2 className="mt-5 font-display text-display-lg font-semibold">
                 {stillingsOverskrift(jobs.length)}
               </h2>
-              <KontorLenker className="mt-6" />
             </div>
             {jobs.length > 0 && (
               <span className="inline-flex rounded-pille bg-flyd-korall px-4 py-2 text-[12px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-skog">
@@ -243,6 +255,8 @@ export default function KarrierePage() {
               </ButtonLink>
             </div>
           </div>
+          {/* Kontorlenkene står for seg under søknadsboksen, ikke mellom overskriften og stillingene. */}
+          <KontorLenker className="mt-12" />
         </Container>
       </Section>
 

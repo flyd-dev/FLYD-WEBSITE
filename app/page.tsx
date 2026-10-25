@@ -1,5 +1,3 @@
-import { preload } from 'react-dom';
-import KontorLenker from '@/components/KontorLenker';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
@@ -8,18 +6,17 @@ import PartnerStrip from '@/components/PartnerStrip';
 import StatsSection from '@/components/StatsSection';
 import ServiceCard from '@/components/ServiceCard';
 import NumberedList from '@/components/NumberedList';
-import FlytLinjer from '@/components/FlytLinjer';
 import ProcessCards from '@/components/ProcessCards';
 import { process } from '@/data/process';
 import ClosingCta from '@/components/ClosingCta';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { HeroTypewriter, HeroTypewriterPause } from '@/components/HeroTypewriter';
-import type { ServiceTone } from '@/components/ServiceIcon';
-import FlydIcon, { type FlydIconName } from '@/components/FlydIcon';
-import { kombinerbareTjenester, uavhengigeTjenester, erpSystems, serviceUrl } from '@/data/services';
+import { type FlydIconName } from '@/components/FlydIcon';
+import SystemBane from '@/components/SystemBane';
+import UtvidendeHero from '@/components/UtvidendeHero';
+import ForhandslastBilde from '@/components/ForhandslastBilde';
+import { kombinerbareTjenester, uavhengigeTjenester, serviceUrl } from '@/data/services';
 import { stats } from '@/data/stats';
-
-const serviceTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
 
 const whyFlyd: { icon: FlydIconName; text: string }[] = [
   { icon: 'samme-tak', text: 'Regnskap, revisjon, rådgivning og teknologi' },
@@ -30,74 +27,73 @@ const whyFlyd: { icon: FlydIconName; text: string }[] = [
   { icon: 'innsikt', text: 'Innsikt og analyse som gir bedre beslutninger' },
 ];
 
-
 const HERO = {
   src: '/header/hero-1200.webp',
   srcSet: '/header/hero-1200.webp 1200w, /header/hero-2400.webp 2400w',
 };
 
 export default function HomePage() {
-  // Heltebildet er det største elementet i første skjermbilde (LCP).
-  preload(HERO.src, { as: 'image', imageSrcSet: HERO.srcSet, imageSizes: '100vw', fetchPriority: 'high' });
   return (
     <>
-      {/* HERO – forsiden er Skog + foto med overlay (designmanualen kap. 07/08).
-          Bildet står i et kort med radius 24 px, siden det ikke er utfallende. */}
+      {/* Heltebildet er det største elementet i første skjermbilde (LCP). */}
+      <ForhandslastBilde src={HERO.src} srcSet={HERO.srcSet} sizes="100vw" />
+      {/* HERO – forsiden er Skog + foto med overlay (designmanualen kap. 07/08). */}
       <Section tone="sand" className="!pb-0 !pt-0 md:!pt-1">
-        <div className="px-3 md:px-5">
-          <div className="on-dark relative flex min-h-[640px] overflow-hidden rounded-bilde [contain:paint] bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
-            {/* Originalfotoet i to størrelser: mobil henter 1200 px, store
-                skjermer 2400 px. next/image lager ikke srcset med statisk
-                eksport (unoptimized), derfor vanlig <img> + preload over. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={HERO.src}
-              srcSet={HERO.srcSet}
-              sizes="100vw"
-              alt="Flyd-teamet i en uformell prat på kontoret"
-              fetchPriority="high"
-              decoding="async"
-              className="hero-drift absolute inset-0 h-full w-full object-cover object-[70%_center]"
-            />
-            <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
-            <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />
-            <FlytLinjer className="opacity-40 [mask-image:linear-gradient(to_right,black_0%,black_45%,transparent_75%)]" />
+        {/* Kortet starter innrykket med radius 24 px og vokser til full bredde
+            (utfallende, uten radius) når du scroller. */}
+        <UtvidendeHero className="on-dark relative flex min-h-[640px] overflow-hidden [contain:paint] bg-flyd-skog text-flyd-sand lg:min-h-[min(calc(100vh-112px),820px)]">
+          {/* Bildet er festet høyt (15 %) og zoomer fra samme punkt, så hodene ikke
+              kuttes i toppen; det som må beskjæres, tas nedenfra. */}
+          {/* Originalfotoet i to størrelser: mobil henter 1200 px, store
+              skjermer 2400 px. next/image lager ikke srcset med statisk
+              eksport (unoptimized), derfor vanlig <img> + preload over. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={HERO.src}
+            srcSet={HERO.srcSet}
+            sizes="100vw"
+            alt="Flyd-teamet i en uformell prat på kontoret"
+            fetchPriority="high"
+            decoding="async"
+            className="hero-drift absolute inset-0 h-full w-full object-cover object-[70%_15%]"
+          />
+          <div className="overlay-skog-bunn absolute inset-0 lg:hidden" aria-hidden="true" />
+          <div className="overlay-skog absolute inset-0 hidden lg:block" aria-hidden="true" />
 
-            <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
-              <div className="max-w-2xl" data-reveal>
-                {/* Kickeren står inne i H1, så overskriften begynner med merkenavnet
-                    (Google retter «flyd» til «floyd»). Poppins 600, versal, +8 %.
-                    Mint fordi bunnen er Skog – på lys bunn ville den vært Petrol. */}
-                <h1 className="font-display text-display-xl font-semibold text-flyd-sand">
-                  <span className="mb-5 block text-[13px] font-semibold uppercase leading-[1.3] tracking-[0.08em] text-flyd-mint md:mb-6 md:text-[15px]">
-                    Flyd AS – regnskap, revisjon, ERP og teknologi
-                  </span>{' '}
-                  Økonomi og teknologi
-                  <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
-                    <span>– </span>
-                    <HeroTypewriter
-                      text={['full flyd.', 'god kontroll.', 'full oversikt.', 'trygg vekst.']}
-                    />
-                  </span>
-                </h1>
-                <p className="mt-8 max-w-xl font-display text-ingress font-medium text-flyd-dempet">
-                  Flyd er et kompetansehus for økonomi og teknologi. Vi hjelper
-                  bedrifter med regnskap, revisjon, rådgivning og programvare – fra
-                  daglig bokføring til ERP og integrasjoner.
-                </p>
-                <div className="mt-10 flex flex-wrap items-center gap-4">
-                  <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
-                    Snakk med oss
-                  </ButtonLink>
-                  <ButtonLink href="/tjenester" variant="secondary-dark">
-                    Se våre tjenester
-                  </ButtonLink>
-                </div>
+          <Container className="relative flex items-end pb-12 pt-40 md:pb-16 lg:items-center lg:py-24">
+            <div className="max-w-2xl" data-reveal>
+              {/* Kickeren står inne i H1, så overskriften begynner med merkenavnet
+                  (Google retter «flyd» til «floyd»). Poppins 600, versal, +8 %.
+                  Mint fordi bunnen er Skog – på lys bunn ville den vært Petrol. */}
+              <h1 className="font-display text-display-xl font-semibold text-flyd-sand">
+                <span className="mb-5 block text-[13px] font-semibold uppercase leading-[1.3] tracking-[0.08em] text-flyd-mint md:mb-6 md:text-[15px]">
+                  Flyd AS – regnskap, revisjon, ERP og teknologi
+                </span>{' '}
+                Økonomi og teknologi
+                <span className="mt-2 block whitespace-nowrap text-[0.78em] sm:text-[1em]">
+                  <span>– </span>
+                  <HeroTypewriter
+                    text={['full flyd.', 'god kontroll.', 'full oversikt.', 'trygg vekst.']}
+                  />
+                </span>
+              </h1>
+              <p className="mt-8 max-w-xl font-display text-ingress font-medium text-flyd-dempet">
+                Flyd er et kompetansehus for økonomi og teknologi. Vi hjelper
+                bedrifter med regnskap, revisjon, rådgivning og programvare – fra
+                daglig bokføring til ERP og integrasjoner.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
+                  Snakk med oss
+                </ButtonLink>
+                <ButtonLink href="/tjenester" variant="secondary-dark">
+                  Se våre tjenester
+                </ButtonLink>
               </div>
-              <HeroTypewriterPause className="absolute bottom-4 right-4 md:bottom-6 md:right-6" />
-            </Container>
-          </div>
-        </div>
+            </div>
+            <HeroTypewriterPause className="absolute bottom-4 right-4 md:bottom-6 md:right-6" />
+          </Container>
+        </UtvidendeHero>
       </Section>
 
       {/* NØKKELTALL + KUNDER */}
@@ -114,8 +110,6 @@ export default function HomePage() {
           <div className="mt-12 md:mt-14">
             <StatsSection stats={stats} columns={5} />
           </div>
-          <KontorLenker className="mt-10" />
-
           <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
             <Eyebrow>Et utvalg kunder</Eyebrow>
             <TextLink href="/kontakt">Bli kunde</TextLink>
@@ -147,20 +141,20 @@ export default function HomePage() {
 
           {/* Tjenestene som kan leveres sammen i rutenettet, revisjon i egen bred rad under. */}
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-            {kombinerbareTjenester.map((s, i) => (
+            {kombinerbareTjenester.map((s) => (
               <div key={s.id} data-reveal className="h-full">
                 <ServiceCard
                   title={s.title}
                   text={s.short}
                   icon={s.icon}
-                  tone={serviceTones[i % serviceTones.length]}
+                  tone="petrol"
                   href={serviceUrl(s)}
                 />
               </div>
             ))}
             {uavhengigeTjenester.map((s) => (
               <div key={s.id} data-reveal className="sm:col-span-2 lg:col-span-3">
-                <ServiceCard title={s.title} text={s.short} icon={s.icon} tone="teal" href={serviceUrl(s)} wide />
+                <ServiceCard title={s.title} text={s.short} icon={s.icon} tone="petrol" href={serviceUrl(s)} wide />
               </div>
             ))}
           </div>
@@ -171,10 +165,11 @@ export default function HomePage() {
       <Section tone="petrol" flyt>
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
+            {/* Halv bredde: med 5 av 12 ble «sparringspartner.» bredere enn spalten fra ca. 1 340 px. */}
+            <div className="lg:col-span-6" data-reveal>
               <Eyebrow tone="petrol">Hvorfor Flyd</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
-                Din strategiske sparringspartner.
+                Din strategiske sparrings&shy;partner.
               </h2>
               <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">
                 Flyd kombinerer fagkompetanse med moderne teknologiforståelse. Vi
@@ -182,7 +177,7 @@ export default function HomePage() {
                 under ett.
               </p>
             </div>
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-6">
               <NumberedList
                 items={whyFlyd.map((w) => w.text)}
                 icons={whyFlyd.map((w) => w.icon)}
@@ -193,45 +188,35 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* PROGRAMVARE */}
+      {/* PROGRAMVARE – systemene og hvordan de henger sammen, partnerne under */}
       <Section tone="sand">
         <Container>
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow>Programvare</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">
-              Riktig system for din virksomhet.
-            </h2>
-            <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
-              Vi hjelper deg å velge, implementere og utnytte forretningssystemet
-              som passer bedriften – ikke det vi tilfeldigvis selger.
-            </p>
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5">
-            {erpSystems.map((e) => (
-              <div key={e.id} data-reveal className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
-                <div className="flex flex-wrap items-center gap-4">
-                  <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-flis bg-flyd-sand text-flyd-teal">
-                    <FlydIcon name={e.icon} className="h-6 w-6" />
-                  </span>
-                  <h3 className="font-display text-[24px] font-semibold leading-tight">
-                    {e.name}
-                  </h3>
-                </div>
-                <span className="mt-5 inline-flex rounded-pille border border-flyd-teal px-3 py-1.5 text-[11px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-petrol">
-                  {e.tagline}
-                </span>
-                <p className="mt-4 text-[16px] leading-[1.6] text-flyd-skifer">
-                  {e.description}
-                </p>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
+            <div className="lg:col-span-5" data-reveal>
+              <Eyebrow>Programvare</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold">
+                Riktig system for din virksomhet.
+              </h2>
+              <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
+                Vi hjelper deg å velge, implementere og utnytte forretningssystemet
+                som passer bedriften – ikke det vi tilfeldigvis selger. Så kobler vi
+                det til resten, slik at dataene flyter dit de skal.
+              </p>
+              <div className="mt-8 flex flex-col items-start gap-3">
+                <TextLink href="/tjenester/erp/">Programvare og ERP</TextLink>
+                <TextLink href="/tjenester/integrasjoner/">Integrasjoner</TextLink>
               </div>
-            ))}
+            </div>
+            <div className="lg:col-span-7" data-reveal>
+              <SystemBane />
+            </div>
           </div>
 
-          <div className="mt-10" data-reveal>
-            <TextLink href="/tjenester/nettsider-og-digitale-flater/">
-              Trenger du en nettside eller digital flate som snakker med systemet?
-            </TextLink>
+          <div className="mt-20 border-t border-flyd-linje-sand pt-10 md:mt-24">
+            <Eyebrow>Våre partnere</Eyebrow>
+            <div className="mt-8">
+              <PartnerStrip />
+            </div>
           </div>
         </Container>
       </Section>
@@ -260,16 +245,6 @@ export default function HomePage() {
               <ProcessCards steps={process} />
             </div>
           </div>
-        </Container>
-      </Section>
-
-      {/* PARTNERE */}
-      <Section tone="sand" size="sm">
-        <Container>
-          <div className="mb-8 md:mb-10" data-reveal>
-            <Eyebrow>Våre partnere</Eyebrow>
-          </div>
-          <PartnerStrip />
         </Container>
       </Section>
 

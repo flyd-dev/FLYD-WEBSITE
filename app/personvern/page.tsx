@@ -154,7 +154,7 @@ export default function PersonvernPage() {
               </ol>
             </nav>
 
-            <div className="mt-12 space-y-12 text-[17px] leading-[1.7] text-flyd-skifer">
+            <div className="mt-12 space-y-12 break-words text-[17px] leading-[1.7] text-flyd-skifer">
               <Del id="lovgivning">
                 <p className="mt-3">
                   {personvern.selskap} har offentlig godkjenning fra Finanstilsynet etter revisorloven og

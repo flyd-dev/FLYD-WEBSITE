@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
+    "prebuild": "node scripts/make-team-thumbs.mjs && node scripts/make-logo-thumbs.mjs",
     "postbuild": "node scripts/sjekk-bekreft.mjs",
     "sjekk:bekreft": "node scripts/sjekk-bekreft.mjs --alltid",
     "build:utkast": "FLYD_UTKAST=1 next build",
@@ -15,10 +16,7 @@
     "export": "next build"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.2.4",
-    "class-variance-authority": "^0.7.1",
     "clsx": "2.1.1",
-    "embla-carousel-react": "^8.6.0",
     "framer-motion": "11.11.1",
     "lucide-react": "0.447.0",
     "next": "14.2.15",

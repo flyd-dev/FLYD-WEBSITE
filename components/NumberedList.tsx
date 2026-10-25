@@ -62,7 +62,7 @@ export default function NumberedList({
           )}
           <span
             className={clsx(
-              'text-[17px] leading-[1.55]',
+              'min-w-0 break-words text-[17px] leading-[1.55] max-sm:hyphens-auto',
               dark ? 'text-flyd-sand' : 'text-flyd-skog',
             )}
           >

@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { Menu, X } from 'lucide-react';
 import { ButtonLink } from './Button';
 import FlydLogo from './FlydLogo';
+import TjenesteMeny, { type MenyTjeneste } from './TjenesteMeny';
 
 const nav = [
   { href: '/tjenester', label: 'Tjenester' },
@@ -16,7 +17,7 @@ const nav = [
   { href: '/kontakt', label: 'Kontakt' },
 ];
 
-export default function Header() {
+export default function Header({ tjenester }: { tjenester?: MenyTjeneste[] } = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -103,21 +104,30 @@ export default function Header() {
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Hovednavigasjon">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-                className={clsx(
-                  'rounded-sm text-[15px] font-medium underline-offset-[10px] decoration-2 transition-colors duration-200 hover:text-flyd-skog hover:underline hover:decoration-flyd-mint active:text-flyd-petrol',
-                  isActive(item.href)
-                    ? 'text-flyd-skog underline !decoration-flyd-teal'
-                    : 'text-flyd-skifer',
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {nav.map((item) => {
+              const klasse = clsx(
+                'rounded-sm text-[15px] font-medium underline-offset-[10px] decoration-2 transition-colors duration-200 hover:text-flyd-skog hover:underline hover:decoration-flyd-mint active:text-flyd-petrol',
+                isActive(item.href)
+                  ? 'text-flyd-skog underline !decoration-flyd-teal'
+                  : 'text-flyd-skifer',
+              );
+              // Nedtrekksmeny for Tjenester når layouten sender listen.
+              if (item.href === '/tjenester' && tjenester?.length) {
+                return (
+                  <TjenesteMeny key={item.href} tjenester={tjenester} aktiv={isActive(item.href)} lenkeKlasse={klasse} />
+                );
+              }
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  className={klasse}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="hidden md:block">

@@ -10,7 +10,7 @@ import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
 import ClosingCta from '@/components/ClosingCta';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import FlytLinjer from '@/components/FlytLinjer';
+import GlassBrett from '@/components/GlassBrett';
 import { artikler, formatDato } from '@/data/artikler';
 
 export const metadata: Metadata = pageMetadata({
@@ -59,13 +59,27 @@ export default function ArtiklerPage() {
       <Section tone="sand" className="!pt-0">
         <Container>
           <ul className="stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-            {artikler.map((a, i) => (
-              <li key={a.slug} data-reveal style={{ '--i': i } as React.CSSProperties}>
+            {artikler.map((a, i) => {
+              // Den nyeste artikkelen fremhevet i full bredde.
+              const fremhevet = i === 0;
+              return (
+              <li
+                key={a.slug}
+                data-reveal
+                style={{ '--i': i } as React.CSSProperties}
+                className={fremhevet ? 'sm:col-span-2 lg:col-span-3' : undefined}
+              >
                 <Link
                   href={a.path}
-                  className="lys lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint"
+                  className={`lys lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-3 hover:bg-flyd-linje-mint ${
+                    fremhevet ? 'lg:flex-row lg:gap-4' : ''
+                  }`}
                 >
-                  <div className="relative aspect-video overflow-hidden rounded-flis bg-flyd-petrol">
+                  <div
+                    className={`relative aspect-video overflow-hidden rounded-flis bg-flyd-petrol ${
+                      fremhevet ? 'lg:aspect-auto lg:min-h-[380px] lg:w-7/12 lg:flex-none' : ''
+                    }`}
+                  >
                     {a.bilde ? (
                       <Image
                         src={a.bilde.src}
@@ -77,17 +91,25 @@ export default function ArtiklerPage() {
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                       />
                     ) : (
-                      // Uten bilde: rolig Petrol-flate med flytlinjene, bare pynt.
-                      <FlytLinjer className="opacity-40" />
+                      // Uten bilde: Petrol-flate med glassbrettet, bare pynt.
+                      <GlassBrett tone="petrol" />
                     )}
                   </div>
-                  <div className="flex flex-1 flex-col px-3 pb-3 pt-6">
+                  <div className={`flex flex-1 flex-col px-3 pb-3 pt-6 ${fremhevet ? 'lg:justify-center lg:px-8 lg:py-8' : ''}`}>
                     <Eyebrow>{a.tema}</Eyebrow>
-                    <h2 className="mt-4 font-display text-[22px] font-semibold leading-[1.25] text-flyd-skog">
+                    <h2
+                      className={`mt-4 font-display text-[22px] font-semibold leading-[1.25] text-flyd-skog ${
+                        fremhevet ? 'lg:text-[clamp(1.75rem,2.6vw,2.375rem)] lg:leading-[1.15]' : ''
+                      }`}
+                    >
                       {a.title}
                     </h2>
                     <p className="mt-3 text-[16px] leading-[1.6] text-flyd-skifer">{a.ingress}</p>
-                    <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-6 text-[15px]">
+                    <div
+                      className={`mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-6 text-[15px] ${
+                        fremhevet ? 'lg:mt-8' : ''
+                      }`}
+                    >
                       <time dateTime={a.published} className="text-flyd-skifer">
                         {formatDato(a.published)}
                       </time>
@@ -99,7 +121,8 @@ export default function ArtiklerPage() {
                   </div>
                 </Link>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </Container>
       </Section>

@@ -1,3 +1,5 @@
+import type { Status } from '@/lib/utkast';
+
 /**
  * Innholdet på /tjenester/revisjon/ (app/tjenester/revisjon/page.tsx).
  *
@@ -5,10 +7,13 @@
  * og uten store ord (Arnstein og Irene, 21.10.2026). Ikke nevn SkatteFUNN, og
  * ikke bruk «lovpålagt» o.l. Tjenestene er de tre Liit hadde på liit.no.
  * «Tillit» er ordet navnet Liit kommer fra, derfor overskriften.
+ *
+ * Felter med `status: 'utkast'` vises bare lokalt og på forhåndsvisninger
+ * (lib/utkast.ts), til revisorene har godkjent dem. Sett da `publisert`.
  */
 export const revisjon = {
   meta: {
-    title: 'Revisjon',
+    title: 'Revisor – revisjon og revisorbekreftelser',
     description:
       'Revisjon gir tillit til at regnskapet stemmer. Flyd tilbyr revisjon, årsregnskap og skattemelding, og rådgivning om regnskap, skatt og avgift.',
   },
@@ -26,10 +31,23 @@ export const revisjon = {
       { tittel: 'Årsregnskap og skattemelding', tekst: 'Vi utarbeider årsregnskapet og skattemeldingen.' },
       { tittel: 'Rådgivning', tekst: 'Faglige råd om regnskap, skatt og avgift.' },
     ],
+    // Omskrevet etter Irenes forslag fra Forus Revisjon (22.10.2026), godkjent av
+    // Irene 25.10.2026.
+    tekst: {
+      status: 'publisert' as Status,
+      tekst:
+        'I revisjonsberetningen uttaler revisor seg om årsregnskapet er avgitt i samsvar med lover og forskrifter. Det har verdi for både små og store virksomheter.',
+    },
   },
   team: {
     kicker: 'Revisjonsteamet',
     tittel: 'Ta kontakt direkte.',
+    // Samme forslag som over (Irene 22.10.2026, godkjent 25.10.2026).
+    tekst: {
+      status: 'publisert' as Status,
+      tekst:
+        'Det skal være enkelt å få tak i oss. Kundene følges opp av de samme erfarne medarbeiderne over tid, og vi tar gjerne en prat.',
+    },
   },
   avslutning: {
     kicker: 'Kontakt',
@@ -48,7 +66,7 @@ export const bytteRevisor = {
   meta: {
     title: 'Bytte revisor – slik gjør du det',
     description:
-      'Slik bytter et aksjeselskap revisor: generalforsamlingen velger ny revisor, den nye revisoren tar kontakt med den forrige, og byttet meldes til Foretaksregisteret.',
+      'Slik bytter et aksjeselskap revisor: generalforsamlingen velger ny revisor, den nye tar kontakt med den forrige, og byttet meldes til Foretaksregisteret.',
   },
   tittel: 'Slik bytter du revisor.',
   ingress:

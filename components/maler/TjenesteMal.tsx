@@ -12,6 +12,7 @@ import FlydIcon from '@/components/FlydIcon';
 import { ButtonLink } from '@/components/Button';
 import { ServiceTile } from '@/components/ServiceIcon';
 import ProcessCards from '@/components/ProcessCards';
+import SystemBane from '@/components/SystemBane';
 import { process } from '@/data/process';
 import { siteUrl } from '@/lib/seo';
 import { visUtkast } from '@/lib/utkast';
@@ -85,7 +86,8 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
         <Container>
           <Breadcrumbs items={[{ name: 'Tjenester', href: '/tjenester/' }, { name: s.title, href: serviceUrl(s) }]} />
           <div className="mt-10 grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
+            {/* Systembanen på integrasjoner trenger mer plass enn et bilde: halvparten hver. */}
+            <div className={s.id === 'integrasjoner' ? 'lg:col-span-6' : 'lg:col-span-7'}>
               <Eyebrow>Tjeneste</Eyebrow>
               <h1 className="mt-6 font-display text-display-xl font-semibold">{s.title}</h1>
               <span aria-hidden="true" className="aksentlinje mt-6 block h-1 w-24 rounded-pille bg-flyd-teal" />
@@ -99,8 +101,11 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                 </ButtonLink>
               </div>
             </div>
-            <div className="lg:col-span-5">
-              {s.image ? (
+            <div className={s.id === 'integrasjoner' ? 'lg:col-span-6' : 'lg:col-span-5'}>
+              {/* Integrasjoner viser hvordan systemene henger sammen i stedet for et bilde. */}
+              {s.id === 'integrasjoner' ? (
+                <SystemBane />
+              ) : s.image ? (
                 <div className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint">
                   <Image
                     src={s.image.src}
@@ -129,6 +134,11 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                 {s.problem ? s.problem : `Slik hjelper vi deg med ${lc(s.title)}.`}
               </h2>
               {!s.problem && mangler('problemet tjenesten løser, i kundens egne ord')}
+              {/* Hvem tjenesten passer for står her, ikke i en egen, nesten tom seksjon. */}
+              <div className="mt-10 border-t border-flyd-linje-mint pt-6">
+                <Eyebrow as="h3">Passer for</Eyebrow>
+                <p className="mt-3 text-[17px] leading-[1.65] text-flyd-skog">{s.fitFor}</p>
+              </div>
             </div>
             <div className="lg:col-span-7" data-reveal>
               <p className="text-[17px] leading-[1.7] text-flyd-skifer">{s.long}</p>
@@ -173,7 +183,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                     {fag.faq.map((f) => (
                       <details key={f.q} className="faq group rounded-kort bg-flyd-lysmint px-6 md:px-7">
                         <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                          {f.q}
+                          <span className="min-w-0 break-words max-sm:hyphens-auto">{f.q}</span>
                           <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                         </summary>
                         <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>
@@ -295,20 +305,12 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
         </Container>
       </Section>
 
-      {/* PASSER FOR / IKKE + PRIS */}
-      <Section tone="sand">
-        <Container>
-          <div
-            className={`stagger grid grid-cols-1 gap-4 md:gap-5 ${
-              s.passerIkke || (utkast && visUtkast) ? 'md:grid-cols-2' : ''
-            }`}
-          >
-            <div data-reveal className="rounded-kort bg-flyd-lysmint p-7 md:p-10">
-              <Eyebrow>Passer for</Eyebrow>
-              <p className="mt-4 max-w-3xl font-display text-ingress font-medium text-flyd-skog">{s.fitFor}</p>
-            </div>
+      {/* PASSER IKKE FOR + PRIS – bare når tjenesten har innhold til det */}
+      {(s.passerIkke || s.prisfaktorer?.length || (utkast && visUtkast)) && (
+        <Section tone="sand">
+          <Container>
             {(s.passerIkke || (utkast && visUtkast)) && (
-              <div data-reveal style={{ '--i': 1 } as React.CSSProperties} className="rounded-kort bg-flyd-lysmint p-7 md:p-8">
+              <div data-reveal className="max-w-3xl rounded-kort bg-flyd-lysmint p-7 md:p-8">
                 <Eyebrow>Passer ikke for</Eyebrow>
                 {s.passerIkke ? (
                   <p className="mt-4 text-[17px] leading-relaxed text-flyd-skog">{s.passerIkke}</p>
@@ -317,35 +319,35 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                 )}
               </div>
             )}
-          </div>
 
-          {(s.prisfaktorer?.length || (utkast && visUtkast)) && (
-            <div className="mt-16 grid grid-cols-1 gap-10 border-t border-flyd-linje-sand pt-14 lg:grid-cols-12 lg:gap-16" data-reveal>
-              <div className="lg:col-span-5">
-                <Eyebrow>Pris</Eyebrow>
-                <h2 className="mt-5 font-display text-display-md font-semibold">Hva prisen avhenger av</h2>
-                <p className="mt-4 text-[16px] leading-relaxed text-flyd-skifer">
-                  Vi har ingen faste priser på nettsiden. Du får et konkret tilbud etter en første samtale.
-                </p>
+            {(s.prisfaktorer?.length || (utkast && visUtkast)) && (
+              <div className="mt-16 grid grid-cols-1 gap-10 border-t border-flyd-linje-sand pt-14 first:mt-0 first:border-t-0 first:pt-0 lg:grid-cols-12 lg:gap-16" data-reveal>
+                <div className="lg:col-span-5">
+                  <Eyebrow>Pris</Eyebrow>
+                  <h2 className="mt-5 font-display text-display-md font-semibold">Hva prisen avhenger av</h2>
+                  <p className="mt-4 text-[16px] leading-relaxed text-flyd-skifer">
+                    Vi har ingen faste priser på nettsiden. Du får et konkret tilbud etter en første samtale.
+                  </p>
+                </div>
+                <div className="lg:col-span-7">
+                  {s.prisfaktorer?.length ? (
+                    <ul className="border-t border-flyd-linje-sand">
+                      {s.prisfaktorer.map((f) => (
+                        <li key={f} className="flex gap-3 border-b border-flyd-linje-sand py-4 text-[16px] text-flyd-skog">
+                          <Check className="mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal" strokeWidth={2.5} aria-hidden="true" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    mangler('hva prisen for tjenesten avhenger av')
+                  )}
+                </div>
               </div>
-              <div className="lg:col-span-7">
-                {s.prisfaktorer?.length ? (
-                  <ul className="border-t border-flyd-linje-sand">
-                    {s.prisfaktorer.map((f) => (
-                      <li key={f} className="flex gap-3 border-b border-flyd-linje-sand py-4 text-[16px] text-flyd-skog">
-                        <Check className="mt-1 h-4 w-4 flex-shrink-0 text-flyd-teal" strokeWidth={2.5} aria-hidden="true" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  mangler('hva prisen for tjenesten avhenger av')
-                )}
-              </div>
-            </div>
-          )}
-        </Container>
-      </Section>
+            )}
+          </Container>
+        </Section>
+      )}
 
       {/* VANLIGE SPØRSMÅL + FAGPERSON */}
       {visFaq && (
@@ -360,7 +362,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
                     {s.faq.map((f) => (
                       <details key={f.q} className="faq group border-b border-flyd-linje-mint">
                         <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                          {f.q}
+                          <span className="min-w-0 break-words max-sm:hyphens-auto">{f.q}</span>
                           <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                         </summary>
                         <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>
@@ -416,7 +418,7 @@ export default function TjenesteMal({ service: s }: { service: Service }) {
       <Section tone={visFaq ? 'sand' : 'lysmint'}>
         <Container>
           <div className="max-w-3xl" data-reveal>
-            <Eyebrow>Alt i ett hus</Eyebrow>
+            <Eyebrow>Kan kombineres</Eyebrow>
             <h2 className="mt-5 font-display text-display-md font-semibold">Andre tjenester</h2>
           </div>
           <ul className="stagger mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">

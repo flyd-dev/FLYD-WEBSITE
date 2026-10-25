@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Check, Plus } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
+import GlassBrett from '@/components/GlassBrett';
 import Eyebrow from '@/components/Eyebrow';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
@@ -134,7 +135,7 @@ export default function BytteRegnskapsforerPage() {
               <li
                 key={s.tittel}
                 data-reveal
-                className="rounded-kort border border-flyd-linje-sand bg-flyd-sand p-6 md:p-8"
+                className="rounded-kort bg-flyd-lysmint p-6 md:p-8"
               >
                 {/* Dekorativt ikon (Fia), godkjent av Marius 14.10.2026 */}
                 {/* eslint-disable-next-line @next/next/no-img-element -- SVG, next/image gir ingenting her */}
@@ -172,7 +173,7 @@ export default function BytteRegnskapsforerPage() {
               className="scroll-mt-24 rounded-kort bg-flyd-sand p-7 md:p-8"
             >
               <Eyebrow>System</Eyebrow>
-              <h2 className="mt-4 font-display text-[24px] font-semibold leading-[1.25]">Må jeg bytte regnskapssystem?</h2>
+              <h2 className="mt-4 font-display text-[24px] font-semibold leading-[1.25]">Må jeg bytte regnskaps&shy;system?</h2>
               <p className={`mt-4 ${brod}`}>
                 Nei, ikke hvis du eier lisensen selv. Da gir du bare den nye regnskapsføreren tilgang, for eksempel i
                 Tripletex.
@@ -185,8 +186,10 @@ export default function BytteRegnskapsforerPage() {
       {/* HVA FLYD GJØR */}
       <Section tone="sand" id="flyd">
         <Container>
-          <div className="on-dark grid grid-cols-1 gap-12 rounded-bilde bg-flyd-petrol p-8 text-flyd-sand md:p-12 lg:grid-cols-12 lg:gap-16 lg:p-14">
-            <div className="lg:col-span-8" data-reveal>
+          {/* Petrol-boks med glassbrettet bak, som de andre mørke flatene. */}
+          <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-petrol p-8 text-flyd-sand md:p-12 lg:p-14">
+            <GlassBrett tone="petrol" />
+            <div className="relative max-w-2xl" data-reveal>
               <Eyebrow tone="petrol">Rogaland og Agder</Eyebrow>
               <h2 className="mt-5 font-display text-display-md font-semibold text-flyd-sand">Dette gjør Flyd for deg</h2>
               <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-dempet">
@@ -208,12 +211,6 @@ export default function BytteRegnskapsforerPage() {
                 <TextLink href="/kontor/" tone="dark">
                   Finn nærmeste kontor
                 </TextLink>
-              </div>
-            </div>
-            {/* Dekor: Mint-ring med Flyd-teal-prikk */}
-            <div className="hidden items-center justify-center lg:col-span-4 lg:flex" aria-hidden="true">
-              <div className="flex aspect-square w-full max-w-[260px] items-center justify-center rounded-full border border-flyd-mint/50">
-                <div className="h-[38%] w-[38%] rounded-full bg-flyd-teal" />
               </div>
             </div>
           </div>
@@ -262,7 +259,7 @@ export default function BytteRegnskapsforerPage() {
               {bytteFaq.map((f) => (
                 <details key={f.q} className="faq group rounded-kort bg-flyd-lysmint px-6 md:px-7">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-flis py-5 font-display text-[18px] font-semibold text-flyd-skog transition-colors duration-200 hover:text-flyd-petrol">
-                    {f.q}
+                    <span className="min-w-0 break-words max-sm:hyphens-auto">{f.q}</span>
                     <Plus className="faq-pil h-5 w-5 flex-shrink-0 text-flyd-teal" strokeWidth={2} aria-hidden="true" />
                   </summary>
                   <p className="faq-svar pb-6 text-[16px] leading-relaxed text-flyd-skifer">{f.a}</p>

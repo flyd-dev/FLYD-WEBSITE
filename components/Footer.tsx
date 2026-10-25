@@ -29,7 +29,7 @@ const komIGangLenker = [
 function Lenkeliste({ tittel, lenker }: { tittel: string; lenker: { href: string; label: string }[] }) {
   return (
     <nav aria-label={tittel}>
-      <Eyebrow as="h3" tone="dark">
+      <Eyebrow as="h2" tone="dark">
         {tittel}
       </Eyebrow>
       <ul className="mt-5 space-y-3 text-[15px] text-flyd-sand">
@@ -107,7 +107,7 @@ export default function Footer() {
           </div>
 
           <nav aria-label="Kontorer" className="col-span-2 md:col-span-6 lg:col-span-4">
-            <Eyebrow as="h3" tone="dark">
+            <Eyebrow as="h2" tone="dark">
               Kontorer
             </Eyebrow>
             <ul className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 text-[15px]">

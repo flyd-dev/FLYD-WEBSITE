@@ -8,12 +8,18 @@ import Reveal from "@/components/Reveal";
 import ScrollToTop from "@/components/ScrollToTop";
 import Analytics from "@/components/Analytics";
 import CookieConsent from "@/components/CookieConsent";
+import FlydPeker from "@/components/FlydPeker";
 import { offices, openingHours } from "@/data/offices";
 import { getKontorside } from "@/data/kontorsider";
 import { allTeam } from "@/data/team";
+import { kombinerbareTjenester, uavhengigeTjenester, serviceUrl } from "@/data/services";
+import type { MenyTjeneste } from "@/components/TjenesteMeny";
 
 // Designmanualen: Poppins (500 ingress, 600 overskrifter og tall) og
-// DM Sans (400 brødtekst, 400 kursiv sitater, 500 knapper, 700 kickers).
+// DM Sans (400 brødtekst, 500 knapper, 700 kickers). Kursiv (400, til sitater)
+// er ikke med før det kommer sitater på sidene: den ble forhåndslastet med høy
+// prioritet (40 kB) og konkurrerte med heltebildet på forsiden. Legg den da inn
+// i et eget DM_Sans-kall med `preload: false`.
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["500", "600"],
@@ -24,7 +30,7 @@ const poppins = Poppins({
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   variable: "--font-dm-sans",
   display: "swap",
 });
@@ -81,6 +87,12 @@ export const metadata: Metadata = {
     ],
   },
 };
+
+// Tjenestene i nedtrekksmenyen under «Tjenester». Revisjon på egen rad (holdes adskilt fra regnskap).
+const menyTjenester: MenyTjeneste[] = [
+  ...kombinerbareTjenester.map((t) => ({ title: t.title, short: t.short, icon: t.icon, href: serviceUrl(t) })),
+  ...uavhengigeTjenester.map((t) => ({ title: t.title, short: t.short, icon: t.icon, href: serviceUrl(t), separat: true })),
+];
 
 export default function RootLayout({
   children,
@@ -148,7 +160,8 @@ export default function RootLayout({
     name: getKontorside(o.slug)?.schemaName ?? `Flyd ${o.city}`,
     parentOrganization: { "@id": orgId },
     url: `${siteUrl}/kontor/${o.slug}/`,
-    image: `${siteUrl}/brand/flyd-teal.png`,
+    // Fasadebildet, som på kontorsiden (KontorMal). Logoen står på organisasjonen.
+    image: `${siteUrl}${o.image?.src ?? "/brand/flyd-teal.png"}`,
     telephone: "+4748019958",
     email: "support@flyd.no",
     address: {
@@ -190,13 +203,14 @@ export default function RootLayout({
           Hopp til hovedinnhold
         </a>
         <div className="lesefremdrift" aria-hidden="true" />
-        <Header />
+        <Header tjenester={menyTjenester} />
         <main id="main">{children}</main>
         <Footer />
         <ScrollToTop />
         <Reveal />
         <PointerFx />
         <CookieConsent />
+        <FlydPeker />
         <Analytics />
         <script
           type="application/ld+json"

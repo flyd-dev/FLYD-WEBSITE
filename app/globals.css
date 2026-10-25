@@ -40,6 +40,13 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   letter-spacing: -0.01em;
   font-weight: 600;
+  /* Jevne linjer i overskrifter, så ingen slutter med ett ord alene («Møt oss der du / er.»). */
+  text-wrap: balance;
+}
+
+/* Avsnitt: unngå ett ord alene på siste linje der nettleseren støtter det. */
+p, li, dd {
+  text-wrap: pretty;
 }
 
 ::selection {
@@ -87,6 +94,114 @@ input, textarea, select, button {
   outline-color: var(--flyd-mint);
 }
 
+/* Flyd-pekeren (components/FlydPeker.tsx): punktum med flytlinje, og pilleknapp med ikon over det
+   som kan klikkes. Klassen egen-peker settes på <html> av komponenten, aldri ved berøring eller
+   redusert bevegelse. */
+.egen-peker,
+.egen-peker * {
+  cursor: none !important;
+}
+.egen-peker :is(input:not([type="radio"]):not([type="checkbox"]), textarea, select, [contenteditable="true"]) {
+  cursor: auto !important;
+}
+.flyd-peker-spor {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+  pointer-events: none;
+  display: none;
+}
+.egen-peker .flyd-peker-spor,
+.egen-peker .flyd-peker {
+  display: block;
+}
+.flyd-peker {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  will-change: transform;
+}
+.flyd-peker.vis {
+  opacity: 1;
+}
+.flyd-peker[data-tilstand="felt"] {
+  opacity: 0;
+}
+/* Punktumet: Korall som i logoens aksent, med Skog-kant så det synes på lys bunn. */
+.flyd-peker-punktum {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2.5px;
+  background: var(--flyd-korall);
+  box-shadow: 0 0 0 2px var(--flyd-skog);
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.flyd-peker[data-flate="mork"] .flyd-peker-punktum {
+  box-shadow: 0 0 0 2px var(--flyd-sand);
+}
+/* Pilleknappen: samme farger som knappene, Skog på lys bunn og Korall på mørk. Den står nede til
+   høyre for punktumet, så den ikke dekker teksten du peker på. */
+.flyd-peker-pille {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transform-origin: top left;
+  border-radius: 9999px;
+  background: var(--flyd-skog);
+  color: var(--flyd-sand);
+  opacity: 0;
+  transform: scale(0.25) rotate(-45deg);
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+}
+.flyd-peker[data-flate="mork"] .flyd-peker-pille {
+  background: var(--flyd-korall);
+  color: var(--flyd-skog);
+}
+.flyd-peker-pille svg {
+  display: none;
+  width: 15px;
+  height: 15px;
+}
+.flyd-peker:is([data-tilstand="lenke"], [data-tilstand="ekstern"], [data-tilstand="tel"], [data-tilstand="epost"], [data-tilstand="apne"], [data-tilstand="velg"], [data-tilstand="kopier"]) .flyd-peker-pille {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+}
+.flyd-peker[data-tilstand="lenke"] [data-ikon="lenke"],
+.flyd-peker[data-tilstand="ekstern"] [data-ikon="ekstern"],
+.flyd-peker[data-tilstand="tel"] [data-ikon="tel"],
+.flyd-peker[data-tilstand="epost"] [data-ikon="epost"],
+.flyd-peker[data-tilstand="apne"] [data-ikon="apne"],
+.flyd-peker[data-tilstand="velg"] [data-ikon="velg"],
+.flyd-peker[data-tilstand="kopier"] [data-ikon="kopier"] {
+  display: block;
+}
+.flyd-peker.trykk .flyd-peker-pille {
+  transform: scale(0.86);
+}
+.flyd-peker.trykk .flyd-peker-punktum {
+  transform: scale(0.7);
+}
+
+/* Kontorkartet: Sand-glorie rundt stedsnavnene, så de leses over kystlinjene. */
+.kart-navn {
+  text-shadow: 0 0 2px var(--flyd-sand), 0 0 4px var(--flyd-sand), 0 0 6px var(--flyd-sand);
+}
+
 /* Overlay for tekst på bilde (manualen kap. 07): gradient fra venstre i Skog,
    95 % → 82 % ved 45 % → 20 %. Teksten står på den mørke siden. */
 .overlay-skog {
@@ -110,13 +225,17 @@ input, textarea, select, button {
 
 /* Signaturen «full flyd.»: originalfilen (public/brand/fullflyd-outline.png)
    brukes som maske, slik at den alltid tegnes i Sand på Flyd-teal uten at
-   ordmerket skrives på nytt med en skrift. */
+   ordmerket skrives på nytt med en skrift. Masken er originalen skalert til
+   1320 px (3× den største visningen, 440 px) som palett-PNG: 9 kB i stedet
+   for 35 kB. Den hentes med en gang siden lastes, også når signaturen står
+   nederst. Lag den på nytt med sharp: resize({ width: 1320 }) og
+   png({ palette: true, colours: 64, dither: 0 }). */
 .signatur {
   display: block;
   aspect-ratio: 3000 / 801;
   background-color: var(--flyd-sand);
-  -webkit-mask: url('/brand/fullflyd-outline.png') center / contain no-repeat;
-  mask: url('/brand/fullflyd-outline.png') center / contain no-repeat;
+  -webkit-mask: url('/brand/fullflyd-outline-1320.png') center / contain no-repeat;
+  mask: url('/brand/fullflyd-outline-1320.png') center / contain no-repeat;
 }
 
 /* Typewriter-markøren: av/på hvert 0,4 s, uten mellomtoner. */
@@ -226,22 +345,6 @@ input, textarea, select, button {
    opacity. Slås av ved prefers-reduced-motion (nederst).
    --------------------------------------------------------------------------- */
 
-/* Flytlinjene: tegnes inn, så glir et lysere strøk langs linjen. */
-.flytlinje {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  opacity: calc(0.55 - var(--i, 0) * 0.1);
-  animation: flyt-tegn 2.2s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--i, 0) * 160ms + 200ms) forwards,
-    flyt-puls 7s ease-in-out calc(var(--i, 0) * 400ms + 2.4s) infinite;
-}
-@keyframes flyt-tegn {
-  to { stroke-dashoffset: 0; }
-}
-@keyframes flyt-puls {
-  0%, 100% { opacity: calc(0.55 - var(--i, 0) * 0.1); }
-  50% { opacity: calc(0.85 - var(--i, 0) * 0.12); }
-}
-
 /* Fremdriftslinje øverst: viser hvor langt du har lest. Bare der nettleseren
    støtter scroll-drevne animasjoner; ellers vises den ikke. */
 .lesefremdrift {
@@ -335,13 +438,6 @@ input, textarea, select, button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flytlinje {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-  .flytprikk {
-    display: none;
-  }
   .lesefremdrift,
   .rull-zoom,
   .rull-gli,
@@ -360,7 +456,7 @@ input, textarea, select, button {
 
 /* Forsidebildet driver langsomt (kun transform, så LCP påvirkes ikke). */
 .hero-drift {
-  transform-origin: 70% 50%;
+  transform-origin: 70% 15%;
   animation: hero-drift 18s ease-in-out infinite alternate;
 }
 @keyframes hero-drift {

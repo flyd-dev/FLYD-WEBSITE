@@ -2,7 +2,7 @@ import Container from './Container';
 import Section from './Section';
 import Eyebrow from './Eyebrow';
 import Signatur from './Signatur';
-import FlytLinjer from './FlytLinjer';
+import GlassBrett from './GlassBrett';
 import { ButtonLink } from './Button';
 
 type Action = { href: string; label: string; external?: boolean };
@@ -28,7 +28,7 @@ export default function ClosingCta({
 }) {
   return (
     <Section tone="skog" size="lg" className="overflow-hidden">
-      <FlytLinjer className="opacity-50" />
+      <GlassBrett tone="skog" />
       <Container className="relative">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6" data-reveal>

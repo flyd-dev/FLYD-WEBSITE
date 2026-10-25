@@ -50,8 +50,9 @@ const config: Config = {
         shell: '1240px',
       },
       fontSize: {
-        // Tittel: Poppins 600, linje 1,08, sperring −2 %.
-        'display-xl': ['clamp(2.5rem, 5.4vw, 4.5rem)', { lineHeight: '1.08', letterSpacing: '-0.02em' }],
+        // Tittel: Poppins 600, linje 1,08, sperring −2 %. Under ca. 400 px krymper den med skjermen,
+        // så lange ord («Regnskapsfører») får plass på 320 px.
+        'display-xl': ['clamp(min(2.5rem, 10vw), 5.4vw, 4.5rem)', { lineHeight: '1.08', letterSpacing: '-0.02em' }],
         // Overskrift: Poppins 600, linje 1,1, sperring −1 %.
         'display-lg': ['clamp(2rem, 3.8vw, 3.25rem)', { lineHeight: '1.1', letterSpacing: '-0.01em' }],
         'display-md': ['clamp(1.625rem, 2.6vw, 2.25rem)', { lineHeight: '1.1', letterSpacing: '-0.01em' }],

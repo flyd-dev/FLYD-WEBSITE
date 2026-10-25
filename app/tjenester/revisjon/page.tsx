@@ -10,6 +10,7 @@ import NumberedList from '@/components/NumberedList';
 import TeamCard from '@/components/TeamCard';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
+import { synlig } from '@/lib/utkast';
 import { ButtonLink } from '@/components/Button';
 import { pageMetadata, siteUrl } from '@/lib/seo';
 import { serviceUrl, visibleServices } from '@/data/services';
@@ -105,6 +106,9 @@ export default function RevisjonPage() {
               <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">
                 {revisjon.tjenester.tittel}
               </h2>
+              {synlig(revisjon.tjenester.tekst) && (
+                <p className="mt-6 max-w-md text-[17px] leading-[1.65] text-flyd-dempet">{revisjon.tjenester.tekst.tekst}</p>
+              )}
             </div>
             <div className="lg:col-span-7">
               <NumberedList
@@ -127,8 +131,11 @@ export default function RevisjonPage() {
           <div className="max-w-3xl" data-reveal>
             <Eyebrow>{revisjon.team.kicker}</Eyebrow>
             <h2 className="mt-5 font-display text-display-lg font-semibold">{revisjon.team.tittel}</h2>
+            {synlig(revisjon.team.tekst) && (
+              <p className="mt-6 max-w-2xl text-[17px] leading-[1.65] text-flyd-skifer">{revisjon.team.tekst.tekst}</p>
+            )}
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
             {team.map((m) => (
               <TeamCard key={m.email} m={m} />
             ))}
