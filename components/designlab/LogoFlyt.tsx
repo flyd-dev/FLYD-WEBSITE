@@ -13,7 +13,7 @@ const D = 'M -80 150 C 180 40, 420 250, 700 140 S 1180 30, 1480 130';
 const VARIGHET = 60;
 
 // Åtte logoer gir god avstand langs linjen (~210 px hver) uten at pillene overlapper.
-const UTVALG = ['Lervig', 'Driftig', 'Sirdal Fjellpark', 'Pizzabakeren', 'Årring', "Leo's Lekeland", 'Bilstad Bygg', 'Ystepikene'];
+const UTVALG = ['Lervig', 'Driftig', 'Sirdal Fjellpark', 'Sinneshyttå', 'Årring', 'Arkit Interiør', 'Bilstad Bygg', 'Steis'];
 
 const css = `
         @keyframes logoflyt { from { offset-distance: 0%; } to { offset-distance: 100%; } }

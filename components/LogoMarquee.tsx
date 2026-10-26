@@ -16,10 +16,6 @@ const FRICTION = 3;
 const MAX_FLING = 2400;
 /** Piltast flytter denne lengden; med Shift går det raskere. */
 const KEY_STEP = 80;
-/** Mørkere gråtone for lyse logoer (`darken` i data/logos.ts). Full farge ved hover. */
-const DARKEN = {
-  litt: 'brightness-[.5] hover:brightness-100',
-} as const;
 
 export default function LogoMarquee() {
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -224,19 +220,17 @@ export default function LogoMarquee() {
             {customerLogos.map((logo) => (
               <div
                 key={logo.name}
-                className={`mr-20 flex flex-shrink-0 items-center justify-center opacity-60 grayscale mix-blend-multiply transition-[filter,opacity] duration-300 hover:opacity-100 hover:grayscale-0 ${
-                  logo.featured ? 'h-12' : 'h-10'
-                } ${logo.darken ? DARKEN[logo.darken] : ''}`}
+                className="mr-20 flex h-10 flex-shrink-0 items-center justify-center opacity-60 grayscale mix-blend-multiply transition-[filter,opacity] duration-300 hover:opacity-100 hover:grayscale-0"
                 title={logo.name}
               >
                 {/* Småbildene (144 px høye) fra scripts/make-logo-thumbs.mjs. */}
                 <Image
                   src={logo.src.replace('/customer-logo/', '/customer-logo/sma/')}
                   alt={logo.alt}
-                  width={logo.featured ? 192 : 160}
-                  height={logo.featured ? 48 : 40}
-                  sizes={logo.featured ? '192px' : '160px'}
-                  className={`${logo.featured ? 'h-12' : 'h-10'} w-auto object-contain`}
+                  width={160}
+                  height={40}
+                  sizes="160px"
+                  className="h-10 w-auto object-contain"
                   draggable={false}
                 />
               </div>
