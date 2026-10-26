@@ -40,7 +40,6 @@ export default function KopierTekst({ tekst, etikett }: { tekst: string; etikett
         type="button"
         onClick={kopier}
         aria-label={etikett}
-        data-peker="kopier"
         className="inline-flex items-center gap-1.5 rounded-pille border border-flyd-teal px-3 py-1 text-[14px] font-medium text-flyd-skog transition-[background-color,color,border-color] duration-200 hover:border-flyd-skog hover:bg-flyd-skog hover:text-flyd-sand active:translate-y-[1px]"
       >
         {kopiert ? (

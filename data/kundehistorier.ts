@@ -37,13 +37,13 @@ export const kundehistorier: Kundehistorie[] = [
     rolle: 'Daglig leder',
   },
   {
-    kunde: 'Pizzabakeren',
+    kunde: 'Sinneshyttå',
     tall: '12 t',
     tallTekst: 'spart i måneden på lønn',
     tallNote: 'Timer fra kassen rett inn i lønnskjøringen',
     sitat: 'Lønna går av seg selv nå. Vi får spørsmål fra Flyd når noe ser rart ut, ikke etter at det har gått galt.',
     navn: 'Navn Navnesen',
-    rolle: 'Franchisetaker',
+    rolle: 'Daglig leder',
   },
   {
     kunde: 'Bilstad Bygg',
