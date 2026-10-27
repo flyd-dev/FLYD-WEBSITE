@@ -8,13 +8,18 @@ import type { TeamMember } from '@/data/team';
  * lange linjer med prikker: «Kontorleder · Statsautorisert regnskapsfører»
  * blir «Kontorleder og partner» og en egen linje «Statsautorisert
  * regnskapsfører». Partner står i stillingslinjen, eller alene («Partner»).
+ * Flere roller blir en vanlig opplisting: «Kontorleder, fagansvarlig regnskap
+ * og partner».
  */
 function titler(m: TeamMember) {
   const deler = m.role.split(' · ');
   const godkjenning = deler.filter((d) => d.startsWith('Statsautorisert'));
-  const stilling = deler.filter((d) => !d.startsWith('Statsautorisert')).join(' · ');
-  const medPartner = m.partner ? (stilling ? `${stilling} og partner` : 'Partner') : stilling;
-  return { stilling: medPartner, godkjenning };
+  const roller = deler.filter((d) => !d.startsWith('Statsautorisert'));
+  if (m.partner) roller.push('Partner');
+  const liste = roller.map((r, i) => (i === 0 ? r : r[0].toLowerCase() + r.slice(1)));
+  const stilling =
+    liste.length > 1 ? `${liste.slice(0, -1).join(', ')} og ${liste[liste.length - 1]}` : (liste[0] ?? '');
+  return { stilling, godkjenning };
 }
 
 // Myke bindestreker i de lange ordene, så de kan deles på smale kort (to spalter på 320 px).

@@ -60,7 +60,7 @@ export const accountingPartners: TeamMember[] = [
   }),
   mk({
     name: 'Thomas Haaland',
-    role: 'Kontorleder · Statsautorisert regnskapsfører',
+    role: 'Kontorleder · Fagansvarlig regnskap · Statsautorisert regnskapsfører',
     partner: true,
     certified: true,
     phone: '+47 974 11 759',
