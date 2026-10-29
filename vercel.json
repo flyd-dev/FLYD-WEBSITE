@@ -13,12 +13,12 @@
     },
     {
       "source": "/karriere/regnskapsforer-stavanger",
-      "destination": "/kontor/stavanger-sandnes/",
+      "destination": "/karriere/",
       "statusCode": 301
     },
     {
       "source": "/karriere/regnskapsforer-stavanger/",
-      "destination": "/kontor/stavanger-sandnes/",
+      "destination": "/karriere/",
       "statusCode": 301
     },
     {
@@ -39,6 +39,86 @@
     {
       "source": "/karriere/erp-konsulent-stavanger/",
       "destination": "/karriere/",
+      "statusCode": 301
+    },
+    {
+      "source": "/om-oss",
+      "destination": "/om-flyd/",
+      "statusCode": 301
+    },
+    {
+      "source": "/om-oss/",
+      "destination": "/om-flyd/",
+      "statusCode": 301
+    },
+    {
+      "source": "/personvern-2",
+      "destination": "/personvern/",
+      "statusCode": 301
+    },
+    {
+      "source": "/personvern-2/",
+      "destination": "/personvern/",
+      "statusCode": 301
+    },
+    {
+      "source": "/regnskap",
+      "destination": "/tjenester/regnskap/",
+      "statusCode": 301
+    },
+    {
+      "source": "/regnskap/",
+      "destination": "/tjenester/regnskap/",
+      "statusCode": 301
+    },
+    {
+      "source": "/lonn",
+      "destination": "/tjenester/lonn-og-hr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/lonn/",
+      "destination": "/tjenester/lonn-og-hr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/hr-og-personal",
+      "destination": "/tjenester/lonn-og-hr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/hr-og-personal/",
+      "destination": "/tjenester/lonn-og-hr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/rapportering",
+      "destination": "/tjenester/analyse-og-rapportering/",
+      "statusCode": 301
+    },
+    {
+      "source": "/rapportering/",
+      "destination": "/tjenester/analyse-og-rapportering/",
+      "statusCode": 301
+    },
+    {
+      "source": "/flyd-lofter-regnskapsbransjen-med-integrasjoner",
+      "destination": "/tjenester/integrasjoner/",
+      "statusCode": 301
+    },
+    {
+      "source": "/flyd-lofter-regnskapsbransjen-med-integrasjoner/",
+      "destination": "/tjenester/integrasjoner/",
+      "statusCode": 301
+    },
+    {
+      "source": "/utvikling",
+      "destination": "/tjenester/nettsider-og-digitale-flater/",
+      "statusCode": 301
+    },
+    {
+      "source": "/utvikling/",
+      "destination": "/tjenester/nettsider-og-digitale-flater/",
       "statusCode": 301
     }
   ],
