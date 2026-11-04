@@ -7,9 +7,9 @@
  */
 export const mvaFrister = {
   path: '/artikler/mva-frister/',
-  title: 'Mva-frister 2026 – alle terminer og årstermin · Flyd',
+  title: 'MVA-terminer 2026: alle frister for mva-meldingen · Flyd',
   description:
-    'Oversikt over fristene for mva-melding og betaling i 2026, hvem som kan levere én gang i året, og hva som skjer om du leverer for sent.',
+    'Mva-fristene 2026: 10. april, 10. juni, 31. august, 12. oktober, 10. desember og 10. februar 2027. Levering og betaling har samme frist.',
   h1: 'Mva-frister: når skal mva-meldingen leveres og betales?',
   published: '2026-10-15',
   modified: '2026-10-15',
