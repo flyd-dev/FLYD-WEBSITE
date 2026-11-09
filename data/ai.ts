@@ -29,7 +29,7 @@ export const ai = {
       'Vi kobler AI til ERP, CRM, dokumenter og e-post, og lager assistenter og agenter som gjør ferdig oppgaver. Dere beholder kontrollen hele veien.',
   },
 
-  /** Illustrasjonen i toppen. Ingen tall eller kundedata. */
+  /** Illustrasjonen ved siden av problemet («koblingen til virkeligheten»). Ingen tall eller kundedata. */
   samtale: {
     etikett: 'Illustrasjon – AI-assistent',
     meldinger: [
@@ -217,7 +217,7 @@ export const ai = {
     'Løfter: «gratis AI-sjekk», «45 minutter», «fast pris», «et par uker» og «noen uker» må stemme med det vi faktisk leverer.',
     'Systemlisten under «Hvilke systemer kan dere koble AI til?»: bare systemer vi har koblet AI til eller kan koble til.',
     'Vår egen AI: det vi skriver at den gjør, må stemme. En demo viser bare testdata, aldri kundedata.',
-    'Samtalen i toppen er en illustrasjon. Bytt gjerne til et skjermbilde eller en video fra en demo med testdata.',
+    'Samtalen ved siden av «Fra prat til drift» er en illustrasjon. Bytt gjerne til et skjermbilde eller en video fra en demo med testdata.',
     'Kundecase: plassen over spørsmålene fylles når en ekte case med samtykke og dokumenterbare tall er klar.',
   ],
 };

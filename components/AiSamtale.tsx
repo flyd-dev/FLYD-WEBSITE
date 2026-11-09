@@ -4,7 +4,7 @@ import { Check } from 'lucide-react';
 type Melding = { fra: 'du' | 'ai'; tekst: string; handling?: string };
 
 /**
- * Illustrasjon av en AI-assistent i toppen av /tjenester/ai/: et Skog-kort med
+ * Illustrasjon av en AI-assistent på /tjenester/ai/ (ved siden av problemet): et Skog-kort med
  * samtalen som ekte tekst (ikke et bilde), så den leses opp og indekseres.
  * Det du skriver står i Petrol til høyre, svaret i Sand til venstre, og
  * «Godkjenn» viser at et menneske bestemmer. Står stille: ingen skriveeffekt.

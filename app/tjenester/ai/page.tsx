@@ -21,7 +21,8 @@ import { ai } from '@/data/ai';
 
 /**
  * AI og automatisering har egen side i stedet for TjenesteMal: et rent AI-budskap
- * til kampanjen, med illustrasjon i toppen, tjenestene, vår egen AI og spørsmål og
+ * til kampanjen, med bilde av folkene i toppen, en AI-samtale som illustrasjon ved
+ * problemet, tjenestene, vår egen AI og spørsmål og
  * svar. Tekstene står i data/ai.ts. Siden er utkast til status settes til
  * `publisert` i data/services.ts; da forsvinner også sjekklisten nederst.
  */
@@ -94,9 +95,8 @@ export default function AiPage() {
                 </ButtonLink>
               </div>
             </div>
-            {/* Folkene først, samtalen over nedre del av bildet (der skjermen står i forgrunnen). */}
-            <div className="lg:col-span-5">
-              {tjeneste.image && (
+            {tjeneste.image && (
+              <div className="lg:col-span-5">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint">
                   <Image
                     src={tjeneste.image.src}
@@ -107,35 +107,28 @@ export default function AiPage() {
                     className="object-cover"
                   />
                 </div>
-              )}
-              <AiSamtale
-                etikett={ai.samtale.etikett}
-                meldinger={ai.samtale.meldinger}
-                className={
-                  tjeneste.image
-                    ? 'relative -mt-10 ml-5 ring-[6px] ring-flyd-sand sm:-mt-14 sm:ml-20 lg:-ml-10 lg:mr-12'
-                    : undefined
-                }
-              />
-            </div>
+              </div>
+            )}
           </div>
         </Container>
       </Section>
 
-      {/* PROBLEMET – Petrol som seksjonsskille */}
+      {/* PROBLEMET – Petrol som seksjonsskille. Samtalen til høyre viser «koblingen til
+          virkeligheten»: svar fra dataene og et ordreutkast som et menneske godkjenner. */}
       <Section tone="petrol" flyt>
         <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5" data-reveal>
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-6" data-reveal>
               <Eyebrow tone="petrol">{ai.problem.kicker}</Eyebrow>
               <h2 className="mt-5 font-display text-display-lg font-semibold text-flyd-sand">{ai.problem.tittel}</h2>
-            </div>
-            <div className="lg:col-span-7 lg:pt-10" data-reveal>
-              <p className="max-w-2xl text-[17px] leading-[1.65] text-flyd-dempet">{ai.problem.tekst}</p>
-              <blockquote className="mt-10 max-w-2xl border-l-2 border-flyd-mint pl-6 font-display text-[22px] font-medium leading-[1.4] text-flyd-sand md:text-[26px]">
+              <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-dempet">{ai.problem.tekst}</p>
+              <blockquote className="mt-10 max-w-xl border-l-2 border-flyd-mint pl-6 font-display text-[22px] font-medium leading-[1.4] text-flyd-sand md:text-[24px]">
                 {ai.problem.sitat}
               </blockquote>
               <p className="mt-8 text-[17px] font-medium text-flyd-sand">{ai.problem.avslutning}</p>
+            </div>
+            <div className="lg:col-span-5 lg:col-start-8" data-reveal>
+              <AiSamtale etikett={ai.samtale.etikett} meldinger={ai.samtale.meldinger} />
             </div>
           </div>
         </Container>
