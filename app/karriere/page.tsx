@@ -13,7 +13,7 @@ import FlydLogo from '@/components/FlydLogo';
 import BildeAkkordeon from '@/components/BildeAkkordeon';
 import type { FlydIconName } from '@/components/FlydIcon';
 import JsonLd from '@/components/JsonLd';
-import { jobs } from '@/data/jobs';
+import { jobs, apenSoknadHref } from '@/data/jobs';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -125,12 +125,12 @@ export default function KarrierePage() {
                     <ButtonLink href="#ledige-stillinger" variant="primary" withArrow>
                       Se ledige stillinger
                     </ButtonLink>
-                    <ButtonLink href="mailto:support@flyd.no" variant="secondary" external>
+                    <ButtonLink href={apenSoknadHref} variant="secondary" external>
                       Send åpen søknad
                     </ButtonLink>
                   </>
                 ) : (
-                  <ButtonLink href="mailto:support@flyd.no" variant="primary" withArrow external>
+                  <ButtonLink href={apenSoknadHref} variant="primary" withArrow external>
                     Send åpen søknad
                   </ButtonLink>
                 )}
@@ -250,7 +250,7 @@ export default function KarrierePage() {
               </p>
             </div>
             <div className="md:ml-auto">
-              <ButtonLink href="mailto:support@flyd.no" variant="secondary" withArrow external>
+              <ButtonLink href={apenSoknadHref} variant="secondary" withArrow external>
                 Send åpen søknad
               </ButtonLink>
             </div>

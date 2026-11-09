@@ -22,6 +22,10 @@ export type Job = {
 
 export const jobs: Job[] = [];
 
+// «Send åpen søknad» på /karriere går rett til Kai, ikke til support@flyd.no.
+export const apenSoknadEpost = 'kai.mydland@flyd.no';
+export const apenSoknadHref = `mailto:${apenSoknadEpost}?subject=${encodeURIComponent('Åpen søknad')}`;
+
 // Besatte stillinger (august 2026). Flytt en stilling tilbake til `jobs` over
 // hvis den skal lyses ut igjen.
 export const arkiverteJobs: Job[] = [
