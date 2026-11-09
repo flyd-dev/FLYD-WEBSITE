@@ -10,6 +10,7 @@ export const CONTACT_TOPICS = [
   'Analyse og rapportering',
   'Nettsider og digitale flater',
   'Lønn og HR',
+  'AI og automatisering',
   CAREER_TOPIC,
   'Annet',
 ] as const;

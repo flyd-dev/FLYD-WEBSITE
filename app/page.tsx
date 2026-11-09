@@ -16,7 +16,11 @@ import SystemBane from '@/components/SystemBane';
 import UtvidendeHero from '@/components/UtvidendeHero';
 import ForhandslastBilde from '@/components/ForhandslastBilde';
 import { kombinerbareTjenester, uavhengigeTjenester, serviceUrl } from '@/data/services';
+import { sisteRad } from '@/lib/tjenesterutenett';
 import { stats } from '@/data/stats';
+
+// Siste rad i tjenesterutenettet: revisjon i egen bred rad, eller ved siden av den siste tjenesten.
+const tjenesteRad = sisteRad(kombinerbareTjenester.length);
 
 const whyFlyd: { icon: FlydIconName; text: string }[] = [
   { icon: 'samme-tak', text: 'Regnskap, revisjon, rådgivning og teknologi' },
@@ -139,10 +143,11 @@ export default function HomePage() {
             </TextLink>
           </div>
 
-          {/* Tjenestene som kan leveres sammen i rutenettet, revisjon i egen bred rad under. */}
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-            {kombinerbareTjenester.map((s) => (
-              <div key={s.id} data-reveal className="h-full">
+          {/* Tjenestene som kan leveres sammen i rutenettet, revisjon sist: i egen bred rad
+              når tjenestene går opp i hele rader, ellers ved siden av den siste (sisteRad). */}
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-6">
+            {kombinerbareTjenester.map((s, i) => (
+              <div key={s.id} data-reveal className={`h-full ${tjenesteRad.kort(i)}`}>
                 <ServiceCard
                   title={s.title}
                   text={s.short}
@@ -153,8 +158,15 @@ export default function HomePage() {
               </div>
             ))}
             {uavhengigeTjenester.map((s) => (
-              <div key={s.id} data-reveal className="sm:col-span-2 lg:col-span-3">
-                <ServiceCard title={s.title} text={s.short} icon={s.icon} tone="petrol" href={serviceUrl(s)} wide />
+              <div key={s.id} data-reveal className={`h-full ${tjenesteRad.revisjon}`}>
+                <ServiceCard
+                  title={s.title}
+                  text={s.short}
+                  icon={s.icon}
+                  tone="petrol"
+                  href={serviceUrl(s)}
+                  wide={tjenesteRad.revisjonBred}
+                />
               </div>
             ))}
           </div>

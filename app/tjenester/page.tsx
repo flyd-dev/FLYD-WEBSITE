@@ -25,6 +25,8 @@ import {
   type EgenTjeneste,
 } from '@/data/services';
 import { bredtKortKolonner } from '@/components/ServiceCard';
+import { midtISetning } from '@/lib/utils';
+import { sisteRad } from '@/lib/tjenesterutenett';
 
 // Én Service per tjeneste, med egen side. Tjenestesiden har samme @id.
 const servicesJsonLd = {
@@ -47,33 +49,42 @@ const servicesJsonLd = {
 export const metadata: Metadata = pageMetadata({
   title: 'Regnskap, revisjon, rådgivning og ERP – Tjenester',
   description:
-    'Tjenestene til Flyd: regnskap og rådgivning, revisjon, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR.',
+    'Tjenestene til Flyd: regnskap og rådgivning, revisjon, ERP, integrasjoner, analyse, nettsider, lønn og HR, og AI og automatisering.',
   path: '/tjenester/',
 });
 
 const tileTones: ServiceTone[] = ['petrol', 'teal', 'skog'];
 
+const rad = sisteRad(kombinerbareTjenester.length);
+
 /**
  * Tjenestekort med bilde (eller ikonflis), nummer og lenke. `bred` gir et kort over
  * hele rutenettet med bildet til venstre, like bredt som én kolonne (revisjon).
+ * `halv` er et kort over halve rutenettet på desktop (siste rad når AI og revisjon
+ * deler den): bildet blir bredere, men like høyt som i kortene over.
+ * `spalter` er spalteklassene fra sisteRad() (lib/tjenesterutenett.ts).
  */
 function Tjenestekort({
   s,
   nr,
   tone,
+  spalter,
   bred = false,
+  halv = false,
 }: {
   s: Service | EgenTjeneste;
   nr: number;
   tone: ServiceTone;
+  spalter: string;
   bred?: boolean;
+  halv?: boolean;
 }) {
   return (
     <li
       id={s.id}
       data-reveal
       style={{ '--i': nr - 1 } as React.CSSProperties}
-      className={clsx('scroll-mt-28', bred && 'sm:col-span-2 lg:col-span-3')}
+      className={clsx('scroll-mt-28', spalter)}
     >
       <Link
         href={serviceUrl(s)}
@@ -83,19 +94,19 @@ function Tjenestekort({
         )}
       >
         {s.image ? (
-          <div className="relative aspect-[16/10] overflow-hidden rounded-flis bg-flyd-linje-mint">
+          <div className={clsx('relative aspect-[16/10] overflow-hidden rounded-flis bg-flyd-linje-mint', halv && 'lg:aspect-[5/2]')}>
             <div className="rull-zoom absolute inset-0">
               <Image
                 src={s.image.src}
                 alt=""
                 fill
-                sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
+                sizes={halv ? '(min-width: 1024px) 580px, (min-width: 640px) 45vw, 90vw' : '(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw'}
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               />
             </div>
           </div>
         ) : (
-          <ServiceTile name={s.icon} tone={tone} className="aspect-[16/10] w-full rounded-flis" />
+          <ServiceTile name={s.icon} tone={tone} className={clsx('aspect-[16/10] w-full rounded-flis', halv && 'lg:aspect-[5/2]')} />
         )}
         <div className={clsx('flex flex-1 flex-col px-3 pb-3 pt-6', bred && 'sm:pt-3 lg:col-span-2')}>
           <span className="text-[13px] font-bold uppercase tracking-[0.12em] text-flyd-petrol">
@@ -104,7 +115,7 @@ function Tjenestekort({
           <h2 className="mt-2 font-display text-[24px] font-semibold leading-tight">{s.title}</h2>
           <p className="mt-3 text-[16px] leading-[1.6] text-flyd-skifer">{s.short}</p>
           <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[15px] font-medium text-flyd-petrol">
-            Les mer om {s.title.charAt(0).toLowerCase() + s.title.slice(1)}
+            Les mer om {midtISetning(s.title)}
             <ArrowRight className="lenkekort-pil h-4 w-4" strokeWidth={2} aria-hidden="true" />
           </span>
         </div>
@@ -137,13 +148,29 @@ export default function TjenesterPage() {
           lenker til /tjenester/#… lander på riktig kort og leder videre. */}
       <Section tone="sand">
         <Container>
-          {/* Tjenestene som kan leveres sammen i rutenettet, revisjon i egen bred rad under. */}
-          <ul className="stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          {/* Tjenestene som kan leveres sammen i rutenettet, revisjon sist: i egen bred rad
+              når tjenestene går opp i hele rader, ellers ved siden av den siste (sisteRad). */}
+          <ul className="stagger grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-6">
             {kombinerbareTjenester.map((s, i) => (
-              <Tjenestekort key={s.id} s={s} nr={i + 1} tone={tileTones[i % tileTones.length]} />
+              <Tjenestekort
+                key={s.id}
+                s={s}
+                nr={i + 1}
+                tone={tileTones[i % tileTones.length]}
+                spalter={rad.kort(i)}
+                halv={rad.delt && i === kombinerbareTjenester.length - 1}
+              />
             ))}
             {uavhengigeTjenester.map((s, i) => (
-              <Tjenestekort key={s.id} s={s} nr={kombinerbareTjenester.length + i + 1} tone="teal" bred />
+              <Tjenestekort
+                key={s.id}
+                s={s}
+                nr={kombinerbareTjenester.length + i + 1}
+                tone="teal"
+                spalter={rad.revisjon}
+                bred={rad.revisjonBred}
+                halv={rad.delt}
+              />
             ))}
           </ul>
           <p className="mt-12 text-[17px] leading-[1.7] text-flyd-skifer" data-reveal>

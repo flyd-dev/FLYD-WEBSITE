@@ -293,6 +293,23 @@ export const services: (Service | EgenTjeneste)[] = [
     },
   },
   {
+    // Egen side (app/tjenester/ai/), tekstene står i data/ai.ts. Til AI-kampanjen,
+    // publisert 9.11.2026.
+    id: 'ai',
+    slug: 'ai',
+    status: 'publisert',
+    tema: 'AI og automatisering',
+    title: 'AI og automatisering',
+    short: 'AI som jobber i systemene dine – med dine data og din arbeidsflyt. Fra første idé til løsning i drift.',
+    icon: 'ai',
+    // Profileringsbildene (SharePoint › Egersund, DSC_4913), utsnitt 4:3.
+    image: {
+      src: '/tjenestebilder/ai.webp',
+      alt: 'Tre kolleger i Flyd ler sammen rundt en skjerm på kontoret i Egersund',
+    },
+    egenSide: true,
+  },
+  {
     // Egen side (app/tjenester/revisjon/), tekstene står i data/revisjon.ts.
     // Står sist: vises i egen rad under de andre tjenestene (uavhengig).
     id: 'revisjon',

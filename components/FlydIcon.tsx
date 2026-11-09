@@ -7,8 +7,8 @@ import type { ReactNode } from 'react';
  *
  * Strek i Flyd-teal på lys bunn og Mint på mørk; punktumet er alltid Korall.
  * Bare ikonene nettstedet bruker er lagt inn her – resten av settet ligger i
- * brand_assets/ikoner/. Klokke, sky og plugg er tegnet etter samme mal
- * (Lucide-geometri, punktumet som dreiepunkt eller midt i formen).
+ * brand_assets/ikoner/. Klokke, sky, plugg, skjold og godkjenn er tegnet etter
+ * samme mal (Lucide-geometri, punktumet som dreiepunkt eller midt i formen).
  */
 const icons = {
   'samme-tak': {
@@ -186,6 +186,33 @@ const icons = {
       </>
     ),
     dot: [15.5, 16.5],
+  },
+  // Nettside: nettleservindu med innhold, punktumet er bildet til høyre for teksten.
+  nettsider: {
+    body: (
+      <>
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <path d="M3 9h18M7 13h4M7 16.5h4" />
+      </>
+    ),
+    dot: [14.5, 13],
+  },
+  // Skjold for sikkerhet og personvern: punktumet midt i skjoldet.
+  skjold: {
+    body: (
+      <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+    ),
+    dot: [10.5, 10.5],
+  },
+  // Peker som klikker – et menneske godkjenner. Punktumet er klikket, strålene går ut fra det.
+  godkjenn: {
+    body: (
+      <>
+        <path d="M10.5 10.5 20.5 14.5 16 16 14.5 20.5Z" />
+        <path d="M7 3.5v-2M3.5 7h-2M10.2 3.8l1.6-1.6M3.8 10.2l-1.6 1.6" />
+      </>
+    ),
+    dot: [5.5, 5.5],
   },
 } satisfies Record<string, { body: ReactNode; dot: [number, number] }>;
 

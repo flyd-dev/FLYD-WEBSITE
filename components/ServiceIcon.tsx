@@ -91,6 +91,11 @@ const icons = {
     ),
     dot: [15.5, 14.5],
   },
+  // Gnist: den store stjernen er AI-en, punktumet den lille gnisten oppe til høyre.
+  ai: {
+    body: <path d="M10.5 5Q11.4 12.6 19 13.5 11.4 14.4 10.5 22 9.6 14.4 2 13.5 9.6 12.6 10.5 5Z" />,
+    dot: [17.5, 2.5],
+  },
 } satisfies Record<string, { body: ReactNode; dot: [number, number] }>;
 
 export type ServiceIconName = keyof typeof icons;
