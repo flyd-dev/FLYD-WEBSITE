@@ -12,19 +12,17 @@ import FlydIcon from '@/components/FlydIcon';
 import AiSamtale from '@/components/AiSamtale';
 import ClosingCta from '@/components/ClosingCta';
 import JsonLd from '@/components/JsonLd';
-import Bekreft, { UtkastBanner } from '@/components/Bekreft';
+import { UtkastBanner } from '@/components/Bekreft';
 import { ButtonLink } from '@/components/Button';
 import { pageMetadata, siteUrl } from '@/lib/seo';
-import { visUtkast } from '@/lib/utkast';
 import { serviceUrl, visibleServices } from '@/data/services';
 import { ai } from '@/data/ai';
 
 /**
  * AI og automatisering har egen side i stedet for TjenesteMal: et rent AI-budskap
  * til kampanjen, med bilde av folkene i toppen, en AI-samtale som illustrasjon ved
- * problemet, tjenestene, vår egen AI og spørsmål og
- * svar. Tekstene står i data/ai.ts. Siden er utkast til status settes til
- * `publisert` i data/services.ts; da forsvinner også sjekklisten nederst.
+ * problemet, tjenestene, vår egen AI og spørsmål og svar. Tekstene står i
+ * data/ai.ts. Status styres av tjenesten i data/services.ts.
  */
 const tjeneste = visibleServices.find((s) => s.slug === 'ai');
 const utkast = tjeneste?.status === 'utkast';
@@ -41,7 +39,6 @@ export const metadata: Metadata = {
 export default function AiPage() {
   if (!tjeneste) notFound();
   const kontakt = `/kontakt?tema=${encodeURIComponent(tjeneste.tema.toLowerCase())}`;
-  const visSjekk = utkast && visUtkast;
 
   const serviceJsonLd = {
     '@context': 'https://schema.org',
@@ -259,14 +256,11 @@ export default function AiPage() {
               </li>
             ))}
           </ol>
-          {visSjekk && (
-            <Bekreft className="mt-16 max-w-3xl">
-              kundecase her – navn, utfordring, løsning og resultat, med kundens samtykke og tall som kan
-              dokumenteres. Seksjonen legges inn når casen er klar.
-            </Bekreft>
-          )}
         </Container>
       </Section>
+
+      {/* Kundecase kommer her, mellom stegene og spørsmålene, når en ekte case med
+          samtykke og dokumenterbare tall er klar. */}
 
       {/* SPØRSMÅL OG SVAR */}
       <Section tone="sand">
@@ -292,25 +286,6 @@ export default function AiPage() {
           </div>
         </Container>
       </Section>
-
-      {/* SJEKKLISTE – bare på utkastet */}
-      {visSjekk && (
-        <Section tone="lysmint" size="sm">
-          <Container>
-            <div className="max-w-3xl">
-              <Eyebrow>Internt – vises ikke på flyd.no</Eyebrow>
-              <h2 className="mt-5 font-display text-display-md font-semibold">Må sjekkes før siden publiseres</h2>
-              <ul className="mt-8 space-y-3">
-                {ai.sjekkliste.map((punkt) => (
-                  <li key={punkt}>
-                    <Bekreft>{punkt}</Bekreft>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Container>
-        </Section>
-      )}
 
       <ClosingCta
         kicker={ai.avslutning.kicker}

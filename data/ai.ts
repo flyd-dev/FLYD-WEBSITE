@@ -4,14 +4,18 @@ import type { FlydIconName } from '@/components/FlydIcon';
 /**
  * Innholdet på /tjenester/ai/ (app/tjenester/ai/page.tsx).
  *
- * Utkast til en AI-kampanje (nov. 2026): et rent AI-budskap som ikke handler om
+ * Tjenesteside til AI-kampanjen (nov. 2026): et rent AI-budskap som ikke handler om
  * regnskap eller revisjon. Teksten bygger på Floyds skisse til tjenesteside, strammet
  * inn så ingenting står to ganger på siden: «Bruksområder» er bakt inn i
  * tjenestekortene, og «Fra idé til drift» under «Hvorfor Flyd» er tatt ut fordi
  * tjenesteoverskriften sier det samme.
  *
- * Siden er utkast (`status` på tjenesten i data/services.ts) og vises bare lokalt
- * og på forhåndsvisninger. Gå gjennom `sjekkliste` før den settes til `publisert`.
+ * Publisert 9.11.2026 med mildere tekst enn skissen: ingen «gratis AI-sjekk», «fast
+ * pris», «45 minutter» eller tidsangivelser, og personvernsvaret er generelt (ikke at
+ * dataene «ikke brukes til å trene andres modeller»). Legg ikke inn slike løfter før
+ * de er bekreftet, og personvernsvaret bare etter godkjenning fra den som har ansvar
+ * for personvern og IT. Kundecase legges inn når en ekte case med samtykke og
+ * dokumenterbare tall er klar.
  */
 export const ai = {
   meta: {
@@ -69,7 +73,7 @@ export const ai = {
         ikon: 'sparring',
         tittel: 'AI-assistent for de ansatte',
         tekst:
-          'En assistent som kjenner bedriften. Den finner svar i systemene, dokumentene og e-posten, alltid med den ansattes egne tilganger. Spør bedriften din som du spør en kollega.',
+          'En assistent som kjenner bedriften. Den finner svar i systemene, dokumentene og e-posten, med den ansattes egne tilganger. Spør bedriften din som du spør en kollega.',
       },
       {
         ikon: 'automatisering',
@@ -117,7 +121,7 @@ export const ai = {
       {
         ikon: 'skjold',
         tittel: 'Trygt fra start',
-        tekst: 'AI-en ser bare det brukeren selv har tilgang til, og dataene deres forblir deres.',
+        tekst: 'Vi går gjennom tilganger, sikkerhet og personvern med dere før noe tas i bruk.',
       },
       {
         ikon: 'lokal',
@@ -152,7 +156,7 @@ export const ai = {
     steg: [
       {
         tittel: 'AI-sjekk',
-        tekst: 'En uforpliktende samtale på 45\u00A0minutter. Vi blir kjent med bedriften og peker på de første mulighetene.',
+        tekst: 'En uforpliktende samtale der vi blir kjent med bedriften og peker på de første mulighetene.',
       },
       {
         tittel: 'Kartlegging',
@@ -179,19 +183,19 @@ export const ai = {
       },
       {
         q: 'Er dataene våre trygge?',
-        a: 'AI-en ser bare det brukeren selv har tilgang til, og vi setter opp løsningen slik at dataene deres ikke brukes til å trene andres modeller. Vi går gjennom sikkerhet og personvern med dere før vi starter.',
+        a: 'Sikkerhet og personvern er en del av løsningen fra starten. Før vi bygger noe, går vi sammen med dere gjennom hvilke data AI-en skal bruke, hvem som skal ha tilgang og hvor dataene behandles.',
       },
       {
         q: 'Hvilke systemer kan dere koble AI til?',
-        a: 'Vanlige forretningssystemer som Tripletex, Visma Business NXT, Uni Micro og PowerOffice Go, i tillegg til Microsoft 365, CRM og bransjesystemer. Har dere noe annet, finner vi en løsning.',
+        a: 'Vanlige forretningssystemer som Tripletex, Visma Business NXT, Uni Micro og PowerOffice Go, i tillegg til Microsoft 365, CRM og bransjesystemer. Har dere andre systemer, ser vi på mulighetene sammen med dere.',
       },
       {
         q: 'Hvor lang tid tar det?',
-        a: 'En kartlegging tar et par uker. De første løsningene kan være i drift i løpet av noen uker, avhengig av omfang.',
+        a: 'Det avhenger av omfanget. Etter kartleggingen får dere en plan med tidslinje, og vi starter gjerne med en avgrenset løsning som kan tas i bruk tidlig.',
       },
       {
         q: 'Hva koster det?',
-        a: 'Vi starter med en gratis AI-sjekk. Kartleggingen har fast pris, og dere får et tydelig estimat før vi bygger noe.',
+        a: 'Det avhenger av hva som skal bygges. Vi starter med en uforpliktende samtale, og dere får et tydelig estimat før vi bygger noe.',
       },
       {
         q: 'Tar AI over jobben til de ansatte?',
@@ -204,20 +208,6 @@ export const ai = {
     kicker: 'Kom i gang',
     tittel: 'Hvor vil du starte?',
     tekst:
-      'Fortell oss om bedriften og hvor tiden går i dag. Så finner vi ut hvor AI kan gjøre en forskjell – på 45\u00A0minutter, uten forpliktelser.',
+      'Fortell oss om bedriften og hvor tiden går i dag. Så finner vi ut hvor AI kan gjøre en forskjell – uten forpliktelser.',
   },
-
-  /**
-   * Vises bare på utkastet, nederst på siden. Fra sjekklisten i Floyds skisse.
-   * Når alt er avklart: sett tjenesten til `publisert` i data/services.ts og
-   * temaet i data/kontaktskjema.ts, og legg siden inn i metadata på /tjenester.
-   */
-  sjekkliste: [
-    'Personvern: svaret på «Er dataene våre trygge?» og punktet «Trygt fra start» godkjennes av den som har ansvar for personvern og IT.',
-    'Løfter: «gratis AI-sjekk», «45 minutter», «fast pris», «et par uker» og «noen uker» må stemme med det vi faktisk leverer.',
-    'Systemlisten under «Hvilke systemer kan dere koble AI til?»: bare systemer vi har koblet AI til eller kan koble til.',
-    'Vår egen AI: det vi skriver at den gjør, må stemme. En demo viser bare testdata, aldri kundedata.',
-    'Samtalen ved siden av «Fra prat til drift» er en illustrasjon. Bytt gjerne til et skjermbilde eller en video fra en demo med testdata.',
-    'Kundecase: plassen over spørsmålene fylles når en ekte case med samtykke og dokumenterbare tall er klar.',
-  ],
 };

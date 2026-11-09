@@ -69,7 +69,6 @@ export const temaValg: TemaValg[] = [
     setning: 'AI og automatisering',
     hint: 'Fortell gjerne hvilke systemer dere bruker, og hvor tiden går i dag.',
     ikon: { sett: 'tjeneste', navn: 'ai' },
-    status: 'utkast',
   },
   {
     tema: 'Revisjon',

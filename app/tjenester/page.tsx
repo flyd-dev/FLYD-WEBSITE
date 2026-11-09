@@ -49,7 +49,7 @@ const servicesJsonLd = {
 export const metadata: Metadata = pageMetadata({
   title: 'Regnskap, revisjon, rådgivning og ERP – Tjenester',
   description:
-    'Tjenestene til Flyd: regnskap og rådgivning, revisjon, ERP/programvare, integrasjoner, analyse, nettsider og digitale flater, lønn og HR.',
+    'Tjenestene til Flyd: regnskap og rådgivning, revisjon, ERP, integrasjoner, analyse, nettsider, lønn og HR, og AI og automatisering.',
   path: '/tjenester/',
 });
 

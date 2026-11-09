@@ -293,11 +293,11 @@ export const services: (Service | EgenTjeneste)[] = [
     },
   },
   {
-    // Egen side (app/tjenester/ai/), tekstene står i data/ai.ts. Utkast til
-    // AI-kampanjen (nov. 2026); se sjekklisten der før den publiseres.
+    // Egen side (app/tjenester/ai/), tekstene står i data/ai.ts. Til AI-kampanjen,
+    // publisert 9.11.2026.
     id: 'ai',
     slug: 'ai',
-    status: 'utkast',
+    status: 'publisert',
     tema: 'AI og automatisering',
     title: 'AI og automatisering',
     short: 'AI som jobber i systemene dine – med dine data og din arbeidsflyt. Fra første idé til løsning i drift.',
