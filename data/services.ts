@@ -302,6 +302,11 @@ export const services: (Service | EgenTjeneste)[] = [
     title: 'AI og automatisering',
     short: 'AI som jobber i systemene dine – med dine data og din arbeidsflyt. Fra første idé til løsning i drift.',
     icon: 'ai',
+    // Profileringsbildene (SharePoint › Egersund, DSC_4913), utsnitt 4:3.
+    image: {
+      src: '/tjenestebilder/ai.webp',
+      alt: 'Tre kolleger i Flyd ler sammen rundt en skjerm på kontoret i Egersund',
+    },
     egenSide: true,
   },
   {

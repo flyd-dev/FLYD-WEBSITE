@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Fragment } from 'react';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Check, Plus } from 'lucide-react';
 import Container from '@/components/Container';
@@ -93,8 +94,29 @@ export default function AiPage() {
                 </ButtonLink>
               </div>
             </div>
+            {/* Folkene først, samtalen over nedre del av bildet (der skjermen står i forgrunnen). */}
             <div className="lg:col-span-5">
-              <AiSamtale etikett={ai.samtale.etikett} meldinger={ai.samtale.meldinger} />
+              {tjeneste.image && (
+                <div className="relative aspect-[4/3] overflow-hidden rounded-bilde bg-flyd-lysmint">
+                  <Image
+                    src={tjeneste.image.src}
+                    alt={tjeneste.image.alt}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              )}
+              <AiSamtale
+                etikett={ai.samtale.etikett}
+                meldinger={ai.samtale.meldinger}
+                className={
+                  tjeneste.image
+                    ? 'relative -mt-10 ml-5 ring-[6px] ring-flyd-sand sm:-mt-14 sm:ml-20 lg:-ml-10 lg:mr-12'
+                    : undefined
+                }
+              />
             </div>
           </div>
         </Container>
