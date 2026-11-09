@@ -86,6 +86,9 @@ export default function TjenesteMeny({
 
   const vanlige = tjenester.filter((t) => !t.separat);
   const separate = tjenester.filter((t) => t.separat);
+  // Revisjon står under streken når de andre går opp i hele rader. Blir det en tom
+  // plass på siste rad (sju tjenester), tar revisjon den, så menyen blir symmetrisk.
+  const iRutenettet = vanlige.length % 2 === 1;
 
   const rad = (t: MenyTjeneste, i: number) => (
     <Link
@@ -147,8 +150,11 @@ export default function TjenesteMeny({
         <div className="mx-auto max-w-shell px-6 md:px-10">
           <div className="grid grid-cols-12 gap-3 rounded-kort bg-flyd-lysmint p-3">
             <div className="col-span-8">
-              <div className="grid grid-cols-2 gap-1">{vanlige.map(rad)}</div>
-              {separate.length > 0 && (
+              <div className="grid grid-cols-2 gap-1">
+                {vanlige.map(rad)}
+                {iRutenettet && separate.map((t) => rad(t, 1))}
+              </div>
+              {!iRutenettet && separate.length > 0 && (
                 <div className="mt-2 border-t border-flyd-linje-mint pt-2">
                   <div className="grid grid-cols-2 gap-1">{separate.map((t) => rad(t, 1))}</div>
                 </div>

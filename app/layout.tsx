@@ -87,7 +87,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Tjenestene i nedtrekksmenyen under «Tjenester». Revisjon på egen rad (holdes adskilt fra regnskap).
+// Tjenestene i nedtrekksmenyen under «Tjenester». Revisjon står sist: under en strek når de andre
+// går opp i hele rader, ellers på den tomme plassen ved siden av den siste (TjenesteMeny).
 const menyTjenester: MenyTjeneste[] = [
   ...kombinerbareTjenester.map((t) => ({ title: t.title, short: t.short, icon: t.icon, href: serviceUrl(t) })),
   ...uavhengigeTjenester.map((t) => ({ title: t.title, short: t.short, icon: t.icon, href: serviceUrl(t), separat: true })),
