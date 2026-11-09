@@ -27,8 +27,9 @@ import {
   type Service,
 } from '@/data/services';
 import { allTeam } from '@/data/team';
+import { midtISetning } from '@/lib/utils';
 
-const lc = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
+const lc = midtISetning;
 
 /**
  * Mal for én tjeneste (/tjenester/[slug]/). Innholdet kommer fra

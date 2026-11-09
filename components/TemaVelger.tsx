@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { Check, ChevronDown } from 'lucide-react';
 import ServiceIcon from './ServiceIcon';
 import FlydIcon from './FlydIcon';
-import { temaValg, type TemaValg } from '@/data/kontaktskjema';
+import type { TemaValg } from '@/data/kontaktskjema';
 
 // Stor forbokstav i menyen; i setningen står temaet med små bokstaver.
 const menyTekst = (v: TemaValg) => v.setning.charAt(0).toUpperCase() + v.setning.slice(1);
@@ -20,8 +20,10 @@ const menyTekst = (v: TemaValg) => v.setning.charAt(0).toUpperCase() + v.setning
  * Returnerer knappen og listen hver for seg: knappen står midt i overskriften,
  * listen under den (en liste kan ikke stå inne i en overskrift). Listen
  * plasseres mot nærmeste posisjonerte forelder.
+ *
+ * `temaValg` er temaene som vises nå (synligeTemaValg() i data/kontaktskjema.ts).
  */
-export function useTemaVelger(verdi: string, onEndre: (tema: string) => void) {
+export function useTemaVelger(verdi: string, onEndre: (tema: string) => void, temaValg: TemaValg[]) {
   const [apen, setApen] = useState(false);
   const [aktiv, setAktiv] = useState(0);
   const knapp = useRef<HTMLButtonElement>(null);

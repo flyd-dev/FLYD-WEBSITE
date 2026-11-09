@@ -11,6 +11,7 @@ import { ArrowRight } from 'lucide-react';
 import Kontorkart from '@/components/Kontorkart';
 import JsonLd from '@/components/JsonLd';
 import { offices, officeLabel } from '@/data/offices';
+import { synligeTemaValg } from '@/data/kontaktskjema';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -76,7 +77,7 @@ export default function KontaktPage() {
             </div>
 
             <div className="lg:col-span-7">
-              <ContactForm />
+              <ContactForm temaValg={synligeTemaValg()} />
             </div>
           </div>
         </Container>

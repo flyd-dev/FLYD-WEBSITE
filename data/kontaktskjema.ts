@@ -1,6 +1,7 @@
 import type { ContactTopic } from '@/lib/contact-topics';
 import type { ServiceIconName } from '@/components/ServiceIcon';
 import type { FlydIconName } from '@/components/FlydIcon';
+import { synlig, type Status } from '@/lib/utkast';
 
 /**
  * Temaene i kontaktskjemaet (/kontakt), slik de står i setningen
@@ -12,7 +13,8 @@ import type { FlydIconName } from '@/components/FlydIcon';
  * folk vet hva som er nyttig å skrive. `ikon` vises i nedtrekksmenyen
  * (tjenesteikonene, og Flyds ikoner for karriere og annet). `skille` gir en
  * strek over valget: revisjon står adskilt fra de andre tjenestene, som i
- * Tjenester-menyen.
+ * Tjenester-menyen. `status: 'utkast'` følger tjenesten i data/services.ts:
+ * temaet står da bare i menyen lokalt og på forhåndsvisninger.
  */
 export type TemaValg = {
   tema: ContactTopic;
@@ -21,6 +23,8 @@ export type TemaValg = {
   hint: string;
   ikon: { sett: 'tjeneste'; navn: ServiceIconName } | { sett: 'flyd'; navn: FlydIconName };
   skille?: true;
+  /** Utkast vises bare lokalt og på forhåndsvisninger. Uten feltet: publisert. */
+  status?: Status;
 };
 
 export const temaValg: TemaValg[] = [
@@ -61,6 +65,13 @@ export const temaValg: TemaValg[] = [
     ikon: { sett: 'tjeneste', navn: 'lonn' },
   },
   {
+    tema: 'AI og automatisering',
+    setning: 'AI og automatisering',
+    hint: 'Fortell gjerne hvilke systemer dere bruker, og hvor tiden går i dag.',
+    ikon: { sett: 'tjeneste', navn: 'ai' },
+    status: 'utkast',
+  },
+  {
     tema: 'Revisjon',
     setning: 'revisjon',
     hint: 'Fortell gjerne om selskapet og hva du trenger: revisjon, en revisorbekreftelse eller en annen attestasjon.',
@@ -80,3 +91,9 @@ export const temaValg: TemaValg[] = [
     ikon: { sett: 'flyd', navn: 'dialog' },
   },
 ];
+
+/**
+ * Temaene som vises i menyen nå. Regnes ut på serveren (app/kontakt/page.tsx) og
+ * sendes til skjemaet, så utkastmodusen ikke avhenger av miljøvariabler i nettleseren.
+ */
+export const synligeTemaValg = () => temaValg.filter((v) => synlig({ status: v.status ?? 'publisert' }));

@@ -6,7 +6,8 @@ import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
 import { useTemaVelger } from './TemaVelger';
 import { getAdClick, trackCareerInquiry, trackLead } from './Analytics';
-import { CAREER_TOPIC, CONTACT_TOPICS } from '@/lib/contact-topics';
+import { CAREER_TOPIC } from '@/lib/contact-topics';
+import type { TemaValg } from '@/data/kontaktskjema';
 
 // Temaene ligger i lib/contact-topics.ts, samme liste som serveren godtar.
 // Hvordan de står i overskriften og menyen, ikonene og hintet i meldingsfeltet
@@ -37,20 +38,20 @@ const lenkeCls =
  * Korall-knappen. Valgt i designlab (okt. 2026) foran et rolig skjema med
  * temapiller og et delt kort.
  */
-export default function ContactForm() {
+export default function ContactForm({ temaValg }: { temaValg: TemaValg[] }) {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [tema, setTema] = useState('');
   const takkRef = useRef<HTMLHeadingElement>(null);
   const rotRef = useRef<HTMLDivElement>(null);
-  const velger = useTemaVelger(tema, setTema);
+  const velger = useTemaVelger(tema, setTema, temaValg);
 
   useEffect(() => {
     const fraLenke = new URLSearchParams(window.location.search).get('tema')?.toLowerCase();
-    const match = CONTACT_TOPICS.find((t) => t.toLowerCase() === fraLenke);
-    if (match) setTema(match);
-  }, []);
+    const match = temaValg.find((v) => v.tema.toLowerCase() === fraLenke);
+    if (match) setTema(match.tema);
+  }, [temaValg]);
 
   // Fokus til takken etter sending, og tilbake til temaet ved «Send en ny».
   const fokusEtter = useRef<'takk' | 'tema' | null>(null);

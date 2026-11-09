@@ -25,6 +25,7 @@ import {
   type EgenTjeneste,
 } from '@/data/services';
 import { bredtKortKolonner } from '@/components/ServiceCard';
+import { midtISetning } from '@/lib/utils';
 
 // Én Service per tjeneste, med egen side. Tjenestesiden har samme @id.
 const servicesJsonLd = {
@@ -104,7 +105,7 @@ function Tjenestekort({
           <h2 className="mt-2 font-display text-[24px] font-semibold leading-tight">{s.title}</h2>
           <p className="mt-3 text-[16px] leading-[1.6] text-flyd-skifer">{s.short}</p>
           <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[15px] font-medium text-flyd-petrol">
-            Les mer om {s.title.charAt(0).toLowerCase() + s.title.slice(1)}
+            Les mer om {midtISetning(s.title)}
             <ArrowRight className="lenkekort-pil h-4 w-4" strokeWidth={2} aria-hidden="true" />
           </span>
         </div>
