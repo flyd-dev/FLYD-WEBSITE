@@ -2,6 +2,16 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/ai",
+      "destination": "/tjenester/ai/",
+      "statusCode": 302
+    },
+    {
+      "source": "/ai/",
+      "destination": "/tjenester/ai/",
+      "statusCode": 302
+    },
+    {
       "source": "/kontor/stavanger",
       "destination": "/kontor/stavanger-sandnes/",
       "statusCode": 301
