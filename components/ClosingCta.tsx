@@ -17,7 +17,7 @@ export default function ClosingCta({
   kicker,
   title,
   text,
-  primary = { href: '/kontakt', label: 'Snakk med oss' },
+  primary = { href: '/kontakt/', label: 'Snakk med oss' },
   secondary = { href: 'tel:+4748019958', label: 'Ring oss', external: true },
 }: {
   kicker?: string;

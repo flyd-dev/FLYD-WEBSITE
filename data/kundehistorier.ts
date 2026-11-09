@@ -16,7 +16,7 @@ export const kundehistorier: Kundehistorie[] = [
     sitat: 'Før brukte vi første uka i måneden på å jage bilag. Nå har vi tallene klare før vi rekker å spørre etter dem.',
     navn: 'Navn Navnesen',
     rolle: 'Økonomisjef',
-    href: '/kontakt',
+    href: '/kontakt/',
   },
   {
     kunde: 'Driftig',

@@ -250,7 +250,7 @@ export default function OmFlydPage() {
       <ClosingCta
         title="Vil du vite mer om hvem vi er?"
         text="Ta kontakt – så finner vi en anledning til å møtes, enten på et kontor, i en videosamtale eller over en kaffe."
-        secondary={{ href: '/karriere', label: 'Jobb hos oss' }}
+        secondary={{ href: '/karriere/', label: 'Jobb hos oss' }}
       />
     </>
   );

@@ -152,7 +152,7 @@ export default function KontorMal({ office }: { office: Office }) {
                 </div>
               )}
               <div className="mt-10 flex flex-wrap items-center gap-4">
-                <ButtonLink href="/kontakt" variant="primary" withArrow>
+                <ButtonLink href="/kontakt/" variant="primary" withArrow>
                   Snakk med oss
                 </ButtonLink>
                 <ButtonLink href="tel:+4748019958" variant="secondary" external>

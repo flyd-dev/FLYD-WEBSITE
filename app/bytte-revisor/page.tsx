@@ -20,7 +20,7 @@ export const metadata: Metadata = pageMetadata({
   path: b.path,
 });
 
-const kontakt = `/kontakt?tema=${encodeURIComponent('revisjon')}`;
+const kontakt = `/kontakt/?tema=${encodeURIComponent('revisjon')}`;
 
 export default function BytteRevisorPage() {
   return (

@@ -10,11 +10,11 @@ import FlydLogo from './FlydLogo';
 import TjenesteMeny, { type MenyTjeneste } from './TjenesteMeny';
 
 const nav = [
-  { href: '/tjenester', label: 'Tjenester' },
-  { href: '/kontor', label: 'Kontorer' },
-  { href: '/om-flyd', label: 'Om Flyd' },
-  { href: '/karriere', label: 'Karriere' },
-  { href: '/kontakt', label: 'Kontakt' },
+  { href: '/tjenester/', label: 'Tjenester' },
+  { href: '/kontor/', label: 'Kontorer' },
+  { href: '/om-flyd/', label: 'Om Flyd' },
+  { href: '/karriere/', label: 'Karriere' },
+  { href: '/kontakt/', label: 'Kontakt' },
 ];
 
 export default function Header({ tjenester }: { tjenester?: MenyTjeneste[] } = {}) {
@@ -112,7 +112,7 @@ export default function Header({ tjenester }: { tjenester?: MenyTjeneste[] } = {
                   : 'text-flyd-skifer',
               );
               // Nedtrekksmeny for Tjenester når layouten sender listen.
-              if (item.href === '/tjenester' && tjenester?.length) {
+              if (item.href === '/tjenester/' && tjenester?.length) {
                 return (
                   <TjenesteMeny key={item.href} tjenester={tjenester} aktiv={isActive(item.href)} lenkeKlasse={klasse} />
                 );
@@ -131,7 +131,7 @@ export default function Header({ tjenester }: { tjenester?: MenyTjeneste[] } = {
           </nav>
 
           <div className="hidden md:block">
-            <ButtonLink href="/kontakt" variant="primary" className="!px-5 !py-2.5 !text-[15px]">
+            <ButtonLink href="/kontakt/" variant="primary" className="!px-5 !py-2.5 !text-[15px]">
               Snakk med oss
             </ButtonLink>
           </div>
@@ -200,7 +200,7 @@ export default function Header({ tjenester }: { tjenester?: MenyTjeneste[] } = {
           ))}
           <div className="mt-10 flex flex-col gap-3">
             <ButtonLink
-              href="/kontakt"
+              href="/kontakt/"
               variant="primary"
               className="w-full"
               onClick={() => setOpen(false)}

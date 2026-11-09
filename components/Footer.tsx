@@ -13,17 +13,17 @@ const lenke = 'transition-colors hover:text-flyd-mint';
 
 const flydLenker = [
   { href: '/', label: 'Forside' },
-  { href: '/tjenester', label: 'Tjenester' },
-  { href: '/kontor', label: 'Kontorer' },
+  { href: '/tjenester/', label: 'Tjenester' },
+  { href: '/kontor/', label: 'Kontorer' },
   { href: '/artikler/', label: 'Artikler' },
-  { href: '/om-flyd', label: 'Om Flyd' },
+  { href: '/om-flyd/', label: 'Om Flyd' },
 ];
 
 const komIGangLenker = [
   { href: '/bytte-regnskapsforer/', label: 'Bytte regnskapsfører' },
   { href: '/bytte-revisor/', label: 'Bytte revisor' },
-  { href: '/karriere', label: 'Karriere' },
-  { href: '/kontakt', label: 'Kontakt' },
+  { href: '/karriere/', label: 'Karriere' },
+  { href: '/kontakt/', label: 'Kontakt' },
 ];
 
 function Lenkeliste({ tittel, lenker }: { tittel: string; lenker: { href: string; label: string }[] }) {
@@ -138,7 +138,7 @@ export default function Footer() {
             <nav aria-label="Personvern og samtykke">
               <ul className="flex flex-wrap gap-x-5 gap-y-2 text-[14px] text-flyd-dempet">
                 <li>
-                  <Link href="/personvern" className={lenke}>
+                  <Link href="/personvern/" className={lenke}>
                     Personvern
                   </Link>
                 </li>
