@@ -149,12 +149,12 @@ export const hubFaq: HubFaq[] = [
   },
   {
     q: 'Må jeg bruke kontoret nærmest meg?',
-    a: 'Nei. Ett nummer gjelder for alle kontorene. Ring +47 480 19 958 eller skriv til support@flyd.no, så setter vi deg i kontakt med riktig person.',
+    a: 'Nei. Vi jobber også digitalt, og hele Norge er arbeidsplassen vår. Bilagene sender du elektronisk, og møtene kan vi ta på video, så det spiller ingen rolle hvor bedriften holder til. Du får en fast kontaktperson som kjenner bedriften din, og trenger saken en spesialist, har vi kolleger på alle seks kontorene å spille på. Vil du heller møtes, er du velkommen innom det kontoret som passer best.',
   },
   {
-    q: 'Kan dere være regnskapsfører for bedrifter i Stavanger og på Nord-Jæren?',
-    a: 'Ja. Sandnes-kontoret i FOMO på Forus ligger midt i Stavanger-regionen og betjener Stavanger, Sandnes, Sola og Randaberg. Bilagene går digitalt, og møtene tar vi på Forus, hos deg eller på video.',
-    lenke: { href: '/kontor/stavanger-sandnes/', tekst: 'Les om kontoret på Forus' },
+    q: 'Tar dere små bedrifter og enkeltpersonforetak?',
+    a: 'Ja. Vi hjelper både små bedrifter og enkeltpersonforetak med regnskapet.',
+    lenke: { href: '/artikler/trenger-jeg-regnskapsforer/', tekst: 'Les om når du trenger regnskapsfører' },
   },
   {
     q: 'Hvilke regnskapssystemer jobber dere i?',
