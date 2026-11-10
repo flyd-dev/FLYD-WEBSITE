@@ -25,7 +25,7 @@ const breadcrumbJsonLd = {
 export const metadata: Metadata = pageMetadata({
   absoluteTitle: 'Kontakt Flyd – 6 kontorer i Sør-Vest-Norge',
   description:
-    'Ring +47 480 19 958 eller send en melding, så finner vi riktig person hos oss. Vi svarer normalt innen én arbeidsdag. Seks kontorer i Rogaland og Agder.',
+    'Ring +47 480 19 958 eller send en melding, så finner vi riktig person hos oss. Vi svarer normalt innen én arbeidsdag. Seks kontorer i Rogaland og Agder og kunder i hele Norge.',
   path: '/kontakt/',
 });
 

@@ -195,7 +195,7 @@ export default function BytteRegnskapsforerPage() {
               <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-dempet">
                 Når du har sagt ja, tar vi oss av overgangen. Vi henter regnskapet fra den gamle regnskapsføreren,
                 setter opp Tripletex, bank og tilganger, og du får en fast kontaktperson. Vi har kontorer i Rogaland og
-                Agder. Ser du etter en{' '}
+                Agder og jobber med kunder i hele Norge. Ser du etter en{' '}
                 <Link
                   href="/kontor/stavanger-sandnes/"
                   className="font-medium text-flyd-sand underline decoration-flyd-mint decoration-2 underline-offset-4 transition-colors duration-200 hover:text-flyd-mint"
