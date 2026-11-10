@@ -114,8 +114,8 @@ export default function KontorerPage() {
             <div>
               <h2 className="font-display text-[24px] font-semibold leading-tight">Regnskapsfører</h2>
               <p className={`mt-3 ${brod}`}>
-                Flyd er autorisert regnskapsfører for bedrifter i hele Norge. Vi har seks kontorer: Sandnes
-                (Forus), Egersund, Sokndal, Moi, Sirdal og Flekkefjord. Vi tar regnskap, lønn, årsoppgjør og
+                Flyd er autorisert regnskapsfører for bedrifter i hele Norge. Vi har seks kontorer: Sandnes,
+                Egersund, Sokndal, Moi, Sirdal og Flekkefjord. Vi tar regnskap, lønn, årsoppgjør og
                 rådgivning, og hjelper deg med Tripletex og andre regnskapssystemer.
               </p>
             </div>

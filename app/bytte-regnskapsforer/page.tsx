@@ -194,7 +194,7 @@ export default function BytteRegnskapsforerPage() {
               <h2 className="mt-5 font-display text-display-md font-semibold text-flyd-sand">Dette gjør Flyd for deg</h2>
               <p className="mt-6 max-w-xl text-[17px] leading-[1.65] text-flyd-dempet">
                 Når du har sagt ja, tar vi oss av overgangen. Vi henter regnskapet fra den gamle regnskapsføreren,
-                setter opp Tripletex, bank og tilganger, og du får en fast kontaktperson. Vi har kontorer i Rogaland og
+                setter opp systemer, bank og tilganger, og du får en fast kontaktperson. Vi har kontorer i Rogaland og
                 Agder og jobber med kunder i hele Norge. Ser du etter en{' '}
                 <Link
                   href="/kontor/stavanger-sandnes/"
