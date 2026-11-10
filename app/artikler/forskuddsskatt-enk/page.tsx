@@ -397,7 +397,7 @@ export default function ForskuddsskattEnkPage() {
         <Container>
           <div className="on-dark rounded-bilde bg-flyd-petrol p-8 text-flyd-sand md:p-12 lg:p-14">
             <div className="max-w-3xl">
-              <Eyebrow tone="petrol">Rogaland og Agder</Eyebrow>
+              <Eyebrow tone="petrol">Kunder i hele Norge</Eyebrow>
               <h2 className="mt-5 font-display text-display-md font-semibold text-flyd-sand">
                 Usikker på hva årets overskudd blir?
               </h2>

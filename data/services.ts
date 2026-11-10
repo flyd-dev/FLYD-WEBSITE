@@ -97,7 +97,7 @@ export const services: (Service | EgenTjeneste)[] = [
     seo: {
       title: 'Regnskapsfører og økonomisk rådgivning for bedrifter',
       description:
-        'Statsautoriserte regnskapsførere med fast kontaktperson: bokføring, mva, årsoppgjør og rådgivning om tall, skatt og vekst. Seks kontorer i Rogaland og Agder.',
+        'Statsautoriserte regnskapsførere med fast kontaktperson: bokføring, mva, årsoppgjør og rådgivning om tall, skatt og vekst. Seks kontorer i Rogaland og Agder og kunder i hele Norge.',
     },
     long: 'Regnskapet skal være i orden, men det skal også fortelle deg noe. Vi tar ansvar for bokføring, fakturering, mva-oppgjør og årsoppgjør – og er samtidig sparringspartneren som hjelper deg å tolke tallene, se muligheter og ta bedre beslutninger. Enten du står foran oppkjøp, vekst, generasjonsskifte eller en vanskelig periode, får du en fast kontaktperson som kjenner virksomheten – og en rådgiver å støtte deg på når det virkelig gjelder.',
     bullets: [
