@@ -149,7 +149,7 @@ export const hubFaq: HubFaq[] = [
   },
   {
     q: 'Må jeg bruke kontoret nærmest meg?',
-    a: 'Nei. Vi jobber også digitalt, og hele Norge er arbeidsplassen vår. Bilagene sender du elektronisk, og møtene kan vi ta på video, så det spiller ingen rolle hvor bedriften holder til. Du får en fast kontaktperson som kjenner bedriften din, og trenger saken en spesialist, har vi kolleger på alle seks kontorene å spille på. Vil du heller møtes, er du velkommen innom det kontoret som passer best.',
+    a: 'Nei. Vi jobber også digitalt, og hele Norge er arbeidsplassen vår. Bilagene sender du elektronisk, og møtene kan vi ta på video, så det spiller ingen rolle hvor bedriften holder til. Du får en fast kontaktperson som kjenner bedriften din, og trenger saken en spesialist, har vi kolleger på alle seks kontorene å spille på. Vil du heller møtes, er du velkommen innom det kontoret som passer best – eller vi kommer til deg.',
   },
   {
     q: 'Tar dere små bedrifter og enkeltpersonforetak?',
