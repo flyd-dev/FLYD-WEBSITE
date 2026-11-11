@@ -134,12 +134,16 @@ export default function KundehistoriePage({ params }: Props) {
                     {h.kilder.map((k) => (
                       <li key={k.href} className="text-[16px] leading-[1.6] text-flyd-skifer">
                         <a href={k.href} target="_blank" rel="noopener noreferrer" className={lenke}>
-                          {k.tittel}
-                          <ArrowUpRight
-                            className="ml-1 inline-block h-4 w-4 align-[-0.15em]"
-                            strokeWidth={2}
-                            aria-hidden="true"
-                          />
+                          {/* Siste ord og pilen holdes sammen, så pilen aldri står alene på ny linje. */}
+                          {k.tittel.slice(0, k.tittel.lastIndexOf(' ') + 1)}
+                          <span className="whitespace-nowrap">
+                            {k.tittel.slice(k.tittel.lastIndexOf(' ') + 1)}
+                            <ArrowUpRight
+                              className="ml-1 inline-block h-4 w-4 align-[-0.15em]"
+                              strokeWidth={2}
+                              aria-hidden="true"
+                            />
+                          </span>
                           <span className="sr-only"> (åpnes i nytt vindu)</span>
                         </a>
                         <span className="block text-[15px]">Hos {k.hos}</span>
