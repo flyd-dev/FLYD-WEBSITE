@@ -4,6 +4,8 @@ import ConsentLink from './ConsentLink';
 import FlydLogo from './FlydLogo';
 import Eyebrow from './Eyebrow';
 import { offices } from '@/data/offices';
+import { kundehistorier, kundehistorierPath } from '@/data/kundehistorier';
+import { samfunnsansvarPath } from '@/data/samfunnsansvar';
 
 // Floyd (intern assistent for ansatte) bor på egen adresse som settes ved
 // deploy. Er variabelen ikke satt, rendres ingen lenke.
@@ -17,6 +19,9 @@ const flydLenker = [
   { href: '/kontor', label: 'Kontorer' },
   { href: '/artikler/', label: 'Artikler' },
   { href: '/om-flyd', label: 'Om Flyd' },
+  // Undersidene under Om Flyd. Kundehistoriene bare når det finnes noen å vise.
+  ...(kundehistorier.length > 0 ? [{ href: kundehistorierPath, label: 'Kundehistorier' }] : []),
+  { href: samfunnsansvarPath, label: 'Samfunnsansvar' },
 ];
 
 const komIGangLenker = [

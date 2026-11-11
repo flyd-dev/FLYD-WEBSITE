@@ -6,7 +6,7 @@ import Eyebrow from '@/components/Eyebrow';
 import Bekreft, { UtkastBanner } from '@/components/Bekreft';
 import KundeHistorier from '@/components/designlab/KundeHistorier';
 import LogoFlyt from '@/components/designlab/LogoFlyt';
-import { kundehistorier } from '@/data/kundehistorier';
+import { kundehistorier } from '@/data/designlab-kundehistorier';
 import { visUtkast } from '@/lib/utkast';
 
 /**
@@ -61,7 +61,7 @@ export default function DesignlabPage() {
                 <li>1. Velg kunder fra logostripa som har fått et tydelig resultat (regnskap, lønn, ERP eller integrasjoner – ikke revisjon).</li>
                 <li>2. Send forespørselen til høyre fra kontaktpersonen deres.</li>
                 <li>3. Skriv sitatet ferdig ut fra svaret, og send det til kunden for godkjenning.</li>
-                <li>4. Lagre det skriftlige ja-et. Legg inn tall, sitat, navn og tittel i data/kundehistorier.ts.</li>
+                <li>4. Lagre det skriftlige ja-et. Legg historien inn i data/kundehistorier.ts.</li>
               </ol>
             </div>
             <div className="lg:col-span-7">
