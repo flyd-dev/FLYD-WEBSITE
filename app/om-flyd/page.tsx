@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
@@ -14,6 +16,8 @@ import JsonLd from '@/components/JsonLd';
 import { allTeam, ledelse, restenAvTeamet } from '@/data/team';
 import { offices } from '@/data/offices';
 import { stat } from '@/data/stats';
+import { kundehistorier, kundehistorierPath } from '@/data/kundehistorier';
+import { antallSponsoravtaler, samfunnsansvarPath } from '@/data/samfunnsansvar';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -69,6 +73,29 @@ const values = [
   {
     title: 'Kompetent',
     body: 'God fagkunnskap innen regnskap, revisjon, systemer og rådgivning.',
+  },
+];
+
+// Undersidene under Om Flyd. Kundehistoriene tas bare med når det finnes
+// historier å vise (utkast vises ikke på flyd.no, se lib/utkast.ts).
+const undersider = [
+  ...(kundehistorier.length > 0
+    ? [
+        {
+          href: kundehistorierPath,
+          kicker: 'Kundehistorier',
+          tittel: 'Historier fra kundene våre',
+          tekst: 'Hva vi gjør for bedriftene vi jobber med, og hva de selv sier.',
+          lenke: `Les ${kundehistorier.length === 1 ? 'historien' : 'historiene'}`,
+        },
+      ]
+    : []),
+  {
+    href: samfunnsansvarPath,
+    kicker: 'Samfunnsansvar',
+    tittel: 'Vi heier på lokalmiljøet',
+    tekst: `${antallSponsoravtaler} lag, utøvere og arrangementer vi støtter der vi har kontor.`,
+    lenke: 'Se hvem vi støtter',
   },
 ];
 
@@ -244,6 +271,38 @@ export default function OmFlydPage() {
             </p>
           </div>
           <KontorAkkordeon className="mt-12" />
+        </Container>
+      </Section>
+
+      {/* MER OM FLYD – undersidene */}
+      <Section tone="sand" id="mer">
+        <Container>
+          <div className="max-w-2xl" data-reveal>
+            <Eyebrow>Mer om Flyd</Eyebrow>
+            <h2 className="mt-5 font-display text-display-lg font-semibold">
+              {undersider.length > 1 ? 'Kundene og lokalmiljøet.' : 'Engasjert i lokalmiljøet.'}
+            </h2>
+          </div>
+          <ul className={`stagger mt-12 grid grid-cols-1 gap-4 md:gap-5 ${undersider.length > 1 ? 'md:grid-cols-2' : 'max-w-2xl'}`}>
+            {undersider.map((u, i) => (
+              <li key={u.href} data-reveal style={{ '--i': i } as React.CSSProperties}>
+                <Link
+                  href={u.href}
+                  className="lys lenkekort group flex h-full flex-col rounded-kort bg-flyd-lysmint p-7 hover:bg-flyd-linje-mint md:p-9"
+                >
+                  <Eyebrow as="span">{u.kicker}</Eyebrow>
+                  <h3 className="mt-5 font-display text-[24px] font-semibold leading-[1.2] text-flyd-skog md:text-[28px]">
+                    {u.tittel}
+                  </h3>
+                  <p className="mt-3 text-[16px] leading-[1.6] text-flyd-skifer">{u.tekst}</p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-8 text-[15px] font-medium text-flyd-petrol">
+                    {u.lenke}
+                    <ArrowRight className="lenkekort-pil h-4 w-4" strokeWidth={2} aria-hidden="true" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </Container>
       </Section>
 

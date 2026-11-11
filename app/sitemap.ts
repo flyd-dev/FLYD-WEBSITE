@@ -5,6 +5,7 @@ import path from 'node:path';
 import { jobs } from '@/data/jobs';
 import { offices } from '@/data/offices';
 import { artikler } from '@/data/artikler';
+import { kundehistoriePath, publiserteKundehistorier } from '@/data/kundehistorier';
 import {
   services,
   erpSystems,
@@ -56,6 +57,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/bytte-revisor', source: 'app/bytte-revisor/page.tsx', priority: 0.6, changeFrequency: 'yearly' },
     { path: '/artikler', source: 'app/artikler/page.tsx', priority: 0.7, changeFrequency: 'weekly' },
     { path: '/om-flyd', source: 'app/om-flyd/page.tsx', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/om-flyd/samfunnsansvar', source: 'data/samfunnsansvar.ts', priority: 0.5, changeFrequency: 'yearly' },
+    // Oversikten over kundehistoriene finnes bare når minst én er publisert.
+    ...(publiserteKundehistorier.length > 0
+      ? [
+          {
+            path: '/om-flyd/kundehistorier',
+            source: 'data/kundehistorier.ts',
+            priority: 0.7,
+            changeFrequency: 'monthly' as const,
+          },
+        ]
+      : []),
     { path: '/karriere', source: 'app/karriere/page.tsx', priority: 0.8, changeFrequency: 'weekly' },
     { path: '/kontakt', source: 'app/kontakt/page.tsx', priority: 0.7, changeFrequency: 'yearly' },
     { path: '/personvern', source: 'app/personvern/page.tsx', priority: 0.3, changeFrequency: 'yearly' },
@@ -98,6 +111,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(a.modified),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
+    })),
+    // Kundehistoriene: bare publiserte, med historiens egen `modified`.
+    ...publiserteKundehistorier.map((h) => ({
+      url: `${base}${kundehistoriePath(h)}`,
+      lastModified: new Date(h.modified),
+      changeFrequency: 'yearly' as const,
+      priority: 0.6,
     })),
     ...offices.map((office) => ({
       url: `${base}/kontor/${office.slug}/`,
