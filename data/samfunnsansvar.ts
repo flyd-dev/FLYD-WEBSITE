@@ -1,5 +1,3 @@
-import type { FlydIconName } from '@/components/FlydIcon';
-
 /**
  * Samfunnsansvar (/om-flyd/samfunnsansvar/): hvem Flyd sponser.
  *
@@ -12,10 +10,11 @@ import type { FlydIconName } from '@/components/FlydIcon';
  * `bredde` og `hoyde` er filens mål. Flekkefjord FK sitt merke er hvitt på rød
  * flate, så flaten er med i filen.
  *
- * Uten logo viser kortet et ikon fra Flyds ikonsett (`ikon`): Sokndal
- * Sportsdrill har bare Facebook-side, og Mathea Selebø er en utøver. Får vi
- * en logo eller et bilde fra dem selv, legges det i `logo`. Ikke hent bilder
- * av personer fra nettet – de tilhører fotografen.
+ * Sokndal Sportsdrill og Mathea Selebø har bilde i stedet for logo (`bilde`,
+ * 1000 × 400 px, sendt av Flyd nov. 2026). Kort med bilde er dobbelt så brede
+ * som de andre. Bildet av drilljentene er beskåret så skiltet til butikken
+ * bak dem ikke er med. Ikke hent bilder av personer fra nettet – de tilhører
+ * fotografen. Mangler både logo og bilde, viser kortet et ikon.
  *
  * `sted` peker på et punkt i kartet (`sponsorsteder`). At Mathea Selebø er fra
  * Sokndal, står i Wikipedia-artikkelen om henne.
@@ -30,8 +29,8 @@ export type Sponsoravtale = {
   /** `id` i `sponsorsteder`. */
   sted: string;
   logo?: Sponsorlogo;
-  /** Vises på kortet når logoen mangler. */
-  ikon?: FlydIconName;
+  /** Bilde i stedet for logo. Kortet blir dobbelt så bredt. */
+  bilde?: { src: string; alt: string };
   /** Egen nettside eller offisiell side (åpnes i nytt vindu). */
   url?: string;
 };
@@ -127,7 +126,10 @@ export const sponsoravtaler: Sponsoravtale[] = [
     kategori: 'lag',
     type: 'Sportsdrill',
     sted: 'sokndal',
-    ikon: 'drill',
+    bilde: {
+      src: '/samfunnsansvar/sokndal-sportsdrill.webp',
+      alt: 'Utøverne i Sokndal Sportsdrill poserer sammen i like treningsdrakter',
+    },
     url: 'https://www.facebook.com/p/Sokndal-Sportsdrill-61563832949680/',
   },
   {
@@ -135,7 +137,10 @@ export const sponsoravtaler: Sponsoravtale[] = [
     kategori: 'utover',
     type: 'Motocross',
     sted: 'sokndal',
-    ikon: 'malflagg',
+    bilde: {
+      src: '/samfunnsansvar/mathea-selebo.webp',
+      alt: 'Mathea Selebø på motocross-sykkelen med startnummer 612',
+    },
     url: 'https://www.facebook.com/MatheaSelebo612',
   },
   {

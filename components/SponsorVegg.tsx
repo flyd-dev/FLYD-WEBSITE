@@ -14,6 +14,9 @@ import type { Sponsoravtale, Sponsorkategori } from '@/data/samfunnsansvar';
  * 21st.dev, tegnet etter designmanualen (kort uten skygge og kantlinje,
  * Korall-punkter som i kontorkartet, pilleknapper).
  *
+ * Kort med bilde (utøvere og lag uten logo) er dobbelt så brede, og
+ * rutenettet pakkes tett (`grid-flow-dense`) så radene går opp.
+ *
  * Pillene filtrerer på type. Et sted i kartet kan velges, og da dempes
  * kortene fra andre steder. Peker du på et kort, lyser stedet opp i kartet.
  * Selve kartflaten tegnes på serveren og sendes inn som `kart`, så
@@ -29,7 +32,12 @@ const navnPlass = {
   under: 'left-1/2 top-full mt-1 -translate-x-1/2',
 } as const;
 
-const delbar = (navn: string) => navn.replace('Fotballklubb', 'Fotball­klubb').replace('Sportsdrill', 'Sports­drill');
+// Lange ord f\u00E5r myk bindestrek, s\u00E5 de ikke stikker ut av smale kort (320 px).
+const delbar = (tekst: string) =>
+  tekst
+    .replace('Fotballklubb', 'Fotball\u00ADklubb')
+    .replace('Sportsdrill', 'Sports\u00ADdrill')
+    .replace('Motorsportanlegg', 'Motorsport\u00ADanlegg');
 
 export default function SponsorVegg({
   avtaler,
@@ -184,35 +192,48 @@ export default function SponsorVegg({
         </p>
 
         <MotionConfig reducedMotion="user">
-          <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 xl:grid-cols-4">
+          <ul className="mt-5 grid grid-flow-dense grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 xl:grid-cols-4">
             <AnimatePresence mode="popLayout" initial={false}>
               {synlige.map((a) => {
                 const dempet = fremhevet != null && a.sted !== fremhevet;
                 const innhold = (
                   <>
-                    {/* Flisen har fast form; logoen ligger absolutt inni, så høye merker ikke strekker kortet. */}
-                    <span className="relative block aspect-[4/3] rounded-flis bg-flyd-lysmint">
-                      <span className="absolute inset-4 flex items-center justify-center sm:inset-5">
-                        {a.logo ? (
-                          <Image
-                            src={a.logo.src}
-                            alt=""
-                            width={a.logo.bredde}
-                            height={a.logo.hoyde}
-                            sizes="(min-width: 640px) 160px, 40vw"
-                            className="h-auto max-h-full w-auto max-w-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                          />
-                        ) : (
-                          a.ikon && <FlydIcon name={a.ikon} className="h-12 w-12 text-flyd-teal sm:h-14 sm:w-14" />
-                        )}
+                    {a.bilde ? (
+                      // Bilde i stedet for logo: bred flis, bildet fyller den.
+                      <span className="relative block aspect-[5/2] overflow-hidden rounded-flis bg-flyd-lysmint">
+                        <Image
+                          src={a.bilde.src}
+                          alt={a.bilde.alt}
+                          fill
+                          sizes="(min-width: 1024px) 380px, (min-width: 640px) 60vw, 90vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                        />
                       </span>
-                    </span>
+                    ) : (
+                      // Flisen har fast form; logoen ligger absolutt inni, så høye merker ikke strekker kortet.
+                      <span className="relative block aspect-[4/3] rounded-flis bg-flyd-lysmint">
+                        <span className="absolute inset-4 flex items-center justify-center sm:inset-5">
+                          {a.logo ? (
+                            <Image
+                              src={a.logo.src}
+                              alt=""
+                              width={a.logo.bredde}
+                              height={a.logo.hoyde}
+                              sizes="(min-width: 640px) 160px, 40vw"
+                              className="h-auto max-h-full w-auto max-w-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                            />
+                          ) : (
+                            <FlydIcon name="lokal" className="h-12 w-12 text-flyd-teal sm:h-14 sm:w-14" />
+                          )}
+                        </span>
+                      </span>
+                    )}
                     <span className="flex flex-1 flex-col px-2 pb-2 pt-4">
                       <span className="font-display text-[17px] font-semibold leading-[1.25] text-flyd-skog sm:text-[19px]">
                         {delbar(a.navn)}
                       </span>
                       <span className="mt-1.5 text-[14px] leading-snug text-flyd-skifer sm:text-[15px]">
-                        {a.type} · {stedNavn(a.sted)}
+                        {delbar(a.type)} · {stedNavn(a.sted)}
                       </span>
                       {a.url && (
                         <span className="mt-auto inline-flex items-center gap-1 pt-4 text-[14px] font-medium text-flyd-petrol">
@@ -234,6 +255,7 @@ export default function SponsorVegg({
                   <motion.li
                     key={a.navn}
                     layout
+                    className={a.bilde ? 'col-span-2' : undefined}
                     initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.96 }}

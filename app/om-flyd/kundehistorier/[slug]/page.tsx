@@ -40,7 +40,7 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 // Lange sammensatte ord i tittelen får myk bindestrek der den vises, ikke i data/.
-const delbar = (t: string) => t.replace('Laboratorium', 'Labora­torium').replace('administrasjonen', 'administra­sjonen');
+const delbar = (t: string) => t.replace('Laboratorium', 'Labora\u00ADtorium').replace('administrasjonen', 'administra\u00ADsjonen');
 
 const lenke =
   'font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors duration-200 hover:text-flyd-skog hover:decoration-flyd-skog';

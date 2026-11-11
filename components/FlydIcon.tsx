@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
  *
  * Strek i Flyd-teal på lys bunn og Mint på mørk; punktumet er alltid Korall.
  * Bare ikonene nettstedet bruker er lagt inn her – resten av settet ligger i
- * brand_assets/ikoner/. Klokke, sky, plugg, skjold, godkjenn, drill og målflagg er tegnet etter
+ * brand_assets/ikoner/. Klokke, sky, plugg, skjold og godkjenn er tegnet etter
  * samme mal (Lucide-geometri, punktumet som dreiepunkt eller midt i formen).
  */
 const icons = {
@@ -213,28 +213,6 @@ const icons = {
       </>
     ),
     dot: [5.5, 5.5],
-  },
-  // Drillstav i fart: punktumet er dreiepunktet, buene viser rotasjonen.
-  drill: {
-    body: (
-      <>
-        <circle cx="5" cy="19" r="2" />
-        <circle cx="19" cy="5" r="2" />
-        <path d="M6.5 17.5 9 15M15 9l2.5-2.5" />
-        <path d="M5 9a8 8 0 0 1 4-4M19 15a8 8 0 0 1-4 4" />
-      </>
-    ),
-    dot: [10.5, 10.5],
-  },
-  // Målflagg (motorsport). Punktumet står midt i flagget.
-  malflagg: {
-    body: (
-      <>
-        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-        <path d="M4 22v-7" />
-      </>
-    ),
-    dot: [10.5, 7.5],
   },
 } satisfies Record<string, { body: ReactNode; dot: [number, number] }>;
 
