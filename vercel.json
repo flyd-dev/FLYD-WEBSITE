@@ -130,6 +130,26 @@
       "source": "/utvikling/",
       "destination": "/tjenester/nettsider-og-digitale-flater/",
       "statusCode": 301
+    },
+    {
+      "source": "/programvare",
+      "destination": "/tjenester/erp/",
+      "statusCode": 301
+    },
+    {
+      "source": "/programvare/",
+      "destination": "/tjenester/erp/",
+      "statusCode": 301
+    },
+    {
+      "source": "/flyd-as-og-liit-as-fusjonerer",
+      "destination": "/om-flyd/",
+      "statusCode": 301
+    },
+    {
+      "source": "/flyd-as-og-liit-as-fusjonerer/",
+      "destination": "/om-flyd/",
+      "statusCode": 301
     }
   ],
   "headers": [

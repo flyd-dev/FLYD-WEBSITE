@@ -114,7 +114,7 @@ export default function TjenesteMeny({
       }}
       className="flex items-center gap-1"
     >
-      <Link href="/tjenester" aria-current={aktiv ? 'page' : undefined} className={lenkeKlasse}>
+      <Link href="/tjenester/" aria-current={aktiv ? 'page' : undefined} className={lenkeKlasse}>
         Tjenester
       </Link>
       <button
@@ -166,7 +166,7 @@ export default function TjenesteMeny({
                 Fortell oss om bedriften, så finner vi ut hvordan vi kan hjelpe.
               </p>
               <div className="mt-auto pt-6">
-                <ButtonLink href="/kontakt" variant="primary-dark" withArrow className="!px-5 !py-2.5 !text-[15px]">
+                <ButtonLink href="/kontakt/" variant="primary-dark" withArrow className="!px-5 !py-2.5 !text-[15px]">
                   Snakk med oss
                 </ButtonLink>
                 <p className="mt-4 text-[14px] text-flyd-dempet">

@@ -35,7 +35,7 @@ export default function NotFound() {
               <ButtonLink href="/" variant="primary" withArrow>
                 Gå til forsiden
               </ButtonLink>
-              <ButtonLink href="/kontakt" variant="secondary">
+              <ButtonLink href="/kontakt/" variant="secondary">
                 Ta kontakt
               </ButtonLink>
             </div>

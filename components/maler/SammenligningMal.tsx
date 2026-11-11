@@ -98,7 +98,7 @@ export default function SammenligningMal() {
         kicker="Systemvalg"
         title="Vil du ha et råd for akkurat din bedrift?"
         text="Vi går gjennom behovene dine og anbefaler systemet som passer – også når svaret er å bli der du er."
-        primary={{ href: `/kontakt?tema=${encodeURIComponent('programvare / erp')}`, label: 'Snakk med oss' }}
+        primary={{ href: `/kontakt/?tema=${encodeURIComponent('programvare / erp')}`, label: 'Snakk med oss' }}
       />
     </>
   );

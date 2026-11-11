@@ -39,7 +39,7 @@ const lc = midtISetning;
 export default function TjenesteMal({ service: s }: { service: Service }) {
   const utkast = s.status === 'utkast';
   const mangler = (hva: string) => (utkast && visUtkast ? <Bekreft>{hva}</Bekreft> : null);
-  const kontakt = `/kontakt?tema=${encodeURIComponent(s.tema.toLowerCase())}`;
+  const kontakt = `/kontakt/?tema=${encodeURIComponent(s.tema.toLowerCase())}`;
   const fagperson = s.fagperson
     ? allTeam.find((m) => m.name === s.fagperson)
     : undefined;

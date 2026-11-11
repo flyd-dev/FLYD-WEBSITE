@@ -33,7 +33,7 @@ const team = [...auditPartners, ...auditTeam];
 
 export default function RevisjonPage() {
   if (!tjeneste) notFound();
-  const kontakt = `/kontakt?tema=${encodeURIComponent(tjeneste.tema.toLowerCase())}`;
+  const kontakt = `/kontakt/?tema=${encodeURIComponent(tjeneste.tema.toLowerCase())}`;
 
   const serviceJsonLd = {
     '@context': 'https://schema.org',

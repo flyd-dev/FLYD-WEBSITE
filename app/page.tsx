@@ -87,10 +87,10 @@ export default function HomePage() {
                 daglig bokføring til ERP og integrasjoner.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-4">
-                <ButtonLink href="/kontakt" variant="primary-dark" withArrow>
+                <ButtonLink href="/kontakt/" variant="primary-dark" withArrow>
                   Snakk med oss
                 </ButtonLink>
-                <ButtonLink href="/tjenester" variant="secondary-dark">
+                <ButtonLink href="/tjenester/" variant="secondary-dark">
                   Se våre tjenester
                 </ButtonLink>
               </div>
@@ -116,7 +116,7 @@ export default function HomePage() {
           </div>
           <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
             <Eyebrow>Et utvalg kunder</Eyebrow>
-            <TextLink href="/kontakt">Bli kunde</TextLink>
+            <TextLink href="/kontakt/">Bli kunde</TextLink>
           </div>
         </Container>
         <div className="mt-8">
@@ -138,7 +138,7 @@ export default function HomePage() {
                 kontroll, mer effektive prosesser og et sterkere beslutningsgrunnlag.
               </p>
             </div>
-            <TextLink href="/tjenester" className="lg:mb-2">
+            <TextLink href="/tjenester/" className="lg:mb-2">
               Utforsk alle tjenester
             </TextLink>
           </div>
@@ -247,7 +247,7 @@ export default function HomePage() {
                 handling. Her er hvordan et samarbeid med Flyd vanligvis ser ut.
               </p>
               <div className="mt-8">
-                <ButtonLink href="/kontakt" variant="secondary" withArrow>
+                <ButtonLink href="/kontakt/" variant="secondary" withArrow>
                   Ta første steg
                 </ButtonLink>
               </div>

@@ -13,7 +13,7 @@ import { siteUrl } from '@/lib/seo';
 import { visUtkast } from '@/lib/utkast';
 import { visibleErpSystems, erpUrl, type ErpSystem } from '@/data/services';
 
-const kontakt = `/kontakt?tema=${encodeURIComponent('programvare / erp')}`;
+const kontakt = `/kontakt/?tema=${encodeURIComponent('programvare / erp')}`;
 
 /**
  * Mal for ett ERP-system (/tjenester/erp/[slug]/). Innholdet kommer fra
