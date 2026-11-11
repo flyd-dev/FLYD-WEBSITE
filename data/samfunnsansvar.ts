@@ -11,10 +11,11 @@
  * flate, så flaten er med i filen.
  *
  * Sokndal Sportsdrill og Mathea Selebø har bilde i stedet for logo (`bilde`,
- * 1000 × 400 px, sendt av Flyd nov. 2026). Kort med bilde er dobbelt så brede
- * som de andre. Bildet av drilljentene er beskåret så skiltet til butikken
- * bak dem ikke er med. Ikke hent bilder av personer fra nettet – de tilhører
- * fotografen. Mangler både logo og bilde, viser kortet et ikon.
+ * sendt av Flyd nov. 2026). Bildet ligger i samme flis som logoene – alle får
+ * like stor plass. Bildet av drilljentene vises helt (`hel`), så ingen kuttes,
+ * og er beskåret så skiltet til butikken bak dem ikke er med. Ikke hent bilder
+ * av personer fra nettet – de tilhører fotografen. Mangler både logo og bilde,
+ * viser kortet et ikon.
  *
  * `sted` peker på et punkt i kartet (`sponsorsteder`). At Mathea Selebø er fra
  * Sokndal, står i Wikipedia-artikkelen om henne.
@@ -29,8 +30,8 @@ export type Sponsoravtale = {
   /** `id` i `sponsorsteder`. */
   sted: string;
   logo?: Sponsorlogo;
-  /** Bilde i stedet for logo. Kortet blir dobbelt så bredt. */
-  bilde?: { src: string; alt: string };
+  /** Bilde i stedet for logo. `hel` viser hele bildet i flisen i stedet for å fylle den. */
+  bilde?: { src: string; alt: string; hel?: boolean };
   /** Egen nettside eller offisiell side (åpnes i nytt vindu). */
   url?: string;
 };
@@ -129,6 +130,7 @@ export const sponsoravtaler: Sponsoravtale[] = [
     bilde: {
       src: '/samfunnsansvar/sokndal-sportsdrill.webp',
       alt: 'Utøverne i Sokndal Sportsdrill poserer sammen i like treningsdrakter',
+      hel: true,
     },
     url: 'https://www.facebook.com/p/Sokndal-Sportsdrill-61563832949680/',
   },

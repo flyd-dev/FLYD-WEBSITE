@@ -103,22 +103,22 @@ export default function SamfunnsansvarPage() {
       {/* LOGOVEGGEN MED KART */}
       <Section tone="lysmint" id="stotter">
         <Container>
-          <div className="max-w-3xl" data-reveal>
-            <Eyebrow>Sponsoravtaler</Eyebrow>
-            <h2 className="mt-5 font-display text-display-lg font-semibold">Hvem vi støtter.</h2>
-            <p className="mt-6 max-w-2xl text-[17px] leading-[1.65] text-flyd-skifer">
-              Fra skiløypene i Sirdal til fotballbanen i Flekkefjord. Velg en type eller et sted i kartet.
-            </p>
-          </div>
-          <div className="mt-12">
-            <SponsorVegg
-              avtaler={sponsoravtaler}
-              kategorier={sponsorkategorier}
-              steder={steder}
-              kart={<KartFlate utsnitt={utsnitt} />}
-              kartForhold={utsnitt[2] / utsnitt[3]}
-            />
-          </div>
+          <SponsorVegg
+            avtaler={sponsoravtaler}
+            kategorier={sponsorkategorier}
+            steder={steder}
+            kart={<KartFlate utsnitt={utsnitt} />}
+            kartForhold={utsnitt[2] / utsnitt[3]}
+            topp={
+              <div className="max-w-2xl">
+                <Eyebrow>Sponsoravtaler</Eyebrow>
+                <h2 className="mt-5 font-display text-display-lg font-semibold">Hvem vi støtter.</h2>
+                <p className="mt-6 text-[17px] leading-[1.65] text-flyd-skifer">
+                  Fra skiløypene i Sirdal til fotballbanen i Flekkefjord. Velg en type eller et sted i kartet.
+                </p>
+              </div>
+            }
+          />
         </Container>
       </Section>
 
