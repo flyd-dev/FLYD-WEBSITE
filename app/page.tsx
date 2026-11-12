@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
@@ -132,9 +133,20 @@ export default function HomePage() {
                   <blockquote className="font-display text-[clamp(1.375rem,2.4vw,2rem)] font-medium leading-[1.3] text-flyd-skog">
                     «{fremhevetKundehistorie.sitat.tekst}»
                   </blockquote>
-                  <figcaption className="mt-7 text-[16px] text-flyd-skifer">
-                    <span className="font-medium text-flyd-skog">{fremhevetKundehistorie.sitat.navn}</span>,{' '}
-                    {fremhevetKundehistorie.sitat.rolle}
+                  {/* Kundens logo ved siden av navnet, så det synes hvem som snakker. */}
+                  <figcaption className="mt-8 flex items-center gap-5">
+                    <Image
+                      src={fremhevetKundehistorie.logo.src}
+                      alt={fremhevetKundehistorie.logo.alt}
+                      width={120}
+                      height={120}
+                      sizes="64px"
+                      className="h-14 w-auto max-w-[96px] flex-none object-contain mix-blend-multiply md:h-16"
+                    />
+                    <span className="text-[16px] leading-snug text-flyd-skifer">
+                      <span className="block font-medium text-flyd-skog">{fremhevetKundehistorie.sitat.navn}</span>
+                      {fremhevetKundehistorie.sitat.rolle}
+                    </span>
                   </figcaption>
                   <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
                     <TextLink href={kundehistoriePath(fremhevetKundehistorie)}>Les historien</TextLink>

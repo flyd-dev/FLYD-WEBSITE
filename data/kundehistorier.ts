@@ -113,10 +113,10 @@ const alle: Kundehistorie[] = [
       tekst:
         'Flyd skilte seg ut allerede i første møte. De har kompetanse på både regnskap og teknologi, og ser økonomien og systemene i sammenheng. Det gir oss en partner som forstår hele virksomheten vår.',
       navn: 'Stein Erik Opheim',
-      rolle: 'Lervig',
+      rolle: 'CFO, Lervig',
     },
     published: '2026-11-11',
-    modified: '2026-11-11',
+    modified: '2026-11-12',
   },
   {
     slug: 'arkit',
