@@ -40,8 +40,6 @@ export type Kundehistorie = {
   sitat?: { tekst: string; navn: string; rolle: string };
   /** Der historien er omtalt fra før (åpnes i nytt vindu). */
   kilder?: { tittel: string; hos: string; href: string }[];
-  /** Løftes fram på forsiden, under kundelogoene. Sett på én historie om gangen. */
-  fremhevet?: boolean;
   /** ISO-datoer (åååå-mm-dd). `modified` oppdateres når teksten endres. */
   published: string;
   modified: string;
@@ -96,7 +94,6 @@ const alle: Kundehistorie[] = [
   {
     slug: 'lervig',
     status: 'publisert',
-    fremhevet: true,
     kunde: 'Lervig',
     logo: { src: '/customer-logo/lervig.webp', alt: 'Lervig' },
     tittel: 'Lervig valgte Flyd som regnskapspartner',
@@ -207,13 +204,6 @@ export const publiserteKundehistorier = alle.filter((h) => h.status === 'publise
 
 /** Er alt som vises utkast? Da er også oversikten et utkast. */
 export const kunUtkast = publiserteKundehistorier.length === 0;
-
-/**
- * Historien forsiden løfter fram: den som er merket `fremhevet`, ellers den
- * første med sitat. Bare publiserte – forsiden viser aldri utkast.
- */
-export const fremhevetKundehistorie: Kundehistorie | undefined =
-  publiserteKundehistorier.find((h) => h.fremhevet) ?? publiserteKundehistorier.find((h) => h.sitat);
 
 export function getKundehistorie(slug: string): Kundehistorie | undefined {
   return kundehistorier.find((h) => h.slug === slug);
