@@ -19,7 +19,7 @@ import { kombinerbareTjenester, uavhengigeTjenester, serviceUrl } from '@/data/s
 import { sisteRad } from '@/lib/tjenesterutenett';
 import { stats } from '@/data/stats';
 import KundehistorieFremhevet from '@/components/KundehistorieFremhevet';
-import { fremhevetKundehistorie } from '@/data/kundehistorier';
+import { fremhevetKundehistorie, kundehistorierPath } from '@/data/kundehistorier';
 
 // Siste rad i tjenesterutenettet: revisjon i egen bred rad, eller ved siden av den siste tjenesten.
 const tjenesteRad = sisteRad(kombinerbareTjenester.length);
@@ -118,12 +118,27 @@ export default function HomePage() {
           </div>
           <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
             <Eyebrow>Et utvalg kunder</Eyebrow>
-            <TextLink href="/kontakt">Bli kunde</TextLink>
+            {/* Lenken går til kundehistoriene når det finnes noen å lese. */}
+            {fremhevetKundehistorie ? (
+              <TextLink href={kundehistorierPath} className="whitespace-nowrap">
+                Kundehistorier
+              </TextLink>
+            ) : (
+              <TextLink href="/kontakt">Bli kunde</TextLink>
+            )}
           </div>
         </Container>
         <div className="mt-8">
           <LogoMarquee />
         </div>
+        {/* Én kunde med egne ord, rett under logoene – bare sitatet og en lenke. */}
+        {fremhevetKundehistorie && (
+          <Container className="mt-12 md:mt-14">
+            <div data-reveal>
+              <KundehistorieFremhevet h={fremhevetKundehistorie} />
+            </div>
+          </Container>
+        )}
       </Section>
 
       {/* TJENESTER */}
@@ -201,15 +216,6 @@ export default function HomePage() {
           </div>
         </Container>
       </Section>
-
-      {/* KUNDEHISTORIE – en kunde bekrefter det «Hvorfor Flyd» nettopp har sagt */}
-      {fremhevetKundehistorie && (
-        <Section tone="lysmint">
-          <Container>
-            <KundehistorieFremhevet h={fremhevetKundehistorie} />
-          </Container>
-        </Section>
-      )}
 
       {/* PROGRAMVARE – systemene og hvordan de henger sammen, partnerne under */}
       <Section tone="sand">
