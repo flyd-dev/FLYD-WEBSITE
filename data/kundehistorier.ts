@@ -10,10 +10,10 @@ import { synlig, type Status } from '@/lib/utkast';
  * (innlegg på Facebook, kundehistoriene hos Visma Software og artikkelen hos
  * iizy). De inneholder ikke noe som ikke står i kildene.
  *
- * `status: 'utkast'` betyr at kunden ikke har sett den omskrevne teksten ennå.
- * Utkast vises bare lokalt og på forhåndsvisninger (lib/utkast.ts). Sett
- * `status: 'publisert'` når kunden har sagt ja til tekst, navn, sitat og logo.
- * Framgangsmåten og samtykketeksten står på /designlab/.
+ * De fem første ble publisert 12.11.2026 etter beskjed fra Flyd. Nye historier
+ * legges inn med `status: 'utkast'` til kunden har sagt ja til tekst, navn,
+ * sitat og logo; utkast vises bare lokalt og på forhåndsvisninger
+ * (lib/utkast.ts). Framgangsmåten og samtykketeksten står på /designlab/.
  *
  * Bare kunder av regnskap, lønn, programvare og integrasjoner – ikke revisjon.
  */
@@ -48,7 +48,7 @@ export type Kundehistorie = {
 const alle: Kundehistorie[] = [
   {
     slug: 'batsfjord-laboratorium',
-    status: 'utkast',
+    status: 'publisert',
     kunde: 'Båtsfjord Laboratorium',
     logo: { src: '/customer-logo/balab_logo_000.webp', alt: 'Båtsfjord Laboratorium' },
     tittel: 'Båtsfjord Laboratorium kuttet 80 prosent av det manuelle arbeidet',
@@ -93,7 +93,7 @@ const alle: Kundehistorie[] = [
   },
   {
     slug: 'lervig',
-    status: 'utkast',
+    status: 'publisert',
     kunde: 'Lervig',
     logo: { src: '/customer-logo/lervig.webp', alt: 'Lervig' },
     tittel: 'Lervig valgte Flyd som regnskapspartner',
@@ -117,7 +117,7 @@ const alle: Kundehistorie[] = [
   },
   {
     slug: 'arkit',
-    status: 'utkast',
+    status: 'publisert',
     kunde: 'Arkit',
     logo: { src: '/customer-logo/arkit.webp', alt: 'Arkit – arkitekt- og ingeniørtjenester' },
     tittel: 'Arkit fikk bedre oversikt og mer tid til prosjektene',
@@ -149,7 +149,7 @@ const alle: Kundehistorie[] = [
   },
   {
     slug: 'sirdal-fjellpark',
-    status: 'utkast',
+    status: 'publisert',
     kunde: 'Sirdal Fjellpark',
     logo: { src: '/customer-logo/sirdal_fjellpark.webp', alt: 'Sirdal Fjellpark' },
     tittel: 'Bedre flyt i administrasjonen hos Sirdal Fjellpark',
@@ -171,7 +171,7 @@ const alle: Kundehistorie[] = [
   },
   {
     slug: 'arring',
-    status: 'utkast',
+    status: 'publisert',
     kunde: 'Årring',
     logo: { src: '/customer-logo/arring.webp', alt: 'Årring' },
     tittel: 'Med Årring fra første dag',
