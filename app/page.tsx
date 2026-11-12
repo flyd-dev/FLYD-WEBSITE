@@ -18,6 +18,8 @@ import ForhandslastBilde from '@/components/ForhandslastBilde';
 import { kombinerbareTjenester, uavhengigeTjenester, serviceUrl } from '@/data/services';
 import { sisteRad } from '@/lib/tjenesterutenett';
 import { stats } from '@/data/stats';
+import KundehistorieFremhevet from '@/components/KundehistorieFremhevet';
+import { fremhevetKundehistorie } from '@/data/kundehistorier';
 
 // Siste rad i tjenesterutenettet: revisjon i egen bred rad, eller ved siden av den siste tjenesten.
 const tjenesteRad = sisteRad(kombinerbareTjenester.length);
@@ -122,6 +124,14 @@ export default function HomePage() {
         <div className="mt-8">
           <LogoMarquee />
         </div>
+        {/* Én kundehistorie løftet fram, rett under logoene. */}
+        {fremhevetKundehistorie && (
+          <Container className="mt-14 md:mt-16">
+            <div data-reveal>
+              <KundehistorieFremhevet h={fremhevetKundehistorie} />
+            </div>
+          </Container>
+        )}
       </Section>
 
       {/* TJENESTER */}
