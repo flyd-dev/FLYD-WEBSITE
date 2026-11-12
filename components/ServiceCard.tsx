@@ -12,8 +12,9 @@ export const bredtKortKolonner = 'sm:grid sm:grid-cols-2 sm:gap-x-10 md:gap-x-11
 
 /**
  * Tjenestekort (designmanualen kap. 06 «Kort med ikon»): Sand-kort på Lys
- * mint, radius 16 px, ingen skygger eller kantlinjer. Ikonet ligger på en
- * flis (radius 12 px) i Petrol, Flyd-teal eller Skog.
+ * mint, eller Lys mint-kort på Sand (`flate`), radius 16 px, ingen skygger
+ * eller kantlinjer. Ikonet ligger på en flis (radius 12 px) i Petrol,
+ * Flyd-teal eller Skog.
  *
  * Kortet er en kompakt rad på alle skjermer: liten flis til venstre, teksten
  * ved siden av. Høye fliser over hvert kort ble seks store, tomme Petrol-flater
@@ -26,6 +27,7 @@ export default function ServiceCard({
   tone,
   href,
   wide = false,
+  flate = 'sand',
 }: {
   title: string;
   text: string;
@@ -33,11 +35,16 @@ export default function ServiceCard({
   tone: ServiceTone;
   href: string;
   wide?: boolean;
+  /** Kortets egen farge: Sand på Lys mint-seksjoner (standard), Lys mint på Sand-seksjoner. */
+  flate?: 'sand' | 'lysmint';
 }) {
   return (
     <Link
       href={href}
-      className="lys group flex h-full flex-row items-start gap-4 rounded-kort bg-flyd-sand p-3 transition-transform duration-300 ease-out hover:-translate-y-1 active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:gap-5 sm:p-4"
+      className={clsx(
+        'lys group flex h-full flex-row items-start gap-4 rounded-kort p-3 transition-transform duration-300 ease-out hover:-translate-y-1 active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:gap-5 sm:p-4',
+        flate === 'lysmint' ? 'bg-flyd-lysmint' : 'bg-flyd-sand',
+      )}
     >
       <ServiceTile name={icon} tone={tone} className="h-16 w-16 shrink-0 rounded-flis sm:h-[72px] sm:w-[72px]" />
       <div className={clsx('flex flex-1 flex-col self-stretch pb-1 pr-1 pt-1', wide && 'lg:max-w-3xl')}>

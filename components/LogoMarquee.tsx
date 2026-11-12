@@ -17,7 +17,8 @@ const MAX_FLING = 2400;
 /** Piltast flytter denne lengden; med Shift går det raskere. */
 const KEY_STEP = 80;
 
-export default function LogoMarquee() {
+export default function LogoMarquee({ tone = 'sand' }: { /** Flaten stripa står på – kantene tones ut i samme farge. */ tone?: 'sand' | 'lysmint' } = {}) {
+  const kant = tone === 'lysmint' ? 'from-flyd-lysmint' : 'from-flyd-sand';
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const firstSetRef = useRef<HTMLDivElement>(null);
@@ -202,8 +203,8 @@ export default function LogoMarquee() {
       }}
     >
       {/* Fade edges */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-flyd-sand to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-flyd-sand to-transparent" />
+      <div className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r ${kant} to-transparent`} />
+      <div className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l ${kant} to-transparent`} />
 
       <div
         ref={trackRef}

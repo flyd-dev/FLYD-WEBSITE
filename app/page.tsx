@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import Eyebrow from '@/components/Eyebrow';
@@ -18,6 +19,7 @@ import ForhandslastBilde from '@/components/ForhandslastBilde';
 import { kombinerbareTjenester, uavhengigeTjenester, serviceUrl } from '@/data/services';
 import { sisteRad } from '@/lib/tjenesterutenett';
 import { stats } from '@/data/stats';
+import { fremhevetKundehistorie, kundehistoriePath, kundehistorierPath } from '@/data/kundehistorier';
 
 // Siste rad i tjenesterutenettet: revisjon i egen bred rad, eller ved siden av den siste tjenesten.
 const tjenesteRad = sisteRad(kombinerbareTjenester.length);
@@ -100,7 +102,7 @@ export default function HomePage() {
         </UtvidendeHero>
       </Section>
 
-      {/* NØKKELTALL + KUNDER */}
+      {/* NØKKELTALL */}
       <Section tone="sand">
         <Container>
           <div className="max-w-3xl" data-reveal>
@@ -114,18 +116,57 @@ export default function HomePage() {
           <div className="mt-12 md:mt-14">
             <StatsSection stats={stats} columns={5} />
           </div>
-          <div className="mt-20 flex items-center justify-between gap-6 border-t border-flyd-linje-sand pt-10 md:mt-24">
-            <Eyebrow>Et utvalg kunder</Eyebrow>
-            <TextLink href="/kontakt">Bli kunde</TextLink>
+        </Container>
+      </Section>
+
+      {/* KUNDENE – egen seksjon: én kunde med egne ord, og logoene under */}
+      <Section tone="lysmint" id="kunder">
+        <Container>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4" data-reveal>
+              <Eyebrow>Kundene våre</Eyebrow>
+              <h2 className="mt-5 font-display text-display-lg font-semibold">Hva kundene sier.</h2>
+            </div>
+            <div className="lg:col-span-8" data-reveal>
+              {fremhevetKundehistorie?.sitat ? (
+                <figure className="m-0">
+                  <blockquote className="font-display text-[clamp(1.375rem,2.4vw,2rem)] font-medium leading-[1.3] text-flyd-skog">
+                    «{fremhevetKundehistorie.sitat.tekst}»
+                  </blockquote>
+                  {/* Kundens logo ved siden av navnet, så det synes hvem som snakker. */}
+                  <figcaption className="mt-8 flex items-center gap-5">
+                    <Image
+                      src={fremhevetKundehistorie.logo.src}
+                      alt={fremhevetKundehistorie.logo.alt}
+                      width={120}
+                      height={120}
+                      sizes="64px"
+                      className="h-14 w-auto max-w-[96px] flex-none object-contain mix-blend-multiply md:h-16"
+                    />
+                    <span className="text-[16px] leading-snug text-flyd-skifer">
+                      <span className="block font-medium text-flyd-skog">{fremhevetKundehistorie.sitat.navn}</span>
+                      {fremhevetKundehistorie.sitat.rolle}
+                    </span>
+                  </figcaption>
+                  <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+                    <TextLink href={kundehistoriePath(fremhevetKundehistorie)}>Les historien</TextLink>
+                    <TextLink href={kundehistorierPath}>Alle kundehistoriene</TextLink>
+                  </div>
+                </figure>
+              ) : (
+                <TextLink href="/kontakt">Bli kunde</TextLink>
+              )}
+            </div>
           </div>
         </Container>
-        <div className="mt-8">
-          <LogoMarquee />
+        <div className="mt-16 md:mt-20">
+          <LogoMarquee tone="lysmint" />
         </div>
       </Section>
 
       {/* TJENESTER */}
-      <Section tone="lysmint" id="tjenester">
+      {/* Sand, med Lys mint-kort: kundeseksjonen over er Lys mint. */}
+      <Section tone="sand" id="tjenester">
         <Container>
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between" data-reveal>
             <div className="max-w-2xl">
@@ -153,6 +194,7 @@ export default function HomePage() {
                   text={s.short}
                   icon={s.icon}
                   tone="petrol"
+                  flate="lysmint"
                   href={serviceUrl(s)}
                 />
               </div>
@@ -164,6 +206,7 @@ export default function HomePage() {
                   text={s.short}
                   icon={s.icon}
                   tone="petrol"
+                  flate="lysmint"
                   href={serviceUrl(s)}
                   wide={tjenesteRad.revisjonBred}
                 />
