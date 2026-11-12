@@ -124,14 +124,6 @@ export default function HomePage() {
         <div className="mt-8">
           <LogoMarquee />
         </div>
-        {/* Én kundehistorie løftet fram, rett under logoene. */}
-        {fremhevetKundehistorie && (
-          <Container className="mt-14 md:mt-16">
-            <div data-reveal>
-              <KundehistorieFremhevet h={fremhevetKundehistorie} />
-            </div>
-          </Container>
-        )}
       </Section>
 
       {/* TJENESTER */}
@@ -209,6 +201,15 @@ export default function HomePage() {
           </div>
         </Container>
       </Section>
+
+      {/* KUNDEHISTORIE – en kunde bekrefter det «Hvorfor Flyd» nettopp har sagt */}
+      {fremhevetKundehistorie && (
+        <Section tone="lysmint">
+          <Container>
+            <KundehistorieFremhevet h={fremhevetKundehistorie} />
+          </Container>
+        </Section>
+      )}
 
       {/* PROGRAMVARE – systemene og hvordan de henger sammen, partnerne under */}
       <Section tone="sand">
