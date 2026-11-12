@@ -174,7 +174,7 @@ export const accountingTeam: TeamMember[] = [
     image: '/team/flyd-arneolav.webp',
   }),
   mk({
-    name: 'Eira Marie Hagland',
+    name: 'Eira Marie Hagland Vik',
     role: 'Regnskapskonsulent',
     phone: '+47 950 40 729',
     email: 'eira.hagland@flyd.no',
