@@ -4,20 +4,32 @@ import SystemLogo, { SystemLogoSymboler, type SystemLogoName } from '@/component
 
 /**
  * Systembanen: forretningssystemet ditt i midten, og det vi kobler det til
- * rundt. Idé fra «Integrations Orbit Section» (Tailark) på 21st.dev.
+ * rundt. Idé fra «Integrations Orbit Section» (Tailark) på 21st.dev, tegnet om
+ * som et koblingsskjema (nov. 2026): ringene er borte, og hver kobling er en
+ * linje i Flyd-teal som går inn i systemflisen.
  *
  * Midten viser ett system om gangen (Tripletex, Visma Business NXT, Uni Micro
  * eller PowerOffice Go), fordi en bedrift velger ett av dem. Fire prikker under
  * logoen viser at det er ett av fire. Rundt står det vi kobler til, som
- * Flyd-ikoner, fordi det er kategorier og ikke bestemte produkter.
- * Korall-punktum går begge veier langs linjene: dataene flyter inn og ut av
- * systemet av seg selv. Flyd står ikke i tegningen: vi setter opp koblingene,
- * dataene går ikke gjennom oss.
+ * Flyd-ikoner på Petrol-brikker, fordi det er kategorier og ikke bestemte
+ * produkter. Brikkene har flisradius, ikke pilleform: piller er knapper, og
+ * disse kan ikke trykkes på. Korall-punktum går begge veier langs linjene:
+ * dataene flyter inn og ut av systemet av seg selv. Flyd står ikke i tegningen:
+ * vi setter opp koblingene, dataene går ikke gjennom oss.
+ *
+ * Tre over og to under i alle størrelser, i tre oppstillinger som velges etter
+ * bredden på flaten (container queries):
+ * - `stor` (fra 520 px): brikkene står i to spalter med «Bransjeløsninger»
+ *   midt over, og linjene fra hjørnene går i en myk bue inn i flisen.
+ * - `middels` (400–519 px) og `liten` (under 400 px): flisen er en bred bjelke,
+ *   og alle linjene går rett ned eller opp i den. «Bransjeløsninger» står en
+ *   rad over de andre, så det lange navnet får plass.
+ * Linjene tegnes helt inn til midten av brikkene og flisen, som ligger oppå, så
+ * de møter kantene uansett hvor stor teksten er.
  *
  * Teksten krymper ikke under lesbar størrelse: navnene rundt er minst 13 px
- * (12 px på de smaleste telefonene), etiketten i midten minst 11 px. I
- * stedet for å skalere alt ned byttes tegningen ut med høyere oppstillinger
- * når flaten blir smal: `middels` under 600 px og `liten` under 420 px.
+ * (12 px på de smaleste telefonene), etiketten i midten 11 px. Derfor byttes
+ * oppstillingen i stedet for at alt skaleres ned.
  *
  * Ved prefers-reduced-motion står alt stille: midten viser de fire logoene i et
  * rutenett i stedet for å veksle, og punktumene (SMIL) skjules.
@@ -26,7 +38,20 @@ import SystemLogo, { SystemLogoSymboler, type SystemLogoName } from '@/component
 type SystemNode = { navn: string; logo: SystemLogoName; hoyde: string; tillegg?: string };
 type Kategori = { navn: string; icon: FlydIconName };
 type Punkt = { x: number; y: number };
-type Oppstilling = { W: number; H: number; C: Punkt; ringer: number[]; bane: number; noder: (Kategori & Punkt)[] };
+/** `d` er linjen fra kategorien inn til systemet; `synlig` er den delen av den som ikke ligger under en brikke eller flisen. */
+type Kobling = Kategori & Punkt & { d: string; synlig: [number, number] };
+type Oppstilling = {
+  W: number;
+  H: number;
+  C: Punkt;
+  /** Bredden på systemflisen i prosent av tegningen. Uten den følger flisen innholdet. */
+  flis?: number;
+  /** Skriftstørrelsen i flisen, når den skal være større enn navnene rundt. */
+  flisSkrift?: string;
+  /** Størrelsen på punktumene i tegningens enheter (ca. 6 px på skjerm). */
+  prikk: number;
+  koblinger: Kobling[];
+};
 
 // Systemene vi jobber i (erpSystems i data/services.ts). `hoyde` jevner ut logoene,
 // så de ser like store ut (formatene er ulike).
@@ -44,82 +69,105 @@ const rapporter: Kategori = { navn: 'Rapporter', icon: 'innsikt' };
 const lonn: Kategori = { navn: 'Lønnssystem', icon: 'lonn-hr' };
 const nettbutikk: Kategori = { navn: 'Nettbutikk', icon: 'nettbutikk' };
 
-function punkt(c: Punkt, r: number, vinkel: number) {
-  const a = (vinkel * Math.PI) / 180;
-  return { x: c.x + r * Math.cos(a), y: c.y - r * Math.sin(a) };
+/** Rett linje fra kategorien loddrett inn i systemet. */
+function rett(k: Kategori, x: number, y: number, c: Punkt, synlig: [number, number]): Kobling {
+  return { ...k, x, y, d: `M ${x} ${y} L ${x} ${c.y}`, synlig };
 }
 
-// Bred flate: på en sirkel, speilvendt rundt midtaksen. Sidene står litt høyere enn i en
-// vanlig femkant (28° i stedet for 18°), så de går klar av midtflisen.
-const C_STOR = { x: 500, y: 360 };
+// Buene har et rett stykke i hver ende, så selve svingen ligger mellom brikken og flisen i
+// alle størrelser: UT er lengre enn en halv brikke, INN lengre enn en halv flis.
+const UT = 42;
+const INN = 112;
+
+/** Myk bue: loddrett ut av brikken, en S bort til plassen sin på flisen (`port` fra midten), og loddrett inn. */
+function bue(k: Kategori, x: number, y: number, c: Punkt, port: number, synlig: [number, number]): Kobling {
+  const retning = y < c.y ? 1 : -1;
+  const y1 = y + retning * UT;
+  const y2 = c.y - retning * INN;
+  const midt = (y1 + y2) / 2;
+  const px = c.x + port;
+  return {
+    ...k,
+    x,
+    y,
+    d: `M ${x} ${y} L ${x} ${y1} C ${x} ${midt} ${px} ${midt} ${px} ${y2} L ${px} ${c.y}`,
+    synlig,
+  };
+}
+
+// Bred flate: tre over og to under, i to spalter. «Bransjeløsninger» (det lengste navnet)
+// står i midten. Buene fra hjørnene går inn i flisen på hver sin side av midtlinjen.
+// Flisen har litt større skrift enn brikkene, så systemet er det største i tegningen.
+const C_STOR = { x: 500, y: 326 };
 const stor: Oppstilling = {
   W: 1000,
-  H: 720,
+  H: 652,
   C: C_STOR,
-  ringer: [150, 370],
-  bane: 300,
-  noder: [
-    { ...crm, ...punkt(C_STOR, 300, 90) },
-    { ...bransje, ...punkt(C_STOR, 300, 28) },
-    { ...rapporter, ...punkt(C_STOR, 300, -50) },
-    { ...lonn, ...punkt(C_STOR, 300, 230) },
-    { ...nettbutikk, ...punkt(C_STOR, 300, 152) },
+  flisSkrift: '1.15em',
+  prikk: 11,
+  koblinger: [
+    rett(bransje, 500, 46, C_STOR, [0.07, 0.78]),
+    bue(nettbutikk, 150, 46, C_STOR, -80, [0.05, 0.86]),
+    bue(crm, 850, 46, C_STOR, 80, [0.05, 0.86]),
+    bue(lonn, 150, 606, C_STOR, -80, [0.05, 0.86]),
+    bue(rapporter, 850, 606, C_STOR, 80, [0.05, 0.86]),
   ],
 };
 
-// Middels flate (smal spalte, nettbrett, 420–600 px): høyere enn den brede, så sidene går
-// klar av midtflisen og linjene synes. Plassert for hånd.
+// Smalere flate (smal spalte, stor telefon): flisen er en bred bjelke, og linjene går rett
+// inn i den. Brikkene står midt på hver sin linje.
+const C_MIDDELS = { x: 500, y: 370 };
 const middels: Oppstilling = {
   W: 1000,
-  H: 900,
-  C: { x: 500, y: 470 },
-  ringer: [170, 470],
-  bane: 390,
-  noder: [
-    { ...crm, x: 500, y: 90 },
-    { ...nettbutikk, x: 230, y: 270 },
-    { ...bransje, x: 770, y: 270 },
-    { ...lonn, x: 260, y: 760 },
-    { ...rapporter, x: 740, y: 760 },
+  H: 650,
+  C: C_MIDDELS,
+  flis: 60,
+  prikk: 15,
+  koblinger: [
+    rett(bransje, 500, 54, C_MIDDELS, [0.1, 0.7]),
+    rett(nettbutikk, 270, 158, C_MIDDELS, [0.14, 0.56]),
+    rett(crm, 730, 158, C_MIDDELS, [0.14, 0.56]),
+    rett(lonn, 270, 582, C_MIDDELS, [0.14, 0.56]),
+    rett(rapporter, 730, 582, C_MIDDELS, [0.14, 0.56]),
   ],
 };
 
-// Smal flate (telefon): høyere, med to og to på hver side. Plassert for hånd, så
-// «Bransjeløsninger» får plass også på 320 px brede skjermer.
+// Telefon: samme oppstilling, høyere, så linjene synes også på 320 px brede skjermer.
+const C_LITEN = { x: 500, y: 540 };
 const liten: Oppstilling = {
   W: 1000,
-  H: 1080,
-  C: { x: 500, y: 600 },
-  ringer: [200, 520],
-  bane: 450,
-  noder: [
-    { ...crm, x: 500, y: 150 },
-    { ...nettbutikk, x: 250, y: 360 },
-    { ...bransje, x: 750, y: 360 },
-    { ...lonn, x: 250, y: 900 },
-    { ...rapporter, x: 750, y: 900 },
+  H: 940,
+  C: C_LITEN,
+  flis: 70,
+  prikk: 21,
+  koblinger: [
+    rett(bransje, 500, 70, C_LITEN, [0.08, 0.74]),
+    rett(nettbutikk, 250, 215, C_LITEN, [0.12, 0.62]),
+    rett(crm, 750, 215, C_LITEN, [0.12, 0.62]),
+    rett(lonn, 250, 865, C_LITEN, [0.12, 0.62]),
+    rett(rapporter, 750, 865, C_LITEN, [0.12, 0.62]),
   ],
 };
 
 const VEKSEL_S = 2.5; // sekunder per logo i midten
 const RUNDE_S = VEKSEL_S * systemer.length;
+const FLYT_S = 6.4; // én runde for et punktum: går i 2,6 s, venter resten usynlig
 
 const css = `
   .systembane { container-type: inline-size; }
   .systembane .sb-middels, .systembane .sb-liten { display: none; }
-  @container (max-width: 600px) {
+  @container (max-width: 519px) {
     .systembane .sb-stor { display: none; }
     .systembane .sb-middels { display: block; }
   }
-  @container (max-width: 420px) {
+  @container (max-width: 399px) {
     .systembane .sb-middels { display: none; }
     .systembane .sb-liten { display: block; }
   }
   @container (max-width: 300px) {
     .systembane .sb-liten { font-size: 12px; }
+    .systembane .sb-liten .sb-ikon { display: none; }
   }
-  @keyframes sb-drift { to { stroke-dashoffset: -180; } }
-  .systembane .sb-drift { animation: sb-drift 24s linear infinite; }
   @keyframes sb-veksle {
     0% { opacity: 0; transform: translateY(0.25em); }
     4%, 22% { opacity: 1; transform: none; }
@@ -131,9 +179,6 @@ const css = `
     27%, 100% { background-color: #C9DCD7; width: 6px; }
   }
   .systembane .sb-prikk { animation: sb-prikk ${RUNDE_S}s infinite; }
-  @media (prefers-reduced-motion: reduce) {
-    .systembane .sb-drift { animation: none; }
-  }
 `;
 
 const pst = (o: Oppstilling, p: Punkt) => ({ left: `${(p.x / o.W) * 100}%`, top: `${(p.y / o.H) * 100}%` });
@@ -141,12 +186,13 @@ const pst = (o: Oppstilling, p: Punkt) => ({ left: `${(p.x / o.W) * 100}%`, top:
 function Midten({ liste }: { liste: string }) {
   return (
     <>
-      <p className="text-center text-[11px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-skifer">
+      <p className="flex items-center justify-center gap-[0.6em] text-[11px] font-bold uppercase leading-none tracking-[0.12em] text-flyd-skog">
+        <span aria-hidden="true" className="block h-[6px] w-[6px] flex-shrink-0 rounded-[1.5px] bg-flyd-korall" />
         Ditt system
       </p>
       <p className="sr-only">{liste}</p>
       {/* Veksler mellom logoene; står stille som rutenett ved redusert bevegelse. */}
-      <div aria-hidden="true" className="relative mt-[0.55em] h-[2.1em] w-[10.5em] motion-reduce:hidden">
+      <div aria-hidden="true" className="relative mx-auto mt-[0.6em] h-[2.1em] w-[10.5em] motion-reduce:hidden">
         {systemer.map((s, i) => (
           <div
             key={s.navn}
@@ -168,7 +214,10 @@ function Midten({ liste }: { liste: string }) {
           />
         ))}
       </div>
-      <div aria-hidden="true" className="mt-[0.5em] hidden w-[10.5em] grid-cols-2 place-items-center gap-[0.5em] motion-reduce:grid">
+      <div
+        aria-hidden="true"
+        className="mx-auto mt-[0.6em] hidden w-[10.5em] grid-cols-2 place-items-center gap-[0.5em] motion-reduce:grid"
+      >
         {systemer.map((s) => (
           <SystemLogo key={s.navn} name={s.logo} label="" delt className="w-auto" style={{ height: `calc(${s.hoyde} * 0.62)` }} />
         ))}
@@ -179,72 +228,63 @@ function Midten({ liste }: { liste: string }) {
 
 function Scene({ o, liste, className }: { o: Oppstilling; liste: string; className: string }) {
   // To punktum per linje: ett inn mot systemet og ett ut, forskjøvet i tid.
-  const baner = o.noder.flatMap((n, i) => [
-    { d: `M ${n.x} ${n.y} L ${o.C.x} ${o.C.y}`, start: `${(i * 0.9).toFixed(2)}s` },
-    { d: `M ${o.C.x} ${o.C.y} L ${n.x} ${n.y}`, start: `${(i * 0.9 + 2.2).toFixed(2)}s` },
-  ]);
+  const flyt = o.koblinger.flatMap((k, i) => {
+    const [a, b] = k.synlig;
+    return [
+      { d: k.d, punkter: `${a};${b};${b}`, start: `${(i * 1.25).toFixed(2)}s` },
+      { d: k.d, punkter: `${b};${a};${a}`, start: `${(i * 1.25 + FLYT_S / 2).toFixed(2)}s` },
+    ];
+  });
   return (
     <div className={clsx('relative mx-auto w-full', className)} style={{ aspectRatio: `${o.W} / ${o.H}` }}>
-      <svg
-        viewBox={`0 0 ${o.W} ${o.H}`}
+      {/* Petrol-lys bak systemet, så midten løfter seg fra flaten. */}
+      <div
         aria-hidden="true"
-        focusable="false"
-        className="absolute inset-0 h-full w-full text-flyd-mint"
-      >
-        {/* Ringene */}
-        <circle cx={o.C.x} cy={o.C.y} r={o.ringer[0]} fill="none" stroke="currentColor" strokeOpacity={0.18} strokeWidth={1.5} />
-        <circle
-          cx={o.C.x}
-          cy={o.C.y}
-          r={o.bane}
-          fill="none"
-          stroke="currentColor"
-          strokeOpacity={0.22}
-          strokeWidth={1.5}
-          strokeDasharray="2 10"
-          strokeLinecap="round"
-          className="sb-drift"
-        />
-        <circle cx={o.C.x} cy={o.C.y} r={o.ringer[1]} fill="none" stroke="currentColor" strokeOpacity={0.07} strokeWidth={1} />
-
-        {/* Linjene fra systemet ut til det vi kobler til */}
-        {o.noder.map((n) => (
-          <line
-            key={`l-${n.navn}`}
-            x1={n.x}
-            y1={n.y}
-            x2={o.C.x}
-            y2={o.C.y}
-            stroke="currentColor"
-            strokeOpacity={0.25}
-            strokeWidth={1.25}
+        className="absolute aspect-square w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{ ...pst(o, o.C), background: 'radial-gradient(closest-side, rgba(36,73,75,0.75), rgba(36,73,75,0))' }}
+      />
+      <svg viewBox={`0 0 ${o.W} ${o.H}`} aria-hidden="true" focusable="false" className="absolute inset-0 h-full w-full">
+        {/* Koblingene: flytlinjer i Flyd-teal, like tykke i alle størrelser */}
+        {o.koblinger.map((k) => (
+          <path
+            key={k.navn}
+            d={k.d}
+            fill="none"
+            className="stroke-flyd-teal"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
           />
         ))}
 
+        {/* Punktum begge veier: går i 2,6 s, venter resten av runden usynlig. */}
         <g className="motion-reduce:hidden">
-          {/* Puls rundt midten */}
-          <circle cx={o.C.x} cy={o.C.y} r={110} fill="none" stroke="currentColor" strokeWidth={1.5}>
-            <animate attributeName="r" values="110;175" dur="2.8s" repeatCount="indefinite" />
-            <animate attributeName="stroke-opacity" values="0.3;0" dur="2.8s" repeatCount="indefinite" />
-          </circle>
-          {/* Punktum begge veier: går på 2,2 s, venter resten av runden usynlig. */}
-          {baner.map((b, i) => (
-            <rect key={i} x={-4.5} y={-4.5} width={9} height={9} rx={2} className="fill-flyd-korall" opacity={0}>
+          {flyt.map((f, i) => (
+            <rect
+              key={i}
+              x={-o.prikk / 2}
+              y={-o.prikk / 2}
+              width={o.prikk}
+              height={o.prikk}
+              rx={o.prikk * 0.22}
+              className="fill-flyd-korall"
+              opacity={0}
+            >
               <animateMotion
-                path={b.d}
-                dur="4.4s"
-                begin={b.start}
+                path={f.d}
+                dur={`${FLYT_S}s`}
+                begin={f.start}
                 repeatCount="indefinite"
-                keyPoints="0;1;1"
-                keyTimes="0;0.5;1"
+                keyPoints={f.punkter}
+                keyTimes="0;0.4;1"
                 calcMode="linear"
               />
               <animate
                 attributeName="opacity"
                 values="0;1;1;0;0"
-                keyTimes="0;0.08;0.42;0.5;1"
-                dur="4.4s"
-                begin={b.start}
+                keyTimes="0;0.05;0.35;0.4;1"
+                dur={`${FLYT_S}s`}
+                begin={f.start}
                 repeatCount="indefinite"
               />
             </rect>
@@ -252,22 +292,22 @@ function Scene({ o, liste, className }: { o: Oppstilling; liste: string; classNa
         </g>
       </svg>
 
-      {/* Det vi kobler til: Flyd-ikon og navn */}
-      {o.noder.map((n) => (
+      {/* Det vi kobler til: Flyd-ikon og navn på Petrol-brikke */}
+      {o.koblinger.map((k) => (
         <div
-          key={n.navn}
-          className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-[0.45em] whitespace-nowrap rounded-pille border border-flyd-mint/35 bg-flyd-skog py-[0.45em] pl-[0.75em] pr-[0.95em] leading-tight text-flyd-dempet"
-          style={pst(o, n)}
+          key={k.navn}
+          className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-[0.45em] whitespace-nowrap rounded-flis bg-flyd-petrol py-[0.55em] pl-[0.8em] pr-[1em] leading-tight text-flyd-sand ring-1 ring-inset ring-flyd-teal/70"
+          style={pst(o, k)}
         >
-          <FlydIcon name={n.icon} className="sb-ikon h-[1.2em] w-[1.2em] flex-shrink-0 text-flyd-mint" />
-          {n.navn}
+          <FlydIcon name={k.icon} className="sb-ikon h-[1.2em] w-[1.2em] flex-shrink-0 text-flyd-mint" />
+          {k.navn}
         </div>
       ))}
 
       {/* Forretningssystemet i midten: ett av fire, logoene veksler */}
       <div
-        className="absolute -translate-x-1/2 -translate-y-1/2 rounded-kort bg-flyd-sand px-[1em] pb-[0.8em] pt-[0.8em] text-flyd-skog shadow-[0_0_0_6px_rgba(139,194,187,0.12)]"
-        style={pst(o, o.C)}
+        className="absolute -translate-x-1/2 -translate-y-1/2 rounded-kort bg-flyd-sand px-[1em] py-[0.85em] text-flyd-skog shadow-[0_0_0_6px_rgba(139,194,187,0.16)]"
+        style={{ ...pst(o, o.C), ...(o.flis ? { width: `${o.flis}%` } : {}), fontSize: o.flisSkrift }}
       >
         <Midten liste={liste} />
       </div>
@@ -286,10 +326,9 @@ export default function SystemBane({ className }: { className?: string }) {
       {/* Logoene én gang; de tre oppstillingene peker hit (se SystemLogoSymboler). */}
       <SystemLogoSymboler />
       <div className="on-dark relative overflow-hidden rounded-bilde bg-flyd-skog p-3 sm:p-6">
-        <Scene o={stor} liste={liste} className="sb-stor max-w-[1000px] text-[clamp(13px,1.6cqw,15px)]" />
+        <Scene o={stor} liste={liste} className="sb-stor max-w-[1000px] text-[clamp(13px,2.2cqw,15px)]" />
         <Scene o={middels} liste={liste} className="sb-middels text-[13px]" />
-        {/* Ikonene på ringen tar for mye plass på telefon. */}
-        <Scene o={liten} liste={liste} className="sb-liten text-[13px] [&_.sb-ikon]:hidden" />
+        <Scene o={liten} liste={liste} className="sb-liten text-[13px]" />
 
         {/* Én linje som forklarer tegningen, i stedet for tegnforklaring. */}
         <figcaption className="mt-3 px-1 text-[15px] leading-relaxed text-flyd-dempet">
