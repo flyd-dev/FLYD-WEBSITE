@@ -9,6 +9,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { pageMetadata, siteUrl } from '@/lib/seo';
+import { formatDato } from '@/data/artikler';
 import { lonnEllerUtbytte as a, lonnEllerUtbytteFaq, kilder } from '@/data/lonn-eller-utbytte';
 import toppbilde from '@/public/header/topp-lonn-eller-utbytte.webp';
 
@@ -115,7 +116,7 @@ const sammenligning: { tema: string; lonn: string; utbytte: string }[] = [
   {
     tema: 'Krav',
     lonn: 'Lønnen bør svare til arbeidet du gjør i selskapet.',
-    utbytte: 'Fri egenkapital, forsvarlig egenkapital og likviditet.',
+    utbytte: 'Fri egenkapital, forsvarlig egenkapital og likviditet, og vedtak på generalforsamlingen.',
   },
 ];
 
@@ -179,7 +180,7 @@ export default function LonnEllerUtbyttePage() {
                   utbytte.
                 </p>
                 <p className="mt-6 text-[15px] text-flyd-dempet">
-                  Sist oppdatert <time dateTime={a.modified}>15. oktober 2026</time>.
+                  Sist oppdatert <time dateTime={a.modified}>{formatDato(a.modified)}</time>.
                 </p>
                 <div className="mt-10 flex flex-wrap items-center gap-4">
                   <ButtonLink href={kontakt} variant="primary-dark" withArrow>
