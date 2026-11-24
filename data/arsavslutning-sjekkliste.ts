@@ -5,6 +5,8 @@
  * eller gebyrbeløp. Vinklingen er hva kunden leverer, ikke hvordan
  * regnskapsfører gjør årsoppgjøret. Bare lovfestede frister med offisiell
  * kilde, ingen leveringsfrister mot regnskapsfører (Marius 15.10.2026).
+ * Januarfakturaer, lærlingtilskudd og varekjøpsbonus som hører til året, er
+ * lagt til etter fagretting fra Thomas Haaland (24.11.2026).
  * Spørsmålene brukes både på siden og i FAQPage-JSON-LD.
  */
 export const arsavslutning = {
@@ -14,7 +16,7 @@ export const arsavslutning = {
     'Hva må du levere til regnskapsføreren ved årsoppgjøret? Bilag, saldoer per 31.12, varetelling, kunder og leverandører – her er hele sjekklisten.',
   h1: 'Årsavslutning: sjekkliste for hva regnskapsføreren trenger fra deg',
   published: '2026-10-15',
-  modified: '2026-10-15',
+  modified: '2026-11-24',
   hero: {
     // Utsnitt (16:9) av kontor/egersund-notatbok.webp, som også brukes på kontorsiden for Egersund.
     src: '/header/topp-arsavslutning-sjekkliste.webp',
@@ -40,7 +42,7 @@ export const kilder = {
 export const arsavslutningFaq: { q: string; a: string }[] = [
   {
     q: 'Hva trenger regnskapsføreren til årsoppgjøret?',
-    a: 'Alle bilag for året, kontoutskrifter og saldo per 31. desember for bank, lån og kredittkort, varetelling hvis du har varelager, oversikt over ubetalte kunde- og leverandørfakturaer, kjøp og salg av eiendeler, og beskjed om store endringer. I AS også endringer i eierskapet, og i ENK privat bruk av bil og andre eiendeler.',
+    a: 'Alle bilag for året, kontoutskrifter og saldo per 31. desember for bank, lån og kredittkort, varetelling hvis du har varelager, oversikt over ubetalte kunde- og leverandørfakturaer, kjøp og salg av eiendeler, og beskjed om store endringer. I AS også endringer i eierskapet, og i ENK privat bruk av bil og andre eiendeler. Ta også med salgsfakturaer sendt i januar for arbeid eller leveranser i året som avsluttes, og lærlingtilskudd og varekjøpsbonus som gjelder året, selv om de først utbetales året etter.',
   },
   {
     q: 'Når må varetellingen gjøres?',

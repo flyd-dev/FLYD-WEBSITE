@@ -4,6 +4,9 @@
  * Skatteetaten og Brønnøysundregistrene 15.10.2026, se `kilder`. Pakkenavnene
  * følger Altinns egne navn («signeringsrettighet»). Spørsmålene brukes både
  * på siden og i FAQPage-JSON-LD. Oppdater `modified` når teksten endres.
+ * Avsnittet «Kunde hos Flyd?» øverst kom etter fagretting fra Thomas Haaland
+ * (24.11.2026): Flyds kunder trenger normalt bare å ha Flyd registrert som
+ * regnskapsfører i Enhetsregisteret. Guiden beholdes fordi den får treff i søk.
  */
 export const altinnTilgang = {
   path: '/artikler/altinn-tilgang-regnskapsforer/',
@@ -12,7 +15,7 @@ export const altinnTilgang = {
     'Altinn-rollene er byttet ut med tilgangspakker. Se hvilke regnskapsføreren trenger, hvordan du gir tilgang, og hva som endres før 2027.',
   h1: 'Slik gir du regnskapsføreren riktig tilgang i Altinn',
   published: '2026-10-15',
-  modified: '2026-10-15',
+  modified: '2026-11-24',
   hero: {
     // Utsnitt (16:9) av office-4.webp, som også brukes i prosesskortene på forsiden.
     src: '/header/topp-altinn-tilgang.webp',

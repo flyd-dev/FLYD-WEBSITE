@@ -8,6 +8,7 @@ import { enkEllerAs } from './enk-eller-as';
 import { arsavslutning } from './arsavslutning-sjekkliste';
 import { lonnEllerUtbytte } from './lonn-eller-utbytte';
 import { bokforingsregler2027 } from './bokforingsregler-2027';
+import { skattefrieGaverStyret } from './skattefrie-gaver-styret';
 
 /**
  * Alle artikler under /artikler/. Oversikten (/artikler/) og sitemapen bygges
@@ -136,6 +137,16 @@ const alle: Artikkel[] = [
     published: bokforingsregler2027.published,
     modified: bokforingsregler2027.modified,
     bilde: bokforingsregler2027.hero,
+  },
+  {
+    slug: 'skattefrie-gaver-styret',
+    path: skattefrieGaverStyret.path,
+    title: skattefrieGaverStyret.h1,
+    ingress: skattefrieGaverStyret.description,
+    tema: 'Aksjeselskap',
+    published: skattefrieGaverStyret.published,
+    modified: skattefrieGaverStyret.modified,
+    bilde: skattefrieGaverStyret.hero,
   },
 ];
 

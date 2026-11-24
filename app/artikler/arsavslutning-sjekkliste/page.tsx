@@ -9,6 +9,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { pageMetadata, siteUrl } from '@/lib/seo';
+import { formatDato } from '@/data/artikler';
 import { arsavslutning as a, arsavslutningFaq, kilder } from '@/data/arsavslutning-sjekkliste';
 import toppbilde from '@/public/header/topp-arsavslutning-sjekkliste.webp';
 
@@ -108,6 +109,15 @@ const sjekkliste: { tittel: string; punkter: React.ReactNode[]; etter?: React.Re
       'Liste over leverandørfakturaer du ikke hadde betalt per 31. desember.',
       'Kunder du tror ikke kommer til å betale.',
     ],
+  },
+  {
+    tittel: 'Periodisering etter årsskiftet',
+    punkter: [
+      'Salgsfakturaer sendt i januar som gjelder arbeid eller leveranser i året som avsluttes.',
+      'Lærlingtilskudd som gjelder året som avsluttes, også når tilskuddet først utbetales året etter.',
+      'Varekjøpsbonus som gjelder året som avsluttes, også når bonusen først utbetales året etter.',
+    ],
+    etter: <>Dette hører til året som avsluttes, selv om fakturaen sendes eller pengene kommer etter nyttår.</>,
   },
   {
     tittel: 'Varelager',
@@ -280,7 +290,7 @@ export default function ArsavslutningPage() {
                   si fra om store endringer. Jo mer komplett, jo færre spørsmål.
                 </p>
                 <p className="mt-6 text-[15px] text-flyd-dempet">
-                  Sist oppdatert <time dateTime={a.modified}>15. oktober 2026</time>.
+                  Sist oppdatert <time dateTime={a.modified}>{formatDato(a.modified)}</time>.
                 </p>
                 <div className="mt-10 flex flex-wrap items-center gap-4">
                   <ButtonLink href={kontakt} variant="primary-dark" withArrow>
@@ -317,6 +327,7 @@ export default function ArsavslutningPage() {
                 'Kontoutskrift og saldo per 31. desember for bankkontoer, lån og kredittkort.',
                 'Varetelling ved årsskiftet, hvis du har varelager.',
                 'Liste over ubetalte kundefakturaer og leverandørfakturaer.',
+                'Salgsfakturaer sendt i januar for arbeid i året som avsluttes, og lærlingtilskudd og varekjøpsbonus for året, også når de utbetales året etter.',
                 'Kjøp og salg av eiendeler, og kjørebok hvis ENK-et eier bil.',
                 'Aksjeselskap: endringer i eierskapet og planer om utbytte. ENK: privat bruk og uttak.',
               ]}
@@ -352,7 +363,7 @@ export default function ArsavslutningPage() {
             <Eyebrow>Sjekkliste</Eyebrow>
             <h2 className={`mt-5 ${h2}`}>Sjekkliste: dette leverer du</h2>
             <p className={`mt-6 ${brod}`}>
-              De seks første gruppene gjelder alle. De to siste gjelder bare aksjeselskap eller bare
+              De sju første gruppene gjelder alle. De to siste gjelder bare aksjeselskap eller bare
               enkeltpersonforetak.
             </p>
             {sjekkliste.map((g) => (

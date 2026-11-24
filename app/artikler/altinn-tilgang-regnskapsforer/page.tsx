@@ -10,6 +10,7 @@ import JsonLd from '@/components/JsonLd';
 import NumberedList from '@/components/NumberedList';
 import { ButtonLink, TextLink } from '@/components/Button';
 import { pageMetadata, siteUrl } from '@/lib/seo';
+import { formatDato } from '@/data/artikler';
 import { altinnTilgang as a, altinnFaq, kilder } from '@/data/altinn-tilgang-regnskapsforer';
 import toppbilde from '@/public/header/topp-altinn-tilgang.webp';
 
@@ -233,8 +234,14 @@ export default function AltinnTilgangPage() {
                   Enhetsregisteret, får byrået pakkene for regnskapsfører automatisk. Trenger byrået mer, eller tilgang
                   raskere, gir du tilgangspakker til byråets organisasjonsnummer i Altinn.
                 </p>
+                {/* For Flyds egne kunder er registreringen i Enhetsregisteret normalt nok. */}
+                <p className="mt-6 max-w-2xl border-l-2 border-flyd-mint pl-5 text-[17px] leading-[1.65] text-flyd-sand">
+                  <strong className="font-semibold">Kunde hos Flyd?</strong> Er Flyd allerede registrert som regnskapsfører
+                  for virksomheten i Enhetsregisteret (Brønnøysundregistrene), får vi de tilgangene vi trenger automatisk og
+                  ordner resten. Guiden under er for deg som skal registrere oss, eller som trenger å gi tilgang utover det.
+                </p>
                 <p className="mt-6 text-[15px] text-flyd-dempet">
-                  Sist oppdatert <time dateTime={a.modified}>15. oktober 2026</time>.
+                  Sist oppdatert <time dateTime={a.modified}>{formatDato(a.modified)}</time>.
                 </p>
                 <div className="mt-10 flex flex-wrap items-center gap-4">
                   <ButtonLink href={kontakt} variant="primary-dark" withArrow>

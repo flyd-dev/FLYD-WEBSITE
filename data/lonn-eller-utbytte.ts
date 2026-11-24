@@ -4,6 +4,8 @@
  * Skatteetaten og Brønnøysundregistrene 15.10.2026, se `kilder`. Ingen priser
  * og ingen skattesatser, faktortall eller G-beløp i teksten. Ingen
  * individuelle råd. Spørsmålene brukes både på siden og i FAQPage-JSON-LD.
+ * «Krav» for utbytte i sammenligningstabellen nevner vedtaket på
+ * generalforsamlingen etter fagretting fra Thomas Haaland (24.11.2026).
  */
 export const lonnEllerUtbytte = {
   path: '/artikler/lonn-eller-utbytte/',
@@ -12,7 +14,7 @@ export const lonnEllerUtbytte = {
     'Skal du ta ut penger fra eget AS før nyttår? Se forskjellen på lønn, utbytte og aksjonærlån – og hva du må ha på plass før du betaler ut.',
   h1: 'Lønn eller utbytte: slik tar du penger ut av eget AS før nyttår',
   published: '2026-10-15',
-  modified: '2026-10-15',
+  modified: '2026-11-24',
   hero: {
     // Utsnitt (16:9) av kontor/egersund-motebord.webp, som også brukes på kontorsiden for Egersund.
     src: '/header/topp-lonn-eller-utbytte.webp',
