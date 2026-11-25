@@ -7,6 +7,9 @@
  * Avsnittet «Kunde hos Flyd?» øverst kom etter fagretting fra Thomas Haaland
  * (24.11.2026): Flyds kunder trenger normalt bare å ha Flyd registrert som
  * regnskapsfører i Enhetsregisteret. Guiden beholdes fordi den får treff i søk.
+ * 25.11.2026: 17. november 2026 er passert, så teksten om den datoen står i
+ * fortid. Altinn har flyttet hjelpesidene til /hjelp/tilgang-og-fullmakt/, og
+ * fire lenker er oppdatert dit (sjekket mot Altinn og Skatteetaten samme dag).
  */
 export const altinnTilgang = {
   path: '/artikler/altinn-tilgang-regnskapsforer/',
@@ -15,7 +18,7 @@ export const altinnTilgang = {
     'Altinn-rollene er byttet ut med tilgangspakker. Se hvilke regnskapsføreren trenger, hvordan du gir tilgang, og hva som endres før 2027.',
   h1: 'Slik gir du regnskapsføreren riktig tilgang i Altinn',
   published: '2026-10-15',
-  modified: '2026-11-24',
+  modified: '2026-11-25',
   hero: {
     // Utsnitt (16:9) av office-4.webp, som også brukes i prosesskortene på forsiden.
     src: '/header/topp-altinn-tilgang.webp',
@@ -28,11 +31,11 @@ export const altinnTilgang = {
 export const kilder = {
   altinnOvergang:
     'https://info.altinn.no/nyheter/altinn-rollene-erstattes-av-tilgangspakker-slik-handterer-du-overgangen/',
-  altinnUtfasing: 'https://info.altinn.no/hjelp/ny-tilgangsstyring/utfasing-av-altinn-ii-roller/',
-  altinnGiFullmakt: 'https://info.altinn.no/hjelp/ny-tilgangsstyring/steg-for-steg-guider/gi-fullmakt-til-tilgangspakker/',
-  altinnSlett: 'https://info.altinn.no/hjelp/ny-tilgangsstyring/slett-fullmakter/',
-  altinnAdministrere:
-    'https://info.altinn.no/hjelp/ny-tilgangsstyring/tilgangspakker/roller-fra-enhetsregisteret-for-a-administrere-tilganger/',
+  altinnUtfasing: 'https://info.altinn.no/hjelp/tilgang-og-fullmakt/#tidspunkter-for-utfasing-av-altinn-ii-roller',
+  altinnGiFullmakt: 'https://info.altinn.no/hjelp/tilgang-og-fullmakt/#gi-eller-be-om-fullmakt-til-tilgangspakker',
+  altinnSlett: 'https://info.altinn.no/hjelp/tilgang-og-fullmakt/#slette-fullmakter',
+  // «Hvem kan administrere fullmakter?» på samme side (har ikke eget anker).
+  altinnAdministrere: 'https://info.altinn.no/hjelp/tilgang-og-fullmakt/',
   altinnKlientadmin: 'https://info.altinn.no/nyheter/enklere-og-mer-fleksibel-klientadministrasjon-i-nye-altinn/',
   altinnRegnskapsforerPakker:
     'https://docs.altinn.studio/nb/authorization/what-do-you-get/accesspackages/business/regnskapsforer/',
@@ -63,7 +66,7 @@ export const altinnFaq: { q: string; a: string }[] = [
   },
   {
     q: 'Hva skjer med Altinn-rollene i 2027?',
-    a: 'Altinn-rollene fases ut og slutter å gjelde senest 31. desember 2026. For skattemeldingen skriver Skatteetaten at du fra og med 2027 må ha riktig tilgangspakke. Ifølge Altinn slutter skattemeldingen, a-meldingen og skattekort å være tilgjengelige via de gamle rollene allerede 17. november 2026.',
+    a: 'Altinn-rollene fases ut og slutter å gjelde senest 31. desember 2026. For skattemeldingen skriver Skatteetaten at du fra og med 2027 må ha riktig tilgangspakke. Ifølge Altinn har skattemeldingen, a-meldingen og skattekort ikke vært tilgjengelige via de gamle rollene siden 17. november 2026.',
   },
   {
     q: 'Gjelder dette også enkeltpersonforetak?',
