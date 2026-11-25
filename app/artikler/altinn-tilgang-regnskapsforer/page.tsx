@@ -277,7 +277,7 @@ export default function AltinnTilgangPage() {
                 'Tilgangspakker har erstattet de gamle Altinn-rollene. En pakke samler fullmakter til tjenester innen ett område.',
                 'Registrerer du regnskapsføreren i Enhetsregisteret, får byrået pakkene for regnskapsfører automatisk.',
                 'Trengs mer, gir du tilgangspakker til byråets organisasjonsnummer under Tilgangsstyring i Altinn.',
-                'Fullmakter du selv ga byrået i gamle Altinn, må gis på nytt. Gjør det før 17. november 2026, da skattemeldingen slutter å virke med de gamle rollene.',
+                'Fullmakter du selv ga byrået i gamle Altinn, må gis på nytt. Skattemeldingen og a-meldingen har ikke virket med de gamle rollene siden 17. november 2026, så ikke vent.',
               ]}
             />
           </div>
@@ -465,8 +465,8 @@ export default function AltinnTilgangPage() {
             <p className={`mt-4 ${brod}`}>
               Overgangen gjelder også enkeltpersonforetak. Innehaveren får Hovedadministrator og Klientadministrator
               automatisk (<Ekstern href={kilder.altinnAdministrere}>Altinn</Ekstern>) og gir regnskapsføreren tilgang
-              på samme måte. Altinns utfasingsliste omfatter skattemeldingen for både person og næring, med 17.
-              november 2026 som siste dag for de gamle rollene (
+              på samme måte. Altinns utfasingsliste omfatter skattemeldingen for både person og næring, og siden 17.
+              november 2026 har den ikke virket med de gamle rollene (
               <Ekstern href={kilder.altinnUtfasing}>Altinn</Ekstern>). For enkeltpersonforetak er skattemeldingen
               innehaverens personlige skattemelding, med både private opplysninger og næringsopplysninger, og fristen er
               31. mai (<Ekstern href={kilder.skatteetatenEnk}>Skatteetaten</Ekstern>). Har du gitt regnskapsføreren
@@ -491,7 +491,7 @@ export default function AltinnTilgangPage() {
                 'Har byrået pakkene det trenger, også utover regnskapsførerpakkene?',
                 'Er fullmakter du selv ga i gamle Altinn, gitt på nytt som tilgangspakker?',
                 'Har noen andre enn daglig leder behov for å gi fullmakter? Gi dem tilgangsstyring.',
-                'Er alt på plass før 17. november 2026, når skattemeldingen og a-meldingen slutter å virke med de gamle rollene?',
+                'Kan byrået levere skattemeldingen og a-meldingen? De har ikke virket med de gamle rollene siden 17. november 2026.',
                 'Planlegg skattemeldingen for 2026 i god tid før fristen 31. mai 2027.',
               ]}
             />
