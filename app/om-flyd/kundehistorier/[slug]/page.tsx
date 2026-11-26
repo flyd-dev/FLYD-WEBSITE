@@ -42,6 +42,8 @@ export function generateMetadata({ params }: Props): Metadata {
 // Lange sammensatte ord i tittelen får myk bindestrek der den vises, ikke i data/.
 const delbar = (t: string) => t.replace('Laboratorium', 'Labora\u00ADtorium').replace('administrasjonen', 'administra\u00ADsjonen');
 
+const brod = 'text-[17px] leading-[1.7] text-flyd-skifer';
+
 const lenke =
   'font-medium text-flyd-petrol underline decoration-flyd-teal decoration-2 underline-offset-4 transition-colors duration-200 hover:text-flyd-skog hover:decoration-flyd-skog';
 
@@ -121,11 +123,38 @@ export default function KundehistoriePage({ params }: Props) {
 
               <div className="space-y-6">
                 {h.avsnitt.map((a) => (
-                  <p key={a} className="text-[17px] leading-[1.7] text-flyd-skifer">
+                  <p key={a} className={brod}>
                     {a}
                   </p>
                 ))}
               </div>
+
+              {/* Uthevet sitat i teksten (lengre historier). Korall-streken som i Petrol-feltet. */}
+              {h.sitat?.iTeksten && (
+                <figure className="mt-12 border-l-4 border-flyd-korall pl-6 md:pl-8">
+                  <blockquote className="font-display text-[clamp(1.375rem,2.4vw,1.75rem)] font-medium leading-[1.35] text-flyd-skog">
+                    «{h.sitat.tekst}»
+                  </blockquote>
+                  <figcaption className="mt-6 text-[16px] leading-snug text-flyd-skifer">
+                    <span className="block font-medium text-flyd-skog">{h.sitat.navn}</span>
+                    {h.sitat.rolle}
+                  </figcaption>
+                </figure>
+              )}
+
+              {/* Mellomtitlene er som h3 i artiklene: uten kicker, de står inne i teksten. */}
+              {h.deler?.map((d) => (
+                <section key={d.overskrift} className="mt-12">
+                  <h2 className="font-display text-[22px] font-semibold leading-[1.3] text-flyd-skog">{d.overskrift}</h2>
+                  <div className="mt-4 space-y-6">
+                    {d.avsnitt.map((a) => (
+                      <p key={a} className={brod}>
+                        {a}
+                      </p>
+                    ))}
+                  </div>
+                </section>
+              ))}
 
               {h.kilder && (
                 <div className="mt-12 border-t border-flyd-linje-sand pt-8">
@@ -204,8 +233,8 @@ export default function KundehistoriePage({ params }: Props) {
         </Container>
       </Section>
 
-      {/* SITATET – Petrol som seksjonsskille */}
-      {h.sitat && (
+      {/* SITATET – Petrol som seksjonsskille (med mindre det står i teksten) */}
+      {h.sitat && !h.sitat.iTeksten && (
         <Section tone="petrol" flyt>
           <Container>
             <figure className="max-w-4xl" data-reveal>

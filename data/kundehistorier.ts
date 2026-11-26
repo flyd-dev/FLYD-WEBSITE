@@ -34,10 +34,17 @@ export type Kundehistorie = {
   leveranse: { label: string; href?: string }[];
   /** Brødteksten, ett avsnitt per streng. Kort: to til fire avsnitt. */
   avsnitt: string[];
+  /** Lengre historier kan fortsette i deler med mellomtittel, under avsnittene over. */
+  deler?: { overskrift: string; avsnitt: string[] }[];
   /** Tall kunden selv har oppgitt. Aldri anslag fra oss. */
   tall?: { verdi: string; tekst: string }[];
-  /** Sitat fra kunden, ordrett fra kilden. */
-  sitat?: { tekst: string; navn: string; rolle: string };
+  /**
+   * Sitat fra kunden, ordrett fra kilden. Vises i Petrol-feltet under teksten,
+   * eller med `iTeksten` uthevet i teksten, rett etter avsnittene og før delene
+   * (for lengre historier, så sitatet ikke kommer først etter all teksten).
+   * Det står aldri begge steder, og ikke som vanlig avsnitt.
+   */
+  sitat?: { tekst: string; navn: string; rolle: string; iTeksten?: boolean };
   /** Der historien er omtalt fra før (åpnes i nytt vindu). */
   kilder?: { tittel: string; hos: string; href: string }[];
   /** Sitatet vises i kundeseksjonen på forsiden. Sett på én historie om gangen. */
@@ -99,24 +106,51 @@ const alle: Kundehistorie[] = [
     fremhevet: true,
     kunde: 'Lervig',
     logo: { src: '/customer-logo/lervig.webp', alt: 'Lervig' },
-    tittel: 'Lervig valgte Flyd som regnskapspartner',
+    tittel: 'Lervig fikk en partner som ser både tallene og systemene',
     ingress:
-      'Lervig har vokst til en nasjonal merkevare, og fra Hillevåg i Stavanger når bryggeriet kunder i over 30 land. Flyd leverer regnskaps- og økonomitjenester.',
+      'Bryggeriet fra Hillevåg selger i over 30 land. Da Lervig valgte Flyd som økonomipartner, begynte arbeidet med å forstå hvordan bryggeriet faktisk jobber – både med tallene og i systemene.',
     bransje: 'Bryggeri',
     sted: 'Stavanger',
-    leveranse: [{ label: 'Regnskap og rådgivning', href: '/tjenester/regnskap/' }],
+    leveranse: [
+      { label: 'Regnskap og rådgivning', href: '/tjenester/regnskap/' },
+      { label: 'Lønn', href: '/tjenester/lonn-og-hr/' },
+      { label: 'Kartlegging av systemene' },
+    ],
     avsnitt: [
-      'Lervig har vokst til å bli en nasjonal merkevare. Produktene finnes i butikker og på utsalgssteder over store deler av landet, og fra Hillevåg i Stavanger når bryggeriet i tillegg kunder i over 30 land.',
-      'Flyd leverer regnskaps- og økonomitjenester til Lervig. Det betyr mye for oss at en virksomhet i vekst, med base i Stavanger, har valgt oss som partner – og vi gleder oss til fortsettelsen.',
+      'Lervig har vokst til å bli en nasjonal merkevare. Produktene selges i butikker og på serveringssteder over store deler av landet, og fra Hillevåg i Stavanger når bryggeriet kunder i over 30 land. Med vekst følger flere ansatte, flere transaksjoner og større krav til god økonomistyring.',
+      'Lervig valgte Flyd som partner for økonomi og lønn. Flyd er sparringspartner for Lervig, bistår med regnskap og økonomi og kjører lønnen.',
+    ],
+    deler: [
+      {
+        overskrift: 'Kartleggingen viste behovene på teknologisiden',
+        avsnitt: [
+          'Allerede i de første møtene gikk vi gjennom hva Lervig trengte. For å levere de riktige tjenestene måtte vi kjenne de interne prosessene godt.',
+          'Derfor gjorde vi en egen kartlegging av systemene Lervig bruker, og av hvordan de brukes i hverdagen. Den viste hvordan informasjonen flyter mellom systemene og folkene, og hvilke behov Lervig har på teknologisiden.',
+          'Med denne innsikten som grunnlag kan vi se nærmere på systemløsningene. Målet er systemer som passer måten Lervig jobber på, og ikke omvendt.',
+        ],
+      },
+      {
+        overskrift: 'Økonomitjenester med faste kontaktpersoner',
+        avsnitt: [
+          'I dag leverer Flyd økonomitjenester til Lervig. Marit Christensen leder det daglige arbeidet sammen med Tatjana Derksen. Lervig har dermed faste personer å forholde seg til, som kjenner både tallene og menneskene i virksomheten.',
+        ],
+      },
+      {
+        overskrift: 'Økonomi og teknologi under samme tak',
+        avsnitt: [
+          'Flyd har regnskap, rådgivning og teknologi under samme tak. Økonomitjenestene og arbeidet med systemene kan derfor gå hånd i hånd, og det er nettopp dette Stein Erik Opheim trekker fram. Når bryggeriet vokser videre, har Lervig en partner som kan bidra både med den daglige økonomien og med utviklingen av systemene.',
+        ],
+      },
     ],
     sitat: {
       tekst:
         'Flyd skilte seg ut allerede i første møte. De har kompetanse på både regnskap og teknologi, og ser økonomien og systemene i sammenheng. Det gir oss en partner som forstår hele virksomheten vår.',
       navn: 'Stein Erik Opheim',
       rolle: 'CFO, Lervig',
+      iTeksten: true,
     },
     published: '2026-11-11',
-    modified: '2026-11-12',
+    modified: '2026-11-26',
   },
   {
     slug: 'arkit',
