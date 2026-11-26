@@ -116,7 +116,8 @@ const sammenligning: { tema: string; lonn: string; utbytte: string }[] = [
   {
     tema: 'Krav',
     lonn: 'Lønnen bør svare til arbeidet du gjør i selskapet.',
-    utbytte: 'Fri egenkapital, forsvarlig egenkapital og likviditet, og vedtak på generalforsamlingen.',
+    utbytte:
+      'Fri egenkapital, forsvarlig egenkapital og likviditet, og vedtak på generalforsamlingen. Husk protokoll fra generalforsamlingen for alle utbytter som tas ut i kommende år. Sjekk med regnskapsføreren din at kravet til fri egenkapital etter aksjeloven er oppfylt.',
   },
 ];
 
