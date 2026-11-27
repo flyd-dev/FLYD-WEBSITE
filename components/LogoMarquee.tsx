@@ -221,7 +221,10 @@ export default function LogoMarquee({ tone = 'sand' }: { /** Flaten stripa står
             {customerLogos.map((logo) => (
               <div
                 key={logo.name}
-                className="mr-20 flex h-10 flex-shrink-0 items-center justify-center opacity-60 grayscale mix-blend-multiply transition-[filter,opacity] duration-300 hover:opacity-100 hover:grayscale-0"
+                // Logofilene er gjennomsiktige. mix-blend-multiply virker ikke her:
+                // sporet flyttes med transform og blander bare mot seg selv, så
+                // hvit bunn i en fil blir stående som en hvit flis.
+                className="mr-20 flex h-10 flex-shrink-0 items-center justify-center opacity-60 grayscale transition-[filter,opacity] duration-300 hover:opacity-100 hover:grayscale-0"
                 title={logo.name}
               >
                 {/* Småbildene (144 px høye) fra scripts/make-logo-thumbs.mjs. */}
