@@ -1,10 +1,18 @@
 /**
  * Logofilene (public/customer-logo/*.webp) er transparente, beskåret tett
  * rundt logoen og 300 px høye. Da får alle samme synlige høyde i karusellen
- * (h-10). Logoer på farget boks er frigjort fra boksen; hvit tekst på boks
- * (Sirdal Bygg/Eiendom) er gjort om til tekst i boksfargen.
+ * (h-10). Logoer på farget boks er frigjort fra boksen; lys tekst på boks
+ * (Sirdal Bygg/Eiendom, Steis) er gjort om til tekst i boksfargen.
  * Karusellen viser småbilder (144 px høye) fra public/customer-logo/sma/, som
  * scripts/make-logo-thumbs.mjs lager før bygg. Legg nye logoer i 300 px her.
+ *
+ * Hvit bunn må fjernes i fila. mix-blend-multiply virker ikke i karusellen
+ * (sporet flyttes med transform), så hvit bunn blir stående som en lys flis.
+ * Arkit, Arkit Arealplan, Sinneshyttå og Sirdal Fjellpark hadde hvit bunn,
+ * og Bilstad Bygg, Sirdal Bygg/Eiendom og Steis sto fortsatt på boksen sin
+ * (rettet 27.11.2026). Brede ordmerker (Steis, Sirdal Bygg/Eiendom) har luft
+ * over og under i fila, ellers blir de to–tre ganger så brede som de andre.
+ * BåLab beholder rammen sin: den er en del av logoen.
  *
  * Ruyters (nov. 2026) er skjoldlogoen fra Flyd, hvit på mørk bunn i originalen,
  * gjort om til mørk logo i bunnfargen. «PREMIUM CAR CARE» er tatt bort fordi
